@@ -17,6 +17,7 @@ namespace www.aqmvc.com.pe.Controllers
             return View(lista());
             //return View();
         }
+        /*agreanfo controler*/
 
         public ActionResult Nuevo()
         {
