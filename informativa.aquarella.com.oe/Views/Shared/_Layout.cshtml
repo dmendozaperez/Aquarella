@@ -1,0 +1,193 @@
+﻿<!DOCTYPE html>
+<html>
+<head lang="es-pe">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>@ViewBag.Title - {Aquarella Perú}</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    @*<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAukKTZvpWOtUOUtr8tK1_J798-JsPlMm8&sensor=true"></script>*@
+    <link rel="shortcut icon" href="~/assets/ico/favicon.ico">
+
+    <style>
+        .header {
+	padding:0px 0 21px 0;
+	background:#fff;
+	border-top:5px #d00b01 solid;
+}
+    </style>
+</head>
+
+<body>
+    <div class="header">
+        <nav class="navbar" role="navigation">
+            <div class="container">
+                <div class="navbar-header">
+                    <a class="navbar-brand"  href="@Url.Action("Index", "Home")"></a>
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#top-navbar-1">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    
+                </div>
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse" id="top-navbar-1">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li>
+                            @*<a  href= @Html.ActionLink("Inicio", "Index", "Home")><i class="fa fa-home"></i><br>Inicio</a>*@
+                            <a href="@Url.Action("Index", "Home")"><i class="fa fa-home"></i><br>Inicio</a>
+                        </li>
+                        <!--<li class="dropdown active">-->
+                        <!--<a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="1000">
+                            <i class="fa fa-home"></i><br>Home <span class="caret"></span>
+                        </a>-->
+                        <!--<ul class="dropdown-menu dropdown-menu-left" role="menu">
+                            <li class="active"><a href="index.html">Home</a></li>
+                            <li><a href="index-2.html">Home 2</a></li>
+                        </ul>-->
+                        <!--</li>-->
+                        <li>
+                            <a href="@Url.Action("Catalogo", "Home")"><i class="fa fa-camera"></i><br>Catalogo</a>
+                        </li>
+                        <!--<li>
+                            <a href="#"><i class="fa fa-comments"></i><br>Blog</a>
+                        </li>
+                        <li>
+                            <a href="services.html"><i class="fa fa-tasks"></i><br>Services</a>
+                        </li>-->
+                        
+                        <li>
+                            <a href="@Url.Action("Contact", "Home")"><i class="fa fa-envelope"></i><br>Contactenos</a>
+                        </li>
+                        <li>
+                            <a href="http://www.catalogo.aquarellaperu.com.pe" target="_blank"><i class="fa fa-user"></i><br>Iniciar Sessión</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        @*<div class="container body-content">*@
+        <div>
+            @RenderBody()
+        </div>
+        @*<hr />*@
+        @*<footer>
+                <p>&copy; @DateTime.Now.Year - Mi aplicación ASP.NET</p>
+            </footer>*@
+        <!-- Footer -->
+        <footer>
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-3 footer-box wow fadeInUp">
+                        <h4>Quienes Somos</h4>
+                        <div class="footer-box-text">
+                            <p>
+                                <b>Aquarella</b> es el catálogo de calzado para toda la familia con presencia en Latinoamérica, pertenecemos a una corporación internacional exitosa de comercialización de calzado, de gran trayectoria y con un portafolio de marcas de calidad mundial.
+                            </p>
+                            <p>
+                                El equipo de <b>Aquarella</b> está totalmente comprometido con nuestra misión, el de mejorar sus vidas, porque creemos firmemente en el emprendimiento y el progreso, es nuestro compromiso acompañarlos en su crecimiento personal, económico y profesional.
+                            </p>
+                            @*<p><a href="about.html">Read more...</a></p>*@
+                        </div>
+                    </div>
+                    <div class="col-sm-3 footer-box wow fadeInDown">
+                        <h4>Nuestra misión</h4>
+                        <div class="footer-box-text footer-box-text-subscribe">
+                            <p>Dar la oportunidad a todas las mujeres en Latinoamérica de tener su propio negocio, para mejorar sus vidas. Con el apoyo de nuestras marcas, la calidad de nuestros productos, el servicio al cliente y la formación permanente. En <b>Aquarella </b> trabajamos todos los días con el fin de consolidar relaciones de beneficio mutuo a corto y largo plazo, donde la libertad y el respeto son siempre los principales valores para el éxito</p>
+                            @*<form role="form" action="assets/subscribe.php" method="post">
+                                    <div class="form-group">
+                                        <label class="sr-only" for="subscribe-email">Email address</label>
+                                        <input type="text" name="email" placeholder="Email..." class="subscribe-email" id="subscribe-email">
+                                    </div>
+                                    <button type="submit" class="btn">Subscribe</button>
+                                </form>
+                                <p class="success-message"></p>
+                                <p class="error-message"></p>*@
+                        </div>
+                    </div>
+                    <div class="col-sm-3 footer-box wow fadeInUp">
+                        @*<h4>Flickr Photos</h4>
+                            <div class="footer-box-text flickr-feed"></div>*@
+                    </div>
+
+                    <div class="col-sm-3 footer-box wow fadeInDown">
+                        <h4>Contactenos</h4>
+                        <div class="footer-box-text footer-box-text-contact">
+                            <p><i class="fa fa-map-marker"></i> Direccion: Av Tomas Marsano 2883, Tienda 9,Santiago de Surco-Lima</p>
+                            <p><i class="fa fa-phone"></i> Telefono: 448-3015 / 271-0704</p>
+                            <p><i class="fa fa-facebook"></i> Facebook: <a href="https://www.facebook.com/AQ-Cat%C3%A1logo-752202961536878/" target="_blank">AqCatálogo </a></p>
+                            <p><i class="fa fa-envelope"></i> Email: <a href="mailto:Informesaquarella@gmail.com">Informesaquarella@gmail.com</a></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12 wow fadeIn">
+                        <div class="footer-border"></div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-7 footer-copyright wow fadeIn">
+                        <p>Copyright @DateTime.Now.Year  Aquarella Perú - All rights reserved.</p>
+                    </div>
+                    <div class="col-sm-5 footer-social wow fadeIn">
+                        @*<a href="https://www.facebook.com/aquarella.peru.9" target="_blank"><i class="fa fa-facebook"></i></a>*@
+                        @*<a href="#"><i class="fa fa-dribbble"></i></a>
+                            <a href="#"><i class="fa fa-twitter"></i></a>
+                            <a href="#"><i class="fa fa-pinterest"></i></a>*@
+                    </div>
+                </div>
+            </div>
+        </footer>
+        @*</div>*@
+        @*<div class="navbar navbar-inverse navbar-fixed-top">
+                <div class="container">
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        @Html.ActionLink("Nombre de aplicación", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                    </div>
+                    <div class="navbar-collapse collapse">
+                        <ul class="nav navbar-nav">
+                            <li>@Html.ActionLink("Inicio", "Index", "Home")</li>
+                            <li>@Html.ActionLink("Acerca de", "About", "Home")</li>
+                            <li>@Html.ActionLink("Contacto", "Contact", "Home")</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="container body-content">
+                @RenderBody()
+                <hr />
+                <footer>
+                    <p>&copy; @DateTime.Now.Year - Mi aplicación ASP.NET</p>
+                </footer>
+            </div>*@
+
+        @Scripts.Render("~/bundles/jquery")
+        @Scripts.Render("~/bundles/bootstrap")
+
+        @*<script src="~/assets/js/jquery-1.11.1.min.js"></script>
+        <script src="~/assets/bootstrap/js/bootstrap.min.js"></script>
+        <script src="~/assets/js/bootstrap-hover-dropdown.min.js"></script>
+        <script src="~/assets/js/jquery.backstretch.min.js"></script>
+        <script src="~/assets/js/wow.min.js"></script>
+        <script src="~/assets/js/retina-1.1.0.min.js"></script>
+        <script src="~/assets/js/jquery.magnific-popup.min.js"></script>
+        <script src="~/assets/flexslider/jquery.flexslider-min.js"></script>
+        <script src="~/assets/js/jflickrfeed.min.js"></script>
+        <script src="~/assets/js/masonry.pkgd.min.js"></script>*@
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAukKTZvpWOtUOUtr8tK1_J798-JsPlMm8"></script>
+        <script src="~/assets/js/jquery.ui.map.min.js"></script>
+        <script src="~/assets/js/scripts.js"></script>
+        <script src="@Url.Content("~/Scripts/alertasdiag.js")"></script>
+        <script src="@Url.Content("~/Scripts/jquery.toaster.js")"></script>
+        @RenderSection("scripts", required: false)
+    </div>
+</body>
+</html>

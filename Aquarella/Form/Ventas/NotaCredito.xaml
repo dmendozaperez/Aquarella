@@ -1,0 +1,296 @@
+﻿<Window x:Class="Aquarella.Form.Ventas.NotaCredito"
+     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"    
+    xmlns:local="clr-namespace:Aquarella.bll"
+    xmlns:wpfToolKit="http://schemas.microsoft.com/wpf/2008/toolkit"          
+    Title="Aquarella Desktop Aplication > Ventana de empacado y facturación de artículos"                 
+    mc:Ignorable="d" xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    WindowStartupLocation="CenterScreen"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"        
+    Height="700" Width="1100" Loaded="Window_Loaded" Icon="/Aquarella Desktop - Bata;component/bata.ico">
+    <Window.Resources>
+
+        <DataTemplate x:Key="DataTemplate1">
+            <Grid TextBlock.Foreground="White">
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+                <TextBlock Text="RowDetails Go here"  Grid.Row="0"/>
+                <TextBlock Text="{Binding ''}" Grid.Row="1"/>
+            </Grid>
+
+        </DataTemplate>
+
+    </Window.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="60*" />
+            <RowDefinition Height="240*" />
+            <RowDefinition Height="100*" />
+        </Grid.RowDefinitions>
+        <!-- CABECERA DE LA VENTANA -->
+        <Grid Grid.Row="0">
+            <Grid x:Name="LayoutRoot" Style="{StaticResource LayoutRootGridStyle}" Grid.RowSpan="4" Grid.ColumnSpan="2">
+                <Grid Style="{StaticResource NavigationOuterGridStyle}" >
+                </Grid>
+                <Grid Style="{StaticResource NavigationOuterGridStyle}">
+                    <Grid x:Name="NavigationGrid" Style="{StaticResource NavigationGridStyle}" Height="62" VerticalAlignment="Top">
+                        <Border x:Name="BrandingBorder" Style="{StaticResource BrandingBorderStyle}">
+                            <StackPanel x:Name="BrandingStackPanel" Style="{StaticResource BrandingStackPanelStyle}">
+                                <!--<ContentControl Style="{StaticResource LogoIcon}" />
+                        <TextBlock x:Name="ApplicationNameTextBlock" Style="{StaticResource ApplicationNameStyle}" Text="Manisol S.A. Bata Colombia." />
+                        -->
+                            </StackPanel>
+                        </Border>
+                        <Border x:Name="LinksBorder" Style="{StaticResource LinksBorderStyle}">
+                            <StackPanel x:Name="LinksStackPanel" Style="{StaticResource LinksStackPanelStyle}">
+                                <Rectangle Style="{StaticResource DividerStyle}" />
+                                <Image Source="../../Design/Images/aq_lineal.jpg" Width="150" Margin="8,4,0,4"></Image>
+                                <!--<Button x:Name="btSync" Style="{StaticResource LinkStyle}" 
+                                        ToolTip="Sincronización de tablas locales con datos de la base de datos central." 
+                                        Content="- S y n c - " />-->
+                            </StackPanel>
+                        </Border>
+                        <Label FontFamily="Georgia" Foreground="WhiteSmoke" FontSize="39" Margin="3,2,0,4" HorizontalAlignment="Left" Width="282">{AQUARELLA}</Label>
+                        <Rectangle Height="0" VerticalAlignment="Bottom" Fill="WhiteSmoke" HorizontalAlignment="Left" Width="189" Margin="130,0,0,26" />
+                        <Label FontFamily="Georgia" Foreground="WhiteSmoke" FontSize="10" Width="149" 
+                           HorizontalAlignment="Left" Margin="300,22,0,17">Aquarella Desktop Aplication</Label>
+                    </Grid>
+                    <Border x:Name="bor" Style="{StaticResource BarBottonHeader}" Margin="0,63,0,0" Height="25"  VerticalAlignment="Top">
+                        <Grid>
+                            <StackPanel HorizontalAlignment="Left" Style="{StaticResource LoginPanelStyle}">
+                                <TextBlock Name="lblInfoUser" Style="{StaticResource SpacerStyle}"></TextBlock>
+                            </StackPanel>
+                            <StackPanel x:Name="LinksLogin" Style="{StaticResource LoginPanelStyle}">
+                                <TextBlock Style="{StaticResource SpacerStyle}"></TextBlock>
+                                <Button Style="{StaticResource LoginRegisterLinkStyle}" Name="btCloseSesion" 
+                                        Click="btCloseSesion_Click" Content="Cerrar Sesión"></Button>
+                                <Rectangle Style="{StaticResource DividerStyleSmoke}" />
+                                <TextBlock Style="{StaticResource SpacerStyle}"></TextBlock>
+                                <Button Name="btBackPanelLiq"  Click="btBackPanelLiq_Click"
+                                        Style="{StaticResource LoginRegisterLinkStyle}" Content="Inicio"></Button>
+                                <!-- Gears -->
+                                <Rectangle Style="{StaticResource DividerStyleSmoke}" />
+                                <TextBlock Style="{StaticResource SpacerStyle}"></TextBlock>
+                            </StackPanel>
+                        </Grid>
+                    </Border>
+                </Grid>
+            </Grid>
+        </Grid>
+        <!-- CUERPO DE LIQUIDACIONES EN ESPERA POR SER FACTURADAS -->
+        <Grid Grid.Row="1">
+            <TabControl Margin="10,0,10,5" Height="160" VerticalAlignment="Top" >
+                <TabItem Header=" > Informacion del cliente la cual se a facturado">
+                    <Grid Margin="0" Grid.Column="2" >
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="23*"/>
+                            <ColumnDefinition Width="77*"/>
+                            <ColumnDefinition Width="431*"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Text="Seleccione Cliente" Grid.ColumnSpan="3" Margin="-1,-3,1,3"/>
+                        <ComboBox Name="cbcliente" Text="Sel. el Cliente" Cursor="Hand"                             
+                              Margin="76,0,500,0" Height="25" FontSize="12" TabIndex="0" VerticalAlignment="Top" Grid.Column="1" Grid.ColumnSpan="2" DisplayMemberPath="Nombres" SelectedValuePath="bas_id" SelectionChanged="cbcliente_SelectionChanged" IsDropDownOpen="True"  >
+                            <ComboBox.Effect>
+                                <DropShadowEffect/>
+                            </ComboBox.Effect>
+                        </ComboBox>
+                        <TextBlock Text="Nro.Documento" Height="20" VerticalAlignment="Top" HorizontalAlignment="Left"                                
+                               Width="163" Margin="0,40,0,0" Grid.ColumnSpan="2" />
+                        <TextBox Name="txtdoc" Height="25"  MaxLength="10" VerticalAlignment="Top" Margin="76,40,700,0" Grid.Column="1" Grid.ColumnSpan="2" IsReadOnly="True"></TextBox>
+                        <TextBlock Text="Direccion" Height="20" VerticalAlignment="Top" HorizontalAlignment="Left"                                
+                               Width="163" Margin="0,70,0,0" Grid.ColumnSpan="2" />
+                        <TextBox Name="txtdir" Height="25"  MaxLength="10" VerticalAlignment="Top" Margin="76,70,400,0" Grid.Column="1" Grid.ColumnSpan="2" IsReadOnly="True"></TextBox>
+                        <TextBlock Text="Ubicacion" Height="20" VerticalAlignment="Top" HorizontalAlignment="Left"                                
+                               Width="163" Margin="0,100,0,0" Grid.ColumnSpan="2" />
+                        <TextBox Name="txtubi" Height="25"  MaxLength="10" VerticalAlignment="Top" Margin="76,100,600,0" Grid.Column="1" Grid.ColumnSpan="2" IsReadOnly="True"></TextBox>
+                        <TextBlock Text="Nombres" Height="20" VerticalAlignment="Top" HorizontalAlignment="Left"                                
+                               Width="59" Margin="180,43,0,0" Grid.Column="2" />
+                        <TextBox Name="txtnombre" Height="25"  MaxLength="10" VerticalAlignment="Top" Margin="245,38,2,0" Grid.Column="2" IsReadOnly="True"></TextBox>
+                        <TextBlock Text="Telefono" Height="20" VerticalAlignment="Top" HorizontalAlignment="Right"                                
+                               Width="59" Margin="0,70,327,0" Grid.Column="2" />
+                        <TextBox Name="txttelefono" Height="25"  MaxLength="10" VerticalAlignment="Top" Margin="534,68,142,0" Grid.Column="2" IsReadOnly="True"></TextBox>
+                        <TextBlock Text="Email" Height="20" VerticalAlignment="Top" HorizontalAlignment="Right"                                
+                               Width="59" Margin="0,100,327,0" Grid.Column="2" />
+                        <TextBox Name="txtemail" Height="25"  MaxLength="10" VerticalAlignment="Top" Margin="535,100,10,0" Grid.Column="2" IsReadOnly="True"></TextBox>
+                    </Grid>
+
+                </TabItem>
+            </TabControl>
+            <TabControl Margin="10,168,10,0" Height="65" VerticalAlignment="Top" >
+                <TabItem Header=" > Buscar Documento">
+                    <Grid Margin="0" Grid.Column="2" >
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="23*"/>
+                            <ColumnDefinition Width="77*"/>
+                            <ColumnDefinition Width="431*"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Text="Nro.Factura" Height="20" VerticalAlignment="Top" HorizontalAlignment="Left"                                
+                               Width="110" Margin="0,5,0,0" Grid.ColumnSpan="2" />
+                        <TextBox Name="txtfac" Height="25" TabIndex="1"  MaxLength="100" VerticalAlignment="Top" Margin="0,5,789,0" Grid.Column="1" Grid.ColumnSpan="2" HorizontalAlignment="Right" Width="143" KeyDown="txtfac_KeyDown">
+                            <TextBox.ToolTip>
+                                <ToolTip>
+                                    <StackPanel>
+                                        <TextBlock FontWeight="Bold" TextAlignment="Left" >Busqueda de Documento</TextBlock>
+                                        <TextBlock>Ingrese el numero de Boleta o Factura</TextBlock>
+                                    </StackPanel>
+                                </ToolTip>
+                            </TextBox.ToolTip>
+                        </TextBox>
+                        <TextBlock Text="Articulo" Height="20" VerticalAlignment="Top" HorizontalAlignment="Left"                                
+                               Width="55" Margin="95,5,0,0" Grid.Column="2" />
+                        <TextBox Name="txtarticulo" Height="25" TabIndex="2" MaxLength="100" VerticalAlignment="Top" Margin="0,5,569,0" Grid.Column="2" HorizontalAlignment="Right" Width="143" KeyDown="txtarticulo_KeyDown">
+                            <TextBox.ToolTip>
+                                <ToolTip>
+                                    <StackPanel>
+                                        <TextBlock FontWeight="Bold" TextAlignment="Left" >Busqueda de Articulo</TextBlock>
+                                        <TextBlock>Ingrese el codio de articulo.</TextBlock>
+                                    </StackPanel>
+                                </ToolTip>
+                            </TextBox.ToolTip>
+                        </TextBox>
+                        <Button Width="120" Height="32" x:Name="btbuscar" TabIndex="3" Cursor="Hand"  HorizontalAlignment="Right" Margin="0,0,437,0" Grid.Column="2" IsTabStop="False" Click="btbuscar_Click">
+                            <Button.ToolTip>
+                                <ToolTip>
+                                    <StackPanel>
+                                        <TextBlock FontWeight="Bold" TextAlignment="Left" >Busqueda de articulo</TextBlock>
+                                        <TextBlock>Realizar la busqueda del articulo para devolver.</TextBlock>
+                                    </StackPanel>
+                                </ToolTip>
+                            </Button.ToolTip>
+                            <Grid Width="170">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="7*" />
+                                    <ColumnDefinition Width="54*" />
+                                    <ColumnDefinition Width="109*" />
+                                </Grid.ColumnDefinitions>
+                                <Image Margin="5,0,0,0" Source="/Aquarella Desktop - Bata;component/Design/Images/lupa.jpg" Width="32" HorizontalAlignment="Left" Grid.ColumnSpan="2"></Image>
+                                <TextBlock Text="Buscar" VerticalAlignment="Center" 
+                                          Margin="0,6,88,4" HorizontalAlignment="Right" Grid.ColumnSpan="2" Grid.Column="1"></TextBlock>
+                            </Grid>
+                        </Button>
+                    </Grid>
+
+                </TabItem>
+            </TabControl>
+            <TabControl Margin="10,240,10,-72" >
+                <TabItem Header=" > Detalle de articulo a devolver">
+                    <wpfToolKit:DataGrid AutoGenerateColumns="False" CanUserAddRows="False" CanUserDeleteRows="False" VerticalScrollBarVisibility="Visible"
+                                          Name="dg1" HorizontalAlignment="Left" Width="1062" SelectionUnit="CellOrRowHeader" >
+                        <wpfToolKit:DataGrid.Columns>
+                            <wpfToolKit:DataGridTextColumn Header="" Width="25" Binding="{Binding key}" IsReadOnly="True" />
+                            <wpfToolKit:DataGridTextColumn Header="Items" Width="38" IsReadOnly="True" CanUserResize="False" Binding="{Binding item_det}" CellStyle="{StaticResource CenterAlignedCellStyleB}" HeaderStyle="{StaticResource CenterAlignedColumnHeaderStyle}" />
+                            <wpfToolKit:DataGridTemplateColumn Header="Mover">
+                                <wpfToolKit:DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+                                            <CheckBox Name="chkMover" HorizontalAlignment="Left"  VerticalAlignment="Top" CommandParameter="{Binding Path= _pdv_article}" Cursor="Hand" Click="chkMover_Click"/>                                            
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </wpfToolKit:DataGridTemplateColumn.CellTemplate>
+                            </wpfToolKit:DataGridTemplateColumn>                                
+                            <wpfToolKit:DataGridTextColumn Header="Factura" Width="90" Binding="{Binding IDV_INVOICE}" IsReadOnly="True" />
+                            <wpfToolKit:DataGridTextColumn Header="Referencia" Width="70" Binding="{Binding IDV_ARTICLE}" IsReadOnly="True"  />
+                            <wpfToolKit:DataGridTextColumn TextBlock.TextAlignment="Left"  Header="Artículo" Width="95" Binding="{Binding ARV_NAME}" IsReadOnly="True"  />
+                            <wpfToolKit:DataGridTextColumn Header="Marca" Width="200" Binding="{Binding brv_description}" IsReadOnly="True" />
+                            <wpfToolKit:DataGridTextColumn Header="Calidad" Width="50" Binding="{Binding CALIDAD}" IsReadOnly="True" CellStyle="{StaticResource CenterAlignedCellStyle}" />
+                            <wpfToolKit:DataGridTextColumn 
+                             Width="100" TextBlock.TextAlignment="Left" Binding="{Binding cov_description}" IsReadOnly="True" Header="Color" />
+                            <wpfToolKit:DataGridTextColumn Header="Talla" HeaderStyle="{StaticResource CenterAlignedColumnHeaderStyle}" Width="Auto" Binding="{Binding IDV_SIZE}"  IsReadOnly="True" HeaderStringFormat="" CellStyle="{StaticResource CenterAlignedCellStyle}"  />
+                            <wpfToolKit:DataGridTextColumn Header="Cant" Binding="{Binding IDN_QTY}" IsReadOnly="True" HeaderStyle="{StaticResource CenterAlignedColumnHeaderStyle}" CellStyle="{StaticResource CenterAlignedCellStyle}" />
+                            <wpfToolKit:DataGridTextColumn Header="Precio" Binding="{Binding IDN_SELLPRICE,StringFormat={}{0:C}}" IsReadOnly="True"/>
+                            <wpfToolKit:DataGridTextColumn SortMemberPath="TAXES" Header="+Impuesto" Binding="{Binding TAXES,StringFormat={}{0:C}}" CanUserResize="False" IsReadOnly="True"/>
+                            <wpfToolKit:DataGridTextColumn SortMemberPath="IDN_COMMISSION" Header="-Ganancia" Binding="{Binding IDN_COMMISSION,StringFormat={}{0:C}}" IsReadOnly="True"/>
+                            <wpfToolKit:DataGridTextColumn SortMemberPath="IDN_DISSCOUNT" Header="-Descuento" Binding="{Binding IDN_DISSCOUNT}" IsReadOnly="True" Visibility="Hidden"/>
+                            <wpfToolKit:DataGridTextColumn Header="idn_qty_line" Binding="{Binding idn_qty_line}" IsReadOnly="True" Visibility="Hidden"/>
+                            <!-- BOTON DE ELIMINACION DE UN ARTICULO EMPACADO -->
+                            <wpfToolKit:DataGridTemplateColumn>
+                                <wpfToolKit:DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+                                            <Button  Name="btUnPackArticle"
+                                                        Background="Transparent" Foreground="Transparent" 
+                                                        BorderBrush="Transparent" BorderThickness="0" ToolTip="Borrar Items"
+                                                    CommandParameter="{Binding Path= _pdv_article}" Cursor="Hand">
+                                                <Image Source="../../Design/Images/bt_delete.png"
+                                                       Height="16" Width="16" 
+                                                       VerticalAlignment="Bottom"
+                                                       Grid.RowSpan="2" />
+                                            </Button>
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </wpfToolKit:DataGridTemplateColumn.CellTemplate>
+                            </wpfToolKit:DataGridTemplateColumn>
+                        </wpfToolKit:DataGrid.Columns>
+                    </wpfToolKit:DataGrid>
+
+                </TabItem>
+            </TabControl>
+        </Grid>
+        <Rectangle Fill="#FFCFEEEA" HorizontalAlignment="Left" Height="75" Margin="10,83,0,0" Grid.Row="2"  VerticalAlignment="Top" Width="590">
+            <Rectangle.Effect>
+                <BlurEffect/>
+            </Rectangle.Effect>
+        </Rectangle>
+        <Rectangle Fill="#FFE6DC9B" HorizontalAlignment="Left" Height="75" Margin="600,83,0,0" Grid.Row="2"  VerticalAlignment="Top" Width="475">
+            <Rectangle.Effect>
+                <BlurEffect/>
+            </Rectangle.Effect>
+        </Rectangle>
+        <Grid Grid.Column="1">
+
+        </Grid>
+        <Button Name="btgenerarnc"  HorizontalAlignment="Left" Margin="25,113,0,0" Grid.Row="2" VerticalAlignment="Top" Width="180" Height="35" Cursor="Hand" AllowDrop="True">
+            <Button.ToolTip>
+                <ToolTip>
+                    <StackPanel>
+                        <TextBlock FontWeight="Bold" TextAlignment="Left" >Generar Nota de credito</TextBlock>
+                        <TextBlock>Realizar la devolucion de mercaderia.</TextBlock>
+                    </StackPanel>
+                </ToolTip>
+            </Button.ToolTip>
+            <Grid Width="170">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="7*" />
+                    <ColumnDefinition Width="54*" />
+                    <ColumnDefinition Width="109*" />
+                </Grid.ColumnDefinitions>
+                <Image Margin="5,0,0,0" Source="/Aquarella Desktop - Bata;component/Design/Images/bt_Save.png" Width="32" HorizontalAlignment="Left" Grid.ColumnSpan="2"></Image>
+                <TextBlock Text="Generar nota de credito" VerticalAlignment="Center" 
+                                          Margin="0,6,5,4" HorizontalAlignment="Right" Grid.ColumnSpan="2" Grid.Column="1"></TextBlock>
+            </Grid>
+        </Button>
+        <Button Name="btinicianc"  HorizontalAlignment="Left" Margin="220,113,0,0" Grid.Row="2" VerticalAlignment="Top" Width="180" Height="35" Cursor="Hand">
+            <Button.ToolTip>
+                <ToolTip>
+                    <StackPanel>
+                        <TextBlock FontWeight="Bold" TextAlignment="Left" >Iniciar Nota de credito</TextBlock>
+                        <TextBlock>Inicializa la generacion de nota de credito.</TextBlock>
+                    </StackPanel>
+                </ToolTip>
+            </Button.ToolTip>
+            <Grid Width="170">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="7*" />
+                    <ColumnDefinition Width="54*" />
+                    <ColumnDefinition Width="109*" />
+                </Grid.ColumnDefinitions>
+                <Image Margin="5,0,0,0" Source="/Aquarella Desktop - Bata;component/Design/Images/bt_gears.png" Width="32" HorizontalAlignment="Left" Grid.ColumnSpan="2"></Image>
+                <TextBlock Text="Iniciar nota de credito" VerticalAlignment="Center" 
+                                          Margin="0,6,5,4" HorizontalAlignment="Right" Grid.ColumnSpan="2" Grid.Column="1"></TextBlock>
+
+            </Grid>
+        </Button>
+        <Label Content="Cantidades devueltas" HorizontalAlignment="Left" Margin="800,88,0,0" Grid.Row="2" VerticalAlignment="Top" FontWeight="Bold" FontSize="14"/>
+        <Label Content="Valor Total Devolución" HorizontalAlignment="Left" Margin="800,123,0,0" Grid.Row="2" VerticalAlignment="Top" FontWeight="Bold" FontSize="14"/>
+        <Label Content="________________________________________________________________________________________________________________________________________________________________________________________________________" HorizontalAlignment="Left" Margin="596,98,0,0" Grid.Row="2" VerticalAlignment="Top" FontWeight="Bold" Width="479"/>
+        <Label x:Name="lblcantidad" Content="0" HorizontalAlignment="Left" Margin="1010,88,0,0" Grid.Row="2" VerticalAlignment="Top" FontWeight="Bold" FontSize="13"/>
+        <Label x:Name="lbltotal" Content="S/.0.00" HorizontalAlignment="Left" Margin="1010,122,0,0" Grid.Row="2" VerticalAlignment="Top" FontWeight="Bold" RenderTransformOrigin="0.625,1.923" FontSize="13"/>
+        <Label Content="Numero de articulos seleccionados" HorizontalAlignment="Left" Margin="405,93,0,0" Grid.Row="2" VerticalAlignment="Top"/>
+        <Label Content="0" Name="lblarticuloselect" HorizontalAlignment="Left" Margin="483,113,0,0" Grid.Row="2" VerticalAlignment="Top" FontWeight="Bold" FontSize="12"/>        
+
+
+    </Grid>
+
+</Window>

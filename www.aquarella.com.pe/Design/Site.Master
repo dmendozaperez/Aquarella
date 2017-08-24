@@ -1,0 +1,151 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site.master.cs" Inherits="www.aquarella.com.pe.Design.Site" %>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+   <%--  <script type="text/javascript" src="../Scripts/cssrefresh.js"></script>--%>
+    <title></title>
+    <script src="<%# Page.ResolveClientUrl("~/Scripts/jquery-1.8.2.min.js") %>" type="text/javascript"></script>
+    <script src="<%# Page.ResolveClientUrl("~/Scripts/jquery-ui-1.8.24.custom.min.js") %>"
+        type="text/javascript"></script>
+    <link href="<%# Page.ResolveClientUrl("~/Styles/theme/jquery-ui-1.8.16.custom.css") %>"
+        rel="stylesheet" type="text/css" />
+    <link href="<%# Page.ResolveClientUrl("~/Styles/Site.css") %>" rel="stylesheet" type="text/css" />
+    <link rel="shortcut icon" href="<%#Page.ResolveClientUrl("~/Design/images/favicon.ico") %>" />
+    <asp:ContentPlaceHolder ID="headCPH" runat="server">
+    </asp:ContentPlaceHolder>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("input:submit,button").button();
+            $("#lblDate").text((new Date).getFullYear());
+        });
+    </script>
+</head>
+<body>
+    <form id="form1" runat="server">
+    <div>
+        <!-- CABECERA -->
+        <div class="a-tj-S">
+            <div id="gb">
+                <div>
+                    <div id="gbz">
+                        <!-- LOGO -->
+                        <div id="logo">
+                        </div>
+                    </div>
+                </div>
+                <div id="gbx3">
+                </div>
+                <div id="gbx5">
+                    <%--<ul id="button">
+<li><a href="#">Catalogo</a></li>
+
+</ul>--%>
+                    <!-- -->
+                    <table style="float: right; color: #f5f5f5; margin: 10px; line-height: normal; vertical-align: middle;"
+                        cellpadding="0" cellspacing="0">
+                        <tr>
+                            <td align="right">
+                                Télefono (Servicio al cliente): 0800 26964
+                            </td>
+                        </tr>
+                        <tr>
+                            <td align="right">
+                                e-mail: <a href="mailto:catalogo@aquarellaperu.com.pe" style="color: Orange;">catalogo@aquarellaperu.com.pe</a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td align="right">
+                                Ventas por catalogo Aquarella Per&uacute;.
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <!-- PANEL DE INICIO Y CIERRE DE SESION -->
+            <div class="a-aa-S">
+                <div class="a-C a-aa-C">
+                    <div class="login f13">
+                        <table cellpadding="0" cellspacing="0" width="100%">
+                            <tr>
+                                <td align="left">
+                                </td>
+                                <td>
+                                    <!-- LOGIN VIEWS -->
+                                    <asp:Label ID="lblAreaWh" runat="server" Font-Bold="True"></asp:Label>&nbsp; | &nbsp;<asp:Label ID="lblWhoIs"
+                                        runat="server"></asp:Label><asp:LoginView ID="HeadLoginView" runat="server" EnableViewState="true">
+                                            <AnonymousTemplate>
+                                                [ <a href="~/Aquarella/Control/LoginForm.aspx" id="HeadLoginStatus" runat="server">Iniciar
+                                                    sesión</a> ]
+                                            </AnonymousTemplate>
+                                            <LoggedInTemplate>
+                                                &nbsp; | &nbsp;[
+                                                <asp:LoginStatus ID="HeadLoginStatus" LogoutAction="RedirectToLoginPage" OnLoggedOut="HeadLoginStatus_LoggedOut"
+                                                    runat="server" LogoutText="Cerrar sesión" LogoutPageUrl="~/Default.aspx" />
+                                                ]
+                                            </LoggedInTemplate>
+                                        </asp:LoginView>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <!-- CUERPO -->
+            <div id="content" class="content">
+                <table class="t-content" cellpadding="0" cellspacing="0">
+                    <tr>
+                        <td class="menu-td" valign="top">
+                            <!-- TREE MENU -->
+                            <div class="menu-c">
+                                <asp:TreeView ID="MenuPrin" runat="server" ImageSet="Arrows" Width="190px"
+                                    ExpandDepth="0" PathSeparator="|" OnSelectedNodeChanged="MenuPrin_SelectedNodeChanged">
+                                    <ParentNodeStyle Font-Bold="False" />
+                                    <HoverNodeStyle Font-Underline="True" ForeColor="#5555DD" />
+                                    <SelectedNodeStyle Font-Underline="True" HorizontalPadding="0px"
+                                        VerticalPadding="0px" ForeColor="#5555DD" />
+                                    <NodeStyle Font-Names="Tahoma" Font-Size="10pt" ForeColor="Black" HorizontalPadding="5px"
+                                        NodeSpacing="0px" VerticalPadding="0px" />
+                                </asp:TreeView>
+                            </div>
+                        </td>
+                        <td class="d-content">
+                            <!-- PAGE TITTLE -->
+                            <div class="title">
+                                <h1>
+                                    <asp:ContentPlaceHolder ID="ContentPlaceHolderTitle" runat="server">
+                                    </asp:ContentPlaceHolder>
+                                </h1>
+                            </div>
+                            <!-- CONTENT PLACE HOLDER -->
+                            <div class="d-cont">
+                                <div >
+                                    <!-- PAGE DESC -->
+                                    <div style="margin-bottom: 10px;">
+                                        <p class="parag f13">
+                                            <asp:ContentPlaceHolder ID="ContentPlaceHolderPageDesc" runat="server">
+                                            </asp:ContentPlaceHolder>
+                                        </p>
+                                    </div>
+                                    <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+                                    </asp:ContentPlaceHolder>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <!-- FOOTER -->
+        <div class="foot-d a-c-aa-S">
+            <div class="foot a-aa-C">
+                <center>
+                    { Aquarella } - Catalogo. Copyright ©
+                    <label id="lblDate">
+                    </label>
+                    Aquarella La vida en colores ! . All Rights Reserved.</center>
+            </div>
+        </div>
+    </div>
+    </form>
+</body>
+</html>

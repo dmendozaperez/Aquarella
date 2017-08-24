@@ -1,0 +1,55 @@
+﻿table.estiloTabla {
+	font-family: verdana,arial,sans-serif;
+	font-size:11px;
+	color:#333333;
+	border-width: 1px;
+	border-color: #999999;
+	border-collapse: collapse;
+}
+table.estiloTabla th {
+	background:#b5cfd2;
+	border-width: 1px;
+	padding: 8px;
+	border-style: solid;
+}
+table.estiloTabla td {
+	background:#dcddc0;
+	border-width: 1px;
+	padding: 8px;
+	border-style: solid;
+}
+
+.FileUpload
+{
+	color: navy;
+	border: 1px solid navy;
+	font: Verdana 10px;
+	padding: 1px 4px;
+	font-family: verdana,arial,sans-serif;
+}
+
+.cssListBox
+{
+    height: 200px !important;
+    width: 500px !important;
+} 
+
+.button {
+	background: #222;
+	display: inline-block;
+	padding: 5px 10px 6px;
+	color: #FFF;
+	position: relative;
+	cursor:pointer;
+	top: 0px;
+	left: 4px;
+	border-left-style: none;
+	border-left-color: inherit;
+	border-left-width: 0px;
+	border-right-style: none;
+	border-right-color: inherit;
+	border-right-width: 0px;
+	border-top-style: none;
+	border-top-color: inherit;
+	border-top-width: 0px;
+}

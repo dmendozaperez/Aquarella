@@ -1,0 +1,1750 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<Mapa xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Nombre="FACTURA_BOLETA_STD110" IdTipoMapa="1" TipoArchivo="1" IdEsquema="1" Activo="true">
+  <ParsingData>
+    <Texto AnchoFijo="false" IgnorarEspacios="true" CharAperturaCampo="" CharCierreCampo="">
+      <Registros>
+        <Registro Prefijo="UNB" Nombre="Cabecera" Separador="+" CharAperturaCampo="" CharCierreCampo="" MinOccurs="1" MaxOccurs="1" PrefijoPadre="" EsItem="false">
+          <Campos>
+            <Campo Prefijo="UNB" Nombre="UNB000" Visible="true">
+              <Valor>
+                <string>UNB</string>
+              </Valor>
+            </Campo>
+            <Campo Prefijo="UNB" Nombre="UNB001" Visible="true">
+              <Valor>
+                <string>PROCESAMIENTO</string>
+              </Valor>
+            </Campo>
+            <Campo Prefijo="UNB" Nombre="VERSION_ESQUEMA_UBL" Visible="true">
+              <Valor>
+                <string>2.0</string>
+              </Valor>
+            </Campo>
+            <Campo Prefijo="UNB" Nombre="PERSONALIZACION_UBL" Visible="true">
+              <Valor>
+                <string>1.0</string>
+              </Valor>
+            </Campo>
+            <Campo Prefijo="UNB" Nombre="PERFIL_DE_FACTURA" Visible="true">
+              <Valor>
+                <string>01</string>
+              </Valor>
+            </Campo>
+            <Campo Prefijo="UNB" Nombre="CDP_TIPO" Visible="true">
+              <Valor>
+                <string>01</string>
+              </Valor>
+            </Campo>
+            <Campo Prefijo="UNB" Nombre="CDP_NUMERO" Visible="true">
+              <Valor>
+                <string>F001-1</string>
+              </Valor>
+            </Campo>
+            <Campo Prefijo="UNB" Nombre="CDP_FECHA_EMISION" Visible="true">
+              <Valor>
+                <string>2013-07-30</string>
+              </Valor>
+            </Campo>
+            <Campo Prefijo="UNB" Nombre="MONEDA" Visible="true">
+              <Valor>
+                <string>PEN</string>
+              </Valor>
+            </Campo>
+            <Campo Prefijo="UNB" Nombre="EMISOR_RUC" Visible="true">
+              <Valor>
+                <string>20505779291</string>
+              </Valor>
+            </Campo>
+            <Campo Prefijo="UNB" Nombre="EMISOR_DOCUMENTO_TIPO" Visible="true">
+              <Valor>
+                <string>6</string>
+              </Valor>
+            </Campo>
+            <Campo Prefijo="UNB" Nombre="EMISOR_NOMBRE_COMERCIAL" Visible="true">
+              <Valor>
+                <string>Cementos Lima S.A.A - EDUARDO</string>
+              </Valor>
+            </Campo>
+            <Campo Prefijo="UNB" Nombre="EMISOR_RAZON_SOCIAL" Visible="true">
+              <Valor>
+                <string>AGREDO GUTIERREZ</string>
+              </Valor>
+            </Campo>
+            <Campo Prefijo="UNB" Nombre="EMISOR_DOMICILIO_UBIGEO" Visible="true">
+              <Valor>
+                <string>LI1501</string>
+              </Valor>
+            </Campo>
+            <Campo Prefijo="UNB" Nombre="EMISOR_DOMICILIO_DIRECCION" Visible="true">
+              <Valor>
+                <string>AV. ATOCONGO NRO. 2440</string>
+              </Valor>
+            </Campo>
+            <Campo Prefijo="UNB" Nombre="EMISOR_DOMICILIO_URBANIZACION" Visible="true">
+              <Valor>
+                <string>URB. JOSE GALVEZ - VILLA</string>
+              </Valor>
+            </Campo>
+            <Campo Prefijo="UNB" Nombre="EMISOR_DOMICILIO_DEPARTAMENTO" Visible="true">
+              <Valor>
+                <string>DEPARTAMENTO LIMA</string>
+              </Valor>
+            </Campo>
+            <Campo Prefijo="UNB" Nombre="EMISOR_DOMICILIO_PROVINCIA" Visible="true">
+              <Valor>
+                <string>PROVINCIA DE LIMA</string>
+              </Valor>
+            </Campo>
+            <Campo Prefijo="UNB" Nombre="EMISOR_DOMICILIO_DISTRITO" Visible="true">
+              <Valor>
+                <string>CERCADO CALLAO</string>
+              </Valor>
+            </Campo>
+            <Campo Prefijo="UNB" Nombre="EMISOR_DOMICILIO_PAIS" Visible="true">
+              <Valor>
+                <string>PE</string>
+              </Valor>
+            </Campo>
+            <Campo Prefijo="UNB" Nombre="RECEPTOR_DOCUMENTO_NUMERO" Visible="true">
+              <Valor>
+                <string>20505779290</string>
+              </Valor>
+            </Campo>
+            <Campo Prefijo="UNB" Nombre="RECEPTOR_DOCUMENTO_TIPO" Visible="true">
+              <Valor>
+                <string>6</string>
+              </Valor>
+            </Campo>
+            <Campo Prefijo="UNB" Nombre="RECEPTOR_RAZON_SOCIAL" Visible="true">
+              <Valor>
+                <string>NESTLE PERU</string>
+              </Valor>
+            </Campo>
+            <Campo Prefijo="UNB" Nombre="RECEPTOR_DIRECCION" Visible="true">
+              <Valor>
+                <string>DESCRIPCION DEL PAIS</string>
+              </Valor>
+            </Campo>
+            <Campo Prefijo="UNB" Nombre="TOTAL_ACUMULADO_SIN_IMPUESTOS" Visible="true">
+              <Valor>
+                <string>3525.00</string>
+              </Valor>
+            </Campo>
+            <Campo Prefijo="UNB" Nombre="TOTAL_IMPUESTOS" Visible="true">
+              <Valor>
+                <string>634.50</string>
+              </Valor>
+            </Campo>
+            <Campo Prefijo="UNB" Nombre="TOTAL_ACUMULADO_CON_IMPUESTOS" Visible="true">
+              <Valor>
+                <string>4159.50</string>
+              </Valor>
+            </Campo>
+            <Campo Prefijo="UNB" Nombre="TOTAL_DESCUENTOS" Visible="true">
+              <Valor>
+                <string>142212121212.89</string>
+              </Valor>
+            </Campo>
+            <Campo Prefijo="UNB" Nombre="TOTAL_CARGOS" Visible="true">
+              <Valor>
+                <string>4159.50</string>
+              </Valor>
+            </Campo>
+            <Campo Prefijo="UNB" Nombre="TOTAL_A_PAGAR" Visible="true">
+              <Valor>
+                <string>999999999</string>
+              </Valor>
+            </Campo>
+            <Campo Prefijo="UNB" Nombre="CODIGO_PLANTILLA" Visible="true">
+              <Valor>
+                <string>PXP-A001</string>
+              </Valor>
+            </Campo>
+            <Campo Prefijo="UNB" Nombre="EMAIL" Visible="true">
+              <Valor>
+                <string>eduardo.agredo@carvajal.com</string>
+              </Valor>
+            </Campo>
+            <Campo Prefijo="UNB" Nombre="CDP_BAJA" Visible="true">
+              <Valor>
+                <string>0</string>
+              </Valor>
+            </Campo>
+            <Campo Prefijo="UNB" Nombre="CDP_BAJA_MOTIVO" Visible="true">
+              <Valor>
+                <string>CAMPO ADICIONAL DE 100 CARACTERES DE RELLENO------------CAMPO ADICIONAL DE 100 CARACTERES DE RELLENO</string>
+              </Valor>
+            </Campo>
+            <Campo Prefijo="UNB" Nombre="UNB034" Visible="true">
+              <Valor>
+                <string>CAMPO ADICIONAL DE 100 CARACTERES DE RELLENO------------CAMPO ADICIONAL DE 100 CARACTERES DE RELLENO</string>
+              </Valor>
+            </Campo>
+            <Campo Prefijo="UNB" Nombre="ORDEN_DE_COMPRA" Visible="true">
+              <Valor>
+                <string>OCPE00001</string>
+              </Valor>
+            </Campo>
+            <Campo Prefijo="UNB" Nombre="CONDICIONES_DE_PAGO" Visible="true">
+              <Valor>
+                <string>SUNAT-12345678998</string>
+              </Valor>
+            </Campo>
+            <Campo Prefijo="UNB" Nombre="FECHA_VENCIMIENTO" Visible="true">
+              <Valor>
+                <string>2013-12-31</string>
+              </Valor>
+            </Campo>
+            <Campo Prefijo="UNB" Nombre="NRO_RESOLUCION_SUNAT" Visible="true">
+              <Valor>
+                <string>142212121212.89</string>
+              </Valor>
+            </Campo>
+            <Campo Prefijo="UNB" Nombre="CODIGO_IMPRESORA" Visible="true">
+              <Valor>
+                <string>IMP01</string>
+              </Valor>
+            </Campo>
+            <Campo Prefijo="UNB" Nombre="CANTIDAD_COPIAS" Visible="true">
+              <Valor>
+                <string>1</string>
+              </Valor>
+            </Campo>
+            <Campo Prefijo="UNB" Nombre="ID_TOTAL_DESCUENTOS" Visible="true">
+              <Valor>
+                <string>2005</string>
+              </Valor>
+            </Campo>
+            <Campo Prefijo="UNB" Nombre="VALOR_TOTAL_DESCUENTOS" Visible="true">
+              <Valor>
+                <string>4159.50</string>
+              </Valor>
+            </Campo>
+            <Campo Prefijo="UNB" Nombre="TIPO_OPERACION" Visible="true">
+              <Valor>
+                <string>01</string>
+              </Valor>
+            </Campo>
+            <Campo Prefijo="UNB" Nombre="CODIGO_FISE" Visible="true">
+              <Valor>
+                <string>3001</string>
+              </Valor>
+            </Campo>
+            <Campo Prefijo="UNB" Nombre="VALOR_FISE" Visible="true">
+              <Valor>
+                <string>454848.85</string>
+              </Valor>
+            </Campo>
+            <Campo Prefijo="UNB" Nombre="RECEPTOR_RUC" Visible="true">
+              <Valor>
+                <string>8569</string>
+              </Valor>
+            </Campo>
+          </Campos>
+          <Longitud xsi:nil="true" />
+          <Ejemplo />
+        </Registro>
+        <Registro Prefijo="NOT" Nombre="Notas" Separador="," CharAperturaCampo="" CharCierreCampo="" MinOccurs="0" MaxOccurs="2147483647" PrefijoPadre="UNB" EsItem="false">
+          <Campos>
+            <Campo Prefijo="NOT" Nombre="ID_REGISTRO" Visible="true">
+              <Valor>
+                <string />
+                <string>NOT</string>
+              </Valor>
+            </Campo>
+            <Campo Prefijo="NOT" Nombre="CODIGO" Visible="true">
+              <Valor>
+                <string>1000</string>
+                <string>1000</string>
+              </Valor>
+            </Campo>
+            <Campo Prefijo="NOT" Nombre="NOTA" Visible="true">
+              <Valor>
+                <string>NOTA 1 ALFANUMERICO DE 100 CARACTERES DE RELLENO</string>
+                <string>NOTA 2 ALFANUMERICO DE 200 CARACTERES DE RELLENO</string>
+              </Valor>
+            </Campo>
+          </Campos>
+          <Longitud xsi:nil="true" />
+          <Ejemplo />
+        </Registro>
+        <Registro Prefijo="LEY" Nombre="Leyendas" Separador="," CharAperturaCampo="" CharCierreCampo="" MinOccurs="0" MaxOccurs="2147483647" PrefijoPadre="UNB" EsItem="false">
+          <Campos>
+            <Campo Prefijo="LEY" Nombre="ID_REGISTRO" Visible="true">
+              <Valor>
+                <string>LEY</string>
+                <string>LEY</string>
+                <string>LEY</string>
+              </Valor>
+            </Campo>
+            <Campo Prefijo="LEY" Nombre="CODIGO" Visible="true">
+              <Valor>
+                <string>1000</string>
+                <string>1000</string>
+                <string>1000</string>
+              </Valor>
+            </Campo>
+            <Campo Prefijo="LEY" Nombre="LEYENDA" Visible="true">
+              <Valor>
+                <string>LEYENDA NRO 1 - áéíóú</string>
+                <string>LEYENDA NRO 2 - ñÑüÜ</string>
+                <string>LEYENDA NRO 3 - ÁÉÍÓÚ</string>
+              </Valor>
+            </Campo>
+          </Campos>
+          <Longitud xsi:nil="true" />
+          <Ejemplo />
+        </Registro>
+        <Registro Prefijo="REM" Nombre="Guías de remisión" Separador="," CharAperturaCampo="" CharCierreCampo="" MinOccurs="0" MaxOccurs="2147483647" PrefijoPadre="UNB" EsItem="false">
+          <Campos>
+            <Campo Prefijo="REM" Nombre="ID_REGISTRO" Visible="true">
+              <Valor>
+                <string>REM</string>
+                <string>REM</string>
+              </Valor>
+            </Campo>
+            <Campo Prefijo="REM" Nombre="NUMERO" Visible="true">
+              <Valor>
+                <string>123456</string>
+                <string>654321</string>
+              </Valor>
+            </Campo>
+            <Campo Prefijo="REM" Nombre="TIPO" Visible="true">
+              <Valor>
+                <string>09</string>
+                <string>09</string>
+              </Valor>
+            </Campo>
+            <Campo Prefijo="REM" Nombre="FECHA_DE_EMISION" Visible="true">
+              <Valor>
+                <string>2013-07-30</string>
+                <string>2013-07-30</string>
+              </Valor>
+            </Campo>
+          </Campos>
+          <Longitud xsi:nil="true" />
+          <Ejemplo />
+        </Registro>
+        <Registro Prefijo="REF" Nombre="Documentos de referencia" Separador="," CharAperturaCampo="" CharCierreCampo="" MinOccurs="0" MaxOccurs="2147483647" PrefijoPadre="UNB" EsItem="false">
+          <Campos>
+            <Campo Prefijo="REF" Nombre="ID_REGISTRO" Visible="true">
+              <Valor>
+                <string>REF</string>
+                <string>REF</string>
+                <string>REF</string>
+              </Valor>
+            </Campo>
+            <Campo Prefijo="REF" Nombre="NUMERO" Visible="true">
+              <Valor>
+                <string>123456</string>
+                <string>123457</string>
+                <string>123458</string>
+              </Valor>
+            </Campo>
+            <Campo Prefijo="REF" Nombre="TIPO" Visible="true">
+              <Valor>
+                <string>09</string>
+                <string>09</string>
+                <string>09</string>
+              </Valor>
+            </Campo>
+            <Campo Prefijo="REF" Nombre="FECHA_EMISION" Visible="true">
+              <Valor>
+                <string>2013-07-30</string>
+                <string>2013-07-30</string>
+                <string>2013-07-30</string>
+              </Valor>
+            </Campo>
+          </Campos>
+          <Longitud xsi:nil="true" />
+          <Ejemplo />
+        </Registro>
+        <Registro Prefijo="DES" Nombre="Descuentos y cargos" Separador="," CharAperturaCampo="" CharCierreCampo="" MinOccurs="0" MaxOccurs="2147483647" PrefijoPadre="UNB" EsItem="false">
+          <Campos>
+            <Campo Prefijo="DES" Nombre="ID_REGISTRO" Visible="true">
+              <Valor>
+                <string>DES</string>
+                <string>DES</string>
+                <string>DES</string>
+                <string>DES</string>
+              </Valor>
+            </Campo>
+            <Campo Prefijo="DES" Nombre="TIPO" Visible="true">
+              <Valor>
+                <string>DES</string>
+                <string>CAR</string>
+                <string>CAR</string>
+                <string>CAR</string>
+              </Valor>
+            </Campo>
+            <Campo Prefijo="DES" Nombre="CODIGO_MOTIVO" Visible="true">
+              <Valor>
+                <string>59</string>
+                <string>68</string>
+                <string>73</string>
+                <string>75</string>
+              </Valor>
+            </Campo>
+            <Campo Prefijo="DES" Nombre="DESCRIPCION_MOTIVO" Visible="true">
+              <Valor>
+                <string>Descripción DESCUENTO 01 del motivo para la aplicación del descuento o cargo</string>
+                <string>Descripción CARGO 02 del motivo para la aplicación del descuento o cargo</string>
+                <string>Descripción CARGO 02 del motivo para la aplicación del descuento o cargo</string>
+                <string>Descripción CARGO 02 del motivo para la aplicación del descuento o cargo</string>
+              </Valor>
+            </Campo>
+            <Campo Prefijo="DES" Nombre="IMPORTE_DESCUENTO" Visible="true">
+              <Valor>
+                <string>10</string>
+                <string>20</string>
+                <string>20</string>
+                <string>20</string>
+              </Valor>
+            </Campo>
+            <Campo Prefijo="DES" Nombre="PORCENTAJE_DESCUENTO" Visible="true">
+              <Valor>
+                <string>99.99</string>
+                <string>99.99</string>
+                <string>100.00</string>
+                <string>1.11</string>
+              </Valor>
+            </Campo>
+          </Campos>
+          <Longitud xsi:nil="true" />
+          <Ejemplo />
+        </Registro>
+        <Registro Prefijo="IMP" Nombre="Impuestos" Separador="," CharAperturaCampo="" CharCierreCampo="" MinOccurs="1" MaxOccurs="2147483647" PrefijoPadre="UNB" EsItem="false">
+          <Campos>
+            <Campo Prefijo="IMP" Nombre="ID_REGISTRO" Visible="true">
+              <Valor>
+                <string>IMP</string>
+                <string>IMP</string>
+              </Valor>
+            </Campo>
+            <Campo Prefijo="IMP" Nombre="IMPORTE_TOTAL" Visible="true">
+              <Valor>
+                <string>1000.00</string>
+                <string>2000.00</string>
+              </Valor>
+            </Campo>
+            <Campo Prefijo="IMP" Nombre="IMPORTE_A_TRIBUTAR" Visible="true">
+              <Valor>
+                <string>1001.00</string>
+                <string>2001.00</string>
+              </Valor>
+            </Campo>
+            <Campo Prefijo="IMP" Nombre="ID" Visible="true">
+              <Valor>
+                <string>1002</string>
+                <string>2002</string>
+              </Valor>
+            </Campo>
+            <Campo Prefijo="IMP" Nombre="NOMBRE" Visible="true">
+              <Valor>
+                <string>IGV</string>
+                <string>ISC</string>
+              </Valor>
+            </Campo>
+            <Campo Prefijo="IMP" Nombre="CODIGO_UNECE" Visible="true">
+              <Valor>
+                <string>VAT</string>
+                <string>VAT</string>
+              </Valor>
+            </Campo>
+          </Campos>
+          <Longitud xsi:nil="true" />
+          <Ejemplo />
+        </Registro>
+        <Registro Prefijo="TRI" Nombre="Otros conceptos tributarios" Separador="," CharAperturaCampo="" CharCierreCampo="" MinOccurs="0" MaxOccurs="2147483647" PrefijoPadre="UNB" EsItem="false">
+          <Campos>
+            <Campo Prefijo="TRI" Nombre="ID_REGISTRO" Visible="true">
+              <Valor>
+                <string>TRI</string>
+                <string>TRI</string>
+              </Valor>
+            </Campo>
+            <Campo Prefijo="TRI" Nombre="CODIGO_CONCEPTO" Visible="true">
+              <Valor>
+                <string>1001</string>
+                <string>1002</string>
+              </Valor>
+            </Campo>
+            <Campo Prefijo="TRI" Nombre="MONTO_CONCEPTO" Visible="true">
+              <Valor>
+                <string>1000.00</string>
+                <string>2000.00</string>
+              </Valor>
+            </Campo>
+            <Campo Prefijo="TRI" Nombre="MONTO_INCLUIDA_PERCEPCION" Visible="true">
+              <Valor>
+                <string>1.50</string>
+                <string>2.50</string>
+              </Valor>
+            </Campo>
+            <Campo Prefijo="TRI" Nombre="BASE_IMPONIBLE" Visible="true">
+              <Valor>
+                <string>12.2</string>
+                <string>11.1</string>
+              </Valor>
+            </Campo>
+            <Campo Prefijo="TRI" Nombre="PORCENTAJE_DETRACCION" Visible="true">
+              <Valor>
+                <string>15.6</string>
+                <string>14.3</string>
+              </Valor>
+            </Campo>
+          </Campos>
+          <Longitud xsi:nil="true" />
+          <Ejemplo />
+        </Registro>
+        <Registro Prefijo="ITE" Nombre="Items" Separador="," CharAperturaCampo="" CharCierreCampo="" MinOccurs="1" MaxOccurs="2147483647" PrefijoPadre="UNB" EsItem="true">
+          <Campos>
+            <Campo Prefijo="ITE" Nombre="ID_REGISTRO" Visible="true">
+              <Valor>
+                <string>ITE</string>
+                <string>ITE</string>
+                <string>ITE</string>
+                <string>ITE</string>
+              </Valor>
+            </Campo>
+            <Campo Prefijo="ITE" Nombre="NUMERO_DE_ORDEN" Visible="true">
+              <Valor>
+                <string>01</string>
+                <string>01</string>
+                <string>02</string>
+                <string>02</string>
+              </Valor>
+            </Campo>
+            <Campo Prefijo="ITE" Nombre="UNIDAD_MEDIDA" Visible="true">
+              <Valor>
+                <string>04</string>
+                <string>1G</string>
+                <string>11</string>
+                <string>DZN</string>
+              </Valor>
+            </Campo>
+            <Campo Prefijo="ITE" Nombre="CANTIDAD" Visible="true">
+              <Valor>
+                <string>15.00</string>
+                <string>30.00</string>
+                <string>45.00</string>
+                <string>60.00</string>
+              </Valor>
+            </Campo>
+            <Campo Prefijo="ITE" Nombre="VALOR_VENTA_ITEM" Visible="true">
+              <Valor>
+                <string>37.50</string>
+                <string>38.50</string>
+                <string>75.00</string>
+                <string>155.00</string>
+              </Valor>
+            </Campo>
+            <Campo Prefijo="ITE" Nombre="DESCRIPCION_1" Visible="true">
+              <Valor>
+                <string>Descripción 01 &amp;+-=)(/&amp;%$·"&lt;&gt;*| del bien vendido o cedido en uso</string>
+                <string>Descripción 02 detallada del bien vendido o cedido en uso</string>
+                <string>Descripción 03 detallada del bien vendido o cedido en uso</string>
+                <string>Descripción 04 detallada del bien vendido o cedido en uso</string>
+              </Valor>
+            </Campo>
+            <Campo Prefijo="ITE" Nombre="VALOR_UNITARIO" Visible="true">
+              <Valor>
+                <string>5.35</string>
+                <string>6.36</string>
+                <string>7.37</string>
+                <string>8.38</string>
+              </Valor>
+            </Campo>
+            <Campo Prefijo="ITE" Nombre="CODIGO" Visible="true">
+              <Valor>
+                <string>20505779291</string>
+                <string>20505779292</string>
+                <string>20505779293</string>
+                <string>20505779294</string>
+              </Valor>
+            </Campo>
+            <Campo Prefijo="ITE" Nombre="CODIGO_PRECIO_SUNAT" Visible="true">
+              <Valor>
+                <string>01</string>
+                <string>01</string>
+                <string>01</string>
+                <string>01</string>
+              </Valor>
+            </Campo>
+            <Campo Prefijo="ITE" Nombre="PRECIO" Visible="true">
+              <Valor>
+                <string>5.35</string>
+                <string>6.36</string>
+                <string>7.37</string>
+                <string>8.38</string>
+              </Valor>
+            </Campo>
+          </Campos>
+          <Longitud xsi:nil="true" />
+          <Ejemplo />
+        </Registro>
+        <Registro Prefijo="IDE" Nombre="Item descuentos" Separador="," CharAperturaCampo="" CharCierreCampo="" MinOccurs="0" MaxOccurs="2147483647" PrefijoPadre="ITE" EsItem="false">
+          <Campos>
+            <Campo Prefijo="IDE" Nombre="ID_REGISTRO" Visible="true">
+              <Valor>
+                <string>IDE</string>
+                <string>IDE</string>
+              </Valor>
+            </Campo>
+            <Campo Prefijo="IDE" Nombre="INDICADOR" Visible="true">
+              <Valor>
+                <string>DES</string>
+                <string>CAR</string>
+              </Valor>
+            </Campo>
+            <Campo Prefijo="IDE" Nombre="CODIGO_DESCUENTOS" Visible="true">
+              <Valor>
+                <string>75</string>
+                <string>72</string>
+              </Valor>
+            </Campo>
+            <Campo Prefijo="IDE" Nombre="DESCRIPCION_DESCUENTO" Visible="true">
+              <Valor>
+                <string>Descripción del motivo para la aplicación del descuento o cargo</string>
+                <string>Descripción del motivo para la aplicación del descuento o cargo</string>
+              </Valor>
+            </Campo>
+            <Campo Prefijo="IDE" Nombre="IMPORTE_FINAL" Visible="true">
+              <Valor>
+                <string>75</string>
+                <string>72</string>
+              </Valor>
+            </Campo>
+            <Campo Prefijo="IDE" Nombre="PORCENTAJE_DESCUENTO" Visible="true">
+              <Valor>
+                <string>90.99</string>
+                <string>1.11</string>
+              </Valor>
+            </Campo>
+          </Campos>
+          <Longitud xsi:nil="true" />
+          <Ejemplo />
+        </Registro>
+        <Registro Prefijo="IIM" Nombre="Item impuestos" Separador="," CharAperturaCampo="" CharCierreCampo="" MinOccurs="0" MaxOccurs="2147483647" PrefijoPadre="ITE" EsItem="false">
+          <Campos>
+            <Campo Prefijo="IIM" Nombre="ID_REGISTRO" Visible="true">
+              <Valor>
+                <string>IIM</string>
+                <string>IIM</string>
+                <string>IIM</string>
+                <string>IIM</string>
+                <string>IIM</string>
+                <string>IIM</string>
+                <string>IIM</string>
+                <string>IIM</string>
+              </Valor>
+            </Campo>
+            <Campo Prefijo="IIM" Nombre="IMPORTE_TOTAL_TRIBUTO" Visible="true">
+              <Valor>
+                <string>10.00</string>
+                <string>20.00</string>
+                <string>30.00</string>
+                <string>30.00</string>
+                <string>10.00</string>
+                <string>20.00</string>
+                <string>20.00</string>
+                <string>30.00</string>
+              </Valor>
+            </Campo>
+            <Campo Prefijo="IIM" Nombre="BASE_IMPONIBLE" Visible="true">
+              <Valor>
+                <string>1.00</string>
+                <string>2.00</string>
+                <string>3.00</string>
+                <string>3.00</string>
+                <string>1.00</string>
+                <string>2.00</string>
+                <string>2.00</string>
+                <string>3.00</string>
+              </Valor>
+            </Campo>
+            <Campo Prefijo="IIM" Nombre="IMPORTE_EXPLICITO" Visible="true">
+              <Valor>
+                <string>10.00</string>
+                <string>20.00</string>
+                <string>30.00</string>
+                <string>30.00</string>
+                <string>10.00</string>
+                <string>20.00</string>
+                <string>20.00</string>
+                <string>30.00</string>
+              </Valor>
+            </Campo>
+            <Campo Prefijo="IIM" Nombre="PORCENTAJE" Visible="true">
+              <Valor>
+                <string>10.18</string>
+                <string>20.18</string>
+                <string>30.18</string>
+                <string>30.18</string>
+                <string>10.18</string>
+                <string>20.18</string>
+                <string>20.18</string>
+                <string>30.18</string>
+              </Valor>
+            </Campo>
+            <Campo Prefijo="IIM" Nombre="TIPO_AFECTACION_IGV" Visible="true">
+              <Valor>
+                <string>12</string>
+                <string>13</string>
+                <string>14</string>
+                <string>14</string>
+                <string>13</string>
+                <string>13</string>
+                <string>14</string>
+                <string>14</string>
+              </Valor>
+            </Campo>
+            <Campo Prefijo="IIM" Nombre="SISTEMA_ISC" Visible="true">
+              <Valor>
+                <string>10</string>
+                <string>20</string>
+                <string>30</string>
+                <string>30</string>
+                <string>20</string>
+                <string>20</string>
+                <string>30</string>
+                <string>30</string>
+              </Valor>
+            </Campo>
+            <Campo Prefijo="IIM" Nombre="ID_TRIBUTO" Visible="true">
+              <Valor>
+                <string>1000</string>
+                <string>2000</string>
+                <string>9999</string>
+                <string>9999</string>
+                <string>1000</string>
+                <string>2000</string>
+                <string>2000</string>
+                <string>9999</string>
+              </Valor>
+            </Campo>
+            <Campo Prefijo="IIM" Nombre="DESCRIPCION_TRIBUTO" Visible="true">
+              <Valor>
+                <string>IGV</string>
+                <string>ISC</string>
+                <string>OTROS</string>
+                <string>OTROS</string>
+                <string>IGV</string>
+                <string>ISC</string>
+                <string>IGV</string>
+                <string>OTROS</string>
+              </Valor>
+            </Campo>
+            <Campo Prefijo="IIM" Nombre="CODIGO_TRIBUTO" Visible="true">
+              <Valor>
+                <string>VAT</string>
+                <string>EXC</string>
+                <string>OTH</string>
+                <string>OTH</string>
+                <string>VAT</string>
+                <string>EXC</string>
+                <string>VAT</string>
+                <string>OTH</string>
+              </Valor>
+            </Campo>
+          </Campos>
+          <Longitud xsi:nil="true" />
+          <Ejemplo />
+        </Registro>
+        <Registro Prefijo="TRA" Nombre="Traslado de Bienes" Separador="," CharAperturaCampo="" CharCierreCampo="" MinOccurs="0" MaxOccurs="1" PrefijoPadre="UNB" EsItem="false">
+          <Campos>
+            <Campo Prefijo="TRA" Nombre="ID_REGISTRO" Visible="true">
+              <Valor>
+                <string>TRA</string>
+              </Valor>
+            </Campo>
+            <Campo Prefijo="TRA" Nombre="CODIGO_UBIGEO" Visible="true">
+              <Valor>
+                <string>10101</string>
+              </Valor>
+            </Campo>
+            <Campo Prefijo="TRA" Nombre="DIRECCION_PUNTO_PARTIDA" Visible="true">
+              <Valor>
+                <string>AV. ATOCONGO NRO. 2440  - áéíóú</string>
+              </Valor>
+            </Campo>
+            <Campo Prefijo="TRA" Nombre="URBANIZACION_PUNTO_PARTIDA" Visible="true">
+              <Valor>
+                <string>URB. JOSE GALVEZ - VILLA</string>
+              </Valor>
+            </Campo>
+            <Campo Prefijo="TRA" Nombre="PROVINCIA_PUNTO_PARTIDA" Visible="true">
+              <Valor>
+                <string>PROVINCIA DE LIMA</string>
+              </Valor>
+            </Campo>
+            <Campo Prefijo="TRA" Nombre="DEPARTAMENTO_PUNTO_PARTIDA" Visible="true">
+              <Valor>
+                <string>DEPARTAMENTO LIMA</string>
+              </Valor>
+            </Campo>
+            <Campo Prefijo="TRA" Nombre="DISTRITO_PUNTO_PARTIDA" Visible="true">
+              <Valor>
+                <string>CERCADO CALLAO</string>
+              </Valor>
+            </Campo>
+            <Campo Prefijo="TRA" Nombre="CODIGO_PAIS_PUNTO_PARTIDA" Visible="true">
+              <Valor>
+                <string>PE</string>
+              </Valor>
+            </Campo>
+            <Campo Prefijo="TRA" Nombre="COD_UBIGEO_PUNTO_LLEGADA" Visible="true">
+              <Valor>
+                <string>10101</string>
+              </Valor>
+            </Campo>
+            <Campo Prefijo="TRA" Nombre="DIRECCION_PUNTO_LLEGADA" Visible="true">
+              <Valor>
+                <string>AV. JIMENEZ NRO. 2330  - áéíóú</string>
+              </Valor>
+            </Campo>
+            <Campo Prefijo="TRA" Nombre="URBANIZACION_PUNTO_LLEGADA" Visible="true">
+              <Valor>
+                <string>URB. JUAN JOSE - VILLA</string>
+              </Valor>
+            </Campo>
+            <Campo Prefijo="TRA" Nombre="PROVINCIA_PUNTO_LLEGADA" Visible="true">
+              <Valor>
+                <string>PROVINCIA DE LIMA</string>
+              </Valor>
+            </Campo>
+            <Campo Prefijo="TRA" Nombre="DEPARTAMENTO_PUNTO_LLEGADA" Visible="true">
+              <Valor>
+                <string>DEPARTAMENTO LIMA</string>
+              </Valor>
+            </Campo>
+            <Campo Prefijo="TRA" Nombre="DISTRITO_PUNTO_LLEGADA" Visible="true">
+              <Valor>
+                <string>CERCADO CALLAO</string>
+              </Valor>
+            </Campo>
+            <Campo Prefijo="TRA" Nombre="CODIGO_PAIS_PUNTO_LLEGADA" Visible="true">
+              <Valor>
+                <string>PE</string>
+              </Valor>
+            </Campo>
+            <Campo Prefijo="TRA" Nombre="PLACA_VEHICULO" Visible="true">
+              <Valor>
+                <string>ABCDE12345</string>
+              </Valor>
+            </Campo>
+            <Campo Prefijo="TRA" Nombre="CONSTANCIA_INSCRIPCION" Visible="true">
+              <Valor>
+                <string>1234567890</string>
+              </Valor>
+            </Campo>
+            <Campo Prefijo="TRA" Nombre="MARCA_VEHICULO" Visible="true">
+              <Valor>
+                <string>CHEVROLET</string>
+              </Valor>
+            </Campo>
+            <Campo Prefijo="TRA" Nombre="LICENCIA_CONDUCIR" Visible="true">
+              <Valor>
+                <string>1234567890</string>
+              </Valor>
+            </Campo>
+            <Campo Prefijo="TRA" Nombre="NUM_ID_TRANSPORTISTA" Visible="true">
+              <Valor>
+                <string>12345678901</string>
+              </Valor>
+            </Campo>
+            <Campo Prefijo="TRA" Nombre="TIPO_DOC_ID_TRANSPORTISTA" Visible="true">
+              <Valor>
+                <string>CC</string>
+              </Valor>
+            </Campo>
+            <Campo Prefijo="TRA" Nombre="RAZON_SOCIAL_TRANSPORTISTA" Visible="true">
+              <Valor>
+                <string>EDUARDO AGREDO</string>
+              </Valor>
+            </Campo>
+          </Campos>
+          <Longitud xsi:nil="true" />
+          <Ejemplo />
+        </Registro>
+        <Registro Prefijo="ANT" Nombre="Anticipos" Separador="," CharAperturaCampo="" CharCierreCampo="" MinOccurs="0" MaxOccurs="2147483647" PrefijoPadre="UNB" EsItem="false">
+          <Campos>
+            <Campo Prefijo="ANT" Nombre="ID_REGISTRO" Visible="true">
+              <Valor>
+                <string>ANT</string>
+              </Valor>
+            </Campo>
+            <Campo Prefijo="ANT" Nombre="VALOR_ANTICIPO" Visible="true">
+              <Valor>
+                <string>45545.55</string>
+              </Valor>
+            </Campo>
+            <Campo Prefijo="ANT" Nombre="TIPO_DOCUMENTO_ANTICIPO" Visible="true">
+              <Valor>
+                <string>04</string>
+              </Valor>
+            </Campo>
+            <Campo Prefijo="ANT" Nombre="SERIE_CORRELATIVO_ANTICIPO" Visible="true">
+              <Valor>
+                <string>SERIE Y CORRELALATIVO ANTICIPO</string>
+              </Valor>
+            </Campo>
+          </Campos>
+          <Longitud xsi:nil="true" />
+          <Ejemplo />
+        </Registro>
+        <Registro Prefijo="USUARIO" Nombre="Campos del Usuario" CharAperturaCampo="" CharCierreCampo="" MinOccurs="1" MaxOccurs="1" PrefijoPadre="" EsItem="false">
+          <Campos>
+            <Campo Prefijo="USUARIO" Nombre="*ESPACIO*" Visible="true">
+              <Valor>
+                <string>' '</string>
+              </Valor>
+              <Funcion>
+                <JS>_ESPACIO</JS>
+              </Funcion>
+            </Campo>
+            <Campo Prefijo="USUARIO" Nombre="FALSE" Visible="true">
+              <Valor>
+                <string>false</string>
+              </Valor>
+            </Campo>
+            <Campo Prefijo="USUARIO" Nombre="Moneda" Visible="true">
+              <Valor>
+                <string>USD</string>
+              </Valor>
+            </Campo>
+          </Campos>
+          <Longitud xsi:nil="true" />
+          <Ejemplo />
+        </Registro>
+      </Registros>
+      <FileNameEjemplo>C:\Users\Administrador\Desktop\TESTING FEPE\Archivos Ejemplo Mapas std v1.4\2013-07-31 FABO_STD14.txt</FileNameEjemplo>
+      <FileContentsEjemplo>
+        <string>VOID+AUTOMATIZACIONCEN+20505779290+20505779291+INVOIC+0+8017A141414141</string>
+        <string>UNB+PROCESAMIENTO+2.0+1.0+01+01+F001-1+2014-02-03+PEN+20505779291+6+Cementos Lima (Peru) S.A.A - EDUARDO+AGREDO GUTIERREZ+LI1501+AV. ATOCONGO NRO. 2440+URB. JOSE GALVEZ - VILLA+DEPARTAMENTO LIMA+PROVINCIA DE LIMA+CERCADO CALLAO+PE+20505779290+6+NESTLE PERU+DESCRIPCION DEL PAIS+3525.00+634.50+4159.50+142212121212.89+4159.50+999999999+PXP-A001+eduardo.agredo@carvajal.com+0+CAMPO ADICIONAL DE 100 CARACTERES DE RELLENO------------CAMPO ADICIONAL DE 100 CARACTERES DE RELLENO+CAMPO ADICIONAL DE 100 CARACTERES DE RELLENO------------CAMPO ADICIONAL DE 100 CARACTERES DE RELLENO+OCPE00001+SUNAT-12345678998+2013-12-31+142212121212.89+IMP01+1+2005+99.99+20505779291+20505779291+20505779291+20505779291+20505779291+20505779291+20505779291+20505779291+20505779291+20505779291+20505779291+20505779291+99+3001+5500.55</string>
+        <string>NOT,1000,NOTA 1 ALFANUMERICO DE 100 CARACTERES DE RELLENO</string>
+        <string>NOT,1000,NOTA 2 ALFANUMERICO DE 200 CARACTERES DE RELLENO</string>
+        <string>LEY,1000,LEYENDA NRO 1 - áéíóú</string>
+        <string>LEY,1000,LEYENDA NRO 2 - ñÑüÜ</string>
+        <string>LEY,1000,LEYENDA NRO 3 - ÁÉÍÓÚ</string>
+        <string>REM,123456,09,2013-07-30</string>
+        <string>REM,654321,09,2013-07-30</string>
+        <string>REF,123456,09,2013-07-30</string>
+        <string>REF,123457,09,2013-07-30</string>
+        <string>REF,123458,09,2013-07-30</string>
+        <string>DES,DES,59,Descripción DESCUENTO 01 del motivo para la aplicación del descuento o cargo,10,99.99</string>
+        <string>DES,CAR,68,Descripción CARGO 02 del motivo para la aplicación del descuento o cargo,20,99.99</string>
+        <string>DES,CAR,73,Descripción CARGO 02 del motivo para la aplicación del descuento o cargo,20,10.00</string>
+        <string>DES,CAR,75,Descripción CARGO 02 del motivo para la aplicación del descuento o cargo,20,20.00</string>
+        <string>IMP,1000.00,1001.00,1002,IGV,VAT</string>
+        <string>IMP,2000.00,2001.00,2002,ISC,VAT</string>
+        <string>TRI,1001,1000.00,1.50,12.2,15.6</string>
+        <string>TRI,1002,2000.00,2.50,11.1,14.3</string>
+        <string>ITE,01,04,15.00,37.50,Descripción 01 &amp;+-=)(/&amp;%$·"&lt;&gt;*| del bien vendido o cedido en uso,5.35,20505779291,01,5.35</string>
+        <string>IDE,DES,72,Descripción del motivo para la aplicación del descuento o cargo,15,90.99</string>
+        <string>IIM,10.00,1.00,10.00,10.18,12,10,1000,IGV,VAT</string>
+        <string>IIM,20.00,2.00,20.00,20.18,13,20,2000,ISC,EXC</string>
+        <string>IIM,30.00,3.00,30.00,30.18,14,30,9999,OTROS,OTH</string>
+        <string>ITE,01,1G,30.00,38.50,Descripción 02 detallada del bien vendido o cedido en uso,6.36,20505779292,01,6.36</string>
+        <string>IIM,30.00,3.00,30.00,30.18,14,30,9999,OTROS,OTH</string>
+        <string>IIM,10.00,1.00,10.00,10.18,13,20,1000,IGV,VAT</string>
+        <string>ITE,02,11,45.00,75.00,Descripción 03 detallada del bien vendido o cedido en uso,7.37,20505779293,01,7.37</string>
+        <string>IDE,CAR,75,Descripción del motivo para la aplicación del descuento o cargo,15,1.11</string>
+        <string>IIM,20.00,2.00,20.00,20.18,13,20,2000,ISC,EXC</string>
+        <string>IIM,20.00,2.00,20.00,20.18,14,30,2000,IGV,VAT</string>
+        <string>ITE,02,DZN,60.00,155.00,Descripción 04 detallada del bien vendido o cedido en uso,8.38,20505779294,01,8.38</string>
+        <string>IIM,30.00,3.00,30.00,30.18,14,30,9999,OTROS,OTH</string>
+        <string>IIM,30.00,3.00,30.00,30.18,14,30,9999,OTROS,OTH</string>
+        <string>TRA,10101,AV. ATOCONGO NRO. 2440  - áéíóú,URB. JOSE GALVEZ - VILLA,PROVINCIA DE LIMA,DEPARTAMENTO LIMA,CERCADO CALLAO,PE,10101,AV. JIMENEZ NRO. 2330  - áéíóú,URB. JUAN JOSE - VILLA,PROVINCIA DE LIMA,DEPARTAMENTO LIMA,CERCADO CALLAO,PE,ABCDE12345,1234567890,CHEVROLET,1234567890,12345678901,CC,EDUARDO AGREDO</string>
+        <string>ANT,35000.50,01,SERIE_CORRELATIVO0001</string>
+      </FileContentsEjemplo>
+    </Texto>
+  </ParsingData>
+  <Mapeos>
+    <Mapeo>
+      <InFields>
+        <CampoID Prefijo="UNB" Nombre="EMISOR_RAZON_SOCIAL" />
+      </InFields>
+      <OutField Prefijo="HEADER" Nombre="EMISOR_RAZON_SOCIAL" />
+    </Mapeo>
+    <Mapeo>
+      <InFields>
+        <CampoID Prefijo="UNB" Nombre="EMISOR_NOMBRE_COMERCIAL" />
+      </InFields>
+      <OutField Prefijo="HEADER" Nombre="EMISOR_NOMBRE_COMERCIAL" />
+    </Mapeo>
+    <Mapeo>
+      <InFields>
+        <CampoID Prefijo="UNB" Nombre="EMISOR_DOMICILIO_UBIGEO" />
+      </InFields>
+      <OutField Prefijo="HEADER" Nombre="EMISOR_CODIGO_UBIGEO" />
+    </Mapeo>
+    <Mapeo>
+      <InFields>
+        <CampoID Prefijo="UNB" Nombre="EMISOR_DOMICILIO_DIRECCION" />
+      </InFields>
+      <OutField Prefijo="HEADER" Nombre="EMISOR_DIRECCION_COMPLETA" />
+    </Mapeo>
+    <Mapeo>
+      <InFields>
+        <CampoID Prefijo="UNB" Nombre="EMISOR_DOMICILIO_URBANIZACION" />
+      </InFields>
+      <OutField Prefijo="HEADER" Nombre="EMISOR_URBANIZACION" />
+    </Mapeo>
+    <Mapeo>
+      <InFields>
+        <CampoID Prefijo="UNB" Nombre="EMISOR_DOMICILIO_PROVINCIA" />
+      </InFields>
+      <OutField Prefijo="HEADER" Nombre="EMISOR_PROVINCIA" />
+    </Mapeo>
+    <Mapeo>
+      <InFields>
+        <CampoID Prefijo="UNB" Nombre="EMISOR_DOMICILIO_DEPARTAMENTO" />
+      </InFields>
+      <OutField Prefijo="HEADER" Nombre="EMISOR_DEPARTAMENTO" />
+    </Mapeo>
+    <Mapeo>
+      <InFields>
+        <CampoID Prefijo="UNB" Nombre="EMISOR_DOMICILIO_DISTRITO" />
+      </InFields>
+      <OutField Prefijo="HEADER" Nombre="EMISOR_DISTRITO" />
+    </Mapeo>
+    <Mapeo>
+      <InFields>
+        <CampoID Prefijo="UNB" Nombre="EMISOR_DOMICILIO_PAIS" />
+      </InFields>
+      <OutField Prefijo="HEADER" Nombre="EMISOR_PAIS" />
+    </Mapeo>
+    <Mapeo>
+      <InFields>
+        <CampoID Prefijo="UNB" Nombre="EMISOR_RUC" />
+      </InFields>
+      <OutField Prefijo="HEADER" Nombre="EMISOR_RUC" />
+    </Mapeo>
+    <Mapeo>
+      <InFields>
+        <CampoID Prefijo="UNB" Nombre="CDP_NUMERO" />
+      </InFields>
+      <OutField Prefijo="HEADER" Nombre="CDP_NUMERO" />
+    </Mapeo>
+    <Mapeo>
+      <InFields>
+        <CampoID Prefijo="UNB" Nombre="CDP_TIPO" />
+      </InFields>
+      <OutField Prefijo="HEADER" Nombre="CDP_TIPO" />
+    </Mapeo>
+    <Mapeo>
+      <InFields>
+        <CampoID Prefijo="UNB" Nombre="RECEPTOR_DOCUMENTO_NUMERO" />
+      </InFields>
+      <OutField Prefijo="HEADER" Nombre="RECEPTOR_DOCUMENTO" />
+    </Mapeo>
+    <Mapeo>
+      <InFields>
+        <CampoID Prefijo="UNB" Nombre="RECEPTOR_DOCUMENTO_TIPO" />
+      </InFields>
+      <OutField Prefijo="HEADER" Nombre="RECEPTOR_TIPO_DOCUMENTO" />
+    </Mapeo>
+    <Mapeo>
+      <InFields>
+        <CampoID Prefijo="UNB" Nombre="RECEPTOR_RAZON_SOCIAL" />
+      </InFields>
+      <OutField Prefijo="HEADER" Nombre="RECEPTOR_RAZON_SOCIAL" />
+    </Mapeo>
+    <Mapeo>
+      <InFields>
+        <CampoID Prefijo="UNB" Nombre="RECEPTOR_DIRECCION" />
+      </InFields>
+      <OutField Prefijo="HEADER" Nombre="RECEPTOR_DIRECCION" />
+    </Mapeo>
+    <Mapeo>
+      <InFields>
+        <CampoID Prefijo="UNB" Nombre="CDP_BAJA" />
+      </InFields>
+      <OutField Prefijo="HEADER" Nombre="ES_BAJA" />
+    </Mapeo>
+    <Mapeo>
+      <InFields>
+        <CampoID Prefijo="UNB" Nombre="CDP_BAJA_MOTIVO" />
+      </InFields>
+      <OutField Prefijo="HEADER" Nombre="MOTIVO_BAJA" />
+    </Mapeo>
+    <Mapeo>
+      <InFields>
+        <CampoID Prefijo="UNB" Nombre="CDP_FECHA_EMISION" />
+      </InFields>
+      <OutField Prefijo="HEADER" Nombre="FECHA_EMISION" />
+    </Mapeo>
+    <Mapeo>
+      <InFields>
+        <CampoID Prefijo="UNB" Nombre="FECHA_VENCIMIENTO" />
+      </InFields>
+      <OutField Prefijo="HEADER" Nombre="FECHA_VENCIMIENTO" />
+    </Mapeo>
+    <Mapeo>
+      <InFields>
+        <CampoID Prefijo="UNB" Nombre="CONDICIONES_DE_PAGO" />
+      </InFields>
+      <OutField Prefijo="HEADER" Nombre="CONDICIONES_DE_PAGO" />
+    </Mapeo>
+    <Mapeo>
+      <InFields>
+        <CampoID Prefijo="UNB" Nombre="ORDEN_DE_COMPRA" />
+      </InFields>
+      <OutField Prefijo="HEADER" Nombre="ORDEN_DE_COMPRA" />
+    </Mapeo>
+    <Mapeo>
+      <InFields>
+        <CampoID Prefijo="TRI" Nombre="CODIGO_CONCEPTO" />
+      </InFields>
+      <OutField Prefijo="OTROS_CONCEPTOS_TRIBUTARIOS" Nombre="CODIGO" />
+    </Mapeo>
+    <Mapeo>
+      <InFields>
+        <CampoID Prefijo="TRI" Nombre="MONTO_CONCEPTO" />
+      </InFields>
+      <OutField Prefijo="OTROS_CONCEPTOS_TRIBUTARIOS" Nombre="IMPORTE" />
+    </Mapeo>
+    <Mapeo>
+      <InFields>
+        <CampoID Prefijo="TRI" Nombre="MONTO_INCLUIDA_PERCEPCION" />
+      </InFields>
+      <OutField Prefijo="OTROS_CONCEPTOS_TRIBUTARIOS" Nombre="MONTO" />
+    </Mapeo>
+    <Mapeo>
+      <InFields>
+        <CampoID Prefijo="TRI" Nombre="BASE_IMPONIBLE" />
+      </InFields>
+      <OutField Prefijo="OTROS_CONCEPTOS_TRIBUTARIOS" Nombre="VALOR_REFERENCIAL_MONTO" />
+    </Mapeo>
+    <Mapeo>
+      <InFields>
+        <CampoID Prefijo="IMP" Nombre="IMPORTE_TOTAL" />
+      </InFields>
+      <OutField Prefijo="TOTAL_OTROS_TRIBUTOS" Nombre="TOTAL" />
+    </Mapeo>
+    <Mapeo>
+      <InFields>
+        <CampoID Prefijo="IMP" Nombre="IMPORTE_A_TRIBUTAR" />
+      </InFields>
+      <OutField Prefijo="TOTAL_OTROS_TRIBUTOS" Nombre="SUBTOTAL" />
+    </Mapeo>
+    <Mapeo>
+      <InFields>
+        <CampoID Prefijo="IMP" Nombre="ID" />
+      </InFields>
+      <OutField Prefijo="TOTAL_OTROS_TRIBUTOS" Nombre="SUBTOTAL_ID" />
+    </Mapeo>
+    <Mapeo>
+      <InFields>
+        <CampoID Prefijo="IMP" Nombre="NOMBRE" />
+      </InFields>
+      <OutField Prefijo="TOTAL_OTROS_TRIBUTOS" Nombre="SUBTOTAL_NOMBRE" />
+    </Mapeo>
+    <Mapeo>
+      <InFields>
+        <CampoID Prefijo="IMP" Nombre="CODIGO_UNECE" />
+      </InFields>
+      <OutField Prefijo="TOTAL_OTROS_TRIBUTOS" Nombre="SUBTOTAL_CODIGO" />
+    </Mapeo>
+    <Mapeo>
+      <InFields>
+        <CampoID Prefijo="UNB" Nombre="TOTAL_A_PAGAR" />
+      </InFields>
+      <OutField Prefijo="FOOTER" Nombre="TOTAL_GENERAL" />
+    </Mapeo>
+    <Mapeo>
+      <InFields>
+        <CampoID Prefijo="UNB" Nombre="MONEDA" />
+      </InFields>
+      <OutField Prefijo="FOOTER" Nombre="CODIGO_MONEDA" />
+    </Mapeo>
+    <Mapeo>
+      <InFields>
+        <CampoID Prefijo="REM" Nombre="NUMERO" />
+      </InFields>
+      <OutField Prefijo="GUIAS" Nombre="NUMERO" />
+    </Mapeo>
+    <Mapeo>
+      <InFields>
+        <CampoID Prefijo="REM" Nombre="TIPO" />
+      </InFields>
+      <OutField Prefijo="GUIAS" Nombre="TIPO" />
+    </Mapeo>
+    <Mapeo>
+      <InFields>
+        <CampoID Prefijo="REM" Nombre="FECHA_DE_EMISION" />
+      </InFields>
+      <OutField Prefijo="GUIAS" Nombre="FECHA" />
+    </Mapeo>
+    <Mapeo>
+      <InFields>
+        <CampoID Prefijo="REF" Nombre="NUMERO" />
+      </InFields>
+      <OutField Prefijo="DOCUMENTO_RELACIONADO" Nombre="NUMERO" />
+    </Mapeo>
+    <Mapeo>
+      <InFields>
+        <CampoID Prefijo="REF" Nombre="TIPO" />
+      </InFields>
+      <OutField Prefijo="DOCUMENTO_RELACIONADO" Nombre="TIPO" />
+    </Mapeo>
+    <Mapeo>
+      <InFields>
+        <CampoID Prefijo="REF" Nombre="FECHA_EMISION" />
+      </InFields>
+      <OutField Prefijo="DOCUMENTO_RELACIONADO" Nombre="FECHA" />
+    </Mapeo>
+    <Mapeo>
+      <InFields>
+        <CampoID Prefijo="LEY" Nombre="CODIGO" />
+      </InFields>
+      <OutField Prefijo="LEYENDAS" Nombre="CODIGO" />
+    </Mapeo>
+    <Mapeo>
+      <InFields>
+        <CampoID Prefijo="LEY" Nombre="LEYENDA" />
+      </InFields>
+      <OutField Prefijo="LEYENDAS" Nombre="DESCRIPCION" />
+    </Mapeo>
+    <Mapeo>
+      <InFields>
+        <CampoID Prefijo="ITE" Nombre="UNIDAD_MEDIDA" />
+      </InFields>
+      <OutField Prefijo="ITEMS" Nombre="UNIDAD_MEDIDA" />
+    </Mapeo>
+    <Mapeo>
+      <InFields>
+        <CampoID Prefijo="ITE" Nombre="CANTIDAD" />
+      </InFields>
+      <OutField Prefijo="ITEMS" Nombre="CANTIDAD" />
+    </Mapeo>
+    <Mapeo>
+      <InFields>
+        <CampoID Prefijo="UNB" Nombre="TOTAL_CARGOS" />
+      </InFields>
+      <OutField Prefijo="FOOTER" Nombre="TOTAL_OTROS_CARGOS" />
+    </Mapeo>
+    <Mapeo>
+      <InFields>
+        <CampoID Prefijo="UNB" Nombre="TOTAL_DESCUENTOS" />
+      </InFields>
+      <OutField Prefijo="FOOTER" Nombre="MONTO_DESCUENTO_GLOBAL" />
+    </Mapeo>
+    <Mapeo>
+      <InFields>
+        <CampoID Prefijo="ITE" Nombre="VALOR_UNITARIO" />
+      </InFields>
+      <OutField Prefijo="ITEMS" Nombre="PRECIO_UNITARIO_NO_GRAVADO" />
+    </Mapeo>
+    <Mapeo>
+      <InFields>
+        <CampoID Prefijo="ITE" Nombre="PRECIO" />
+      </InFields>
+      <OutField Prefijo="ITEMS" Nombre="PRECIO_UNITARIO_GRAVADO" />
+    </Mapeo>
+    <Mapeo>
+      <InFields>
+        <CampoID Prefijo="ITE" Nombre="CODIGO" />
+      </InFields>
+      <OutField Prefijo="ITEMS" Nombre="CODIGO" />
+    </Mapeo>
+    <Mapeo>
+      <InFields>
+        <CampoID Prefijo="ITE" Nombre="VALOR_VENTA_ITEM" />
+      </InFields>
+      <OutField Prefijo="ITEMS" Nombre="VALOR_VENTA_ITEM" />
+    </Mapeo>
+    <Mapeo>
+      <InFields>
+        <CampoID Prefijo="ITE" Nombre="PRECIO" />
+      </InFields>
+      <OutField Prefijo="ITEMS" Nombre="VALOR_REFERENCIAL" />
+    </Mapeo>
+    <Mapeo>
+      <InFields>
+        <CampoID Prefijo="IIM" Nombre="CODIGO_TRIBUTO" />
+      </InFields>
+      <OutField Prefijo="ITEM_IMPUESTOS" Nombre="SUBTOTAL_CODIGO_TRIBUTO" />
+    </Mapeo>
+    <Mapeo>
+      <InFields>
+        <CampoID Prefijo="IIM" Nombre="DESCRIPCION_TRIBUTO" />
+      </InFields>
+      <OutField Prefijo="ITEM_IMPUESTOS" Nombre="SUBTOTAL_DESCRIPCION_TRIBUTO" />
+    </Mapeo>
+    <Mapeo>
+      <InFields>
+        <CampoID Prefijo="IIM" Nombre="ID_TRIBUTO" />
+      </InFields>
+      <OutField Prefijo="ITEM_IMPUESTOS" Nombre="SUBTOTAL_ID_TRIBUTO" />
+    </Mapeo>
+    <Mapeo>
+      <InFields>
+        <CampoID Prefijo="IIM" Nombre="SISTEMA_ISC" />
+      </InFields>
+      <OutField Prefijo="ITEM_IMPUESTOS" Nombre="SUBTOTAL_SISTEMA_CALCULO" />
+    </Mapeo>
+    <Mapeo>
+      <InFields>
+        <CampoID Prefijo="IIM" Nombre="IMPORTE_TOTAL_TRIBUTO" />
+      </InFields>
+      <OutField Prefijo="ITEM_IMPUESTOS" Nombre="MONTO" />
+    </Mapeo>
+    <Mapeo>
+      <InFields>
+        <CampoID Prefijo="IIM" Nombre="BASE_IMPONIBLE" />
+      </InFields>
+      <OutField Prefijo="ITEM_IMPUESTOS" Nombre="BASE_IMPONIBLE" />
+    </Mapeo>
+    <Mapeo>
+      <InFields>
+        <CampoID Prefijo="IIM" Nombre="IMPORTE_EXPLICITO" />
+      </InFields>
+      <OutField Prefijo="ITEM_IMPUESTOS" Nombre="SUBTOTAL" />
+    </Mapeo>
+    <Mapeo>
+      <InFields>
+        <CampoID Prefijo="IIM" Nombre="PORCENTAJE" />
+      </InFields>
+      <OutField Prefijo="ITEM_IMPUESTOS" Nombre="PORCENTAJE_BASE_IMPONIBLE" />
+    </Mapeo>
+    <Mapeo>
+      <InFields>
+        <CampoID Prefijo="IIM" Nombre="TIPO_AFECTACION_IGV" />
+      </InFields>
+      <OutField Prefijo="ITEM_IMPUESTOS" Nombre="SUBTOTAL_TIPO_AFECTACION" />
+    </Mapeo>
+    <Mapeo>
+      <InFields>
+        <CampoID Prefijo="NOT" Nombre="CODIGO" />
+      </InFields>
+      <OutField Prefijo="NOTAS" Nombre="CODIGO" />
+    </Mapeo>
+    <Mapeo>
+      <InFields>
+        <CampoID Prefijo="NOT" Nombre="NOTA" />
+      </InFields>
+      <OutField Prefijo="NOTAS" Nombre="DESCRIPCION" />
+    </Mapeo>
+    <Mapeo>
+      <InFields>
+        <CampoID Prefijo="ITE" Nombre="DESCRIPCION_1" />
+      </InFields>
+      <OutField Prefijo="ITEMS" Nombre="DESCRIPCION" />
+    </Mapeo>
+    <Mapeo>
+      <InFields>
+        <CampoID Prefijo="ITE" Nombre="CODIGO_PRECIO_SUNAT" />
+      </InFields>
+      <OutField Prefijo="ITEMS" Nombre="PRECIO_CODIGO" />
+    </Mapeo>
+    <Mapeo>
+      <InFields>
+        <CampoID Prefijo="ITE" Nombre="CODIGO_PRECIO_SUNAT" />
+      </InFields>
+      <OutField Prefijo="ITEMS" Nombre="VALOR_REFERENCIAL_CODIGO" />
+    </Mapeo>
+    <Mapeo>
+      <InFields>
+        <CampoID Prefijo="USUARIO" Nombre="Random_Campo_Id_Nota[NOT-ID_REGISTRO]" />
+      </InFields>
+      <OutField Prefijo="NOTAS" Nombre="CODIGO" />
+    </Mapeo>
+    <Mapeo>
+      <InFields>
+        <CampoID Prefijo="UNB" Nombre="MONEDA" />
+      </InFields>
+      <OutField Prefijo="ITEMS" Nombre="PRECIO_UNITARIO_NO_GRAVADO_MONEDA" />
+    </Mapeo>
+    <Mapeo>
+      <InFields>
+        <CampoID Prefijo="UNB" Nombre="MONEDA" />
+      </InFields>
+      <OutField Prefijo="ITEMS" Nombre="PRECIO_UNITARIO_GRAVADO_MONEDA" />
+    </Mapeo>
+    <Mapeo>
+      <InFields>
+        <CampoID Prefijo="UNB" Nombre="MONEDA" />
+      </InFields>
+      <OutField Prefijo="ITEMS" Nombre="VALOR_VENTA_ITEM_MONEDA" />
+    </Mapeo>
+    <Mapeo>
+      <InFields>
+        <CampoID Prefijo="UNB" Nombre="MONEDA" />
+      </InFields>
+      <OutField Prefijo="ITEMS" Nombre="VALOR_REFERENCIAL_MONEDA" />
+    </Mapeo>
+    <Mapeo>
+      <InFields>
+        <CampoID Prefijo="UNB" Nombre="MONEDA" />
+      </InFields>
+      <OutField Prefijo="OTROS_CONCEPTOS_TRIBUTARIOS" Nombre="MONEDA" />
+    </Mapeo>
+    <Mapeo>
+      <InFields>
+        <CampoID Prefijo="UNB" Nombre="MONEDA" />
+      </InFields>
+      <OutField Prefijo="OTROS_CONCEPTOS_TRIBUTARIOS" Nombre="VALOR_REFERENCIAL_MONEDA" />
+    </Mapeo>
+    <Mapeo>
+      <InFields>
+        <CampoID Prefijo="UNB" Nombre="MONEDA" />
+      </InFields>
+      <OutField Prefijo="OTROS_CONCEPTOS_TRIBUTARIOS" Nombre="MONTO_MONEDA" />
+    </Mapeo>
+    <Mapeo>
+      <InFields>
+        <CampoID Prefijo="UNB" Nombre="MONEDA" />
+      </InFields>
+      <OutField Prefijo="TOTAL_OTROS_TRIBUTOS" Nombre="MONEDA" />
+    </Mapeo>
+    <Mapeo>
+      <InFields>
+        <CampoID Prefijo="UNB" Nombre="MONEDA" />
+      </InFields>
+      <OutField Prefijo="TOTAL_OTROS_TRIBUTOS" Nombre="SUBTOTAL_MONEDA" />
+    </Mapeo>
+    <Mapeo>
+      <InFields>
+        <CampoID Prefijo="UNB" Nombre="MONEDA" />
+      </InFields>
+      <OutField Prefijo="FOOTER" Nombre="MONEDA_DESCUENTO_GLOBAL" />
+    </Mapeo>
+    <Mapeo>
+      <InFields>
+        <CampoID Prefijo="UNB" Nombre="MONEDA" />
+      </InFields>
+      <OutField Prefijo="FOOTER" Nombre="TOTAL_GENERAL_MONEDA" />
+    </Mapeo>
+    <Mapeo>
+      <InFields>
+        <CampoID Prefijo="UNB" Nombre="MONEDA" />
+      </InFields>
+      <OutField Prefijo="FOOTER" Nombre="TOTAL_OTROS_CARGOS_MONEDA" />
+    </Mapeo>
+    <Mapeo>
+      <InFields>
+        <CampoID Prefijo="UNB" Nombre="MONEDA" />
+      </InFields>
+      <OutField Prefijo="ITEM_IMPUESTOS" Nombre="SUBTOTAL_MONEDA" />
+    </Mapeo>
+    <Mapeo>
+      <InFields>
+        <CampoID Prefijo="UNB" Nombre="MONEDA" />
+      </InFields>
+      <OutField Prefijo="ITEM_IMPUESTOS" Nombre="MONEDA" />
+    </Mapeo>
+    <Mapeo>
+      <InFields>
+        <CampoID Prefijo="UNB" Nombre="EMAIL" />
+      </InFields>
+      <OutField Prefijo="HEADER" Nombre="RECEPTOR_EMAILS" />
+    </Mapeo>
+    <Mapeo>
+      <InFields>
+        <CampoID Prefijo="UNB" Nombre="CODIGO_PLANTILLA" />
+      </InFields>
+      <OutField Prefijo="HEADER" Nombre="CODIGO_PLANTILLA" />
+    </Mapeo>
+    <Mapeo>
+      <InFields>
+        <CampoID Prefijo="UNB" Nombre="CODIGO_IMPRESORA" />
+      </InFields>
+      <OutField Prefijo="HEADER" Nombre="CODIGO_IMPRESORA" />
+    </Mapeo>
+    <Mapeo>
+      <InFields>
+        <CampoID Prefijo="UNB" Nombre="CANTIDAD_COPIAS" />
+      </InFields>
+      <OutField Prefijo="HEADER" Nombre="CANTIDAD_COPIAS" />
+    </Mapeo>
+    <Mapeo>
+      <InFields>
+        <CampoID Prefijo="TRA" Nombre="CODIGO_UBIGEO" />
+      </InFields>
+      <OutField Prefijo="TRASLADO_BIENES" Nombre="CODIGO_UBIGEO" />
+    </Mapeo>
+    <Mapeo>
+      <InFields>
+        <CampoID Prefijo="TRA" Nombre="DIRECCION_PUNTO_PARTIDA" />
+      </InFields>
+      <OutField Prefijo="TRASLADO_BIENES" Nombre="DIRECCION_PUNTO_PARTIDA" />
+    </Mapeo>
+    <Mapeo>
+      <InFields>
+        <CampoID Prefijo="TRA" Nombre="URBANIZACION_PUNTO_PARTIDA" />
+      </InFields>
+      <OutField Prefijo="TRASLADO_BIENES" Nombre="URBANIZACION_PUNTO_PARTIDA" />
+    </Mapeo>
+    <Mapeo>
+      <InFields>
+        <CampoID Prefijo="TRA" Nombre="PROVINCIA_PUNTO_PARTIDA" />
+      </InFields>
+      <OutField Prefijo="TRASLADO_BIENES" Nombre="PROVINCIA_PUNTO_PARTIDA" />
+    </Mapeo>
+    <Mapeo>
+      <InFields>
+        <CampoID Prefijo="TRA" Nombre="DEPARTAMENTO_PUNTO_PARTIDA" />
+      </InFields>
+      <OutField Prefijo="TRASLADO_BIENES" Nombre="DEPARTAMENTO_PUNTO_PARTIDA" />
+    </Mapeo>
+    <Mapeo>
+      <InFields>
+        <CampoID Prefijo="TRA" Nombre="DISTRITO_PUNTO_PARTIDA" />
+      </InFields>
+      <OutField Prefijo="TRASLADO_BIENES" Nombre="DISTRITO_PUNTO_PARTIDA" />
+    </Mapeo>
+    <Mapeo>
+      <InFields>
+        <CampoID Prefijo="TRA" Nombre="CODIGO_PAIS_PUNTO_PARTIDA" />
+      </InFields>
+      <OutField Prefijo="TRASLADO_BIENES" Nombre="CODIGO_PAIS_PUNTO_PARTIDA" />
+    </Mapeo>
+    <Mapeo>
+      <InFields>
+        <CampoID Prefijo="TRA" Nombre="COD_UBIGEO_DIRECCION_PUNTO_PARTIDA" />
+      </InFields>
+      <OutField Prefijo="TRASLADO_BIENES" Nombre="COD_UBIGEO_DIRECCION_PUNTO_PARTIDA" />
+    </Mapeo>
+    <Mapeo>
+      <InFields>
+        <CampoID Prefijo="TRA" Nombre="DIRECCION_PUNTO_LLEGADA" />
+      </InFields>
+      <OutField Prefijo="TRASLADO_BIENES" Nombre="DIRECCION_PUNTO_LLEGADA" />
+    </Mapeo>
+    <Mapeo>
+      <InFields>
+        <CampoID Prefijo="TRA" Nombre="URBANIZACION_PUNTO_LLEGADA" />
+      </InFields>
+      <OutField Prefijo="TRASLADO_BIENES" Nombre="URBANIZACION_PUNTO_LLEGADA" />
+    </Mapeo>
+    <Mapeo>
+      <InFields>
+        <CampoID Prefijo="TRA" Nombre="PROVINCIA_PUNTO_LLEGADA" />
+      </InFields>
+      <OutField Prefijo="TRASLADO_BIENES" Nombre="PROVINCIA_PUNTO_LLEGADA" />
+    </Mapeo>
+    <Mapeo>
+      <InFields>
+        <CampoID Prefijo="TRA" Nombre="DEPARTAMENTO_PUNTO_LLEGADA" />
+      </InFields>
+      <OutField Prefijo="TRASLADO_BIENES" Nombre="DEPARTAMENTO_PUNTO_LLEGADA" />
+    </Mapeo>
+    <Mapeo>
+      <InFields>
+        <CampoID Prefijo="TRA" Nombre="DISTRITO_PUNTO_LLEGADA" />
+      </InFields>
+      <OutField Prefijo="TRASLADO_BIENES" Nombre="DISTRITO_PUNTO_LLEGADA" />
+    </Mapeo>
+    <Mapeo>
+      <InFields>
+        <CampoID Prefijo="TRA" Nombre="CODIGO_PAIS_PUNTO_LLEGADA" />
+      </InFields>
+      <OutField Prefijo="TRASLADO_BIENES" Nombre="CODIGO_PAIS_PUNTO_LLEGADA" />
+    </Mapeo>
+    <Mapeo>
+      <InFields>
+        <CampoID Prefijo="TRA" Nombre="PLACA_VEHICULO" />
+      </InFields>
+      <OutField Prefijo="TRASLADO_BIENES" Nombre="PLACA_VEHICULO" />
+    </Mapeo>
+    <Mapeo>
+      <InFields>
+        <CampoID Prefijo="TRA" Nombre="CONSTANCIA_INSCRIPCION" />
+      </InFields>
+      <OutField Prefijo="TRASLADO_BIENES" Nombre="CONSTANCIA_INSCRIPCION" />
+    </Mapeo>
+    <Mapeo>
+      <InFields>
+        <CampoID Prefijo="TRA" Nombre="MARCA_VEHICULO" />
+      </InFields>
+      <OutField Prefijo="TRASLADO_BIENES" Nombre="MARCA_VEHICULO" />
+    </Mapeo>
+    <Mapeo>
+      <InFields>
+        <CampoID Prefijo="TRA" Nombre="LICENCIA_CONDUCIR" />
+      </InFields>
+      <OutField Prefijo="TRASLADO_BIENES" Nombre="LICENCIA_CONDUCIR" />
+    </Mapeo>
+    <Mapeo>
+      <InFields>
+        <CampoID Prefijo="TRA" Nombre="NUM_ID_TRANSPORTISTA" />
+      </InFields>
+      <OutField Prefijo="TRASLADO_BIENES" Nombre="NUM_ID_TRANSPORTISTA" />
+    </Mapeo>
+    <Mapeo>
+      <InFields>
+        <CampoID Prefijo="TRA" Nombre="TIPO_DOC_ID_TRANSPORTISTA" />
+      </InFields>
+      <OutField Prefijo="TRASLADO_BIENES" Nombre="TIPO_DOC_ID_TRANSPORTISTA" />
+    </Mapeo>
+    <Mapeo>
+      <InFields>
+        <CampoID Prefijo="TRA" Nombre="RAZON_SOCIAL_TRANSPORTISTA" />
+      </InFields>
+      <OutField Prefijo="TRASLADO_BIENES" Nombre="RAZON_SOCIAL_TRANSPORTISTA" />
+    </Mapeo>
+    <Mapeo>
+      <InFields>
+        <CampoID Prefijo="TRA" Nombre="COD_UBIGEO_PUNTO_LLEGADA" />
+      </InFields>
+      <OutField Prefijo="TRASLADO_BIENES" Nombre="COD_UBIGEO_PUNTO_LLEGADA" />
+    </Mapeo>
+    <Mapeo>
+      <InFields>
+        <CampoID Prefijo="UNB" Nombre="NRO_RESOLUCION_SUNAT" />
+      </InFields>
+      <OutField Prefijo="HEADER" Nombre="NRO_RESOLUCION_SUNAT" />
+    </Mapeo>
+    <Mapeo>
+      <InFields>
+        <CampoID Prefijo="UNB" Nombre="ID_TOTAL_DESCUENTOS" />
+      </InFields>
+      <OutField Prefijo="HEADER" Nombre="ID_TOTAL_DESCUENTOS" />
+    </Mapeo>
+    <Mapeo>
+      <InFields>
+        <CampoID Prefijo="UNB" Nombre="VALOR_TOTAL_DESCUENTOS" />
+      </InFields>
+      <OutField Prefijo="HEADER" Nombre="VALOR_TOTAL_DESCUENTOS" />
+    </Mapeo>
+    <Mapeo>
+      <InFields>
+        <CampoID Prefijo="UNB" Nombre="MONEDA" />
+      </InFields>
+      <OutField Prefijo="HEADER" Nombre="MONEDA" />
+    </Mapeo>
+    <Mapeo>
+      <InFields>
+        <CampoID Prefijo="UNB" Nombre="MONEDA" />
+      </InFields>
+      <OutField Prefijo="HEADERIMP" Nombre="MONEDA" />
+    </Mapeo>
+    <Mapeo>
+      <InFields>
+        <CampoID Prefijo="UNB" Nombre="RECEPTOR_RUC" />
+      </InFields>
+      <OutField Prefijo="HEADER" Nombre="RECEPTOR_RUC" />
+    </Mapeo>
+    <Mapeo>
+      <InFields>
+        <CampoID Prefijo="UNB" Nombre="TOTAL_IMPUESTOS" />
+      </InFields>
+      <OutField Prefijo="FOOTER" Nombre="TOTAL_IMPUESTOS" />
+    </Mapeo>
+    <Mapeo>
+      <InFields>
+        <CampoID Prefijo="UNB" Nombre="MONEDA" />
+      </InFields>
+      <OutField Prefijo="FOOTER" Nombre="TOTAL_IMPUESTOS_MONEDA" />
+    </Mapeo>
+    <Mapeo>
+      <InFields>
+        <CampoID Prefijo="UNB" Nombre="TOTAL_ACUMULADO_CON_IMPUESTOS" />
+      </InFields>
+      <OutField Prefijo="FOOTER" Nombre="TOTAL_ACUMULADO_CON_IMPUESTOS" />
+    </Mapeo>
+    <Mapeo>
+      <InFields>
+        <CampoID Prefijo="UNB" Nombre="MONEDA" />
+      </InFields>
+      <OutField Prefijo="FOOTER" Nombre="TOTAL_ACUMULADO_CON_IMPUESTOS_MONEDA" />
+    </Mapeo>
+    <Mapeo>
+      <InFields>
+        <CampoID Prefijo="DES" Nombre="CODIGO_MOTIVO" />
+      </InFields>
+      <OutField Prefijo="DESCUENTOS_CARGOS" Nombre="CODIGO" />
+    </Mapeo>
+    <Mapeo>
+      <InFields>
+        <CampoID Prefijo="DES" Nombre="DESCRIPCION_MOTIVO" />
+      </InFields>
+      <OutField Prefijo="DESCUENTOS_CARGOS" Nombre="DESCRIPCION" />
+    </Mapeo>
+    <Mapeo>
+      <InFields>
+        <CampoID Prefijo="DES" Nombre="IMPORTE_DESCUENTO" />
+      </InFields>
+      <OutField Prefijo="DESCUENTOS_CARGOS" Nombre="IMPORTE" />
+    </Mapeo>
+    <Mapeo>
+      <InFields>
+        <CampoID Prefijo="DES" Nombre="PORCENTAJE_DESCUENTO" />
+      </InFields>
+      <OutField Prefijo="DESCUENTOS_CARGOS" Nombre="PORCENTAJE" />
+    </Mapeo>
+    <Mapeo>
+      <InFields>
+        <CampoID Prefijo="IDE" Nombre="CODIGO_DESCUENTOS" />
+      </InFields>
+      <OutField Prefijo="ITEM_DESCUENTOS_CARGOS" Nombre="CODIGO" />
+    </Mapeo>
+    <Mapeo>
+      <InFields>
+        <CampoID Prefijo="IDE" Nombre="DESCRIPCION_DESCUENTO" />
+      </InFields>
+      <OutField Prefijo="ITEM_DESCUENTOS_CARGOS" Nombre="DESCRIPCION" />
+    </Mapeo>
+    <Mapeo>
+      <InFields>
+        <CampoID Prefijo="IDE" Nombre="IMPORTE_FINAL" />
+      </InFields>
+      <OutField Prefijo="ITEM_DESCUENTOS_CARGOS" Nombre="IMPORTE" />
+    </Mapeo>
+    <Mapeo>
+      <InFields>
+        <CampoID Prefijo="IDE" Nombre="PORCENTAJE_DESCUENTO" />
+      </InFields>
+      <OutField Prefijo="ITEM_DESCUENTOS_CARGOS" Nombre="PORCENTAJE" />
+    </Mapeo>
+    <Mapeo>
+      <InFields>
+        <CampoID Prefijo="UNB" Nombre="TIPO_OPERACION" />
+      </InFields>
+      <OutField Prefijo="HEADER" Nombre="TIPO_OPERACION" />
+    </Mapeo>
+    <Mapeo>
+      <InFields>
+        <CampoID Prefijo="UNB" Nombre="CODIGO_FISE" />
+      </InFields>
+      <OutField Prefijo="HEADERIMP" Nombre="CODIGO_FISE" />
+    </Mapeo>
+    <Mapeo>
+      <InFields>
+        <CampoID Prefijo="UNB" Nombre="VALOR_FISE" />
+      </InFields>
+      <OutField Prefijo="HEADERIMP" Nombre="VALOR_FISE" />
+    </Mapeo>
+    <Mapeo>
+      <InFields>
+        <CampoID Prefijo="ANT" Nombre="VALOR_ANTICIPO" />
+      </InFields>
+      <OutField Prefijo="ANTICIPOS" Nombre="VALOR_ANTICIPO" />
+    </Mapeo>
+    <Mapeo>
+      <InFields>
+        <CampoID Prefijo="ANT" Nombre="TIPO_DOCUMENTO_ANTICIPO" />
+      </InFields>
+      <OutField Prefijo="ANTICIPOS" Nombre="TIPO_DOCUMENTO_ANTICIPO" />
+    </Mapeo>
+    <Mapeo>
+      <InFields>
+        <CampoID Prefijo="ANT" Nombre="SERIE_CORRELATIVO_ANTICIPO" />
+      </InFields>
+      <OutField Prefijo="ANTICIPOS" Nombre="SERIE_CORRELATIVO_ANTICIPO" />
+    </Mapeo>
+  </Mapeos>
+  <PreprocessJS>
+    var l=origen.split('\r\n');
+    var c=l[0].split('+');
+    c[0]='VOID';
+    l[0]=c.join(
+    '+');
+    l[1] = l[1] + '+' + c[2];
+    var x=l.join('\r\n');
+
+    x;
+  </PreprocessJS>
+</Mapa>

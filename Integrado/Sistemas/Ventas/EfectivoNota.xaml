@@ -1,0 +1,113 @@
+﻿<Controls:MetroWindow x:Class="Integrado.Sistemas.Ventas.EfectivoNota"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"                                
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Integrado.Sistemas.Ventas"
+        WindowStartupLocation="CenterScreen"
+        ResizeMode="CanMinimize" ShowIconOnTitleBar="True"
+        ShowTitleBar="True"              
+        Title="Efectivo Nota" Height="370" Width="450" Loaded="MetroWindow_Loaded">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid Grid.Column="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="210"></RowDefinition>
+                <RowDefinition Height="40"></RowDefinition>
+                <RowDefinition Height="100"></RowDefinition>
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="0">
+                <Grid Background="#FFE5E5E5">
+                    <DataGrid x:Name="dgformanc" HorizontalAlignment="Left"  Width="440"  IsReadOnly="True"   AutoGenerateColumns="False" GridLinesVisibility="All" SelectionUnit="CellOrRowHeader" AlternatingRowBackground="White"   >
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Binding="{Binding nc_num}" ClipboardContentBinding="{x:Null}" Header="[Num-Doc]"/>
+                            <DataGridTextColumn Binding="{Binding total_nc, StringFormat=\{0:C2\}}" ClipboardContentBinding="{x:Null}" Header="Monto" >
+                                <DataGridTextColumn.ElementStyle>
+                                    <Style TargetType="{x:Type TextBlock}">
+                                        <Setter Property="TextAlignment" Value="Right"/>
+                                    </Style>
+                                </DataGridTextColumn.ElementStyle>
+                            </DataGridTextColumn>
+                            <DataGridTemplateColumn Header="Seleccionar">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+                                            <CheckBox Name="chkok" IsChecked="{Binding Path=chknota, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Center" VerticalAlignment="Center" Click="chkok_Click"></CheckBox>
+                                            <!--<Button x:Name="btneliminar" Style="{DynamicResource NoChromeButton}" Cursor="Hand" >
+                                                <Button.ToolTip>
+                                                    <ToolTip>
+                                                        <StackPanel>
+                                                            <TextBlock FontWeight="Bold" TextAlignment="Left" ><Run Text="Eliminar Registro"/></TextBlock>
+                                                            <TextBlock><Run Text="Eliminar Registro."/></TextBlock>
+                                                            <TextBlock><Run Text="No lo presione hasta estar seguro de eliminar registro."/></TextBlock>
+                                                        </StackPanel>
+                                                    </ToolTip>
+                                                </Button.ToolTip>
+                                                <Image Source="/Integrado;component/Design/Images/bt_delete.png" Height="16" Width="16" VerticalAlignment="Bottom" Grid.RowSpan="2"/>
+                                            </Button>-->
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </Grid>
+            </Grid>
+            <Grid Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="180"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Label Content="TOTAL" FontSize="16" FontWeight="Bold" HorizontalAlignment="Right"></Label>
+                <Label Name="lbltotpagonc" Content="0.00" Grid.Column="1" FontSize="16" Foreground="Blue" FontWeight="Bold"></Label>
+            </Grid>
+            <Grid Grid.Row="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Button x:Name="btnaceptarnc" Grid.Column="0" Height="50" Width="120" Cursor="Hand" >
+                    <Button.ToolTip>
+                        <ToolTip>
+                            <StackPanel>
+                                <TextBlock FontWeight="Bold" TextAlignment="Left" ><Run Text="Aceptar"/></TextBlock>
+                            </StackPanel>
+                        </ToolTip>
+                    </Button.ToolTip>
+                    <Grid Width="140">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="7*" />
+                            <ColumnDefinition Width="80*" />
+
+                        </Grid.ColumnDefinitions>
+                        <Image Margin="-3,0,0,0" Source="/Integrado;component/Design/Images/16 (Ok).ico" Width="32" HorizontalAlignment="Left" Grid.ColumnSpan="2"/>
+                        <TextBlock Text="Aceptar" VerticalAlignment="Center" Foreground="Black"
+										Margin="-10,0,0,0" HorizontalAlignment="Center"   Grid.Column="1"/>
+                    </Grid>
+                </Button>
+                <Button x:Name="btncancelarnc" Grid.Column="1" Margin="-50,0,0,0" Height="50" Width="120" Cursor="Hand" >
+                    <Button.ToolTip>
+                        <ToolTip>
+                            <StackPanel>
+                                <TextBlock FontWeight="Bold" TextAlignment="Left" ><Run Text="Cancelar"/></TextBlock>
+                            </StackPanel>
+                        </ToolTip>
+                    </Button.ToolTip>
+                    <Grid Width="140">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="7*" />
+                            <ColumnDefinition Width="80*" />
+
+                        </Grid.ColumnDefinitions>
+                        <Image Margin="-3,0,0,0" Source="/Integrado;component/Design/Images/stop.ico" Width="32" HorizontalAlignment="Left" Grid.ColumnSpan="2"/>
+                        <TextBlock Text="Cancelar" VerticalAlignment="Center" Foreground="Black"
+										Margin="0,0,0,0" HorizontalAlignment="Center"   Grid.Column="1"/>
+                    </Grid>
+                </Button>
+            </Grid>
+        </Grid>
+    </Grid>
+</Controls:MetroWindow>

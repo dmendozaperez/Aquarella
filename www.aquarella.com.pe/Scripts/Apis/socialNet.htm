@@ -1,0 +1,65 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title></title>
+    <script src="../jquery-1.8.2.min.js" type="text/javascript"></script>
+    <script src="../jquery-ui-1.8.24.custom.min.js" type="text/javascript"></script>
+    <link href="../../Styles/theme/jquery-ui-1.8.16.custom.css" rel="stylesheet" type="text/css" />
+    <script type="text/javascript" language="javascript">
+        $(function () {
+            $("#fbTab").tabs();
+        });
+    </script>
+    <!-- TWITTER -->
+    <script type="text/javascript">        !function (d, s, id) { var js, fjs = d.getElementsByTagName(s)[0]; if (!d.getElementById(id)) { js = d.createElement(s); js.id = id; js.src = "//platform.twitter.com/widgets.js"; fjs.parentNode.insertBefore(js, fjs); } } (document, "script", "twitter-wjs");</script>
+    <!-- FB ACTIVITY -->
+    <script type="text/javascript">        (function (d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) return;
+            js = d.createElement(s); js.id = id;
+            js.src = "//connect.facebook.net/es_LA/all.js#xfbml=1&appId=366349750774";
+            fjs.parentNode.insertBefore(js, fjs);
+        } (document, 'script', 'facebook-jssdk'));</script>
+    <!-- FB COMMENTS ON PAGE -->
+    <script type="text/javascript">        (function (d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) return;
+            js = d.createElement(s); js.id = id;
+            js.src = "//connect.facebook.net/es_LA/all.js#xfbml=1&appId=366349750774";
+            fjs.parentNode.insertBefore(js, fjs);
+        } (document, 'script', 'facebook-jssdk'));</script>
+</head>
+<body style="background-color: #f4f4f4">
+    <table width="100%" cellpadding="4" cellspacing="4">
+        <tr>
+            <td align="center" width="40%">
+                <a class="twitter-timeline" href="https://twitter.com/AquarellaMR" data-widget-id="271333748245676032">
+                    Tweets por @AquarellaMR</a>
+            </td>
+            <td width="40%" align="center">
+                <div>
+                    <div id="fbTab">
+                        <ul>
+                            <li><a href="#fb-1"><span>Actividad Facebook</span></a></li>
+                            <li><a href="#fb-2"><span>Comentarios Facebook</span></a></li>
+                        </ul>
+                        <div id="fb-1" style="min-height: 295px; min-width: 400px;">
+                            <!-- ACTIVITY -->
+                            <div class="fb-activity" data-site="http://aquarella.co" data-width="300" data-height="280"
+                                data-header="true" data-recommendations="true">
+                            </div>
+                            <div id="fb-root">
+                            </div>
+                        </div>
+                        <div id="fb-2" style="min-height: 295px; min-width: 400px;">
+                            <!-- COMMENTS -->
+                            <div class="fb-comments" data-href="http://aquarella.co" data-num-posts="15" data-width="390">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </td>
+        </tr>
+    </table>
+</body>
+</html>

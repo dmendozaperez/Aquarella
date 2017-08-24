@@ -1,0 +1,68 @@
+﻿<Controls:MetroWindow x:Class="Integrado.Sistemas.Ventas.InicioVenta"
+                      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"          
+                      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"          
+                      xmlns:Controls="http://metro.mahapps.com/winfx/xaml/controls"    
+                      xmlns:dxlc="http://schemas.devexpress.com/winfx/2008/xaml/layoutcontrol" xmlns:GrayscaleEffect="clr-namespace:GrayscaleEffect;assembly=GrayscaleEffect" xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"  
+                      ResizeMode="CanMinimize"
+                      Icon="/Integrado;component/Design/Icono/sistema_ico.ico"                      
+                      Title="[Inicio de Venta]" EnableDWMDropShadow="True" 
+                      WindowStartupLocation="CenterScreen"  Height="370" Width="960" Loaded="MetroWindow_Loaded">
+    <Controls:MetroWindow.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro.Resources;component/Icons.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+
+            <Thickness x:Key="ControlMargin">0 5 0 0</Thickness>
+        </ResourceDictionary>
+    </Controls:MetroWindow.Resources>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid Grid.Column="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="30"></RowDefinition>
+                <RowDefinition Height="190" ></RowDefinition>
+                <RowDefinition Height="40"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+            </Grid.RowDefinitions>
+            <Label Name="lblalmaini" Content="ALMACEN HIGUERETA" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="0" Foreground="Maroon"  FontSize="16" FontWeight="Bold"></Label>
+            <Calendar Name="calfecha"  Grid.Row="1"></Calendar>
+            
+            <Grid Grid.Row="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="440"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Label Content="Ingrese Monto Inicial:" Grid.Column="0" VerticalAlignment="Center" FontSize="14" FontWeight="Bold" HorizontalAlignment="Right"></Label>
+                <dxe:SpinEdit Name="txtmonto" DisplayFormatString="c2" Grid.Column="1" FontSize="16" Grid.Row="1" Width="130"  Height="27" VerticalAlignment="Center" HorizontalAlignment="Left" KeyDown="txtmonto_KeyDown" >
+                    <dxe:SpinEdit.EditValue>
+                        0.00
+                    </dxe:SpinEdit.EditValue>
+                </dxe:SpinEdit>
+            </Grid>
+            <dxlc:GroupBox Background="AntiqueWhite" Grid.Row="3">
+            <Grid Grid.Row="3">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Button Name="btnaceptar" Width="100" Margin="290,0,0,0" Grid.Column="0" Height="30" Cursor="Hand"
+                    
+                    Content="Aceptar"
+                    IsEnabled="True" Click="btnaceptar_Click"
+                    />
+                <Button Name="btncancelar" HorizontalAlignment="Left" Width="100" Grid.Column="1" Margin="50,0,0,0" Height="30" Cursor="Hand"
+                    
+                    Content="Cancelar"
+                    IsEnabled="True" Click="btncancelar_Click"
+                    />
+            </Grid>
+            </dxlc:GroupBox>
+        </Grid>
+    </Grid>
+</Controls:MetroWindow>
+

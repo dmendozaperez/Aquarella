@@ -1,0 +1,600 @@
+﻿<Controls:MetroWindow
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"                      
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Integrado.Sistemas.Ventas"
+        xmlns:dxlc="http://schemas.devexpress.com/winfx/2008/xaml/layoutcontrol" xmlns:GrayscaleEffect="clr-namespace:GrayscaleEffect;assembly=GrayscaleEffect" xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors" x:Class="Integrado.Sistemas.Ventas.NotaCredito"
+        Title="PAGINA PRINCIPAL [SISTEMA INTEGRADO]"    
+        Icon="/Integrado;component/Design/Icono/sistema_ico.ico"
+        ShowIconOnTitleBar="True"
+        ShowTitleBar="True"
+        WindowStartupLocation="CenterScreen"                     
+        GlowBrush="{DynamicResource AccentColorBrush}"
+        NonActiveGlowBrush="#CDFF0000"        
+        Height="710"
+        Width="1320"              
+        ResizeMode="CanMinimize" Loaded="MetroWindow_Loaded" >
+    <Controls:MetroWindow.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro.Resources;component/Icons.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/FlatSlider.xaml"/>
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/BaseLight.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+            <Ellipse x:Key="AppThemeMenuIcon"
+                     x:Shared="False"
+                     Width="16"
+                     Height="16"
+                     StrokeThickness="1"
+                     Stroke="{Binding BorderColorBrush, Mode=OneWay}"
+                     Fill="{Binding ColorBrush, Mode=OneWay}" />
+            <Ellipse x:Key="AccentMenuIcon"
+                     x:Shared="False"
+                     Width="16"
+                     Height="16"
+                     Fill="{Binding ColorBrush, Mode=OneWay}" />
+
+            <Style x:Key="AppThemeMenuItemStyle"
+                   TargetType="{x:Type MenuItem}"
+                   BasedOn="{StaticResource MetroMenuItem}">
+                <Setter Property="Command"
+            		Value="{Binding ChangeAccentCommand}" />
+                <Setter Property="Icon"
+            		Value="{StaticResource AppThemeMenuIcon}" />
+                <Setter Property="Header"
+            		Value="{Binding Name, Mode=OneWay}" />
+            </Style>
+
+            <Style x:Key="AccentColorMenuItemStyle"
+                   TargetType="{x:Type MenuItem}"
+                   BasedOn="{StaticResource MetroMenuItem}">
+                <Setter Property="Command"
+            		Value="{Binding ChangeAccentCommand}" />
+                <Setter Property="Icon"
+            		Value="{StaticResource AccentMenuIcon}" />
+                <Setter Property="Header"
+            		Value="{Binding Name, Mode=OneWay}" />
+            </Style>
+            <!-- LayoutRoot Grid Style -->
+            <Style x:Key="LayoutRootGridStyle" TargetType="{x:Type Grid}">
+                <Setter Property="Background" Value="Transparent"/>
+            </Style>
+            <Style x:Key="NavigationOuterGridStyle" TargetType="{x:Type Grid}"/>
+            <SolidColorBrush x:Key="NavigationBackgroundColorBrush" Color="#FF484848"/>
+            <Style x:Key="NavigationGridStyle" TargetType="{x:Type Grid}">
+                <Setter Property="Background" Value="{StaticResource NavigationBackgroundColorBrush}"/>
+                <Setter Property="Height" Value="62"/>
+                <Setter Property="Margin" Value="0"/>
+                <Setter Property="VerticalAlignment" Value="Top"/>
+            </Style>
+            <!-- Branding Border Style -->
+            <Style x:Key="BrandingBorderStyle" TargetType="{x:Type Border}">
+                <Setter Property="Height" Value="42"/>
+                <Setter Property="Margin" Value="110,0,25,0"/>
+                <Setter Property="VerticalAlignment" Value="Top"/>
+                <Setter Property="HorizontalAlignment" Value="Left"/>
+            </Style>
+            <!-- Branding StackPanel Style -->
+            <Style x:Key="BrandingStackPanelStyle" TargetType="{x:Type StackPanel}">
+                <Setter Property="HorizontalAlignment" Value="Left"/>
+                <Setter Property="Orientation" Value="Horizontal"/>
+            </Style>
+            <!-- Links Border Style -->
+            <Style x:Key="LinksBorderStyle" TargetType="{x:Type Border}">
+                <Setter Property="Height" Value="42"/>
+                <Setter Property="Margin" Value="15,0,15,0"/>
+                <Setter Property="HorizontalAlignment" Value="Right"/>
+            </Style>
+            <!-- Links StackPanel Style -->
+            <Style x:Key="LinksStackPanelStyle" TargetType="{x:Type StackPanel}">
+                <Setter Property="VerticalAlignment" Value="Center"/>
+                <Setter Property="HorizontalAlignment" Value="Left"/>
+                <Setter Property="Orientation" Value="Horizontal"/>
+            </Style>
+            <!-- Divider Style -->
+            <Style x:Key="DividerStyle" TargetType="{x:Type Rectangle}">
+                <Setter Property="Fill" Value="#1FFFFFFF"/>
+                <!--<Setter Property="Stroke" Value="Transparent"/>-->
+                <Setter Property="Width" Value="1"/>
+                <Setter Property="Margin" Value="2,4,2,4"/>
+            </Style>
+            <Style x:Key="BarBottonHeader" TargetType="{x:Type Border}">
+                <Setter Property="Background" Value="#FF949290"/>
+                <Setter Property="Margin" Value="0,63,0,0"/>
+                <Setter Property="Height" Value="25"/>
+                <Setter Property="BorderThickness" Value="0,0,0,1"/>
+                <Setter Property="BorderBrush" Value="#FFFFFFFF"/>
+                <Setter Property="HorizontalAlignment" Value="Stretch"/>
+                <Setter Property="VerticalAlignment" Value="Top"/>
+            </Style>
+            <Style x:Key="LoginPanelStyle" TargetType="{x:Type StackPanel}">
+                <Setter Property="Orientation" Value="Horizontal"/>
+                <Setter Property="HorizontalAlignment" Value="Right"/>
+                <Setter Property="RenderTransformOrigin" Value="0.5,0.5"/>
+            </Style>
+            <Style x:Key="SpacerStyle" TargetType="{x:Type TextBlock}">
+                <Setter Property="FontSize" Value="11"/>
+                <Setter Property="Foreground" Value="#FFFFFFFF"/>
+                <Setter Property="HorizontalAlignment" Value="Right"/>
+                <Setter Property="VerticalAlignment" Value="Center"/>
+                <Setter Property="Margin" Value="6,2"/>
+            </Style>
+            <Style x:Key="DividerStyleSmoke" TargetType="{x:Type Rectangle}">
+                <Setter Property="Fill" Value="#FFFFFF"/>
+                <!--<Setter Property="Stroke" Value="Transparent"/>-->
+                <Setter Property="Width" Value="1"/>
+                <Setter Property="Margin" Value="2,4,2,4"/>
+            </Style>
+            <Style x:Key="LoginRegisterLinkStyle" TargetType="{x:Type Button}">
+                <Setter Property="Background" Value="Transparent"/>
+                <Setter Property="Margin" Value="0,2,30,2"/>
+                <Setter Property="HorizontalContentAlignment" Value="Right"/>
+                <Setter Property="VerticalContentAlignment" Value="Center"/>
+                <Setter Property="FontSize" Value="11"/>
+                <Setter Property="Foreground" Value="#FFFFFFFF"/>
+                <Setter Property="Cursor" Value="Hand"/>
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="{x:Type Button}">
+                            <Grid Cursor="{TemplateBinding Cursor}" Background="{TemplateBinding Background}">
+                                <VisualStateManager.VisualStateGroups>
+                                    <VisualStateGroup x:Name="CommonStates">
+                                        <VisualState x:Name="Normal"/>
+                                        <VisualState x:Name="MouseOver">
+                                            <Storyboard>
+                                                <ObjectAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="contentPresenter" Storyboard.TargetProperty="(UIElement.Visibility)">
+                                                    <DiscreteObjectKeyFrame KeyTime="00:00:00">
+                                                        <DiscreteObjectKeyFrame.Value>
+                                                            <Visibility>Collapsed</Visibility>
+                                                        </DiscreteObjectKeyFrame.Value>
+                                                    </DiscreteObjectKeyFrame>
+                                                </ObjectAnimationUsingKeyFrames>
+                                                <ObjectAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="Mouseover_Pressed" Storyboard.TargetProperty="(UIElement.Visibility)">
+                                                    <DiscreteObjectKeyFrame KeyTime="00:00:00">
+                                                        <DiscreteObjectKeyFrame.Value>
+                                                            <Visibility>Visible</Visibility>
+                                                        </DiscreteObjectKeyFrame.Value>
+                                                    </DiscreteObjectKeyFrame>
+                                                </ObjectAnimationUsingKeyFrames>
+                                            </Storyboard>
+                                        </VisualState>
+                                        <VisualState x:Name="Pressed">
+                                            <Storyboard>
+                                                <ObjectAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="Mouseover_Pressed" Storyboard.TargetProperty="(UIElement.Visibility)">
+                                                    <DiscreteObjectKeyFrame KeyTime="00:00:00">
+                                                        <DiscreteObjectKeyFrame.Value>
+                                                            <Visibility>Visible</Visibility>
+                                                        </DiscreteObjectKeyFrame.Value>
+                                                    </DiscreteObjectKeyFrame>
+                                                </ObjectAnimationUsingKeyFrames>
+                                                <ObjectAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="contentPresenter" Storyboard.TargetProperty="(UIElement.Visibility)">
+                                                    <DiscreteObjectKeyFrame KeyTime="00:00:00">
+                                                        <DiscreteObjectKeyFrame.Value>
+                                                            <Visibility>Collapsed</Visibility>
+                                                        </DiscreteObjectKeyFrame.Value>
+                                                    </DiscreteObjectKeyFrame>
+                                                </ObjectAnimationUsingKeyFrames>
+                                            </Storyboard>
+                                        </VisualState>
+                                        <VisualState x:Name="Disabled">
+                                            <Storyboard>
+                                                <ObjectAnimationUsingKeyFrames Duration="0" Storyboard.TargetName="DisabledOverlay" Storyboard.TargetProperty="Visibility">
+                                                    <DiscreteObjectKeyFrame KeyTime="0">
+                                                        <DiscreteObjectKeyFrame.Value>
+                                                            <Visibility>Visible</Visibility>
+                                                        </DiscreteObjectKeyFrame.Value>
+                                                    </DiscreteObjectKeyFrame>
+                                                </ObjectAnimationUsingKeyFrames>
+                                                <ObjectAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="DisabledOverlay" Storyboard.TargetProperty="(FrameworkElement.HorizontalAlignment)">
+                                                    <DiscreteObjectKeyFrame KeyTime="00:00:00">
+                                                        <DiscreteObjectKeyFrame.Value>
+                                                            <HorizontalAlignment>Center</HorizontalAlignment>
+                                                        </DiscreteObjectKeyFrame.Value>
+                                                    </DiscreteObjectKeyFrame>
+                                                </ObjectAnimationUsingKeyFrames>
+                                                <ObjectAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="contentPresenter" Storyboard.TargetProperty="(UIElement.Visibility)">
+                                                    <DiscreteObjectKeyFrame KeyTime="00:00:00">
+                                                        <DiscreteObjectKeyFrame.Value>
+                                                            <Visibility>Collapsed</Visibility>
+                                                        </DiscreteObjectKeyFrame.Value>
+                                                    </DiscreteObjectKeyFrame>
+                                                </ObjectAnimationUsingKeyFrames>
+                                            </Storyboard>
+                                        </VisualState>
+                                    </VisualStateGroup>
+                                    <VisualStateGroup x:Name="FocusStates">
+                                        <VisualState x:Name="Focused">
+                                            <Storyboard>
+                                                <ObjectAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="Mouseover_Pressed" Storyboard.TargetProperty="(UIElement.Visibility)">
+                                                    <DiscreteObjectKeyFrame KeyTime="00:00:00">
+                                                        <DiscreteObjectKeyFrame.Value>
+                                                            <Visibility>Visible</Visibility>
+                                                        </DiscreteObjectKeyFrame.Value>
+                                                    </DiscreteObjectKeyFrame>
+                                                </ObjectAnimationUsingKeyFrames>
+                                                <ObjectAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="contentPresenter" Storyboard.TargetProperty="(UIElement.Visibility)">
+                                                    <DiscreteObjectKeyFrame KeyTime="00:00:00">
+                                                        <DiscreteObjectKeyFrame.Value>
+                                                            <Visibility>Collapsed</Visibility>
+                                                        </DiscreteObjectKeyFrame.Value>
+                                                    </DiscreteObjectKeyFrame>
+                                                </ObjectAnimationUsingKeyFrames>
+                                            </Storyboard>
+                                        </VisualState>
+                                        <VisualState x:Name="Unfocused"/>
+                                    </VisualStateGroup>
+                                </VisualStateManager.VisualStateGroups>
+                                <ContentPresenter x:Name="contentPresenter" Content="{TemplateBinding Content}" ContentTemplate="{TemplateBinding ContentTemplate}" HorizontalAlignment="Stretch" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                                <TextBlock HorizontalAlignment="Stretch" x:Name="Mouseover_Pressed" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" Visibility="Collapsed" Panel.ZIndex="1" Foreground="{StaticResource NavigationBackgroundColorBrush}" Text="{TemplateBinding Content}"/>
+                                <TextBlock HorizontalAlignment="Stretch" x:Name="DisabledOverlay" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" Visibility="Collapsed" Panel.ZIndex="1" Foreground="#FFAAAAAA" Text="{TemplateBinding Content}"/>
+                            </Grid>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+        </ResourceDictionary>
+    </Controls:MetroWindow.Resources>
+    <DockPanel>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="100" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="25" />
+            </Grid.RowDefinitions>
+            <Grid.Background>
+                <ImageBrush  Stretch="UniformToFill"/>
+            </Grid.Background>
+            <Grid Grid.Row="0">
+                <Grid x:Name="LayoutRoot" Style="{StaticResource LayoutRootGridStyle}" Grid.RowSpan="4" Grid.ColumnSpan="2">
+                    <Grid Style="{StaticResource NavigationOuterGridStyle}" />
+                    <Grid Style="{StaticResource NavigationOuterGridStyle}">
+                        <Grid x:Name="NavigationGrid" Style="{StaticResource NavigationGridStyle}" Height="62" VerticalAlignment="Top">
+                            <Border x:Name="BrandingBorder" Style="{StaticResource BrandingBorderStyle}">
+                                <StackPanel x:Name="BrandingStackPanel" Style="{StaticResource BrandingStackPanelStyle}"/>
+                            </Border>
+                            <Border x:Name="LinksBorder" Style="{StaticResource LinksBorderStyle}">
+                                <StackPanel x:Name="LinksStackPanel" Style="{StaticResource LinksStackPanelStyle}">
+                                    <Rectangle Style="{StaticResource DividerStyle}" />
+                                    <Button x:Name="btnsession" Cursor="Hand"   HorizontalAlignment="Left" Width="35" Height="35"  Style="{DynamicResource NoChromeButton}" Click="btnsession_Click"   >
+                                        <Button.ToolTip>
+                                            <ToolTip>
+                                                <StackPanel>
+                                                    <TextBlock FontWeight="Bold" TextAlignment="Left" ><Run Text="Adminsitrador del Sistema"/></TextBlock>
+                                                    <TextBlock><Run Text="Cerrar Session de Usuario"/></TextBlock>
+                                                    <TextBlock><Run Text="No lo presione hasta estar seguro de cerrar session del usuario."/></TextBlock>
+                                                </StackPanel>
+                                            </ToolTip>
+                                        </Button.ToolTip>
+                                        <Image Source="/Integrado;component/Design/images/reiniciar.png" Width="48" Margin="8,4,0,4"/>
+                                    </Button>
+                                    <Rectangle Style="{StaticResource DividerStyle}" />
+                                    <Button x:Name="btnprincipal"  Cursor="Hand"   HorizontalAlignment="Left" Width="35" Height="35"  Style="{DynamicResource NoChromeButton}" Click="btnprincipal_Click"   >
+                                        <Button.ToolTip>
+                                            <ToolTip>
+                                                <StackPanel>
+                                                    <TextBlock FontWeight="Bold" TextAlignment="Left" ><Run Text="Pantalla Principal"/></TextBlock>
+                                                    <TextBlock><Run Text="Menu Principal"/></TextBlock>
+                                                    <TextBlock><Run Text="No lo presione hasta estar seguro de volver a la pantalla principal."/></TextBlock>
+                                                </StackPanel>
+                                            </ToolTip>
+                                        </Button.ToolTip>
+                                        <DockPanel>
+                                            <Image Source="/Integrado;component/Design/images/windows-8.1-start-button.jpg"    Width="48" Margin="8,4,0,4"  />
+                                        </DockPanel>
+                                    </Button>
+                                    <Rectangle Style="{StaticResource DividerStyle}" />
+                                </StackPanel>
+                            </Border>
+                            <Image Margin="6,4,0,2" Source="/Integrado;component/Design/Images/aq_lineal.jpg" Width="205" Grid.Column="0" HorizontalAlignment="Left" />
+                            <Label x:Name="lblnom_modulo" FontFamily="Georgia" Foreground="WhiteSmoke" FontSize="35" Margin="224,11,0,-5" HorizontalAlignment="Left" Grid.Column="0" Content="aa" Width="auto" FontStretch="Expanded"/>
+                            <Rectangle Height="0" VerticalAlignment="Bottom" Fill="WhiteSmoke" HorizontalAlignment="Left" Width="189" Margin="130,0,0,26" />
+                            <Label Visibility="Hidden"  FontFamily="Georgia" Foreground="WhiteSmoke" FontSize="10" Width="95" 
+								HorizontalAlignment="Left" Margin="633,33,0,6" Content="Desktop Aplication"/>
+                            <Label x:Name="lblhora" Margin="0,-5,177,25" Grid.Column="0" Content="02-12"  VerticalAlignment="Center" HorizontalAlignment="Right"   Width="auto" FontSize="24"  Foreground="White" FontFamily="Segoe UI Symbol" FontStretch="Expanded"/>
+                            <Label x:Name="lblfecha" Margin="0,31,151,5" Grid.Column="0" Content="12-12-145"  VerticalAlignment="Center" HorizontalAlignment="Right"   Width="auto" FontSize="12"  Foreground="White" FontFamily="Segoe UI Symbol" FontStretch="Expanded"/>
+                            <Label x:Name="lblnombre_login" Grid.Column="0" Grid.Row="0" Margin="0,20,35,452" VerticalAlignment="Center" HorizontalAlignment="Right"  Content="" Width="auto" FontSize="12"  Foreground="White" FontFamily="Segoe UI Symbol" FontStretch="Expanded" RenderTransformOrigin="-4.445,0.543" Grid.ColumnSpan="2"/>
+                        </Grid>
+                        <Border x:Name="bor" Style="{StaticResource BarBottonHeader}" Margin="0,63,0,0" Height="25"  VerticalAlignment="Top">
+                            <Grid>
+                                <StackPanel HorizontalAlignment="Left" Style="{StaticResource LoginPanelStyle}">
+                                    <TextBlock x:Name="lblInfoUser" Style="{StaticResource SpacerStyle}"/>
+                                </StackPanel>
+                                <StackPanel x:Name="LinksLogin" Style="{StaticResource LoginPanelStyle}">
+                                    <TextBlock Style="{StaticResource SpacerStyle}"/>
+                                    <Rectangle Style="{StaticResource DividerStyleSmoke}" />
+                                    <TextBlock Style="{StaticResource SpacerStyle}"/>
+                                    <Button x:Name="btCloseSesion"   Style="{StaticResource LoginRegisterLinkStyle}" Content="Salir del Sistema" Click="btCloseSesion_Click"/>
+                                    <!-- Gears -->
+                                    <Rectangle Style="{StaticResource DividerStyleSmoke}" />
+                                    <TextBlock Style="{StaticResource SpacerStyle}"/>
+                                </StackPanel>
+                            </Grid>
+                        </Border>
+                    </Grid>
+                </Grid>
+            </Grid>
+            <StatusBar Grid.Row="2" Height="30" Margin="0,-3,0,0">
+                <StatusBarItem Content="Usuario"/>
+                <Separator Style="{StaticResource MetroStatusBarSeparator}" />
+                <StatusBarItem>
+                    <Label x:Name="lblusuario" Foreground="White" FontWeight="Bold" Content="david mendoza" Width="auto" Height="auto"/>
+                </StatusBarItem>
+                <StatusBarItem Content="{Binding SelectedItem.Header, ElementName=MainTabControl, Mode=OneWay}" />
+            </StatusBar>
+            <Grid Grid.Row="1" Margin="0,-10,0,0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="167"/>
+                    <RowDefinition Height="98"/>
+                    <RowDefinition Height="230"/>
+                    <RowDefinition Height="70"/>
+                </Grid.RowDefinitions>
+                <Grid Grid.Row="0" Margin="0,-10,0,0">
+                    <GroupBox x:Name="groupBox" Header="Datos del Cliente" HorizontalAlignment="Center" VerticalAlignment="Center" Width="1305" Height="155" Grid.Row="0" />
+                    <Grid Margin="0,40,0,0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="30"/>
+                            <RowDefinition Height="30"/>
+                            <RowDefinition Height="30"/>
+                            <RowDefinition Height="30"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="50"/>
+                            <ColumnDefinition Width="130"/>
+                            <ColumnDefinition Width="380"/>
+                            <ColumnDefinition Width="120"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Label Content="Cliente:" Margin="0,0,0,0" FontSize="12" FontWeight="Bold" VerticalAlignment="Center" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Left"  />
+                        <ComboBox x:Name="dwcliente" Visibility="Hidden" VirtualizingPanel.IsVirtualizing="True"   Width="370" Height="28" Grid.Row="0" Cursor="Hand" Grid.Column="2" FontSize="14" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Center" SelectionChanged="dwcliente_SelectionChanged" PreviewKeyDown="dwcliente_PreviewKeyDown">
+                            <ComboBox.Effect>
+                                <DropShadowEffect/>
+                            </ComboBox.Effect>
+                        </ComboBox>
+                        <dxe:ComboBoxEdit  Name="dwclientex" ValidateOnTextInput="False"  Width="370" Height="28" Grid.Row="0" Cursor="Hand" Grid.Column="2" FontSize="14" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Center"  KeyDown="dwclientex_KeyDown" SelectedIndexChanged="dwclientex_SelectedIndexChanged"  PreviewKeyDown="dwclientex_PreviewKeyDown" AutoComplete="True"/>
+                        <Label Content="Nro.Documento:" Margin="0,0,0,0" FontSize="12"  VerticalAlignment="Center" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Left"  />
+                        <Label x:Name="lbldocumento" Content="31003920" Margin="0,0,0,0" FontSize="12"  VerticalAlignment="Center" Grid.Row="1" Grid.Column="2" HorizontalAlignment="Left" FontWeight="Bold"  />
+                        <Label Content="Dirección:" Margin="0,0,0,0" FontSize="12"  VerticalAlignment="Center" Grid.Row="2" Grid.Column="1" HorizontalAlignment="Left"  />
+                        <Label x:Name="lbldireccion" Content="Av Canada sn esquina" Margin="0,0,0,0" FontSize="12"  VerticalAlignment="Center" Grid.Row="2" Grid.Column="2" HorizontalAlignment="Left" FontWeight="Bold"  />
+                        <Label Content="Ubicación:" Margin="0,0,0,0" FontSize="12"  VerticalAlignment="Center" Grid.Row="3" Grid.Column="1" HorizontalAlignment="Left"  />
+                        <Label x:Name="lblubicacion" Content="Apurimac abancay" Margin="0,0,0,0" FontSize="12"  VerticalAlignment="Center" Grid.Row="3" Grid.Column="2" HorizontalAlignment="Left" FontWeight="Bold"  />
+                        <Label Content="Nombre:" Margin="0,0,0,0" FontSize="12"  VerticalAlignment="Center" Grid.Row="1" Grid.Column="3" HorizontalAlignment="Left"  />
+                        <Label Content="Teléfono:" Margin="0,0,0,0" FontSize="12"  VerticalAlignment="Center" Grid.Row="2" Grid.Column="3" HorizontalAlignment="Left"  />
+                        <Label Content="E-Mail:" Margin="0,0,0,0" FontSize="12"  VerticalAlignment="Center" Grid.Row="3" Grid.Column="3" HorizontalAlignment="Left"  />
+                        <Label x:Name="lblnombre" Content="Ada Flores Palomino" Margin="0,0,0,0" FontSize="12"  VerticalAlignment="Center" Grid.Row="1" Grid.Column="4" HorizontalAlignment="Left" FontWeight="Bold"  />
+                        <Label x:Name="lbltelefono" Content="325897" Margin="0,0,0,0" FontSize="12"  VerticalAlignment="Center" Grid.Row="2" Grid.Column="4" HorizontalAlignment="Left" FontWeight="Bold"  />
+                        <Label x:Name="lblemail" Content="laura@bata.com" Margin="0,0,0,0" FontSize="12"  VerticalAlignment="Center" Grid.Row="3" Grid.Column="4" HorizontalAlignment="Left" FontWeight="Bold"  />
+                    </Grid>
+                </Grid>
+                <Grid Grid.Row="1" Margin="0,-10,0,0">
+                    <GroupBox Header="Buscar Documento" HorizontalAlignment="Center"  VerticalAlignment="Center" Width="1305" Height="98" Grid.Row="1" />
+                    <Grid Margin="0,40,0,0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="30"/>
+                            <RowDefinition Height="30"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="50"/>
+                            <ColumnDefinition Width="130"/>
+                            <ColumnDefinition Width="135"/>
+                            <ColumnDefinition Width="110"/>
+                            <ColumnDefinition Width="630"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Label Content="Nro°Factura" Grid.Column="1" Grid.Row="0" VerticalAlignment="Top"/>
+                        <Label Content="Referencia de articulo" Grid.Column="1" Grid.Row="1" VerticalAlignment="Top"/>
+                        <TextBox x:Name="txtfactura" CharacterCasing="Upper" Grid.Column="2" Grid.Row="0" Width="130" Margin="0,0,0,0" Height="23" HorizontalAlignment="Left" KeyDown="txtfactura_KeyDown" TextChanged="txtfactura_TextChanged"/>
+                        <TextBox x:Name="txtarticulo" Grid.Column="2" Grid.Row="1" Margin="0,0,0,0" Width="130" Height="23"  HorizontalAlignment="Left" KeyDown="txtarticulo_KeyDown"/>
+                        <Button x:Name="btnbuscar" Grid.Column="3" Grid.Row="1" Height="25" Width="100" Cursor="Hand" HorizontalAlignment="Left" Click="btnbuscar_Click">
+                            <Button.ToolTip>
+                                <ToolTip>
+                                    <StackPanel>
+                                        <TextBlock FontWeight="Bold" TextAlignment="Left" ><Run Text="Buscar Documento"/></TextBlock>
+                                    </StackPanel>
+                                </ToolTip>
+                            </Button.ToolTip>
+                            <Grid Width="140">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="7*" />
+                                    <ColumnDefinition Width="54*" />
+                                    <ColumnDefinition Width="80*" />
+                                </Grid.ColumnDefinitions>
+                                <Image Margin="5,0,0,0" Source="/Integrado;component/Design/Images/lupa.jpg" Width="32" HorizontalAlignment="Left" Grid.ColumnSpan="2"/>
+                                <TextBlock Text="Buscar" VerticalAlignment="Center" 
+									Margin="-30,0,10,0" HorizontalAlignment="Center"  Grid.ColumnSpan="2" Grid.Column="1"/>
+                            </Grid>
+                        </Button>
+                        <Label Content="ESTADO DE NOTA DE CREDITO" FontSize="14" FontWeight="Bold" Grid.Column="4" HorizontalAlignment="Right" Grid.Row="0"/>
+                        <ComboBox x:Name="dwestado" Foreground="Red" Grid.Column="5" Grid.Row="0" Width="250" Height="25" FontSize="16" Cursor="Hand" FontWeight="Bold" HorizontalAlignment="Left" SelectionChanged="dwestado_SelectionChanged"/>
+                        <Label x:Name="lblinfo" Content="&gt;No hay datos para generar la nota de credito" Grid.Column="4" Grid.Row="1" HorizontalAlignment="Left" FontWeight="Bold" Foreground="#FF0068FF" FontStretch="Expanded"/>
+                    </Grid>
+                </Grid>
+                <Grid Grid.Row="2">
+                    <TabControl x:Name="tabControl2" HorizontalAlignment="Left"  Margin="0,0,0,0" VerticalAlignment="Top" >
+                        <TabItem Header="&gt;Detalle de articulos a devolver">
+                            <Grid Background="#FFE5E5E5">
+                                <DataGrid x:Name="dg1" HorizontalAlignment="Left"  Width="1305"   IsReadOnly="True"   AutoGenerateColumns="False" GridLinesVisibility="All" SelectionUnit="CellOrRowHeader" AlternatingRowBackground="White"   >
+                                    <DataGrid.Columns>
+                                        <DataGridTextColumn Binding="{Binding item_det}" ClipboardContentBinding="{x:Null}" Header="Items" >
+                                            <DataGridTextColumn.ElementStyle>
+                                                <Style TargetType="{x:Type TextBlock}">
+                                                    <Setter Property="TextAlignment" Value="Center"/>
+                                                </Style>
+                                            </DataGridTextColumn.ElementStyle>
+                                        </DataGridTextColumn>
+                                        <DataGridTextColumn Binding="{Binding IDV_INVOICE}" ClipboardContentBinding="{x:Null}" Header="Factura"/>
+                                        <DataGridTextColumn Binding="{Binding IDV_ARTICLE}" ClipboardContentBinding="{x:Null}" Header="Referencia">
+                                            <!--<DataGridTextColumn.ElementStyle>
+                                                <Style TargetType="TextBlock">
+                                                    <Setter Property="TextAlignment" Value="Center"></Setter>
+                                                </Style>
+                                            </DataGridTextColumn.ElementStyle>-->
+                                        </DataGridTextColumn>
+                                        <DataGridTextColumn Binding="{Binding ARV_NAME}" ClipboardContentBinding="{x:Null}" Header="Artículo" />
+                                        <DataGridTextColumn Binding="{Binding brv_description}" ClipboardContentBinding="{x:Null}" Header="Marca" />
+                                        <DataGridTextColumn Binding="{Binding CALIDAD}" ClipboardContentBinding="{x:Null}" Header="Calidad" >
+                                            <DataGridTextColumn.ElementStyle>
+                                                <Style TargetType="{x:Type TextBlock}">
+                                                    <Setter Property="TextAlignment" Value="Center"/>
+                                                </Style>
+                                            </DataGridTextColumn.ElementStyle>
+                                        </DataGridTextColumn>
+                                        <DataGridTextColumn Binding="{Binding cov_description}" ClipboardContentBinding="{x:Null}" Header="Color" >
+                                            <!--<DataGridTextColumn.ElementStyle>
+                                                <Style TargetType="TextBlock">
+                                                    <Setter Property="TextAlignment" Value="Center"></Setter>
+                                                    <Setter Property="Background" Value="#FFB7C9EA"></Setter>
+                                                </Style>
+                                            </DataGridTextColumn.ElementStyle>-->
+                                        </DataGridTextColumn>
+                                        <DataGridTextColumn Binding="{Binding IDV_SIZE}" ClipboardContentBinding="{x:Null}" Header="Talla">
+                                            <DataGridTextColumn.ElementStyle>
+                                                <Style TargetType="{x:Type TextBlock}">
+                                                    <Setter Property="TextAlignment" Value="Center"/>
+                                                </Style>
+                                            </DataGridTextColumn.ElementStyle>
+                                        </DataGridTextColumn>
+                                        <DataGridTextColumn Binding="{Binding IDN_QTY}" ClipboardContentBinding="{x:Null}" Header="Cant." >
+                                            <DataGridTextColumn.ElementStyle>
+                                                <Style TargetType="{x:Type TextBlock}">
+                                                    <Setter Property="TextAlignment" Value="Center"/>
+                                                </Style>
+                                            </DataGridTextColumn.ElementStyle>
+                                        </DataGridTextColumn>
+                                        <DataGridTextColumn Binding="{Binding IDN_SELLPRICE, StringFormat=\{0:C2\}}" ClipboardContentBinding="{x:Null}" Header="Precio" >
+                                            <DataGridTextColumn.ElementStyle>
+                                                <Style TargetType="{x:Type TextBlock}">
+                                                    <Setter Property="TextAlignment" Value="Right"/>
+                                                </Style>
+                                            </DataGridTextColumn.ElementStyle>
+                                        </DataGridTextColumn>
+                                        <DataGridTextColumn Binding="{Binding TAXES, StringFormat=\{0:C2\}}" ClipboardContentBinding="{x:Null}" Header="+Impuesto">
+                                            <DataGridTextColumn.ElementStyle>
+                                                <Style TargetType="{x:Type TextBlock}">
+                                                    <Setter Property="TextAlignment" Value="Right"/>
+                                                </Style>
+                                            </DataGridTextColumn.ElementStyle>
+                                        </DataGridTextColumn>
+                                        <DataGridTextColumn Binding="{Binding IDN_COMMISSION, StringFormat=\{0:C2\}}" ClipboardContentBinding="{x:Null}" Header="-Ganancia" >
+                                            <DataGridTextColumn.ElementStyle>
+                                                <Style TargetType="{x:Type TextBlock}">
+                                                    <Setter Property="TextAlignment" Value="Right"/>
+                                                </Style>
+                                            </DataGridTextColumn.ElementStyle>
+                                        </DataGridTextColumn>
+                                        <DataGridTextColumn Binding="{Binding IDN_DISSCOUNT, StringFormat=\{0:C2\}}" ClipboardContentBinding="{x:Null}" Header="-Descuento" >
+                                            <DataGridTextColumn.ElementStyle>
+                                                <Style TargetType="{x:Type TextBlock}">
+                                                    <Setter Property="TextAlignment" Value="Right"/>
+                                                </Style>
+                                            </DataGridTextColumn.ElementStyle>
+                                        </DataGridTextColumn>
+                                        <DataGridTemplateColumn Header="">
+                                            <DataGridTemplateColumn.CellTemplate>
+                                                <DataTemplate>
+                                                    <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+                                                        <Button x:Name="btneliminar" Style="{DynamicResource NoChromeButton}" Cursor="Hand" Click="btneliminar_Click" >
+                                                            <Button.ToolTip>
+                                                                <ToolTip>
+                                                                    <StackPanel>
+                                                                        <TextBlock FontWeight="Bold" TextAlignment="Left" ><Run Text="Eliminar Registro"/></TextBlock>
+                                                                        <TextBlock><Run Text="Eliminar Registro."/></TextBlock>
+                                                                        <TextBlock><Run Text="No lo presione hasta estar seguro de eliminar registro."/></TextBlock>
+                                                                    </StackPanel>
+                                                                </ToolTip>
+                                                            </Button.ToolTip>
+                                                            <Image Source="/Integrado;component/Design/Images/bt_delete.png" Height="16" Width="16" VerticalAlignment="Bottom" Grid.RowSpan="2"/>
+                                                        </Button>
+                                                    </StackPanel>
+                                                </DataTemplate>
+                                            </DataGridTemplateColumn.CellTemplate>
+                                        </DataGridTemplateColumn>
+                                    </DataGrid.Columns>
+                                </DataGrid>
+                            </Grid>
+                        </TabItem>
+                    </TabControl>
+                </Grid>
+                <Grid Grid.Row="3" Margin="8,0,0,0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <dxlc:GroupBox  Background="#FFD9F1F1" Width="650" Grid.Column="0" Height="65" HorizontalAlignment="Left" Margin="0,0,0,0" VerticalAlignment="Top">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="50"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Button x:Name="btngenera" Grid.Column="0" Cursor="Hand" Click="btngenera_Click">
+                                <Button.ToolTip>
+                                    <ToolTip>
+                                        <StackPanel>
+                                            <TextBlock FontWeight="Bold" TextAlignment="Left" ><Run Text="Nota de Credito"/></TextBlock>
+                                            <TextBlock><Run Text="se generara la nota de credito."/></TextBlock>
+                                            <TextBlock><Run Text="No lo presione hasta estar seguro de generar la nota de credito."/></TextBlock>
+                                        </StackPanel>
+                                    </ToolTip>
+                                </Button.ToolTip>
+                                <Grid Width="140">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="7*" />
+                                        <ColumnDefinition Width="80*" />
+                                        <ColumnDefinition Width="80*" />
+                                    </Grid.ColumnDefinitions>
+                                    <Image Margin="-3,0,0,0" Source="/Integrado;component/Design/Images/bt_Save.png" Width="32" HorizontalAlignment="Left" Grid.ColumnSpan="2"/>
+                                    <TextBlock Text="Generar nota de credito" VerticalAlignment="Center" Foreground="Black"
+										Margin="0,0,0,0" HorizontalAlignment="Right"  Grid.ColumnSpan="2" Grid.Column="1"/>
+                                </Grid>
+                            </Button>
+                            <Button x:Name="btninicia" Grid.Column="2" Cursor="Hand">
+                                <Button.ToolTip>
+                                    <ToolTip>
+                                        <StackPanel>
+                                            <TextBlock FontWeight="Bold" TextAlignment="Left" ><Run Text="Iniciar Nota de Credito"/></TextBlock>
+                                            <TextBlock><Run Text="se inciara la nota de credito."/></TextBlock>
+                                            <TextBlock><Run Text="No lo presione hasta estar seguro de iniciar."/></TextBlock>
+                                        </StackPanel>
+                                    </ToolTip>
+                                </Button.ToolTip>
+                                <Grid Width="140">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="7*" />
+                                        <ColumnDefinition Width="80*" />
+                                        <ColumnDefinition Width="80*" />
+                                    </Grid.ColumnDefinitions>
+                                    <Image Margin="-3,0,0,0" Source="/Integrado;component/Design/Images/bt_gears.png" Width="32" HorizontalAlignment="Left" Grid.ColumnSpan="2"/>
+                                    <TextBlock Text="Iniciar nota de credito" VerticalAlignment="Center" Foreground="Black"
+										Margin="0,0,0,0" HorizontalAlignment="Right"  Grid.ColumnSpan="2" Grid.Column="1"/>
+                                </Grid>
+                            </Button>
+                        </Grid>
+                    </dxlc:GroupBox>
+                    <dxlc:GroupBox  Background="Khaki" Width="650" Grid.Column="1" Height="65" HorizontalAlignment="Left" Margin="0,0,0,0" VerticalAlignment="Top">
+                        <Grid Margin="0,-15,0,0" Height="60">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="28"/>
+                                <RowDefinition Height="26"/>
+                                <RowDefinition Height="3"/>
+                            </Grid.RowDefinitions>
+                            <Label Content="Cantidades Devueltas" Grid.Row="0" HorizontalAlignment="Right" Grid.Column="1" FontSize="12" FontWeight="Bold" VerticalAlignment="Top"/>
+                            <Label Content="Valor Total de Devolucion" Grid.Row="1" HorizontalAlignment="Right" Grid.Column="1" FontSize="12" FontWeight="Bold" VerticalAlignment="Bottom"/>
+                            <Label x:Name="lblcantidad" Content="1" Grid.Row="0" HorizontalAlignment="Right" Grid.Column="2" FontSize="12" FontWeight="Bold" VerticalAlignment="Top"/>
+                            <Label x:Name="lbltotal" Content="S/.47.92" Grid.Row="1" HorizontalAlignment="Right" Grid.Column="2" FontSize="12" FontWeight="Bold" VerticalAlignment="Top"/>
+                        </Grid>
+                    </dxlc:GroupBox>
+
+                </Grid>
+            </Grid>
+
+        </Grid>
+    </DockPanel>
+</Controls:MetroWindow>

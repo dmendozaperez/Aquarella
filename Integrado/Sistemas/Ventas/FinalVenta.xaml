@@ -1,0 +1,152 @@
+﻿<Controls:MetroWindow x:Class="Integrado.Sistemas.Ventas.FinalVenta"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:Controls="http://metro.mahapps.com/winfx/xaml/controls"  
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:dxlc="http://schemas.devexpress.com/winfx/2008/xaml/layoutcontrol" xmlns:GrayscaleEffect="clr-namespace:GrayscaleEffect;assembly=GrayscaleEffect" xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"  
+        xmlns:local="clr-namespace:Integrado.Sistemas.Ventas"
+        ResizeMode="CanMinimize"
+        Icon="/Integrado;component/Design/Icono/sistema_ico.ico"                      
+        Title="[Final de Venta]" EnableDWMDropShadow="True" 
+        WindowStartupLocation="CenterScreen"  Height="680" Width="960" Loaded="MetroWindow_Loaded" >
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid Grid.Column="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="30"></RowDefinition>
+                <RowDefinition Height="30"></RowDefinition>
+                <RowDefinition Height="185"></RowDefinition>
+                <RowDefinition Height="185"></RowDefinition>
+                <RowDefinition Height="135"></RowDefinition>
+                <RowDefinition Height="35"></RowDefinition>
+                <RowDefinition Height="60"></RowDefinition>
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Label Content="Fecha de Venta:" Grid.Column="0" FontSize="14" FontWeight="Bold" VerticalAlignment="Center" HorizontalAlignment="Right"></Label>
+                <Label Name="lblfechaventa" Content="20-07-2017" Grid.Column="1" Margin="10,0,0,0" Foreground="Maroon" FontSize="14" FontWeight="Bold" VerticalAlignment="Center" HorizontalAlignment="Left"></Label>
+            </Grid>
+          
+            <Grid Grid.Row="1" Background="Khaki">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Label Content="Venta Soles:" Grid.Column="0" FontSize="14" FontWeight="Bold" VerticalAlignment="Center" HorizontalAlignment="Right"></Label>
+                <Label Name="lblventa" Content="S/800.00" HorizontalContentAlignment="Right" Grid.Column="1" Margin="10,0,0,0" Foreground="Maroon" FontSize="14" FontWeight="Bold" VerticalAlignment="Center" HorizontalAlignment="Left"></Label>
+            </Grid>
+            <GroupBox Header="VENTAS POR TIPO DE PAGO" Width="420" Grid.Row="2"></GroupBox>
+            <Frame Grid.Row="2" Height="30" Width="420" Margin="0,65,0,0" Background="Khaki"></Frame>
+            <Grid Grid.Row="2" >
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="25"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
+                </Grid.RowDefinitions>
+              
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <!--<Grid Grid.Row="3" Background="Khaki" Grid.Column="1" ></Grid>
+                <Grid Grid.Row="3" Background="Khaki" Grid.Column="0" ></Grid>-->
+                <Label Content="Efectivo:" Grid.Column="0" Grid.Row="1" FontSize="14" FontWeight="Bold" VerticalAlignment="Center" HorizontalAlignment="Right"></Label>
+                <Label Name="lblefectivo" Content="S/900.00" Grid.Row="1"  HorizontalContentAlignment="Right" Grid.Column="1" Margin="10,0,0,0" Foreground="Maroon" FontSize="14" FontWeight="Bold" VerticalAlignment="Center" HorizontalAlignment="Left"></Label>
+                <Label Content="Vuelto:" Grid.Column="0" Grid.Row="2" FontSize="14" FontWeight="Bold" VerticalAlignment="Center" HorizontalAlignment="Right"></Label>
+                <Label Name="lblvuelto" Content="S/900.00" Grid.Row="2"  HorizontalContentAlignment="Right" Grid.Column="1" Margin="10,0,0,0" Foreground="Maroon" FontSize="14" FontWeight="Bold" VerticalAlignment="Center" HorizontalAlignment="Left"></Label>
+                <Label Content="Total Efectivo:" Grid.Column="0" Grid.Row="3" FontSize="14" FontWeight="Bold" VerticalAlignment="Center" HorizontalAlignment="Right"></Label>
+                <Label Name="lbltefectivo" Content="S/900.00" Grid.Row="3"  HorizontalContentAlignment="Right" Grid.Column="1" Margin="10,0,0,0" Foreground="Maroon" FontSize="14" FontWeight="Bold" VerticalAlignment="Center" HorizontalAlignment="Left"></Label>
+                <Label Content="Total Tarjeta:" Grid.Column="0" Grid.Row="4" FontSize="14" FontWeight="Bold" VerticalAlignment="Center" HorizontalAlignment="Right"></Label>
+                <Label Name="lbltarjeta" Content="S/600.00" Grid.Row="4" HorizontalContentAlignment="Right" Grid.Column="1" Margin="10,0,0,0" Foreground="Maroon" FontSize="14" FontWeight="Bold" VerticalAlignment="Center" HorizontalAlignment="Left"></Label>
+            </Grid>
+            <GroupBox Header="ARQUEO DE CAJA" Width="420"  Grid.Row="3"></GroupBox>
+            <Frame Grid.Row="3" Height="30" Width="420" Margin="0,135,0,0" Background="Khaki"></Frame>
+            <Grid Grid.Row="3">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="25"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <!--<Grid Grid.Row="3" Background="Khaki" Grid.Column="1" ></Grid>
+                <Grid Grid.Row="3" Background="Khaki" Grid.Column="0" ></Grid>-->
+                
+                <Label Content="Efectivo Neto:" Grid.Column="0" FontSize="14" Grid.Row="1" FontWeight="Bold" VerticalAlignment="Center" HorizontalAlignment="Right"></Label>
+                <Label Name="lblefecneto" Content="S/1600.00" Grid.Row="1" HorizontalContentAlignment="Right" Grid.Column="1" Margin="10,0,0,0" Foreground="Maroon" FontSize="14" FontWeight="Bold" VerticalAlignment="Center" HorizontalAlignment="Left"></Label>
+                <Label Content="Fondo de Caja (+):" Grid.Column="0" FontSize="14" Grid.Row="2" FontWeight="Bold" VerticalAlignment="Center" HorizontalAlignment="Right"></Label>
+                <Label Name="lblinicaja" Content="S/1600.00" Grid.Row="2" HorizontalContentAlignment="Right" Grid.Column="1" Margin="10,0,0,0" Foreground="Maroon" FontSize="14" FontWeight="Bold" VerticalAlignment="Center" HorizontalAlignment="Left"></Label>
+                <Label Content="Total en Caja:" Grid.Column="0" FontSize="14" Grid.Row="3" FontWeight="Bold" VerticalAlignment="Center" HorizontalAlignment="Right"></Label>
+                <Label Name="lbltcaja" Content="S/1600.00" Grid.Row="3" HorizontalContentAlignment="Right" Grid.Column="1" Margin="10,0,0,0" Foreground="Maroon" FontSize="14" FontWeight="Bold" VerticalAlignment="Center" HorizontalAlignment="Left"></Label>
+            </Grid>
+
+            <GroupBox Header="DEPOSITO DE BANCO" Width="420"  Grid.Row="4"></GroupBox>
+            <Grid Grid.Row="4">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="25"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+               
+
+                <Label Content="Banco:" Grid.Column="0" FontSize="14" Grid.Row="1" FontWeight="Bold" VerticalAlignment="Center" HorizontalAlignment="Right"></Label>
+                <dxe:ComboBoxEdit  Name="dwbanco" DisplayMember="ban_des" ValueMember="ban_id"  Width="190" Height="25" Grid.Row="1" Cursor="Hand" Grid.Column="1" FontSize="12" FontWeight="Bold"  HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="0,0,0,0"  IsTextEditable="False"  />
+                <Label Content="Nro Operacion:" Grid.Column="0" FontSize="14" Grid.Row="2" FontWeight="Bold" VerticalAlignment="Center" HorizontalAlignment="Right"></Label>
+                <TextBox Name="txtoperacion" MaxLength="15" Height="23" Grid.Column="1"  VerticalAlignment="Center" Grid.Row="2" HorizontalAlignment="Left" Width="136"   Margin="0,0,0,0" KeyDown="txtoperacion_KeyDown"  />
+                <Label Content="Monto:" Grid.Column="0" FontSize="14" Grid.Row="3" FontWeight="Bold" VerticalAlignment="Center" HorizontalAlignment="Right"></Label>
+                <dxe:SpinEdit Name="txtmonto" DisplayFormatString="c2" Grid.Column="1" FontSize="16" Grid.Row="3" Width="130"  Height="27" VerticalAlignment="Top" HorizontalAlignment="Left"  >
+                    <dxe:SpinEdit.EditValue>
+                        0.00
+                    </dxe:SpinEdit.EditValue>
+                </dxe:SpinEdit>
+            </Grid>
+            <Grid Grid.Row="5">
+                <Border Height="30"  
+                            HorizontalAlignment="Center" 
+                            BorderBrush="White"                            
+                            BorderThickness="3"                            
+                            CornerRadius="2"                           
+                            Grid.Column="0" 
+                            Grid.Row="0"
+                            Margin="0,0,0,0">
+                    <CheckBox  Name="chkcierre" Content="Cierre de Venta" Cursor="Hand" Foreground="Red" FontSize="14" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center"></CheckBox>
+                </Border>
+                
+            </Grid>
+            <dxlc:GroupBox Background="AntiqueWhite" Grid.Row="6">
+            <Grid Grid.Row="6">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Button Name="btnaceptar" Width="100" Margin="290,-5,0,0" Grid.Column="0" Height="30" Cursor="Hand"
+                    VerticalAlignment="Top"
+                    Content="Aceptar"
+                    IsEnabled="True" Click="btnaceptar_Click" 
+                    />
+                <Button Name="btncancelar" HorizontalAlignment="Left" Width="100" Grid.Column="1" Margin="50,-5,0,0" Height="30" Cursor="Hand"
+                    VerticalAlignment="Top"
+                    Content="Cancelar"
+                    IsEnabled="True" Click="btncancelar_Click"
+                    />
+            </Grid>
+            </dxlc:GroupBox>
+        </Grid>
+    </Grid>
+</Controls:MetroWindow>

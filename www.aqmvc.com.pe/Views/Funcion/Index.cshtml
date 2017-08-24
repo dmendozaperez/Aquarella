@@ -1,0 +1,97 @@
+﻿@using www.aqmvc.com.pe.Data.Control
+@model IEnumerable<Funcion>
+
+<link rel="stylesheet" href="~/plugins/datatables/dataTables.bootstrap.css">
+@section Scripts
+{
+    <script src="~/plugins/datatables/jquery.dataTables.min.js"></script>
+    <script src="~/plugins/datatables/dataTables.bootstrap.min.js"></script>
+    <script type="text/javascript">
+        var TeamDetailPostBackURL = '/Funcion/Nuevo';
+        $(function () {
+            $(".btn").click(function () {
+                //debugger;
+                var $buttonClicked = $(this);
+                //var id = $buttonClicked.attr('data-id');
+                var options = { "backdrop": "static", keyboard: true };
+                $.ajax({
+                    type: "GET",
+                    url: TeamDetailPostBackURL,
+                    contentType: "application/json; charset=utf-8",
+                    data: {},
+                    datatype: "json",
+                    cache: true,
+                    success: function (data) {
+                        //debugger;
+                        $('#myModalContent').html(data);
+                        $('#myModalnew').modal(options);
+                        $('#myModalnew').modal('show');
+                        // debugger;
+
+                    },
+                    error: function () {
+                        alert("Dynamic content load failed.");
+                    }
+                });
+            });
+
+
+            $("#closbtn").click(function () {
+                // debugger;
+                $('#myModalnew').modal('hide');
+            });
+        });
+    </script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#result').DataTable({
+            "language": {
+                "url": "../plugins/datatables/Spanish.json"
+            },
+            "paging": true,
+            "lengthChange": false,
+            "searching": false,
+            "ordering": true,
+            "info": true,
+            "autoWidth": false,
+            "iDisplayLength": 6
+        });
+    });
+</script>
+}
+
+
+<div id="myModalnew" class="modal fade" aria-labelledby="edit" aria-hidden="true" role="dialog" data-keyboard="true" data-backdrop="static">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div id='myModalContent'></div>
+        </div>
+    </div>
+
+</div>   
+
+<section class="content">
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="box">
+                <div class="box-header">
+                    <h3 class="box-title">Funciones</h3>
+                </div>                
+                    <div class="box-header">
+                        <div class="col-md-4">
+                            <div class="input-group input-group">                                
+                                <span class="input-group-btn">                                        
+                                    <button class="btn btn-primary media-bottom" data-title="Edit" data-id="s" data-toggle="modal" data-target="#nuevo"><span class="glyphicon glyphicon-new-window"></span>Nueva Función</button>
+                                </span>
+                            </div>
+                        </div>
+                    </div>                 
+                <div class="box-body" id="lista">
+                    @{Html.RenderPartial("ListaFuncion", Model); }
+                </div>                             
+            </div>            
+        </div>
+        <!-- /.col -->
+    </div>
+    <!-- /.row -->
+</section>

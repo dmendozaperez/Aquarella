@@ -1,0 +1,228 @@
+﻿<Controls:MetroWindow x:Class="Integrado.Sistemas.Ventas.Efectivo"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"                         
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Integrado.Sistemas.Ventas"
+        xmlns:dxlc="http://schemas.devexpress.com/winfx/2008/xaml/layoutcontrol" xmlns:GrayscaleEffect="clr-namespace:GrayscaleEffect;assembly=GrayscaleEffect" xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"               
+        WindowStartupLocation="CenterScreen"
+        ResizeMode="CanMinimize" ShowIconOnTitleBar="True"
+        ShowTitleBar="True"              
+        Title="Efectivo" Height="550" Width="700">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="150"></RowDefinition>
+            <RowDefinition Height="200"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+           
+        </Grid.RowDefinitions>
+       
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+
+       
+        <GroupBox x:Name="groupBox" Header="Seleccione el modo de Pago" HorizontalAlignment="Center"  Width="670" Height="125" Grid.Row="0" Grid.Column="0" />
+        <Grid Grid.Row="0" Grid.Column="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="80"></RowDefinition>
+                <RowDefinition></RowDefinition>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="150"></ColumnDefinition>
+                <ColumnDefinition Width="160"></ColumnDefinition>
+                <ColumnDefinition Width="100"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+
+            <Grid Grid.Column="3">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="60"></ColumnDefinition>
+                    <ColumnDefinition Width="60"></ColumnDefinition>
+                    <ColumnDefinition Width="60"></ColumnDefinition>
+                    <ColumnDefinition Width="60"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <TextBox x:Name="txtnum1"  Grid.Column="0" FontSize="16"  Width="auto"  Height="27" VerticalAlignment="Bottom"></TextBox>
+                <TextBox x:Name="txtnum2"  Grid.Column="1" FontSize="16"  Width="auto"  Height="27" VerticalAlignment="Bottom"></TextBox>
+                <TextBox x:Name="txtnum3"  Grid.Column="2" FontSize="16"  Width="auto"  Height="27" VerticalAlignment="Bottom"></TextBox>
+                <TextBox x:Name="txtnum4"  Grid.Column="3" FontSize="16"  Width="auto"  Height="27" VerticalAlignment="Bottom" KeyDown="txtnum4_KeyDown"></TextBox>
+                
+            </Grid>
+            
+            <Label Content="Forma de pago" VerticalAlignment="Bottom"  FontWeight="Bold" HorizontalAlignment="Center" FontSize="16"   Grid.Row="0" Grid.Column="0" ></Label>
+            <dxe:ComboBoxEdit  Name="dwforma" ValidateOnTextInput="False"  Width="150" Height="32" Grid.Row="0" Cursor="Hand" Grid.Column="1" FontSize="18" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Bottom"   AutoComplete="True"/>
+            <Label Content="Nro. Tarjeta" VerticalAlignment="Bottom"  FontWeight="Bold" HorizontalAlignment="Center" FontSize="16"   Grid.Row="0" Grid.Column="2" ></Label>
+            <dxe:ComboBoxEdit  Name="dwtarjeta" Visibility="Hidden" ValidateOnTextInput="False"  Width="150" Height="32" Grid.Row="0" Cursor="Hand" Grid.Column="3" FontSize="18" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Bottom"   AutoComplete="True">
+                <dxe:ComboBoxEdit.ItemTemplate>
+                    <DataTemplate>
+                        <Image></Image>
+                    </DataTemplate>
+                </dxe:ComboBoxEdit.ItemTemplate>
+            </dxe:ComboBoxEdit>
+                               
+            <Label Content="Monto S/" VerticalAlignment="Center"  FontWeight="Bold" HorizontalAlignment="Right" FontSize="16"   Grid.Row="1" Grid.Column="0" ></Label>
+            <TextBox x:Name="txtmonto"  Grid.Column="1" FontSize="16" Grid.Row="1" Width="130"  Height="27" VerticalAlignment="Center" HorizontalAlignment="Left" />
+            <Button x:Name="btnagregar" Margin="-20,0,0,0" Grid.Column="2" Grid.Row="1" Height="25" Width="100" Cursor="Hand" VerticalAlignment="Center" HorizontalAlignment="Left" >
+                <Button.ToolTip>
+                    <ToolTip>
+                        <StackPanel>
+                            <TextBlock FontWeight="Bold" TextAlignment="Left" ><Run Text="Agregar monto"/></TextBlock>
+                        </StackPanel>
+                    </ToolTip>
+                </Button.ToolTip>
+                <Grid Width="140">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="7*" />
+                        <ColumnDefinition Width="54*" />
+                        <ColumnDefinition Width="80*" />
+                    </Grid.ColumnDefinitions>
+                    <Image Margin="5,0,0,0" Source="/Integrado;component/Design/Images/16 (Plus_over2).ico" Width="32" HorizontalAlignment="Left" Grid.ColumnSpan="2"/>
+                    <TextBlock Text="Agregar" VerticalAlignment="Center" 
+									Margin="-30,0,10,0" HorizontalAlignment="Center"  Grid.ColumnSpan="2" Grid.Column="1"/>
+                </Grid>
+            </Button>
+        </Grid>
+        <Grid Grid.Row="1" Grid.Column="0">
+            <TabControl x:Name="tabControl2" HorizontalAlignment="Left"  Margin="0,0,0,0" VerticalAlignment="Top" >
+                <TabItem Header="&gt;Detalle de la forma de pago">
+                    <Grid Background="#FFE5E5E5">
+                        <DataGrid x:Name="dgforma" HorizontalAlignment="Left"  Width="690"   IsReadOnly="True"   AutoGenerateColumns="False" GridLinesVisibility="All" SelectionUnit="CellOrRowHeader" AlternatingRowBackground="White"   >
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Binding="{Binding IDV_INVOICE}" ClipboardContentBinding="{x:Null}" Header="Forma de Pago"/>
+                                <DataGridTextColumn Binding="{Binding IDV_ARTICLE}" ClipboardContentBinding="{x:Null}" Header="Tarjeta">
+                                </DataGridTextColumn>
+                                <DataGridTextColumn Binding="{Binding ARV_NAME}" ClipboardContentBinding="{x:Null}" Header="Nro tarjeta" />
+                                
+                              
+                                <DataGridTextColumn Binding="{Binding IDN_SELLPRICE, StringFormat=\{0:C2\}}" ClipboardContentBinding="{x:Null}" Header="Monto" >
+                                    <DataGridTextColumn.ElementStyle>
+                                        <Style TargetType="{x:Type TextBlock}">
+                                            <Setter Property="TextAlignment" Value="Right"/>
+                                        </Style>
+                                    </DataGridTextColumn.ElementStyle>
+                                </DataGridTextColumn>
+                                <DataGridTemplateColumn Header="">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+                                                <Button x:Name="btneliminar" Style="{DynamicResource NoChromeButton}" Cursor="Hand" >
+                                                    <Button.ToolTip>
+                                                        <ToolTip>
+                                                            <StackPanel>
+                                                                <TextBlock FontWeight="Bold" TextAlignment="Left" ><Run Text="Eliminar Registro"/></TextBlock>
+                                                                <TextBlock><Run Text="Eliminar Registro."/></TextBlock>
+                                                                <TextBlock><Run Text="No lo presione hasta estar seguro de eliminar registro."/></TextBlock>
+                                                            </StackPanel>
+                                                        </ToolTip>
+                                                    </Button.ToolTip>
+                                                    <Image Source="/Integrado;component/Design/Images/bt_delete.png" Height="16" Width="16" VerticalAlignment="Bottom" Grid.RowSpan="2"/>
+                                                </Button>
+                                            </StackPanel>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </Grid>
+                </TabItem>
+            </TabControl>
+        </Grid>
+        <Border Height="160" Width="685" 
+                            HorizontalAlignment="Center" 
+                            BorderBrush="Black"                            
+                            BorderThickness="1"                            
+                            CornerRadius="2"                           
+                            Grid.Column="0" 
+                            Grid.Row="2"
+                            Margin="0,0,0,0">
+
+       
+
+        <Grid Grid.Row="2" Grid.Column="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="160"></ColumnDefinition>
+                <ColumnDefinition Width="240"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Grid Grid.Column="0" Grid.Row="0" Background="#FFE2E2B0"></Grid>
+            <Grid Grid.Column="1" Grid.Row="0" Background="#FFE2E2B0"></Grid>
+            <Button x:Name="btnaceptar" Grid.Column="0" Height="50" Width="120" Cursor="Hand" >
+                <Button.ToolTip>
+                    <ToolTip>
+                        <StackPanel>
+                                <TextBlock FontWeight="Bold" TextAlignment="Left" ><Run Text="Aceptar la venta"/></TextBlock>
+                            </StackPanel>
+                    </ToolTip>
+                </Button.ToolTip>
+                <Grid Width="140">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="7*" />
+                        <ColumnDefinition Width="80*" />
+                        
+                    </Grid.ColumnDefinitions>
+                    <Image Margin="-3,0,0,0" Source="/Integrado;component/Design/Images/bt_Save.png" Width="32" HorizontalAlignment="Left" Grid.ColumnSpan="2"/>
+                    <TextBlock Text="Aceptar" VerticalAlignment="Center" Foreground="Black"
+										Margin="-10,0,0,0" HorizontalAlignment="Center"   Grid.Column="1"/>
+                </Grid>
+            </Button>
+            <Button x:Name="btncancelar" Grid.Column="1" Margin="-50,0,0,0" Height="50" Width="120" Cursor="Hand" >
+                <Button.ToolTip>
+                    <ToolTip>
+                        <StackPanel>
+                                <TextBlock FontWeight="Bold" TextAlignment="Left" ><Run Text="Cancelar la operacion"/></TextBlock>
+                            </StackPanel>
+                    </ToolTip>
+                </Button.ToolTip>
+                <Grid Width="140">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="7*" />
+                        <ColumnDefinition Width="80*" />
+                        
+                    </Grid.ColumnDefinitions>
+                    <Image Margin="-3,0,0,0" Source="/Integrado;component/Design/Images/stop.ico" Width="32" HorizontalAlignment="Left" Grid.ColumnSpan="2"/>
+                    <TextBlock Text="Cancelar" VerticalAlignment="Center" Foreground="Black"
+										Margin="0,0,0,0" HorizontalAlignment="Center"   Grid.Column="1"/>
+                </Grid>
+            </Button>
+            
+            <Grid Grid.Column="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="180"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
+                </Grid.RowDefinitions>
+
+                <Grid Grid.Column="0" Grid.Row="0" Background="#FFE2E2B0"></Grid>
+                <Grid Grid.Column="0" Grid.Row="1" Background="#FFE2E2B0"></Grid>
+                <Grid Grid.Column="0" Grid.Row="2" Background="#FFE2E2B0"></Grid>
+                <Grid Grid.Column="0" Grid.Row="3" Background="#FFE2E2B0"></Grid>
+                <Grid Grid.Column="0" Grid.Row="4" Background="#FFE2E2B0"></Grid>
+                
+                <Grid Grid.Column="1" Grid.Row="0" Background="#FFE8CBD3"></Grid>
+                <Grid Grid.Column="1" Grid.Row="1" Background="#FFE8CBD3"></Grid>
+                <Grid Grid.Column="1" Grid.Row="2" Background="#FFE8CBD3"></Grid>
+                <Grid Grid.Column="1" Grid.Row="3" Background="#FFE8CBD3"></Grid>
+                <Grid Grid.Column="1" Grid.Row="4" Background="#FFE8CBD3"></Grid>
+                <Label Content="Total a Pagar:" Height="32" FontSize="16" FontWeight="Bold"  VerticalAlignment="Center" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Right"  />
+                <Label Content="Efectivo:" Height="32" FontSize="16" FontWeight="Bold"  VerticalAlignment="Center" Grid.Row="1" Grid.Column="0" HorizontalAlignment="Right"  />
+                <Label Content="Tarjeta:" Height="32" FontSize="16" FontWeight="Bold"  VerticalAlignment="Center" Grid.Row="2" Grid.Column="0" HorizontalAlignment="Right"  />
+                <Label Content="Vuelto:" Height="32" FontSize="16" FontWeight="Bold"  VerticalAlignment="Center" Grid.Row="3" Grid.Column="0" HorizontalAlignment="Right"  />
+                <Label Content="Saldo:" Height="32" FontSize="16" FontWeight="Bold"  VerticalAlignment="Center" Grid.Row="4" Grid.Column="0" HorizontalAlignment="Right"  />
+                
+                <Label Name="lbltpagar" Content="S/.0.00" Height="32" FontSize="16" FontWeight="Bold"  VerticalAlignment="Center" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Right"  />
+                <Label Name="lblefectivo" Content="S/.0.00" Height="32" FontSize="16" FontWeight="Bold"  VerticalAlignment="Center" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Right"  />
+                <Label Name="lbltarjeta" Content="S/.0.00" Height="32" FontSize="16" FontWeight="Bold"  VerticalAlignment="Center" Grid.Row="2" Grid.Column="1" HorizontalAlignment="Right"  />
+                <Label Name="lblvuelto" Content="S/.0.00" Height="32" FontSize="16" FontWeight="Bold"  VerticalAlignment="Center" Grid.Row="3" Grid.Column="1" HorizontalAlignment="Right"  />
+                <Label Name="lblsaldo" Content="S/.0.00" Height="32" FontSize="16" FontWeight="Bold"  VerticalAlignment="Center" Grid.Row="4" Grid.Column="1" HorizontalAlignment="Right"  />
+            </Grid>
+        </Grid>
+        </Border>
+    </Grid>
+</Controls:MetroWindow>

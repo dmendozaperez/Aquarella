@@ -1,0 +1,177 @@
+.texto {
+	FONT-SIZE: 10px; COLOR: #294969; FONT-FAMILY: Verdana, Arial, Helvetica, sans-serif
+}
+.textocorrido {
+	FONT-WEIGHT: normal; FONT-SIZE: 11px; COLOR: #000000; FONT-FAMILY: Verdana, Arial, Helvetica, sans-serif
+}
+.textoNormal {
+	FONT-SIZE: 11px; COLOR: #000000; FONT-FAMILY: Verdana, Arial, Helvetica, sans-serif
+}
+.tablagris {
+	BORDER-RIGHT: #cccccc 1px solid; BORDER-TOP: #cccccc 1px solid; BORDER-LEFT: #cccccc 1px solid; BORDER-BOTTOM: #cccccc 1px solid
+}
+.naranja {
+	FONT-WEIGHT: normal; FONT-SIZE: 11px; COLOR: #cc6600; FONT-FAMILY: Verdana, Arial, Helvetica, sans-serif
+}
+.textogris {
+	FONT-SIZE: 11px; COLOR: #666666; FONT-FAMILY: Verdana, Arial, Helvetica, sans-serif
+}
+.empresa {
+	FONT-WEIGHT: normal; FONT-SIZE: 18px; COLOR: #ffffff; FONT-STYLE: normal; FONT-FAMILY: Arial, Helvetica, sans-serif
+}
+.pequenogris {
+	FONT-SIZE: 10px; COLOR: #999999; FONT-FAMILY: Verdana, Arial, Helvetica, sans-serif
+}
+.titulos {
+	FONT-WEIGHT: normal; FONT-SIZE: 11px; COLOR: #37638e; FONT-FAMILY: Verdana, Arial, Helvetica, sans-serif
+}
+.titulosencabezado {
+	FONT-WEIGHT: normal; FONT-SIZE: 14px; COLOR: #37638e; FONT-FAMILY: Verdana, Arial, Helvetica, sans-serif
+}
+.panel_login
+{
+	background: none repeat scroll 0 0 #FFFFFF;
+    border: 1px solid #E5E5E5;
+    border-radius: 11px 11px 11px 11px;
+    box-shadow: 0 4px 18px #C8C8C8;
+    font-weight: normal;
+    margin-left: 8px;
+    padding: 25px 16px 40px;
+    width:60%;
+    vertical-align:middle;
+	}
+
+.campo_login
+{	
+	background: none repeat scroll 0 0 #FBFBFB;
+    border: 1px solid #E5E5E5;
+    font-size: 24px;
+    margin-bottom: 16px;
+    margin-right: 6px;
+    margin-top: 2px;
+    padding: 3px;
+    width: 97%;
+    color: #555555;
+    text-transform:uppercase;
+	}
+.campo1 {
+	border: 1px solid #9ebbd8;
+	FONT-SIZE: 11px; COLOR: #666666; FONT-FAMILY: Verdana, Arial, Helvetica, sans-serif; text-transform:uppercase
+}
+.pequenoazul {
+	FONT-SIZE: 10px; COLOR: #37638e; FONT-FAMILY: Verdana, Arial, Helvetica, sans-serif
+}
+.subtitulos {
+	FONT-SIZE: 11px; COLOR: #6291bf; FONT-FAMILY: Verdana, Arial, Helvetica, sans-serif
+}
+.titulonaranja {
+	FONT-SIZE: 11px; COLOR: #cc6600; FONT-FAMILY: Verdana, Arial, Helvetica, sans-serif
+}
+.titulosencabezadonaranja {
+	FONT-SIZE: 14px; COLOR: #cc6600; FONT-FAMILY: Verdana, Arial, Helvetica, sans-serif
+}
+.combo1 {
+	BORDER-RIGHT: #9ebbd8 1px solid; BORDER-TOP: #9ebbd8 1px solid; FONT-SIZE: 11px; BORDER-LEFT: #9ebbd8 1px solid; WIDTH: 60px; COLOR: #666666; BORDER-BOTTOM: #9ebbd8 1px solid; FONT-FAMILY: Verdana, Arial, Helvetica, sans-serif
+}
+.error {
+	FONT-WEIGHT: normal; FONT-SIZE: 9px; COLOR: #cc6600; FONT-FAMILY: Verdana, Arial, Helvetica, sans-serif
+}
+.mensajes {
+	FONT-WEIGHT: normal; FONT-SIZE: 12px; COLOR: #cc6600; FONT-FAMILY: Verdana, Arial, Helvetica, sans-serif
+}
+.campo2 {
+	BORDER-RIGHT: #9ebbd8 1px solid; BORDER-TOP: #9ebbd8 1px solid; FONT-SIZE: 11px; BORDER-LEFT: #9ebbd8 1px solid; WIDTH: 480px; COLOR: #666666; BORDER-BOTTOM: #9ebbd8 1px solid; FONT-FAMILY: Verdana, Arial, Helvetica, sans-serif; HEIGHT: 100px
+}
+.campo3 {
+	BORDER-RIGHT: #9ebbd8 1px solid; BORDER-TOP: #9ebbd8 1px solid; FONT-SIZE: 11px; BORDER-LEFT: #9ebbd8 1px solid; WIDTH: 270px; COLOR: #666666; BORDER-BOTTOM: #9ebbd8 1px solid; FONT-FAMILY: Verdana, Arial, Helvetica, sans-serif
+}
+.combo2 {
+	BORDER-RIGHT: #9ebbd8 1px solid; BORDER-TOP: #9ebbd8 1px solid; FONT-SIZE: 11px; BORDER-LEFT: #9ebbd8 1px solid; WIDTH: 100px; COLOR: #666666; BORDER-BOTTOM: #9ebbd8 1px solid; FONT-FAMILY: Verdana, Arial, Helvetica, sans-serif
+}
+.impnombre {
+	FONT-WEIGHT: bold; FONT-SIZE: 17px; COLOR: #000000; FONT-FAMILY: Arial, Helvetica, sans-serif
+}
+.impdatos {
+	FONT-SIZE: 14px; COLOR: #000000; FONT-FAMILY: Arial, Helvetica, sans-serif
+}
+.textogris A:link {
+	FONT-WEIGHT: normal; FONT-SIZE: 11px; COLOR: #666666; FONT-FAMILY: Verdana, Arial, Helvetica, sans-serif
+}
+.textogris A:hover {
+	FONT-WEIGHT: normal; FONT-SIZE: 11px; COLOR: #000000; FONT-FAMILY: Verdana, Arial, Helvetica, sans-serif
+}
+.textogris A.visited {
+	FONT-WEIGHT: normal; FONT-SIZE: 11px; COLOR: #6699cc; FONT-FAMILY: Verdana, Arial, Helvetica, sans-serif; TEXT-DECORATION: none
+}
+.combo3 {
+	BORDER-RIGHT: #cccccc 1px solid; BORDER-TOP: #cccccc 1px solid; FONT-SIZE: 11px; BORDER-LEFT: #cccccc 1px solid; WIDTH: 190px; COLOR: #666666; BORDER-BOTTOM: #cccccc 1px solid; FONT-FAMILY: Verdana, Arial, Helvetica, sans-serif
+}
+.combo4 {
+	BORDER-RIGHT: #cccccc 1px solid; BORDER-TOP: #cccccc 1px solid; FONT-SIZE: 11px; BORDER-LEFT: #cccccc 1px solid; WIDTH: 250px; COLOR: #666666; BORDER-BOTTOM: #cccccc 1px solid; FONT-FAMILY: Verdana, Arial, Helvetica, sans-serif
+}
+.nombre2 {
+	FONT-WEIGHT: normal; FONT-SIZE: 20px; FONT-FAMILY: Arial, Helvetica, sans-serif
+}
+.impdatos2 {
+	FONT-WEIGHT: normal; FONT-SIZE: 16px; COLOR: #666666; FONT-FAMILY: Arial, Helvetica, sans-serif
+}
+.texto10 {
+	FONT-WEIGHT: normal; COLOR: #333333; FONT-FAMILY: Verdana, Arial, Helvetica, sans-serif
+}
+.gris14 {
+	FONT-WEIGHT: normal; FONT-SIZE: 14px; COLOR: #333333; FONT-FAMILY: Arial, Helvetica, sans-serif
+}
+.gris11 {
+	FONT-SIZE: 11px; COLOR: #666666; FONT-FAMILY: Verdana, Arial, Helvetica, sans-serif
+}
+.nombre3 {
+	FONT-WEIGHT: normal; FONT-SIZE: 24px; COLOR: #000000; FONT-FAMILY: Verdana, Arial, Helvetica, sans-serif
+}
+.gris12 {
+	FONT-SIZE: 13px; COLOR: #333333; FONT-FAMILY: Arial, Helvetica, sans-serif
+}
+.bodyBac
+{
+	background: url('images/MasterDesign/backG_.png') left top repeat-x #FFF;
+}
+/* AutoComplete item */
+
+.autocomplete_listItem 
+{
+	background-color : window;
+	color : windowtext;
+	padding : 1px;
+	text-align : left;	
+	font-family:Verdana, Arial, Helvetica, sans-serif;
+	font-size:smaller;
+}
+
+/*AutoComplete flyout */
+
+.autocomplete_completionListElement 
+{  
+	visibility : hidden;
+	margin : 1px!important;
+	background-color : inherit;
+	color : windowtext;
+	border : buttonshadow;
+	border-width : 1px;
+	border-style : solid;
+	cursor : 'default';
+	overflow : auto;
+	height : 150px;
+    text-align : left; 
+    list-style-type : none;
+    padding-left:0;
+    margin-left:0;        
+}
+/* AutoComplete highlighted item */
+
+.autocomplete_highlightedListItem
+{
+	background-color: #ffff99;
+	color: black;
+	padding: 1px;
+	font-family:Verdana, Arial, Helvetica, sans-serif;
+	font-size:smaller;
+}

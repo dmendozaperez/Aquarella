@@ -1,0 +1,65 @@
+﻿<Controls:MetroWindow
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:dxga="http://schemas.devexpress.com/winfx/2008/xaml/gauges"
+        xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"                      
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Integrado.Sistemas.Logistica"
+        xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core" x:Class="Integrado.Sistemas.Logistica.DuplicaGuia"
+        ResizeMode="CanMinimize"
+        Icon="/Integrado;component/Design/Icono/sistema_ico.ico"                      
+        Title="[Duplicado de Guia de Remision]" EnableDWMDropShadow="True" 
+        WindowStartupLocation="CenterScreen"  Height="300" Width="400" Loaded="MetroWindow_Loaded">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="150"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <Label Content="Duplicado de Guia de Remision" HorizontalAlignment="Center" Foreground="#FF5252D8"  VerticalAlignment="Center" FontSize="18" FontWeight="Bold" Grid.Row="0" Grid.Column="0"/>
+
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Label Content="Numero de Comprobante" Margin="0,40,0,0" Grid.Column="0" FontSize="12" HorizontalAlignment="Center"/>
+            <TextBox x:Name="txtnumero" CharacterCasing="Upper" Grid.Column="0" FontSize="12" Height="23" Width="140" Margin="5,10,0,0" HorizontalAlignment="Center"/>
+
+            <Button x:Name="btnimprimir" Grid.Column="1" Height="100"  Width="120"  Cursor="Hand" Background="White" BorderBrush="White" Click="btnimprimir_Click">
+                <Button.ToolTip>
+                    <ToolTip>
+                        <StackPanel>
+                            <TextBlock FontWeight="Bold" TextAlignment="Left" ><Run Text="Duplicado de Guia de Remision"/></TextBlock>
+                            <TextBlock><Run Text="Imprimir Guia de Remision."/></TextBlock>
+                            <TextBlock><Run Text="No lo presione hasta estar seguro."/></TextBlock>
+                        </StackPanel>
+                    </ToolTip>
+                </Button.ToolTip>
+                <Button.Effect>
+                    <dx:LineRevealTransitionEffect/>
+                </Button.Effect>
+                <Grid Width="110">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Image Grid.Column="0"  Source="/Integrado;component/Design/Images/impresora.png"/>
+                </Grid>
+            </Button>
+            <Label Content="Imprimir" Grid.Column="1" FontWeight="Bold" FontSize="13" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,50,0,0" ></Label>
+        </Grid>
+        <Grid Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Label Name="lblmensaje" Content="" VerticalAlignment="Center" Foreground="Maroon" FontSize="12"></Label>
+        </Grid>
+        <dxga:LinearGaugeControl Grid.Row="0" Background="#FFECEAE2"  HorizontalAlignment="Left"  Grid.Column="0"  VerticalAlignment="Top" Height="4" Margin="0,53,0,0" Width="394"/>
+        <dxga:LinearGaugeControl Grid.Row="2" Background="#FFECEAE2"  HorizontalAlignment="Left"  Grid.Column="0"  VerticalAlignment="Top" Height="4" Margin="0,5,0,0" Width="394"/>
+    </Grid>
+</Controls:MetroWindow>

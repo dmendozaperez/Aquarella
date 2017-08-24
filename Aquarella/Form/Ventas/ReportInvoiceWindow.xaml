@@ -1,0 +1,12 @@
+﻿<Window x:Class="Aquarella.Form.Ventas.ReportInvoiceWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:CR="clr-namespace:CrystalDecisions.Windows.Forms;assembly=CrystalDecisions.Windows.Forms"
+         Title="Aquarella Desktop Aplication > Reporte de facturación" 
+         Height="400" Width="600" Loaded="Window_Loaded" Icon="/Aquarella Desktop - Bata;component/bata.ico">
+    <Grid>
+        <WindowsFormsHost x:Name="wfHost">
+            <CR:CrystalReportViewer x:Name="crReportInvoiceGuia"></CR:CrystalReportViewer>
+        </WindowsFormsHost>
+    </Grid>
+</Window>

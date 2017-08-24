@@ -1,0 +1,55 @@
+﻿@using www.aqmvc.com.pe.Data.Control
+@model IEnumerable<UsuarioModel>
+@{    
+    AjaxOptions options = new AjaxOptions
+    {
+        HttpMethod = "POST",
+        InsertionMode = InsertionMode.Replace,
+        UpdateTargetId = "lista",
+        OnSuccess = "removeLoading();",
+        OnBegin = "showLoading()",
+
+    };
+}
+
+<link rel="stylesheet" href="~/plugins/datatables/dataTables.bootstrap.css">
+}
+@section Scripts
+{
+<script src="~/plugins/datatables/jquery.dataTables.min.js"></script>
+}
+    <!-- Main content -->
+    <section class="content">
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="box">
+                    <div class="box-header">
+                        <h3 class="box-title">Actualizar Contraseña de usuario</h3>
+                    </div>
+                    @using (Ajax.BeginForm("ListaUsuario", options))
+                    {                    
+                    <div class="box-header">
+                        <div class="col-md-4">
+                            <div class="input-group input-group">
+                                <input type="text" maxlength="11" id="buscarnom" name="buscarnom" class="form-control" autofocus placeholder="Consultar por primer nombre" @*oninvalid="InvalidMsg(this);" required="required"*@>
+                                <span class="input-group-btn">
+                                    <button type="submit" id="btnaceptar" name="btnaceptar" class="btn btn-google btn-flat">Buscar</button>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    }
+                        <!-- /.box-header -->
+                        <div class="box-body" id="lista">
+                            @{Html.RenderPartial("ListaUsuario", Model); }    
+                        </div>
+                        <!-- /.box-body -->
+                    </div>
+                <!-- /.box -->
+               
+                <!-- /.box -->
+            </div>
+            <!-- /.col -->
+        </div>
+        <!-- /.row -->
+    </section>

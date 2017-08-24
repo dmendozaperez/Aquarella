@@ -1,0 +1,306 @@
+﻿<Window x:Class="Aquarella.Form.Ventas.PanelLiquidationForInvoiceWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:wpfToolKit="http://schemas.microsoft.com/wpf/2008/toolkit"
+        xmlns:winForms="clr-namespace:System.Windows.Forms;assembly=System.Windows.Forms"
+        WindowState="Maximized" WindowStartupLocation="CenterScreen"
+        Title="Aquarella Desktop Aplication > Panel de pedidos en espera por facturación"
+         Loaded="Window_Loaded" Icon="/Aquarella Desktop - Bata;component/bata.ico">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="60*" />
+            <RowDefinition Height="240*" />
+            <RowDefinition Height="100*" />
+        </Grid.RowDefinitions>
+        <!-- CABECERA DE LA VENTANA -->
+        <Grid Grid.Row="0">
+            <Grid x:Name="LayoutRoot" Style="{StaticResource LayoutRootGridStyle}" Grid.RowSpan="4" Grid.ColumnSpan="2">
+                <Grid Style="{StaticResource NavigationOuterGridStyle}" >
+                </Grid>
+                <Grid Style="{StaticResource NavigationOuterGridStyle}">
+                    <Grid x:Name="NavigationGrid" Style="{StaticResource NavigationGridStyle}" Height="62" VerticalAlignment="Top">
+                        <Border x:Name="BrandingBorder" Style="{StaticResource BrandingBorderStyle}">
+                            <StackPanel x:Name="BrandingStackPanel" Style="{StaticResource BrandingStackPanelStyle}">
+                                <!--<ContentControl Style="{StaticResource LogoIcon}" />
+                        <TextBlock x:Name="ApplicationNameTextBlock" Style="{StaticResource ApplicationNameStyle}" Text="Manisol S.A. Bata Colombia." />
+                        -->
+                            </StackPanel>
+                        </Border>
+                        <Border x:Name="LinksBorder" Style="{StaticResource LinksBorderStyle}">
+                            <StackPanel x:Name="LinksStackPanel" Style="{StaticResource LinksStackPanelStyle}">
+                                <Rectangle Style="{StaticResource DividerStyle}" />
+                                <Image Source="../../Design/Images/aq_lineal.jpg" Width="150" Margin="8,4,0,4"></Image>
+                                <!--<Button x:Name="btSync" Style="{StaticResource LinkStyle}" 
+                                        ToolTip="Sincronización de tablas locales con datos de la base de datos central." 
+                                        Content="- S y n c - " />-->
+                            </StackPanel>
+                        </Border>
+                        <Label FontFamily="Georgia" Foreground="WhiteSmoke" FontSize="39" Margin="3,2,0,4" HorizontalAlignment="Left" Width="282">{AQUARELLA}</Label>
+                        <Rectangle Height="0" VerticalAlignment="Bottom" Fill="WhiteSmoke" HorizontalAlignment="Left" Width="189" Margin="130,0,0,26" />
+                        <Label FontFamily="Georgia" Foreground="WhiteSmoke" FontSize="10" Width="149" 
+                           HorizontalAlignment="Left" Margin="300,22,0,17">Aquarella Desktop Aplication</Label>
+                    </Grid>
+                    <Border x:Name="bor" Style="{StaticResource BarBottonHeader}" Margin="0,63,0,0" Height="25"  VerticalAlignment="Top">
+                        <Grid>
+                            <StackPanel HorizontalAlignment="Left" Style="{StaticResource LoginPanelStyle}">
+                                <TextBlock Name="lblInfoUser" Style="{StaticResource SpacerStyle}"></TextBlock>
+                            </StackPanel>
+                            <StackPanel x:Name="LinksLogin" Style="{StaticResource LoginPanelStyle}">
+                                <TextBlock Style="{StaticResource SpacerStyle}"></TextBlock>
+                                <Button Style="{StaticResource LoginRegisterLinkStyle}" Name="btCloseSesion" 
+                                        Click="btCloseSesion_Click" Content="Cerrar Sesión"></Button>
+                                <Rectangle Style="{StaticResource DividerStyleSmoke}" />
+                                <TextBlock Style="{StaticResource SpacerStyle}"></TextBlock>
+                                <Button Name="btBackPanelLiq"  Click="btBackPanelLiq_Click"
+                                        Style="{StaticResource LoginRegisterLinkStyle}" Content="Inicio"></Button>
+                                <!-- Gears -->
+                                <Rectangle Style="{StaticResource DividerStyleSmoke}" />
+                                <TextBlock Style="{StaticResource SpacerStyle}"></TextBlock>
+                            </StackPanel>
+                        </Grid>
+                    </Border>
+                </Grid>
+            </Grid>
+        </Grid>
+
+        <!-- CUERPO DE LIQUIDACIONES EN ESPERA POR SER FACTURADAS -->
+        <Grid Grid.Row="1">
+            <!-- -->
+            <Grid HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,5,20,0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="30" />
+                    <ColumnDefinition Width="30" />
+                </Grid.ColumnDefinitions>
+                <!--
+                <MediaElement Name="meLoader" ScrubbingEnabled="True"  Source="../../Design/Images/ajax_loader.gif"
+                      LoadedBehavior="Play" Height="11" Width="16" UnloadedBehavior="Play"></MediaElement>
+                <Image x:Name="pbLoading"  Source="../../Design/Images/ajax_loader.gif">
+                    </Image>
+                <WindowsFormsHost x:Name="wfHost">
+                        <winForms:PictureBox Visible="False" WaitOnLoad="True" x:Name="pbLoading" Height="11" Width="16" 
+                                         ImageLocation="../../Design/Images/ajax_loader.gif">
+                        </winForms:PictureBox>
+                    </WindowsFormsHost>
+                <Image x:Name="imgLoader" Width="16" Height="16" Source="../../Design/Images/downloader.png">
+                    </Image>
+                -->
+                <Grid Grid.Column="0" VerticalAlignment="Top" HorizontalAlignment="Left" >
+                    <Label Margin="70,0,0,0" HorizontalAlignment="Left" Width="181" VerticalAlignment="Top">Filtro de pedido a facturar :</Label>
+                    <TextBox Margin="250,0,0,0" Name="txtFilterOrders" HorizontalAlignment="Left" Width="279" TextChanged="txtFilterOrders_TextChanged"  ToolTip="Número del pedido" VerticalAlignment="Top" />
+                </Grid>
+                <Grid Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Left">
+                    <MediaElement Name="meLoader" ScrubbingEnabled="True"  Source="../../Design/Images/ajax_loader.gif"
+                      LoadedBehavior="Play" Height="11" Width="16" UnloadedBehavior="Play"></MediaElement>
+                </Grid>
+                <Grid Grid.Column="2" VerticalAlignment="Top">
+                    <Rectangle Style="{StaticResource DividerStyleDark}" HorizontalAlignment="Left" />
+                    <Button  Name="btRefresh" Click="btRefresh_Click" Background="Transparent" Foreground="Transparent" HorizontalAlignment="Right" Cursor="Hand" 
+                             BorderBrush="Transparent" BorderThickness="0">
+                        <Image Source="../../Design/Images/bt_refresh.png"
+                                                       Height="16" Width="16"></Image>
+                        <Button.ToolTip>
+                            <ToolTip FlowDirection="RightToLeft">
+                                <StackPanel>
+                                    <TextBlock FontWeight="Bold" TextAlignment="Right">Botón de refrescado del panel de liquidaciones</TextBlock>
+                                    <TextBlock TextAlignment="Right">Presione el boton para refrescar el panel</TextBlock>
+                                    <TextBlock TextAlignment="Right">de liquidaciones o pedidos en espera de facturación</TextBlock>
+                                </StackPanel>
+                            </ToolTip>
+                        </Button.ToolTip>
+                    </Button>
+                </Grid>
+            </Grid>
+            <TabControl Margin="10,10,10,0">
+                <TabItem Header=" > Grid Liquidaciones para facturar">
+                    <wpfToolKit:DataGrid Name="dgOrdersForInv" AlternatingRowBackground="#E0FFC2" 
+                                         AutoGenerateColumns="False" CanUserAddRows="False" CanUserDeleteRows="False" VerticalScrollBarVisibility="Visible">
+                        <wpfToolKit:DataGrid.Columns>
+                            <wpfToolKit:DataGridTextColumn Header="" Width="10" Binding="{Binding key}" IsReadOnly="True" />
+                            <wpfToolKit:DataGridTextColumn Block.TextAlignment="Center" CellStyle="{StaticResource CenterAlignedCellStyleY}" Header="Cedi" Visibility="Hidden"
+                                                           Width="40" Binding="{Binding _lhv_ware}" IsReadOnly="True" />
+                            <wpfToolKit:DataGridTextColumn TextBlock.TextAlignment="Center" Header="Area ó Zona" Width="Auto" 
+                                                           Binding="{Binding _lhv_area_desc}" CellStyle="{StaticResource LeftAlignedCellStyleB}" IsReadOnly="True" />
+                            <wpfToolKit:DataGridTextColumn Header="Liquidación" Width="Auto" 
+                                                           Binding="{Binding _ldv_liquidation_no}" CellStyle="{StaticResource CenterAlignedCellStyleR}" IsReadOnly="True" />
+                            <wpfToolKit:DataGridTextColumn Header="Fecha" Width="Auto" 
+                                                           Binding="{Binding _lhd_date,StringFormat={}\{0:dd/MM/yyyy \}}" CellStyle="{StaticResource CenterAlignedCellStyle}" IsReadOnly="True" />
+                            <wpfToolKit:DataGridTextColumn Header="Estado" Width="Auto" 
+                                                           Binding="{Binding _lhv_status}" CellStyle="{StaticResource CenterAlignedCellStyle}" IsReadOnly="True" />
+
+                            <wpfToolKit:DataGridTextColumn Header="Uds.Liq"  CellStyle="{StaticResource CenterAlignedCellStyle}" 
+                                                           HeaderStyle="{StaticResource CenterAlignedColumnHeaderStyle}"  Width="Auto" 
+                                                           Binding="{Binding _qtystotals}" TextBlock.Foreground="Maroon" 
+                                                           IsReadOnly="True" />
+                            <wpfToolKit:DataGridTextColumn Header="Uds.Emp."  CellStyle="{StaticResource CenterAlignedCellStyleY}" 
+                                                           HeaderStyle="{StaticResource CenterAlignedColumnHeaderStyle}"  Width="Auto" 
+                                                           Binding="{Binding _pdn_qty}" TextBlock.Foreground="Salmon" 
+                                                           IsReadOnly="True" />
+
+                            <wpfToolKit:DataGridTextColumn Header="Cliente" Width="Auto" CellStyle="{StaticResource LeftAlignedCellStyle}"
+                                                           Binding="{Binding _lhn_customer}" IsReadOnly="True" />
+                            <wpfToolKit:DataGridTextColumn Header="Nombre" Width="Auto" CellStyle="{StaticResource LeftAlignedCellStyle}" 
+                                                           Binding="{Binding _lhv_customer_name}" IsReadOnly="True" />
+
+
+                            <wpfToolKit:DataGridTextColumn Header="Ubicación"  Width="Auto" TextBlock.TextAlignment="Center" CellStyle="{StaticResource LeftAlignedCellStyle}"
+                                                           Binding="{Binding _lhv_customer_ubication}" IsReadOnly="True" />
+
+                            <wpfToolKit:DataGridTextColumn Header="Flete"  Visibility="Hidden"                                                           
+                             Width="Auto" TextBlock.Foreground="Tomato"  Binding="{Binding _lhv_trans_type}" IsReadOnly="True" CellStyle="{StaticResource LeftAlignedCellStyle}" />
+
+                            <wpfToolKit:DataGridTextColumn Header="Guia" Width="Auto" Binding="{Binding _lhv_guide_no}" 
+                                                           TextBlock.Foreground="Maroon" IsReadOnly="True" 
+                                                           CellStyle="{StaticResource LeftAlignedCellStyle}" />
+                            <wpfToolKit:DataGridTextColumn Header="Transportadora" 
+                                                           Width="Auto" Binding="{Binding _lhv_transporter}" IsReadOnly="True" 
+                                                           TextBlock.Foreground="Teal" CellStyle="{StaticResource LeftAlignedCellStyle}" />
+                            <!-- BOTON DE CONFIGURACION DE GUIA -->
+                            <wpfToolKit:DataGridTemplateColumn>
+                                <wpfToolKit:DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <StackPanel Background="#EBFAEB" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                            <Button  Name="btConfigGuide" Click="btConfigGuide_Click" Cursor="Hand" 
+                                                        Background="Transparent" Foreground="Transparent" 
+                                                        BorderBrush="Transparent" BorderThickness="0"
+                                                    CommandParameter="{Binding Path= _ldv_liquidation_no}">
+                                                <Image Source="../../Design/Images/bt_destiny.png"
+                                                       Height="16" Width="16" 
+                                                       VerticalAlignment="Bottom"
+                                                       Grid.RowSpan="2" />
+                                                <Button.ToolTip>
+                                                    <ToolTip FlowDirection="RightToLeft">
+                                                        <StackPanel>
+                                                            <TextBlock FontWeight="Bold" TextAlignment="Right">Configuración de guia y transportadora</TextBlock>
+                                                            <TextBlock TextAlignment="Right">Configure el número de guia y la transportadora</TextBlock>
+                                                        </StackPanel>
+                                                    </ToolTip>
+                                                </Button.ToolTip>
+                                            </Button>
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </wpfToolKit:DataGridTemplateColumn.CellTemplate>
+                            </wpfToolKit:DataGridTemplateColumn>
+                            <!-- BOTON DE INICIACION DE EMPACADO Y POSTERIRO FACTURACION DE UN PEDIDO -->
+                            <wpfToolKit:DataGridTemplateColumn>
+                                <wpfToolKit:DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <StackPanel Background="#E8FFA4" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                            <Button  Name="btPackOrder" Click="btPackOrder_Click"
+                                                        Background="Transparent" Foreground="Transparent" 
+                                                        BorderBrush="Transparent" BorderThickness="0"
+                                                    CommandParameter="{Binding Path= _ldv_liquidation_no}">
+                                                <Image Source="../../Design/Images/bt_pack_order.png" Cursor="Hand"
+                                                       Height="16" Width="16" 
+                                                       VerticalAlignment="Bottom"
+                                                       Grid.RowSpan="2" />
+                                                <Button.ToolTip>
+                                                    <ToolTip FlowDirection="RightToLeft">
+                                                        <StackPanel>
+                                                            <TextBlock FontWeight="Bold" TextAlignment="Right">Botón de iniciación de empacado</TextBlock>
+                                                            <TextBlock TextAlignment="Right">Presione el boton asociado a la liquidación sobre</TextBlock>
+                                                            <TextBlock TextAlignment="Right">la cual desea iniciar el proceso de empacado y facturado</TextBlock>
+                                                        </StackPanel>
+                                                    </ToolTip>
+                                                </Button.ToolTip>
+                                            </Button>
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </wpfToolKit:DataGridTemplateColumn.CellTemplate>
+                            </wpfToolKit:DataGridTemplateColumn>
+                        </wpfToolKit:DataGrid.Columns>
+                    </wpfToolKit:DataGrid>
+                </TabItem>
+            </TabControl>
+        </Grid>
+
+        <!-- GRID DE TOTALIZADOS -->
+        <Grid Margin="18,0,16,0" Grid.Row="3" HorizontalAlignment="Right">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" MinWidth="111" />
+                <ColumnDefinition Width="Auto" MinWidth="370" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="32" />
+                <RowDefinition Height="Auto" MinHeight="9" />
+                <RowDefinition Height="32" />
+                <RowDefinition Height="Auto" MinHeight="9" />
+                <RowDefinition Height="32" />
+                <RowDefinition Height="Auto" MinHeight="9" />
+                <RowDefinition Height="32" />
+                <RowDefinition Height="13" />
+            </Grid.RowDefinitions>
+
+            <Grid Grid.ColumnSpan="2" Grid.Row="0" ShowGridLines="True">
+                <Label Grid.Row="0" FontSize="18" HorizontalAlignment="Left" Width="319" VerticalAlignment="Top">Número de pedidos :</Label>
+                <TextBlock Name="lblTotalLiq" FontSize="20" TextAlignment="Right" Foreground="Maroon" 
+                       HorizontalAlignment="Right" Width="89" VerticalAlignment="Center">0
+                    <TextBlock.ToolTip>
+                        <ToolTip>
+                            <StackPanel>
+                                <TextBlock FontWeight="Bold" TextAlignment="Left">Número total de pedidos</TextBlock>
+                                <TextBlock TextAlignment="Left">Número total de pedidos por empacar</TextBlock>
+                                <TextBlock TextAlignment="Left">y despachar.</TextBlock>
+                            </StackPanel>
+                        </ToolTip>
+                    </TextBlock.ToolTip>
+            </TextBlock>
+            </Grid>
+
+            <Rectangle Grid.ColumnSpan="2" Grid.Row="1" Style="{StaticResource DividerStyleBlack}" 
+                           HorizontalAlignment="Right" Width="490" Height="1" VerticalAlignment="Center" />
+
+            <Grid Grid.ColumnSpan="2" Grid.Row="2">
+                <Label Grid.Row="0" FontSize="18" HorizontalAlignment="Left" Width="319" VerticalAlignment="Top">Cantidades Totales :</Label>
+                <TextBlock Name="lblTotalQtys" FontSize="20" TextAlignment="Right" Foreground="Maroon" 
+                       HorizontalAlignment="Right" Width="89" VerticalAlignment="Center">0
+                    <TextBlock.ToolTip>
+                        <ToolTip>
+                            <StackPanel>
+                                <TextBlock FontWeight="Bold" TextAlignment="Left">Unidades totales</TextBlock>
+                                <TextBlock TextAlignment="Left">Número total de unidades por empacar y despachar.</TextBlock>
+                            </StackPanel>
+                        </ToolTip>
+                    </TextBlock.ToolTip>
+            </TextBlock>
+            </Grid>
+
+            <Rectangle Grid.ColumnSpan="2" Grid.Row="3" Style="{StaticResource DividerStyleBlack}" 
+                           HorizontalAlignment="Right" Width="490" Height="1" VerticalAlignment="Center" />
+
+            <Grid Grid.ColumnSpan="2" Grid.Row="4">
+                <Label Grid.Row="0" FontSize="18" HorizontalAlignment="Left" Width="319" VerticalAlignment="Top">Cantidades totales empacadas :</Label>
+                <TextBlock Name="lblTotalQtysPack" FontSize="20" TextAlignment="Right" Foreground="Maroon" 
+                       HorizontalAlignment="Right" Width="89" VerticalAlignment="Center">0
+                    <TextBlock.ToolTip>
+                        <ToolTip>
+                            <StackPanel>
+                                <TextBlock FontWeight="Bold" TextAlignment="Left">Unidades totales empacadas</TextBlock>
+                                <TextBlock TextAlignment="Left">Número total de unidades empacadas.</TextBlock>
+                            </StackPanel>
+                        </ToolTip>
+                    </TextBlock.ToolTip>
+            </TextBlock>
+            </Grid>
+
+            <Rectangle Grid.ColumnSpan="2" Grid.Row="5" Style="{StaticResource DividerStyleBlack}" 
+                           HorizontalAlignment="Right" Width="490" Height="1" VerticalAlignment="Center" />
+
+            <Grid Grid.ColumnSpan="2" Grid.Row="6">
+                <Label Grid.Row="0" FontSize="18" HorizontalAlignment="Left" Width="319" VerticalAlignment="Top">Cantidades restantes por empacar :</Label>
+                <TextBlock Name="lblTotalQtysRest" FontSize="20" TextAlignment="Right" Foreground="Maroon" 
+                       HorizontalAlignment="Right" Width="89" VerticalAlignment="Center">0
+                    <TextBlock.ToolTip>
+                        <ToolTip>
+                            <StackPanel>
+                                <TextBlock FontWeight="Bold" TextAlignment="Left">Unidades restantes por empacar</TextBlock>
+                                <TextBlock TextAlignment="Left">Número total de unidades aún faltantes por empacar.</TextBlock>
+                            </StackPanel>
+                        </ToolTip>
+                    </TextBlock.ToolTip>
+            </TextBlock>
+            </Grid>
+
+        </Grid>
+    </Grid>
+</Window>

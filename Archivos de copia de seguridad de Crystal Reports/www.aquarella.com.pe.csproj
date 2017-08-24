@@ -1,0 +1,1778 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{2B38F876-AB5B-416B-AD82-23A0CA656AC2}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>www.aquarella.com.pe</RootNamespace>
+    <AssemblyName>www.aquarella.com.pe</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <UseIISExpress>true</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="AjaxControlToolkit">
+      <HintPath>..\..\..\..\PRODUCCION\www.aquarella.com.pe\www.aquarella.com.pe\bin\AjaxControlToolkit.dll</HintPath>
+    </Reference>
+    <Reference Include="AsyncCtpLibrary">
+      <HintPath>..\..\..\..\PRODUCCION\www.aquarella.com.pe\www.aquarella.com.pe\bin\AsyncCtpLibrary.dll</HintPath>
+    </Reference>
+    <Reference Include="Carvajal.FEPE.PreSC, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>C:\carvajal\dll_prueba\Carvajal.FEPE.PreSC.dll</HintPath>
+    </Reference>
+    <Reference Include="CrystalDecisions.CrystalReports.Engine, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.ReportSource, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.Shared, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.Web, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="Jayrock">
+      <HintPath>..\..\..\..\PRODUCCION\www.aquarella.com.pe\www.aquarella.com.pe\bin\Jayrock.dll</HintPath>
+    </Reference>
+    <Reference Include="Jayrock.Json">
+      <HintPath>..\..\..\..\PRODUCCION\www.aquarella.com.pe\www.aquarella.com.pe\bin\Jayrock.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.VisualBasic" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Web.DataVisualization" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="UBL20, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>C:\carvajal\dll_prueba\UBL20.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Aquarella\Admonred\AfiliadosClientes.aspx" />
+    <Content Include="Aquarella\Admonred\ConsultaPromotorXLider.aspx" />
+    <Content Include="Aquarella\Admonred\ConsultaRucDniReniec.aspx" />
+    <Content Include="Aquarella\Admonred\Contactenos.aspx" />
+    <Content Include="Aquarella\Admonred\contactenos_update.aspx" />
+    <Content Include="Aquarella\Admonred\ConvertAsesorLider.aspx" />
+    <Content Include="Aquarella\Admonred\ConvertLiderPromotor.aspx" />
+    <Content Include="Aquarella\Admonred\ConvertPromotorLider.aspx" />
+    <Content Include="Aquarella\Admonred\crearlider.aspx" />
+    <Content Include="Aquarella\Admonred\crearpromotor.aspx" />
+    <Content Include="Aquarella\Admonred\ListaLider.aspx" />
+    <Content Include="Aquarella\Admonred\Mapa.htm" />
+    <Content Include="Aquarella\Admonred\panelAdminLider.aspx" />
+    <Content Include="Aquarella\Admonred\panelAdminNetPromoters.aspx" />
+    <Content Include="Aquarella\Admonred\panelAdminPromoters.aspx" />
+    <Content Include="Aquarella\Admonred\Relacion_Usuario_Asesor.aspx" />
+    <Content Include="Aquarella\Admonred\updateProfileForm.aspx" />
+    <Content Include="Aquarella\Admonred\updateProfileFormLider.aspx" />
+    <Content Include="Aquarella\Admonred\Valida_dniruc_reniec.aspx" />
+    <Content Include="Aquarella\Control\Catalogo.aspx" />
+    <Content Include="Aquarella\Control\Catalogo_Config.aspx" />
+    <Content Include="Aquarella\Control\changePassword.aspx" />
+    <Content Include="Aquarella\Control\LoginForm.aspx" />
+    <Content Include="Aquarella\Control\panelApplication.aspx" />
+    <Content Include="Aquarella\Control\panelEditUsers.aspx" />
+    <Content Include="Aquarella\Control\panelFunctions.aspx" />
+    <Content Include="Aquarella\Control\panelFunc_App.aspx" />
+    <Content Include="Aquarella\Control\panelRoles.aspx" />
+    <Content Include="Aquarella\Control\panelRole_Func.aspx" />
+    <Content Include="Aquarella\Control\panelUser_Role.aspx" />
+    <Content Include="Aquarella\Control\panelUser_Role_Func.aspx" />
+    <Content Include="Aquarella\Control\updateusers.aspx" />
+    <Content Include="Aquarella\Financiera\Agrupar_Pedido_Pago.aspx" />
+    <Content Include="Aquarella\Financiera\clear.aspx" />
+    <Content Include="Aquarella\Financiera\Consulta_Archivo_Banco.aspx" />
+    <Content Include="Aquarella\Financiera\Consulta_OP_Automatic.aspx" />
+    <Content Include="Aquarella\Financiera\Cruce_Pago_Lider.aspx" />
+    <Content Include="Aquarella\Financiera\Genera_Saldos_nc.aspx" />
+    <Content Include="Aquarella\Financiera\InfoClienteFina.aspx" />
+    <Content Include="Aquarella\Financiera\Mov_Venta_Pagos.aspx" />
+    <Content Include="Aquarella\Financiera\PagoXPedido.aspx" />
+    <Content Include="Aquarella\Financiera\panelPaymentList.aspx" />
+    <Content Include="Aquarella\Financiera\payments.aspx" />
+    <Content Include="Aquarella\Financiera\paymentsUpd.aspx" />
+    <Content Include="Aquarella\Financiera\paymentsUpdFec.aspx" />
+    <Content Include="Aquarella\Financiera\reportventasemanafz.aspx" />
+    <Content Include="Aquarella\Financiera\Saldo_Cliente.aspx" />
+    <Content Include="Aquarella\Financiera\validateBank.aspx" />
+    <Content Include="Aquarella\Financiera\verifyCredito.aspx" />
+    <Content Include="Aquarella\Financiera\verifyPayment.aspx" />
+    <Content Include="Aquarella\Interface\adonisInterfaz.aspx" />
+    <Content Include="Aquarella\Interface\EnviaCorreoContactenos.aspx" />
+    <Content Include="Aquarella\Interface\expClienteBanco.aspx" />
+    <Content Include="Aquarella\Interface\expClientes.aspx" />
+    <Content Include="Aquarella\Interface\expVentasAQ.aspx" />
+    <Content Include="Aquarella\Interface\impMovimiento.aspx" />
+    <Content Include="Aquarella\Logistica\Anular_Pedido_Marcacion.aspx" />
+    <Content Include="Aquarella\Logistica\consultaHPedido.aspx" />
+    <Content Include="Aquarella\Logistica\Importar_Mov_Bata.aspx" />
+    <Content Include="Aquarella\Logistica\LiquidacionVsDespacho.aspx" />
+    <Content Include="Aquarella\Logistica\Manifiesto.aspx" />
+    <Content Include="Aquarella\Logistica\orderformaNC.aspx" />
+    <Content Include="Aquarella\Logistica\ordersForm.aspx" />
+    <Content Include="Aquarella\Logistica\ordervencido.aspx" />
+    <Content Include="Aquarella\Logistica\panelAsignPickingLiquidation.aspx" />
+    <Content Include="Aquarella\Logistica\panelFramesLiqReports.aspx" />
+    <Content Include="Aquarella\Logistica\panelFramesManReport.aspx" />
+    <Content Include="Aquarella\Logistica\panelLiqForInvoice.aspx" />
+    <Content Include="Aquarella\Logistica\panelLiqReports.aspx" />
+    <Content Include="Aquarella\Logistica\PanelManifiesto.aspx" />
+    <Content Include="Aquarella\Logistica\panelManReports.aspx" />
+    <Content Include="Aquarella\Logistica\panelOrdersCustomer.aspx" />
+    <Content Include="Aquarella\Logistica\panelSearchOrder.aspx" />
+    <Content Include="Aquarella\Logistica\panelSeparatedOrders.aspx" />
+    <Content Include="Aquarella\Logistica\Panel_Liquidacion_Lider.aspx" />
+    <Content Include="Aquarella\Logistica\RecalcularStock.aspx" />
+    <Content Include="Aquarella\Logistica\stockcategoria.aspx" />
+    <Content Include="Aquarella\Logistica\stockForm.aspx" />
+    <Content Include="Aquarella\Maestros\informationarticle.aspx" />
+    <Content Include="Aquarella\Maestros\Lista_PreciosAQ.aspx" />
+    <Content Include="Aquarella\Maestros\updateprecioarticle.aspx" />
+    <Content Include="Aquarella\Ventas\ComisionLiderDet.aspx" />
+    <Content Include="Aquarella\Ventas\ConsultaVentaTk.aspx" />
+    <Content Include="Aquarella\Ventas\descargar_pdf.aspx" />
+    <Content Include="Aquarella\Ventas\getventasemanal.aspx" />
+    <Content Include="Aquarella\Ventas\panelcomisionlider_xdoc.aspx" />
+    <Content Include="Aquarella\Ventas\panelInvReports.aspx" />
+    <Content Include="Aquarella\Ventas\panelReturns.aspx" />
+    <Content Include="Aquarella\Ventas\panelSalesByMajCat.aspx" />
+    <Content Include="Aquarella\Ventas\panelSalesHall.aspx" />
+    <Content Include="Aquarella\Ventas\panel_FE.aspx" />
+    <Content Include="Aquarella\Ventas\reportlider_afiliadoventa.aspx" />
+    <Content Include="Aquarella\Ventas\returnArticlesForm.aspx" />
+    <Content Include="Aquarella\Ventas\rptComisionLider.aspx" />
+    <Content Include="Aquarella\Ventas\rptcomisionlider_xdoc.aspx" />
+    <Content Include="Aquarella\Ventas\rptVentaLider.aspx" />
+    <Content Include="Aquarella\Ventas\VentaAnualEstadistica.aspx" />
+    <Content Include="Aquarella\Ventas\VentaLiderResumido.aspx" />
+    <Content Include="Aquarella\Ventas\ventaxzona.aspx" />
+    <Content Include="css\styles.css" />
+    <Content Include="Default.aspx" />
+    <Content Include="Design\images\ajax-loader.gif" />
+    <Content Include="Design\images\ajax_loader_face.gif" />
+    <Content Include="Design\images\ArticlesImages\image_broken.png" />
+    <Content Include="Design\images\back_contact.jpg" />
+    <Content Include="Design\images\Botones\8564884_1.JPG" />
+    <Content Include="Design\images\Botones\add.gif" />
+    <Content Include="Design\images\Botones\addUser.png" />
+    <Content Include="Design\images\Botones\back_contact.jpg" />
+    <Content Include="Design\images\Botones\bt_basket.png" />
+    <Content Include="Design\images\Botones\bt_login.gif" />
+    <Content Include="Design\images\Botones\bt_refresh.png" />
+    <Content Include="Design\images\Botones\bt_statistics.png" />
+    <Content Include="Design\images\Botones\bt_tasks.png" />
+    <Content Include="Design\images\Botones\b_add.gif" />
+    <Content Include="Design\images\Botones\b_all_in_list.gif" />
+    <Content Include="Design\images\Botones\b_aplicaciones_ico.gif" />
+    <Content Include="Design\images\Botones\b_app.png" />
+    <Content Include="Design\images\Botones\b_app2.png" />
+    <Content Include="Design\images\Botones\b_asignaciones_ico.gif" />
+    <Content Include="Design\images\Botones\b_award.png" />
+    <Content Include="Design\images\Botones\b_bars.png" />
+    <Content Include="Design\images\Botones\b_calendar_ico.gif" />
+    <Content Include="Design\images\Botones\b_comment.png" />
+    <Content Include="Design\images\Botones\b_comments.png" />
+    <Content Include="Design\images\Botones\b_date_add.png" />
+    <Content Include="Design\images\Botones\b_date_minus.png" />
+    <Content Include="Design\images\Botones\b_deshacer_ico.jpg" />
+    <Content Include="Design\images\Botones\b_doc.png" />
+    <Content Include="Design\images\Botones\b_edit_order.png" />
+    <Content Include="Design\images\Botones\b_eliminar_ico.gif" />
+    <Content Include="Design\images\Botones\b_functiones_ico.gif" />
+    <Content Include="Design\images\Botones\b_group.png" />
+    <Content Include="Design\images\Botones\b_info.png" />
+    <Content Include="Design\images\Botones\b_info_red.png" />
+    <Content Include="Design\images\Botones\b_mail.png" />
+    <Content Include="Design\images\Botones\b_modificar_ico.gif" />
+    <Content Include="Design\images\Botones\b_new_window.PNG" />
+    <Content Include="Design\images\Botones\b_obligatorio.gif" />
+    <Content Include="Design\images\Botones\b_phone.png" />
+    <Content Include="Design\images\Botones\b_refresh.png" />
+    <Content Include="Design\images\Botones\b_roles_ico.gif" />
+    <Content Include="Design\images\Botones\b_shoe.gif" />
+    <Content Include="Design\images\Botones\b_shoppingBasketminus.png" />
+    <Content Include="Design\images\Botones\b_tallas_ico.gif" />
+    <Content Include="Design\images\Botones\b_telephone.png" />
+    <Content Include="Design\images\Botones\b_tips.gif" />
+    <Content Include="Design\images\Botones\b_toExcel.png" />
+    <Content Include="Design\images\Botones\b_toExcel_ic.png" />
+    <Content Include="Design\images\Botones\chulo.png" />
+    <Content Include="Design\images\Botones\clock_red.png" />
+    <Content Include="Design\images\Botones\clock_start.png" />
+    <Content Include="Design\images\Botones\clock_stop.png" />
+    <Content Include="Design\images\Botones\close.png" />
+    <Content Include="Design\images\Botones\delete_off.png" />
+    <Content Include="Design\images\Botones\delete_Promoter.png" />
+    <Content Include="Design\images\Botones\editOrder.png" />
+    <Content Include="Design\images\Botones\editPensil.png" />
+    <Content Include="Design\images\Botones\exclamation.png" />
+    <Content Include="Design\images\Botones\house_go.png" />
+    <Content Include="Design\images\Botones\info.png" />
+    <Content Include="Design\images\Botones\Invoice_go.png" />
+    <Content Include="Design\images\Botones\linea_division.gif" />
+    <Content Include="Design\images\Botones\minus.png" />
+    <Content Include="Design\images\Botones\pdf-document-Manual.png" />
+    <Content Include="Design\images\Botones\photo.png" />
+    <Content Include="Design\images\Botones\pin.png" />
+    <Content Include="Design\images\Botones\pin_bata.png" />
+    <Content Include="Design\images\Botones\plus.png" />
+    <Content Include="Design\images\Botones\printer.png" />
+    <Content Include="Design\images\Botones\search.png" />
+    <Content Include="Design\images\Botones\success.gif" />
+    <Content Include="Design\images\Botones\transport_go.png" />
+    <Content Include="Design\images\bt_refresh.png" />
+    <Content Include="Design\images\b_active.png" />
+    <Content Include="Design\images\b_clock_play.png" />
+    <Content Include="Design\images\b_clock_stop.png" />
+    <Content Include="Design\images\b_inactive.png" />
+    <Content Include="Design\images\b_order.png" />
+    <Content Include="Design\images\b_print.png" />
+    <Content Include="Design\images\card_user.png" />
+    <Content Include="Design\images\cuadro.jpg" />
+    <Content Include="Design\images\favicon.ico" />
+    <Content Include="Design\images\indicator.gif" />
+    <Content Include="Design\images\loading.gif" />
+    <Content Include="Design\images\loading2.gif" />
+    <Content Include="Design\images\logo.png" />
+    <Content Include="Design\images\Logo_Contacto.png" />
+    <Content Include="Design\images\logo_copy.png" />
+    <Content Include="Design\images\lupa.jpg" />
+    <Content Include="Design\images\pdf-document-Manual.png" />
+    <Content Include="Design\images\pdf-viewer.png" />
+    <Content Include="Design\images\quantity-less.png" />
+    <Content Include="Design\images\quantity-more.png" />
+    <Content Include="Design\PagosOnline\animacion_pse.gif" />
+    <Content Include="Design\PagosOnline\Img_PSE.jpg" />
+    <Content Include="Design\PagosOnline\pse2.gif" />
+    <Content Include="Design\templateMail - copia.htm" />
+    <Content Include="Design\templateMail.htm" />
+    <Content Include="Design\templateMailliquidacion.htm" />
+    <Content Include="Design\Terminos_Condiciones\index_terms.htm" />
+    <Content Include="Design\Terminos_Condiciones\payment.htm" />
+    <Content Include="Design\Terminos_Condiciones\shipping.htm" />
+    <Content Include="Design\Terminos_Condiciones\terms.htm" />
+    <Content Include="Esquemas\FACTURA_BOLETA.xml" />
+    <Content Include="Esquemas\NOTAS.xml" />
+    <Content Include="favicon.ico" />
+    <Content Include="images\dropdown-bg-hover.gif" />
+    <Content Include="images\dropdown-bg.gif" />
+    <Content Include="images\dropdown-list-bg.gif" />
+    <Content Include="images\navigation-arrow.gif" />
+    <Content Include="images\search.png" />
+    <Content Include="images\separator.gif" />
+    <Content Include="images\stars\1.png" />
+    <Content Include="images\stars\2.png" />
+    <Content Include="images\stars\3.png" />
+    <Content Include="images\stars\4.png" />
+    <Content Include="images\stars\5.png" />
+    <Content Include="images\tables\back_disabled.jpg" />
+    <Content Include="images\tables\back_enabled.jpg" />
+    <Content Include="images\tables\forward_disabled.jpg" />
+    <Content Include="images\tables\forward_enabled.jpg" />
+    <Content Include="images\tables\sort_asc.gif" />
+    <Content Include="images\tables\sort_both.gif" />
+    <Content Include="images\tables\sort_desc.gif" />
+    <Content Include="Mapas\FACTURA_BOLETA_STD110.xml" />
+    <Content Include="Mapas\NOTAS_STD110.xml" />
+    <Content Include="Reports\Logistica\reportliquidacion.aspx" />
+    <Content Include="Reports\Logistica\reportLiquidation.aspx" />
+    <Content Include="Reports\Logistica\reportManifiesto.aspx" />
+    <Content Include="Reports\Logistica\reportPicking.aspx" />
+    <Content Include="Reports\Ventas\reporArticlesReturnedCancel.aspx" />
+    <Content Include="Reports\Ventas\reportArticlesReturned.aspx" />
+    <Content Include="Reports\Ventas\reportInvoice.aspx" />
+    <Content Include="report_form.aspx" />
+    <Content Include="Scripts\Apis\socialNet.htm" />
+    <Content Include="Scripts\Apis\urtak.htm" />
+    <Content Include="Scripts\calendar-en.min.js" />
+    <Content Include="Scripts\Colorbox\colorbox.css" />
+    <Content Include="Scripts\Colorbox\images\border.png" />
+    <Content Include="Scripts\Colorbox\images\controls.png" />
+    <Content Include="Scripts\Colorbox\images\ie6\borderBottomCenter.png" />
+    <Content Include="Scripts\Colorbox\images\ie6\borderBottomLeft.png" />
+    <Content Include="Scripts\Colorbox\images\ie6\borderBottomRight.png" />
+    <Content Include="Scripts\Colorbox\images\ie6\borderMiddleLeft.png" />
+    <Content Include="Scripts\Colorbox\images\ie6\borderMiddleRight.png" />
+    <Content Include="Scripts\Colorbox\images\ie6\borderTopCenter.png" />
+    <Content Include="Scripts\Colorbox\images\ie6\borderTopLeft.png" />
+    <Content Include="Scripts\Colorbox\images\ie6\borderTopRight.png" />
+    <Content Include="Scripts\Colorbox\images\loading.gif" />
+    <Content Include="Scripts\Colorbox\images\loading_background.png" />
+    <Content Include="Scripts\Colorbox\images\overlay.png" />
+    <Content Include="Scripts\Colorbox\jquery.colorbox-min.js" />
+    <Content Include="Scripts\Colorbox\jquery.colorbox.js" />
+    <Content Include="Scripts\cssrefresh.js" />
+    <Content Include="Scripts\css\jquery.dataTables.css" />
+    <Content Include="Scripts\css\jquery.dataTables.min.css" />
+    <Content Include="Scripts\css\jquery.dataTables_themeroller.css" />
+    <Content Include="Scripts\images\back_disabled.png" />
+    <Content Include="Scripts\images\back_enabled.png" />
+    <Content Include="Scripts\images\back_enabled_hover.png" />
+    <Content Include="Scripts\images\forward_disabled.png" />
+    <Content Include="Scripts\images\forward_enabled.png" />
+    <Content Include="Scripts\images\forward_enabled_hover.png" />
+    <Content Include="Scripts\images\sort_asc.png" />
+    <Content Include="Scripts\images\sort_asc_disabled.png" />
+    <Content Include="Scripts\images\sort_both.png" />
+    <Content Include="Scripts\images\sort_desc.png" />
+    <Content Include="Scripts\images\sort_desc_disabled.png" />
+    <Content Include="Scripts\imageZoomer\featuredimagezoomer.js" />
+    <Content Include="Scripts\ImgScale\jquery.cj-object-scaler.min.js" />
+    <Content Include="Scripts\JqGrid\grid.locale-es.js" />
+    <Content Include="Scripts\JqGrid\jquery.jqGrid.min.js" />
+    <Content Include="Scripts\JqGrid\jquery.jqGrid.src.js" />
+    <Content Include="Scripts\JqTinyTb\jquery.ui.tinytbl.css" />
+    <Content Include="Scripts\JqTinyTb\jquery.ui.tinytbl.js" />
+    <Content Include="Scripts\JqTinyTb\jquery.ui.tinytbl.src.js" />
+    <Content Include="Scripts\jquery-1.4.1.js" />
+    <Content Include="Scripts\jquery-1.4.1.min.js" />
+    <Content Include="App_Themes\SiteTheme\skinSite.skin" />
+    <Content Include="Aquarella\Admonred\ImageHandler.ashx" />
+    <Content Include="Properties\DataSources\System.Data.DataTable.datasource" />
+    <Content Include="Certificado\CDBATA.pfx" />
+    <None Include="Properties\PublishProfiles\AQ.pubxml" />
+    <None Include="Properties\PublishProfiles\Sistema Aquarella Web.pubxml" />
+    <None Include="Scripts\jquery-1.7-vsdoc.js" />
+    <Content Include="Scripts\jquery-1.4.2.min.js" />
+    <Content Include="Scripts\jquery-1.8.2.min.js" />
+    <Content Include="Scripts\jquery-ui-1.8.24.custom.min.js" />
+    <Content Include="Scripts\jquery-ui-date\css\ui-lightness\images\animated-overlay.gif" />
+    <Content Include="Scripts\jquery-ui-date\css\ui-lightness\images\ui-bg_diagonals-thick_18_b81900_40x40.png" />
+    <Content Include="Scripts\jquery-ui-date\css\ui-lightness\images\ui-bg_diagonals-thick_20_666666_40x40.png" />
+    <Content Include="Scripts\jquery-ui-date\css\ui-lightness\images\ui-bg_flat_10_000000_40x100.png" />
+    <Content Include="Scripts\jquery-ui-date\css\ui-lightness\images\ui-bg_glass_100_f6f6f6_1x400.png" />
+    <Content Include="Scripts\jquery-ui-date\css\ui-lightness\images\ui-bg_glass_100_fdf5ce_1x400.png" />
+    <Content Include="Scripts\jquery-ui-date\css\ui-lightness\images\ui-bg_glass_65_ffffff_1x400.png" />
+    <Content Include="Scripts\jquery-ui-date\css\ui-lightness\images\ui-bg_gloss-wave_35_f6a828_500x100.png" />
+    <Content Include="Scripts\jquery-ui-date\css\ui-lightness\images\ui-bg_highlight-soft_100_eeeeee_1x100.png" />
+    <Content Include="Scripts\jquery-ui-date\css\ui-lightness\images\ui-bg_highlight-soft_75_ffe45c_1x100.png" />
+    <Content Include="Scripts\jquery-ui-date\css\ui-lightness\images\ui-icons_222222_256x240.png" />
+    <Content Include="Scripts\jquery-ui-date\css\ui-lightness\images\ui-icons_228ef1_256x240.png" />
+    <Content Include="Scripts\jquery-ui-date\css\ui-lightness\images\ui-icons_ef8c08_256x240.png" />
+    <Content Include="Scripts\jquery-ui-date\css\ui-lightness\images\ui-icons_ffd27a_256x240.png" />
+    <Content Include="Scripts\jquery-ui-date\css\ui-lightness\images\ui-icons_ffffff_256x240.png" />
+    <Content Include="Scripts\jquery-ui-date\css\ui-lightness\jquery-ui-1.10.2.custom.css" />
+    <Content Include="Scripts\jquery-ui-date\css\ui-lightness\jquery-ui-1.10.2.custom.min.css" />
+    <Content Include="Scripts\jquery-ui-date\development-bundle\AUTHORS.txt" />
+    <Content Include="Scripts\jquery-ui-date\development-bundle\demos\datepicker\default.html" />
+    <Content Include="Scripts\jquery-ui-date\development-bundle\demos\datepicker\images\b_calendar_ico.gif" />
+    <Content Include="Scripts\jquery-ui-date\development-bundle\demos\datepicker\images\calendar.gif" />
+    <Content Include="Scripts\jquery-ui-date\development-bundle\demos\datepicker\jquery.ui.datepicker-ar.js" />
+    <Content Include="Scripts\jquery-ui-date\development-bundle\demos\datepicker\jquery.ui.datepicker-fr.js" />
+    <Content Include="Scripts\jquery-ui-date\development-bundle\demos\datepicker\jquery.ui.datepicker-he.js" />
+    <Content Include="Scripts\jquery-ui-date\development-bundle\demos\datepicker\jquery.ui.datepicker-zh-TW.js" />
+    <Content Include="Scripts\jquery-ui-date\development-bundle\demos\demos.css" />
+    <Content Include="Scripts\jquery-ui-date\development-bundle\demos\images\calendar.gif" />
+    <Content Include="Scripts\jquery-ui-date\development-bundle\demos\images\demo-config-on-tile.gif" />
+    <Content Include="Scripts\jquery-ui-date\development-bundle\demos\images\demo-config-on.gif" />
+    <Content Include="Scripts\jquery-ui-date\development-bundle\demos\images\demo-spindown-closed.gif" />
+    <Content Include="Scripts\jquery-ui-date\development-bundle\demos\images\demo-spindown-open.gif" />
+    <Content Include="Scripts\jquery-ui-date\development-bundle\demos\images\icon-docs-info.gif" />
+    <Content Include="Scripts\jquery-ui-date\development-bundle\demos\images\pbar-ani.gif" />
+    <Content Include="Scripts\jquery-ui-date\development-bundle\demos\position\cycler.html" />
+    <Content Include="Scripts\jquery-ui-date\development-bundle\demos\position\default.html" />
+    <Content Include="Scripts\jquery-ui-date\development-bundle\demos\position\images\earth.jpg" />
+    <Content Include="Scripts\jquery-ui-date\development-bundle\demos\position\images\flight.jpg" />
+    <Content Include="Scripts\jquery-ui-date\development-bundle\demos\position\images\rocket.jpg" />
+    <Content Include="Scripts\jquery-ui-date\development-bundle\demos\position\index.html" />
+    <Content Include="Scripts\jquery-ui-date\development-bundle\demos\widget\default.html" />
+    <Content Include="Scripts\jquery-ui-date\development-bundle\demos\widget\index.html" />
+    <Content Include="Scripts\jquery-ui-date\development-bundle\docs\datepicker.html" />
+    <Content Include="Scripts\jquery-ui-date\development-bundle\docs\jQuery.widget.html" />
+    <Content Include="Scripts\jquery-ui-date\development-bundle\docs\mouse.html" />
+    <Content Include="Scripts\jquery-ui-date\development-bundle\docs\position.html" />
+    <Content Include="Scripts\jquery-ui-date\development-bundle\external\globalize.culture.de-DE.js" />
+    <Content Include="Scripts\jquery-ui-date\development-bundle\external\globalize.culture.ja-JP.js" />
+    <Content Include="Scripts\jquery-ui-date\development-bundle\external\globalize.js" />
+    <Content Include="Scripts\jquery-ui-date\development-bundle\external\jquery.mousewheel.js" />
+    <Content Include="Scripts\jquery-ui-date\development-bundle\external\jshint.js" />
+    <Content Include="Scripts\jquery-ui-date\development-bundle\external\qunit.css" />
+    <Content Include="Scripts\jquery-ui-date\development-bundle\external\qunit.js" />
+    <Content Include="Scripts\jquery-ui-date\development-bundle\Gruntfile.js" />
+    <Content Include="Scripts\jquery-ui-date\development-bundle\jquery-1.9.1.js" />
+    <Content Include="Scripts\jquery-ui-date\development-bundle\MIT-LICENSE.txt" />
+    <Content Include="Scripts\jquery-ui-date\development-bundle\ui\i18n\jquery-ui-i18n.js" />
+    <Content Include="Scripts\jquery-ui-date\development-bundle\ui\i18n\jquery.ui.datepicker-af.js" />
+    <Content Include="Scripts\jquery-ui-date\development-bundle\ui\i18n\jquery.ui.datepicker-ar-DZ.js" />
+    <Content Include="Scripts\jquery-ui-date\development-bundle\ui\i18n\jquery.ui.datepicker-ar.js" />
+    <Content Include="Scripts\jquery-ui-date\development-bundle\ui\i18n\jquery.ui.datepicker-az.js" />
+    <Content Include="Scripts\jquery-ui-date\development-bundle\ui\i18n\jquery.ui.datepicker-be.js" />
+    <Content Include="Scripts\jquery-ui-date\development-bundle\ui\i18n\jquery.ui.datepicker-bg.js" />
+    <Content Include="Scripts\jquery-ui-date\development-bundle\ui\i18n\jquery.ui.datepicker-bs.js" />
+    <Content Include="Scripts\jquery-ui-date\development-bundle\ui\i18n\jquery.ui.datepicker-ca.js" />
+    <Content Include="Scripts\jquery-ui-date\development-bundle\ui\i18n\jquery.ui.datepicker-cs.js" />
+    <Content Include="Scripts\jquery-ui-date\development-bundle\ui\i18n\jquery.ui.datepicker-cy-GB.js" />
+    <Content Include="Scripts\jquery-ui-date\development-bundle\ui\i18n\jquery.ui.datepicker-da.js" />
+    <Content Include="Scripts\jquery-ui-date\development-bundle\ui\i18n\jquery.ui.datepicker-de.js" />
+    <Content Include="Scripts\jquery-ui-date\development-bundle\ui\i18n\jquery.ui.datepicker-el.js" />
+    <Content Include="Scripts\jquery-ui-date\development-bundle\ui\i18n\jquery.ui.datepicker-en-AU.js" />
+    <Content Include="Scripts\jquery-ui-date\development-bundle\ui\i18n\jquery.ui.datepicker-en-GB.js" />
+    <Content Include="Scripts\jquery-ui-date\development-bundle\ui\i18n\jquery.ui.datepicker-en-NZ.js" />
+    <Content Include="Scripts\jquery-ui-date\development-bundle\ui\i18n\jquery.ui.datepicker-eo.js" />
+    <Content Include="Scripts\jquery-ui-date\development-bundle\ui\i18n\jquery.ui.datepicker-es.js" />
+    <Content Include="Scripts\jquery-ui-date\development-bundle\ui\i18n\jquery.ui.datepicker-et.js" />
+    <Content Include="Scripts\jquery-ui-date\development-bundle\ui\i18n\jquery.ui.datepicker-eu.js" />
+    <Content Include="Scripts\jquery-ui-date\development-bundle\ui\i18n\jquery.ui.datepicker-fa.js" />
+    <Content Include="Scripts\jquery-ui-date\development-bundle\ui\i18n\jquery.ui.datepicker-fi.js" />
+    <Content Include="Scripts\jquery-ui-date\development-bundle\ui\i18n\jquery.ui.datepicker-fo.js" />
+    <Content Include="Scripts\jquery-ui-date\development-bundle\ui\i18n\jquery.ui.datepicker-fr-CA.js" />
+    <Content Include="Scripts\jquery-ui-date\development-bundle\ui\i18n\jquery.ui.datepicker-fr-CH.js" />
+    <Content Include="Scripts\jquery-ui-date\development-bundle\ui\i18n\jquery.ui.datepicker-fr.js" />
+    <Content Include="Scripts\jquery-ui-date\development-bundle\ui\i18n\jquery.ui.datepicker-gl.js" />
+    <Content Include="Scripts\jquery-ui-date\development-bundle\ui\i18n\jquery.ui.datepicker-he.js" />
+    <Content Include="Scripts\jquery-ui-date\development-bundle\ui\i18n\jquery.ui.datepicker-hi.js" />
+    <Content Include="Scripts\jquery-ui-date\development-bundle\ui\i18n\jquery.ui.datepicker-hr.js" />
+    <Content Include="Scripts\jquery-ui-date\development-bundle\ui\i18n\jquery.ui.datepicker-hu.js" />
+    <Content Include="Scripts\jquery-ui-date\development-bundle\ui\i18n\jquery.ui.datepicker-hy.js" />
+    <Content Include="Scripts\jquery-ui-date\development-bundle\ui\i18n\jquery.ui.datepicker-id.js" />
+    <Content Include="Scripts\jquery-ui-date\development-bundle\ui\i18n\jquery.ui.datepicker-is.js" />
+    <Content Include="Scripts\jquery-ui-date\development-bundle\ui\i18n\jquery.ui.datepicker-it.js" />
+    <Content Include="Scripts\jquery-ui-date\development-bundle\ui\i18n\jquery.ui.datepicker-ja.js" />
+    <Content Include="Scripts\jquery-ui-date\development-bundle\ui\i18n\jquery.ui.datepicker-ka.js" />
+    <Content Include="Scripts\jquery-ui-date\development-bundle\ui\i18n\jquery.ui.datepicker-kk.js" />
+    <Content Include="Scripts\jquery-ui-date\development-bundle\ui\i18n\jquery.ui.datepicker-km.js" />
+    <Content Include="Scripts\jquery-ui-date\development-bundle\ui\i18n\jquery.ui.datepicker-ko.js" />
+    <Content Include="Scripts\jquery-ui-date\development-bundle\ui\i18n\jquery.ui.datepicker-ky.js" />
+    <Content Include="Scripts\jquery-ui-date\development-bundle\ui\i18n\jquery.ui.datepicker-lb.js" />
+    <Content Include="Scripts\jquery-ui-date\development-bundle\ui\i18n\jquery.ui.datepicker-lt.js" />
+    <Content Include="Scripts\jquery-ui-date\development-bundle\ui\i18n\jquery.ui.datepicker-lv.js" />
+    <Content Include="Scripts\jquery-ui-date\development-bundle\ui\i18n\jquery.ui.datepicker-mk.js" />
+    <Content Include="Scripts\jquery-ui-date\development-bundle\ui\i18n\jquery.ui.datepicker-ml.js" />
+    <Content Include="Scripts\jquery-ui-date\development-bundle\ui\i18n\jquery.ui.datepicker-ms.js" />
+    <Content Include="Scripts\jquery-ui-date\development-bundle\ui\i18n\jquery.ui.datepicker-nb.js" />
+    <Content Include="Scripts\jquery-ui-date\development-bundle\ui\i18n\jquery.ui.datepicker-nl-BE.js" />
+    <Content Include="Scripts\jquery-ui-date\development-bundle\ui\i18n\jquery.ui.datepicker-nl.js" />
+    <Content Include="Scripts\jquery-ui-date\development-bundle\ui\i18n\jquery.ui.datepicker-nn.js" />
+    <Content Include="Scripts\jquery-ui-date\development-bundle\ui\i18n\jquery.ui.datepicker-no.js" />
+    <Content Include="Scripts\jquery-ui-date\development-bundle\ui\i18n\jquery.ui.datepicker-pl.js" />
+    <Content Include="Scripts\jquery-ui-date\development-bundle\ui\i18n\jquery.ui.datepicker-pt-BR.js" />
+    <Content Include="Scripts\jquery-ui-date\development-bundle\ui\i18n\jquery.ui.datepicker-pt.js" />
+    <Content Include="Scripts\jquery-ui-date\development-bundle\ui\i18n\jquery.ui.datepicker-rm.js" />
+    <Content Include="Scripts\jquery-ui-date\development-bundle\ui\i18n\jquery.ui.datepicker-ro.js" />
+    <Content Include="Scripts\jquery-ui-date\development-bundle\ui\i18n\jquery.ui.datepicker-ru.js" />
+    <Content Include="Scripts\jquery-ui-date\development-bundle\ui\i18n\jquery.ui.datepicker-sk.js" />
+    <Content Include="Scripts\jquery-ui-date\development-bundle\ui\i18n\jquery.ui.datepicker-sl.js" />
+    <Content Include="Scripts\jquery-ui-date\development-bundle\ui\i18n\jquery.ui.datepicker-sq.js" />
+    <Content Include="Scripts\jquery-ui-date\development-bundle\ui\i18n\jquery.ui.datepicker-sr-SR.js" />
+    <Content Include="Scripts\jquery-ui-date\development-bundle\ui\i18n\jquery.ui.datepicker-sr.js" />
+    <Content Include="Scripts\jquery-ui-date\development-bundle\ui\i18n\jquery.ui.datepicker-sv.js" />
+    <Content Include="Scripts\jquery-ui-date\development-bundle\ui\i18n\jquery.ui.datepicker-ta.js" />
+    <Content Include="Scripts\jquery-ui-date\development-bundle\ui\i18n\jquery.ui.datepicker-th.js" />
+    <Content Include="Scripts\jquery-ui-date\development-bundle\ui\i18n\jquery.ui.datepicker-tj.js" />
+    <Content Include="Scripts\jquery-ui-date\development-bundle\ui\i18n\jquery.ui.datepicker-tr.js" />
+    <Content Include="Scripts\jquery-ui-date\development-bundle\ui\i18n\jquery.ui.datepicker-uk.js" />
+    <Content Include="Scripts\jquery-ui-date\development-bundle\ui\i18n\jquery.ui.datepicker-vi.js" />
+    <Content Include="Scripts\jquery-ui-date\development-bundle\ui\i18n\jquery.ui.datepicker-zh-CN.js" />
+    <Content Include="Scripts\jquery-ui-date\development-bundle\ui\i18n\jquery.ui.datepicker-zh-HK.js" />
+    <Content Include="Scripts\jquery-ui-date\development-bundle\ui\i18n\jquery.ui.datepicker-zh-TW.js" />
+    <Content Include="Scripts\jquery-ui-date\development-bundle\ui\jquery-ui.custom.js" />
+    <Content Include="Scripts\jquery-ui-date\development-bundle\ui\jquery.ui.core.js" />
+    <Content Include="Scripts\jquery-ui-date\development-bundle\ui\jquery.ui.datepicker.js" />
+    <Content Include="Scripts\jquery-ui-date\development-bundle\ui\jquery.ui.mouse.js" />
+    <Content Include="Scripts\jquery-ui-date\development-bundle\ui\jquery.ui.position.js" />
+    <Content Include="Scripts\jquery-ui-date\development-bundle\ui\jquery.ui.widget.js" />
+    <Content Include="Scripts\jquery-ui-date\development-bundle\ui\minified\i18n\jquery-ui-i18n.min.js" />
+    <Content Include="Scripts\jquery-ui-date\development-bundle\ui\minified\i18n\jquery.ui.datepicker-af.min.js" />
+    <Content Include="Scripts\jquery-ui-date\development-bundle\ui\minified\i18n\jquery.ui.datepicker-ar-DZ.min.js" />
+    <Content Include="Scripts\jquery-ui-date\development-bundle\ui\minified\i18n\jquery.ui.datepicker-ar.min.js" />
+    <Content Include="Scripts\jquery-ui-date\development-bundle\ui\minified\i18n\jquery.ui.datepicker-az.min.js" />
+    <Content Include="Scripts\jquery-ui-date\development-bundle\ui\minified\i18n\jquery.ui.datepicker-be.min.js" />
+    <Content Include="Scripts\jquery-ui-date\development-bundle\ui\minified\i18n\jquery.ui.datepicker-bg.min.js" />
+    <Content Include="Scripts\jquery-ui-date\development-bundle\ui\minified\i18n\jquery.ui.datepicker-bs.min.js" />
+    <Content Include="Scripts\jquery-ui-date\development-bundle\ui\minified\i18n\jquery.ui.datepicker-ca.min.js" />
+    <Content Include="Scripts\jquery-ui-date\development-bundle\ui\minified\i18n\jquery.ui.datepicker-cs.min.js" />
+    <Content Include="Scripts\jquery-ui-date\development-bundle\ui\minified\i18n\jquery.ui.datepicker-cy-GB.min.js" />
+    <Content Include="Scripts\jquery-ui-date\development-bundle\ui\minified\i18n\jquery.ui.datepicker-da.min.js" />
+    <Content Include="Scripts\jquery-ui-date\development-bundle\ui\minified\i18n\jquery.ui.datepicker-de.min.js" />
+    <Content Include="Scripts\jquery-ui-date\development-bundle\ui\minified\i18n\jquery.ui.datepicker-el.min.js" />
+    <Content Include="Scripts\jquery-ui-date\development-bundle\ui\minified\i18n\jquery.ui.datepicker-en-AU.min.js" />
+    <Content Include="Scripts\jquery-ui-date\development-bundle\ui\minified\i18n\jquery.ui.datepicker-en-GB.min.js" />
+    <Content Include="Scripts\jquery-ui-date\development-bundle\ui\minified\i18n\jquery.ui.datepicker-en-NZ.min.js" />
+    <Content Include="Scripts\jquery-ui-date\development-bundle\ui\minified\i18n\jquery.ui.datepicker-eo.min.js" />
+    <Content Include="Scripts\jquery-ui-date\development-bundle\ui\minified\i18n\jquery.ui.datepicker-es.min.js" />
+    <Content Include="Scripts\jquery-ui-date\development-bundle\ui\minified\i18n\jquery.ui.datepicker-et.min.js" />
+    <Content Include="Scripts\jquery-ui-date\development-bundle\ui\minified\i18n\jquery.ui.datepicker-eu.min.js" />
+    <Content Include="Scripts\jquery-ui-date\development-bundle\ui\minified\i18n\jquery.ui.datepicker-fa.min.js" />
+    <Content Include="Scripts\jquery-ui-date\development-bundle\ui\minified\i18n\jquery.ui.datepicker-fi.min.js" />
+    <Content Include="Scripts\jquery-ui-date\development-bundle\ui\minified\i18n\jquery.ui.datepicker-fo.min.js" />
+    <Content Include="Scripts\jquery-ui-date\development-bundle\ui\minified\i18n\jquery.ui.datepicker-fr-CA.min.js" />
+    <Content Include="Scripts\jquery-ui-date\development-bundle\ui\minified\i18n\jquery.ui.datepicker-fr-CH.min.js" />
+    <Content Include="Scripts\jquery-ui-date\development-bundle\ui\minified\i18n\jquery.ui.datepicker-fr.min.js" />
+    <Content Include="Scripts\jquery-ui-date\development-bundle\ui\minified\i18n\jquery.ui.datepicker-gl.min.js" />
+    <Content Include="Scripts\jquery-ui-date\development-bundle\ui\minified\i18n\jquery.ui.datepicker-he.min.js" />
+    <Content Include="Scripts\jquery-ui-date\development-bundle\ui\minified\i18n\jquery.ui.datepicker-hi.min.js" />
+    <Content Include="Scripts\jquery-ui-date\development-bundle\ui\minified\i18n\jquery.ui.datepicker-hr.min.js" />
+    <Content Include="Scripts\jquery-ui-date\development-bundle\ui\minified\i18n\jquery.ui.datepicker-hu.min.js" />
+    <Content Include="Scripts\jquery-ui-date\development-bundle\ui\minified\i18n\jquery.ui.datepicker-hy.min.js" />
+    <Content Include="Scripts\jquery-ui-date\development-bundle\ui\minified\i18n\jquery.ui.datepicker-id.min.js" />
+    <Content Include="Scripts\jquery-ui-date\development-bundle\ui\minified\i18n\jquery.ui.datepicker-is.min.js" />
+    <Content Include="Scripts\jquery-ui-date\development-bundle\ui\minified\i18n\jquery.ui.datepicker-it.min.js" />
+    <Content Include="Scripts\jquery-ui-date\development-bundle\ui\minified\i18n\jquery.ui.datepicker-ja.min.js" />
+    <Content Include="Scripts\jquery-ui-date\development-bundle\ui\minified\i18n\jquery.ui.datepicker-ka.min.js" />
+    <Content Include="Scripts\jquery-ui-date\development-bundle\ui\minified\i18n\jquery.ui.datepicker-kk.min.js" />
+    <Content Include="Scripts\jquery-ui-date\development-bundle\ui\minified\i18n\jquery.ui.datepicker-km.min.js" />
+    <Content Include="Scripts\jquery-ui-date\development-bundle\ui\minified\i18n\jquery.ui.datepicker-ko.min.js" />
+    <Content Include="Scripts\jquery-ui-date\development-bundle\ui\minified\i18n\jquery.ui.datepicker-ky.min.js" />
+    <Content Include="Scripts\jquery-ui-date\development-bundle\ui\minified\i18n\jquery.ui.datepicker-lb.min.js" />
+    <Content Include="Scripts\jquery-ui-date\development-bundle\ui\minified\i18n\jquery.ui.datepicker-lt.min.js" />
+    <Content Include="Scripts\jquery-ui-date\development-bundle\ui\minified\i18n\jquery.ui.datepicker-lv.min.js" />
+    <Content Include="Scripts\jquery-ui-date\development-bundle\ui\minified\i18n\jquery.ui.datepicker-mk.min.js" />
+    <Content Include="Scripts\jquery-ui-date\development-bundle\ui\minified\i18n\jquery.ui.datepicker-ml.min.js" />
+    <Content Include="Scripts\jquery-ui-date\development-bundle\ui\minified\i18n\jquery.ui.datepicker-ms.min.js" />
+    <Content Include="Scripts\jquery-ui-date\development-bundle\ui\minified\i18n\jquery.ui.datepicker-nb.min.js" />
+    <Content Include="Scripts\jquery-ui-date\development-bundle\ui\minified\i18n\jquery.ui.datepicker-nl-BE.min.js" />
+    <Content Include="Scripts\jquery-ui-date\development-bundle\ui\minified\i18n\jquery.ui.datepicker-nl.min.js" />
+    <Content Include="Scripts\jquery-ui-date\development-bundle\ui\minified\i18n\jquery.ui.datepicker-nn.min.js" />
+    <Content Include="Scripts\jquery-ui-date\development-bundle\ui\minified\i18n\jquery.ui.datepicker-no.min.js" />
+    <Content Include="Scripts\jquery-ui-date\development-bundle\ui\minified\i18n\jquery.ui.datepicker-pl.min.js" />
+    <Content Include="Scripts\jquery-ui-date\development-bundle\ui\minified\i18n\jquery.ui.datepicker-pt-BR.min.js" />
+    <Content Include="Scripts\jquery-ui-date\development-bundle\ui\minified\i18n\jquery.ui.datepicker-pt.min.js" />
+    <Content Include="Scripts\jquery-ui-date\development-bundle\ui\minified\i18n\jquery.ui.datepicker-rm.min.js" />
+    <Content Include="Scripts\jquery-ui-date\development-bundle\ui\minified\i18n\jquery.ui.datepicker-ro.min.js" />
+    <Content Include="Scripts\jquery-ui-date\development-bundle\ui\minified\i18n\jquery.ui.datepicker-ru.min.js" />
+    <Content Include="Scripts\jquery-ui-date\development-bundle\ui\minified\i18n\jquery.ui.datepicker-sk.min.js" />
+    <Content Include="Scripts\jquery-ui-date\development-bundle\ui\minified\i18n\jquery.ui.datepicker-sl.min.js" />
+    <Content Include="Scripts\jquery-ui-date\development-bundle\ui\minified\i18n\jquery.ui.datepicker-sq.min.js" />
+    <Content Include="Scripts\jquery-ui-date\development-bundle\ui\minified\i18n\jquery.ui.datepicker-sr-SR.min.js" />
+    <Content Include="Scripts\jquery-ui-date\development-bundle\ui\minified\i18n\jquery.ui.datepicker-sr.min.js" />
+    <Content Include="Scripts\jquery-ui-date\development-bundle\ui\minified\i18n\jquery.ui.datepicker-sv.min.js" />
+    <Content Include="Scripts\jquery-ui-date\development-bundle\ui\minified\i18n\jquery.ui.datepicker-ta.min.js" />
+    <Content Include="Scripts\jquery-ui-date\development-bundle\ui\minified\i18n\jquery.ui.datepicker-th.min.js" />
+    <Content Include="Scripts\jquery-ui-date\development-bundle\ui\minified\i18n\jquery.ui.datepicker-tj.min.js" />
+    <Content Include="Scripts\jquery-ui-date\development-bundle\ui\minified\i18n\jquery.ui.datepicker-tr.min.js" />
+    <Content Include="Scripts\jquery-ui-date\development-bundle\ui\minified\i18n\jquery.ui.datepicker-uk.min.js" />
+    <Content Include="Scripts\jquery-ui-date\development-bundle\ui\minified\i18n\jquery.ui.datepicker-vi.min.js" />
+    <Content Include="Scripts\jquery-ui-date\development-bundle\ui\minified\i18n\jquery.ui.datepicker-zh-CN.min.js" />
+    <Content Include="Scripts\jquery-ui-date\development-bundle\ui\minified\i18n\jquery.ui.datepicker-zh-HK.min.js" />
+    <Content Include="Scripts\jquery-ui-date\development-bundle\ui\minified\i18n\jquery.ui.datepicker-zh-TW.min.js" />
+    <Content Include="Scripts\jquery-ui-date\development-bundle\ui\minified\jquery-ui.custom.min.js" />
+    <Content Include="Scripts\jquery-ui-date\development-bundle\ui\minified\jquery.ui.core.min.js" />
+    <Content Include="Scripts\jquery-ui-date\development-bundle\ui\minified\jquery.ui.datepicker.min.js" />
+    <Content Include="Scripts\jquery-ui-date\development-bundle\ui\minified\jquery.ui.mouse.min.js" />
+    <Content Include="Scripts\jquery-ui-date\development-bundle\ui\minified\jquery.ui.position.min.js" />
+    <Content Include="Scripts\jquery-ui-date\development-bundle\ui\minified\jquery.ui.widget.min.js" />
+    <Content Include="Scripts\jquery-ui-date\js\jquery-1.9.1.js" />
+    <Content Include="Scripts\jquery-ui-date\js\jquery-ui-1.10.2.custom.js" />
+    <Content Include="Scripts\jquery-ui-date\js\jquery-ui-1.10.2.custom.min.js" />
+    <Content Include="Scripts\jquery.dataTables.js" />
+    <Content Include="Scripts\jquery.dataTables.min.js" />
+    <Content Include="Scripts\jquery.dynDateTime.min.js" />
+    <Content Include="Scripts\jquery.metadata.js" />
+    <Content Include="Scripts\Js\jquery-1.4.2.min.js" />
+    <Content Include="Scripts\Js\jquery.dataTables.js" />
+    <Content Include="Scripts\Js\jquery.dataTables.min.js" />
+    <Content Include="Scripts\Js\jquery.metadata.js" />
+    <Content Include="Scripts\Js\logInJs.js" />
+    <Content Include="Scripts\Js\ordersJs.js" />
+    <Content Include="Scripts\Slides\css\global.css" />
+    <Content Include="Scripts\Slides\img\arrow-next.png" />
+    <Content Include="Scripts\Slides\img\arrow-prev.png" />
+    <Content Include="Scripts\Slides\img\background.png" />
+    <Content Include="Scripts\Slides\img\example-frame.png" />
+    <Content Include="Scripts\Slides\img\loading.gif" />
+    <Content Include="Scripts\Slides\img\pagination.png" />
+    <Content Include="Scripts\Slides\img\slide-2.jpg" />
+    <Content Include="Scripts\Slides\index.html" />
+    <Content Include="Scripts\Slides\js\slides.min.jquery.js" />
+    <None Include="Service\ServiceBata\ws_bata.disco" />
+    <None Include="Service\ServiceBata\configuration91.svcinfo" />
+    <None Include="Service\ServiceBata\configuration.svcinfo" />
+    <None Include="Service\ServiceBata\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Service\ws_clientedniruc\configuration91.svcinfo" />
+    <None Include="Service\ws_clientedniruc\configuration.svcinfo" />
+    <None Include="Service\ws_clientedniruc\Cons_Cliente1.wsdl" />
+    <None Include="Service\ws_clientedniruc\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Service\ws_clientedniruc\Cons_Cliente1.disco" />
+    <Content Include="Styles\calendar-blue.css" />
+    <Content Include="Styles\estilos_Aqua.css" />
+    <Content Include="Styles\Site.css" />
+    <Content Include="Styles\StyleFile.css" />
+    <Content Include="Styles\style_others.css" />
+    <Content Include="Styles\theme\images\ui-bg_flat_55_999999_40x100.png" />
+    <Content Include="Styles\theme\images\ui-bg_flat_75_aaaaaa_40x100.png" />
+    <Content Include="Styles\theme\images\ui-bg_glass_45_0078ae_1x400.png" />
+    <Content Include="Styles\theme\images\ui-bg_glass_55_f8da4e_1x400.png" />
+    <Content Include="Styles\theme\images\ui-bg_glass_75_79c9ec_1x400.png" />
+    <Content Include="Styles\theme\images\ui-bg_gloss-wave_45_e14f1c_500x100.png" />
+    <Content Include="Styles\theme\images\ui-bg_gloss-wave_50_6eac2c_500x100.png" />
+    <Content Include="Styles\theme\images\ui-bg_gloss-wave_75_2191c0_500x100.png" />
+    <Content Include="Styles\theme\images\ui-bg_inset-hard_100_fcfdfd_1x100.png" />
+    <Content Include="Styles\theme\images\ui-icons_0078ae_256x240.png" />
+    <Content Include="Styles\theme\images\ui-icons_056b93_256x240.png" />
+    <Content Include="Styles\theme\images\ui-icons_d8e7f3_256x240.png" />
+    <Content Include="Styles\theme\images\ui-icons_e0fdff_256x240.png" />
+    <Content Include="Styles\theme\images\ui-icons_f5e175_256x240.png" />
+    <Content Include="Styles\theme\images\ui-icons_f7a50d_256x240.png" />
+    <Content Include="Styles\theme\images\ui-icons_fcd113_256x240.png" />
+    <Content Include="Styles\theme\jquery-ui-1.8.16.custom.css" />
+    <Content Include="Styles\ui.jqgrid.css" />
+    <Content Include="UserControl\ucAddItemsForm.ascx" />
+    <Content Include="UserControl\ucConfigLiq.ascx" />
+    <Content Include="UserControl\ucMessage.ascx" />
+    <Content Include="UserControl\ucShippingForm.ascx" />
+    <Content Include="UserControl\ucWareAreaForm.ascx" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <None Include="Service\ServiceBata\ws_bata.wsdl" />
+    <Content Include="Service\ServiceBata\www.aquarella.com.pe.ServiceBata.ws_control_errorResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service\ServiceBata\www.aquarella.com.pe.ServiceBata.ws_envio_xmlResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service\ServiceBata\www.aquarella.com.pe.ServiceBata.ws_envio_xml_desarrolloResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Aquarella\Admonred\AfiliadosClientes.aspx.cs">
+      <DependentUpon>AfiliadosClientes.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Aquarella\Admonred\AfiliadosClientes.aspx.designer.cs">
+      <DependentUpon>AfiliadosClientes.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Aquarella\Admonred\ConsultaPromotorXLider.aspx.cs">
+      <DependentUpon>ConsultaPromotorXLider.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Aquarella\Admonred\ConsultaPromotorXLider.aspx.designer.cs">
+      <DependentUpon>ConsultaPromotorXLider.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Aquarella\Admonred\ConsultaRucDniReniec.aspx.cs">
+      <DependentUpon>ConsultaRucDniReniec.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Aquarella\Admonred\ConsultaRucDniReniec.aspx.designer.cs">
+      <DependentUpon>ConsultaRucDniReniec.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Aquarella\Admonred\Contactenos.aspx.cs">
+      <DependentUpon>Contactenos.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Aquarella\Admonred\Contactenos.aspx.designer.cs">
+      <DependentUpon>Contactenos.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Aquarella\Admonred\contactenos_update.aspx.cs">
+      <DependentUpon>contactenos_update.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Aquarella\Admonred\contactenos_update.aspx.designer.cs">
+      <DependentUpon>contactenos_update.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Aquarella\Admonred\ConvertAsesorLider.aspx.cs">
+      <DependentUpon>ConvertAsesorLider.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Aquarella\Admonred\ConvertAsesorLider.aspx.designer.cs">
+      <DependentUpon>ConvertAsesorLider.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Aquarella\Admonred\ConvertLiderPromotor.aspx.cs">
+      <DependentUpon>ConvertLiderPromotor.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Aquarella\Admonred\ConvertLiderPromotor.aspx.designer.cs">
+      <DependentUpon>ConvertLiderPromotor.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Aquarella\Admonred\ConvertPromotorLider.aspx.cs">
+      <DependentUpon>ConvertPromotorLider.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Aquarella\Admonred\ConvertPromotorLider.aspx.designer.cs">
+      <DependentUpon>ConvertPromotorLider.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Aquarella\Admonred\crearlider.aspx.cs">
+      <DependentUpon>crearlider.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Aquarella\Admonred\crearlider.aspx.designer.cs">
+      <DependentUpon>crearlider.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Aquarella\Admonred\crearpromotor.aspx.cs">
+      <DependentUpon>crearpromotor.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Aquarella\Admonred\crearpromotor.aspx.designer.cs">
+      <DependentUpon>crearpromotor.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Aquarella\Admonred\ListaLider.aspx.cs">
+      <DependentUpon>ListaLider.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Aquarella\Admonred\ListaLider.aspx.designer.cs">
+      <DependentUpon>ListaLider.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Aquarella\Admonred\panelAdminLider.aspx.cs">
+      <DependentUpon>panelAdminLider.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Aquarella\Admonred\panelAdminLider.aspx.designer.cs">
+      <DependentUpon>panelAdminLider.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Aquarella\Admonred\panelAdminNetPromoters.aspx.cs">
+      <DependentUpon>panelAdminNetPromoters.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Aquarella\Admonred\panelAdminNetPromoters.aspx.designer.cs">
+      <DependentUpon>panelAdminNetPromoters.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Aquarella\Admonred\panelAdminPromoters.aspx.cs">
+      <DependentUpon>panelAdminPromoters.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Aquarella\Admonred\panelAdminPromoters.aspx.designer.cs">
+      <DependentUpon>panelAdminPromoters.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Aquarella\Admonred\Relacion_Usuario_Asesor.aspx.cs">
+      <DependentUpon>Relacion_Usuario_Asesor.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Aquarella\Admonred\Relacion_Usuario_Asesor.aspx.designer.cs">
+      <DependentUpon>Relacion_Usuario_Asesor.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Aquarella\Admonred\updateProfileForm.aspx.cs">
+      <DependentUpon>updateProfileForm.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Aquarella\Admonred\updateProfileForm.aspx.designer.cs">
+      <DependentUpon>updateProfileForm.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Aquarella\Admonred\updateProfileFormLider.aspx.cs">
+      <DependentUpon>updateProfileFormLider.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Aquarella\Admonred\updateProfileFormLider.aspx.designer.cs">
+      <DependentUpon>updateProfileFormLider.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Aquarella\Admonred\Valida_dniruc_reniec.aspx.cs">
+      <DependentUpon>Valida_dniruc_reniec.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Aquarella\Admonred\Valida_dniruc_reniec.aspx.designer.cs">
+      <DependentUpon>Valida_dniruc_reniec.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Aquarella\Control\Catalogo.aspx.cs">
+      <DependentUpon>Catalogo.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Aquarella\Control\Catalogo.aspx.designer.cs">
+      <DependentUpon>Catalogo.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Aquarella\Control\Catalogo_Config.aspx.cs">
+      <DependentUpon>Catalogo_Config.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Aquarella\Control\Catalogo_Config.aspx.designer.cs">
+      <DependentUpon>Catalogo_Config.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Aquarella\Control\changePassword.aspx.cs">
+      <DependentUpon>changePassword.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Aquarella\Control\changePassword.aspx.designer.cs">
+      <DependentUpon>changePassword.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Aquarella\Control\LoginForm.aspx.cs">
+      <DependentUpon>LoginForm.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Aquarella\Control\LoginForm.aspx.designer.cs">
+      <DependentUpon>LoginForm.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Aquarella\Control\panelApplication.aspx.cs">
+      <DependentUpon>panelApplication.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Aquarella\Control\panelApplication.aspx.designer.cs">
+      <DependentUpon>panelApplication.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Aquarella\Control\panelEditUsers.aspx.cs">
+      <DependentUpon>panelEditUsers.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Aquarella\Control\panelEditUsers.aspx.designer.cs">
+      <DependentUpon>panelEditUsers.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Aquarella\Control\panelFunctions.aspx.cs">
+      <DependentUpon>panelFunctions.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Aquarella\Control\panelFunctions.aspx.designer.cs">
+      <DependentUpon>panelFunctions.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Aquarella\Control\panelFunc_App.aspx.cs">
+      <DependentUpon>panelFunc_App.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Aquarella\Control\panelFunc_App.aspx.designer.cs">
+      <DependentUpon>panelFunc_App.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Aquarella\Control\panelRoles.aspx.cs">
+      <DependentUpon>panelRoles.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Aquarella\Control\panelRoles.aspx.designer.cs">
+      <DependentUpon>panelRoles.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Aquarella\Control\panelRole_Func.aspx.cs">
+      <DependentUpon>panelRole_Func.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Aquarella\Control\panelRole_Func.aspx.designer.cs">
+      <DependentUpon>panelRole_Func.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Aquarella\Control\panelUser_Role.aspx.cs">
+      <DependentUpon>panelUser_Role.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Aquarella\Control\panelUser_Role.aspx.designer.cs">
+      <DependentUpon>panelUser_Role.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Aquarella\Control\panelUser_Role_Func.aspx.cs">
+      <DependentUpon>panelUser_Role_Func.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Aquarella\Control\panelUser_Role_Func.aspx.designer.cs">
+      <DependentUpon>panelUser_Role_Func.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Aquarella\Control\updateusers.aspx.cs">
+      <DependentUpon>updateusers.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Aquarella\Control\updateusers.aspx.designer.cs">
+      <DependentUpon>updateusers.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Aquarella\Financiera\Agrupar_Pedido_Pago.aspx.cs">
+      <DependentUpon>Agrupar_Pedido_Pago.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Aquarella\Financiera\Agrupar_Pedido_Pago.aspx.designer.cs">
+      <DependentUpon>Agrupar_Pedido_Pago.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Aquarella\Financiera\clear.aspx.cs">
+      <DependentUpon>clear.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Aquarella\Financiera\clear.aspx.designer.cs">
+      <DependentUpon>clear.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Aquarella\Financiera\Consulta_Archivo_Banco.aspx.cs">
+      <DependentUpon>Consulta_Archivo_Banco.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Aquarella\Financiera\Consulta_Archivo_Banco.aspx.designer.cs">
+      <DependentUpon>Consulta_Archivo_Banco.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Aquarella\Financiera\Consulta_OP_Automatic.aspx.cs">
+      <DependentUpon>Consulta_OP_Automatic.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Aquarella\Financiera\Consulta_OP_Automatic.aspx.designer.cs">
+      <DependentUpon>Consulta_OP_Automatic.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Aquarella\Financiera\Cruce_Pago_Lider.aspx.cs">
+      <DependentUpon>Cruce_Pago_Lider.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Aquarella\Financiera\Cruce_Pago_Lider.aspx.designer.cs">
+      <DependentUpon>Cruce_Pago_Lider.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Aquarella\Financiera\Genera_Saldos_nc.aspx.cs">
+      <DependentUpon>Genera_Saldos_nc.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Aquarella\Financiera\Genera_Saldos_nc.aspx.designer.cs">
+      <DependentUpon>Genera_Saldos_nc.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Aquarella\Financiera\InfoClienteFina.aspx.cs">
+      <DependentUpon>InfoClienteFina.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Aquarella\Financiera\InfoClienteFina.aspx.designer.cs">
+      <DependentUpon>InfoClienteFina.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Aquarella\Financiera\Mov_Venta_Pagos.aspx.cs">
+      <DependentUpon>Mov_Venta_Pagos.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Aquarella\Financiera\Mov_Venta_Pagos.aspx.designer.cs">
+      <DependentUpon>Mov_Venta_Pagos.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Aquarella\Financiera\PagoXPedido.aspx.cs">
+      <DependentUpon>PagoXPedido.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Aquarella\Financiera\PagoXPedido.aspx.designer.cs">
+      <DependentUpon>PagoXPedido.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Aquarella\Financiera\panelPaymentList.aspx.cs">
+      <DependentUpon>panelPaymentList.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Aquarella\Financiera\panelPaymentList.aspx.designer.cs">
+      <DependentUpon>panelPaymentList.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Aquarella\Financiera\payments.aspx.cs">
+      <DependentUpon>payments.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Aquarella\Financiera\payments.aspx.designer.cs">
+      <DependentUpon>payments.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Aquarella\Financiera\paymentsUpd.aspx.cs">
+      <DependentUpon>paymentsUpd.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Aquarella\Financiera\paymentsUpd.aspx.designer.cs">
+      <DependentUpon>paymentsUpd.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Aquarella\Financiera\paymentsUpdFec.aspx.cs">
+      <DependentUpon>paymentsUpdFec.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Aquarella\Financiera\paymentsUpdFec.aspx.designer.cs">
+      <DependentUpon>paymentsUpdFec.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Aquarella\Financiera\reportventasemanafz.aspx.cs">
+      <DependentUpon>reportventasemanafz.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Aquarella\Financiera\reportventasemanafz.aspx.designer.cs">
+      <DependentUpon>reportventasemanafz.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Aquarella\Financiera\Saldo_Cliente.aspx.cs">
+      <DependentUpon>Saldo_Cliente.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Aquarella\Financiera\Saldo_Cliente.aspx.designer.cs">
+      <DependentUpon>Saldo_Cliente.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Aquarella\Financiera\validateBank.aspx.cs">
+      <DependentUpon>validateBank.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Aquarella\Financiera\validateBank.aspx.designer.cs">
+      <DependentUpon>validateBank.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Aquarella\Financiera\verifyCredito.aspx.cs">
+      <DependentUpon>verifyCredito.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Aquarella\Financiera\verifyCredito.aspx.designer.cs">
+      <DependentUpon>verifyCredito.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Aquarella\Financiera\verifyPayment.aspx.cs">
+      <DependentUpon>verifyPayment.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Aquarella\Financiera\verifyPayment.aspx.designer.cs">
+      <DependentUpon>verifyPayment.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Aquarella\Interface\adonisInterfaz.aspx.cs">
+      <DependentUpon>adonisInterfaz.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Aquarella\Interface\adonisInterfaz.aspx.designer.cs">
+      <DependentUpon>adonisInterfaz.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Aquarella\Interface\EnviaCorreoContactenos.aspx.cs">
+      <DependentUpon>EnviaCorreoContactenos.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Aquarella\Interface\EnviaCorreoContactenos.aspx.designer.cs">
+      <DependentUpon>EnviaCorreoContactenos.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Aquarella\Interface\expClienteBanco.aspx.cs">
+      <DependentUpon>expClienteBanco.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Aquarella\Interface\expClienteBanco.aspx.designer.cs">
+      <DependentUpon>expClienteBanco.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Aquarella\Interface\expClientes.aspx.cs">
+      <DependentUpon>expClientes.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Aquarella\Interface\expClientes.aspx.designer.cs">
+      <DependentUpon>expClientes.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Aquarella\Interface\expVentasAQ.aspx.cs">
+      <DependentUpon>expVentasAQ.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Aquarella\Interface\expVentasAQ.aspx.designer.cs">
+      <DependentUpon>expVentasAQ.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Aquarella\Interface\impMovimiento.aspx.cs">
+      <DependentUpon>impMovimiento.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Aquarella\Interface\impMovimiento.aspx.designer.cs">
+      <DependentUpon>impMovimiento.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Aquarella\Logistica\Anular_Pedido_Marcacion.aspx.cs">
+      <DependentUpon>Anular_Pedido_Marcacion.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Aquarella\Logistica\Anular_Pedido_Marcacion.aspx.designer.cs">
+      <DependentUpon>Anular_Pedido_Marcacion.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Aquarella\Logistica\consultaHPedido.aspx.cs">
+      <DependentUpon>consultaHPedido.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Aquarella\Logistica\consultaHPedido.aspx.designer.cs">
+      <DependentUpon>consultaHPedido.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Aquarella\Logistica\Importar_Mov_Bata.aspx.cs">
+      <DependentUpon>Importar_Mov_Bata.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Aquarella\Logistica\Importar_Mov_Bata.aspx.designer.cs">
+      <DependentUpon>Importar_Mov_Bata.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Aquarella\Logistica\LiquidacionVsDespacho.aspx.cs">
+      <DependentUpon>LiquidacionVsDespacho.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Aquarella\Logistica\LiquidacionVsDespacho.aspx.designer.cs">
+      <DependentUpon>LiquidacionVsDespacho.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Aquarella\Logistica\liquidacion_grupo_consulta.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>liquidacion_grupo_consulta.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Aquarella\Logistica\liquidationReport.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>liquidationReport.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Aquarella\Logistica\Manifiesto.aspx.cs">
+      <DependentUpon>Manifiesto.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Aquarella\Logistica\Manifiesto.aspx.designer.cs">
+      <DependentUpon>Manifiesto.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Aquarella\Logistica\orderformaNC.aspx.cs">
+      <DependentUpon>orderformaNC.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Aquarella\Logistica\orderformaNC.aspx.designer.cs">
+      <DependentUpon>orderformaNC.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Aquarella\Logistica\ordersForm.aspx.cs">
+      <DependentUpon>ordersForm.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Aquarella\Logistica\ordersForm.aspx.designer.cs">
+      <DependentUpon>ordersForm.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Aquarella\Logistica\ordervencido.aspx.cs">
+      <DependentUpon>ordervencido.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Aquarella\Logistica\ordervencido.aspx.designer.cs">
+      <DependentUpon>ordervencido.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Aquarella\Logistica\panelAsignPickingLiquidation.aspx.cs">
+      <DependentUpon>panelAsignPickingLiquidation.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Aquarella\Logistica\panelAsignPickingLiquidation.aspx.designer.cs">
+      <DependentUpon>panelAsignPickingLiquidation.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Aquarella\Logistica\panelFramesLiqReports.aspx.cs">
+      <DependentUpon>panelFramesLiqReports.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Aquarella\Logistica\panelFramesLiqReports.aspx.designer.cs">
+      <DependentUpon>panelFramesLiqReports.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Aquarella\Logistica\panelFramesManReport.aspx.cs">
+      <DependentUpon>panelFramesManReport.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Aquarella\Logistica\panelFramesManReport.aspx.designer.cs">
+      <DependentUpon>panelFramesManReport.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Aquarella\Logistica\panelLiqForInvoice.aspx.cs">
+      <DependentUpon>panelLiqForInvoice.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Aquarella\Logistica\panelLiqForInvoice.aspx.designer.cs">
+      <DependentUpon>panelLiqForInvoice.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Aquarella\Logistica\panelLiqReports.aspx.cs">
+      <DependentUpon>panelLiqReports.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Aquarella\Logistica\panelLiqReports.aspx.designer.cs">
+      <DependentUpon>panelLiqReports.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Aquarella\Logistica\PanelManifiesto.aspx.cs">
+      <DependentUpon>PanelManifiesto.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Aquarella\Logistica\PanelManifiesto.aspx.designer.cs">
+      <DependentUpon>PanelManifiesto.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Aquarella\Logistica\panelManReports.aspx.cs">
+      <DependentUpon>panelManReports.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Aquarella\Logistica\panelManReports.aspx.designer.cs">
+      <DependentUpon>panelManReports.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Aquarella\Logistica\panelOrdersCustomer.aspx.cs">
+      <DependentUpon>panelOrdersCustomer.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Aquarella\Logistica\panelOrdersCustomer.aspx.designer.cs">
+      <DependentUpon>panelOrdersCustomer.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Aquarella\Logistica\panelSearchOrder.aspx.cs">
+      <DependentUpon>panelSearchOrder.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Aquarella\Logistica\panelSearchOrder.aspx.designer.cs">
+      <DependentUpon>panelSearchOrder.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Aquarella\Logistica\panelSeparatedOrders.aspx.cs">
+      <DependentUpon>panelSeparatedOrders.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Aquarella\Logistica\panelSeparatedOrders.aspx.designer.cs">
+      <DependentUpon>panelSeparatedOrders.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Aquarella\Logistica\Panel_Liquidacion_Lider.aspx.cs">
+      <DependentUpon>Panel_Liquidacion_Lider.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Aquarella\Logistica\Panel_Liquidacion_Lider.aspx.designer.cs">
+      <DependentUpon>Panel_Liquidacion_Lider.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Aquarella\Logistica\RecalcularStock.aspx.cs">
+      <DependentUpon>RecalcularStock.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Aquarella\Logistica\RecalcularStock.aspx.designer.cs">
+      <DependentUpon>RecalcularStock.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Aquarella\Logistica\stockcategoria.aspx.cs">
+      <DependentUpon>stockcategoria.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Aquarella\Logistica\stockcategoria.aspx.designer.cs">
+      <DependentUpon>stockcategoria.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Aquarella\Logistica\stockForm.aspx.cs">
+      <DependentUpon>stockForm.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Aquarella\Logistica\stockForm.aspx.designer.cs">
+      <DependentUpon>stockForm.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Aquarella\Maestros\informationarticle.aspx.cs">
+      <DependentUpon>informationarticle.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Aquarella\Maestros\informationarticle.aspx.designer.cs">
+      <DependentUpon>informationarticle.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Aquarella\Maestros\Lista_PreciosAQ.aspx.cs">
+      <DependentUpon>Lista_PreciosAQ.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Aquarella\Maestros\Lista_PreciosAQ.aspx.designer.cs">
+      <DependentUpon>Lista_PreciosAQ.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Aquarella\Maestros\updateprecioarticle.aspx.cs">
+      <DependentUpon>updateprecioarticle.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Aquarella\Maestros\updateprecioarticle.aspx.designer.cs">
+      <DependentUpon>updateprecioarticle.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Aquarella\Ventas\ComisionLiderDet.aspx.cs">
+      <DependentUpon>ComisionLiderDet.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Aquarella\Ventas\ComisionLiderDet.aspx.designer.cs">
+      <DependentUpon>ComisionLiderDet.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Aquarella\Ventas\comisionxdocReport.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>comisionxdocReport.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Aquarella\Ventas\ConsultaVentaTk.aspx.cs">
+      <DependentUpon>ConsultaVentaTk.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Aquarella\Ventas\ConsultaVentaTk.aspx.designer.cs">
+      <DependentUpon>ConsultaVentaTk.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Aquarella\Ventas\descargar_pdf.aspx.cs">
+      <DependentUpon>descargar_pdf.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Aquarella\Ventas\descargar_pdf.aspx.designer.cs">
+      <DependentUpon>descargar_pdf.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Aquarella\Ventas\getventasemanal.aspx.cs">
+      <DependentUpon>getventasemanal.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Aquarella\Ventas\getventasemanal.aspx.designer.cs">
+      <DependentUpon>getventasemanal.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Aquarella\Ventas\panelcomisionlider_xdoc.aspx.cs">
+      <DependentUpon>panelcomisionlider_xdoc.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Aquarella\Ventas\panelcomisionlider_xdoc.aspx.designer.cs">
+      <DependentUpon>panelcomisionlider_xdoc.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Aquarella\Ventas\panelInvReports.aspx.cs">
+      <DependentUpon>panelInvReports.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Aquarella\Ventas\panelInvReports.aspx.designer.cs">
+      <DependentUpon>panelInvReports.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Aquarella\Ventas\panelReturns.aspx.cs">
+      <DependentUpon>panelReturns.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Aquarella\Ventas\panelReturns.aspx.designer.cs">
+      <DependentUpon>panelReturns.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Aquarella\Ventas\panelSalesByMajCat.aspx.cs">
+      <DependentUpon>panelSalesByMajCat.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Aquarella\Ventas\panelSalesByMajCat.aspx.designer.cs">
+      <DependentUpon>panelSalesByMajCat.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Aquarella\Ventas\panelSalesHall.aspx.cs">
+      <DependentUpon>panelSalesHall.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Aquarella\Ventas\panelSalesHall.aspx.designer.cs">
+      <DependentUpon>panelSalesHall.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Aquarella\Ventas\panel_FE.aspx.cs">
+      <DependentUpon>panel_FE.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Aquarella\Ventas\panel_FE.aspx.designer.cs">
+      <DependentUpon>panel_FE.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Aquarella\Ventas\reportlider_afiliadoventa.aspx.cs">
+      <DependentUpon>reportlider_afiliadoventa.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Aquarella\Ventas\reportlider_afiliadoventa.aspx.designer.cs">
+      <DependentUpon>reportlider_afiliadoventa.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Aquarella\Ventas\returnArticlesForm.aspx.cs">
+      <DependentUpon>returnArticlesForm.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Aquarella\Ventas\returnArticlesForm.aspx.designer.cs">
+      <DependentUpon>returnArticlesForm.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Aquarella\Ventas\rptComisionLider.aspx.cs">
+      <DependentUpon>rptComisionLider.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Aquarella\Ventas\rptComisionLider.aspx.designer.cs">
+      <DependentUpon>rptComisionLider.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Aquarella\Ventas\rptcomisionlider_xdoc.aspx.cs">
+      <DependentUpon>rptcomisionlider_xdoc.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Aquarella\Ventas\rptcomisionlider_xdoc.aspx.designer.cs">
+      <DependentUpon>rptcomisionlider_xdoc.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Aquarella\Ventas\rptReporteVenta.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>rptReporteVenta.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Aquarella\Ventas\rptVentaLider.aspx.cs">
+      <DependentUpon>rptVentaLider.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Aquarella\Ventas\rptVentaLider.aspx.designer.cs">
+      <DependentUpon>rptVentaLider.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Aquarella\Ventas\VentaAnualEstadistica.aspx.cs">
+      <DependentUpon>VentaAnualEstadistica.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Aquarella\Ventas\VentaAnualEstadistica.aspx.designer.cs">
+      <DependentUpon>VentaAnualEstadistica.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Aquarella\Ventas\VentaLiderResumido.aspx.cs">
+      <DependentUpon>VentaLiderResumido.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Aquarella\Ventas\VentaLiderResumido.aspx.designer.cs">
+      <DependentUpon>VentaLiderResumido.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Aquarella\Ventas\ventaxzona.aspx.cs">
+      <DependentUpon>ventaxzona.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Aquarella\Ventas\ventaxzona.aspx.designer.cs">
+      <DependentUpon>ventaxzona.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Be\Be_Documents_trans.cs" />
+    <Compile Include="Bll\Admonred\Asesor.cs" />
+    <Compile Include="Bll\Admonred\Consultar_Documento.cs" />
+    <Compile Include="Bll\Admonred\Contactenos_Data.cs" />
+    <Compile Include="Bll\Admonred\Coordinator.cs" />
+    <Compile Include="Bll\Admonred\Coordinator_Type.cs" />
+    <Compile Include="Bll\Admonred\Infodniruc.cs" />
+    <Compile Include="Bll\Admonred\Lider.cs" />
+    <Compile Include="Bll\Admonred\Persona.cs" />
+    <Compile Include="Bll\Control\ApplicationClass.cs" />
+    <Compile Include="Bll\Control\ApplicationFunctions.cs" />
+    <Compile Include="Bll\Control\CatalogoClass.cs" />
+    <Compile Include="Bll\Control\Conexion.cs" />
+    <Compile Include="Bll\Control\Functions.cs" />
+    <Compile Include="Bll\Control\History_Password.cs" />
+    <Compile Include="Bll\Control\InvalidCredentialsLog.cs" />
+    <Compile Include="Bll\Control\Log_Transaction.cs" />
+    <Compile Include="Bll\Control\Roles.cs" />
+    <Compile Include="Bll\Control\Status.cs" />
+    <Compile Include="Bll\Control\Users.cs" />
+    <Compile Include="Bll\Financiera\Clear.cs" />
+    <Compile Include="Bll\Financiera\Documents_Trans.cs" />
+    <Compile Include="Bll\Financiera\Payments.cs" />
+    <Compile Include="Bll\Interfaces\Adonis.cs" />
+    <Compile Include="Bll\Interfaces\Contactenos.cs" />
+    <Compile Include="Bll\Interfaces\ExpClientesBL.cs" />
+    <Compile Include="Bll\Logistica\formapago.cs" />
+    <Compile Include="Bll\Logistica\Liquidations_Hdr.cs" />
+    <Compile Include="Bll\Logistica\ManifiestoBll.cs" />
+    <Compile Include="Bll\Logistica\Order_Dtl.cs" />
+    <Compile Include="Bll\Logistica\Order_Hdr.cs" />
+    <Compile Include="Bll\Logistica\Pedido_Lider_Grupo.cs" />
+    <Compile Include="Bll\Logistica\Picking.cs" />
+    <Compile Include="Bll\Logistica\Stock.cs" />
+    <Compile Include="Bll\Logistica\Storages.cs" />
+    <Compile Include="Bll\Logistica\Transaction_det.cs" />
+    <Compile Include="Bll\Logistica\Transporters_Guides.cs" />
+    <Compile Include="Bll\Maestros\Area.cs" />
+    <Compile Include="Bll\Maestros\Article.cs" />
+    <Compile Include="Bll\Maestros\Articles_Sizes.cs" />
+    <Compile Include="Bll\Maestros\Article_Catalog.cs" />
+    <Compile Include="Bll\Maestros\Banks.cs" />
+    <Compile Include="Bll\Maestros\Basic_Data.cs" />
+    <Compile Include="Bll\Maestros\Catalog.cs" />
+    <Compile Include="Bll\Maestros\Concepts.cs" />
+    <Compile Include="Bll\Maestros\Departments.cs" />
+    <Compile Include="Bll\Maestros\Employees.cs" />
+    <Compile Include="Bll\Reports\LiqNcSubinforme.cs" />
+    <Compile Include="Bll\Reports\Liquidation.cs" />
+    <Compile Include="Bll\Reports\Manifiesto_Reports.cs" />
+    <Compile Include="Bll\Reports\Picking.cs" />
+    <Compile Include="Bll\Reports\VentaPagoSubInforme.cs" />
+    <Compile Include="Bll\Util\BarCodes.cs" />
+    <Compile Include="Bll\Util\Constants.cs" />
+    <Compile Include="Bll\Util\Cryptographic.cs" />
+    <Compile Include="Bll\Util\DataUtil.cs" />
+    <Compile Include="Bll\Util\Data_Bata.cs" />
+    <Compile Include="Bll\Util\GridViewExportUtil.cs" />
+    <Compile Include="Bll\Util\NetworkShare.cs" />
+    <Compile Include="Bll\Util\SingleTon.cs" />
+    <Compile Include="Bll\Util\TreeViewState.cs" />
+    <Compile Include="Bll\Util\Utilities.cs" />
+    <Compile Include="Bll\Util\ValuesDB.cs" />
+    <Compile Include="Bll\Ventas\Discounts.cs" />
+    <Compile Include="Bll\Ventas\Facturacion.cs" />
+    <Compile Include="Bll\Ventas\F_Electronico.cs" />
+    <Compile Include="Bll\Ventas\invoice.cs" />
+    <Compile Include="Bll\Ventas\Pivot.cs" />
+    <Compile Include="Bll\Ventas\ReporteComisionDetXDoc.cs" />
+    <Compile Include="Bll\Ventas\ReporteDevolucion.cs" />
+    <Compile Include="Bll\Ventas\ReporteFacturacion.cs" />
+    <Compile Include="Bll\Ventas\ReporteVentas.cs" />
+    <Compile Include="Bll\Ventas\Returns_Dtl.cs" />
+    <Compile Include="Bll\Ventas\Returns_Hdr.cs" />
+    <Compile Include="CrystalReport2.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CrystalReport2.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Default.aspx.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Default.aspx.designer.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Design\Site.Master.cs">
+      <DependentUpon>Site.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Design\Site.Master.designer.cs">
+      <DependentUpon>Site.Master</DependentUpon>
+    </Compile>
+    <Compile Include="Liquidation.cs" />
+    <Compile Include="liquidationReport.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>liquidationReport.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Reports\Logistica\CrystalReport1.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CrystalReport1.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\Logistica\liquidationReport.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>liquidationReport.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\Logistica\manifiestoReport.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>manifiestoReport.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\Logistica\pickingReport.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>pickingReport.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\Logistica\reportliquidacion.aspx.cs">
+      <DependentUpon>reportliquidacion.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reports\Logistica\reportliquidacion.aspx.designer.cs">
+      <DependentUpon>reportliquidacion.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\Logistica\reportLiquidation.aspx.cs">
+      <DependentUpon>reportLiquidation.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reports\Logistica\reportLiquidation.aspx.designer.cs">
+      <DependentUpon>reportLiquidation.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\Logistica\reportManifiesto.aspx.cs">
+      <DependentUpon>reportManifiesto.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reports\Logistica\reportManifiesto.aspx.designer.cs">
+      <DependentUpon>reportManifiesto.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\Logistica\reportPicking.aspx.cs">
+      <DependentUpon>reportPicking.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reports\Logistica\reportPicking.aspx.designer.cs">
+      <DependentUpon>reportPicking.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\Ventas\InvoiceReport.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>InvoiceReport.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\Ventas\reporArticlesReturnedCancel.aspx.cs">
+      <DependentUpon>reporArticlesReturnedCancel.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reports\Ventas\reporArticlesReturnedCancel.aspx.designer.cs">
+      <DependentUpon>reporArticlesReturnedCancel.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\Ventas\reportArticlesReturned.aspx.cs">
+      <DependentUpon>reportArticlesReturned.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reports\Ventas\reportArticlesReturned.aspx.designer.cs">
+      <DependentUpon>reportArticlesReturned.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\Ventas\reportArticlesReturnedDev.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>reportArticlesReturnedDev.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\Ventas\reportArticlesReturnedDevcopia.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>reportArticlesReturnedDevcopia.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\Ventas\reportInvoice.aspx.cs">
+      <DependentUpon>reportInvoice.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reports\Ventas\reportInvoice.aspx.designer.cs">
+      <DependentUpon>reportInvoice.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="report_form.aspx.cs">
+      <DependentUpon>report_form.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="report_form.aspx.designer.cs">
+      <DependentUpon>report_form.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Service\ServiceBata\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Service\ws_clientedniruc\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="UserControl\ucAddItemsForm.ascx.cs">
+      <DependentUpon>ucAddItemsForm.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControl\ucAddItemsForm.ascx.designer.cs">
+      <DependentUpon>ucAddItemsForm.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControl\ucConfigLiq.ascx.cs">
+      <DependentUpon>ucConfigLiq.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControl\ucConfigLiq.ascx.designer.cs">
+      <DependentUpon>ucConfigLiq.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControl\ucMessage.ascx.cs">
+      <DependentUpon>ucMessage.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControl\ucMessage.ascx.designer.cs">
+      <DependentUpon>ucMessage.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControl\ucShippingForm.ascx.cs">
+      <DependentUpon>ucShippingForm.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControl\ucShippingForm.ascx.designer.cs">
+      <DependentUpon>ucShippingForm.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControl\ucWareAreaForm.ascx.cs">
+      <DependentUpon>ucWareAreaForm.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControl\ucWareAreaForm.ascx.designer.cs">
+      <DependentUpon>ucWareAreaForm.ascx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Aquarella\Financiera\Docs\" />
+    <Folder Include="Aquarella\Maestros\Docs\" />
+    <Folder Include="Correo\Pedido\" />
+    <Folder Include="Windows\" />
+    <Folder Include="Windows_Desarrollo\" />
+    <Folder Include="XML\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{C0C07587-41A7-46C8-8FBD-3F9C8EBE2DDC}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Design\Site.Master" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Scripts\jquery-ui-date\development-bundle\package.json" />
+    <Content Include="Scripts\jquery-ui-date\development-bundle\README.md" />
+    <Content Include="Scripts\jquery-ui-date\development-bundle\ui.core.jquery.json" />
+    <Content Include="Scripts\jquery-ui-date\development-bundle\ui.datepicker.jquery.json" />
+    <Content Include="Scripts\jquery-ui-date\development-bundle\ui.mouse.jquery.json" />
+    <Content Include="Scripts\jquery-ui-date\development-bundle\ui.position.jquery.json" />
+    <Content Include="Scripts\jquery-ui-date\development-bundle\ui.widget.jquery.json" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Aquarella\Logistica\liquidacion_grupo_consulta.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>liquidacion_grupo_consulta.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Aquarella\Logistica\liquidationReport.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>liquidationReport.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Aquarella\Ventas\comisionxdocReport.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>comisionxdocReport.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Aquarella\Ventas\rptReporteVenta.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>rptReporteVenta.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CrystalReport2.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>CrystalReport2.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="liquidationReport.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>liquidationReport.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\Logistica\CrystalReport1.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>CrystalReport1.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\Logistica\liquidationReport.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>liquidationReport.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\Logistica\manifiestoReport.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>manifiestoReport.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\Logistica\pickingReport.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>pickingReport.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\Ventas\InvoiceReport.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>InvoiceReport.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\Ventas\reportArticlesReturnedDev.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>reportArticlesReturnedDev.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\Ventas\reportArticlesReturnedDevcopia.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>reportArticlesReturnedDevcopia.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <COMReference Include="CrystalReportViewerWebReportSourceLib">
+      <Guid>{14173BA7-071D-4216-8C9B-EAB29A55E2D4}</Guid>
+      <VersionMajor>13</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>tlbimp</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+    <COMReference Include="stdole">
+      <Guid>{00020430-0000-0000-C000-000000000046}</Guid>
+      <VersionMajor>2</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>primary</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+    <COMReference Include="VBRUN">
+      <Guid>{EA544A21-C82D-11D1-A3E4-00A0C90AEA82}</Guid>
+      <VersionMajor>6</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>9</Lcid>
+      <WrapperTool>tlbimp</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadataStorage Include="Service\ServiceBata\" />
+    <WCFMetadataStorage Include="Service\ws_clientedniruc\" />
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>favicon.ico</ApplicationIcon>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>1763</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:1766/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

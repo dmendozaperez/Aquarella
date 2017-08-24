@@ -1,0 +1,422 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{508BBEC8-AB42-49B8-B8BF-8060D4487CD4}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Sistema_Aquarella</RootNamespace>
+    <AssemblyName>Sistema Aquarella</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <IsWebBootstrapper>true</IsWebBootstrapper>
+    <TargetFrameworkProfile />
+    <PublishUrl>\\10.10.10.206\wwwroot\Aquarella\Windows\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Web</InstallFrom>
+    <UpdateEnabled>true</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <InstallUrl>http://148.102.50.45/Windows/</InstallUrl>
+    <ProductName>Sistema Aquarella</ProductName>
+    <PublisherName>Bata Peru</PublisherName>
+    <SuiteName>%28Corporacion Bata%29</SuiteName>
+    <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
+    <WebPage>publish.htm</WebPage>
+    <ApplicationRevision>74</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <CreateDesktopShortcut>true</CreateDesktopShortcut>
+    <PublishWizardCompleted>true</PublishWizardCompleted>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestCertificateThumbprint>08547568571E1DE2A5BB762BB41E4D16AC184E9F</ManifestCertificateThumbprint>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestKeyFile>
+    </ManifestKeyFile>
+  </PropertyGroup>
+  <PropertyGroup>
+    <GenerateManifests>true</GenerateManifests>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignManifests>true</SignManifests>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>favicon.ico</ApplicationIcon>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Carvajal.FEPE.PreSC">
+      <HintPath>..\..\..\CARBAJAL DLL\Dlls\Carvajal.FEPE.PreSC.dll</HintPath>
+    </Reference>
+    <Reference Include="exalib, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\EXALIB ACT\exalib.dll</HintPath>
+    </Reference>
+    <Reference Include="FlashControlV71, Version=1.0.3187.32366, Culture=neutral, PublicKeyToken=692fbea5521e1304" />
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="UBL20">
+      <HintPath>..\..\..\CARBAJAL DLL\Dlls\UBL20.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Anular_Ncredito.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Anular_Ncredito.designer.cs">
+      <DependentUpon>Anular_Ncredito.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Clases\Acceso.cs" />
+    <Compile Include="Clases\BarCodes.cs" />
+    <Compile Include="Clases\Basico.cs" />
+    <Compile Include="Clases\Constantes.cs" />
+    <Compile Include="Clases\Conv_NumLetra.cs" />
+    <Compile Include="Clases\Cryptographic.cs" />
+    <Compile Include="Clases\Facturacion_Electronica.cs" />
+    <Compile Include="Clases\Liquidacion.cs" />
+    <Compile Include="Clases\NetworkShare.cs" />
+    <Compile Include="Clases\NotaCredito.cs" />
+    <Compile Include="Clases\Permisos.cs" />
+    <Compile Include="Clases\ReportInvoiceClass.cs" />
+    <Compile Include="Clases\ReportInvoiceSummary.cs" />
+    <Compile Include="Clases\Returns_Dtl.cs" />
+    <Compile Include="Clases\Returns_Hdr.cs" />
+    <Compile Include="Clases\Transaction_det.cs" />
+    <Compile Include="Clases\Usuario.cs" />
+    <Compile Include="Clases\Venta.cs" />
+    <Compile Include="Clases\Ventana.cs" />
+    <Compile Include="ConfiguraGuia.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ConfiguraGuia.designer.cs">
+      <DependentUpon>ConfiguraGuia.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Duplicado_Tk.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Duplicado_Tk.designer.cs">
+      <DependentUpon>Duplicado_Tk.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Inicio.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Inicio.designer.cs">
+      <DependentUpon>Inicio.cs</DependentUpon>
+    </Compile>
+    <Compile Include="IPanelPedidos.cs" />
+    <Compile Include="IPrincipal.cs" />
+    <Compile Include="NotaCredito.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="NotaCredito.designer.cs">
+      <DependentUpon>NotaCredito.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Anular_Documento.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Anular_Documento.designer.cs">
+      <DependentUpon>Anular_Documento.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Principal.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Principal.designer.cs">
+      <DependentUpon>Principal.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Service References\ServiceBata\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <None Include="Service References\ServiceBata\Sistema_Aquarella.ServiceBata.ws_control_errorResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\ServiceBata\Sistema_Aquarella.ServiceBata.ws_envio_xml_desarrolloResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\ServiceBata\ws_bata1.disco" />
+    <None Include="Service References\ServiceBata\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Service References\ServiceBata\configuration.svcinfo" />
+    <None Include="Service References\ServiceBata\configuration91.svcinfo" />
+    <None Include="Service References\ServiceBata\Sistema_Aquarella.ServiceBata.ws_envio_xmlResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <EmbeddedResource Include="Anular_Ncredito.resx">
+      <DependentUpon>Anular_Ncredito.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ConfiguraGuia.resx">
+      <DependentUpon>ConfiguraGuia.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Duplicado_Tk.resx">
+      <DependentUpon>Duplicado_Tk.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Inicio.resx">
+      <DependentUpon>Inicio.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NotaCredito.resx">
+      <DependentUpon>NotaCredito.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Anular_Documento.resx">
+      <DependentUpon>Anular_Documento.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Principal.resx">
+      <DependentUpon>Principal.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <None Include="app.config" />
+    <Content Include="Certificado\CDBATA.pfx" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <None Include="Service References\ServiceBata\ws_bata1.wsdl" />
+    <None Include="Sistema Aquarella_ClaveTemporal.pfx" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.5">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4.5 %28x86 y x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="SAP.CrystalReports14.NET.2.0">
+      <Visible>False</Visible>
+      <ProductName>SAP Crystal Reports Runtime Engine for .NET Framework</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{C0C07587-41A7-46C8-8FBD-3F9C8EBE2DDC}" />
+  </ItemGroup>
+  <ItemGroup>
+    <PublishFile Include="Certificado\CDBATA.pfx">
+      <Visible>False</Visible>
+      <Group>
+      </Group>
+      <TargetPath>
+      </TargetPath>
+      <PublishState>Include</PublishState>
+      <IncludeHash>True</IncludeHash>
+      <FileType>File</FileType>
+    </PublishFile>
+    <PublishFile Include="Esquemas\FACTURA_BOLETA.xml">
+      <Visible>False</Visible>
+      <Group>
+      </Group>
+      <TargetPath>
+      </TargetPath>
+      <PublishState>Include</PublishState>
+      <IncludeHash>True</IncludeHash>
+      <FileType>File</FileType>
+    </PublishFile>
+    <PublishFile Include="Esquemas\NOTAS.xml">
+      <Visible>False</Visible>
+      <Group>
+      </Group>
+      <TargetPath>
+      </TargetPath>
+      <PublishState>Include</PublishState>
+      <IncludeHash>True</IncludeHash>
+      <FileType>File</FileType>
+    </PublishFile>
+    <PublishFile Include="log4net">
+      <Visible>False</Visible>
+      <Group>
+      </Group>
+      <TargetPath>
+      </TargetPath>
+      <PublishState>Exclude</PublishState>
+      <IncludeHash>True</IncludeHash>
+      <FileType>Assembly</FileType>
+    </PublishFile>
+    <PublishFile Include="Mapas\FACTURA_BOLETA_STD110.xml">
+      <Visible>False</Visible>
+      <Group>
+      </Group>
+      <TargetPath>
+      </TargetPath>
+      <PublishState>Include</PublishState>
+      <IncludeHash>True</IncludeHash>
+      <FileType>File</FileType>
+    </PublishFile>
+    <PublishFile Include="Mapas\NOTAS_STD110.xml">
+      <Visible>False</Visible>
+      <Group>
+      </Group>
+      <TargetPath>
+      </TargetPath>
+      <PublishState>Include</PublishState>
+      <IncludeHash>True</IncludeHash>
+      <FileType>File</FileType>
+    </PublishFile>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ICSharpCode.SharpZLib\ICSharpCode.SharpZLib.csproj">
+      <Project>{72d4a5e5-b10e-40d2-8ded-0ad8886732e4}</Project>
+      <Name>ICSharpCode.SharpZLib</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Impresora_Epson\Impresora_Epson.csproj">
+      <Project>{0f6ce48f-2e54-4ed1-a8e0-3906c4860533}</Project>
+      <Name>Impresora_Epson</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Variables\Variables.csproj">
+      <Project>{993cddf0-e8a1-4fa5-bb4b-93a2e6133a46}</Project>
+      <Name>Variables</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\aq_lineal.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\bt_delete.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\bt_destiny.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\bt_pack_order.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\bt_package.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\bt_refresh.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\bt_Save.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\bt_tasks.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\control_user.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\DuplcadoGuia.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\duplicadoFactura.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\fechaabaarriba.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\impresora.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\packages.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Esquemas\FACTURA_BOLETA.xml" />
+    <Content Include="Esquemas\NOTAS.xml" />
+    <Content Include="favicon.ico" />
+    <Content Include="Mapas\FACTURA_BOLETA_STD110.xml" />
+    <Content Include="Mapas\NOTAS_STD110.xml" />
+    <None Include="Resources\printer.ico" />
+    <None Include="Resources\images %282%292.jpg" />
+    <None Include="Resources\images %281%291.jpg" />
+    <None Include="Resources\anular.png" />
+    <None Include="Resources\images1.jpg" />
+    <None Include="Resources\images %282%291.jpg" />
+    <None Include="Resources\images %282%29.jpg" />
+    <None Include="Resources\images %281%29.jpg" />
+    <None Include="Resources\images.jpg" />
+    <None Include="Resources\delete-item-icon_small.jpg" />
+    <None Include="Resources\delete-sticker-icon-vector_small1.jpg" />
+    <None Include="Resources\delete-sticker-icon-vector_small.jpg" />
+    <None Include="Resources\Icono_archivo_borrar.png" />
+    <None Include="Resources\Shred.png" />
+    <None Include="Resources\anul_doc1.png" />
+    <None Include="Resources\anul_doc.png" />
+    <None Include="Resources\info.png" />
+    <None Include="Resources\bt_gears.png" />
+    <None Include="Resources\lupa.jpg" />
+    <None Include="Resources\inventory.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadataStorage Include="Service References\ServiceBata\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Reportes\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

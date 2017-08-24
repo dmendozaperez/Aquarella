@@ -1,0 +1,35 @@
+
+
+ <asp:GridView SkinId="gridviewSkin" runat="server" ForeColor="#333333" Width="100%"
+                                AutoGenerateColumns="false" CellPadding="6" GridLines="None" BorderStyle="Solid"
+                                BorderWidth="1px" AllowPaging="True" AllowSorting="True">
+                                <AlternatingRowStyle BackColor="White" />
+                                <EditRowStyle BackColor="#2461BF" />                              
+                                <FooterStyle BackColor="#507CD1" Font-Bold="True" ForeColor="White" />
+                                <HeaderStyle BackColor="#507CD1" Font-Bold="True" ForeColor="White" />
+                                <PagerStyle BackColor="#2461BF" ForeColor="White" HorizontalAlign="Center" />
+                                <RowStyle BackColor="#EFF3FB" BorderColor="#DEDFDE" BorderWidth="1px" BorderStyle="Solid" />
+                                <SelectedRowStyle BackColor="#D1DDF1" Font-Bold="True" ForeColor="#333333" />
+                                <SortedAscendingCellStyle BackColor="#F5F7FB" />
+                                <SortedAscendingHeaderStyle BackColor="#6D95E1" />
+                                <SortedDescendingCellStyle BackColor="#E9EBEF" />
+                                <SortedDescendingHeaderStyle BackColor="#4870BE" />
+                            </asp:GridView>
+
+
+
+                            <asp:DetailsView SkinId="detailsviewSkin" Font-Size="Medium" runat="server" Width="700px"
+                                    BorderColor="Silver" BorderWidth="1"
+                                    AutoGenerateRows="False" CellPadding="8" ForeColor="#333333" GridLines="None">
+                                    <AlternatingRowStyle BackColor="White" />
+                                    <CommandRowStyle BackColor="#D1DDF1" Font-Bold="True" />
+                                    <EditRowStyle BackColor="#2461BF" />
+                                    <FieldHeaderStyle BackColor="#DEE8F5" Font-Bold="True" />
+                                    <EmptyDataTemplate>
+                                        No existen registros; revise e inténtelo de nuevo.
+                                    </EmptyDataTemplate>
+                                    <FooterStyle BackColor="#507CD1" Font-Bold="True" ForeColor="White" />
+                                    <HeaderStyle BackColor="#507CD1" Font-Bold="True" ForeColor="White" />
+                                    <PagerStyle BackColor="#2461BF" ForeColor="White" HorizontalAlign="Center" />
+                                    <RowStyle BackColor="#EFF3FB" HorizontalAlign="Left" />
+                                </asp:DetailsView>

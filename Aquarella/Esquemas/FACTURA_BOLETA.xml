@@ -1,0 +1,920 @@
+<?xml version="1.0" encoding="iso-8859-1" ?>
+<!--Title: Esquema de Facturas y BoletasVersion: 1.0Date: 2013-11-11-->
+<ArrayOfCampoSUNAT xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <CampoSUNAT Id="100" Seccion="HEADER" Condicion="M" Format="n1" SUNAT_format="bool" Campo="ES_BAJA" Valor="*">
+    <Grupo>0</Grupo>
+    <Descripcion>Indicador de CDP dado de Baja. Se considerará una baja si este campo tiene un 1, caso contrario se lo tomará como un CDP normal.</Descripcion>
+  </CampoSUNAT>
+  <CampoSUNAT Id="150" Seccion="HEADER" Condicion="C" Format="an..100" SUNAT_format="" Campo="MOTIVO_BAJA" Valor="*">
+    <Grupo>0</Grupo>
+    <Descripcion>Motivo de la baja del CDP (sólo válido si el CDP es una baja)</Descripcion>
+  </CampoSUNAT>
+  <CampoSUNAT Id="200" Seccion="HEADER" Condicion="M" Format="an..10" SUNAT_format="YYYY-MM-DD" Campo="FECHA_EMISION" Valor="*">
+    <Grupo>1</Grupo>
+    <Descripcion>Fecha de emisión</Descripcion>
+  </CampoSUNAT>
+  <CampoSUNAT Id="300" Seccion="HEADER" Condicion="M" Format="an..3000" SUNAT_format="" Campo="FIRMA_DIGITAL" Valor="?">
+    <Grupo>2</Grupo>
+    <Descripcion>Firma Digital</Descripcion>
+  </CampoSUNAT>
+  <CampoSUNAT Id="400" Seccion="HEADER" Condicion="M" Format="an..3000" SUNAT_format="" Campo="FIRMA_DIGITAL2" Valor="?">
+    <Grupo>2</Grupo>
+    <Descripcion>Firma Digital</Descripcion>
+  </CampoSUNAT>
+  <CampoSUNAT Id="500" Seccion="HEADER" Condicion="M" Format="an..100" SUNAT_format="" Campo="EMISOR_RAZON_SOCIAL" Valor="*">
+    <Grupo>3</Grupo>
+    <Descripcion>Apellidos y nombres, denominación o razón social</Descripcion>
+  </CampoSUNAT>
+  <CampoSUNAT Id="600" Seccion="HEADER" Condicion="C" Format="an..100" SUNAT_format="" Campo="EMISOR_NOMBRE_COMERCIAL" Valor="*">
+    <Grupo>4</Grupo>
+    <Descripcion>Nombre Comercial</Descripcion>
+  </CampoSUNAT>
+  <CampoSUNAT Id="700" Seccion="HEADER" Condicion="C" Format="an6" SUNAT_format="" Campo="EMISOR_CODIGO_UBIGEO" Valor="#">
+    <Grupo>5</Grupo>
+    <Descripcion>Código de ubigeo (Catálogo No. 13)</Descripcion>
+  </CampoSUNAT>
+  <CampoSUNAT Id="800" Seccion="HEADER" Condicion="C" Format="an..100" SUNAT_format="" Campo="EMISOR_DIRECCION_COMPLETA" Valor="*">
+    <Grupo>5</Grupo>
+    <Descripcion>Dirección completa y detallada</Descripcion>
+  </CampoSUNAT>
+  <CampoSUNAT Id="900" Seccion="HEADER" Condicion="C" Format="an..25" SUNAT_format="" Campo="EMISOR_URBANIZACION" Valor="*">
+    <Grupo>5</Grupo>
+    <Descripcion>Urbanización</Descripcion>
+  </CampoSUNAT>
+  <CampoSUNAT Id="1000" Seccion="HEADER" Condicion="C" Format="an..30" SUNAT_format="" Campo="EMISOR_PROVINCIA" Valor="*">
+    <Grupo>5</Grupo>
+    <Descripcion>Provincia</Descripcion>
+  </CampoSUNAT>
+  <CampoSUNAT Id="1100" Seccion="HEADER" Condicion="C" Format="an..30" SUNAT_format="" Campo="EMISOR_DEPARTAMENTO" Valor="*">
+    <Grupo>5</Grupo>
+    <Descripcion>Departamento</Descripcion>
+  </CampoSUNAT>
+  <CampoSUNAT Id="1200" Seccion="HEADER" Condicion="C" Format="an..30" SUNAT_format="" Campo="EMISOR_DISTRITO" Valor="*">
+    <Grupo>5</Grupo>
+    <Descripcion>Distrito</Descripcion>
+  </CampoSUNAT>
+  <CampoSUNAT Id="1300" Seccion="HEADER" Condicion="C" Format="an2" SUNAT_format="" Campo="EMISOR_PAIS" Valor="#">
+    <Grupo>5</Grupo>
+    <Descripcion>Código de país (Catálogo No. 04)</Descripcion>
+  </CampoSUNAT>
+  <CampoSUNAT Id="1400" Seccion="HEADER" Condicion="M" Format="n..11" SUNAT_format="" Campo="EMISOR_RUC" Valor="*">
+    <Grupo>6</Grupo>
+    <Descripcion>Número de RUC</Descripcion>
+  </CampoSUNAT>
+  <CampoSUNAT Id="1500" Seccion="HEADER" Condicion="M" Format="n1" SUNAT_format="" Campo="EMISOR_TIPO" Valor="6">
+    <Grupo>6</Grupo>
+    <Descripcion>Tipo de Documento</Descripcion>
+  </CampoSUNAT>
+  <CampoSUNAT Id="1600" Seccion="HEADER" Condicion="M" Format="an2" SUNAT_format="" Campo="CDP_TIPO" Valor="#">
+    <Grupo>7</Grupo>
+    <Descripcion>Tipo de documento (Factura: 01 ó Boleta de Venta: 03)</Descripcion>
+  </CampoSUNAT>
+  <CampoSUNAT Id="1700" Seccion="HEADER" Condicion="M" Format="an..13" SUNAT_format="F###-NNNNNNNN" Campo="CDP_NUMERO" Valor="*">
+    <Grupo>8</Grupo>
+    <Descripcion>Numeración, conformada por serie y número correlativo</Descripcion>
+  </CampoSUNAT>
+  <CampoSUNAT Id="1800" Seccion="HEADER" Condicion="C" Format="an..15" SUNAT_format="" Campo="RECEPTOR_DOCUMENTO" Valor="*">
+    <Grupo>9</Grupo>
+    <Descripcion>Número de documento de identidad del adquirente o usuario</Descripcion>
+  </CampoSUNAT>
+  <CampoSUNAT Id="1900" Seccion="HEADER" Condicion="M" Format="an..1" SUNAT_format="" Campo="RECEPTOR_TIPO_DOCUMENTO" Valor="#">
+    <Grupo>9</Grupo>
+    <Descripcion>Tipo de documento de identidad del adquirente o usuario</Descripcion>
+  </CampoSUNAT>
+  <CampoSUNAT Id="2000" Seccion="HEADER" Condicion="M" Format="an..100" SUNAT_format="" Campo="RECEPTOR_RAZON_SOCIAL" Valor="*">
+    <Grupo>10</Grupo>
+    <Descripcion>Apellidos y nombres, denominación o razón social del adquirente o usuario</Descripcion>
+  </CampoSUNAT>
+  <CampoSUNAT Id="2050" Seccion="HEADER" Condicion="C" Format="an..100" SUNAT_format="" Campo="RECEPTOR_DIRECCION" Valor="*">
+    <Grupo>10</Grupo>
+    <Descripcion>Dirección en el país del adquiriente o lugar de destino</Descripcion>
+  </CampoSUNAT>
+  <CampoSUNAT Id="2055" Seccion="HEADER" Condicion="M" Format="an..25" SUNAT_format="" Campo="NRO_RESOLUCION_SUNAT" Valor="*">
+    <Grupo>10</Grupo>
+    <Descripcion>Número de la resolución emitida por la SUNAT para el emisor</Descripcion>
+  </CampoSUNAT>
+  <CampoSUNAT Id="2060" Seccion="HEADER" Condicion="C" Format="an..1280" SUNAT_format="" Campo="RECEPTOR_EMAILS" Valor="*">
+    <Grupo>10</Grupo>
+    <Descripcion>Lista separada por punto y comas de emails del adquiriente</Descripcion>
+  </CampoSUNAT>
+  <CampoSUNAT Id="2070" Seccion="HEADER" Condicion="C" Format="an..100" SUNAT_format="" Campo="CODIGO_PLANTILLA" Valor="*">
+    <Grupo>10</Grupo>
+    <Descripcion>Codigo de la plantilla PDF para el documento</Descripcion>
+  </CampoSUNAT>
+  <CampoSUNAT Id="2071" Seccion="HEADER" Condicion="C" Format="an..5" SUNAT_format="" Campo="CODIGO_IMPRESORA" Valor="*">
+    <Grupo>10</Grupo>
+    <Descripcion>Código de la Impresora en la cual se debe imprimir el documento</Descripcion>
+  </CampoSUNAT>
+  <CampoSUNAT Id="2072" Seccion="HEADER" Condicion="C" Format="n..5" SUNAT_format="" Campo="CANTIDAD_COPIAS" Valor="*">
+    <Grupo>10</Grupo>
+    <Descripcion>Cantidad de copias del PDF a imprimir</Descripcion>
+  </CampoSUNAT>
+  <CampoSUNAT Id="2080" Seccion="HEADER" Condicion="C" Format="an..4" SUNAT_format="" Campo="ID_TOTAL_DESCUENTOS" Valor="*">
+    <Grupo>10</Grupo>
+    <Descripcion>Identificador de Total de descuentos</Descripcion>
+  </CampoSUNAT>
+  <CampoSUNAT Id="2081" Seccion="HEADER" Condicion="C" Format="an..100" SUNAT_format="" Campo="FECHA_VENCIMIENTO" Valor="*">
+    <Grupo>10</Grupo>
+    <Descripcion>Fecha de vencimiento.</Descripcion>
+  </CampoSUNAT>
+  <CampoSUNAT Id="2090" Seccion="HEADER" Condicion="C" Format="an..15" SUNAT_format="n(12,2)" Campo="VALOR_TOTAL_DESCUENTOS" Valor="#">
+    <Grupo>10</Grupo>
+    <Descripcion>Valor total descuentos</Descripcion>
+  </CampoSUNAT>
+  <CampoSUNAT Id="2091" Seccion="HEADER" Condicion="M" Format="an..100" SUNAT_format="" Campo="CONDICIONES_DE_PAGO" Valor="*">
+    <Grupo>10</Grupo>
+    <Descripcion>Condiciones de pago.</Descripcion>
+  </CampoSUNAT>
+  <CampoSUNAT Id="2092" Seccion="HEADER" Condicion="M" Format="an..100" SUNAT_format="" Campo="ORDEN_DE_COMPRA" Valor="*">
+    <Grupo>10</Grupo>
+    <Descripcion>Orden de compra.</Descripcion>
+  </CampoSUNAT>
+  <CampoSUNAT Id="2095" Seccion="HEADER" Condicion="C" Format="an..3" SUNAT_format="" Campo="MONEDA" Valor="*">
+    <Grupo>1</Grupo>
+    <Descripcion>Tipo Moneda en la cual se emite el documento</Descripcion>
+  </CampoSUNAT>
+  <CampoSUNAT Id="2096" Seccion="HEADER" Condicion="C" Format="n..2" SUNAT_format="" Campo="TIPO_OPERACION" Valor="*">
+    <Grupo>1</Grupo>
+    <Descripcion>Tipo de operación.</Descripcion>
+  </CampoSUNAT>
+  <CampoSUNAT Id="2097" Seccion="HEADERIMP" Condicion="C" Format="an..4" SUNAT_format="" Campo="CODIGO_FISE" Valor="*">
+    <Grupo>1</Grupo>
+    <Descripcion>Código - FISE (Ley 29852) Fondo Inclusión Social Energético (3001)</Descripcion>
+  </CampoSUNAT>
+  <CampoSUNAT Id="2098" Seccion="HEADERIMP" Condicion="C" Format="an..18" SUNAT_format="n(15,2)" Campo="VALOR_FISE" Valor="*">
+    <Grupo>1</Grupo>
+    <Descripcion>Monto - FISE (Ley 29852) Fondo Inclusión Social Energético.</Descripcion>
+  </CampoSUNAT>
+  <CampoSUNAT Id="2099" Seccion="HEADER" Condicion="C" Format="n..15" SUNAT_format="" Campo="RECEPTOR_RUC" Valor="*">
+    <Grupo>1</Grupo>
+    <Descripcion>RUC de la empresa receptora.</Descripcion>
+  </CampoSUNAT>
+  <CampoSUNAT Id="2100" Seccion="ITEMS" Condicion="M" Format="an..3" SUNAT_format="" Campo="UNIDAD_MEDIDA" Valor="#">
+    <Grupo>11</Grupo>
+    <Descripcion>Unidad de medida por ítem</Descripcion>
+  </CampoSUNAT>
+  <CampoSUNAT Id="2200" Seccion="ITEMS" Condicion="M" Format="an..23" SUNAT_format="n(12,10)" Campo="CANTIDAD" Valor="*">
+    <Grupo>12</Grupo>
+    <Descripcion>Cantidad de unidades por ítem</Descripcion>
+  </CampoSUNAT>
+  <CampoSUNAT Id="2300" Seccion="ITEMS" Condicion="M" Format="an..250" SUNAT_format="" Campo="DESCRIPCION" Valor="*">
+    <Grupo>13</Grupo>
+    <Descripcion>Descripción detallada del servicio prestado, bien vendido o cedido en uso, indicando las características.</Descripcion>
+  </CampoSUNAT>
+  <CampoSUNAT Id="2400" Seccion="ITEMS" Condicion="M" Format="an..23" SUNAT_format="n(12,10)" Campo="PRECIO_UNITARIO_NO_GRAVADO" Valor="*">
+    <Grupo>14</Grupo>
+    <Descripcion>Valor unitario por ítem</Descripcion>
+  </CampoSUNAT>
+  <CampoSUNAT Id="2500" Seccion="ITEMS" Condicion="M" Format="" SUNAT_format="" Campo="PRECIO_UNITARIO_NO_GRAVADO_MONEDA" Valor="#">
+    <Grupo>14</Grupo>
+    <Descripcion>Atributo Moneda</Descripcion>
+  </CampoSUNAT>
+  <CampoSUNAT Id="2600" Seccion="ITEMS" Condicion="M" Format="an..23" SUNAT_format="n(12,10)" Campo="PRECIO_UNITARIO_GRAVADO" Valor="*">
+    <Grupo>15</Grupo>
+    <Descripcion>Precio de venta unitario por item (con tributos y descuentos)</Descripcion>
+  </CampoSUNAT>
+  <CampoSUNAT Id="2700" Seccion="ITEMS" Condicion="M" Format="" SUNAT_format="" Campo="PRECIO_UNITARIO_GRAVADO_MONEDA" Valor="#">
+    <Grupo>15</Grupo>
+    <Descripcion>Atributo Moneda</Descripcion>
+  </CampoSUNAT>
+  <CampoSUNAT Id="2800" Seccion="ITEMS" Condicion="M" Format="an2" SUNAT_format="" Campo="PRECIO_CODIGO" Valor="*">
+    <Grupo>15</Grupo>
+    <Descripcion>Código de tipo de precio del ítem</Descripcion>
+  </CampoSUNAT>
+  <CampoSUNAT Id="2900" Seccion="ITEMS" Condicion="M" Format="1..1" SUNAT_format="" Campo="ITEM_IGV" Valor="/">
+    <Grupo>16</Grupo>
+    <Descripcion>IGV del ítem</Descripcion>
+  </CampoSUNAT>
+  <CampoSUNAT Id="3000" Seccion="ITEM_IGV" Condicion="M" Format="an..15" SUNAT_format="n(12,2)" Campo="MONTO" Valor="*">
+    <Grupo>16</Grupo>
+    <Descripcion>Monto IGV del ítem</Descripcion>
+  </CampoSUNAT>
+  <CampoSUNAT Id="3100" Seccion="ITEM_IGV" Condicion="M" Format="" SUNAT_format="" Campo="MONEDA" Valor="PEN">
+    <Grupo>16</Grupo>
+    <Descripcion>Atributo Moneda</Descripcion>
+  </CampoSUNAT>
+  <CampoSUNAT Id="3200" Seccion="ITEM_IGV" Condicion="M" Format="an..15" SUNAT_format="n(12,2)" Campo="SUBTOTAL" Valor="*">
+    <Grupo>16</Grupo>
+    <Descripcion>Monto IGV del ítem</Descripcion>
+  </CampoSUNAT>
+  <CampoSUNAT Id="3300" Seccion="ITEM_IGV" Condicion="M" Format="" SUNAT_format="" Campo="SUBTOTAL_MONEDA" Valor="PEN">
+    <Grupo>16</Grupo>
+    <Descripcion>Atributo Moneda</Descripcion>
+  </CampoSUNAT>
+  <CampoSUNAT Id="3400" Seccion="ITEM_IGV" Condicion="M" Format="an2" SUNAT_format="" Campo="SUBTOTAL_TIPO_AFECTACION" Valor="#">
+    <Grupo>16</Grupo>
+    <Descripcion>Tipo de afectación IGV</Descripcion>
+  </CampoSUNAT>
+  <CampoSUNAT Id="3500" Seccion="ITEM_IGV" Condicion="C" Format="an2" SUNAT_format="" Campo="SUBTOTAL_SISTEMA_CALCULO" Valor="#">
+    <Grupo>16</Grupo>
+    <Descripcion>Sistema de Cálculo IGV</Descripcion>
+  </CampoSUNAT>
+  <CampoSUNAT Id="3600" Seccion="ITEM_IGV" Condicion="M" Format="an4" SUNAT_format="" Campo="SUBTOTAL_ID_TRIBUTO" Valor="1000">
+    <Grupo>16</Grupo>
+    <Descripcion>Id de tributo</Descripcion>
+  </CampoSUNAT>
+  <CampoSUNAT Id="3700" Seccion="ITEM_IGV" Condicion="M" Format="an..6" SUNAT_format="" Campo="SUBTOTAL_DESCRIPCION_TRIBUTO" Valor="IGV">
+    <Grupo>16</Grupo>
+    <Descripcion>Descripción del tributo</Descripcion>
+  </CampoSUNAT>
+  <CampoSUNAT Id="3800" Seccion="ITEM_IGV" Condicion="M" Format="an3" SUNAT_format="" Campo="SUBTOTAL_CODIGO_TRIBUTO" Valor="VAT">
+    <Grupo>16</Grupo>
+    <Descripcion>Código de tributo</Descripcion>
+  </CampoSUNAT>
+  <CampoSUNAT Id="3900" Seccion="ITEMS" Condicion="C" Format="0..1" SUNAT_format="" Campo="ITEM_ISC" Valor="/">
+    <Grupo>17</Grupo>
+    <Descripcion>ISC del ítem</Descripcion>
+  </CampoSUNAT>
+  <CampoSUNAT Id="4000" Seccion="ITEM_ISC" Condicion="C" Format="an..15" SUNAT_format="n(12,2)" Campo="MONTO" Valor="*">
+    <Grupo>17</Grupo>
+    <Descripcion>Monto ISC del ítem</Descripcion>
+  </CampoSUNAT>
+  <CampoSUNAT Id="4100" Seccion="ITEM_ISC" Condicion="C" Format="" SUNAT_format="" Campo="MONEDA" Valor="PEN">
+    <Grupo>17</Grupo>
+    <Descripcion>Atributo Moneda</Descripcion>
+  </CampoSUNAT>
+  <CampoSUNAT Id="4200" Seccion="ITEM_ISC" Condicion="C" Format="an..15" SUNAT_format="n(12,2)" Campo="SUBTOTAL" Valor="*">
+    <Grupo>17</Grupo>
+    <Descripcion>Monto ISC del ítem</Descripcion>
+  </CampoSUNAT>
+  <CampoSUNAT Id="4300" Seccion="ITEM_ISC" Condicion="C" Format="" SUNAT_format="" Campo="SUBTOTAL_MONEDA" Valor="PEN">
+    <Grupo>17</Grupo>
+    <Descripcion>Atributo Moneda</Descripcion>
+  </CampoSUNAT>
+  <CampoSUNAT Id="4400" Seccion="ITEM_ISC" Condicion="C" Format="an2" SUNAT_format="" Campo="SUBTOTAL_TIPO_AFECTACION" Valor="#">
+    <Grupo>17</Grupo>
+    <Descripcion>Tipo de afectación ISC</Descripcion>
+  </CampoSUNAT>
+  <CampoSUNAT Id="4500" Seccion="ITEM_ISC" Condicion="C" Format="an2" SUNAT_format="" Campo="SUBTOTAL_SISTEMA_CALCULO" Valor="#">
+    <Grupo>17</Grupo>
+    <Descripcion>Sistema de Cálculo ISC</Descripcion>
+  </CampoSUNAT>
+  <CampoSUNAT Id="4600" Seccion="ITEM_ISC" Condicion="C" Format="an4" SUNAT_format="" Campo="SUBTOTAL_ID_TRIBUTO" Valor="2000">
+    <Grupo>17</Grupo>
+    <Descripcion>Id de tributo</Descripcion>
+  </CampoSUNAT>
+  <CampoSUNAT Id="4700" Seccion="ITEM_ISC" Condicion="C" Format="an..6" SUNAT_format="" Campo="SUBTOTAL_DESCRIPCION_TRIBUTO" Valor="ISC">
+    <Grupo>17</Grupo>
+    <Descripcion>Descripción del tributo</Descripcion>
+  </CampoSUNAT>
+  <CampoSUNAT Id="4800" Seccion="ITEM_ISC" Condicion="C" Format="an3" SUNAT_format="" Campo="SUBTOTAL_CODIGO_TRIBUTO" Valor="EXC">
+    <Grupo>17</Grupo>
+    <Descripcion>Código de tributo</Descripcion>
+  </CampoSUNAT>
+  <CampoSUNAT Id="4900" Seccion="ITEMS" Condicion="C" Format="0..n" SUNAT_format="" Campo="ITEM_IMPUESTOS" Valor="/">
+    <Grupo>16,17</Grupo>
+    <Descripcion>IMPUESTOS del ítem</Descripcion>
+  </CampoSUNAT>
+  <CampoSUNAT Id="5000" Seccion="ITEM_IMPUESTOS" Condicion="C" Format="an..15" SUNAT_format="n(12,2)" Campo="MONTO" Valor="*">
+    <Grupo>16,17</Grupo>
+    <Descripcion>Monto del Impuesto</Descripcion>
+  </CampoSUNAT>
+  <CampoSUNAT Id="5001" Seccion="ITEM_IMPUESTOS" Condicion="C" Format="an..15" SUNAT_format="n(12,2)" Campo="BASE_IMPONIBLE" Valor="*">
+    <Grupo>16,17</Grupo>
+    <Descripcion>Base Imponible</Descripcion>
+  </CampoSUNAT>
+  <CampoSUNAT Id="5002" Seccion="ITEM_IMPUESTOS" Condicion="C" Format="an..5" SUNAT_format="n(2,2)" Campo="PORCENTAJE_BASE_IMPONIBLE" Valor="*">
+    <Grupo>16,17</Grupo>
+    <Descripcion>Porcentaje aplicable a Base Imponible</Descripcion>
+  </CampoSUNAT>
+  <CampoSUNAT Id="5100" Seccion="ITEM_IMPUESTOS" Condicion="C" Format="" SUNAT_format="" Campo="MONEDA" Valor="#">
+    <Grupo>16,17</Grupo>
+    <Descripcion>Atributo Moneda</Descripcion>
+  </CampoSUNAT>
+  <CampoSUNAT Id="5200" Seccion="ITEM_IMPUESTOS" Condicion="C" Format="an..15" SUNAT_format="n(12,2)" Campo="SUBTOTAL" Valor="*">
+    <Grupo>16,17</Grupo>
+    <Descripcion>Monto del impuesto del ítem</Descripcion>
+  </CampoSUNAT>
+  <CampoSUNAT Id="5300" Seccion="ITEM_IMPUESTOS" Condicion="C" Format="" SUNAT_format="" Campo="SUBTOTAL_MONEDA" Valor="#">
+    <Grupo>16,17</Grupo>
+    <Descripcion>Atributo Moneda</Descripcion>
+  </CampoSUNAT>
+  <CampoSUNAT Id="5400" Seccion="ITEM_IMPUESTOS" Condicion="C" Format="an2" SUNAT_format="" Campo="SUBTOTAL_TIPO_AFECTACION" Valor="#">
+    <Grupo>16,17</Grupo>
+    <Descripcion>Tipo de afectación</Descripcion>
+  </CampoSUNAT>
+  <CampoSUNAT Id="5500" Seccion="ITEM_IMPUESTOS" Condicion="C" Format="an2" SUNAT_format="" Campo="SUBTOTAL_SISTEMA_CALCULO" Valor="#">
+    <Grupo>16,17</Grupo>
+    <Descripcion>Sistema de Cálculo</Descripcion>
+  </CampoSUNAT>
+  <CampoSUNAT Id="5600" Seccion="ITEM_IMPUESTOS" Condicion="C" Format="an4" SUNAT_format="" Campo="SUBTOTAL_ID_TRIBUTO" Valor="*">
+    <Grupo>16,17</Grupo>
+    <Descripcion>Id de tributo</Descripcion>
+  </CampoSUNAT>
+  <CampoSUNAT Id="5700" Seccion="ITEM_IMPUESTOS" Condicion="C" Format="an..6" SUNAT_format="" Campo="SUBTOTAL_DESCRIPCION_TRIBUTO" Valor="*">
+    <Grupo>16,17</Grupo>
+    <Descripcion>Descripción del tributo</Descripcion>
+  </CampoSUNAT>
+  <CampoSUNAT Id="5800" Seccion="ITEM_IMPUESTOS" Condicion="C" Format="an3" SUNAT_format="" Campo="SUBTOTAL_CODIGO_TRIBUTO" Valor="*">
+    <Grupo>16,17</Grupo>
+    <Descripcion>Código de tributo</Descripcion>
+  </CampoSUNAT>
+  <CampoSUNAT Id="5900" Seccion="ITEMS" Condicion="M" Format="an..23" SUNAT_format="n(12,10)" Campo="VALOR_VENTA_ITEM" Valor="*">
+    <Grupo>21</Grupo>
+    <Descripcion>Valor de Venta por ítem</Descripcion>
+  </CampoSUNAT>
+  <CampoSUNAT Id="6000" Seccion="ITEMS" Condicion="M" Format="" SUNAT_format="" Campo="VALOR_VENTA_ITEM_MONEDA" Valor="#">
+    <Grupo>21</Grupo>
+    <Descripcion>Atributo Moneda</Descripcion>
+  </CampoSUNAT>
+  <CampoSUNAT Id="6100" Seccion="ITEMS" Condicion="M" Format="n..5" SUNAT_format="" Campo="NUMERO" Valor="1">
+    <Grupo>33</Grupo>
+    <Descripcion>Número de orden del Ítem</Descripcion>
+  </CampoSUNAT>
+  <CampoSUNAT Id="6200" Seccion="ITEMS" Condicion="C" Format="an..30" SUNAT_format="" Campo="CODIGO" Valor="*">
+    <Grupo>34</Grupo>
+    <Descripcion>Código de producto</Descripcion>
+  </CampoSUNAT>
+  <CampoSUNAT Id="6300" Seccion="ITEMS" Condicion="C" Format="an..23" SUNAT_format="n(12,2)" Campo="VALOR_REFERENCIAL" Valor="*">
+    <Grupo>35</Grupo>
+    <Descripcion>Valor referencial unitario por ítem en operaciones no onerosas y código</Descripcion>
+  </CampoSUNAT>
+  <CampoSUNAT Id="6400" Seccion="ITEMS" Condicion="C" Format="" SUNAT_format="" Campo="VALOR_REFERENCIAL_MONEDA" Valor="#">
+    <Grupo>35</Grupo>
+    <Descripcion>Atributo Moneda</Descripcion>
+  </CampoSUNAT>
+  <CampoSUNAT Id="6500" Seccion="ITEMS" Condicion="C" Format="an2" SUNAT_format="" Campo="VALOR_REFERENCIAL_CODIGO" Valor="*">
+    <Grupo>35</Grupo>
+    <Descripcion>Código de Tipo de Valor</Descripcion>
+  </CampoSUNAT>
+  <CampoSUNAT Id="6540" Seccion="ITEMS" Condicion="C" Format="0..n" SUNAT_format="" Campo="ITEM_DESCUENTOS_CARGOS" Valor="/">
+    <Grupo>42</Grupo>
+    <Descripcion>Descuentos o Cargos por Item</Descripcion>
+  </CampoSUNAT>
+  <CampoSUNAT Id="6570" Seccion="ITEM_DESCUENTOS_CARGOS" Condicion="C" Format="an..3" SUNAT_format="" Campo="CODIGO" Valor="#">
+    <Grupo>42</Grupo>
+    <Descripcion>Código del Descuento/Cargo</Descripcion>
+  </CampoSUNAT>
+  <CampoSUNAT Id="6571" Seccion="ITEM_DESCUENTOS_CARGOS" Condicion="C" Format="an..100" SUNAT_format="" Campo="DESCRIPCION" Valor="*">
+    <Grupo>42</Grupo>
+    <Descripcion>Descripción del Descuento/Cargo del Item</Descripcion>
+  </CampoSUNAT>
+  <CampoSUNAT Id="6572" Seccion="ITEM_DESCUENTOS_CARGOS" Condicion="C" Format="an..15" SUNAT_format="n(12,2)" Campo="IMPORTE" Valor="*">
+    <Grupo>42</Grupo>
+    <Descripcion>Importe Final del Descuento/Cargo del Item</Descripcion>
+  </CampoSUNAT>
+  <CampoSUNAT Id="6573" Seccion="ITEM_DESCUENTOS_CARGOS" Condicion="C" Format="an..6" SUNAT_format="n(3,2)" Campo="PORCENTAJE" Valor="*">
+    <Grupo>42</Grupo>
+    <Descripcion>Porcentaje del Descuento/Cargo del Item</Descripcion>
+  </CampoSUNAT>
+  <CampoSUNAT Id="6574" Seccion="ITEM_DESCUENTOS_CARGOS" Condicion="C" Format="an..15" SUNAT_format="" Campo="CODIGO_PRODUCTO" Valor="*">
+    <Grupo />
+    <Descripcion>Código del Producto</Descripcion>
+  </CampoSUNAT>
+  <CampoSUNAT Id="6575" Seccion="ITEM_DESCUENTOS_CARGOS" Condicion="C" Format="n..5" SUNAT_format="" Campo="NUMERO_ITEM" Valor="*">
+    <Grupo />
+    <Descripcion>Número de Item</Descripcion>
+  </CampoSUNAT>
+  <CampoSUNAT Id="6600" Seccion="FOOTER" Condicion="M" Format="an..10" SUNAT_format="" Campo="VERSION_UBL" Valor="2.0">
+    <Grupo>36</Grupo>
+    <Descripcion>Versión del UBL</Descripcion>
+  </CampoSUNAT>
+  <CampoSUNAT Id="6700" Seccion="FOOTER" Condicion="M" Format="an..10" SUNAT_format="" Campo="VERSION_ESTRUCTURA" Valor="1.0">
+    <Grupo>37</Grupo>
+    <Descripcion>Versión de la estructura del documento</Descripcion>
+  </CampoSUNAT>
+  <CampoSUNAT Id="6800" Seccion="FOOTER" Condicion="C" Format="0..1" SUNAT_format="" Campo="TOTAL_GRAVADO" Valor="/">
+    <Grupo>18</Grupo>
+    <Descripcion>Total operaciones Gravadas</Descripcion>
+  </CampoSUNAT>
+  <CampoSUNAT Id="6900" Seccion="TOTAL_GRAVADO" Condicion="C" Format="an4" SUNAT_format="" Campo="CODIGO" Valor="1001">
+    <Grupo>18</Grupo>
+    <Descripcion>Código Total valor de venta - operaciones gravadas</Descripcion>
+  </CampoSUNAT>
+  <CampoSUNAT Id="7000" Seccion="TOTAL_GRAVADO" Condicion="C" Format="an..15" SUNAT_format="n(12,2)" Campo="IMPORTE" Valor="*">
+    <Grupo>18</Grupo>
+    <Descripcion>Total valor de venta - operaciones gravadas</Descripcion>
+  </CampoSUNAT>
+  <CampoSUNAT Id="7100" Seccion="TOTAL_GRAVADO" Condicion="C" Format="" SUNAT_format="" Campo="MONEDA" Valor="PEN">
+    <Grupo>18</Grupo>
+    <Descripcion>Atributo Moneda</Descripcion>
+  </CampoSUNAT>
+  <CampoSUNAT Id="7200" Seccion="TOTAL_GRAVADO" Condicion="C" Format="an..15" SUNAT_format="n(12,2)" Campo="MONTO" Valor="*">
+    <Grupo>18</Grupo>
+    <Descripcion>Monto cobrado expresado en moneda nacional</Descripcion>
+  </CampoSUNAT>
+  <CampoSUNAT Id="7300" Seccion="TOTAL_GRAVADO" Condicion="C" Format="" SUNAT_format="" Campo="MONTO_MONEDA" Valor="PEN">
+    <Grupo>18</Grupo>
+    <Descripcion>Atributo Moneda</Descripcion>
+  </CampoSUNAT>
+  <CampoSUNAT Id="7400" Seccion="FOOTER" Condicion="C" Format="0..1" SUNAT_format="" Campo="TOTAL_INAFECTO" Valor="/">
+    <Grupo>19</Grupo>
+    <Descripcion>Total operaciones Inafectas</Descripcion>
+  </CampoSUNAT>
+  <CampoSUNAT Id="7500" Seccion="TOTAL_INAFECTO" Condicion="C" Format="an4" SUNAT_format="" Campo="CODIGO" Valor="1002">
+    <Grupo>19</Grupo>
+    <Descripcion>Código Total valor de venta - operaciones inafectas</Descripcion>
+  </CampoSUNAT>
+  <CampoSUNAT Id="7600" Seccion="TOTAL_INAFECTO" Condicion="C" Format="an..15" SUNAT_format="n(12,2)" Campo="IMPORTE" Valor="*">
+    <Grupo>19</Grupo>
+    <Descripcion>Total valor de venta - operaciones inafectas</Descripcion>
+  </CampoSUNAT>
+  <CampoSUNAT Id="7700" Seccion="TOTAL_INAFECTO" Condicion="C" Format="" SUNAT_format="" Campo="MONEDA" Valor="PEN">
+    <Grupo>19</Grupo>
+    <Descripcion>Atributo Moneda</Descripcion>
+  </CampoSUNAT>
+  <CampoSUNAT Id="7800" Seccion="TOTAL_INAFECTO" Condicion="C" Format="an..15" SUNAT_format="n(12,2)" Campo="MONTO" Valor="*">
+    <Grupo>19</Grupo>
+    <Descripcion>Monto cobrado expresado en moneda nacional</Descripcion>
+  </CampoSUNAT>
+  <CampoSUNAT Id="7900" Seccion="TOTAL_INAFECTO" Condicion="C" Format="" SUNAT_format="" Campo="MONTO_MONEDA" Valor="PEN">
+    <Grupo>19</Grupo>
+    <Descripcion>Atributo Moneda</Descripcion>
+  </CampoSUNAT>
+  <CampoSUNAT Id="8000" Seccion="FOOTER" Condicion="C" Format="0..1" SUNAT_format="" Campo="TOTAL_EXONERADO" Valor="/">
+    <Grupo>20</Grupo>
+    <Descripcion>Total operaciones Exoneradas</Descripcion>
+  </CampoSUNAT>
+  <CampoSUNAT Id="8100" Seccion="TOTAL_EXONERADO" Condicion="C" Format="an4" SUNAT_format="" Campo="CODIGO" Valor="1003">
+    <Grupo>20</Grupo>
+    <Descripcion>Código Total valor de venta - operaciones exoneradas</Descripcion>
+  </CampoSUNAT>
+  <CampoSUNAT Id="8200" Seccion="TOTAL_EXONERADO" Condicion="C" Format="an..15" SUNAT_format="n(12,2)" Campo="IMPORTE" Valor="*">
+    <Grupo>20</Grupo>
+    <Descripcion>Total valor de venta - operaciones exoneradas</Descripcion>
+  </CampoSUNAT>
+  <CampoSUNAT Id="8300" Seccion="TOTAL_EXONERADO" Condicion="C" Format="" SUNAT_format="" Campo="MONEDA" Valor="PEN">
+    <Grupo>20</Grupo>
+    <Descripcion>Atributo Moneda</Descripcion>
+  </CampoSUNAT>
+  <CampoSUNAT Id="8400" Seccion="TOTAL_EXONERADO" Condicion="C" Format="an..15" SUNAT_format="n(12,2)" Campo="MONTO" Valor="*">
+    <Grupo>20</Grupo>
+    <Descripcion>Monto cobrado expresado en moneda nacional</Descripcion>
+  </CampoSUNAT>
+  <CampoSUNAT Id="8500" Seccion="TOTAL_EXONERADO" Condicion="C" Format="" SUNAT_format="" Campo="MONTO_MONEDA" Valor="PEN">
+    <Grupo>20</Grupo>
+    <Descripcion>Atributo Moneda</Descripcion>
+  </CampoSUNAT>
+  <CampoSUNAT Id="8600" Seccion="FOOTER" Condicion="C" Format="0..n" SUNAT_format="" Campo="OTROS_CONCEPTOS_TRIBUTARIOS" Valor="/">
+    <Grupo>18,19,20</Grupo>
+    <Descripcion>Otros Conceptos Tributarios</Descripcion>
+  </CampoSUNAT>
+  <CampoSUNAT Id="8700" Seccion="OTROS_CONCEPTOS_TRIBUTARIOS" Condicion="C" Format="an4" SUNAT_format="" Campo="CODIGO" Valor="#">
+    <Grupo>18,19,20</Grupo>
+    <Descripcion>Código Otros Conceptos Tributarios</Descripcion>
+  </CampoSUNAT>
+  <CampoSUNAT Id="8800" Seccion="OTROS_CONCEPTOS_TRIBUTARIOS" Condicion="C" Format="an..15" SUNAT_format="n(12,2)" Campo="IMPORTE" Valor="*">
+    <Grupo>18,19,20</Grupo>
+    <Descripcion>Importe total de descuentos aplicados.</Descripcion>
+  </CampoSUNAT>
+  <CampoSUNAT Id="8900" Seccion="OTROS_CONCEPTOS_TRIBUTARIOS" Condicion="C" Format="" SUNAT_format="" Campo="MONEDA" Valor="#">
+    <Grupo>18,19,20</Grupo>
+    <Descripcion>Atributo Moneda</Descripcion>
+  </CampoSUNAT>
+  <CampoSUNAT Id="9000" Seccion="OTROS_CONCEPTOS_TRIBUTARIOS" Condicion="C" Format="an..15" SUNAT_format="n(12,2)" Campo="MONTO" Valor="*">
+    <Grupo>18,19,20</Grupo>
+    <Descripcion>Monto cobrado expresado en moneda nacional</Descripcion>
+  </CampoSUNAT>
+  <CampoSUNAT Id="9100" Seccion="OTROS_CONCEPTOS_TRIBUTARIOS" Condicion="C" Format="" SUNAT_format="" Campo="MONTO_MONEDA" Valor="#">
+    <Grupo>18,19,20</Grupo>
+    <Descripcion>Atributo Moneda</Descripcion>
+  </CampoSUNAT>
+  <CampoSUNAT Id="9101" Seccion="OTROS_CONCEPTOS_TRIBUTARIOS" Condicion="C" Format="an..15" SUNAT_format="n(12.2)" Campo="VALOR_REFERENCIAL_MONTO" Valor="*">
+    <Grupo>18,19,20</Grupo>
+    <Descripcion>Base Imponible percepcion/Valor referencial</Descripcion>
+  </CampoSUNAT>
+  <CampoSUNAT Id="9102" Seccion="OTROS_CONCEPTOS_TRIBUTARIOS" Condicion="C" Format="" SUNAT_format="" Campo="VALOR_REFERENCIAL_MONEDA" Valor="#">
+    <Grupo>18,19,20</Grupo>
+    <Descripcion>Atributo Moneda</Descripcion>
+  </CampoSUNAT>
+  <CampoSUNAT Id="9200" Seccion="FOOTER" Condicion="C" Format="0..1" SUNAT_format="" Campo="TOTAL_IGV" Valor="/">
+    <Grupo>22</Grupo>
+    <Descripcion>TOTAL IGV</Descripcion>
+  </CampoSUNAT>
+  <CampoSUNAT Id="9300" Seccion="TOTAL_IGV" Condicion="C" Format="an..15" SUNAT_format="n(12,2)" Campo="TOTAL" Valor="*">
+    <Grupo>22</Grupo>
+    <Descripcion>Sumatoria IGV</Descripcion>
+  </CampoSUNAT>
+  <CampoSUNAT Id="9400" Seccion="TOTAL_IGV" Condicion="C" Format="" SUNAT_format="" Campo="MONEDA" Valor="PEN">
+    <Grupo>22</Grupo>
+    <Descripcion>Atributo Moneda</Descripcion>
+  </CampoSUNAT>
+  <CampoSUNAT Id="9500" Seccion="TOTAL_IGV" Condicion="C" Format="an..15" SUNAT_format="n(12,2)" Campo="SUBTOTAL" Valor="*">
+    <Grupo>22</Grupo>
+    <Descripcion>Sumatoria IGV</Descripcion>
+  </CampoSUNAT>
+  <CampoSUNAT Id="9600" Seccion="TOTAL_IGV" Condicion="C" Format="" SUNAT_format="" Campo="SUBTOTAL_MONEDA" Valor="PEN">
+    <Grupo>22</Grupo>
+    <Descripcion>Atributo Moneda</Descripcion>
+  </CampoSUNAT>
+  <CampoSUNAT Id="9700" Seccion="TOTAL_IGV" Condicion="C" Format="an4" SUNAT_format="" Campo="SUBTOTAL_ID" Valor="1000">
+    <Grupo>22</Grupo>
+    <Descripcion>Id de Tipo de Tributo (IGV=Impuesto General a las Ventas)</Descripcion>
+  </CampoSUNAT>
+  <CampoSUNAT Id="9800" Seccion="TOTAL_IGV" Condicion="C" Format="an..6" SUNAT_format="" Campo="SUBTOTAL_NOMBRE" Valor="IGV">
+    <Grupo>22</Grupo>
+    <Descripcion>Nombre del Tributo</Descripcion>
+  </CampoSUNAT>
+  <CampoSUNAT Id="9900" Seccion="TOTAL_IGV" Condicion="C" Format="an3" SUNAT_format="" Campo="SUBTOTAL_CODIGO" Valor="VAT">
+    <Grupo>22</Grupo>
+    <Descripcion>Código de Tipo de Tributo</Descripcion>
+  </CampoSUNAT>
+  <CampoSUNAT Id="10000" Seccion="FOOTER" Condicion="C" Format="0..1" SUNAT_format="" Campo="TOTAL_ISC" Valor="/">
+    <Grupo>23</Grupo>
+    <Descripcion>TOTAL ISC</Descripcion>
+  </CampoSUNAT>
+  <CampoSUNAT Id="10100" Seccion="TOTAL_ISC" Condicion="C" Format="an..15" SUNAT_format="n(12,2)" Campo="TOTAL" Valor="*">
+    <Grupo>23</Grupo>
+    <Descripcion>Sumatoria ISC</Descripcion>
+  </CampoSUNAT>
+  <CampoSUNAT Id="10200" Seccion="TOTAL_ISC" Condicion="C" Format="" SUNAT_format="" Campo="MONEDA" Valor="PEN">
+    <Grupo>23</Grupo>
+    <Descripcion>Atributo Moneda</Descripcion>
+  </CampoSUNAT>
+  <CampoSUNAT Id="10300" Seccion="TOTAL_ISC" Condicion="C" Format="an..15" SUNAT_format="n(12,2)" Campo="SUBTOTAL" Valor="*">
+    <Grupo>23</Grupo>
+    <Descripcion>Sumatoria ISC</Descripcion>
+  </CampoSUNAT>
+  <CampoSUNAT Id="10400" Seccion="TOTAL_ISC" Condicion="C" Format="" SUNAT_format="" Campo="SUBTOTAL_MONEDA" Valor="PEN">
+    <Grupo>23</Grupo>
+    <Descripcion>Atributo Moneda</Descripcion>
+  </CampoSUNAT>
+  <CampoSUNAT Id="10500" Seccion="TOTAL_ISC" Condicion="C" Format="an4" SUNAT_format="" Campo="SUBTOTAL_ID" Valor="2000">
+    <Grupo>23</Grupo>
+    <Descripcion>Id de Tipo de Tributo (ISC=Impuesto Selectivo al Consumo)</Descripcion>
+  </CampoSUNAT>
+  <CampoSUNAT Id="10600" Seccion="TOTAL_ISC" Condicion="C" Format="an..6" SUNAT_format="" Campo="SUBTOTAL_NOMBRE" Valor="ISC">
+    <Grupo>23</Grupo>
+    <Descripcion>Nombre del Tributo</Descripcion>
+  </CampoSUNAT>
+  <CampoSUNAT Id="10700" Seccion="TOTAL_ISC" Condicion="C" Format="an3" SUNAT_format="" Campo="SUBTOTAL_CODIGO" Valor="EXC">
+    <Grupo>23</Grupo>
+    <Descripcion>Código de Tipo de Tributo</Descripcion>
+  </CampoSUNAT>
+  <CampoSUNAT Id="10800" Seccion="FOOTER" Condicion="C" Format="0..n" SUNAT_format="" Campo="TOTAL_OTROS_TRIBUTOS" Valor="/">
+    <Grupo>24</Grupo>
+    <Descripcion>TOTAL OTROS TRIBUTOS</Descripcion>
+  </CampoSUNAT>
+  <CampoSUNAT Id="10900" Seccion="TOTAL_OTROS_TRIBUTOS" Condicion="C" Format="an..15" SUNAT_format="n(12,2)" Campo="TOTAL" Valor="*">
+    <Grupo>24</Grupo>
+    <Descripcion>Sumatoria otros tributos</Descripcion>
+  </CampoSUNAT>
+  <CampoSUNAT Id="11000" Seccion="TOTAL_OTROS_TRIBUTOS" Condicion="C" Format="" SUNAT_format="" Campo="MONEDA" Valor="#">
+    <Grupo>24</Grupo>
+    <Descripcion>Atributo Moneda</Descripcion>
+  </CampoSUNAT>
+  <CampoSUNAT Id="11100" Seccion="TOTAL_OTROS_TRIBUTOS" Condicion="C" Format="an..15" SUNAT_format="n(12,2)" Campo="SUBTOTAL" Valor="*">
+    <Grupo>24</Grupo>
+    <Descripcion>Sumatoria otros tributos</Descripcion>
+  </CampoSUNAT>
+  <CampoSUNAT Id="11200" Seccion="TOTAL_OTROS_TRIBUTOS" Condicion="C" Format="" SUNAT_format="" Campo="SUBTOTAL_MONEDA" Valor="#">
+    <Grupo>24</Grupo>
+    <Descripcion>Atributo Moneda</Descripcion>
+  </CampoSUNAT>
+  <CampoSUNAT Id="11300" Seccion="TOTAL_OTROS_TRIBUTOS" Condicion="C" Format="an4" SUNAT_format="" Campo="SUBTOTAL_ID" Valor="#">
+    <Grupo>24</Grupo>
+    <Descripcion>Id de Tipo de Tributo</Descripcion>
+  </CampoSUNAT>
+  <CampoSUNAT Id="11400" Seccion="TOTAL_OTROS_TRIBUTOS" Condicion="C" Format="an..6" SUNAT_format="" Campo="SUBTOTAL_NOMBRE" Valor="#">
+    <Grupo>24</Grupo>
+    <Descripcion>Nombre del Tributo</Descripcion>
+  </CampoSUNAT>
+  <CampoSUNAT Id="11500" Seccion="TOTAL_OTROS_TRIBUTOS" Condicion="C" Format="an3" SUNAT_format="" Campo="SUBTOTAL_CODIGO" Valor="#">
+    <Grupo>24</Grupo>
+    <Descripcion>Código de Tipo de Tributo</Descripcion>
+  </CampoSUNAT>
+  <CampoSUNAT Id="11600" Seccion="FOOTER" Condicion="C" Format="an..15" SUNAT_format="n(12,2)" Campo="TOTAL_OTROS_CARGOS" Valor="*">
+    <Grupo>25</Grupo>
+    <Descripcion>Sumatoria otros Cargos</Descripcion>
+  </CampoSUNAT>
+  <CampoSUNAT Id="11700" Seccion="FOOTER" Condicion="C" Format="" SUNAT_format="" Campo="TOTAL_OTROS_CARGOS_MONEDA" Valor="#">
+    <Grupo>25</Grupo>
+    <Descripcion>Atributo Moneda</Descripcion>
+  </CampoSUNAT>
+  <CampoSUNAT Id="11800" Seccion="FOOTER" Condicion="C" Format="0..1" SUNAT_format="" Campo="TOTAL_DESCUENTOS" Valor="/">
+    <Grupo>26</Grupo>
+    <Descripcion>Total descuentos</Descripcion>
+  </CampoSUNAT>
+  <CampoSUNAT Id="11900" Seccion="TOTAL_DESCUENTOS" Condicion="C" Format="an..3" SUNAT_format="" Campo="CODIGO" Valor="*">
+    <Grupo>26</Grupo>
+    <Descripcion>Total descuentos (codigo)</Descripcion>
+  </CampoSUNAT>
+  <CampoSUNAT Id="12000" Seccion="TOTAL_DESCUENTOS" Condicion="C" Format="an..15" SUNAT_format="n(12,2)" Campo="IMPORTE" Valor="*">
+    <Grupo>26</Grupo>
+    <Descripcion>Importe del total de descuentos</Descripcion>
+  </CampoSUNAT>
+  <CampoSUNAT Id="12100" Seccion="TOTAL_DESCUENTOS" Condicion="C" Format="" SUNAT_format="" Campo="MONEDA" Valor="PEN">
+    <Grupo>26</Grupo>
+    <Descripcion>Atributo Moneda</Descripcion>
+  </CampoSUNAT>
+  <CampoSUNAT Id="12200" Seccion="FOOTER" Condicion="C" Format="0..n" SUNAT_format="" Campo="DESCUENTOS_CARGOS" Valor="/">
+    <Grupo>26</Grupo>
+    <Descripcion>Descuentos o Cargos</Descripcion>
+  </CampoSUNAT>
+  <CampoSUNAT Id="12300" Seccion="DESCUENTOS_CARGOS" Condicion="C" Format="an..3" SUNAT_format="" Campo="CODIGO" Valor="#">
+    <Grupo>26</Grupo>
+    <Descripcion>Código del Descuento/Cargo</Descripcion>
+  </CampoSUNAT>
+  <CampoSUNAT Id="12301" Seccion="DESCUENTOS_CARGOS" Condicion="C" Format="an..100" SUNAT_format="" Campo="DESCRIPCION" Valor="*">
+    <Grupo>26</Grupo>
+    <Descripcion>Descripcion del Descuento/Cargo</Descripcion>
+  </CampoSUNAT>
+  <CampoSUNAT Id="12302" Seccion="DESCUENTOS_CARGOS" Condicion="C" Format="an..15" SUNAT_format="n(12,2)" Campo="IMPORTE" Valor="*">
+    <Grupo>26</Grupo>
+    <Descripcion>Importe del Total del Descuento/Cargo</Descripcion>
+  </CampoSUNAT>
+  <CampoSUNAT Id="12303" Seccion="DESCUENTOS_CARGOS" Condicion="C" Format="an..6" SUNAT_format="n(3,2)" Campo="PORCENTAJE" Valor="*">
+    <Grupo>26</Grupo>
+    <Descripcion>Porcentaje del Descuento/Cargo</Descripcion>
+  </CampoSUNAT>
+  <CampoSUNAT Id="12304" Seccion="DESCUENTOS_CARGOS" Condicion="C" Format="" SUNAT_format="" Campo="MONEDA" Valor="PEN">
+    <Grupo>26</Grupo>
+    <Descripcion>Moneda del Descuento/Cargo</Descripcion>
+  </CampoSUNAT>
+  <CampoSUNAT Id="12600" Seccion="FOOTER" Condicion="M" Format="an..15" SUNAT_format="n(12,2)" Campo="TOTAL_GENERAL" Valor="*">
+    <Grupo>27</Grupo>
+    <Descripcion>Importe total de la venta, cesión en uso o del servicio prestado. Es la sumatoria de los elementos 18, 19, 20, 22, 23, 24 y 25.</Descripcion>
+  </CampoSUNAT>
+  <CampoSUNAT Id="12700" Seccion="FOOTER" Condicion="M" Format="" SUNAT_format="" Campo="TOTAL_GENERAL_MONEDA" Valor="#">
+    <Grupo>27</Grupo>
+    <Descripcion>Atributo Moneda</Descripcion>
+  </CampoSUNAT>
+  <CampoSUNAT Id="12800" Seccion="FOOTER" Condicion="M" Format="an3" SUNAT_format="" Campo="CODIGO_MONEDA" Valor="#">
+    <Grupo>28</Grupo>
+    <Descripcion>Tipo de moneda en la cual se emite la factura electrónica</Descripcion>
+  </CampoSUNAT>
+  <CampoSUNAT Id="12900" Seccion="FOOTER" Condicion="C" Format="0..n" SUNAT_format="" Campo="GUIAS" Valor="/">
+    <Grupo>29</Grupo>
+    <Descripcion>Tipo y número de la guía de remisión relacionada con la operación que se factura</Descripcion>
+  </CampoSUNAT>
+  <CampoSUNAT Id="13000" Seccion="GUIAS" Condicion="C" Format="an..30" SUNAT_format="" Campo="NUMERO" Valor="*">
+    <Grupo>29</Grupo>
+    <Descripcion>Número del documento de referencia</Descripcion>
+  </CampoSUNAT>
+  <CampoSUNAT Id="13100" Seccion="GUIAS" Condicion="C" Format="an2" SUNAT_format="" Campo="TIPO" Valor="#">
+    <Grupo>29</Grupo>
+    <Descripcion>Tipo de documento de referencia</Descripcion>
+  </CampoSUNAT>
+  <CampoSUNAT Id="13200" Seccion="GUIAS" Condicion="C" Format="an10" SUNAT_format="YYYY-MM-DD" Campo="FECHA" Valor="*">
+    <Grupo>29</Grupo>
+    <Descripcion>Fecha del documento de referencia</Descripcion>
+  </CampoSUNAT>
+  <CampoSUNAT Id="13300" Seccion="FOOTER" Condicion="C" Format="0..n" SUNAT_format="" Campo="DOCUMENTO_RELACIONADO" Valor="/">
+    <Grupo>30</Grupo>
+    <Descripcion>Tipo y número de otro documento y código relacionado con la operación que se factura</Descripcion>
+  </CampoSUNAT>
+  <CampoSUNAT Id="13400" Seccion="DOCUMENTO_RELACIONADO" Condicion="C" Format="an..30" SUNAT_format="" Campo="NUMERO" Valor="*">
+    <Grupo>30</Grupo>
+    <Descripcion>Número del documento de referencia</Descripcion>
+  </CampoSUNAT>
+  <CampoSUNAT Id="13500" Seccion="DOCUMENTO_RELACIONADO" Condicion="C" Format="an2" SUNAT_format="" Campo="TIPO" Valor="#">
+    <Grupo>30</Grupo>
+    <Descripcion>Tipo de documento de referencia</Descripcion>
+  </CampoSUNAT>
+  <CampoSUNAT Id="13600" Seccion="DOCUMENTO_RELACIONADO" Condicion="C" Format="an10" SUNAT_format="YYYY-MM-DD" Campo="FECHA" Valor="*">
+    <Grupo>30</Grupo>
+    <Descripcion>Fecha del documento de referencia</Descripcion>
+  </CampoSUNAT>
+  <CampoSUNAT Id="13700" Seccion="FOOTER" Condicion="C" Format="0..n" SUNAT_format="" Campo="LEYENDAS" Valor="/">
+    <Grupo>31</Grupo>
+    <Descripcion>LEYENDAS</Descripcion>
+  </CampoSUNAT>
+  <CampoSUNAT Id="13800" Seccion="LEYENDAS" Condicion="C" Format="an4" SUNAT_format="" Campo="CODIGO" Valor="#">
+    <Grupo>31</Grupo>
+    <Descripcion>Código de Leyenda</Descripcion>
+  </CampoSUNAT>
+  <CampoSUNAT Id="13900" Seccion="LEYENDAS" Condicion="C" Format="an..100" SUNAT_format="" Campo="DESCRIPCION" Valor="*">
+    <Grupo>31</Grupo>
+    <Descripcion>Descripcion de la Leyenda</Descripcion>
+  </CampoSUNAT>
+  <CampoSUNAT Id="14000" Seccion="FOOTER" Condicion="C" Format="0..n" SUNAT_format="" Campo="NOTAS" Valor="/">
+    <Grupo>31</Grupo>
+    <Descripcion>NOTAS</Descripcion>
+  </CampoSUNAT>
+  <CampoSUNAT Id="14100" Seccion="NOTAS" Condicion="C" Format="an4" SUNAT_format="" Campo="CODIGO" Valor="#">
+    <Grupo>31</Grupo>
+    <Descripcion>Código de Nota</Descripcion>
+  </CampoSUNAT>
+  <CampoSUNAT Id="14200" Seccion="NOTAS" Condicion="C" Format="an..100" SUNAT_format="" Campo="DESCRIPCION" Valor="*">
+    <Grupo>31</Grupo>
+    <Descripcion>Detalle de la nota</Descripcion>
+  </CampoSUNAT>
+  <CampoSUNAT Id="14300" Seccion="FOOTER" Condicion="C" Format="0..1" SUNAT_format="" Campo="PERCEPCION" Valor="/">
+    <Grupo>32</Grupo>
+    <Descripcion>Percepción en moneda nacional</Descripcion>
+  </CampoSUNAT>
+  <CampoSUNAT Id="14400" Seccion="PERCEPCION" Condicion="C" Format="an4" SUNAT_format="" Campo="CODIGO" Valor="2001">
+    <Grupo>32</Grupo>
+    <Descripcion>Código de la percepción en moneda nacional</Descripcion>
+  </CampoSUNAT>
+  <CampoSUNAT Id="14450" Seccion="PERCEPCION" Condicion="C" Format="an..15" SUNAT_format="n(12,2)" Campo="BASE_IMPONIBLE" Valor="*">
+    <Grupo>32</Grupo>
+    <Descripcion>Base imponible de la percepción en moneda nacional</Descripcion>
+  </CampoSUNAT>
+  <CampoSUNAT Id="14500" Seccion="PERCEPCION" Condicion="C" Format="an..15" SUNAT_format="n(12,2)" Campo="IMPORTE" Valor="*">
+    <Grupo>32</Grupo>
+    <Descripcion>Importe de la percepción en moneda nacional</Descripcion>
+  </CampoSUNAT>
+  <CampoSUNAT Id="14600" Seccion="PERCEPCION" Condicion="C" Format="" SUNAT_format="" Campo="MONEDA" Valor="PEN">
+    <Grupo>32</Grupo>
+    <Descripcion>Atributo Moneda</Descripcion>
+  </CampoSUNAT>
+  <CampoSUNAT Id="14700" Seccion="PERCEPCION" Condicion="C" Format="an..15" SUNAT_format="n(12,2)" Campo="MONTO" Valor="*">
+    <Grupo>32</Grupo>
+    <Descripcion>Monto cobrado expresado en moneda nacional</Descripcion>
+  </CampoSUNAT>
+  <CampoSUNAT Id="14800" Seccion="PERCEPCION" Condicion="C" Format="" SUNAT_format="" Campo="MONTO_MONEDA" Valor="PEN">
+    <Grupo>32</Grupo>
+    <Descripcion>Atributo Moneda</Descripcion>
+  </CampoSUNAT>
+  <CampoSUNAT Id="14900" Seccion="FOOTER" Condicion="C" Format="0..1" SUNAT_format="" Campo="TOTAL_OPERACIONES_GRATUITAS" Valor="/">
+    <Grupo>40</Grupo>
+    <Descripcion>Total Operaciones Gratuitas</Descripcion>
+  </CampoSUNAT>
+  <CampoSUNAT Id="15000" Seccion="TOTAL_OPERACIONES_GRATUITAS" Condicion="C" Format="an4" SUNAT_format="" Campo="CODIGO" Valor="1004">
+    <Grupo>40</Grupo>
+    <Descripcion>Código del tipo de elemento</Descripcion>
+  </CampoSUNAT>
+  <CampoSUNAT Id="15100" Seccion="TOTAL_OPERACIONES_GRATUITAS" Condicion="C" Format="an..15" SUNAT_format="n(12,2)" Campo="IMPORTE" Valor="*">
+    <Grupo>40</Grupo>
+    <Descripcion>Total Valor Venta Operaciones gratuitas</Descripcion>
+  </CampoSUNAT>
+  <CampoSUNAT Id="15200" Seccion="TOTAL_OPERACIONES_GRATUITAS" Condicion="C" Format="" SUNAT_format="" Campo="MONEDA" Valor="PEN">
+    <Grupo>40</Grupo>
+    <Descripcion>Total Valor Venta Operaciones gratuitas</Descripcion>
+  </CampoSUNAT>
+  <CampoSUNAT Id="15300" Seccion="FOOTER" Condicion="C" Format="an..15" SUNAT_format="n(12,2)" Campo="MONTO_DESCUENTO_GLOBAL" Valor="*">
+    <Grupo>41</Grupo>
+    <Descripcion>Monto del Descuento Global</Descripcion>
+  </CampoSUNAT>
+  <CampoSUNAT Id="15400" Seccion="FOOTER" Condicion="C" Format="" SUNAT_format="" Campo="MONEDA_DESCUENTO_GLOBAL" Valor="#">
+    <Grupo>41</Grupo>
+    <Descripcion>Moneda del Descuento Global</Descripcion>
+  </CampoSUNAT>
+  <CampoSUNAT Id="15500" Seccion="FOOTER" Condicion="C" Format="an4" SUNAT_format="" Campo="VALOR_REFERENCIAL_CODIGO" Valor="3010">
+    <Grupo>38</Grupo>
+    <Descripcion>Código de Valor referencial del servicio de transporte de bienes realizado por vía terrestre</Descripcion>
+  </CampoSUNAT>
+  <CampoSUNAT Id="15600" Seccion="FOOTER" Condicion="C" Format="an..15" SUNAT_format="n(12,2)" Campo="VALOR_REFERENCIAL_MONTO" Valor="*">
+    <Grupo>38</Grupo>
+    <Descripcion>Monto de Valor referencial del servicio de transporte de bienes realizado por vía terrestre</Descripcion>
+  </CampoSUNAT>
+  <CampoSUNAT Id="15700" Seccion="FOOTER" Condicion="C" Format="" SUNAT_format="" Campo="VALOR_REFERENCIAL_MONEDA" Valor="PEN">
+    <Grupo>38</Grupo>
+    <Descripcion>Moneda de Valor referencial del servicio de transporte de bienes realizado por vía terrestre</Descripcion>
+  </CampoSUNAT>
+  <CampoSUNAT Id="15800" Seccion="FOOTER" Condicion="C" Format="0..n" SUNAT_format="" Campo="RECURSOS_HIDROBIOLOGICOS" Valor="/">
+    <Grupo>39-42</Grupo>
+    <Descripcion>Recursos Hidrobiológicos</Descripcion>
+  </CampoSUNAT>
+  <CampoSUNAT Id="15900" Seccion="RECURSOS_HIDROBIOLOGICOS" Condicion="C" Format="an4" SUNAT_format="" Campo="CODIGO" Valor="*">
+    <Grupo>39-42</Grupo>
+    <Descripcion>Código de Detracción</Descripcion>
+  </CampoSUNAT>
+  <CampoSUNAT Id="16000" Seccion="RECURSOS_HIDROBIOLOGICOS" Condicion="C" Format="an..150" SUNAT_format="" Campo="DESCRIPCION" Valor="*">
+    <Grupo>39-42</Grupo>
+    <Descripcion>Detalle de la Detracción</Descripcion>
+  </CampoSUNAT>
+  <CampoSUNAT Id="16100" Seccion="FOOTER" Condicion="C" Format="0..n" SUNAT_format="" Campo="TRANSPORTE_TERRESTRE_BIENES" Valor="/">
+    <Grupo>43-47</Grupo>
+    <Descripcion>Transporte de Bienes por vía terrestre</Descripcion>
+  </CampoSUNAT>
+  <CampoSUNAT Id="16200" Seccion="TRANSPORTE_TERRESTRE_BIENES" Condicion="C" Format="an4" SUNAT_format="" Campo="CODIGO" Valor="*">
+    <Grupo>43-47</Grupo>
+    <Descripcion>Código de Detracción</Descripcion>
+  </CampoSUNAT>
+  <CampoSUNAT Id="16300" Seccion="TRANSPORTE_TERRESTRE_BIENES" Condicion="C" Format="an..100" SUNAT_format="" Campo="DESCRIPCION" Valor="*">
+    <Grupo>43-47</Grupo>
+    <Descripcion>Detalle de la Detracción</Descripcion>
+  </CampoSUNAT>
+  <CampoSUNAT Id="16400" Seccion="TRANSPORTE_TERRESTRE_BIENES" Condicion="C" Format="an..100" SUNAT_format="" Campo="NOMBRE" Valor="*">
+    <Grupo>43-47</Grupo>
+    <Descripcion>Descripción de la Detracción</Descripcion>
+  </CampoSUNAT>
+  <CampoSUNAT Id="16500" Seccion="FOOTER" Condicion="C" Format="0..n" SUNAT_format="" Campo="BENEFICIO_HOSPEDAJES" Valor="/">
+    <Grupo>48</Grupo>
+    <Descripcion>Beneficio Hospedajes</Descripcion>
+  </CampoSUNAT>
+  <CampoSUNAT Id="16600" Seccion="BENEFICIO_HOSPEDAJES" Condicion="C" Format="an4" SUNAT_format="" Campo="CODIGO" Valor="*">
+    <Grupo>48</Grupo>
+    <Descripcion>Código de Detracción</Descripcion>
+  </CampoSUNAT>
+  <CampoSUNAT Id="16700" Seccion="BENEFICIO_HOSPEDAJES" Condicion="C" Format="an..150" SUNAT_format="" Campo="DESCRIPCION" Valor="*">
+    <Grupo>48</Grupo>
+    <Descripcion>Detalle de la Detracción</Descripcion>
+  </CampoSUNAT>
+  <CampoSUNAT Id="16800" Seccion="FOOTER" Condicion="C" Format="" SUNAT_format="" Campo="TOTAL_IMPUESTOS_MONEDA" Valor="#">
+    <Grupo>41</Grupo>
+    <Descripcion>Moneda de Total de Impuestos</Descripcion>
+  </CampoSUNAT>
+  <CampoSUNAT Id="16900" Seccion="FOOTER" Condicion="C" Format="" SUNAT_format="" Campo="TOTAL_IMPUESTOS" Valor="*">
+    <Grupo>41</Grupo>
+    <Descripcion>Monto de Total de Impuestos</Descripcion>
+  </CampoSUNAT>
+  <CampoSUNAT Id="16901" Seccion="FOOTER" Condicion="C" Format="" SUNAT_format="" Campo="TOTAL_ACUMULADO_CON_IMPUESTOS" Valor="*">
+    <Grupo>41</Grupo>
+    <Descripcion>Monto de Total de Acumulado de Impuestos</Descripcion>
+  </CampoSUNAT>
+  <CampoSUNAT Id="16902" Seccion="FOOTER" Condicion="C" Format="" SUNAT_format="" Campo="TOTAL_ACUMULADO_CON_IMPUESTOS_MONEDA" Valor="#">
+    <Grupo>41</Grupo>
+    <Descripcion>Moneda de Total de Acumulado de Impuestos</Descripcion>
+  </CampoSUNAT>
+  <CampoSUNAT Id="16800" Seccion="FOOTER" Condicion="C" Format="0..1" SUNAT_format="" Campo="TRASLADO_BIENES" Valor="/">
+    <Grupo>49</Grupo>
+    <Descripcion>Translado de Bienes</Descripcion>
+  </CampoSUNAT>
+  <CampoSUNAT Id="16900" Seccion="TRASLADO_BIENES" Condicion="C" Format="an..6" SUNAT_format="" Campo="CODIGO_UBIGEO" Valor="*">
+    <Grupo>49</Grupo>
+    <Descripcion>Código de ubigeo - de la Dirección del punto de partida</Descripcion>
+  </CampoSUNAT>
+  <CampoSUNAT Id="17000" Seccion="TRASLADO_BIENES" Condicion="C" Format="an..100" SUNAT_format="" Campo="DIRECCION_PUNTO_PARTIDA" Valor="*">
+    <Grupo>49</Grupo>
+    <Descripcion>Dirección del punto de partida completa y detallada</Descripcion>
+  </CampoSUNAT>
+  <CampoSUNAT Id="17100" Seccion="TRASLADO_BIENES" Condicion="C" Format="an..25" SUNAT_format="" Campo="URBANIZACION_PUNTO_PARTIDA" Valor="*">
+    <Grupo>49</Grupo>
+    <Descripcion>Urbanización de la dirección del punto de partida</Descripcion>
+  </CampoSUNAT>
+  <CampoSUNAT Id="17200" Seccion="TRASLADO_BIENES" Condicion="C" Format="an..30" SUNAT_format="" Campo="PROVINCIA_PUNTO_PARTIDA" Valor="*">
+    <Grupo>49</Grupo>
+    <Descripcion>Provincia de la dirección del punto de partida</Descripcion>
+  </CampoSUNAT>
+  <CampoSUNAT Id="17300" Seccion="TRASLADO_BIENES" Condicion="C" Format="an..30" SUNAT_format="" Campo="DEPARTAMENTO_PUNTO_PARTIDA" Valor="*">
+    <Grupo>49</Grupo>
+    <Descripcion>Departamento de la dirección del punto de partida</Descripcion>
+  </CampoSUNAT>
+  <CampoSUNAT Id="17400" Seccion="TRASLADO_BIENES" Condicion="C" Format="an..30" SUNAT_format="" Campo="DISTRITO_PUNTO_PARTIDA" Valor="*">
+    <Grupo>49</Grupo>
+    <Descripcion>Distrito de la dirección del punto de partida</Descripcion>
+  </CampoSUNAT>
+  <CampoSUNAT Id="17500" Seccion="TRASLADO_BIENES" Condicion="C" Format="an2" SUNAT_format="" Campo="CODIGO_PAIS_PUNTO_PARTIDA" Valor="*">
+    <Grupo>49</Grupo>
+    <Descripcion>Código de país de la dirección del punto de partida</Descripcion>
+  </CampoSUNAT>
+  <CampoSUNAT Id="17600" Seccion="TRASLADO_BIENES" Condicion="C" Format="an..6" SUNAT_format="" Campo="COD_UBIGEO_PUNTO_LLEGADA" Valor="*">
+    <Grupo>49</Grupo>
+    <Descripcion>Código de ubigeo de la dirección del punto de llegada</Descripcion>
+  </CampoSUNAT>
+  <CampoSUNAT Id="17700" Seccion="TRASLADO_BIENES" Condicion="C" Format="an..100" SUNAT_format="" Campo="DIRECCION_PUNTO_LLEGADA" Valor="*">
+    <Grupo>49</Grupo>
+    <Descripcion>Dirección del punto de llegada completa y detallada</Descripcion>
+  </CampoSUNAT>
+  <CampoSUNAT Id="17800" Seccion="TRASLADO_BIENES" Condicion="C" Format="an..25" SUNAT_format="" Campo="URBANIZACION_PUNTO_LLEGADA" Valor="*">
+    <Grupo>49</Grupo>
+    <Descripcion>Urbanización de la dirección del punto de llegada</Descripcion>
+  </CampoSUNAT>
+  <CampoSUNAT Id="17900" Seccion="TRASLADO_BIENES" Condicion="C" Format="an..30" SUNAT_format="" Campo="PROVINCIA_PUNTO_LLEGADA" Valor="*">
+    <Grupo>49</Grupo>
+    <Descripcion>Provincia de la dirección del punto de llegada</Descripcion>
+  </CampoSUNAT>
+  <CampoSUNAT Id="18000" Seccion="TRASLADO_BIENES" Condicion="C" Format="an..30" SUNAT_format="" Campo="DEPARTAMENTO_PUNTO_LLEGADA" Valor="*">
+    <Grupo>49</Grupo>
+    <Descripcion>Departamento de la dirección del punto de llegada</Descripcion>
+  </CampoSUNAT>
+  <CampoSUNAT Id="18100" Seccion="TRASLADO_BIENES" Condicion="C" Format="an..30" SUNAT_format="" Campo="DISTRITO_PUNTO_LLEGADA" Valor="*">
+    <Grupo>49</Grupo>
+    <Descripcion>Distrito de la dirección del punto de llegada</Descripcion>
+  </CampoSUNAT>
+  <CampoSUNAT Id="18200" Seccion="TRASLADO_BIENES" Condicion="C" Format="an2" SUNAT_format="" Campo="CODIGO_PAIS_PUNTO_LLEGADA" Valor="*">
+    <Grupo>49</Grupo>
+    <Descripcion>Código de país de la dirección del punto de llegada</Descripcion>
+  </CampoSUNAT>
+  <CampoSUNAT Id="18300" Seccion="TRASLADO_BIENES" Condicion="C" Format="an..10" SUNAT_format="" Campo="PLACA_VEHICULO" Valor="*">
+    <Grupo>49</Grupo>
+    <Descripcion>Placa del vehículo transportador</Descripcion>
+  </CampoSUNAT>
+  <CampoSUNAT Id="18400" Seccion="TRASLADO_BIENES" Condicion="C" Format="an..100" SUNAT_format="" Campo="CONSTANCIA_INSCRIPCION" Valor="*">
+    <Grupo>49</Grupo>
+    <Descripcion>No. constancia de inscripción del vehículo o certificado de habilitacion vehicular</Descripcion>
+  </CampoSUNAT>
+  <CampoSUNAT Id="18500" Seccion="TRASLADO_BIENES" Condicion="C" Format="an..50" SUNAT_format="" Campo="MARCA_VEHICULO" Valor="*">
+    <Grupo>49</Grupo>
+    <Descripcion>Marca del vehículo transportador</Descripcion>
+  </CampoSUNAT>
+  <CampoSUNAT Id="18600" Seccion="TRASLADO_BIENES" Condicion="C" Format="an..30" SUNAT_format="" Campo="LICENCIA_CONDUCIR" Valor="*">
+    <Grupo>49</Grupo>
+    <Descripcion>No. de licencia de conducir</Descripcion>
+  </CampoSUNAT>
+  <CampoSUNAT Id="18700" Seccion="TRASLADO_BIENES" Condicion="C" Format="0..11" SUNAT_format="" Campo="NUM_ID_TRANSPORTISTA" Valor="*">
+    <Grupo>49</Grupo>
+    <Descripcion>No. Identificación del transportista</Descripcion>
+  </CampoSUNAT>
+  <CampoSUNAT Id="18800" Seccion="TRASLADO_BIENES" Condicion="C" Format="an..2" SUNAT_format="" Campo="TIPO_DOC_ID_TRANSPORTISTA" Valor="*">
+    <Grupo>49</Grupo>
+    <Descripcion>Tipo Documento Identificación del Transportista</Descripcion>
+  </CampoSUNAT>
+  <CampoSUNAT Id="18900" Seccion="TRASLADO_BIENES" Condicion="C" Format="an..100" SUNAT_format="" Campo="RAZON_SOCIAL_TRANSPORTISTA" Valor="*">
+    <Grupo>49</Grupo>
+    <Descripcion>Razón social del transportista</Descripcion>
+  </CampoSUNAT>
+  <CampoSUNAT Id="19000" Seccion="FOOTER" Condicion="C" Format="0..n" SUNAT_format="" Campo="ANTICIPOS" Valor="/">
+    <Grupo>31</Grupo>
+    <Descripcion>ANTICIPOS</Descripcion>
+  </CampoSUNAT>
+  <CampoSUNAT Id="19100" Seccion="ANTICIPOS" Condicion="C" Format="an..18" SUNAT_format="n(15,2)" Campo="VALOR_ANTICIPO" Valor="#">
+    <Grupo>31</Grupo>
+    <Descripcion>Valor del anticipo</Descripcion>
+  </CampoSUNAT>
+  <CampoSUNAT Id="19200" Seccion="ANTICIPOS" Condicion="C" Format="an2" SUNAT_format="" Campo="TIPO_DOCUMENTO_ANTICIPO" Valor="*">
+    <Grupo>31</Grupo>
+    <Descripcion>Tipo de documento con el que cual se realizó el anticipo. </Descripcion>
+  </CampoSUNAT>
+  <CampoSUNAT Id="19300" Seccion="ANTICIPOS" Condicion="C" Format="an..20" SUNAT_format="" Campo="SERIE_CORRELATIVO_ANTICIPO" Valor="*">
+    <Grupo>31</Grupo>
+    <Descripcion>Serie y Correlativo  de la boleta de venta con la cual se realizó el anticipo</Descripcion>
+  </CampoSUNAT>
+  <CampoSUNAT Id="19400" Seccion="HEADERIMP" Condicion="C" Format="an..3" SUNAT_format="" Campo="MONEDA" Valor="*">
+    <Grupo>1</Grupo>
+    <Descripcion>Tipo Moneda en la cual se emite el documento</Descripcion>
+  </CampoSUNAT>
+</ArrayOfCampoSUNAT>
