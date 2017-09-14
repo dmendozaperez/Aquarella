@@ -14,7 +14,7 @@ namespace CatalogoVirtual
 
         public static string conexion
         {
-            get { return "Server=10.10.10.206;Database=BdAquarella;User ID=sa;Password=Bata2013;Trusted_Connection=False;"; }
+            get { return "Server=www.aquarellaperu.com.pe;Database=BdAquarella;User ID=sa;Password=Bata2013;Trusted_Connection=False;"; }
         }
         public static string _ruta_catalogo(string _rc_id)
         {

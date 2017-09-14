@@ -152,18 +152,22 @@
     <Compile Include="Controllers\FuncionController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MenuController.cs" />
+    <Compile Include="Controllers\RolesController.cs" />
     <Compile Include="Controllers\RRHHController.cs" />
     <Compile Include="Data\Cliente\Lider.cs" />
     <Compile Include="Data\Cliente\Promotor.cs" />
+    <Compile Include="Data\Control\Aplicacion.cs" />
     <Compile Include="Data\Control\Estado.cs" />
     <Compile Include="Data\Control\Funcion.cs" />
     <Compile Include="Data\Control\Menu.cs" />
+    <Compile Include="Data\Control\Roles.cs" />
     <Compile Include="Data\Control\Usuario.cs" />
     <Compile Include="Data\Util\Conexion.cs" />
     <Compile Include="Data\Util\Cryptographic.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\MyHelpers.cs" />
     <Compile Include="Models\Cuenta\LoginViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
@@ -1063,6 +1067,8 @@
     <Content Include="plugins\timepicker\bootstrap-timepicker.js" />
     <Content Include="plugins\timepicker\bootstrap-timepicker.min.css" />
     <Content Include="plugins\timepicker\bootstrap-timepicker.min.js" />
+    <Content Include="Scripts\bootbox.js" />
+    <Content Include="Scripts\bootbox.min.js" />
     <Content Include="Scripts\bootstrap-select.js" />
     <Content Include="Scripts\bootstrap-select.min.js" />
     <Content Include="Scripts\bootstrap.js" />
@@ -1218,6 +1224,15 @@
     <Content Include="Views\Funcion\Index.cshtml" />
     <Content Include="Views\Funcion\Nuevo.cshtml" />
     <Content Include="Views\Funcion\ListaFuncion.cshtml" />
+    <Content Include="Views\Funcion\Edit.cshtml" />
+    <Content Include="Views\Funcion\Aplicacion.cshtml" />
+    <Content Include="Views\Funcion\ListaAplFun.cshtml" />
+    <Content Include="Views\Roles\Index.cshtml" />
+    <Content Include="Views\Roles\ListaRoles.cshtml" />
+    <Content Include="Views\Roles\Nuevo.cshtml" />
+    <Content Include="Views\Roles\Edit.cshtml" />
+    <Content Include="Views\Roles\Funcion.cshtml" />
+    <Content Include="Views\Roles\ListaFunRol.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -31,9 +31,7 @@
                          $('body').removeClass('modal-open');
                          $('.modal-backdrop').remove();
 
-                         $('#lista').load('@Url.Action("ListaFuncion", "Funcion")', {});
-                         //$("#result").dataTable().fnDestroy();
-                         //tablerefresh();
+                         $('#lista').load('@Url.Action("ListaFuncion", "Funcion")', {});                        
                          toastr.success(data.desmsg, msg_titulo);
                      }
                      else {
@@ -54,7 +52,7 @@
 @Scripts.Render("~/bundles/bootstrap-select")
 @Styles.Render("~/Content/Bootstrap-Select/css")
 <link rel="stylesheet" type="text/css" href="~/Content/bootstrap-select.css" />
-@using (Ajax.BeginForm("Funcion", new AjaxOptions {OnFailure= "OnNuevo_Grabar();" }))
+@using (Ajax.BeginForm("Funcion",new AjaxOptions { OnBegin = "OnNuevo_Grabar();" }))
 {
         <div class="modal-content">
             <div class="modal-header">

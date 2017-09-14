@@ -1,33 +1,100 @@
-﻿@{ 
+﻿<script type="text/javascript">
+    function InvalidMsg(textbox, str) {
+
+        if (textbox.value.length == 0) {
+            textbox.setCustomValidity(str);
+        }
+        else {
+            textbox.setCustomValidity('');
+        }
+        return true;
+    }
+</script>
+<script type="text/javascript">
+    function OnEditar_Grabar() {
+        var msg_titulo = 'Mensaje Aquarella!';
+        var id = $("#idfun").val();
+        var nombre = $("#nombre").val();
+        var padre = $('select[name=dwfuncion]').selectpicker('val');
+        var orden = $("#orden").val();
+        var descripcion = $("#descripcion").val();
+
+        $.ajax
+             ({
+                 url: '../Funcion/Edit',
+                 dataType: "json",
+                 type: "POST",
+                 data: { id: id,nombre: nombre, descripcion: descripcion, orden: orden, padre: padre },
+                 success: function (data, textStatus, XMLHttpRequest) {
+                     if (data.estado == '1') {
+
+                         $('#myModalnew').modal('hide');
+                         $('body').removeClass('modal-open');
+                         $('.modal-backdrop').remove();
+
+                         $('#lista').load('@Url.Action("ListaFuncion", "Funcion")', {});                        
+                         toastr.success(data.desmsg, msg_titulo);
+                     }
+                     else {
+                         toastr.error(data.desmsg, msg_titulo);
+                     }
+                 },
+                 error: function (xhr) {
+                     toastr.error(xhr, msg_titulo);
+                 }
+             })
+
+    }
+</script>
+
+@model www.aqmvc.com.pe.Data.Control.Funcion
+@{
     Layout = null;
 }
-<div class="modal-content">
-    <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
-        <h4 class="modal-title custom_align" id="Heading"><b>Creando Nueva Función</b></h4>
+@Scripts.Render("~/bundles/bootstrap-select")
+@Styles.Render("~/Content/Bootstrap-Select/css")
+<link rel="stylesheet" type="text/css" href="~/Content/bootstrap-select.css" />
+@using (Ajax.BeginForm("Funcion", new AjaxOptions { OnBegin = "OnEditar_Grabar();" }))
+{ 
+    <div class="modal-content">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
+            <h4 class="modal-title custom_align" id="Heading"><b>Editando Función</b></h4>
+        </div>
+        <div class="modal-body" id="myModalBody">
+            <form id="editfuncion" role="form">
+                <input type="hidden" id="idfun" value="@Model.fun_id" />
+                <div class="form-group">
+                    <label for="nombre">Nombre</label>
+                    <input type="text" id="nombre" value=@Model.fun_nombre placeholder="Ingrese el nombre" autofocus class="form-control" oninvalid="InvalidMsg(this,'Ingrese el nombre')" required="required" />
+                </div>
+                <div class="form-group">
+                    <label for="dwfuncion">Padre</label>
+                    @Html.DropDownList("dwfuncion", new SelectList(ViewBag.funcion, "fun_id", "fun_nombre", ((Model.fun_padre.Length==0)?"0": Model.fun_padre)), new { @class = "selectCountry form-control", @data_live_search = "true", @id = "dwfuncion" })
+                </div>
+                <div class="form-group">
+                    <label for="orden">Orden</label>
+                    <input type="text" id="orden" value="@Model.fun_orden" placeholder="Ingese el orden" class="form-control" />
+                </div>
+                <div class="form-group">
+                    <label for="descripcion">Descripcion</label>
+                    <input type="text" id="descripcion" value="@Model.fun_descripcion" placeholder="Ingrese la descripción" class="form-control" oninvalid="InvalidMsg(this,'Ingrese la descripcion')" required="required" />
+                </div>
+            </form>       
+        </div>
+        <div class="modal-footer">
+            <button type="submit" class="btn btn-success">Aceptar</button>
+            <button type="submit" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+        </div>
     </div>
-    <div class="modal-body" id="myModalBody">
-        <form id="contactform" role="form">
-            <div class="form-group">
-                <label for="nombre">Nombreaaa</label>
-                <input type="text" id="nombre" value="" placeholder="Ingrese el nombre" autofocus class="form-control" oninvalid="InvalidMsg(this,'Ingrese el nombre')" required="required" />
-            </div>
-            <div class="form-group">
-                <label for="dwfuncion">Padre</label>
-                @*@Html.DropDownList("dwfuncion", new SelectList(ViewBag.funcion, "fun_id", "fun_nombre", "0"), new { @class = "selectCountry form-control", @data_live_search = "true", @id = "dwfuncion" })*@
-            </div>
-            <div class="form-group">
-                <label for="orden">Orden</label>
-                <input type="text" id="orden" placeholder="Ingese el orden" class="form-control" />
-            </div>
-            <div class="form-group">
-                <label for="descripcion">Descripcion</label>
-                <input type="text" id="descripcion" placeholder="Ingrese la descripción" class="form-control" oninvalid="InvalidMsg(this,'Ingrese la descripcion')" required="required" />
-            </div>
-        </form>
-    </div>
-    <div class="modal-footer">
-        <button type="submit" class="btn btn-success">Aceptar</button>
-        <button type="submit" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
-    </div>
-</div>
+}
+<script>
+
+
+$(document).ready(function() {
+    $("#dwfuncion").select({
+        dropdownParent: $("#myModalnew")
+  });
+});
+
+</script>

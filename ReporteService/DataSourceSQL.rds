@@ -1,0 +1,8 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<RptDataSource xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Name="DataSourceSQL">
+  <ConnectionProperties>
+    <Extension>SQL</Extension>
+    <ConnectString>Data Source=10.10.10.206;Initial Catalog=BdAquarella</ConnectString>
+  </ConnectionProperties>
+  <DataSourceID>4b7a8641-ac8e-4422-afa9-d6224ffbc520</DataSourceID>
+</RptDataSource>

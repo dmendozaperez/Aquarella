@@ -45,7 +45,7 @@
             $("#txtdireccion").val('');
             $("#txttelefono").val('');
         }
-        function OnFailure_update() {           
+        function OnBegin_update() {
             var msg_titulo = 'Mensaje Aquarella!';
             var id = $("#idcli").val();           
             var area = $('select[name=dwlider]').selectpicker('val');
@@ -75,7 +75,7 @@
                   })
         }
 
-        function OnFailure() {            
+        function OnBegin() {
             //$('select[name=dwestado]').selectpicker('val', 'I');
             //$('select[name=dwlider]').selectpicker('val', '277');
             var div = document.getElementById('dvinfo');
@@ -130,7 +130,7 @@
                     <div class="box-header with-border">
                         <h3 class="box-title">Administrador de pomotores y coordinadores</h3>
                     </div>
-                 @using (Ajax.BeginForm("RRHH", new AjaxOptions { OnFailure = "OnFailure" }))
+                 @using (Ajax.BeginForm("RRHH", new AjaxOptions { OnBegin = "OnBegin" }))
                  { 
                     <div class="box-body">
                         <div class="input-group input-group">
@@ -144,7 +144,7 @@
                 </div>              
             </div>                       
         </div>
-        @using (Ajax.BeginForm("RRHH", new AjaxOptions { OnFailure = "OnFailure_update();" }))
+        @using (Ajax.BeginForm("RRHH", new AjaxOptions { OnBegin = "OnBegin_update();" }))
         { 
             <div class="row" id="dvinfo" style="visibility:hidden" >
             <div class="col-md-6">

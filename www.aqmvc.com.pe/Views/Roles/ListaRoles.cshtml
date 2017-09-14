@@ -1,0 +1,200 @@
+﻿<table id="result" class="table table-bordered table-hover">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Nombre</th>
+            <th>Descripción</th> 
+            <th>
+                <div class="pull-right">
+                    Editar
+                </div>
+            </th> 
+            <th>
+                <div class="pull-right">
+                    Funciones
+                </div>
+            </th>          
+            @*<th>
+                <button title="Agregar" class="btnnuevo btn btn-primary pull-right" data-modal="" data-toggle="modal"><span class="glyphicon glyphicon-plus"></span></button>
+            </th>*@
+        </tr>
+    </thead>
+    <tbody data-bind="foreach:">
+        @using www.aqmvc.com.pe.Data.Control
+        @model IEnumerable<www.aqmvc.com.pe.Data.Control.Roles>
+
+        @foreach (www.aqmvc.com.pe.Data.Control.Roles item in Model)
+        {
+            <tr>
+                <td>@item.rol_id.ToString()</td>
+                <td>@item.rol_nombre.ToString()</td>
+                <td>@item.rol_descripcion.ToString()</td>  
+                <td>
+                    <div class="pull-right">
+                        <button title="Editar" class="btneditar btn btn-primary" data-id="@item.rol_id" data-modal="" data-toggle="modal"><span class="glyphicon glyphicon-pencil"></span></button>
+                    </div>
+                </td>          
+                <td>
+                    <div class="pull-right">
+                        <button title="Funciones" class="btnapli btn btn-success" data-id="@item.rol_id" data-modal="" data-toggle="modal"><span class="glyphicon glyphicon-list-alt"></span></button>
+                    </div>
+                </td>   
+                @*<td>
+                    <div class="pull-right">
+                        <button title="Editar" class="btneditar btn btn-primary" data-id="@item.rol_id" data-modal="" data-toggle="modal"><span class="glyphicon glyphicon-pencil"></span></button>
+                        &nbsp;
+                        <button title="Funciones" class="btnapli btn btn-success" data-id="@item.rol_id" data-modal="" data-toggle="modal"><span class="glyphicon glyphicon-list-alt"></span></button>
+                    </div>
+                </td>*@
+            </tr>
+
+        }
+    </tbody>
+    @if (Model.Count() != 0)
+    {
+        <tfoot>
+            <tr>
+                <th>Id</th>
+                <th>Nombre</th>
+                <th>Descripción</th>               
+                <th>
+                    <div class="pull-right">
+                        Editar
+                    </div>
+                </th>
+                <th>
+                    <div class="pull-right">
+                        Funciones
+                    </div>
+                </th>
+            </tr>
+        </tfoot>
+    }
+</table>
+<script src="~/plugins/datatables/jquery.dataTables.min.js"></script>
+<script src="~/plugins/datatables/dataTables.bootstrap.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#result').DataTable({
+            "language": {
+                "url": "../plugins/datatables/Spanish.json"
+            },
+            "paging": true,
+            "lengthChange": false,
+            "searching": true,
+            "ordering": true,
+            "info": true,
+            "autoWidth": false,
+            "iDisplayLength": 6
+        });
+    });
+</script>
+
+<script type="text/javascript">
+    $(function () {
+        $(".btnapli").click(function () {
+            var TeamDetailPostBackURL = '/Roles/Funcion';
+            //debugger;
+            var $buttonClicked = $(this);
+            var id = $buttonClicked.attr('data-id');
+            var options = { "backdrop": "static", keyboard: true };
+            $.ajax({
+                type: "GET",
+                url: TeamDetailPostBackURL,
+                contentType: "application/json; charset=utf-8",
+                data: { "Id": id },
+                datatype: "json",
+                cache: true,
+                success: function (data) {
+                    //debugger;
+                    $('#myModalContent').html(data);
+                    $('#myModalnew').modal(options);
+                    $('#myModalnew').modal('show');
+                    // debugger;
+
+                },
+                error: function () {
+                    alert("Dynamic content load failed.");
+                }
+            });
+        });
+
+
+        $("#closbtn").click(function () {
+            // debugger;
+            $('#myModalnew').modal('hide');
+        });
+    });
+</script>
+
+<script type="text/javascript">
+    $(function () {
+        $(".btneditar").click(function () {
+            var TeamDetailPostBackURL = '/Roles/Edit';
+            //debugger;
+            var $buttonClicked = $(this);
+            var id = $buttonClicked.attr('data-id');
+            var options = { "backdrop": "static", keyboard: true };
+            $.ajax({
+                type: "GET",
+                url: TeamDetailPostBackURL,
+                contentType: "application/json; charset=utf-8",
+                data: { "Id": id },
+                datatype: "json",
+                cache: true,
+                success: function (data) {
+                    //debugger;
+                    $('#myModalContent').html(data);
+                    $('#myModalnew').modal(options);
+                    $('#myModalnew').modal('show');
+                    // debugger;
+
+                },
+                error: function () {
+                    alert("Dynamic content load failed.");
+                }
+            });
+        });
+
+
+        $("#closbtn").click(function () {
+            // debugger;
+            $('#myModalnew').modal('hide');
+        });
+    });
+
+    $(function () {
+        $(".btnnuevo").click(function () {
+            var TeamDetailPostBackURL = '/Roles/Nuevo';
+            //debugger;
+            var $buttonClicked = $(this);
+            //var id = $buttonClicked.attr('data-id');
+            var options = { "backdrop": "static", keyboard: true };
+            $.ajax({
+                type: "GET",
+                url: TeamDetailPostBackURL,
+                contentType: "application/json; charset=utf-8",
+                data: {},
+                datatype: "json",
+                cache: true,
+                success: function (data) {
+                    //debugger;
+                    $('#myModalContent').html(data);
+                    $('#myModalnew').modal(options);
+                    $('#myModalnew').modal('show');
+                    // debugger;
+
+                },
+                error: function () {
+                    alert("Dynamic content load failed.");
+                }
+            });
+        });
+
+
+        $("#closbtn").click(function () {
+            // debugger;
+            $('#myModalnew').modal('hide');
+        });
+    });
+</script>
