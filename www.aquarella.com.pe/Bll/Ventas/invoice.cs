@@ -473,7 +473,7 @@ namespace www.aquarella.com.pe.bll
             //}
             //catch (Exception e) { throw new Exception(e.Message, e.InnerException); }
         }
-        private static DataSet getallinvoice(string invoice_no)
+        private static DataSet getallinvoice(string invoice_no,Int32 pvt_id=1)
         {
             string sqlquery = "USP_Leer_Venta_Imprimir";
             SqlConnection cn = null;
@@ -487,6 +487,7 @@ namespace www.aquarella.com.pe.bll
                 cmd.CommandTimeout = 0;
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.Parameters.AddWithValue("@ven_id", invoice_no);
+                cmd.Parameters.AddWithValue("@pvt_id", pvt_id);
                 da = new SqlDataAdapter(cmd);
                 ds = new DataSet();
                 da.Fill(ds);
@@ -499,10 +500,10 @@ namespace www.aquarella.com.pe.bll
 
         #region <Region de Formato de Tickets>
 
-        public static string get_formatoTickets(string invoice_no)
+        public static string get_formatoTickets(string invoice_no, Int32 pvt_id = 1)
         {
             //consulta de venta invoice y invoice detalle
-            DataSet dsinvoice = getallinvoice(invoice_no);
+            DataSet dsinvoice = getallinvoice(invoice_no, pvt_id);
 
             if (dsinvoice.Tables[0].Rows.Count == 0)
             {

@@ -1,9 +1,9 @@
-﻿
-<script type="text/javascript">
+﻿<script type="text/javascript">
     function onAgregar_Apl() {
         var msg_titulo = 'Mensaje Aquarella!';
         var funid = $("#idfun").val();      
         var aplid = $('select[name=dwapl]').selectpicker('val');
+        showLoading();
         $.ajax
              ({
                  url: '../Funcion/Agregar_Apl',
@@ -46,7 +46,7 @@
         <h4 class="modal-title custom_align" id="Heading"><b>Adicionar aplicacion a función</b></h4>
     </div>
     <div class="modal-body" id="myModalBody">
-@using (Ajax.BeginForm("Funcion", new AjaxOptions { OnBegin = "onAgregar_Apl();" }))
+@using (Ajax.BeginForm("Funcion", new AjaxOptions { OnBegin = "onAgregar_Apl();",OnComplete= "removeLoading();",OnFailure= "removeLoading();" }))
 {
         <form id="editfuncion" role="form">
             <input type="hidden" id="idfun" value="@ViewBag.funid" />
@@ -71,7 +71,7 @@
         </div>
     </div>   
 </div>
-                    
+ <div class="modal fade" id="pleaseWaitDialog" data-backdrop="static" data-keyboard="false" role="dialog" aria-labelledby="basicModal" aria-hidden="true" tabindex="-1"><div class="modal-dialog"><div class="modal-content"><div class="modal-header"><h1 style="font-size:18px;font-weight:bold;color:#1c334f">Espere un momento por favor...</h1></div><div class="modal-body"><div class="progress progress-striped active"><div class="progress-bar" style="width: 100%;"><span class="sr-only">60% Complete</span></div></div></div></div></div></div>                   
 <script>
 
 

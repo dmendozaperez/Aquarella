@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using CrystalDecisions.CrystalReports.Engine;
 using System.Web.UI;
 using www.aquarella.com.pe.UserControl;
+using System.Globalization;
 
 namespace www.aquarella.com.pe.Aquarella.Logistica
 {
@@ -224,8 +225,11 @@ namespace www.aquarella.com.pe.Aquarella.Logistica
 
                 gvsf.DataSourceID = odsfavor.ID;
                 gvsf.DataBind();
+
+                gvventa.DataSourceID = odsventa.ID;
+                gvventa.DataBind();
             }
-            catch
+            catch(Exception exc)
             {
                 return;
             }
@@ -303,6 +307,32 @@ namespace www.aquarella.com.pe.Aquarella.Logistica
             }
         }
 
+        protected void gvventa_RowCreated(object sender, GridViewRowEventArgs e)
+        {
+            if ((e.Row.RowType == DataControlRowType.DataRow))
+            {
+                // Numero de la fila
+                int idRow = Convert.ToInt16(e.Row.RowIndex.ToString());
+
+                try
+                {
+                    string status = System.Web.UI.DataBinder.Eval(e.Row.DataItem, "Ven_Est_Id").ToString();
+                    if (status== "FA")
+                    {
+                        //
+                        string noLiq = System.Web.UI.DataBinder.Eval(e.Row.DataItem, "Ven_Id").ToString();
+                        ///
+                        Image imgShowReportInvoice = (Image)e.Row.FindControl("imgInv");
+                        ///
+                        imgShowReportInvoice.Visible = true;
+                    }                  
+                }
+                catch
+                {
+                }
+            }
+        }
+
         /// <summary>
         /// Cargar para edición un nuevo pedido
         /// </summary>
@@ -367,8 +397,12 @@ namespace www.aquarella.com.pe.Aquarella.Logistica
         {
             e.InputParameters["dtObj"] = (object)Session[_nameSessionData];
         }
+        protected void odsventa_Selecting(object sender, ObjectDataSourceSelectingEventArgs e)
+        {
+            e.InputParameters["dtObj"] = (object)Session[_nameSessionData];
+        }
         #endregion
-        
+
         /// <summary>
         /// Generación de nueva liquidación
         /// </summary>
@@ -742,6 +776,65 @@ namespace www.aquarella.com.pe.Aquarella.Logistica
             }
         }
 
+        private void Reimp_tickets(string _numero)
+        {
+            try
+            {
+                string cultureName = "es-ES";
+                CultureInfo culture = new CultureInfo(cultureName);
+
+                String vnumero = _numero;
+                String VFormatoTK = invoice.get_formatoTickets(vnumero,3);
+
+                if (VFormatoTK == "0")
+                {
+                    string vmensaje = "El Numero de tickets : " + vnumero + " no se encuenta registrado en el sistema";
+                    ScriptManager.RegisterStartupScript(Page, GetType(), "mensaje", "alert('" + vmensaje + "');", true);
+                    return;
+                }
+                VFormatoTK = VFormatoTK.Replace("\r\n", "\r\n");
+                VFormatoTK = VFormatoTK.Replace("|", " ");
+                VFormatoTK = VFormatoTK.Replace("&nbsp", " ");
+
+                System.Text.StringBuilder str = new System.Text.StringBuilder();
+                str.Append(VFormatoTK);
+                Response.Clear();
+                Response.Buffer = true;
+                Response.ContentType = "text/plain";
+                Response.AddHeader("Content-Disposition", "attachment;filename=Tk" + vnumero + " .txt");
+                Response.Charset = "UTF-8";
+                Response.ContentEncoding = System.Text.Encoding.Default;
+                System.IO.StringWriter tw = new System.IO.StringWriter();
+                System.Web.UI.HtmlTextWriter hw = new System.Web.UI.HtmlTextWriter(tw);
+                Response.Write(str.ToString());
+                Response.End();
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+        protected void gvventa_RowCommand(object sender, GridViewCommandEventArgs e)
+        {
+            msnMessage.HideMessage();           
+            if (e.CommandName.Equals("strfac"))
+            {
+                string _ven_id = e.CommandArgument.ToString();
+                {
+                    try
+                    {
+                        Reimp_tickets(_ven_id);
+                    }
+                    catch (Exception ex)
+                    {
+                        this.msnMessage.LoadMessage(ex.Message, ucMessage.MessageType.Error);
+                    }
+
+                }
+            }
+
+        }
         protected void gvLiquidations_RowCommand(object sender, GridViewCommandEventArgs e)
         {
             msnMessage.HideMessage();

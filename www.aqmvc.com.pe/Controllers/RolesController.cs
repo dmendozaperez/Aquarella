@@ -4,6 +4,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using www.aqmvc.com.pe.bll.util;
 using www.aqmvc.com.pe.Data.Control;
 
 namespace www.aqmvc.com.pe.Controllers
@@ -15,7 +16,14 @@ namespace www.aqmvc.com.pe.Controllers
         // GET: Roles
         public ActionResult Index()
         {
-            return View(lista());
+            Usuario _usuario = (Usuario)Session[Constantes.NameSessionUser];
+            if (_usuario == null)
+            {
+                return RedirectToAction("Login", "Cuenta");
+            }
+            else { 
+                return View(lista());
+            }
         }
         public List<Roles> lista()
         {

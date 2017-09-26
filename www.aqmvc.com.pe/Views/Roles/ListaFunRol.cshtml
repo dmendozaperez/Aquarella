@@ -1,4 +1,17 @@
 ﻿<input type="hidden" id="idfun" value="@ViewBag.rolid" />
+<script>
+        function showLoading() {
+            $('#pleaseWaitDialog').modal('show');
+            //alert('ini');
+        }
+        function removeLoading() {
+            //alert('fin');// $('#pleaseWaitDialog').modal('hide');
+
+            $('#pleaseWaitDialog').modal('hide');
+            $('body').removeClass('modal-open');
+            $('.modal-backdrop').remove();
+        }
+    </script>
 <table id="result" class="table table-bordered table-hover">
     <thead>
         <tr>
@@ -26,6 +39,7 @@
         }
     </tbody>
 </table>
+<div class="modal fade" id="pleaseWaitDialog" data-backdrop="static" data-keyboard="false" role="dialog" aria-labelledby="basicModal" aria-hidden="true" tabindex="-1"><div class="modal-dialog"><div class="modal-content"><div class="modal-header"><h1 style="font-size:18px;font-weight:bold;color:#1c334f">Espere un momento por favor...</h1></div><div class="modal-body"><div class="progress progress-striped active"><div class="progress-bar" style="width: 100%;"><span class="sr-only">60% Complete</span></div></div></div></div></div></div>                   
 <script src="~/plugins/datatables/jquery.dataTables.min.js"></script>
 <script src="~/plugins/datatables/dataTables.bootstrap.min.js"></script>
 <script src="~/Scripts/bootbox.min.js"></script>
@@ -65,6 +79,7 @@
                 },
                 callback: function (result) {
                     if (result) {
+                        showLoading();
                         $.ajax
                             ({
                                 url: '../Roles/Borrar_Fun',
@@ -73,14 +88,17 @@
                                 data: { fun_id: funid, rol_id: rolid },
                                 success: function (data, textStatus, XMLHttpRequest) {
                                     if (data.estado == '1') {
+                                        removeLoading();
                                         $('#lista').load('@Url.Action("ListaFunRol", "Roles")', { rolid: rolid });
                                         toastr.success(data.desmsg, msg_titulo);
                                     }
                                     else {
+                                        removeLoading();
                                         toastr.error(data.desmsg, msg_titulo);
                                     }
                                 },
                                 error: function (xhr) {
+                                    removeLoading();
                                     toastr.error(xhr, msg_titulo);
                                 }
                             })

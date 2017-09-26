@@ -147,6 +147,7 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="bll\util\Constantes.cs" />
     <Compile Include="bll\util\Global.cs" />
+    <Compile Include="Controllers\AplicacionController.cs" />
     <Compile Include="Controllers\ControlController.cs" />
     <Compile Include="Controllers\CuentaController.cs" />
     <Compile Include="Controllers\FuncionController.cs" />
@@ -1193,6 +1194,7 @@
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\modalcargando.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
@@ -1233,6 +1235,9 @@
     <Content Include="Views\Roles\Edit.cshtml" />
     <Content Include="Views\Roles\Funcion.cshtml" />
     <Content Include="Views\Roles\ListaFunRol.cshtml" />
+    <Content Include="Views\Aplicacion\Index.cshtml" />
+    <Content Include="Views\Aplicacion\ListaAplicacion.cshtml" />
+    <Content Include="Views\Aplicacion\Nuevo.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

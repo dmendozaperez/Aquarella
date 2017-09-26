@@ -1,4 +1,16 @@
-﻿
+﻿<script>
+    function showLoading() {
+        $('#pleaseWaitDialog').modal('show');
+        //alert('ini');
+    }
+    function removeLoading() {
+        //alert('fin');// $('#pleaseWaitDialog').modal('hide');
+
+        $('#pleaseWaitDialog').modal('hide');
+        $('body').removeClass('modal-open');
+        $('.modal-backdrop').remove();
+    }
+</script>
 <script type="text/javascript">
     function InvalidMsg(textbox, str) {
 
@@ -30,7 +42,7 @@
 
 <script type="text/javascript">
     function OnBegin_update() {
-
+        showLoading();
         var msg_titulo = 'Mensaje Aquarella!';
         var id = $("#idusu").val();
         var pass = $("#txtnpass").val();
@@ -84,8 +96,8 @@
 </div>
 
 
-@using (Ajax.BeginForm("Control", new AjaxOptions { OnBegin = "OnBegin_update();" }))
-{ 
+@using (Ajax.BeginForm("Control", new AjaxOptions { OnBegin = "OnBegin_update();",OnComplete= "removeLoading();",OnFailure= "removeLoading();" }))
+{
         @*<div class="modal-content">*@
            
             <div class="login-box-body">

@@ -1,4 +1,17 @@
-﻿<table id="result" class="table table-bordered table-hover">
+﻿<script>
+    function showLoading() {
+        $('#pleaseWaitDialog').modal('show');
+        //alert('ini');
+    }
+    function removeLoading() {
+        //alert('fin');// $('#pleaseWaitDialog').modal('hide');
+
+        $('#pleaseWaitDialog').modal('hide');
+        $('body').removeClass('modal-open');
+        $('.modal-backdrop').remove();
+    }
+</script>
+<table id="result" class="table table-bordered table-hover">
     <thead>
         <tr>
             <th>Id</th>
@@ -36,7 +49,7 @@
                 </td>          
                 <td>
                     <div class="pull-right">
-                        <button title="Funciones" class="btnapli btn btn-success" data-id="@item.rol_id" data-modal="" data-toggle="modal"><span class="glyphicon glyphicon-list-alt"></span></button>
+                        <button title="Funciones" class="btnfun btn btn-success" data-id="@item.rol_id" data-modal="" data-toggle="modal"><span class="glyphicon glyphicon-list-alt"></span></button>
                     </div>
                 </td>   
                 @*<td>
@@ -71,6 +84,7 @@
         </tfoot>
     }
 </table>
+<div class="modal fade" id="pleaseWaitDialog" data-backdrop="static" data-keyboard="false" role="dialog" aria-labelledby="basicModal" aria-hidden="true" tabindex="-1"><div class="modal-dialog"><div class="modal-content"><div class="modal-header"><h1 style="font-size:18px;font-weight:bold;color:#1c334f">Espere un momento por favor...</h1></div><div class="modal-body"><div class="progress progress-striped active"><div class="progress-bar" style="width: 100%;"><span class="sr-only">60% Complete</span></div></div></div></div></div></div>
 <script src="~/plugins/datatables/jquery.dataTables.min.js"></script>
 <script src="~/plugins/datatables/dataTables.bootstrap.min.js"></script>
 <script type="text/javascript">
@@ -92,11 +106,12 @@
 
 <script type="text/javascript">
     $(function () {
-        $(".btnapli").click(function () {
+        $(".btnfun").click(function () {
             var TeamDetailPostBackURL = '/Roles/Funcion';
             //debugger;
             var $buttonClicked = $(this);
             var id = $buttonClicked.attr('data-id');
+            showLoading();
             var options = { "backdrop": "static", keyboard: true };
             $.ajax({
                 type: "GET",
@@ -106,6 +121,7 @@
                 datatype: "json",
                 cache: true,
                 success: function (data) {
+                    removeLoading();
                     //debugger;
                     $('#myModalContent').html(data);
                     $('#myModalnew').modal(options);
@@ -114,6 +130,7 @@
 
                 },
                 error: function () {
+                    removeLoading();
                     alert("Dynamic content load failed.");
                 }
             });

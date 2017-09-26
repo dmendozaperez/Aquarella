@@ -11,7 +11,6 @@
         $('.modal-backdrop').remove();
     }
 </script>
-
 <script type="text/javascript">
     function InvalidMsg(textbox, str) {
 
@@ -27,15 +26,20 @@
 <script type="text/javascript">
     function OnNuevo_Grabar() {
         var msg_titulo = 'Mensaje Aquarella!';
-        var nombre = $("#nombre").val();     
-        var descripcion = $("#descripcion").val();
+        var nombre = $("#nombre").val();
+        var urlruta = $("#urlruta").val();
+        var orden = $("#orden").val();
+        var estado = $('select[name=dwestado]').selectpicker('val');        
+        var controller = $("#controller").val();
+        var action = $("#action").val();
+
         showLoading();
         $.ajax
              ({
-                 url: '../Roles/Nuevo',
+                 url: '../Aplicacion/Nuevo',
                  dataType: "json",
                  type: "POST",
-                 data: { nombre: nombre, descripcion: descripcion},
+                 data: { apl_nombre: nombre, apl_url: urlruta, apl_orden: orden, apl_est_id: estado, apl_controller: controller, apl_action: action },
                  success: function (data, textStatus, XMLHttpRequest) {
                      if (data.estado == '1') {
 
@@ -43,7 +47,7 @@
                          $('body').removeClass('modal-open');
                          $('.modal-backdrop').remove();
 
-                         $('#lista').load('@Url.Action("ListaRoles", "Roles")', {});
+                         $('#lista').load('@Url.Action("ListaAplicacion", "Aplicacion")', {});
                          toastr.success(data.desmsg, msg_titulo);
                      }
                      else {
@@ -56,25 +60,46 @@
              })
     }
 </script>
-@{ 
+
+@model www.aqmvc.com.pe.Data.Control.Aplicacion
+@{
     Layout = null;
 }
-@using (Ajax.BeginForm("Roles", new AjaxOptions { OnBegin = "OnNuevo_Grabar();",OnComplete= "removeLoading();",OnFailure= "removeLoading();" }))
+@Scripts.Render("~/bundles/bootstrap-select")
+@Styles.Render("~/Content/Bootstrap-Select/css")
+<link rel="stylesheet" type="text/css" href="~/Content/bootstrap-select.css" />
+@using (Ajax.BeginForm("Aplicacion", new AjaxOptions { OnBegin = "OnNuevo_Grabar();", OnComplete = "removeLoading();", OnFailure = "removeLoading();" }))
 {
 <div class="modal-content">
     <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
-        <h4 class="modal-title custom_align" id="Heading"><b>Creando Nuevo Rol</b></h4>
+        <h4 class="modal-title custom_align" id="Heading"><b>Creando Nueva Aplicación</b></h4>
     </div>
     <div class="modal-body" id="myModalBody">
         <form id="contactform" role="form">
             <div class="form-group">
                 <label for="nombre">Nombre</label>
                 <input type="text" id="nombre" value="" placeholder="Ingrese el nombre" autofocus class="form-control" oninvalid="InvalidMsg(this,'Ingrese el nombre')" required="required" />
+            </div>
+            <div class="form-group">
+                <label for="urlruta">Ruta URL App</label>
+                <input type="text" id="urlruta" value="" placeholder="Ingrese la Ruta URL App" autofocus class="form-control"  />
+            </div>
+            <div class="form-group">
+                <label for="orden">Orden</label>
+                <input type="text" id="orden" placeholder="Ingese el orden" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label for="dwestado">Estado</label>
+                @Html.DropDownList("dwestado", new SelectList(ViewBag.estado, "_est_id", "_est_des", "A"), new { @class = "selectCountry form-control", @id = "dwestado" })
             </div>           
             <div class="form-group">
-                <label for="descripcion">Descripcion</label>
-                <input type="text" id="descripcion" placeholder="Ingrese la descripción" class="form-control" oninvalid="InvalidMsg(this,'Ingrese la descripcion')" required="required" />
+                <label for="controller">Controller</label>
+                <input type="text" id="controller" placeholder="Ingrese el controller" class="form-control" oninvalid="InvalidMsg(this,'Ingrese el controller')" required="required" />
+            </div>
+            <div class="form-group">
+                <label for="action">Action</label>
+                <input type="text" id="action" placeholder="Ingrese el action" class="form-control" oninvalid="InvalidMsg(this,'Ingrese el action')" required="required" />
             </div>
         </form>
     </div>
@@ -84,4 +109,13 @@
     </div>
 </div>
 }
-<div class="modal fade" id="pleaseWaitDialog" data-backdrop="static" data-keyboard="false" role="dialog" aria-labelledby="basicModal" aria-hidden="true" tabindex="-1"><div class="modal-dialog"><div class="modal-content"><div class="modal-header"><h1 style="font-size:18px;font-weight:bold;color:#1c334f">Espere un momento por favor...</h1></div><div class="modal-body"><div class="progress progress-striped active"><div class="progress-bar" style="width: 100%;"><span class="sr-only">60% Complete</span></div></div></div></div></div></div>
+<script>
+
+
+$(document).ready(function() {
+    $("#dwestado").select({
+    dropdownParent: $("#myModal")
+  });
+});
+
+</script>

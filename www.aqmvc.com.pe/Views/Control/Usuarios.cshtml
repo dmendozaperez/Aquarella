@@ -1,13 +1,14 @@
 ﻿@using www.aqmvc.com.pe.Data.Control
 @model IEnumerable<UsuarioModel>
 @{    
-    AjaxOptions options = new AjaxOptions
-    {
-        HttpMethod = "POST",
-        InsertionMode = InsertionMode.Replace,
-        UpdateTargetId = "lista",
-        OnSuccess = "removeLoading();",
-        OnBegin = "showLoading()",
+        AjaxOptions options = new AjaxOptions
+        {
+            HttpMethod = "POST",
+            InsertionMode = InsertionMode.Replace,
+            UpdateTargetId = "lista",
+            OnComplete = "removeLoading();",
+            OnBegin = "showLoading()",
+            OnFailure= "removeLoading();",
 
     };
 }

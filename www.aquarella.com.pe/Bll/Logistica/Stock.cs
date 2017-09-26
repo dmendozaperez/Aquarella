@@ -276,6 +276,39 @@ namespace www.aquarella.com.pe.bll
             }
             catch (Exception e) { throw new Exception(e.Message, e.InnerException); }
         }
+
+        public static DataSet get_stockhiguereta(DateTime fe_ini,DateTime fec_fin)
+        {
+            DataSet ds = null;
+            string sqlquery = "USP_ConsultaStkHVenta";
+            try
+            {
+                using (SqlConnection cn = new SqlConnection(Conexion.myconexion()))
+                {
+                    using (SqlCommand cmd = new SqlCommand(sqlquery, cn))
+                    {
+                        cmd.CommandTimeout = 0;
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        cmd.Parameters.AddWithValue("@FECHA_INI", fe_ini);
+                        cmd.Parameters.AddWithValue("@FECHA_FIN", fec_fin);
+
+                        using (SqlDataAdapter da = new SqlDataAdapter(cmd))
+                        {
+                            ds = new DataSet();
+                            da.Fill(ds);
+                        }
+
+                    }
+                }
+            }
+            catch (Exception)
+            {
+
+                ds = null;
+            }
+            return ds;
+        }
+
         public static DataSet getAlltemporada()
         {
             string sqlquery = "USP_Leer_Temporada";

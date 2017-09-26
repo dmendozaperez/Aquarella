@@ -1,4 +1,17 @@
-﻿<script type="text/javascript">
+﻿@*<script>
+    function showLoading() {
+        $('#pleaseWaitDialog').modal('show');
+        //alert('ini');
+    }
+    function removeLoading() {
+        //alert('fin');// $('#pleaseWaitDialog').modal('hide');
+
+        $('#pleaseWaitDialog').modal('hide');
+        $('body').removeClass('modal-open');
+        $('.modal-backdrop').remove();
+    }
+</script>*@
+<script type="text/javascript">
     function InvalidMsg(textbox, str) {
 
         if (textbox.value.length == 0) {
@@ -18,7 +31,7 @@
         var padre = $('select[name=dwfuncion]').selectpicker('val');
         var orden = $("#orden").val();
         var descripcion = $("#descripcion").val();
-
+        showLoading();
         $.ajax
              ({
                  url: '../Funcion/Edit',
@@ -54,8 +67,8 @@
 @Scripts.Render("~/bundles/bootstrap-select")
 @Styles.Render("~/Content/Bootstrap-Select/css")
 <link rel="stylesheet" type="text/css" href="~/Content/bootstrap-select.css" />
-@using (Ajax.BeginForm("Funcion", new AjaxOptions { OnBegin = "OnEditar_Grabar();" }))
-{ 
+@using (Ajax.BeginForm("Funcion", new AjaxOptions { OnBegin = "OnEditar_Grabar();",OnComplete= "removeLoading();", OnFailure= "removeLoading();" }))
+{
     <div class="modal-content">
         <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
