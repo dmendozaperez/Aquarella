@@ -14,6 +14,7 @@
                      if (data.estado == '1') {                      
                          $('#lista').load('@Url.Action("ListaAplFun", "Funcion")', { funid: funid });                         
                          toastr.success(data.desmsg, msg_titulo);
+                         removeLoading();
                      }
                      else {
                          toastr.error(data.desmsg, msg_titulo);

@@ -516,6 +516,63 @@ namespace www.aquarella.com.pe.bll
             return FormatoTk;
         }
 
+        public static DataTable get_ventadetcn(DateTime fecini, DateTime fecfin,string conid)
+        {
+            DataTable dt = null;
+            string sqlquery = "USP_ConsultaVentaDetCN";
+            try
+            {
+                using (SqlConnection cn = new SqlConnection(Conexion.myconexion()))
+                {
+                    using (SqlCommand cmd = new SqlCommand(sqlquery, cn))
+                    {
+                        cmd.CommandTimeout = 0;
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        cmd.Parameters.AddWithValue("@fecha_ini", fecini);
+                        cmd.Parameters.AddWithValue("@fecha_fin", fecfin);
+                        cmd.Parameters.AddWithValue("@con_id", conid);
+
+                        using (SqlDataAdapter da = new SqlDataAdapter(cmd))
+                        {
+                            dt = new DataTable();
+                            da.Fill(dt);
+                        }
+
+                    }
+                }
+            }
+            catch
+            {
+                dt = null;
+            }
+            return dt;
+        }
+        public static DataTable getconepto_ce()
+        {
+            string sqlquery = "USP_LeerFormaPagoCN";
+            DataTable dt = null;
+            try
+            {
+                using (SqlConnection cn = new SqlConnection(Conexion.myconexion()))
+                {
+                    using (SqlCommand cmd = new SqlCommand(sqlquery, cn))
+                    {
+                        cmd.CommandTimeout = 0;
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        using (SqlDataAdapter da = new SqlDataAdapter(cmd))
+                        {
+                            dt = new DataTable();
+                            da.Fill(dt);
+                        }
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                dt = null;                
+            }
+            return dt;
+        }
 
         private static string getPosPrinter(DataSet dsInvoice, string strFilePath, CultureInfo myCIintl, int recLineChars, string strDecimal, string strTipo, string StrSerieFactura, string StrSerieBoleta, string StrConceptoVisaUnica)
         {

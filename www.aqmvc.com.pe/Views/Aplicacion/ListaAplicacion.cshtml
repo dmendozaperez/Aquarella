@@ -6,7 +6,11 @@
             <th>Tipo</th>
             <th>Orden</th>
             <th>Estado</th>
-            <th>Editar</th>
+            <th>
+                <button title="Agregar" class="btnnuevo btn btn-primary pull-right" data-modal="" data-toggle="modal"><span class="glyphicon glyphicon-plus"></span></button>
+            </th>
+            @*<th>Estado</th>
+            <th>Editar</th>*@
         </tr>
     </thead>
     <tbody data-bind="foreach:">
@@ -21,7 +25,7 @@
                 <td>@item.apl_tip_id</td>
                 <td>@item.apl_orden</td>
                 <td>@item.apl_est_id</td>
-                <td><p data-placement="top" data-toggle="tooltip" title="Edit"><button class="anchorDetail btn btn-primary" data-title="Edit" data-id="@item.apl_id" data-toggle="modal" data-target="#edit"><span class="glyphicon glyphicon-pencil"></span></button></p></td>
+                <td><button title="Editar" class="btneditar btn btn-primary" data-id="@item.apl_id" data-modal="" data-toggle="modal"><span class="glyphicon glyphicon-pencil"></span></button></td>
             </tr>
 
         }
@@ -35,7 +39,7 @@
                 <th>Tipo</th>
                 <th>Orden</th>
                 <th>Estado</th>
-                <th>Editar</th>
+                <th></th>
             </tr>
         </tfoot>
     }
