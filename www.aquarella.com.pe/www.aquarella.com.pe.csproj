@@ -40,14 +40,14 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="AjaxControlToolkit">
-      <HintPath>..\..\..\..\PRODUCCION\www.aquarella.com.pe\www.aquarella.com.pe\bin\AjaxControlToolkit.dll</HintPath>
+      <HintPath>..\AjaxControlToolkit.dll</HintPath>
     </Reference>
     <Reference Include="AsyncCtpLibrary">
       <HintPath>..\..\..\..\PRODUCCION\www.aquarella.com.pe\www.aquarella.com.pe\bin\AsyncCtpLibrary.dll</HintPath>
     </Reference>
     <Reference Include="Carvajal.FEPE.PreSC, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>C:\carvajal\dll_prueba\Carvajal.FEPE.PreSC.dll</HintPath>
+      <HintPath>..\Carvajal.FEPE.PreSC.dll</HintPath>
     </Reference>
     <Reference Include="CrystalDecisions.CrystalReports.Engine, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -66,10 +66,10 @@
       <HintPath>..\..\..\..\David\AQUARELLA SQL\Sistema\Vb C# 2013\ELECTRONICO_CARVAJAL\ELECTRONICO\Sistema\www.aquarella.com.pe\www.aquarella.com.pe\bin\CrystalDecisions.Web.dll</HintPath>
     </Reference>
     <Reference Include="Jayrock">
-      <HintPath>..\..\..\..\PRODUCCION\www.aquarella.com.pe\www.aquarella.com.pe\bin\Jayrock.dll</HintPath>
+      <HintPath>..\Jayrock.dll</HintPath>
     </Reference>
     <Reference Include="Jayrock.Json">
-      <HintPath>..\..\..\..\PRODUCCION\www.aquarella.com.pe\www.aquarella.com.pe\bin\Jayrock.Json.dll</HintPath>
+      <HintPath>..\Jayrock.Json.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Microsoft.VisualBasic" />
@@ -94,7 +94,7 @@
     <Reference Include="System.EnterpriseServices" />
     <Reference Include="UBL20, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>C:\carvajal\dll_prueba\UBL20.dll</HintPath>
+      <HintPath>..\UBL20.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
