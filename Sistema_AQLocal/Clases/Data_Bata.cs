@@ -419,7 +419,11 @@ namespace Sistema_AQLocal
                             dr[1] = medida(regla, cmp.ToString());
                             dr[2] = Convert.ToDecimal(dt.Tables["ACSAL"].Rows[i]["mart_pvta1"].ToString());
                             dr[3] = val1;
-                            dt_tabla.Rows.Add(dr);
+
+                            if (dr[1].ToString() != "")
+                            {
+                                dt_tabla.Rows.Add(dr);
+                            }
                             //dt_tabla.Rows.Add(dt.Rows[i]["talla"].ToString(), dt.Rows[i]["campo"].ToString());
                             //}
                             //catch (Exception e) { }
