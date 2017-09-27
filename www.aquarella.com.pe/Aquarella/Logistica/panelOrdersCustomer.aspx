@@ -241,6 +241,7 @@
                     <li><a href="#fragment-3"><span>Historial de Nota de credito</span></a></li>
                     <li><a href="#fragment-4"><span>Historial de Consignaciones</span></a></li>
                     <li><a href="#fragment-5"><span>Nota de Credito (Saldos)</span></a></li>
+                    <li><a href="#fragment-6"><span>Historial de Ventas (Higuereta)</span></a></li>
                 </ul>
                 <!-- PEDIDOS EN BORRADOR -->
                 <div id="fragment-1" style="min-height: 200px;">
@@ -578,6 +579,84 @@
                         </ContentTemplate>
                         <Triggers>
                             <asp:AsyncPostBackTrigger ControlID="dwCustomers" EventName="SelectedIndexChanged" />
+                        </Triggers>
+                    </asp:UpdatePanel>
+                </div>
+                <!--HISTORIAL DE VENTA HIGUERETA-->
+                 <div id="fragment-6" style="min-height: 200px;">
+                    <p>
+                        Historial de Ventas de Higuereta; consulta de facturación
+                        general e individual por promotor.</p>
+                    <asp:UpdatePanel ID="UpdatePanel1" runat="server" UpdateMode="Conditional">
+                        <ContentTemplate>
+                            <asp:GridView ID="gvventa" runat="server" Width="100%" SkinID="gridviewSkin"
+                                AutoGenerateColumns="False" AllowPaging="True" AllowSorting="True" 
+                                OnRowCreated="gvventa_RowCreated" 
+                                 onrowcommand="gvventa_RowCommand" >
+                                <EmptyDataTemplate>
+                                    No existen Facturas que mostrar.
+                                </EmptyDataTemplate>
+                                <Columns>                                    
+                                    <asp:BoundField DataField="Ven_Id" SortExpression="Ven_Id" HeaderText="Factura" >
+                                    <FooterStyle HorizontalAlign="Left" />
+                                    <HeaderStyle HorizontalAlign="Left" />
+                                    <ItemStyle HorizontalAlign="Left" />
+                                    </asp:BoundField>
+                                    <asp:BoundField DataField="Fecha" SortExpression="Fecha" HeaderText="Fecha" >
+                                    <HeaderStyle HorizontalAlign="Left" />
+                                    <ItemStyle HorizontalAlign="Left" />
+                                    </asp:BoundField>
+                                    <asp:BoundField DataField="Ven_Det_Cantidad" HeaderText="Pares" SortExpression="Ven_Det_Cantidad" ItemStyle-HorizontalAlign="Center">
+                                        <ItemStyle HorizontalAlign="Center" />
+                                    </asp:BoundField>
+                                    <asp:BoundField DataField="Est_Descripcion" SortExpression="Est_Descripcion" HeaderText="Estado" >                                                                                                
+                                    <HeaderStyle HorizontalAlign="Center" />
+                                    <ItemStyle HorizontalAlign="Center" />
+                                    </asp:BoundField>
+                                    <asp:BoundField DataField="total" DataFormatString="{0:C}" HeaderText="Total">
+                                    <HeaderStyle HorizontalAlign="Right" />
+                                    <ItemStyle HorizontalAlign="Right" />
+                                    </asp:BoundField>
+                                    <asp:BoundField DataField="percepcion" DataFormatString="{0:C}" 
+                                        HeaderText="Percepcion">
+                                    <HeaderStyle HorizontalAlign="Right" />
+                                    <ItemStyle HorizontalAlign="Right" />
+                                    </asp:BoundField>
+                                    <asp:BoundField DataField="tpagar" DataFormatString="{0:C}" 
+                                        HeaderText="T.Pagar">
+                                    <HeaderStyle HorizontalAlign="Right" />
+                                    <ItemStyle HorizontalAlign="Right" />
+                                    </asp:BoundField>                                  
+                                  <%--  <asp:TemplateField HeaderText="Fac" ItemStyle-HorizontalAlign="Center">
+                                        <ItemTemplate>
+                                            <a class='iframe' href='../Ventas/panelInvReports.aspx?noliq=H&NoInvo=<%# Eval("Ven_Id")%>'
+                                                title="Ver / Imprimir reporte de factura  <%# Eval("Ven_Id")%>.<b>X</b> Para Cerrar (Esquina Inferior Derecha del Marco)">
+                                                <asp:Image ID="imgInv" Visible="false" ImageUrl="../../Design/images/b_print.png"
+                                                    runat="server" AlternateText="Fact" ToolTip="Ver/Imprimir Factura" BorderWidth="0" /></a>
+                                        </ItemTemplate>
+                                        <ItemStyle HorizontalAlign="Center" />
+                                    </asp:TemplateField>   --%>
+                                      <asp:TemplateField HeaderText="Fac" ItemStyle-HorizontalAlign="Center" >
+                            <ItemTemplate>
+                                 <a class='iframe' href='../../Reports/Ventas/reportTickets.aspx?noventa=<%# Eval("Ven_Id")%>'
+                                    title="Ver / Imprimir factura  <%# Eval("Ven_Id")%>.<b>X</b> Para Cerrar (Esquina Inferior Derecha del Marco)">
+                                    <img src="../../Design/images/b_print.png" border="0" alt="Ver reporte de facturacion No.<%# Eval("Ven_Id")%>" /></a>                                                                  
+                            </ItemTemplate>
+                            <ItemStyle HorizontalAlign="Center" />
+                        </asp:TemplateField>                                                                                                       
+                                </Columns>
+                                <RowStyle BorderColor="#DEDFDE" BorderWidth="1px" BorderStyle="Solid" />
+                            </asp:GridView>
+                            <asp:ObjectDataSource ID="odsventa" runat="server" SelectMethod="getTableFromDataset"
+                                TypeName="www.aquarella.com.pe.bll.Util.Utilities" OnSelecting="odsventa_Selecting">
+                                <SelectParameters>
+                                    <asp:Parameter Name="dtObj" Type="Object" />
+                                    <asp:Parameter DefaultValue="5" Name="posTable" Type="Int32" />
+                                </SelectParameters>
+                            </asp:ObjectDataSource>
+                        </ContentTemplate>
+                        <Triggers>
+                            <asp:AsyncPostBackTrigger ControlID="dwCustomers" EventName="SelectedIndexChanged" />                           
                         </Triggers>
                     </asp:UpdatePanel>
                 </div>

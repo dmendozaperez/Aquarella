@@ -1,0 +1,38 @@
+﻿@using www.aqmvc.com.pe.Data.Control
+@model IEnumerable<www.aqmvc.com.pe.Data.Control.Roles>
+@section Scripts
+{
+    <script src="~/plugins/datatables/jquery.dataTables.min.js"></script>
+    <script src="~/plugins/datatables/dataTables.bootstrap.min.js"></script>
+}
+
+
+<div id="myModalnew" class="modal fade" aria-labelledby="edit" aria-hidden="true" role="dialog" data-keyboard="true" data-backdrop="static">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div id='myModalContent'></div>
+        </div>
+    </div>
+
+</div>
+
+<link rel="stylesheet" href="~/plugins/datatables/dataTables.bootstrap.css">
+<section class="content">
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="box">
+                <div class="box-header">
+                    <h3 class="box-title">Roles</h3>
+                    <button title="Agregar" class="btnnuevo btn btn-primary pull-right" data-modal="" data-toggle="modal"><span class="glyphicon glyphicon-plus"></span></button>
+                </div>
+                @*<div class="pull-left">
+                    <button title="Agregar" class="btnnuevo btn btn-primary pull-right" data-modal="" data-toggle="modal"><span class="glyphicon glyphicon-plus"></span></button>
+                </div>*@
+                <div class="box-body" id="lista">
+                    @{Html.RenderPartial("ListaRoles", Model); }
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+

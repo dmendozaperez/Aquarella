@@ -20,7 +20,7 @@
                 <td>@item.usu_nombre</td>
                 <td>@item.nombre</td>
                 <td>@item.usu_est_id</td>         
-                <td><p data-placement="top" data-toggle="tooltip" title="Edit"><button class="anchorDetail btn btn-primary btn-xs" data-title="Edit" data-id="@item.usu_id" data-toggle="modal" data-target="#edit"><span class="glyphicon glyphicon-pencil"></span></button></p></td>
+                <td><p data-placement="top" data-toggle="tooltip" title="Edit"><button class="anchorDetail btn btn-primary" data-title="Edit" data-id="@item.usu_id" data-toggle="modal" data-target="#edit"><span class="glyphicon glyphicon-pencil"></span></button></p></td>
             </tr>
 
         }
@@ -104,6 +104,7 @@
     $(function () {
         $(".anchorDetail").click(function () {
             //debugger;
+            showLoading();
             var $buttonClicked = $(this);
             var id = $buttonClicked.attr('data-id');
             var options = { "backdrop": "static", keyboard: true };  
@@ -114,16 +115,20 @@
                 data: { "Id": id },  
                 datatype: "json",
                 cache:true,
-                success: function (data) {  
+                success: function (data) {
+                    removeLoading();
                     //debugger;  
                     $('#myModalContent').html(data);  
                     $('#myModal').modal(options);  
                     $('#myModal').modal('show');
+                   
                    // debugger;  
   
                 },  
-                error: function () {  
-                    alert("Dynamic content load failed.");  
+                error: function () {
+                   
+                    alert("Dynamic content load failed.");
+                    removeLoading();
                 }  
             });  
         });  

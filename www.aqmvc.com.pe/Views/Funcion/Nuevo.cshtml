@@ -1,4 +1,18 @@
-﻿<script type="text/javascript">
+﻿<script>
+    function showLoading() {
+        $('#pleaseWaitDialog').modal('show');
+        //alert('ini');
+    }
+    function removeLoading() {
+        //alert('fin');// $('#pleaseWaitDialog').modal('hide');
+
+        $('#pleaseWaitDialog').modal('hide');
+        $('body').removeClass('modal-open');
+        $('.modal-backdrop').remove();
+    }
+</script>
+
+<script type="text/javascript">
     function InvalidMsg(textbox, str) {
 
         if (textbox.value.length == 0) {
@@ -17,7 +31,7 @@
         var padre = $('select[name=dwfuncion]').selectpicker('val');
         var orden = $("#orden").val();
         var descripcion = $("#descripcion").val();
-
+        showLoading();
         $.ajax
              ({
                  url: '../Funcion/Nuevo',
@@ -31,9 +45,7 @@
                          $('body').removeClass('modal-open');
                          $('.modal-backdrop').remove();
 
-                         $('#lista').load('@Url.Action("ListaFuncion", "Funcion")', {});
-                         //$("#result").dataTable().fnDestroy();
-                         //tablerefresh();
+                         $('#lista').load('@Url.Action("ListaFuncion", "Funcion")', {});                        
                          toastr.success(data.desmsg, msg_titulo);
                      }
                      else {
@@ -54,7 +66,7 @@
 @Scripts.Render("~/bundles/bootstrap-select")
 @Styles.Render("~/Content/Bootstrap-Select/css")
 <link rel="stylesheet" type="text/css" href="~/Content/bootstrap-select.css" />
-@using (Ajax.BeginForm("Funcion", new AjaxOptions {OnFailure= "OnNuevo_Grabar();" }))
+@using (Ajax.BeginForm("Funcion",new AjaxOptions { OnBegin = "OnNuevo_Grabar();",OnComplete= "removeLoading();",OnFailure= "removeLoading();" }))
 {
         <div class="modal-content">
             <div class="modal-header">

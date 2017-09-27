@@ -1,4 +1,16 @@
-﻿
+﻿<script>
+    function showLoading() {
+        $('#pleaseWaitDialog').modal('show');
+        //alert('ini');
+    }
+    function removeLoading() {
+        //alert('fin');// $('#pleaseWaitDialog').modal('hide');
+
+        $('#pleaseWaitDialog').modal('hide');
+        $('body').removeClass('modal-open');
+        $('.modal-backdrop').remove();
+    }
+</script>
 <script type="text/javascript">
     function InvalidMsg(textbox, str) {
 
@@ -29,8 +41,8 @@
 </script>
 
 <script type="text/javascript">
-    function OnFailure_update() {
-
+    function OnBegin_update() {
+        showLoading();
         var msg_titulo = 'Mensaje Aquarella!';
         var id = $("#idusu").val();
         var pass = $("#txtnpass").val();
@@ -49,9 +61,7 @@
                           $('body').removeClass('modal-open');                        
                           $('.modal-backdrop').remove();
 
-                          $('#lista').load('@Url.Action("ListaUsuario", "Control")', { buscarnom: buscar });
-                          //$("#result").dataTable().fnDestroy();
-                          //tablerefresh();
+                          $('#lista').load('@Url.Action("ListaUsuario", "Control")', { buscarnom: buscar });                       
                           toastr.success(data.desmsg, msg_titulo);                                                  
                       }
                       else {
@@ -80,14 +90,16 @@
 @Styles.Render("~/Content/Bootstrap-Select/css")
 <link rel="stylesheet" type="text/css" href="~/Content/bootstrap-select.css" />
 
+<div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
+    <h4 class="modal-title custom_align" id="Heading">Usuario:<b> @Model.nombre </b></h4>
+</div>
 
-@using (Ajax.BeginForm("Control", new AjaxOptions { OnFailure = "OnFailure_update();" }))
-{ 
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
-                <h4 class="modal-title custom_align" id="Heading">Usuario:<b> @Model.nombre </b></h4>
-            </div>
+
+@using (Ajax.BeginForm("Control", new AjaxOptions { OnBegin = "OnBegin_update();",OnComplete= "removeLoading();",OnFailure= "removeLoading();" }))
+{
+        @*<div class="modal-content">*@
+           
             <div class="login-box-body">
                 <p class="login-box-msg">Cambio de Password</p>           
                 <input type="hidden" id="idusu" value="@Model.usu_id" />
@@ -111,7 +123,7 @@
                 <button type="submit" class="btn btn-facebook btn-lg" style="width: 100%;"><span class="glyphicon glyphicon-ok-sign"></span>Actualizar</button>
             </div>
    
-        </div>
+        @*</div>*@
 }
 
 <script>

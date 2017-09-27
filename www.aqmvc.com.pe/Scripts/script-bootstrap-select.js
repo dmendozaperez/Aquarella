@@ -6,7 +6,7 @@ $(document).ready(function ()
     $('.selectCountry').selectpicker(
     {
         width: '100%',
-        title: '- [Choose Country] -',
+        title: '- [Eliga un items] -',
         style: 'btn-default',
         size: 6
     });

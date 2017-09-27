@@ -1,0 +1,79 @@
+﻿<script type="text/javascript">
+    function onAgregar_fun() {
+        var msg_titulo = 'Mensaje Aquarella!';
+        var rolid = $("#idrol").val();
+        var funid = $('select[name=dwfun]').selectpicker('val');
+        showLoading();
+        $.ajax
+             ({
+                 url: '../Roles/Agregar_Fun',
+                 dataType: "json",
+                 type: "POST",
+                 data: { fun_id: funid, rol_id: rolid },
+                 success: function (data, textStatus, XMLHttpRequest) {
+                     if (data.estado == '1') {
+                         $('#lista').load('@Url.Action("ListaFunRol", "Roles")', { rolid: rolid });
+                         toastr.success(data.desmsg, msg_titulo);
+                     }
+                     else {
+                         toastr.error(data.desmsg, msg_titulo);
+                     }
+                 },
+                 error: function (xhr) {
+                     toastr.error(xhr, msg_titulo);
+                 }
+             })
+
+    }
+</script>
+
+@using www.aqmvc.com.pe.Data.Control
+@model IEnumerable<RolesFuncion>
+@{
+    Layout = null;
+}
+@Scripts.Render("~/bundles/bootstrap-select")
+@Styles.Render("~/Content/Bootstrap-Select/css")
+<link rel="stylesheet" type="text/css" href="~/Content/bootstrap-select.css" />
+<div class="modal-content">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
+        <h4 class="modal-title custom_align" id="Heading"><b>Adicionar Función a Roles</b></h4>
+    </div>
+    <div class="modal-body" id="myModalBody">
+        @using (Ajax.BeginForm("Roles", new AjaxOptions { OnBegin = "onAgregar_fun();",OnComplete= "removeLoading();", OnFailure= "removeLoading();" }))
+        {
+            <form id="editfuncion" role="form">
+                <input type="hidden" id="idrol" value="@ViewBag.rolid" />
+                <div class="form-group">
+                    <div class="input-group">
+                        <label for="dwfun">Función {Roles - @ViewBag.rolnombre}</label>
+                    </div>
+                    <div class="input-group">
+                        @Html.DropDownList("dwfun", new SelectList(ViewBag.funciones, "fun_id", "fun_nombre"), new { @class = "selectCountry form-control", @data_live_search = "true", @id = "dwfun", @required = "required" })
+                        <span class="input-group-btn">
+                            <button type="submit" title="Agregar funciones" class="btn btn-primary btn-flat">
+                                <span class="glyphicon glyphicon-plus"></span>
+                            </button>
+                        </span>
+
+                    </div>
+                </div>
+            </form>
+        }
+        <div class="form-group" id="lista">
+            @{Html.RenderPartial("ListaFunRol", Model); }
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="pleaseWaitDialog" data-backdrop="static" data-keyboard="false" role="dialog" aria-labelledby="basicModal" aria-hidden="true" tabindex="-1"><div class="modal-dialog"><div class="modal-content"><div class="modal-header"><h1 style="font-size:18px;font-weight:bold;color:#1c334f">Espere un momento por favor...</h1></div><div class="modal-body"><div class="progress progress-striped active"><div class="progress-bar" style="width: 100%;"><span class="sr-only">60% Complete</span></div></div></div></div></div></div>                   
+<script>
+
+
+$(document).ready(function() {
+    $("#dwfun").select({
+        dropdownParent: $("#myModalnew")
+  });
+});
+
+</script>
