@@ -561,7 +561,7 @@ namespace www.aquarella.com.pe.bll
         }
 
 
-        static public Be_Documents_trans SaveValidateBank(Be_Documents_trans objArray, int var_usu,DataTable dt)
+        static public Be_Documents_trans SaveValidateBank(Be_Documents_trans objArray, int var_usu,DataTable dt,string banco)
         {
             Be_Documents_trans resp = new Be_Documents_trans();
             string sqlquery = "USP_Valida_Archivo_Banco";
@@ -575,6 +575,7 @@ namespace www.aquarella.com.pe.bll
                 cmd.CommandTimeout = 0;
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.Parameters.AddWithValue("@usu_validar", var_usu);
+                //cmd.Parameters.AddWithValue("@ban_id", banco);
                 cmd.Parameters.AddWithValue("@Pago_Valida", dt);
                 cmd.ExecuteNonQuery();
                 resp.Ok = true;

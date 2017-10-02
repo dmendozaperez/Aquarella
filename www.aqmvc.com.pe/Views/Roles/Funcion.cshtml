@@ -13,13 +13,16 @@
                  success: function (data, textStatus, XMLHttpRequest) {
                      if (data.estado == '1') {
                          $('#lista').load('@Url.Action("ListaFunRol", "Roles")', { rolid: rolid });
+                         removeLoading();
                          toastr.success(data.desmsg, msg_titulo);
                      }
                      else {
+                         removeLoading();
                          toastr.error(data.desmsg, msg_titulo);
                      }
                  },
                  error: function (xhr) {
+                     removeLoading();
                      toastr.error(xhr, msg_titulo);
                  }
              })

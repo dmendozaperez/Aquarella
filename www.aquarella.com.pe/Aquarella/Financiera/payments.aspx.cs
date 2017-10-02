@@ -93,7 +93,7 @@ namespace www.aquarella.com.pe.Aquarella.Financiera
             {
                 idCust = dwCustomers.SelectedValue;
             }
-
+            string _banid = dwBanks.SelectedValue;
 
 
             //if (_user._usv_employee)
@@ -103,7 +103,7 @@ namespace www.aquarella.com.pe.Aquarella.Financiera
 
             if (!string.IsNullOrEmpty(idCust) && !idCust.Equals("-1"))
 
-                if (!(Payments.existe_op(txtNoVoucher.Text.Trim())))
+                if (!(Payments.existe_op(txtNoVoucher.Text.Trim(), _banid,Convert.ToDecimal(idCust),Convert.ToDecimal(txtValue.Text),Convert.ToDateTime(txtDate.Text))))
                 {
                     savePayment(idCust);
                 }

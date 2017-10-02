@@ -13,7 +13,7 @@
     Ventas Detallado Centro de Negocio
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="ContentPlaceHolderPageDesc" runat="server">
-    Consulte entre un rango de fechas, por formao de pago
+    Consulte entre un rango de fechas, por forma de pago
 </asp:Content>
 <asp:Content ID="Content4" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
       <asp:ScriptManager ID="ScriptManager1" runat="server" 
@@ -216,6 +216,10 @@
                         <ItemStyle HorizontalAlign="Right" />
                         </asp:BoundField>
                           <asp:BoundField DataField="pago" HeaderText="Forma de Pago">
+                        <HeaderStyle HorizontalAlign="Left" />
+                        <ItemStyle HorizontalAlign="Left" />
+                        </asp:BoundField>
+                          <asp:BoundField DataField="TipTar" HeaderText="Nombre Tarj.">
                         <HeaderStyle HorizontalAlign="Center" />
                         <ItemStyle HorizontalAlign="Center" />
                         </asp:BoundField>

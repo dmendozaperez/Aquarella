@@ -199,7 +199,7 @@
                 //debugger;
                 var $buttonClicked = $(this);
                 //var id = $buttonClicked.attr('data-id');
-                //showLoading();
+                showLoading();
                 var options = { "backdrop": "static", keyboard: true };
                 $.ajax({
                     type: "GET",
@@ -209,7 +209,7 @@
                     datatype: "json",
                     cache: true,
                     success: function (data) {
-                        //removeLoading();
+                        removeLoading();
                         //debugger;
                         $('#myModalContent').html(data);
                         $('#myModalnew').modal(options);
@@ -218,7 +218,7 @@
 
                     },
                     error: function () {
-                        //removeLoading();
+                        removeLoading();
                         alert("Dynamic content load failed.");
 
                     }

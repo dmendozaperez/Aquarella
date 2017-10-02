@@ -18,6 +18,42 @@ namespace www.aqmvc.com.pe.Data.Control
         public string apl_est_id { get; set; }
         public string apl_controller { get; set; }
         public string apl_action { get; set; }
+
+        public Boolean UpdateAplicacion()
+        {
+            Boolean valida = false;
+            string sqlquery = "[USP_Modificar_Aplicacion]";
+            try
+            {
+                using (SqlConnection cn = new SqlConnection(Conexion.conexion_sql))
+                {
+                    if (cn.State == 0) cn.Open();
+                    using (SqlCommand cmd = new SqlCommand(sqlquery, cn))
+                    {
+                        cmd.CommandTimeout = 0;
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        cmd.Parameters.AddWithValue("@apl_id", apl_id);
+                        cmd.Parameters.AddWithValue("@apl_nombre", apl_nombre);
+                        cmd.Parameters.AddWithValue("@apl_tip_id", apl_tip_id);
+                        cmd.Parameters.AddWithValue("@apl_url", apl_url);
+                        cmd.Parameters.AddWithValue("@apl_orden", apl_orden);
+                        cmd.Parameters.AddWithValue("@apl_est_id", apl_est_id);
+                        cmd.Parameters.AddWithValue("@apl_ayuda", "");
+                        cmd.Parameters.AddWithValue("@apl_comentario", "");
+                        cmd.Parameters.AddWithValue("@apl_controller", apl_controller);
+                        cmd.Parameters.AddWithValue("@apl_action", apl_action);
+                        cmd.ExecuteNonQuery();
+                        valida = true;
+                    }
+                }
+                
+            }
+            catch (Exception)
+            {
+                valida=false;
+            }
+            return valida;
+        }
         public Boolean InsertarAplicacion()
         {
             string sqlquery = "USP_Insertar_Aplicacion";
@@ -80,6 +116,8 @@ namespace www.aqmvc.com.pe.Data.Control
                                 apl.apl_tip_id= dr["apl_tip_id"].ToString();
                                 apl.apl_orden= dr["apl_orden"].ToString();
                                 apl.apl_est_id= dr["apl_est_id"].ToString();
+                                apl.apl_action= dr["apl_action"].ToString();
+                                apl.apl_controller= dr["apl_controller"].ToString();
                                 list.Add(apl);
                             }
                         }

@@ -1238,6 +1238,7 @@
     <Content Include="Views\Aplicacion\Index.cshtml" />
     <Content Include="Views\Aplicacion\ListaAplicacion.cshtml" />
     <Content Include="Views\Aplicacion\Nuevo.cshtml" />
+    <Content Include="Views\Aplicacion\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

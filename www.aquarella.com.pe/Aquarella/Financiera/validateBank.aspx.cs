@@ -20,7 +20,7 @@ namespace www.aquarella.com.pe.Aquarella.Financiera
     public partial class validateBank : System.Web.UI.Page
     {
         Users _user;
-
+        private string _namsession_banco = "_namsession_banco";
         protected void Page_Load(object sender, EventArgs e)
         {
             // Vencimiento de sesion
@@ -30,6 +30,7 @@ namespace www.aquarella.com.pe.Aquarella.Financiera
 
             if (!IsPostBack)
             {
+                Session[_namsession_banco] = "";
                 dwBanks.DataSource = Banks.getAllBanks();
                 dwBanks.DataBind();
             }
@@ -40,6 +41,14 @@ namespace www.aquarella.com.pe.Aquarella.Financiera
             int rpta;
             try
             {
+                Session[_namsession_banco] = "";
+                if (dwBanks.SelectedValue=="-1")
+                {
+                    msnMessage.LoadMessage("Seleccione el banco: " + DateTime.Now, UserControl.ucMessage.MessageType.Information);
+                    return;
+                }
+                
+
                 if (FileUpload1.HasFile && System.Convert.ToInt32(dwTipArc.SelectedValue) != -1)
                 {
 
@@ -70,6 +79,7 @@ namespace www.aquarella.com.pe.Aquarella.Financiera
 
                     btGuardarDatos_2.Enabled = true;
                     File.Delete(FilePath);
+                    Session[_namsession_banco] = dwBanks.SelectedValue;
                     msnMessage.LoadMessage("Carga correcta del archivo excel. Última actualización: " + DateTime.Now, UserControl.ucMessage.MessageType.Information);
                 }
                 else
@@ -294,7 +304,7 @@ namespace www.aquarella.com.pe.Aquarella.Financiera
 
                 for (int j = 0; j <= GridView1.Rows.Count - 1; j++)
                 {
-                    dt.Rows.Add(GridView1.Rows[j].Cells[0].Text.Replace("&nbsp;", "nulo"), GridView1.Rows[j].Cells[1].Text.Replace("&nbsp;", "nulo"), Convert.ToDecimal(GridView1.Rows[j].Cells[2].Text), GridView1.Rows[j].Cells[3].Text.Replace("&nbsp;", "nulo"), dwBanks.SelectedValue.Replace("&nbsp;", ""));
+                    dt.Rows.Add(GridView1.Rows[j].Cells[0].Text.Replace("&nbsp;", "nulo"), GridView1.Rows[j].Cells[1].Text.Replace("&nbsp;", "nulo"), Convert.ToDecimal(GridView1.Rows[j].Cells[2].Text), GridView1.Rows[j].Cells[3].Text.Replace("&nbsp;", "nulo"),Session[_namsession_banco].ToString() /*dwBanks.SelectedValue.Replace("&nbsp;", "")*/);
 
                     varFecha[j - restar2da] = GridView1.Rows[j].Cells[0].Text.Replace("&nbsp;", "nulo");
                     varDescripcion[j - restar2da] = GridView1.Rows[j].Cells[1].Text.Replace("&nbsp;", "nulo");
@@ -311,7 +321,8 @@ namespace www.aquarella.com.pe.Aquarella.Financiera
                 objArray.getSetBanco = varBanco;
 
                 int var_user_ID = System.Convert.ToInt32(_user._usn_userid);
-                objRpta = Documents_Trans.SaveValidateBank(objArray, var_user_ID,dt);
+                string _banco = Session[_namsession_banco].ToString();
+                objRpta = Documents_Trans.SaveValidateBank(objArray, var_user_ID,dt, _banco);
 
 
                 if (objRpta.Ok)

@@ -93,13 +93,13 @@ namespace www.aquarella.com.pe.Aquarella.Financiera
             //    idCust = dwCustomers.SelectedValue;
             //else if (_user._usv_customer)
             //    idCust = _user._usn_userid.ToString();
-
+            string _valida = "0";
             if (!string.IsNullOrEmpty(idCust) && !idCust.Equals("-1"))
 
-                if (!(Payments.existe_op(txtNoVoucher.Text.Trim())))
-                {
-                    //en esta opcion validamos lo del pedido relacionado con el lider
-                    string _valida= Payments.valida_pedido_pago(Convert.ToDecimal(idCust), txtpedido.Text);
+                //if (!(Payments.existe_op(txtNoVoucher.Text.Trim())))
+                //{
+                //en esta opcion validamos lo del pedido relacionado con el lider
+                /* string _valida = "0";*/// Payments.valida_pedido_pago(Convert.ToDecimal(idCust), txtpedido.Text);
                     //en esta opcion si la funcion retorna un error
                     if (_valida == "-1")
                     {
@@ -130,11 +130,11 @@ namespace www.aquarella.com.pe.Aquarella.Financiera
                     {
                         savePayment(idCust);
                     }
-                }
-                else
-                {
-                    msnMessage.LoadMessage("El numero de operacion ya esta registrado.", UserControl.ucMessage.MessageType.Error);
-                }
+                //}
+                //else
+                //{
+                //    msnMessage.LoadMessage("El numero de operacion ya esta registrado.", UserControl.ucMessage.MessageType.Error);
+                //}
             else
                 msnMessage.LoadMessage("Seleccione un lider sobre el cual aplicar el registro del recaudo.", UserControl.ucMessage.MessageType.Error);
         }
