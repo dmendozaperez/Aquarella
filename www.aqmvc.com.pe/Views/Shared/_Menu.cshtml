@@ -12,22 +12,23 @@
                 <p>@User.Identity.GetUserName()</p>
                 <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
             </div>
-        </div>      
+        </div>         
         <ul class="sidebar-menu">
-            <li class="header">NAVEGACIÓN PRINCIPAL</li>           
+            <li class="header">NAVEGACIÓN PRINCIPAL</li>      
+            
             @foreach (var item in Model)
             {
+                if ((item.isParent) && item.parentId == item.Id)
+                {
                 <li class="treeview">
-                    @if ((item.isParent) && item.parentId == item.Id)
-                    {
+                   
                         <a href="#">
-                            <i class="fa fa-book"></i>
-                            <span>@item.nameOption</span>
-                            <span class="pull-right-container">
-                                <i class="fa fa-angle-left pull-right"></i>
-                            </span>
+                            <i class="fa fa-folder"></i>
+                            <span>@item.nameOption</span>                           
+                                <i class="fa fa-angle-left pull-right"></i>                            
                         </a>
-                    }
+
+                   
                     <ul class="treeview-menu">
                         @foreach (var sub1 in Model.Where(p => p.parentId == item.Id && p.parentId != p.Id))
                         {
@@ -36,15 +37,12 @@
                             {
                                 <li>
                                     <a href="#">
-                                        <i class="fa fa-circle-o"></i>@sub1.nameOption
-                                        <span class="pull-right-container">
-                                            <i class="fa fa-angle-left pull-right"></i>
-                                        </span>
+                                        <i class="fa fa-angle-double-right"></i>@sub1.nameOption                                        
                                     </a>
                                     <ul class="treeview-menu">
                                         @foreach (var sub2 in Model.Where(p => p.parentId == sub1.Id))
                                         {
-                                            <li><a href="@Url.Action(sub2.action, sub2.controller)"><i class="fa fa-circle-o"></i>@sub2.nameOption</a></li>                                            
+                                            <li><a href="@Url.Action(sub2.action, sub2.controller)"><i class="fa fa-angle-double-right"></i>@sub2.nameOption</a></li>                                            
                                         }
                                     </ul>
                                 </li>
@@ -52,14 +50,15 @@
                             else
                             {
 
-                                <li><a href="@Url.Action(sub1.action, sub1.controller)"><i class="fa fa-circle-o"></i>@sub1.nameOption</a></li>
+                                <li><a href="@Url.Action(sub1.action, sub1.controller)"><i class="fa fa-angle-double-right"></i>@sub1.nameOption</a></li>
 
                             }
 
                         }
                     </ul>
             </li>
-}    
+                }               
+            }               
         </ul>
     </section>
     <!-- /.sidebar -->

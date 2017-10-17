@@ -1,0 +1,63 @@
+﻿@*<script src="~/plugins/datatables/jquery.dataTables.min.js"></script>
+<script src="~/plugins/datatables/dataTables.bootstrap.min.js"></script>
+<link rel="stylesheet" href="~/plugins/datatables/dataTables.bootstrap.css">*@
+<input type="hidden" id="idusu" value="@ViewBag.usuid" />
+<script>
+        function showLoading() {
+            $('#pleaseWaitDialog').modal('show');
+            //alert('ini');
+        }
+        function removeLoading() {
+            //alert('fin');// $('#pleaseWaitDialog').modal('hide');
+
+            $('#pleaseWaitDialog').modal('hide');
+            $('body').removeClass('modal-open');
+            $('.modal-backdrop').remove();
+        }
+</script>
+<table id="result" class="table table-bordered table-hover">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Nombre</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody data-bind="foreach:">
+        @using www.aqmvc.com.pe.Data.Control
+        @model IEnumerable<UsuarioRoles>
+
+        @foreach (UsuarioRoles item in Model)
+        {
+            <tr>
+                <td>@item.rol_id.ToString()</td>
+                <td>@item.rol_nombre.ToString()</td>
+                <td>
+                    <div class="pull-right">
+                        <button title="Borrar" class="btnborrar btn btn-danger" data-id="@item.rol_id" data-modal="" data-toggle="modal"><span class="glyphicon glyphicon-remove"></span></button>
+                    </div>
+                </td>
+            </tr>
+
+        }
+    </tbody>
+</table>
+<div class="modal fade" id="pleaseWaitDialog" data-backdrop="static" data-keyboard="false" role="dialog" aria-labelledby="basicModal" aria-hidden="true" tabindex="-1"><div class="modal-dialog"><div class="modal-content"><div class="modal-header"><h1 style="font-size:18px;font-weight:bold;color:#1c334f">Espere un momento por favor...</h1></div><div class="modal-body"><div class="progress progress-striped active"><div class="progress-bar" style="width: 100%;"><span class="sr-only">60% Complete</span></div></div></div></div></div></div>
+
+<script src="~/Scripts/bootbox.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#result').DataTable({
+            "language": {
+                "url": "../plugins/datatables/Spanish.json"
+            },
+            "paging": true,
+            "lengthChange": false,
+            "searching": false,
+            "ordering": true,
+            "info": true,
+            "autoWidth": false,
+            "iDisplayLength": 4
+        });
+    });
+</script>

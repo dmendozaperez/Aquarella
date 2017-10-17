@@ -7,8 +7,8 @@
             <th>Orden</th>
             <th>Estado</th>
             <th>
-                <button title="Agregar" class="btnnuevo btn btn-primary pull-right" data-modal="" data-toggle="modal"><span class="glyphicon glyphicon-plus"></span></button>
-            </th>
+                <p data-placement="top" data-toggle="tooltip" title="Agregar aplicación"></p> <button title="Agregar aplicación" class="btnnuevo btn btn-primary pull-right" data-modal="" data-toggle="modal"><span class="glyphicon glyphicon-plus"></span></button>
+</th>
             @*<th>Estado</th>
             <th>Editar</th>*@
         </tr>
@@ -27,7 +27,7 @@
                 <td>@item.apl_est_id</td>
                 <td>
                     <div class="pull-right">
-                        <button title="Editar" class="btneditar btn btn-primary" data-id="@item.apl_id" data-modal="" data-toggle="modal"><span class="glyphicon glyphicon-pencil"></span></button>
+                        <button title="Editar Aplicación" class="btneditar btn btn-primary" data-id="@item.apl_id" data-modal="" data-toggle="modal"><span class="glyphicon glyphicon-pencil"></span></button>
                     </div>
                 </td>
             </tr>

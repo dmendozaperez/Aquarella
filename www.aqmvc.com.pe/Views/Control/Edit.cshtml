@@ -1,4 +1,4 @@
-﻿<script>
+﻿@*<script>
     function showLoading() {
         $('#pleaseWaitDialog').modal('show');
         //alert('ini');
@@ -10,7 +10,8 @@
         $('body').removeClass('modal-open');
         $('.modal-backdrop').remove();
     }
-</script>
+</script>*@
+
 <script type="text/javascript">
     function InvalidMsg(textbox, str) {
 
@@ -40,46 +41,7 @@
     }
 </script>
 
-<script type="text/javascript">
-    function OnBegin_update() {
-        showLoading();
-        var msg_titulo = 'Mensaje Aquarella!';
-        var id = $("#idusu").val();
-        var pass = $("#txtnpass").val();
-        var buscar = $("#buscarnom").val();
-        var estado =$('select[name=dwestado]').selectpicker('val');
-        $.ajax
-              ({
-                  url: '../Control/Edit',
-                  dataType: "json",
-                  type: "POST",
-                  data: { _id: id, _pass: pass, _estado: estado },
-                  success: function (data, textStatus, XMLHttpRequest) {                    
-                      if (data.estado == '1') {
-                         
-                          $('#myModal').modal('hide');                        
-                          $('body').removeClass('modal-open');                        
-                          $('.modal-backdrop').remove();
 
-                          $('#lista').load('@Url.Action("ListaUsuario", "Control")', { buscarnom: buscar });                       
-                          toastr.success(data.desmsg, msg_titulo);                                                  
-                      }
-                      else {
-                          toastr.error(data.desmsg, msg_titulo);                         
-                      }
-                  },
-                  error: function (xhr) {                   
-                      toastr.error(xhr, msg_titulo);
-                  }
-              })
-
-    }
-
-    function SetData(data) {
-        $("#lista").html(data); //HTML DOM replace
-    }
-
-</script>
 
 
 @model www.aqmvc.com.pe.Data.Control.UsuarioModel
@@ -90,16 +52,16 @@
 @Styles.Render("~/Content/Bootstrap-Select/css")
 <link rel="stylesheet" type="text/css" href="~/Content/bootstrap-select.css" />
 
-<div class="modal-header">
-    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
-    <h4 class="modal-title custom_align" id="Heading">Usuario:<b> @Model.nombre </b></h4>
-</div>
 
 
-@using (Ajax.BeginForm("Control", new AjaxOptions { OnBegin = "OnBegin_update();",OnComplete= "removeLoading();",OnFailure= "removeLoading();" }))
+
+@using (Ajax.BeginForm("Control", new AjaxOptions { HttpMethod="GET", UpdateTargetId = "lista", InsertionMode=InsertionMode.Replace,OnBegin = "OnBegin_update();",OnSuccess= " $('#myModal').modal('hide');" }))
 {
         @*<div class="modal-content">*@
-           
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
+        <h4 class="modal-title custom_align" id="Heading">Usuario:<b> @Model.nombre </b></h4>
+    </div>
             <div class="login-box-body">
                 <p class="login-box-msg">Cambio de Password</p>           
                 <input type="hidden" id="idusu" value="@Model.usu_id" />
@@ -126,9 +88,14 @@
         @*</div>*@
 }
 
+@*<div class="row">
+    <div class="col-md-offset-2 col-md-10" id="replacetarget">
+        @{ Html.RenderAction("Usuarios", "Control", new { id = Model.nombre }); }
+    </div>
+</div>*@
+
+@*<div class="modal fade" id="pleaseWaitDialog" data-backdrop="static" data-keyboard="false" role="dialog" aria-labelledby="basicModal" aria-hidden="true" tabindex="-1"><div class="modal-dialog"><div class="modal-content"><div class="modal-header"><h1 style="font-size:18px;font-weight:bold;color:#1c334f">Espere un momento por favor...</h1></div><div class="modal-body"><div class="progress progress-striped active"><div class="progress-bar" style="width: 100%;"><span class="sr-only">60% Complete</span></div></div></div></div></div></div>*@
 <script>
-
-
 $(document).ready(function() {
     $("#dwestado").select({
     dropdownParent: $("#myModal")

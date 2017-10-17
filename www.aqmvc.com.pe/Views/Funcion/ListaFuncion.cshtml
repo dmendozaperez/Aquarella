@@ -19,8 +19,8 @@
             <th>Orden</th>
             <th>Padre</th>           
             <th >                
-                <button title="Agregar"  class="btnnuevo btn btn-primary pull-right" data-modal="" data-toggle="modal"><span class="glyphicon glyphicon-plus"></span></button>                
-            </th>  
+                <p data-placement="top" data-toggle="tooltip" title="Agregar funcion"><button title="Agregar" class="btnnuevo btn btn-primary pull-right" data-modal="" data-toggle="modal"><span class="glyphicon glyphicon-plus"></span></button>
+</th>  
             @*<th>
                 <div class="pull-right">
                     Editar
@@ -56,9 +56,9 @@
                 </td>*@
                 <td>
                     <div class="pull-right">
-                        <button title="Editar" class="btneditar btn btn-primary" data-id="@item.fun_id" data-modal="" data-toggle="modal"><span class="glyphicon glyphicon-pencil"></span></button>                       
+                        <button title="Editar Funcion" class="btneditar btn btn-primary" data-id="@item.fun_id" data-modal="" data-toggle="modal"><span class="glyphicon glyphicon-pencil"></span></button>                       
                         &nbsp;
-                        <button title="Aplicación" class="btnapli btn btn-success" data-id="@item.fun_id" data-modal="" data-toggle="modal"><span class="glyphicon glyphicon-list-alt"></span></button>                        
+                        <button title="Agregar Aplicación" class="btnapli btn btn-success" data-id="@item.fun_id" data-modal="" data-toggle="modal"><span class="glyphicon glyphicon-list-alt"></span></button>                        
                     </div>
                 </td>                
             </tr>

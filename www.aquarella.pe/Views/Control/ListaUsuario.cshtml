@@ -1,0 +1,92 @@
+﻿<table class="table table-hover dataTable  table-striped table-responsive">
+    <thead>
+        <tr style="background-color:#3d566e; color:#ecf0f1">
+            <th>Id</th>
+            <th>Nombre de Usuario</th>
+            <th>Nombre</th>
+            <th>Estado</th>
+            <th>Editar</th>
+        </tr>
+    </thead>
+    <tbody data-bind="foreach:">
+        @using www.aquarella.pe.Data.Control
+        @model IEnumerable<UsuarioModel>
+
+        @foreach (UsuarioModel item in Model)
+        {
+            <tr>
+                <td>@item.usu_id.ToString()</td>
+                <td>@item.usu_nombre</td>
+                <td>@item.nombre</td>
+                <td>@item.usu_est_id</td>
+                <td><p data-placement="top" data-toggle="tooltip" title="Editar Password"><button title="Editar Password" data-dismiss="modal" data-backdrop="false" class="editar btn btn-primary" data-title="Editar Password" data-id="@item.usu_id" data-toggle="modal" data-target="#edit"><span class="glyphicon glyphicon-pencil"></span></button></p></td>
+            </tr>
+
+        }
+    </tbody>
+    @if (Model.Count() != 0)
+    {
+        <tfoot>
+            <tr>
+                <th>Id</th>
+                <th>Nombre de Usuario</th>
+                <th>Nombre</th>
+                <th>Estado</th>
+                <th>Editar</th>
+            </tr>
+        </tfoot>
+    }
+</table>
+
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" ng-app>
+    <div class="modal-dialog" >
+        <div class="modal-content">
+            <div id='myModalContent'></div>           
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+        $('.table').dataTable({
+            "language": {
+                "url": "../Scripts/DataTables/Spanish.json"
+            }
+        });
+    });
+</script>
+
+<script>
+    $(function () {
+        $(".editar").click(function () {
+            waitingDialog.show('Espere un momento por favor');
+            var TeamDetailPostBackURL = '/Control/Edit';
+            var $buttonClicked = $(this);
+            var id = $buttonClicked.attr('data-id');
+            var options = { "backdrop": "static", keyboard: true };
+            $.ajax({
+                type: "GET",
+                url: TeamDetailPostBackURL,
+                contentType: "application/json; charset=utf-8",
+                data: { "Id": id },
+                cache: true,
+                success: function (data) {
+                    waitingDialog.hide();
+                    $('#myModalContent').html(data);
+                    $('#myModal').modal(options);
+                    $('#myModal').modal('show');
+                },
+                error: function () {
+                    waitingDialog.hide();
+                    alert("Dynamic content load failed.");
+                }
+            });
+        });
+
+
+        $("#closbtn").click(function () {
+            waitingDialog.hide();
+            $('#myModal').modal('hide');
+        });
+    });
+</script>

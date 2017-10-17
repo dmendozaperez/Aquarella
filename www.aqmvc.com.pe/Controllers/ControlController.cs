@@ -76,8 +76,10 @@ namespace www.aqmvc.com.pe.Controllers
                 _usuario._usu_fec_cre = filauser.usu_fecha_cre;
                 _usuario._usu_password = Cryptographic.encrypt(_pass);
                 Boolean _valida_update = _usuario.UpdateUsuario();
-          
-                return Json(new { estado = (_valida_update) ? "1" : "-1", desmsg = (_valida_update) ? "Se actualizo satisfactoriamente." : "Hubo un error al actualizar." });            
+           // _valida_update = false;
+            //string url = Url.Action("ListaUsuario", "Control", new { buscarnom = _usuario._usu_nombre });
+
+            return Json(new { estado = (_valida_update) ? "1" : "-1", desmsg = (_valida_update) ? "Se actualizo satisfactoriamente." : "Hubo un error al actualizar." });            
              
 
         }

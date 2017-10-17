@@ -195,7 +195,7 @@ namespace Integrado.Sistemas.Ventas
 
                 lblper.Content= string.Format("{0:C2}", percep_monto);
 
-                decimal total_pagar = total_monto + percep_monto;
+                decimal total_pagar =Math.Round(total_monto + percep_monto,2,MidpointRounding.AwayFromZero);
 
 
                 _total_pagar = total_pagar;

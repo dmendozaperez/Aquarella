@@ -1,0 +1,64 @@
+﻿@using www.aqmvc.com.pe.Data.Control
+@model IEnumerable<UsuarioModel>
+@{
+    AjaxOptions options = new AjaxOptions
+    {
+        HttpMethod = "POST",
+        InsertionMode = InsertionMode.Replace,
+        UpdateTargetId = "lista",
+        OnComplete = "removeLoading();",
+        OnBegin = "showLoading()",
+        OnFailure = "removeLoading();",
+
+    };
+}
+
+@section Scripts
+{
+    <script src="~/plugins/datatables/jquery.dataTables.min.js"></script>
+    <script src="~/plugins/datatables/dataTables.bootstrap.min.js"></script>
+}
+<div id="myModalnew" class="modal fade" aria-labelledby="edit" aria-hidden="true" role="dialog" data-keyboard="true" data-backdrop="static">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div id='myModalContent'></div>
+        </div>
+    </div>
+
+</div>
+<link rel="stylesheet" href="~/plugins/datatables/dataTables.bootstrap.css">
+<!-- Main content -->
+<section class="content">
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="box">
+                <div class="box-header">
+                    <h3 class="box-title">Usuarios (Roles) y (Funciones)  </h3>                                                                               
+                    <p class="text-danger">Formularios para asignar roles y funciones a los diferentes usuarios.</p> 
+                </div>                       
+                    @using (Ajax.BeginForm("ListaUsuario", options))
+                    {
+                        <div class="box-header">
+                            <div class="col-md-4">
+                                <div class="input-group input-group">
+                                    <input type="text" maxlength="11" id="buscarnom" name="buscarnom" class="form-control" autofocus placeholder="Consultar por primer nombre" @*oninvalid="InvalidMsg(this);" required="required"*@>
+                                    <span class="input-group-btn">
+                                        <button type="submit" id="btnaceptar" name="btnaceptar" class="btn btn-google btn-flat">Buscar</button>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                    <!-- /.box-header -->
+                    <div class="box-body" id="lista">
+                        @{Html.RenderPartial("ListaUsuario", Model); }
+                    </div>
+                    <!-- /.box-body -->
+                </div>
+            <!-- /.box -->
+            <!-- /.box -->
+        </div>
+        <!-- /.col -->
+    </div>
+    <!-- /.row -->
+</section>
