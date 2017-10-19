@@ -1,0 +1,33 @@
+﻿@using www.aquarella.pe.Data.Control
+@model IEnumerable<UsuarioModel>
+@{
+    ViewBag.Title = "Actualizar Contraseña de usuario";
+    AjaxOptions options = new AjaxOptions
+    {
+        HttpMethod = "GET",
+        InsertionMode = InsertionMode.Replace,
+        UpdateTargetId = "lista",
+        OnComplete = "waitingDialog.hide();",
+        OnBegin = "waitingDialog.show('Espere un momento por favor');",
+        OnFailure = "waitingDialog.hide();"
+    };
+}
+<p class="text-danger">Realice el cambio de la clave de acceso a su cuenta.</p>
+<div class="box box-body box-primary">
+    @using (Ajax.BeginForm("ListaUsuario", options))
+    {
+        <div class="box-header">
+            <div class="col-md-4">
+                <div class="input-group input-group">
+                    <input type="text" maxlength="11" id="buscarnom" name="buscarnom" class="form-control" autofocus placeholder="Consultar por primer nombre" @*oninvalid="InvalidMsg(this);" required="required"*@>
+                    <span class="input-group-btn">
+                        <button type="submit" id="btnaceptar" name="btnaceptar" class="btn btn-facebook btn-flat">Buscar</button>
+                    </span>
+                </div>
+            </div>
+        </div>
+    }
+    <div class="box-body" id="lista">
+        @{Html.RenderPartial("ListaUsuario", Model); }
+    </div>
+</div>

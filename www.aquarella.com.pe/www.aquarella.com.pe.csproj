@@ -192,6 +192,7 @@
     <Content Include="Aquarella\Ventas\panel_FE.aspx" />
     <Content Include="Aquarella\Ventas\reportlider_afiliadoventa.aspx" />
     <Content Include="Aquarella\Ventas\reportventadetCN.aspx" />
+    <Content Include="Aquarella\Ventas\reportventaformaCN.aspx" />
     <Content Include="Aquarella\Ventas\returnArticlesForm.aspx" />
     <Content Include="Aquarella\Ventas\rptComisionLider.aspx" />
     <Content Include="Aquarella\Ventas\rptcomisionlider_xdoc.aspx" />
@@ -1354,6 +1355,13 @@
     </Compile>
     <Compile Include="Aquarella\Ventas\reportventadetCN.aspx.designer.cs">
       <DependentUpon>reportventadetCN.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Aquarella\Ventas\reportventaformaCN.aspx.cs">
+      <DependentUpon>reportventaformaCN.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Aquarella\Ventas\reportventaformaCN.aspx.designer.cs">
+      <DependentUpon>reportventaformaCN.aspx</DependentUpon>
     </Compile>
     <Compile Include="Aquarella\Ventas\returnArticlesForm.aspx.cs">
       <DependentUpon>returnArticlesForm.aspx</DependentUpon>

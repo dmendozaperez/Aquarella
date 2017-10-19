@@ -149,8 +149,9 @@ namespace  www.aquarella.com.pe.Aquarella.Ventas
 
             string nameFile = "VentaLiderResumido";
 
+            Decimal[] columna = { 1 };
             //  pass the grid that for exporting ...
-            GridViewExportUtil.Export(nameFile + ".xls", gvReturns);
+            GridViewExportUtil.Export(nameFile + ".xls", gvReturns,false,columna);
         }
     }
 }

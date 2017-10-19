@@ -4,6 +4,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using www.aquarella.pe.bll.util;
 using www.aquarella.pe.Data.Control;
 
 namespace www.aquarella.pe.Controllers
@@ -15,7 +16,15 @@ namespace www.aquarella.pe.Controllers
         private string _session_list_user_per_private = "_session_list_user_per_private";
         public ActionResult Index()
         {
-            return View(Buscar(""));
+            Usuario _usuario = (Usuario)Session[Constantes.NameSessionUser];
+
+            if (_usuario == null)
+            {
+                return RedirectToAction("Login", "Cuenta");
+            }
+            { 
+                return View(Buscar(""));
+            }
         }
         public List<UsuarioModel> Buscar(string _nombre)
         {

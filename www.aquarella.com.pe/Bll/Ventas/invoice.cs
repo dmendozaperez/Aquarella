@@ -516,6 +516,38 @@ namespace www.aquarella.com.pe.bll
             return FormatoTk;
         }
 
+        public static DataTable get_ventaformacn(DateTime fecini, DateTime fecfin, string conid)
+        {
+            DataTable dt = null;
+            string sqlquery = "USP_VentaFinanzas_CN";
+            try
+            {
+                using (SqlConnection cn = new SqlConnection(Conexion.myconexion()))
+                {
+                    using (SqlCommand cmd = new SqlCommand(sqlquery, cn))
+                    {
+                        cmd.CommandTimeout = 0;
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        cmd.Parameters.AddWithValue("@fechaini", fecini);
+                        cmd.Parameters.AddWithValue("@fechafin", fecfin);
+                        cmd.Parameters.AddWithValue("@con_id", conid);
+
+                        using (SqlDataAdapter da = new SqlDataAdapter(cmd))
+                        {
+                            dt = new DataTable();
+                            da.Fill(dt);
+                        }
+
+                    }
+                }
+            }
+            catch
+            {
+                dt = null;
+            }
+            return dt;
+        }
+
         public static DataTable get_ventadetcn(DateTime fecini, DateTime fecfin,string conid)
         {
             DataTable dt = null;
@@ -547,6 +579,34 @@ namespace www.aquarella.com.pe.bll
             }
             return dt;
         }
+
+        public static DataTable getconeptopago_ce()
+        {
+            string sqlquery = "USP_LeerConceptoPagoCN";
+            DataTable dt = null;
+            try
+            {
+                using (SqlConnection cn = new SqlConnection(Conexion.myconexion()))
+                {
+                    using (SqlCommand cmd = new SqlCommand(sqlquery, cn))
+                    {
+                        cmd.CommandTimeout = 0;
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        using (SqlDataAdapter da = new SqlDataAdapter(cmd))
+                        {
+                            dt = new DataTable();
+                            da.Fill(dt);
+                        }
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                dt = null;
+            }
+            return dt;
+        }
+
         public static DataTable getconepto_ce()
         {
             string sqlquery = "USP_LeerFormaPagoCN";

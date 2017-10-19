@@ -397,7 +397,7 @@ namespace www.aquarella.com.pe.Aquarella.Logistica
                 Order_Dtl newLineOrder = new Order_Dtl();
                 List<Order_Dtl> order = new List<Order_Dtl>();
 
-                DataSet dsArt = Article.getArticle(code.Replace("-", string.Empty).Trim());
+                DataSet dsArt = Article.getArticle(code.Replace("-", string.Empty).Trim(),cust._idCust);
 
                 if (dsArt == null || dsArt.Tables[0].Rows.Count == 0)
                     throw new Exception("El artículo digitado es inexistente.");
