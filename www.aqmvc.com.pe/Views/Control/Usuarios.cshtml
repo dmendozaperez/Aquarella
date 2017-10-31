@@ -1,23 +1,36 @@
 ﻿@using www.aqmvc.com.pe.Data.Control
 @model IEnumerable<UsuarioModel>
 @{    
-        AjaxOptions options = new AjaxOptions
-        {
-            HttpMethod = "POST",
-            InsertionMode = InsertionMode.Replace,
-            UpdateTargetId = "lista",
-            OnComplete = "removeLoading();",
-            OnBegin = "showLoading()",
-            OnFailure= "removeLoading();",
+    AjaxOptions options = new AjaxOptions
+    {
+        HttpMethod = "POST",
+        InsertionMode = InsertionMode.Replace,
+        UpdateTargetId = "lista",
+        OnComplete = "waitingDialog.hide();",
+        OnBegin = "waitingDialog.show('Espere un momento por favor');",
+        OnFailure = "waitingDialog.hide();",
 
     };
 }
 
 <link rel="stylesheet" href="~/plugins/datatables/dataTables.bootstrap.css">
-}
 @section Scripts
 {
 <script src="~/plugins/datatables/jquery.dataTables.min.js"></script>
+<script src="~/Scripts/waitingfor.js"></script>
+<script>
+    //function showLoading() {
+    //    $('#pleaseWaitDialog').modal('show');
+    //    //alert('ini');
+    //}
+    //function removeLoading() {
+    //    //alert('fin');// $('#pleaseWaitDialog').modal('hide');
+
+    //    $('#pleaseWaitDialog').modal('hide');
+    //    $('body').removeClass('modal-open');
+    //    $('.modal-backdrop').remove();
+    //}
+</script>
 }
     <!-- Main content -->
     <section class="content">
@@ -26,6 +39,7 @@
                 <div class="box">
                     <div class="box-header">
                         <h3 class="box-title">Actualizar Contraseña de usuario</h3>
+                        <p class="text-danger">Realice el cambio de la clave de acceso a su cuenta.</p>
                     </div>
                     @using (Ajax.BeginForm("ListaUsuario", options))
                     {                    
@@ -52,5 +66,7 @@
             </div>
             <!-- /.col -->
         </div>
+        @*<div class="modal fade" id="pleaseWaitDialog" data-backdrop="static" data-keyboard="false" role="dialog" aria-labelledby="basicModal" aria-hidden="true" tabindex="-1"><div class="modal-dialog"><div class="modal-content"><div class="modal-header"><h1 style="font-size:18px;font-weight:bold;color:#1c334f">Espere un momento por favor...</h1></div><div class="modal-body"><div class="progress progress-striped active"><div class="progress-bar" style="width: 100%;"><span class="sr-only">60% Complete</span></div></div></div></div></div></div>*@
+        @*<div class="modal fade" id="pleaseWaitDialog" data-backdrop="static" data-keyboard="false" role="dialog" aria-labelledby="basicModal" aria-hidden="true" tabindex="-1"><div class="modal-dialog"><div class="modal-content"><div class="modal-header"><h1 style="font-size:18px;font-weight:bold;color:#1c334f">Espere un momento por favor...</h1></div><div class="modal-body"><div class="progress progress-striped active"><div class="progress-bar" style="width: 100%;"><span class="sr-only">60% Complete</span></div></div></div></div></div></div>*@
         <!-- /.row -->
     </section>

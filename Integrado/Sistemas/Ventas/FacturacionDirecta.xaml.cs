@@ -195,7 +195,7 @@ namespace Integrado.Sistemas.Ventas
 
                 lblper.Content= string.Format("{0:C2}", percep_monto);
 
-                decimal total_pagar = total_monto + percep_monto;
+                decimal total_pagar =Math.Round(total_monto + percep_monto,2,MidpointRounding.AwayFromZero);
 
 
                 _total_pagar = total_pagar;
@@ -360,6 +360,36 @@ namespace Integrado.Sistemas.Ventas
             grdoc.Header = "Tipo de Documento";
             lblndoc.Content = "";
         }
+
+        private void recalcular_precio_lider(string tipo_precio)
+        {
+            try
+            {
+                if (venta_det_dt!=null)
+                {
+                    if (venta_det_dt.Rows.Count>0)
+                    {
+                        for(Int32 i=0;i<venta_det_dt.Rows.Count;++i)
+                        {
+                            string codart = venta_det_dt.Rows[i]["articulo"].ToString();
+                            decimal precio=Dat_Venta.getprecio_sinigv(codart, tipo_precio);
+
+                            venta_det_dt.Rows[i]["precio"] = precio;
+
+                        }
+
+                        /*refresh grilla*/
+                        refreshgrilla();
+
+                    }
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
         private async void buscarcliente()
         {
             Mouse.OverrideCursor = Cursors.Wait;
@@ -372,6 +402,12 @@ namespace Integrado.Sistemas.Ventas
                 datclie_ven = new Dat_ClienteVenta(dniruc);
                 if (datclie_ven.existe_cli)
                 {
+
+                    #region<VERIFICAR SI ES QUE HAY DATOS EN EL DETALLE PARA RECALCULAR PRECIOS>
+                    recalcular_precio_lider(datclie_ven.tipoprecio);
+                    
+                    #endregion
+
                     Dat_Venta_Directa dat_formanc = new Dat_Venta_Directa();
                     lista_pago_nc_grid = dat_formanc.leer_formapago_nota(datclie_ven.bas_id);
 
@@ -524,7 +560,15 @@ namespace Integrado.Sistemas.Ventas
 
                     ObservableCollection<Dat_Venta> articulo_stock_var=null;
 
-                    Boolean valida_stock=bus_stk.BuscarProductoStock(articleToAdd, sizeToAdd, _barra, (_barra.Length==18)?true:false,ref articulo_stock_var);
+                    decimal bas_id = 0;
+                    if (datclie_ven!=null)
+                    {
+                        bas_id = datclie_ven.bas_id;
+                    }
+                    //if datcl
+                    //datclie_ven.bas_id
+
+                    Boolean valida_stock=bus_stk.BuscarProductoStock(articleToAdd, sizeToAdd, _barra, (_barra.Length==18)?true:false, bas_id, ref articulo_stock_var);
 
                     //string varreturn = Dat_Venta.insertar_articulopaq(_paq_id, _liq_id, articleToAdd, sizeToAdd, 1, calidadToAdd, _barra);
 

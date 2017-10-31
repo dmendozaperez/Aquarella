@@ -166,6 +166,18 @@ namespace CatalogoVirtual
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
+
+            //string[] _archivos_paq_array = Directory.GetFiles(@"D:\AQCATALOGO", "*.jpg").OrderBy(d => new FileInfo(d).FullName).ToArray();
+
+            //Int32 a = 0;
+            //for(Int32 i=0;i<_archivos_paq_array.Length;++i)
+            //{
+            //    a += 1;
+            //    string origen = _archivos_paq_array[i].ToString();
+            //    string destino = "D://AQCATALOGO//copy//" + a.ToString()+ ".jpg";
+            //    System.IO.File.Move(@origen, @destino);
+            //}
+
             sbinicio();
         }
 

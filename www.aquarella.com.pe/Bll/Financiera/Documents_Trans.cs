@@ -298,6 +298,28 @@ namespace www.aquarella.com.pe.bll
             }
             catch (Exception e) { throw new Exception(e.Message, e.InnerException); }
         }
+        static public DataSet get_DocTranFacBy(string _fechaini,string _fechafin)
+        {
+            string sqlquery = "USP_ConsultaPenOP_CN";
+            SqlConnection cn = null;
+            SqlCommand cmd = null;
+            SqlDataAdapter da = null;
+            DataSet ds = null;
+            try
+            {
+                cn = new SqlConnection(Conexion.myconexion());
+                cmd = new SqlCommand(sqlquery, cn);
+                cmd.CommandTimeout = 0;
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@fechaini",Convert.ToDateTime(_fechaini));
+                cmd.Parameters.AddWithValue("@fechafin",Convert.ToDateTime(_fechafin));
+                da = new SqlDataAdapter(cmd);
+                ds = new DataSet();
+                da.Fill(ds);
+                return ds;
+            }
+            catch (Exception e) { throw new Exception(e.Message, e.InnerException); }
+        }
 
         static public DataSet get_PagoNcredito(string _bas_id, string _idliq)
         {          
@@ -345,7 +367,7 @@ namespace www.aquarella.com.pe.bll
             //catch (Exception e) { throw new Exception(e.Message, e.InnerException); }
         }
 
-        static public DataSet get_Docn_TransAdonis(DateTime _varfechaini, DateTime _varfechafin, string var_cliente)
+        static public DataSet get_Docn_TransAdonis(DateTime _varfechaini, DateTime _varfechafin, string var_cliente,string var_almacen="11")
         {
             string sqlquery = "USP_Leer_Asientos_Adonis";
             SqlConnection cn = null;
@@ -361,6 +383,7 @@ namespace www.aquarella.com.pe.bll
                 cmd.Parameters.AddWithValue("@var_fechaini", _varfechaini);
                 cmd.Parameters.AddWithValue("@var_fechafin", _varfechafin);
                 cmd.Parameters.AddWithValue("@var_cliente", var_cliente);
+                cmd.Parameters.AddWithValue("@var_almacen", var_almacen);
                 da = new SqlDataAdapter(cmd);
                 ds = new DataSet();
                 da.Fill(ds);
@@ -560,8 +583,33 @@ namespace www.aquarella.com.pe.bll
             //catch (Exception e) { throw new Exception(e.Message, e.InnerException); }
         }
 
-
-        static public Be_Documents_trans SaveValidateBank(Be_Documents_trans objArray, int var_usu,DataTable dt)
+        public static string SaveValidaInter(string ban_id,decimal usu,DataTable dt)
+        {
+            string sqlquery = "USP_Valida_Archivo_Banco_Inter";
+            string _error = "";
+            try
+            {
+                using (SqlConnection cn = new SqlConnection(Conexion.myconexion()))
+                {
+                    if (cn.State == 0) cn.Open();
+                    using (SqlCommand cmd = new SqlCommand(sqlquery,cn))
+                    {
+                        cmd.CommandTimeout = 0;
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        cmd.Parameters.AddWithValue("@ban_id_b", ban_id);
+                        cmd.Parameters.AddWithValue("@usu_validar", usu);
+                        cmd.Parameters.AddWithValue("@tmpvalida", dt);
+                        cmd.ExecuteNonQuery();
+                    }
+                }
+            }
+            catch (Exception exc)
+            {
+                _error = "-1";                
+            }
+            return _error;
+        }
+        static public Be_Documents_trans SaveValidateBank(Be_Documents_trans objArray, int var_usu,DataTable dt,string banco)
         {
             Be_Documents_trans resp = new Be_Documents_trans();
             string sqlquery = "USP_Valida_Archivo_Banco";
@@ -575,6 +623,7 @@ namespace www.aquarella.com.pe.bll
                 cmd.CommandTimeout = 0;
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.Parameters.AddWithValue("@usu_validar", var_usu);
+                //cmd.Parameters.AddWithValue("@ban_id", banco);
                 cmd.Parameters.AddWithValue("@Pago_Valida", dt);
                 cmd.ExecuteNonQuery();
                 resp.Ok = true;

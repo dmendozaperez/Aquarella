@@ -95,7 +95,8 @@
             @using (Ajax.BeginForm("Cuenta", new AjaxOptions { OnBegin = "OnBegin();",OnComplete= "removeLoading();",OnFailure= "removeLoading();" }))
             {
             <div class="login-box-body">
-                <p class="login-box-msg">Cambio de Password</p>                
+                <p class="login-box-msg">Cambio de Password</p>    
+                <p class="text-danger">Realice el cambio de la clave de acceso a su cuenta.</p>             
                 <div class="form-group has-feedback">
                     <input type="text" class="form-control" value="@Model._usu_nom_ape" readonly="readonly" placeholder="Usuario">
                     <span class="glyphicon glyphicon-user form-control-feedback"></span>

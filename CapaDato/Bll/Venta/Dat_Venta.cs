@@ -12,7 +12,45 @@ namespace CapaDato.Bll.Venta
 {
     public class Dat_Venta
     {
+
+
         #region<REGION DE VENTA ALMACEN CHORRILLOS>
+
+        public static Decimal getprecio_sinigv(string articulo,string tipo)
+        {
+            string sqlquery = "Devolver_Precio_SinIgv";
+            Decimal precio = 0;
+            try
+            {
+                using (SqlConnection cn = new SqlConnection(Ent_Conexion.conexion))
+                {
+                    if (cn.State == 0) cn.Open();
+                    using (SqlCommand cmd = new SqlCommand(sqlquery, cn))
+                    {
+                        cmd.CommandTimeout = 0;
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        cmd.Parameters.Add("@art_id", SqlDbType.VarChar).Value = articulo;
+                        cmd.Parameters.Add("@tip", SqlDbType.VarChar).Value = tipo;
+
+                        SqlParameter precio_sql = new SqlParameter("@precio",SqlDbType.Money);
+                        precio_sql.Direction = ParameterDirection.ReturnValue;
+
+                        cmd.Parameters.Add(precio_sql);
+
+                        cmd.ExecuteNonQuery();
+
+                        precio =Convert.ToDecimal(precio_sql.Value);
+
+
+                    }
+                }
+            }
+            catch 
+            {
+                precio = 0;
+            }
+            return precio;
+        }
         public static DataSet leer_venta_tk(string _idventa)
         {
             string sqlquery = "USP_Leer_Venta_Imprimir";
@@ -426,7 +464,7 @@ namespace CapaDato.Bll.Venta
 
         public List<Vent_Talla_Cant> ven_tall { get; set; }  
 
-        public Boolean BuscarProductoStock(string articulo,string talla,string barra,Boolean bus_barra,ref  ObservableCollection<Dat_Venta> articulo_stock)
+        public Boolean BuscarProductoStock(string articulo,string talla,string barra,Boolean bus_barra,decimal bas_id,ref  ObservableCollection<Dat_Venta> articulo_stock)
         {
             Boolean valida = false;
             string sqlquery = "USP_LeerStockArticulo_Venta";
@@ -444,7 +482,7 @@ namespace CapaDato.Bll.Venta
                         cmd.Parameters.AddWithValue("@talla", talla);
                         cmd.Parameters.AddWithValue("@barra", barra);
                         cmd.Parameters.AddWithValue("@bus_barra", bus_barra);
-                      
+                        cmd.Parameters.AddWithValue("@bas_id", bas_id);
                         if (bus_barra)
                         {
                             if (cn.State == 0) cn.Open();

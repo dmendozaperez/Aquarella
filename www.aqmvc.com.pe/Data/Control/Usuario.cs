@@ -180,4 +180,49 @@ namespace www.aqmvc.com.pe.Data.Control
         public string nombre;
         public string buscar_nom;
     }
+    public class UsuarioRoles
+    {
+        public string rol_id { get; set; }
+        public string rol_nombre { get; set; }
+        public string rol_descripcion { get; set; }
+
+        public List<UsuarioRoles> get_lista(decimal usu_id)
+        {
+            string sqlquery = "USP_Leer_Roles_Usuario";
+            List<UsuarioRoles> list = null;
+            try
+            {
+                using (SqlConnection cn = new SqlConnection(Conexion.conexion_sql))
+                {
+                    if (cn.State == 0) cn.Open();
+                    using (SqlCommand cmd = new SqlCommand(sqlquery, cn))
+                    {
+                        cmd.CommandTimeout = 0;
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        cmd.Parameters.AddWithValue("@usu_id", usu_id);
+                        SqlDataReader dr = cmd.ExecuteReader();
+                        list = new List<UsuarioRoles>();
+                        if (dr.HasRows)
+                        {
+
+                            while (dr.Read())
+                            {
+                                UsuarioRoles fila = new UsuarioRoles();
+                                fila.rol_id = dr["rol_id"].ToString();
+                                fila.rol_nombre = dr["rol_nombre"].ToString();
+                                list.Add(fila);
+                            }
+                        }
+
+                    }
+                }
+            }
+            catch (Exception)
+            {
+
+                list = null;
+            }
+            return list;
+        }
+    }
 }

@@ -1,0 +1,119 @@
+﻿@{
+    Layout = null;
+}
+@Scripts.Render("~/bundles/bootstrap-select")
+@Styles.Render("~/Content/Bootstrap-Select/css")
+<link rel="stylesheet" type="text/css" href="~/Content/bootstrap-select.css" />
+@using (Ajax.BeginForm("Edit", new AjaxOptions { OnBegin = "OnBegin_update();"}))
+{     
+    <div class="modal-content">
+        <div style="background-color:#c0392b; color:white;" class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title" id="myModalLabel">Usuario:  @Model.nombre</h4>
+        </div>
+        <div class="modal-body">
+            <p class="login-box-msg">Cambio de Password</p>
+            <input type="hidden" id="idusu" value="@Model.usu_id" />
+            <table class="table table-striped">
+                <tr>
+                    
+                    <td><label for="nombre">Nombre</label></td>
+                    <td><input type="text" id="nombre" class="form-control" value="@Model.usu_nombre" readonly="readonly" placeholder="Usuario">                                        
+                    </td>
+                </tr>
+                <tr>
+                    <td><label for="txtnpass">Password</label></td>
+                    <td><input type="password" name="txtnpass" id="txtnpass" class="form-control" value="@Model.usu_password" autofocus placeholder="Nuevo Password" oninvalid="InvalidMsg(this,'ingrese el password a cambiar')" required="required"></td>
+                </tr>
+                <tr>
+                    <td><label for="txtnpass2">Confirmar Password</label></td>
+                    <td><input type="password" name="txtnpass2" id="txtnpass2" class="form-control" value="@Model.usu_password" placeholder="Confirmar Password" oninvalid="ValidaMsgPassConfirm(this)" required="required"></td>
+                </tr>       
+                <tr>
+                    <td><label for="dwestado">Estado</label></td>
+                    <td>@Html.DropDownList("dwestado", new SelectList(ViewBag.estado, "_est_id", "_est_des", Model.usu_est_id), new { @class = "selectCountry  form-control", @id = "dwestado" })</td>
+                </tr>               
+            </table>
+        </div>
+        <div class="modal-footer" style="margin-top:-30px">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+            <input type="submit" class="btn btn-primary" id="btnSubmit" value="Aceptar" />
+        </div>   
+    </div>
+}
+
+ <script>
+$(document).ready(function() {
+    $("#dwestado").select({
+    dropdownParent: $("#myModal")
+  });
+});
+
+</script> 
+<script type="text/javascript">
+    function InvalidMsg(textbox, str) {
+
+        if (textbox.value.length == 0) {
+            textbox.setCustomValidity(str);
+        }
+        else {
+            textbox.setCustomValidity('');
+        }
+        return true;
+    }
+    function ValidaMsgPassConfirm(textbox) {
+
+        str = $("#txtnpass").val();
+        if (textbox.value.length == 0) {
+            textbox.setCustomValidity('ingrese el password a confirmar');
+        }
+        else {
+            if (textbox.value == str) {
+                textbox.setCustomValidity('');
+            }
+            else {
+                textbox.setCustomValidity('El password a confirmar debe de ser igual al password nuevo');
+            }
+        }
+        return true;
+    }
+</script>
+   
+
+<script type="text/javascript">
+    function OnBegin_update() {      
+        var msg_titulo = 'Mensaje Aquarella!';
+        var id = $("#idusu").val();
+        var pass = $("#txtnpass").val();
+        var buscar = $("#buscarnom").val();
+        var estado = $('select[name=dwestado]').selectpicker('val');
+        waitingDialog.show('Espere un momento por favor');
+        $.ajax
+              ({
+                  url: '../Control/Edit',
+                  dataType: "json",
+                  type: "POST",
+                  data: { _id: id, _pass: pass, _estado: estado },
+                  success: function (data, textStatus, XMLHttpRequest) {
+                      if (data.estado == '1') {                        
+                          $('body').removeClass('modal-open');
+                          $('#myModal').modal('hide');
+                          $('.modal-backdrop').remove();
+                         
+                          $('#lista').load('@Url.Action("ListaUsuario", "Control")', { buscarnom: buscar });
+                          waitingDialog.hide();
+                          toastr.success(data.desmsg, msg_titulo);
+                          }
+                      else {
+                          waitingDialog.hide();
+                          toastr.error(data.desmsg, msg_titulo);
+                      }
+                  },
+                  error: function (xhr) {
+                      waitingDialog.hide();
+                      toastr.error(xhr, msg_titulo);
+                  }
+              })
+
+    }
+</script>

@@ -152,15 +152,19 @@
     <Compile Include="Controllers\CuentaController.cs" />
     <Compile Include="Controllers\FuncionController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\InterfaceController.cs" />
     <Compile Include="Controllers\MenuController.cs" />
+    <Compile Include="Controllers\PermisosController.cs" />
     <Compile Include="Controllers\RolesController.cs" />
     <Compile Include="Controllers\RRHHController.cs" />
+    <Compile Include="Controllers\StockController.cs" />
     <Compile Include="Data\Cliente\Lider.cs" />
     <Compile Include="Data\Cliente\Promotor.cs" />
     <Compile Include="Data\Control\Aplicacion.cs" />
     <Compile Include="Data\Control\Estado.cs" />
     <Compile Include="Data\Control\Funcion.cs" />
     <Compile Include="Data\Control\Menu.cs" />
+    <Compile Include="Data\Control\Permisos.cs" />
     <Compile Include="Data\Control\Roles.cs" />
     <Compile Include="Data\Control\Usuario.cs" />
     <Compile Include="Data\Util\Conexion.cs" />
@@ -184,6 +188,7 @@
     <Content Include="bootstrap\js\npm.js" />
     <Content Include="Content\bootstrap-select.css" />
     <Content Include="Content\bootstrap-select.min.css" />
+    <Content Include="Content\Bootstrap-Select\css\jquery-2.2.3.min.js" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\jquery\jquery-ui.min.js" />
@@ -1201,6 +1206,7 @@
     <Content Include="Scripts\script-bootstrap-select.js" />
     <Content Include="Scripts\toastr.js" />
     <Content Include="Scripts\toastr.min.js" />
+    <Content Include="Scripts\waitingfor.js" />
     <Content Include="Scripts\_references.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
@@ -1238,6 +1244,13 @@
     <Content Include="Views\Aplicacion\Index.cshtml" />
     <Content Include="Views\Aplicacion\ListaAplicacion.cshtml" />
     <Content Include="Views\Aplicacion\Nuevo.cshtml" />
+    <Content Include="Views\Aplicacion\Edit.cshtml" />
+    <Content Include="Views\Interface\Index.cshtml" />
+    <Content Include="Views\Stock\StkArticulo.cshtml" />
+    <Content Include="Views\Permisos\Index.cshtml" />
+    <Content Include="Views\Permisos\ListaUsuario.cshtml" />
+    <Content Include="Views\Permisos\Roles.cshtml" />
+    <Content Include="Views\Permisos\ListaRolUsu.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

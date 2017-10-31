@@ -105,13 +105,18 @@
                     <table>
                         <tr>
                             <td class="style7">
+                                    Tipo Precio:</td>
+                                <td>
+                                    <asp:DropDownList ID="dwtipo" runat="server" AppendDataBoundItems="true"                                       
+                                         Width="100px" style="cursor:pointer">
+                                       
+                                    </asp:DropDownList>
+                                </td>                
+                            <td class="style7">
                                <b>Buscar por codigo</b></td>
-                             <td>
-                            </td>
-                             <td>
-                            </td>
+                            
                              <td class="f12">
-                                 <asp:TextBox ID="txtarticulo" runat="server" Height="18px"></asp:TextBox>
+                                 <asp:TextBox ID="txtarticulo" runat="server"  Width="100px"></asp:TextBox>
                             </td>
                              <td>
                                  &nbsp;</td>
@@ -121,11 +126,8 @@
                             </td>
                         </tr>
                         </table>
-                </td>
-                    <td class="style9" __designer:mapid="76">
-                        
-                        &nbsp;</td>
-                    <td class="style6" __designer:mapid="76">
+                </td>                   
+                    <td class="style6" >
                         
                         Adjuntar archivo:<br __designer:mapid="77" /> (Unicamente extensión .XLSX)</td>
                 <td valign="middle" class="style8">
@@ -156,6 +158,10 @@
                 <PagerStyle BackColor="White" ForeColor="#000066" HorizontalAlign="Left" 
                     CssClass="GridViewBlue-tf" />
                 <Columns>
+                    <asp:BoundField DataField="tipodes"  HeaderText="Tipo de Precio">
+                    <HeaderStyle HorizontalAlign="Left" />
+                    <ItemStyle HorizontalAlign="Left" BackColor="#B9F0C1" />
+                    </asp:BoundField>
                     <asp:BoundField DataField="articulo" HeaderText="Codigo">
                     <HeaderStyle HorizontalAlign="Left" />
                     <ItemStyle HorizontalAlign="Left" />

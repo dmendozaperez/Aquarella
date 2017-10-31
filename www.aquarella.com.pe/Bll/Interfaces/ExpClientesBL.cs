@@ -30,6 +30,34 @@ namespace www.aquarella.com.pe.bll.Interfaces
             return ds;            
         }
 
+        public static DataSet get_cliente_pedido_inter()
+        {
+            DataSet ds = null;
+            string sqlquery = "[USP_ExportarClienteBanco]";
+            try
+            {
+                using (SqlConnection cn = new SqlConnection(Conexion.myconexion()))
+                {
+                    using (SqlCommand cmd = new SqlCommand(sqlquery, cn))
+                    {
+                        cmd.CommandTimeout = 0;
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        using (SqlDataAdapter da = new SqlDataAdapter(cmd))
+                        {
+                            ds = new DataSet();
+                            da.Fill(ds);
+                        }
+                    }
+                }
+            }
+            catch (Exception)
+            {
+
+                ds = null;
+            }
+            return ds;
+        }
+
         public static DataSet Get_Clientes_Banco()
         {
             string sqlquery = "USP_Leer_Cliente_Banco";

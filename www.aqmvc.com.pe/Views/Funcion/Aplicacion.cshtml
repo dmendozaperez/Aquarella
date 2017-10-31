@@ -13,13 +13,17 @@
                  success: function (data, textStatus, XMLHttpRequest) {
                      if (data.estado == '1') {                      
                          $('#lista').load('@Url.Action("ListaAplFun", "Funcion")', { funid: funid });                         
+                         removeLoading();
                          toastr.success(data.desmsg, msg_titulo);
+                        
                      }
                      else {
-                         toastr.error(data.desmsg, msg_titulo);
+                         removeLoading();
+                         toastr.error(data.desmsg, msg_titulo);                        
                      }
                  },
                  error: function (xhr) {
+                     removeLoading();
                      toastr.error(xhr, msg_titulo);
                  }
              })

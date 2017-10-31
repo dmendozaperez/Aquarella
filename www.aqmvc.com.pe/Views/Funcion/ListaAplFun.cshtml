@@ -88,8 +88,9 @@
                                 data: { apl_id: aplid, fun_id: funid },
                                 success: function (data, textStatus, XMLHttpRequest) {
                                     if (data.estado == '1') {
-                                        removeLoading();
+                                      
                                         $('#lista').load('@Url.Action("ListaAplFun", "Funcion")', { funid: funid });
+                                        removeLoading();
                                         toastr.success(data.desmsg, msg_titulo);
                                        
                                     }

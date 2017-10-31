@@ -90,7 +90,8 @@ namespace www.aquarella.com.pe.bll
             }
         }
 
-        public static bool existe_op(string _op)
+        public static bool existe_op(string _op,string _ban_id,Decimal _cli_id,
+                                     Decimal _monto,DateTime _fecha)
         {
             string sqlquery = "USP_Existe_OP";
             SqlConnection cn = null;
@@ -103,7 +104,12 @@ namespace www.aquarella.com.pe.bll
                 cmd = new SqlCommand(sqlquery, cn);
                 cmd.CommandTimeout = 0;
                 cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@ban_id", _ban_id);
+                cmd.Parameters.AddWithValue("@cli_id", _cli_id);
+                cmd.Parameters.AddWithValue("@monto", _monto);
+                cmd.Parameters.AddWithValue("@fecha", _fecha);
                 cmd.Parameters.AddWithValue("@n_op", _op);
+
                 cmd.Parameters.Add("@existe", SqlDbType.Int);
                 cmd.Parameters["@existe"].Direction = ParameterDirection.Output;
                 cmd.ExecuteNonQuery();

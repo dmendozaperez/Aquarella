@@ -15,7 +15,7 @@ namespace www.aquarella.com.pe.bll
         /// <summary>
         /// Nombre de cadena de conexion en el web.config
         /// </summary>
-        
+
 
         #endregion
 
@@ -332,7 +332,7 @@ namespace www.aquarella.com.pe.bll
         /// <param name="APN_ID"></param>
         /// <param name="APV_CO"></param>
         /// <returns>A DataSet containing the results of the query</returns>
-        static public DataSet getV_ArticleByPkAll(string ARV_ARTICLE,ref DataTable dttalla)
+        static public DataSet getV_ArticleByPkAll(string ARV_ARTICLE, ref DataTable dttalla)
         {
 
             string sqlquery = "USP_Leer_Articulo";
@@ -1077,7 +1077,34 @@ namespace www.aquarella.com.pe.bll
             }
         }
 
-        public static DataSet fgetarticleprecio(string _article)
+        public static DataTable gettipo_precio()
+        {
+            DataTable dt = null;
+            string sqlquery = "USP_LeerTipoPrecio";
+            try
+            {
+                using (SqlConnection cn = new SqlConnection(Conexion.myconexion()))
+                {
+                    using (SqlCommand cmd = new SqlCommand(sqlquery, cn))
+                    {
+                        cmd.CommandTimeout = 0;
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        using (SqlDataAdapter da = new SqlDataAdapter(cmd))
+                        {
+                            dt = new DataTable();
+                            da.Fill(dt);
+                        }
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                dt = null;
+                
+            }
+            return dt;
+        }
+        public static DataSet fgetarticleprecio(string _article,string _tipo)
         {
             string sqlquery = "USP_Buscar_ArticuloPrecio";
             SqlConnection cn = null;
@@ -1091,6 +1118,7 @@ namespace www.aquarella.com.pe.bll
                 cmd.CommandTimeout = 0;
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.Parameters.AddWithValue("@art_id", _article);
+                cmd.Parameters.AddWithValue("@tip", _tipo);
                 da = new SqlDataAdapter(cmd);
                 ds = new DataSet();
                 da.Fill(ds);
@@ -1111,14 +1139,16 @@ namespace www.aquarella.com.pe.bll
             {
 
                 DataTable dt = new DataTable();
+                dt.Columns.Add("tipo", typeof(string));
                 dt.Columns.Add("Art_Id", typeof(string));
                 dt.Columns.Add("Art_Precio", typeof(Decimal));
 
                 for (Int32 i = 0; i < dtactualiza.Rows.Count; ++i)
                 {
+                    string vtipo= dtactualiza.Rows[i]["tipo"].ToString();
                     string varticulo = dtactualiza.Rows[i]["articulo"].ToString();
                     Decimal vprecio = Convert.ToDecimal(dtactualiza.Rows[i]["precion"].ToString());
-                    dt.Rows.Add(varticulo, vprecio);
+                    dt.Rows.Add(vtipo, varticulo, vprecio);
                 }
 
                 cn = new SqlConnection(Conexion.myconexion());
@@ -1194,7 +1224,7 @@ namespace www.aquarella.com.pe.bll
         /// <param name="_co"></param>
         /// <param name="_code"></param>
         /// <returns>Dos Tablas, [0] -> Informacion articulo, [1] -> Tallas activas</returns>
-        public static DataSet getArticle(string _code)
+        public static DataSet getArticle(string _code,decimal _bas_id)
         {
             string sqlquery = "USP_Leer_Articulo";
             SqlConnection cn = null;
@@ -1208,6 +1238,7 @@ namespace www.aquarella.com.pe.bll
                 cmd.CommandTimeout = 0;
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.Parameters.AddWithValue("@Art_Id", _code);
+                cmd.Parameters.AddWithValue("@bas_id", _bas_id);
                 da = new SqlDataAdapter(cmd);
                 ds = new DataSet();
                 da.Fill(ds);

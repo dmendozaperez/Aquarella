@@ -18,10 +18,10 @@
             <th>Nombre</th>
             <th>Orden</th>
             <th>Padre</th>           
-            @*<th >                
-                <button title="Agregar"  class="btnnuevo btn btn-primary pull-right" data-modal="" data-toggle="modal"><span class="glyphicon glyphicon-plus"></span></button>                
-            </th>*@  
-            <th>
+            <th >                
+                <p data-placement="top" data-toggle="tooltip" title="Agregar funcion"><button title="Agregar" class="btnnuevo btn btn-primary pull-right" data-modal="" data-toggle="modal"><span class="glyphicon glyphicon-plus"></span></button>
+</th>  
+            @*<th>
                 <div class="pull-right">
                     Editar
                 </div>
@@ -30,7 +30,7 @@
                 <div class="pull-right">
                     Aplicación
                 </div>
-            </th>          
+            </th>*@          
         </tr>
     </thead>
     <tbody data-bind="foreach:">
@@ -44,7 +44,7 @@
                 <td>@item.fun_nombre.ToString()</td>
                 <td>@item.fun_orden</td>
                 <td>@item.fun_padre</td>
-                <td>
+                @*<td>
                     <div class="pull-right">
                         <button title="Editar" class="btneditar btn btn-primary" data-id="@item.fun_id" data-modal="" data-toggle="modal"><span class="glyphicon glyphicon-pencil"></span></button>
                     </div>
@@ -53,14 +53,14 @@
                     <div class="pull-right">
                         <button title="Aplicación" class="btnapli btn btn-success" data-id="@item.fun_id" data-modal="" data-toggle="modal"><span class="glyphicon glyphicon-list-alt"></span></button>
                     </div>
-                </td>
-                @*<td>
+                </td>*@
+                <td>
                     <div class="pull-right">
-                        <button title="Editar" class="btneditar btn btn-primary" data-id="@item.fun_id" data-modal="" data-toggle="modal"><span class="glyphicon glyphicon-pencil"></span></button>                       
+                        <button title="Editar Funcion" class="btneditar btn btn-primary" data-id="@item.fun_id" data-modal="" data-toggle="modal"><span class="glyphicon glyphicon-pencil"></span></button>                       
                         &nbsp;
-                        <button title="Aplicación" class="btnapli btn btn-success" data-id="@item.fun_id" data-modal="" data-toggle="modal"><span class="glyphicon glyphicon-list-alt"></span></button>                        
+                        <button title="Agregar Aplicación" class="btnapli btn btn-success" data-id="@item.fun_id" data-modal="" data-toggle="modal"><span class="glyphicon glyphicon-list-alt"></span></button>                        
                     </div>
-                </td>*@                
+                </td>                
             </tr>
 
         }
@@ -74,15 +74,15 @@
                 <th>Orden</th>
                 <th>Padre</th>
                 <th>
-                    <div class="pull-right">
+                    @*<div class="pull-right">
                         Editar
-                    </div>
+                    </div>*@
                 </th>   
-                <th>
+                @*<th>
                     <div class="pull-right">
                         Aplicación
                     </div>
-                </th>                 
+                </th>*@                 
             </tr>
         </tfoot>
     }
@@ -199,7 +199,7 @@
                 //debugger;
                 var $buttonClicked = $(this);
                 //var id = $buttonClicked.attr('data-id');
-                //showLoading();
+                showLoading();
                 var options = { "backdrop": "static", keyboard: true };
                 $.ajax({
                     type: "GET",
@@ -209,7 +209,7 @@
                     datatype: "json",
                     cache: true,
                     success: function (data) {
-                        //removeLoading();
+                        removeLoading();
                         //debugger;
                         $('#myModalContent').html(data);
                         $('#myModalnew').modal(options);
@@ -218,7 +218,7 @@
 
                     },
                     error: function () {
-                        //removeLoading();
+                        removeLoading();
                         alert("Dynamic content load failed.");
 
                     }

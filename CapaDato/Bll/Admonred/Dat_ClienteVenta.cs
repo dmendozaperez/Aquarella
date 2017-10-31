@@ -21,6 +21,7 @@ namespace CapaDato.Bll.Admonred
         public string tipodoc { get; set; }
         public string sernum { get; set; }
         public Boolean existe_cli { get; set; }
+        public string tipoprecio { get; set; }
 
         public Dat_ClienteVenta()
         {
@@ -58,6 +59,7 @@ namespace CapaDato.Bll.Admonred
                                 tipodoc = dr["tipodoc"].ToString();
                                 sernum = dr["sernum"].ToString();
                                 existe_cli = true;
+                                tipoprecio= dr["tipoprecio"].ToString();
                             }
 
                         }

@@ -28,20 +28,35 @@ namespace www.aquarella.com.pe.Aquarella.Maestros
 
             if (!IsPostBack)
             {
+                llenar_combo();
                 Session[_nameSessionData] = null;                
             }
+        }
+        private void llenar_combo()
+        {
+            dwtipo.DataSource = Article.gettipo_precio();
+            dwtipo.DataTextField = "descripcion";
+            dwtipo.DataValueField = "idtipoprecio";
+            dwtipo.DataBind();
+
+            dwtipo.SelectedValue = "02";
         }
         private void sbconsultar()
         {
             msnMessage.Visible = false;
+            try
+            {
+
+           
             string varticulo = txtarticulo.Text.Trim();
+            string vtipo = dwtipo.SelectedValue;
 
             if (varticulo.Length == 0) 
             {
                 msnMessage.LoadMessage("Ingrese el codigo de articulo", UserControl.ucMessage.MessageType.Information);
                 return;
             }
-            DataSet dsreturn = Article.fgetarticleprecio(txtarticulo.Text);
+            DataSet dsreturn = Article.fgetarticleprecio(txtarticulo.Text, vtipo);
             DataTable dtdata = new DataTable();
             sbactualizargrid();
             if (dsreturn.Tables[0].Rows.Count == 0)
@@ -53,16 +68,20 @@ namespace www.aquarella.com.pe.Aquarella.Maestros
             {
                 if (!(Session[_nameSessionData] == null))
                 {
-                    if (fvalidaarticulo(varticulo))
+                    if (fvalidaarticulo(varticulo, vtipo))
                     {
-                        msnMessage.LoadMessage("El codigo de articulo ya existe en la lista", UserControl.ucMessage.MessageType.Information);
+                        msnMessage.LoadMessage("El codigo de articulo del tipo de precio ya existe en la lista", UserControl.ucMessage.MessageType.Information);
                         return;
                     }
-                    dtdata = (DataTable)(Session[_nameSessionData]);                   
-                    string vcodigo = dsreturn.Tables[0].Rows[0]["articulo"].ToString();
-                    string vdescripcion = dsreturn.Tables[0].Rows[0]["descripcion"].ToString();
+                    dtdata = (DataTable)(Session[_nameSessionData]);
+                        string tipo = dsreturn.Tables[0].Rows[0]["tipo"].ToString(); ;
+                        string tipodes = dsreturn.Tables[0].Rows[0]["tipodes"].ToString(); ;
+                    //string vtipodes                     
+                        string vcodigo = dsreturn.Tables[0].Rows[0]["articulo"].ToString();
+                        string vdescripcion = dsreturn.Tables[0].Rows[0]["descripcion"].ToString();
+
                     Decimal vprecio = Convert.ToDecimal(dsreturn.Tables[0].Rows[0]["precioigv"].ToString());
-                    dtdata.Rows.Add(vcodigo, vdescripcion, vprecio, 0);
+                    dtdata.Rows.Add(tipo,tipodes,vcodigo, vdescripcion, vprecio, 0);
 
                 }
                 else
@@ -82,10 +101,16 @@ namespace www.aquarella.com.pe.Aquarella.Maestros
             gvreturn.DataBind();
 
             sbvisualizagrid();
-            
+            }
+            catch (Exception exc)
+            {
+
+                msnMessage.LoadMessage(exc.Message, UserControl.ucMessage.MessageType.Error);
+            }
+
         }
 
-        private Boolean fvalidaarticulo(string varticulo)
+        private Boolean fvalidaarticulo(string varticulo,string tipo)
         {
             DataTable dtdata = (DataTable)(Session[_nameSessionData]);
             Boolean vexiste = false;
@@ -94,7 +119,8 @@ namespace www.aquarella.com.pe.Aquarella.Maestros
                 for (Int32 i = 0; i < dtdata.Rows.Count; ++i)
                 {
                     string varticulocompara = dtdata.Rows[i]["articulo"].ToString();
-                    if (varticulocompara.ToString()==varticulo.ToString())
+                    string vartipo= dtdata.Rows[i]["tipo"].ToString();
+                    if (varticulocompara.ToString()==varticulo.ToString() && vartipo.ToString() == tipo.ToString())
                     {
                         vexiste = true;
                         break;
@@ -268,9 +294,10 @@ namespace www.aquarella.com.pe.Aquarella.Maestros
                     FileUpload1.SaveAs(FilePath);
                     int val_dwTipArc = 1;
                     rpta = validarArchivo(FilePath, Extension, val_dwTipArc);
+                    Int32 nfilas = 0;
                     if (rpta == 1)
                     {
-                        Import_To_Grid(FilePath, Extension, val_dwTipArc);
+                        Import_To_Grid(FilePath, Extension, val_dwTipArc,ref nfilas);
                     }
                     else
                     {
@@ -284,7 +311,7 @@ namespace www.aquarella.com.pe.Aquarella.Maestros
 
                    // btGuardarDatos_2.Enabled = true;
                     File.Delete(FilePath);
-                    msnMessage.LoadMessage("Carga correcta del archivo excel. Última actualización: " + DateTime.Now, UserControl.ucMessage.MessageType.Information);
+                    msnMessage.LoadMessage("Carga correcta del archivo excel. Total de Filas:"  + nfilas.ToString() +   " ,Última actualización: " + DateTime.Now, UserControl.ucMessage.MessageType.Information);
                 }
                 else
                 {
@@ -377,7 +404,7 @@ namespace www.aquarella.com.pe.Aquarella.Maestros
             return rpta;
 
         }
-        private void Import_To_Grid(string FilePath, string Extension, int val_dwTipArc)
+        private void Import_To_Grid(string FilePath, string Extension, int val_dwTipArc,ref Int32 filas)
         {
             string conStr = "";
             switch (Extension)
@@ -392,12 +419,17 @@ namespace www.aquarella.com.pe.Aquarella.Maestros
                               .ConnectionString;
                     break;
             }
+            //conStr = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source={0};Extended Properties=\"Excel 12.0 Xml;HDR=YES;IMEX=1\"";
 
             conStr = String.Format(conStr, FilePath, "A4:F5", true);
             OleDbConnection connExcel = new OleDbConnection(conStr);
             OleDbCommand cmdExcel = new OleDbCommand();
             OleDbDataAdapter oda = new OleDbDataAdapter();
             DataTable dt = new DataTable();
+            dt.Columns.Add("tipo", typeof(string));
+            dt.Columns.Add("articulo", typeof(string));
+            dt.Columns.Add("precio", typeof(Decimal));
+
             DataTable dt_Complete = new DataTable();
             cmdExcel.Connection = connExcel;
             //Get the name of First Sheet
@@ -413,7 +445,7 @@ namespace www.aquarella.com.pe.Aquarella.Maestros
 
             if (val_dwTipArc == 1)
             {
-                cmdExcel.CommandText = "SELECT [codigo],[precio] From [" + SheetName + "]";
+                cmdExcel.CommandText = "SELECT [tipo],[articulo] ,[precio] From [" + SheetName + "]";
             }
             //else
             //{
@@ -424,11 +456,22 @@ namespace www.aquarella.com.pe.Aquarella.Maestros
             oda.Fill(dt);
 
 
+
             for (Int32 i = 0; i < dt.Rows.Count; ++i)
             {               
                 string _MONTOstr = dt.Rows[i]["precio"].ToString().Replace(',', '.');
 
-                dt.Rows[i]["precio"] = formato_numerico(_MONTOstr);                                      
+                dt.Rows[i]["precio"] = formato_numerico(_MONTOstr);
+
+                string _articulo = dt.Rows[i]["articulo"].ToString();
+                //if (_articulo.Length == 6)
+                //{ 
+                     _articulo = dt.Rows[i]["articulo"].ToString().PadLeft(7, '0');
+                //}
+
+                dt.Rows[i]["articulo"] = _articulo.ToString();
+
+
             }
 
             //CultureInfo PE = new CultureInfo("es-PE");
@@ -437,14 +480,16 @@ namespace www.aquarella.com.pe.Aquarella.Maestros
 
             if (dt.Rows.Count > 0)
             {
+                filas = dt.Rows.Count;
                 DataTable dt_import = new DataTable();
+                dt_import.Columns.Add("tipo", typeof(string));
                 dt_import.Columns.Add("Art_Id", typeof(string));
                 dt_import.Columns.Add("Precio_Igv", typeof(decimal));
 
 
                 for (Int32 i = 0; i<dt.Rows.Count; ++i)
                 {
-                    dt_import.Rows.Add(dt.Rows[i][0].ToString(),Convert.ToDecimal(dt.Rows[i][1].ToString()));
+                    dt_import.Rows.Add(dt.Rows[i]["tipo"].ToString(), dt.Rows[i]["articulo"].ToString(),Convert.ToDecimal(dt.Rows[i]["precio"].ToString()));
                 }
 
                     //foreach (DataRow fila in dt.Rows)
