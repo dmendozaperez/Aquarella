@@ -97,7 +97,7 @@
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="UBL20">
-      <HintPath>..\UBL20.dll</HintPath>
+      <HintPath>bin\UBL20.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>

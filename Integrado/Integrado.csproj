@@ -79,9 +79,18 @@
     <Reference Include="Carvajal.FEPE.PreSC">
       <HintPath>..\Carvajal.FEPE.PreSC.dll</HintPath>
     </Reference>
-    <Reference Include="CrystalDecisions.CrystalReports.Engine, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
-    <Reference Include="CrystalDecisions.ReportSource, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
-    <Reference Include="CrystalDecisions.Shared, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.CrystalReports.Engine">
+      <HintPath>bin\CrystalDecisions.CrystalReports.Engine.dll</HintPath>
+    </Reference>
+    <Reference Include="CrystalDecisions.ReportSource">
+      <HintPath>bin\CrystalDecisions.ReportSource.dll</HintPath>
+    </Reference>
+    <Reference Include="CrystalDecisions.Shared">
+      <HintPath>bin\CrystalDecisions.Shared.dll</HintPath>
+    </Reference>
+    <Reference Include="CrystalDecisions.Web">
+      <HintPath>bin\CrystalDecisions.Web.dll</HintPath>
+    </Reference>
     <Reference Include="DevExpress.Data.v15.1, Version=15.1.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.Mvvm.v15.1, Version=15.1.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.Printing.v15.1.Core, Version=15.1.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
@@ -124,7 +133,7 @@
       <RequiredTargetFramework>4.0</RequiredTargetFramework>
     </Reference>
     <Reference Include="UBL20">
-      <HintPath>..\..\..\..\David\AQUARELLA SQL\Sistema\Vb C# 2013\ELECTRONICO_CARVAJAL\ELECTRONICO\Sistema\www.aquarella.com.pe\Integrado\bin\Debug\UBL20.dll</HintPath>
+      <HintPath>bin\UBL20.dll</HintPath>
     </Reference>
     <Reference Include="UIAutomationProvider" />
     <Reference Include="UIAutomationTypes" />
@@ -132,7 +141,7 @@
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
     <Reference Include="WPFToolkit">
-      <HintPath>..\..\..\..\..\..\..\..\Sist_Integrado\Version 1.3\Integrado\Integrado\bin\Debug\WPFToolkit.dll</HintPath>
+      <HintPath>bin\WPFToolkit.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>

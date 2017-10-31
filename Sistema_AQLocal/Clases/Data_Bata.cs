@@ -386,7 +386,7 @@ namespace Sistema_AQLocal
                     dt_tabla.Columns.Add("talla", typeof(string));
                     dt_tabla.Columns.Add("precio", typeof(double));
                     dt_tabla.Columns.Add("stock", typeof(int));
-
+                    
                     //RECIBOS
                     for (Int32 i = 0; i < dt.Tables["ACSAL"].Rows.Count; ++i)
                     {
@@ -455,6 +455,7 @@ namespace Sistema_AQLocal
 
                         DataTable dt = new DataTable();
 
+                        dt.Columns.Add("Alm_id", typeof(string));
                         dt.Columns.Add("Con_Bata", typeof(string));
                         dt.Columns.Add("Doc_Bata", typeof(string));
                         dt.Columns.Add("Est_Bata", typeof(string));
@@ -469,7 +470,7 @@ namespace Sistema_AQLocal
                         //DataRow[] dr01 = dt_stk.Select("cantidad > 0");
                         foreach (DataRow vrow in dt_stk.Rows)
                         {
-                            dt.Rows.Add("", "", "", "", vrow["COD_ARTIC"].ToString().Trim(), vrow["TALLA"].ToString().Trim(), Convert.ToDecimal(vrow["STOCK"].ToString()));
+                            dt.Rows.Add(_codigoalmacen, "", "", "", "", vrow["COD_ARTIC"].ToString().Trim(), vrow["TALLA"].ToString().Trim(), Convert.ToDecimal(vrow["STOCK"].ToString()));
                         }
 
                         //foreach (DataRow dr0 in dt_stk.Rows)
