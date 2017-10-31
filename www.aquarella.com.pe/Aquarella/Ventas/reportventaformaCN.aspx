@@ -5,8 +5,17 @@
             width: 382px;
         }
         .auto-style2 {
-            width: 136px;
+            width: 103px;
         }
+         .auto-style3 {
+             width: 43px;
+         }
+         .auto-style4 {
+             width: 11%;
+         }
+         .auto-style7 {
+             width: 177px;
+         }
     </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolderTitle" runat="server">
@@ -44,7 +53,7 @@
                     <td>
                         <table cellpadding="1" cellspacing="1" width="100%">
                             <tr>
-                                <td class="f12" width="5%">
+                                <td class="auto-style4">
                                     Forma de pago:</td>
                                 <td>
                                     <asp:DropDownList ID="dwconcepto" runat="server" AppendDataBoundItems="true"                                       
@@ -54,7 +63,7 @@
                                 </td>                                                                                            
                             </tr>                            
                             <tr>
-                                <td>
+                                <td class="auto-style4">
                                     <br />                                    
                                 </td>
                             </tr>                           
@@ -146,6 +155,15 @@
                     <asp:Button ID="btConsult" runat="server" Text="Consultar" ValidationGroup="vsConsultForm"
                         CausesValidation="true" OnClick="btConsult_Click"  />
                 </td>
+                 <td valign="middle"  align="left" class="auto-style7" >
+                    <asp:CheckBox ID="chkresumido" runat="server" AutoPostBack="True" Font-Size="12" Font-Bold="True" 
+                        Text="Reporte Resumido" OnCheckedChanged="chkresumido_CheckedChanged"/>
+                </td>
+                  <td align="center" style="border-left: solid 1px silver;" class="auto-style3">
+                     <asp:ImageButton ID="ibExportDoc" ImageUrl="~/Design/images/Botones/b_doc.png" onmouseover="this.style.background='green';"
+                                    onmouseout="this.style.background=''" runat="server" Height="25px" Width="24px"
+                                    ToolTip="Exportar Archivo de Interfaz Para Adonis." OnClick="ibExportDoc_Click" />
+                      </td>
                 <td align="left" style="border-left: solid 1px silver;">
                     <asp:ImageButton ID="ibExportToExcel" ImageUrl="~/Design/images/Botones/b_toExcel.png"
                         onmouseover="this.style.background='green';" onmouseout="this.style.background=''"
@@ -213,6 +231,8 @@
                
                 <asp:AsyncPostBackTrigger ControlID="btConsult" EventName="Click" />
                 <asp:AsyncPostBackTrigger ControlID="gvReturns" EventName="PageIndexChanging" />
+               
+                <asp:AsyncPostBackTrigger ControlID="chkresumido" EventName="CheckedChanged" />
                
             </Triggers>
         </asp:UpdatePanel>

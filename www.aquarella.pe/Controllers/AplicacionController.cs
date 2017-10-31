@@ -9,21 +9,43 @@ using www.aquarella.pe.Data.Control;
 
 namespace www.aquarella.pe.Controllers
 {
+  
     public class AplicacionController : Controller
     {
         // GET: Aplicacion
         private Aplicacion aplicacion = new Aplicacion();
         private string _session_listaplicacion_private = "session_listapl_private";
         // GET: Aplicacion
+
+       
         public ActionResult Index()
         {
             Usuario _usuario = (Usuario)Session[Constantes.NameSessionUser];
+
+            string actionName = this.ControllerContext.RouteData.GetRequiredString("action");
+            string controllerName = this.ControllerContext.RouteData.GetRequiredString("controller");
+            string return_view = actionName + "|" + controllerName;
+
             if (_usuario == null)
             {
-                return RedirectToAction("Login", "Cuenta");
+                return RedirectToAction("Login", "Cuenta", new { returnUrl = return_view });
             }
+            else
             {
-                return View(lista());
+                #region<VALIDACION DE ROLES DE USUARIO>
+                Boolean valida_rol = true;
+                Global valida_controller = new Global();
+                List<Menu_Items> menu = (List<Menu_Items>)Session[Global._session_menu_user];
+                valida_rol = valida_controller.AccesoMenu(menu, this);
+                #endregion
+                if (valida_rol)
+                { 
+                    return View(lista());
+                }
+                else
+                {
+                    return RedirectToAction("Login", "Cuenta",new { returnUrl = return_view });
+                }
             }
         }
         public List<Aplicacion> lista()
@@ -82,7 +104,8 @@ namespace www.aquarella.pe.Controllers
 
             return View(filaaplicacion);
         }
-        [HttpPost]
+      
+        [HttpPost]       
         public ActionResult Edit(string apl_id, string apl_nombre, string apl_url, string apl_orden, string apl_est_id,
                                   string apl_controller, string apl_action)
         {

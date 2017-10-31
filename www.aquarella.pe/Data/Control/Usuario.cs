@@ -186,6 +186,59 @@ namespace www.aquarella.pe.Data.Control
         public string rol_nombre { get; set; }
         public string rol_descripcion { get; set; }
 
+        public Boolean Eliminar_Rol_Usuario(Decimal _usu_rol_idusu, decimal _usu_rol_idrol)
+        {
+            Boolean valida = false;
+            string sqlquery = "USP_Borrar_Usuario_Roles";
+            try
+            {
+                using (SqlConnection cn = new SqlConnection(Conexion.conexion_sql))
+                {
+                    if (cn.State == 0) cn.Open();
+                    using (SqlCommand cmd = new SqlCommand(sqlquery, cn))
+                    {
+                        cmd.CommandTimeout = 0; cmd.CommandType = CommandType.StoredProcedure;
+                        cmd.Parameters.AddWithValue("@usu_rol_idusu", _usu_rol_idusu);
+                        cmd.Parameters.AddWithValue("@usu_rol_idrol", _usu_rol_idrol);
+                        cmd.ExecuteNonQuery();
+                        valida = true;
+                    }
+                }
+            }
+            catch (Exception)
+            {
+
+                valida = false;
+            }
+            return valida;
+        }
+        public Boolean Insertar_Rol_Usuario(Decimal _usu_rol_idusu, decimal _usu_rol_idrol)
+        {
+            string sqlquery = "USP_Insertar_Usuario_Roles";
+            Boolean valida = false;
+            try
+            {
+                using (SqlConnection cn = new SqlConnection(Conexion.conexion_sql))
+                {
+                    if (cn.State == 0) cn.Open();
+                    using (SqlCommand cmd = new SqlCommand(sqlquery, cn))
+                    {
+                        cmd.CommandTimeout = 0;
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        cmd.Parameters.AddWithValue("@usu_rol_idusu", _usu_rol_idusu);
+                        cmd.Parameters.AddWithValue("@usu_rol_idrol", _usu_rol_idrol);
+                        cmd.ExecuteNonQuery();
+                        valida = true;
+                    }
+                }
+            }
+            catch (Exception)
+            {
+
+                valida = false;
+            }
+            return valida;
+        }
         public List<UsuarioRoles> get_lista(decimal usu_id)
         {
             string sqlquery = "USP_Leer_Roles_Usuario";

@@ -193,6 +193,24 @@ namespace www.aquarella.com.pe.Aquarella.Ventas {
         protected global::System.Web.UI.WebControls.Button btConsult;
         
         /// <summary>
+        /// Control chkresumido.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CheckBox chkresumido;
+        
+        /// <summary>
+        /// Control ibExportDoc.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.ImageButton ibExportDoc;
+        
+        /// <summary>
         /// Control ibExportToExcel.
         /// </summary>
         /// <remarks>

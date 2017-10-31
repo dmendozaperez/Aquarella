@@ -60,7 +60,7 @@
     $(function () {
         $(".editar").click(function () {
             waitingDialog.show('Espere un momento por favor');
-            var TeamDetailPostBackURL = '/Control/Edit';
+            var TeamDetailPostBackURL ="@Url.Action("Edit", "Control")";
             var $buttonClicked = $(this);
             var id = $buttonClicked.attr('data-id');
             var options = { "backdrop": "static", keyboard: true };

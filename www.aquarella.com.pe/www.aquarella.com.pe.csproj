@@ -132,6 +132,7 @@
     <Content Include="Aquarella\Control\updateusers.aspx" />
     <Content Include="Aquarella\Financiera\Agrupar_Pedido_Pago.aspx" />
     <Content Include="Aquarella\Financiera\clear.aspx" />
+    <Content Include="Aquarella\Financiera\ClearCN.aspx" />
     <Content Include="Aquarella\Financiera\Consulta_Archivo_Banco.aspx" />
     <Content Include="Aquarella\Financiera\Consulta_OP_Automatic.aspx" />
     <Content Include="Aquarella\Financiera\Cruce_Pago_Lider.aspx" />
@@ -151,6 +152,7 @@
     <Content Include="Aquarella\Interface\adonisInterfaz.aspx" />
     <Content Include="Aquarella\Interface\EnviaCorreoContactenos.aspx" />
     <Content Include="Aquarella\Interface\expClienteBanco.aspx" />
+    <Content Include="Aquarella\Interface\expclientebancointer.aspx" />
     <Content Include="Aquarella\Interface\expClientes.aspx" />
     <Content Include="Aquarella\Interface\expVentasAQ.aspx" />
     <Content Include="Aquarella\Interface\impMovimiento.aspx" />
@@ -918,6 +920,13 @@
     <Compile Include="Aquarella\Financiera\clear.aspx.designer.cs">
       <DependentUpon>clear.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Aquarella\Financiera\ClearCN.aspx.cs">
+      <DependentUpon>ClearCN.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Aquarella\Financiera\ClearCN.aspx.designer.cs">
+      <DependentUpon>ClearCN.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Aquarella\Financiera\Consulta_Archivo_Banco.aspx.cs">
       <DependentUpon>Consulta_Archivo_Banco.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -1050,6 +1059,13 @@
     </Compile>
     <Compile Include="Aquarella\Interface\expClienteBanco.aspx.designer.cs">
       <DependentUpon>expClienteBanco.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Aquarella\Interface\expclientebancointer.aspx.cs">
+      <DependentUpon>expclientebancointer.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Aquarella\Interface\expclientebancointer.aspx.designer.cs">
+      <DependentUpon>expclientebancointer.aspx</DependentUpon>
     </Compile>
     <Compile Include="Aquarella\Interface\expClientes.aspx.cs">
       <DependentUpon>expClientes.aspx</DependentUpon>

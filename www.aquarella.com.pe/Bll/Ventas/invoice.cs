@@ -516,7 +516,7 @@ namespace www.aquarella.com.pe.bll
             return FormatoTk;
         }
 
-        public static DataTable get_ventaformacn(DateTime fecini, DateTime fecfin, string conid)
+        public static DataTable get_ventaformacn(DateTime fecini, DateTime fecfin, string conid,Boolean resu)
         {
             DataTable dt = null;
             string sqlquery = "USP_VentaFinanzas_CN";
@@ -531,6 +531,7 @@ namespace www.aquarella.com.pe.bll
                         cmd.Parameters.AddWithValue("@fechaini", fecini);
                         cmd.Parameters.AddWithValue("@fechafin", fecfin);
                         cmd.Parameters.AddWithValue("@con_id", conid);
+                        cmd.Parameters.AddWithValue("@resu", resu);
 
                         using (SqlDataAdapter da = new SqlDataAdapter(cmd))
                         {

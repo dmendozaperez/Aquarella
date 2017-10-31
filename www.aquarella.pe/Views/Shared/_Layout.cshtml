@@ -166,6 +166,16 @@
             return this.href == url;
         }).parentsUntil(".sidebar-menu > .treeview-menu").addClass('active');
     </script>
-
+    @*<script>
+         @functions{
+             public string GetAntiForgeryToken()
+             {
+                 string cookieToken, formToken;
+                 AntiForgery.GetTokens(null, out cookieToken, out formToken);
+                 return cookieToken + "," + formToken;
+             }
+         }
+    </script>
+    <input type="hidden" id="forgeryToken" value="@GetAntiForgeryToken()" />*@
 </body>
 </html>

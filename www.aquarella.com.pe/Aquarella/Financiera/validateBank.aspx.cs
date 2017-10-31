@@ -21,6 +21,7 @@ namespace www.aquarella.com.pe.Aquarella.Financiera
     {
         Users _user;
         private string _namsession_banco = "_namsession_banco";
+        private string _namesession_inter = "_namesession_inter";
         protected void Page_Load(object sender, EventArgs e)
         {
             // Vencimiento de sesion
@@ -31,6 +32,7 @@ namespace www.aquarella.com.pe.Aquarella.Financiera
             if (!IsPostBack)
             {
                 Session[_namsession_banco] = "";
+                Session[_namesession_inter] = null;
                 dwBanks.DataSource = Banks.getAllBanks();
                 dwBanks.DataBind();
             }
@@ -47,7 +49,7 @@ namespace www.aquarella.com.pe.Aquarella.Financiera
                     msnMessage.LoadMessage("Seleccione el banco: " + DateTime.Now, UserControl.ucMessage.MessageType.Information);
                     return;
                 }
-                
+                string _banco = dwBanks.SelectedValue;
 
                 if (FileUpload1.HasFile && System.Convert.ToInt32(dwTipArc.SelectedValue) != -1)
                 {
@@ -59,28 +61,90 @@ namespace www.aquarella.com.pe.Aquarella.Financiera
                     Random r = new Random();
                     int varAleatorio = r.Next(0, 999);
 
-                    string FilePath = Server.MapPath(FolderPath + FileName + varAleatorio);
-                    FileUpload1.SaveAs(FilePath);
-                    int val_dwTipArc = System.Convert.ToInt32(dwTipArc.SelectedValue);
-                    rpta = validarArchivo(FilePath, Extension, val_dwTipArc);
-                    if (rpta == 1)
+                    if (_banco!="4")
                     {
-                        Import_To_Grid(FilePath, Extension, val_dwTipArc);
+                        string FilePath = Server.MapPath(FolderPath + FileName + varAleatorio);
+                        FileUpload1.SaveAs(FilePath);
+
+                        //string fichero = Server.MapPath(FilePath);
+                        //System.IO.StreamReader sr = new System.IO.StreamReader(fichero);
+                        //string str = sr.ReadToEnd();
+
+                        int val_dwTipArc = System.Convert.ToInt32(dwTipArc.SelectedValue);
+                        rpta = validarArchivo(FilePath, Extension, val_dwTipArc);
+                        if (rpta == 1)
+                        {
+                            Import_To_Grid(FilePath, Extension, val_dwTipArc);
+                        }
+                        else
+                        {
+                            msnMessage.LoadMessage("Debe seleccionar un tipo de archivo correcto: ", UserControl.ucMessage.MessageType.Error);
+                            GridView1.DataBind();
+                            return;
+
+                        }
+
+                        GridView1.Visible = true;
+
+                        btGuardarDatos_2.Enabled = true;
+                        File.Delete(FilePath);
+                        Session[_namsession_banco] = dwBanks.SelectedValue;
+                        msnMessage.LoadMessage("Carga correcta del archivo excel. Última actualización: " + DateTime.Now, UserControl.ucMessage.MessageType.Information);
                     }
                     else
                     {
-                        msnMessage.LoadMessage("Debe seleccionar un tipo de archivo correcto: ", UserControl.ucMessage.MessageType.Error);
+                        FileName = FileName.Substring(0, FileName.Length - 4);
+                        string FilePath = Server.MapPath(FolderPath + FileName + varAleatorio.ToString() + Extension);
+                        FileUpload1.SaveAs(FilePath);
+
+                        string fichero = Server.MapPath(FolderPath + FileName + varAleatorio.ToString() + Extension);
+
+                        string[] lineas = File.ReadAllLines(fichero);
+
+
+                        DataTable dtinter = new DataTable();
+                        dtinter.Columns.Add("DniRuc", typeof(string));
+                        dtinter.Columns.Add("Pedido", typeof(string));
+                        dtinter.Columns.Add("Op", typeof(string));
+                        dtinter.Columns.Add("Fecha", typeof(DateTime));
+                        dtinter.Columns.Add("Monto", typeof(decimal));
+
+                        foreach(string lin in lineas)
+                        {
+                            string dniruc = lin.Substring(9,20).Trim();
+                            string pedido = Convert.ToInt32(lin.Substring(37, 15).Trim()).ToString(); 
+                            string op = lin.Substring(139, 8).Trim();
+                            DateTime op_fecha =DateTime.ParseExact(lin.Substring(82, 8).Trim(), "yyyyMMdd", null, DateTimeStyles.None);                          
+                            string enter =Convert.ToInt32(lin.Substring(96, 11).Trim()).ToString();
+                            string decim =Convert.ToInt32(lin.Substring(96+11, 2).Trim()).ToString();
+                            Decimal op_monto =Convert.ToDecimal(enter + "." + decim);
+
+                            dtinter.Rows.Add(dniruc, pedido, op, op_fecha, op_monto);
+                        }
+                        Session[_namesession_inter] = null;
+                        DataTable dtreturn= Clear.getvalida_inter(dtinter);
+                        Session[_namesession_inter] = dtreturn;
+                        GridView1.Visible = true;
+                        GridView1.DataSource = dtreturn;
                         GridView1.DataBind();
-                        return;
+                        btGuardarDatos_2.Enabled = true;
+                        File.Delete(FilePath);
+                        Session[_namsession_banco] = dwBanks.SelectedValue;
+                        if (dtreturn.Rows.Count==0)
+                        {
+                            msnMessage.LoadMessage("No hay datos para cargar , debido a que no esta registrado en nuestra base o ya ha sio registrado: " + DateTime.Now, UserControl.ucMessage.MessageType.Error);
+                        }
+                        else
+                        { 
+                            msnMessage.LoadMessage("Solo se carga los numero de OP PENDIENTES del banco interbank. Última actualización: " + DateTime.Now, UserControl.ucMessage.MessageType.Information);
+                        }
+                        //System.IO.StreamReader sr = new System.IO.StreamReader(fichero);
 
+
+                        // string str = sr.ReadToEnd();
                     }
-                   
-                    GridView1.Visible = true;
 
-                    btGuardarDatos_2.Enabled = true;
-                    File.Delete(FilePath);
-                    Session[_namsession_banco] = dwBanks.SelectedValue;
-                    msnMessage.LoadMessage("Carga correcta del archivo excel. Última actualización: " + DateTime.Now, UserControl.ucMessage.MessageType.Information);
+
                 }
                 else
                 {
@@ -274,9 +338,81 @@ namespace www.aquarella.com.pe.Aquarella.Financiera
 
         protected void btGuardarDatos_2_Click(object sender, EventArgs e)
         {
-           Save();
+            string _banco = Session[_namsession_banco].ToString();
+            if (_banco=="4")
+            {
+                SaveInter();
+            }
+            else
+            {
+                Save();
+            }
+           
         }
+        private void SaveInter()
+        {
+           
+            try
+            {
+                DataTable dt = (DataTable)Session[_namesession_inter];
+                if (dt!=null)
+                {
+                    if (dt.Rows.Count==0)
+                    {
+                        msnMessage.LoadMessage("Lamentablemente no se ha guardado el archivo", UserControl.ucMessage.MessageType.Error);
+                    }
+                    else
+                    {
+                        DataTable dtvalida = new DataTable();
+                        dtvalida.Columns.Add("dniruc", typeof(string));
+                        dtvalida.Columns.Add("pedido", typeof(string));
+                        dtvalida.Columns.Add("op", typeof(string));
+                        dtvalida.Columns.Add("fecha", typeof(DateTime));
+                        dtvalida.Columns.Add("monto", typeof(Decimal));
 
+                        for(Int32 i=0;i<dt.Rows.Count;++i)
+                        {
+                            string dniruc = dt.Rows[i]["doc"].ToString() ;
+                            string pedido = dt.Rows[i]["liq"].ToString();
+                            string op = dt.Rows[i]["op"].ToString();
+                            DateTime fecha =Convert.ToDateTime(dt.Rows[i]["fecha"]);
+                            Decimal monto =Convert.ToDecimal(dt.Rows[i]["tpagar"]);
+                            dtvalida.Rows.Add(dniruc, pedido, op, fecha, monto);
+
+                        }
+
+                        string ban_id = Session[_namsession_banco].ToString();
+
+                        string _error=Documents_Trans.SaveValidaInter(ban_id, _user._bas_id,dtvalida);
+
+                        if (_error!="-1")
+                        {
+                            msnMessage.LoadMessage("Se guardo correctamente. El archivo del banco Interbank" + " Última actualización: " + DateTime.Now, UserControl.ucMessage.MessageType.Information);
+                        }
+                        else
+                        {
+                            msnMessage.LoadMessage("Lamentablemente no se ha guardado el archivo", UserControl.ucMessage.MessageType.Error);
+                        }
+
+                    }
+                }
+                else
+                {
+                    msnMessage.LoadMessage("Lamentablemente no se ha guardado el archivo", UserControl.ucMessage.MessageType.Error);
+                }
+
+
+            }
+            catch (Exception ex)
+            {
+
+                GridView1.Visible = false;
+                string msg;
+                msg = ex.Message;
+
+                msnMessage.LoadMessage("Se genero el error: " + ex.Message, UserControl.ucMessage.MessageType.Error);
+            }
+        }
         protected void Save()
         {
             Be_Documents_trans objArray = new Be_Documents_trans();

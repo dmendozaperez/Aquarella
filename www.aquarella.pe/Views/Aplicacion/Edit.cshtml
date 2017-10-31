@@ -94,13 +94,13 @@ $(document).ready(function() {
         var estado = $('select[name=dwestado]').selectpicker('val');
         var controller = $("#controller").val();
         var action = $("#action").val();
-
+      
         waitingDialog.show('Espere un momento por favor');
         $.ajax
              ({
                  url: '../Aplicacion/Edit',
                  dataType: "json",
-                 type: "POST",
+                 type: "POST",                
                  data: { apl_id:id,apl_nombre: nombre, apl_url: urlruta, apl_orden: orden, apl_est_id: estado, apl_controller: controller, apl_action: action },
                  success: function (data, textStatus, XMLHttpRequest) {
                      if (data.estado == '1') {

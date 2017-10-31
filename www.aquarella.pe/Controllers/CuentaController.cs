@@ -11,6 +11,7 @@ using www.aquarella.pe.Data.Control;
 using www.aquarella.pe.Models.Cuenta;
 namespace www.aquarella.pe.Controllers
 {
+    [Authorize]
     public class CuentaController : Controller
     {
         IAuthenticationManager Authentication
@@ -19,7 +20,7 @@ namespace www.aquarella.pe.Controllers
         }
         // GET: Cuenta
         [AllowAnonymous]
-        public ActionResult Login()
+        public ActionResult Login(string returnUrl = null)
         {
             Usuario _usuario = (Usuario)Session[Constantes.NameSessionUser];
             if (_usuario == null)
@@ -27,10 +28,17 @@ namespace www.aquarella.pe.Controllers
                 Authentication.SignOut();
                 Session.Clear();
             }
-            return View(new LoginViewModel());
+
+            //ViewBag.returnUrl = returnUrl;
+
+            LoginViewModel view = new LoginViewModel();
+            view.returnUrl = returnUrl;
+            //return View(new LoginViewModel());
+            return View(view);
         }
         [HttpPost]
-        public ActionResult Login(LoginViewModel model)
+        [AllowAnonymous]        
+        public ActionResult Login(LoginViewModel model, string returnUrl = null)
         {
             if (!ModelState.IsValid)
             {
@@ -39,15 +47,43 @@ namespace www.aquarella.pe.Controllers
             string _error_con = "";
             Boolean _acceso = IsValid(model.Usuario, model.Password, ref _error_con);
 
+            string return_action = "";string return_controller = "";
+
             if (_acceso)
             {
+                if (returnUrl!=null)
+                {
+                    if (returnUrl.Length>0)
+                    { 
+                        string[] controller_action = returnUrl.Split('|');
+                        return_action = controller_action[0].ToString();
+                        return_controller = controller_action[1].ToString();
+                    }
+                }
+
+
                 Usuario _usuario = (Usuario)Session[Constantes.NameSessionUser];
                 var identity = new ClaimsIdentity(new[] { new Claim(ClaimTypes.Name, _usuario._usu_nom_ape), }, DefaultAuthenticationTypes.ApplicationCookie);
                 Authentication.SignIn(new AuthenticationProperties
                 {
                     IsPersistent = model.Recordar
                 }, identity);
-                return RedirectToAction("Index", "Home");
+
+
+                if (return_action.Length==0)
+                { 
+                    return RedirectToAction("Index", "Home");
+                }
+                else
+                {                    
+                    /*validamos las opciones del menu de acceso*/
+                    var data = new Data_Menu();                                      
+                    var items = data.navbarItems(_usuario._usu_id).ToList();
+                    Session[Global._session_menu_user] = items;
+                    return RedirectToAction(return_action, return_controller);
+                    /*************************************/
+                }
+
             }
             else
             {

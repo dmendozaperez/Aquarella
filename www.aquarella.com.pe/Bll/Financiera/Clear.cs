@@ -31,7 +31,34 @@ namespace www.aquarella.com.pe.bll
         /// <param name="_list_documentrans"></param>
         /// <returns></returns>
         /// 
+        public static DataTable getvalida_inter(DataTable dt)
+        {
+            string sqlquery = "USP_ConsultaValidaInter";
+            DataTable dtinter = null;
+            try
+            {
+                using (SqlConnection cn = new SqlConnection(Conexion.myconexion()))
+                {
+                    using (SqlCommand cmd = new SqlCommand(sqlquery, cn))
+                    {
+                        cmd.CommandTimeout = 0;
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        cmd.Parameters.AddWithValue("@tmpinter", dt);
+                        using (SqlDataAdapter da = new SqlDataAdapter(cmd))
+                        {
+                            dtinter = new DataTable();
+                            da.Fill(dtinter);
+                        }
+                    }
+                }
+            }
+            catch (Exception)
+            {
 
+                throw;
+            }
+            return dtinter;
+        }
         public static string setvalidaclear(string _list_liquidations,ref string _ncredito, ref string _fecharef)
         {            
             String sqlquery = "USP_Valida_Finanzas_PagoNc";
@@ -103,6 +130,43 @@ namespace www.aquarella.com.pe.bll
                 cmd.CommandTimeout = 0;
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.Parameters.AddWithValue("@liq_id", _list_liquidations);
+                cmd.Parameters.AddWithValue("@gru_id_devolver", DbType.String);
+                cmd.Parameters.AddWithValue("@Tmp_Pago", dt);
+                cmd.Parameters["@gru_id_devolver"].Direction = ParameterDirection.Output;
+                cmd.ExecuteNonQuery();
+
+                clearId = Convert.ToString(cmd.Parameters["@gru_id_devolver"].Value);
+                return clearId;
+
+                //Database db = DatabaseFactory.CreateDatabase(_conn);
+                ////                
+                //string sqlCommand = "financiera.sp_pre_clear";
+                ////
+                //DbCommand dbCommandWrapper = db.GetStoredProcCommand(sqlCommand, _company, _list_liquidations, _list_documentrans, clearId);
+                ////
+                //db.ExecuteNonQuery(dbCommandWrapper);
+                //clearId = db.GetParameterValue(dbCommandWrapper, "p_clv_clear_id").ToString();
+
+                //return clearId;
+            }
+            catch (Exception e) { throw new Exception(e.Message, e.InnerException); }
+        }
+
+        public static string setPreClear(Decimal _usuid, DataTable dt)
+        {
+            //return "";
+            string clearId = string.Empty;
+            string sqlquery = "USP_Pre_Grupo_CN";
+            SqlConnection cn = null;
+            SqlCommand cmd = null;
+            try
+            {
+                cn = new SqlConnection(Conexion.myconexion());
+                if (cn.State == 0) cn.Open();
+                cmd = new SqlCommand(sqlquery, cn);
+                cmd.CommandTimeout = 0;
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@usu_id", _usuid);
                 cmd.Parameters.AddWithValue("@gru_id_devolver", DbType.String);
                 cmd.Parameters.AddWithValue("@Tmp_Pago", dt);
                 cmd.Parameters["@gru_id_devolver"].Direction = ParameterDirection.Output;

@@ -18,12 +18,29 @@ namespace www.aquarella.pe.Controllers
         {
             Usuario _usuario = (Usuario)Session[Constantes.NameSessionUser];
 
+            string actionName = this.ControllerContext.RouteData.GetRequiredString("action");
+            string controllerName = this.ControllerContext.RouteData.GetRequiredString("controller");
+            string return_view = actionName + "|" + controllerName;
+
             if (_usuario == null)
             {
-                return RedirectToAction("Login", "Cuenta");
+                return RedirectToAction("Login", "Cuenta", new { returnUrl = return_view });
             }
-            { 
-                return View(Buscar(""));
+            {
+                #region<VALIDACION DE ROLES DE USUARIO>
+                Boolean valida_rol = true;
+                Global valida_controller = new Global();
+                List<Menu_Items> menu = (List<Menu_Items>)Session[Global._session_menu_user];
+                valida_rol = valida_controller.AccesoMenu(menu, this);
+                #endregion
+                if (valida_rol)
+                { 
+                    return View(Buscar(""));
+                }
+                else
+                {
+                    return RedirectToAction("Login", "Cuenta", new { returnUrl = return_view });
+                }
             }
         }
         public List<UsuarioModel> Buscar(string _nombre)
@@ -61,6 +78,30 @@ namespace www.aquarella.pe.Controllers
 
             return View(lista_usu_rol(id));
 
+        }
+        [HttpPost]
+        public ActionResult Borrar_Rol(Decimal usu_id, Decimal rol_id)
+        {
+            UsuarioRoles _usuario_rol = new UsuarioRoles();
+
+            Boolean _valida_borrar = _usuario_rol.Eliminar_Rol_Usuario(usu_id,rol_id);
+
+            return Json(new { estado = (_valida_borrar) ? "1" : "-1", desmsg = (_valida_borrar) ? "Se borro correctamente." : "Hubo un error al borrar." });
+        }
+        [HttpPost]
+        public ActionResult Agregar_Rol(Decimal usu_id, Decimal rol_id)
+        {
+
+            UsuarioRoles _usuario_rol = new UsuarioRoles();
+
+            Boolean _valida_agregar = _usuario_rol.Insertar_Rol_Usuario(usu_id, rol_id);
+
+            return Json(new { estado = (_valida_agregar) ? "1" : "-1", desmsg = (_valida_agregar) ? "Se agrego correctamente." : "Hubo un error al agregar." });
+        }
+        public PartialViewResult ListaRolUsu(Decimal usuid)
+        {
+            ViewBag.usuid = usuid.ToString();
+            return PartialView(lista_usu_rol(usuid));
         }
         public List<UsuarioRoles> lista_usu_rol(Decimal id)
         {

@@ -60,7 +60,7 @@
 <script type="text/javascript">
     $(function () {
         $(".btnrol").click(function () {
-            var TeamDetailPostBackURL = '/Permisos/Roles';
+            var TeamDetailPostBackURL ="@Url.Action("Roles", "Permisos")"; 
             //debugger;
             var $buttonClicked = $(this);
             var id = $buttonClicked.attr('data-id');

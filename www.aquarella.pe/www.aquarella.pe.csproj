@@ -804,6 +804,7 @@
     <Content Include="Content\bootstrap-select.css.map" />
     <Content Include="Content\toastr.scss" />
     <Content Include="Content\toastr.less" />
+    <None Include="Properties\PublishProfiles\webaq.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -1018,6 +1019,7 @@
     <Content Include="Views\Permisos\Index.cshtml" />
     <Content Include="Views\Permisos\ListaUsuario.cshtml" />
     <Content Include="Views\Permisos\Roles.cshtml" />
+    <Content Include="Views\Permisos\ListaRolUsu.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

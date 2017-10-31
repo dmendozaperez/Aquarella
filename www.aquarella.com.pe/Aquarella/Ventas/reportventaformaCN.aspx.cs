@@ -6,6 +6,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using www.aquarella.com.pe.bll;
+using www.aquarella.com.pe.bll.Interfaces;
 using www.aquarella.com.pe.bll.Util;
 
 namespace www.aquarella.com.pe.Aquarella.Ventas
@@ -37,10 +38,11 @@ namespace www.aquarella.com.pe.Aquarella.Ventas
             msnMessage.HideMessage();
             try
             {
+                Boolean resu = chkresumido.Checked;
                 DateTime _fecha_ini = Convert.ToDateTime(txtDateStart.Text);
                 DateTime _fecha_fin = Convert.ToDateTime(txtDateEnd.Text);
                 string _concepto = dwconcepto.SelectedValue;
-                DataTable dt = invoice.get_ventaformacn(_fecha_ini, _fecha_fin, _concepto);
+                DataTable dt = invoice.get_ventaformacn(_fecha_ini, _fecha_fin, _concepto, resu);
                 Session[_nameSessDatavenazonaconsulta] = dt;
                 gvReturns.DataSource = dt;
                 gvReturns.DataBind();
@@ -102,6 +104,63 @@ namespace www.aquarella.com.pe.Aquarella.Ventas
 
 
             }
+        }
+
+
+        protected void ibExportDoc_Click(object sender, ImageClickEventArgs e)
+        {
+            DataTable dt = null;
+            try
+            {
+                DateTime fechaini =Convert.ToDateTime(txtDateStart.Text);
+                DateTime fechafin = Convert.ToDateTime(txtDateEnd.Text);
+                dt=Documents_Trans.get_Docn_TransAdonis(fechaini, fechafin, "-1", "2").Tables[0];
+                if (dt.Rows.Count>0)
+                {
+                    DateTime _fecStart = Convert.ToDateTime((txtDateStart.Text.Equals(string.Empty)) ? "01/01/1900" : txtDateStart.Text);
+                    DateTime _fecEnd = Convert.ToDateTime((txtDateEnd.Text.Equals(string.Empty)) ? "01/01/1900" : txtDateEnd.Text);
+
+                    DataSet _interf = Adonis.Get_Comercial_Interface(_fecStart, _fecEnd);
+                    DataTable dtinter = _interf.Tables[0];
+
+                    DataRow[] foundRows = dtinter.Select("", "");
+
+                    System.Text.StringBuilder str = new System.Text.StringBuilder();
+
+                    for (int i = 0; i <= foundRows.GetUpperBound(0); i++)
+                    {
+                        str.Append(foundRows[i][0].ToString() + "\r\n");
+                    }
+
+                    Response.Clear();
+                    Response.Buffer = true;
+                    Response.ContentType = "text/plain";
+                    Response.AddHeader("Content-Disposition", "attachment;filename=InterComerAdonis.txt");
+                    Response.Charset = "UTF-8";
+                    Response.ContentEncoding = System.Text.Encoding.Default;
+
+                    System.IO.StringWriter tw = new System.IO.StringWriter();
+                    System.Web.UI.HtmlTextWriter hw = new System.Web.UI.HtmlTextWriter(tw);
+
+                    Response.Write(str.ToString());
+                    Response.End();
+                }
+                else
+                {
+                    msnMessage.LoadMessage("No hay datos para exportar", UserControl.ucMessage.MessageType.Error);
+                }
+
+            }
+            catch (Exception exc)
+            {
+                msnMessage.LoadMessage(exc.Message, UserControl.ucMessage.MessageType.Error);
+                dt = null;
+            }
+        }
+
+        protected void chkresumido_CheckedChanged(object sender, EventArgs e)
+        {
+            _consultar();
         }
     }
 }

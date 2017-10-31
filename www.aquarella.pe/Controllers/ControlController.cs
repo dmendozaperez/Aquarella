@@ -18,13 +18,32 @@ namespace www.aquarella.pe.Controllers
         public ActionResult Usuarios()
         {
             Usuario _usuario = (Usuario)Session[Constantes.NameSessionUser];
+
+            string actionName = this.ControllerContext.RouteData.GetRequiredString("action");
+            string controllerName = this.ControllerContext.RouteData.GetRequiredString("controller");
+            string return_view = actionName + "|" + controllerName;
+
+
             if (_usuario == null)
             {
-                return RedirectToAction("Login", "Cuenta");
+                return RedirectToAction("Login", "Cuenta", new { returnUrl = return_view });
             }
             else
             {
-                return View(Buscar(""));
+                #region<VALIDACION DE ROLES DE USUARIO>
+                Boolean valida_rol = true;
+                Global valida_controller = new Global();
+                List<Menu_Items> menu = (List<Menu_Items>)Session[Global._session_menu_user];
+                valida_rol = valida_controller.AccesoMenu(menu, this);
+                #endregion
+                if (valida_rol)
+                { 
+                    return View(Buscar(""));
+                }
+                else
+                {
+                    return RedirectToAction("Login", "Cuenta", new { returnUrl = return_view });
+                }
             }
         }
         public List<UsuarioModel> Buscar(string _nombre)

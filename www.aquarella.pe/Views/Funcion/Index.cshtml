@@ -19,7 +19,7 @@
     $(function () {
         $(".nuevo").click(function () {
             waitingDialog.show('Espere un momento por favor');
-            var TeamDetailPostBackURL = '/Funcion/Nuevo';
+            var TeamDetailPostBackURL ="@Url.Action("Nuevo", "Funcion")"; 
 
             var $buttonClicked = $(this);
             //var id = $buttonClicked.attr('data-id');

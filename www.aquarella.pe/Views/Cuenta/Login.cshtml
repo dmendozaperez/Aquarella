@@ -26,8 +26,9 @@
             </div>
             <!-- /.login-logo -->
             <div class="login-box-body">
-                @using (Html.BeginForm("Login", "Cuenta", FormMethod.Post, new { @class = "login-box-body" }))
+                @using (Html.BeginForm("Login", "Cuenta",new { returnUrl=Model.returnUrl }, FormMethod.Post, new { @class = "login-box-body" }))
                 {
+                    @*@Html.AntiForgeryToken()*@
                     <p class="login-box-msg">Accede para comenzar tu sesión</p>
                     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                     <div class="form-group has-feedback">

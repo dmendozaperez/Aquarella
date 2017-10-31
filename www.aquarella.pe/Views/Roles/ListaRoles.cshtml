@@ -90,7 +90,7 @@
 <script>
     $(function () {
         $(".btneditar").click(function () {
-            var TeamDetailPostBackURL = '/Roles/Edit';
+            var TeamDetailPostBackURL ="@Url.Action("Edit", "Roles")";
             //debugger;
             var $buttonClicked = $(this);
             waitingDialog.show('Espere un momento por favor');
@@ -128,7 +128,7 @@
     });
     $(function () {
         $(".btnfun").click(function () {
-            var TeamDetailPostBackURL = '/Roles/Funcion';
+            var TeamDetailPostBackURL = "@Url.Action("Funcion", "Roles")";
             //debugger;
             var $buttonClicked = $(this);
             var id = $buttonClicked.attr('data-id');

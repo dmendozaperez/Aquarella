@@ -64,10 +64,10 @@
     });
 </script>
 <script>
-  
+
     $(function () {
         $(".btneditar").click(function () {
-            var TeamDetailPostBackURL = '/Funcion/Edit';
+            var TeamDetailPostBackURL ="@Url.Action("Edit", "Funcion")";
             //debugger;
             var $buttonClicked = $(this);
             waitingDialog.show('Espere un momento por favor');
@@ -105,7 +105,7 @@
     });
     $(function () {
         $(".btnapli").click(function () {
-            var TeamDetailPostBackURL = '/Funcion/Aplicacion';
+            var TeamDetailPostBackURL ="@Url.Action("Aplicacion", "Funcion")"; 
             //debugger;
             var $buttonClicked = $(this);
             var id = $buttonClicked.attr('data-id');

@@ -294,9 +294,10 @@ namespace www.aquarella.com.pe.Aquarella.Maestros
                     FileUpload1.SaveAs(FilePath);
                     int val_dwTipArc = 1;
                     rpta = validarArchivo(FilePath, Extension, val_dwTipArc);
+                    Int32 nfilas = 0;
                     if (rpta == 1)
                     {
-                        Import_To_Grid(FilePath, Extension, val_dwTipArc);
+                        Import_To_Grid(FilePath, Extension, val_dwTipArc,ref nfilas);
                     }
                     else
                     {
@@ -310,7 +311,7 @@ namespace www.aquarella.com.pe.Aquarella.Maestros
 
                    // btGuardarDatos_2.Enabled = true;
                     File.Delete(FilePath);
-                    msnMessage.LoadMessage("Carga correcta del archivo excel. Última actualización: " + DateTime.Now, UserControl.ucMessage.MessageType.Information);
+                    msnMessage.LoadMessage("Carga correcta del archivo excel. Total de Filas:"  + nfilas.ToString() +   " ,Última actualización: " + DateTime.Now, UserControl.ucMessage.MessageType.Information);
                 }
                 else
                 {
@@ -403,7 +404,7 @@ namespace www.aquarella.com.pe.Aquarella.Maestros
             return rpta;
 
         }
-        private void Import_To_Grid(string FilePath, string Extension, int val_dwTipArc)
+        private void Import_To_Grid(string FilePath, string Extension, int val_dwTipArc,ref Int32 filas)
         {
             string conStr = "";
             switch (Extension)
@@ -418,12 +419,17 @@ namespace www.aquarella.com.pe.Aquarella.Maestros
                               .ConnectionString;
                     break;
             }
+            //conStr = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source={0};Extended Properties=\"Excel 12.0 Xml;HDR=YES;IMEX=1\"";
 
             conStr = String.Format(conStr, FilePath, "A4:F5", true);
             OleDbConnection connExcel = new OleDbConnection(conStr);
             OleDbCommand cmdExcel = new OleDbCommand();
             OleDbDataAdapter oda = new OleDbDataAdapter();
             DataTable dt = new DataTable();
+            dt.Columns.Add("tipo", typeof(string));
+            dt.Columns.Add("articulo", typeof(string));
+            dt.Columns.Add("precio", typeof(Decimal));
+
             DataTable dt_Complete = new DataTable();
             cmdExcel.Connection = connExcel;
             //Get the name of First Sheet
@@ -439,7 +445,7 @@ namespace www.aquarella.com.pe.Aquarella.Maestros
 
             if (val_dwTipArc == 1)
             {
-                cmdExcel.CommandText = "SELECT [tipo],[articulo],[precio] From [" + SheetName + "]";
+                cmdExcel.CommandText = "SELECT [tipo],[articulo] ,[precio] From [" + SheetName + "]";
             }
             //else
             //{
@@ -450,11 +456,22 @@ namespace www.aquarella.com.pe.Aquarella.Maestros
             oda.Fill(dt);
 
 
+
             for (Int32 i = 0; i < dt.Rows.Count; ++i)
             {               
                 string _MONTOstr = dt.Rows[i]["precio"].ToString().Replace(',', '.');
 
-                dt.Rows[i]["precio"] = formato_numerico(_MONTOstr);                                      
+                dt.Rows[i]["precio"] = formato_numerico(_MONTOstr);
+
+                string _articulo = dt.Rows[i]["articulo"].ToString();
+                //if (_articulo.Length == 6)
+                //{ 
+                     _articulo = dt.Rows[i]["articulo"].ToString().PadLeft(7, '0');
+                //}
+
+                dt.Rows[i]["articulo"] = _articulo.ToString();
+
+
             }
 
             //CultureInfo PE = new CultureInfo("es-PE");
@@ -463,6 +480,7 @@ namespace www.aquarella.com.pe.Aquarella.Maestros
 
             if (dt.Rows.Count > 0)
             {
+                filas = dt.Rows.Count;
                 DataTable dt_import = new DataTable();
                 dt_import.Columns.Add("tipo", typeof(string));
                 dt_import.Columns.Add("Art_Id", typeof(string));

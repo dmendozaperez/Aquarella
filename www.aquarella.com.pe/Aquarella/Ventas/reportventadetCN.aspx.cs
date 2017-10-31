@@ -82,5 +82,10 @@ namespace www.aquarella.com.pe.Aquarella.Ventas
             gvReturns.DataSource = (DataTable)Session[_nameSessDatavenazonaconsulta];
             gvReturns.DataBind();
         }
+
+        protected void ibExportDoc_Click(object sender, ImageClickEventArgs e)
+        {
+
+        }
     }
 }

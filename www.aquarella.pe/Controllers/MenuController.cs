@@ -11,6 +11,7 @@ namespace www.aquarella.pe.Controllers
 {
     public class MenuController : Controller
     {
+      
         // GET: Menu
         [Authorize]
         public ActionResult Menu()
@@ -21,6 +22,8 @@ namespace www.aquarella.pe.Controllers
 
             if (_usuario == null) return View(new LoginViewModel());
             var items = data.navbarItems(_usuario._usu_id).ToList();
+
+            Session[Global._session_menu_user] = items;
 
             return PartialView("_AdminLteLeftMenu", items);
         }
