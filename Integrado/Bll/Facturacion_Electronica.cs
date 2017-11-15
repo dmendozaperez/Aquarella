@@ -9,6 +9,29 @@ namespace Integrado.Bll
 {
     public class Facturacion_Electronica
     {
+        public static void FE_QR(string _tipo_doc, string _num_doc, ref Byte[] img_qr, ref string _error)
+        {
+            string _formato_doc = "";
+            try
+            {
+                _formato_doc = Dat_Venta._leer_formato_electronico(_tipo_doc, _num_doc, ref _error);
+                GeneratorCdp generatorCdp = new GeneratorCdp();
+                if (_tipo_doc == "B" || _tipo_doc == "F")
+                {
+                    img_qr = generatorCdp.GetImageQrCodeForInvoiceCdp(_formato_doc);
+                }
+                else
+                {
+                    img_qr = generatorCdp.GetImageQrCodeForNoteCdp(_formato_doc);
+                }
+
+            }
+            catch (Exception exc)
+            {
+
+                _error = exc.Message;
+            }
+        }
         public static void ejecutar_factura_electronica(string _tipo_doc, string _num_doc, ref string cod_hash, ref string _error)
         {
             string _formato_doc = "";

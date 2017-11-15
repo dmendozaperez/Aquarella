@@ -214,6 +214,7 @@
     </ApplicationDefinition>
     <Compile Include="Bll\Basico.cs" />
     <Compile Include="Bll\Facturacion_Electronica.cs" />
+    <Compile Include="Bll\Fe_Sunat_Qr.cs" />
     <Compile Include="Certificado\ReportInvoiceClass.cs" />
     <Compile Include="Bll\ReportInvoiceSummary.cs" />
     <Compile Include="Bll\Transaction_det.cs" />
@@ -430,6 +431,10 @@
     <ProjectReference Include="..\CapaEntidad\CapaEntidad.csproj">
       <Project>{7e9f5bf4-d3e4-4b48-864c-d7ea925c9e6d}</Project>
       <Name>CapaEntidad</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Epson_QR\Epson_QR.csproj">
+      <Project>{a3dee9ac-6017-412f-ad6a-de0294ad887b}</Project>
+      <Name>Epson_QR</Name>
     </ProjectReference>
     <ProjectReference Include="..\Epson_Ticket\Epson_Ticket.csproj">
       <Project>{ab16c47e-1072-496a-9515-d15d35a92f4a}</Project>

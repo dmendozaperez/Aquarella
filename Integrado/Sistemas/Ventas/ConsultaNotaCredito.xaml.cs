@@ -335,17 +335,32 @@ namespace Integrado.Sistemas.Ventas
             if (result == MessageDialogResult.Affirmative)
             {
                 //Mouse.OverrideCursor = Cursors.Wait;
+                #region<CODIGO QR FACTURACION ELECTRONICA>
+                //string _error = "";
+                //byte[] img_qr = null;
                 var ProgressAlert = await this.ShowProgressAsync(Ent_Msg.msgcargando, "Imprimiendo Documento");  //show message
-                ProgressAlert.SetIndeterminate();
-                string tickets = await Task.Run(() => Imprimir_Doc.Generar_Impresion("N", _not_id_imp.ToString()) /*Config_Imp_NC.GenerarTicketNC(_not_id_imp.ToString(), 1, _codigo_hash)*/);
-                //string tickets = Config_Imp_NC.GenerarTicketNC(_not_id_imp.ToString(), 1, _codigo_hash);
-                await ProgressAlert.CloseAsync();
-                if (tickets == null)
-                {
-                    await this.ShowMessageAsync(Ent_Msg.msginfomacion, " >> Se producjo un error en la impresión del ticket");
-                    //MessageBox.Show(" >> Se producjo un error en la impresión del ticket", Ent_Msg.msginfomacion, MessageBoxButton.OK, MessageBoxImage.Error);
-                    //Mouse.OverrideCursor = null;
-                }
+
+                //await Task.Run(() => Facturacion_Electronica.FE_QR("N", _not_id_imp.ToString(), ref img_qr, ref _error));
+                #endregion
+                //if (_error.Length == 0)
+                //{ 
+                    ProgressAlert.SetIndeterminate();               
+
+                    string tickets = await Task.Run(() => Imprimir_Doc.Generar_Impresion("N", _not_id_imp.ToString()) /*Config_Imp_NC.GenerarTicketNC(_not_id_imp.ToString(), 1, _codigo_hash)*/);
+                    //string tickets = Config_Imp_NC.GenerarTicketNC(_not_id_imp.ToString(), 1, _codigo_hash);
+                    await ProgressAlert.CloseAsync();
+                    if (tickets == null)
+                    {
+                        await this.ShowMessageAsync(Ent_Msg.msginfomacion, " >> Se producjo un error en la impresión del ticket");
+                        //MessageBox.Show(" >> Se producjo un error en la impresión del ticket", Ent_Msg.msginfomacion, MessageBoxButton.OK, MessageBoxImage.Error);
+                        //Mouse.OverrideCursor = null;
+                    }
+                //}
+                //else
+                //{
+                //    await ProgressAlert.CloseAsync();
+                //    await this.ShowMessageAsync(Ent_Msg.msginfomacion, _error);
+                //}
 
             }
             //Mouse.OverrideCursor = null;

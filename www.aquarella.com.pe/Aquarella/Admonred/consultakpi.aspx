@@ -1,34 +1,48 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Design/Site.Master" AutoEventWireup="true" CodeBehind="ConsultaPromotorXLider.aspx.cs" Inherits="www.aquarella.com.pe.Aquarella.Admonred.ConsultaPromotorXLider" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Design/Site.Master" AutoEventWireup="true" CodeBehind="consultakpi.aspx.cs" Inherits="www.aquarella.com.pe.Aquarella.Admonred.consultakpi" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="headCPH" runat="server">
     <style type="text/css">
-        .auto-style1 {
-            width: 309px;
+        .style1
+        {
+            width: 452px;
         }
-        .auto-style2 {
-            height: 59px;
+        .style2
+        {
+            width: 183px;
         }
-        .auto-style3 {
-            width: 145px;
+        .style3
+        {
+            width: 77px;
         }
-        .auto-style4 {
-            width: 386px;
+        .style4
+        {
+            width: 141px;
         }
-        .auto-style5 {
-            width: 109px;
+        .style5
+        {
+            width: 170px;
+        }
+        .style6
+        {
+            width: 170px;
+            height: 23px;
+        }
+        .style7
+        {
+            height: 23px;
         }
     </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolderTitle" runat="server">
-     Consulta de Promotor por lider 
+    Consulta de Resultado KPI
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="ContentPlaceHolderPageDesc" runat="server">
-    Consulte lista de promotores por lider
+    Consulte entre un rango de fechas, o por lideres
 </asp:Content>
 <asp:Content ID="Content4" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-      <asp:ScriptManager ID="ScriptManager1" runat="server" 
+    <asp:ScriptManager ID="ScriptManager1" runat="server" 
         EnableScriptGlobalization="True">
     </asp:ScriptManager>
-    <!-- Area de errores -->
+      <!-- Area de errores -->
     <asp:UpdatePanel ID="upPanelMsg" runat="server">
         <ContentTemplate>
             <AQControl:Message runat="server" Visible="false" ID="msnMessage"></AQControl:Message>
@@ -45,35 +59,35 @@
             </center>
         </ProgressTemplate>
     </asp:UpdateProgress>
-      <asp:Panel ID="pnlDwCustomers" Visible="true" runat="server">
+    <!-- -->
+    <asp:Panel ID="pnlDwCustomers" Visible="false" runat="server">
         <div style="margin: 10px auto 0 auto;">
-            <table width="100%" class="auto-style2" cellpadding="4">
+            <table width="100%" class="tablagris" cellpadding="4">
                 <tr>
                     <td>
                         <table cellpadding="1" cellspacing="1" width="100%">
                             <tr>
                                 <td class="f12" width="5%">
                                     Lider:</td>
-                                <td class="auto-style1">
-                                    <asp:DropDownList ID="dwlider" runat="server" AppendDataBoundItems="true" 
-                                        DataTextField="Are_Descripcion" 
-                                        DataValueField="Are_Id"
-                                        ToolTip="Selecionar un lider" Width="280px" style="cursor:pointer">
+                                <td>
+                                    <asp:DropDownList ID="dwCustomers" runat="server" AppendDataBoundItems="true" 
+                                        DataTextField="are_descripcion" 
+                                        DataValueField="are_id"
+                                        ToolTip="Selecionar un lider" Width="280px">
                                         <asp:ListItem Text=" -- Seleccionar a todos --" Value="-1"></asp:ListItem>
                                     </asp:DropDownList>
                                 </td>
-                             
                             </tr>
                         </table>
                     </td>
                 </tr>
             </table>
         </div>
-          </asp:Panel>
-        <div style="margin: 10px auto 0 auto;">
+    </asp:Panel>
+    <div style="margin: 10px auto 0 auto;">
         <table width="100%" class="tablagris" cellpadding="4">
             <tr>
-                <td class="auto-style4">
+                <td class="style1">
                     <table>
                         <tr>
                             <td class="f12">
@@ -103,7 +117,7 @@
                              <td>
                                             <asp:Image ID="imgCalendar" runat="server" ImageUrl="~/Design/images/Botones/b_calendar_ico.gif"
                                                 onmouseover="this.style.background='red';" onmouseout="this.style.background=''"
-                                                Style="cursor: pointer;" />
+                                                Style="cursor:pointer;" />
                             </td>
                              <td>
                                             <asp:RequiredFieldValidator ValidationGroup="vsConsultForm" ID="rfvDateStart" runat="server"
@@ -148,94 +162,94 @@
                         </tr>
                     </table>
                 </td>
-                <td valign="middle" class="auto-style5">
+                <td valign="middle" class="style2">
                     <asp:Button ID="btConsult" runat="server" Text="Consultar" ValidationGroup="vsConsultForm"
                         CausesValidation="true" OnClick="btConsult_Click" />
                 </td>
                 <td align="left" style="border-left: solid 1px silver;">
+                    <table style="width:100%;">
+                        <tr>
+                            <td class="style3">
+                                &nbsp;</td>
+                            <td class="style4">
+                                &nbsp;</td>
+                            <td>
+                                &nbsp;</td>
+                        </tr>
+                        <tr>
+                            <td class="style3">
                     <asp:ImageButton ID="ibExportToExcel" ImageUrl="~/Design/images/Botones/b_toExcel.png"
                         onmouseover="this.style.background='green';" onmouseout="this.style.background=''"
                         runat="server" Height="25px" Width="24px" 
                         ToolTip="Exportar Panel de Resultados a Excel." 
                         onclick="ibExportToExcel_Click" />
+                            </td>
+                            <td class="style4">
+                                &nbsp;</td>
+                            <td>
+                                &nbsp;</td>
+                        </tr>
+                        <tr>
+                            <td class="style3">
+                                &nbsp;</td>
+                            <td class="style4">
+                                &nbsp;</td>
+                            <td>
+                                &nbsp;</td>
+                        </tr>
+                    </table>
                 </td>
             </tr>
             <tr>
-                <td class="auto-style4">
+                <td class="style1">
                     <asp:ValidationSummary ID="vsConsultForm" ValidationGroup="vsConsultForm" runat="server"
                         EnableClientScript="true" HeaderText="Realice las siguientes correcciones" ShowMessageBox="true" />
                 </td>
             </tr>
         </table>
     </div>
-               <div  style="min-height: 200px; align-content:center; width: 1017px;" align="center">                   
-                    <asp:UpdatePanel ID="uppromotor" runat="server" UpdateMode="Conditional">
-                        <ContentTemplate>
-                            <asp:GridView ID="gvpromotor" runat="server" Width="98%" SkinID="gridviewSkin"
-                                AutoGenerateColumns="False"  Font-Size="Small" AllowPaging="True" AllowSorting="True" CellPadding="3" ShowHeaderWhenEmpty="True" BackColor="White" BorderColor="#CCCCCC" BorderStyle="Solid" BorderWidth="1px"  OnPageIndexChanging="gvmanifiesto_PageIndexChanging" PageSize="12">
-                                <EmptyDataTemplate>
-                                    No existen datos que mostrar.
-                                </EmptyDataTemplate>
-                                <Columns>
-                                    <asp:BoundField DataField="asesor" HeaderText="Asesor">
-                                    <HeaderStyle HorizontalAlign="Left" />
-                                    <ItemStyle HorizontalAlign="Left" />
-                                    </asp:BoundField>
-                                    <asp:BoundField DataField="Lider"
-                                        HeaderText="Lider" ItemStyle-HorizontalAlign="Center">
-                                        <HeaderStyle HorizontalAlign="Left" />
-                                        <ItemStyle HorizontalAlign="Left" />
-                                    </asp:BoundField>
-                                    <asp:BoundField DataField="promotor" HeaderText="Promotor" >
-                                    <HeaderStyle HorizontalAlign="Left" />
-                                    <ItemStyle HorizontalAlign="Left" />
-                                    </asp:BoundField>
-                                    <asp:BoundField DataField="documento" HeaderText="Documento" >
-                                    <HeaderStyle HorizontalAlign="Left" />
-                                    <ItemStyle HorizontalAlign="Left" />
-                                    </asp:BoundField>
-                                    <asp:BoundField DataField="direccion" HeaderText="Direccion" ItemStyle-HorizontalAlign="Center">
-                                        <HeaderStyle HorizontalAlign="Left" />
-                                        <ItemStyle HorizontalAlign="Left" />
-                                    </asp:BoundField>
-                                    <asp:BoundField DataField="telefono" HeaderText="Telefono" Visible="true" >
-                                    <HeaderStyle HorizontalAlign="Center" />
-                                    <ItemStyle HorizontalAlign="Center" />
-                                    </asp:BoundField>
-                                    <asp:BoundField DataField="Correo" HeaderText="Correo" ItemStyle-HorizontalAlign="Right">
-                                        <HeaderStyle HorizontalAlign="Left" />
-                                        <ItemStyle HorizontalAlign="Left" />
-                                    </asp:BoundField>
-                                    <asp:BoundField DataField="Celular" HeaderText="Celular" ItemStyle-HorizontalAlign="Right">
-                                        <HeaderStyle HorizontalAlign="Left" />
-                                        <ItemStyle HorizontalAlign="Left" />
-                                    </asp:BoundField>
-                                     <asp:BoundField DataField="fecing" HeaderText="Fec.Ing" ItemStyle-HorizontalAlign="Right">
-                                        <HeaderStyle HorizontalAlign="Left" />
-                                        <ItemStyle HorizontalAlign="Left" />
-                                    </asp:BoundField>
-                                    <asp:BoundField DataField="fecactv" HeaderText="Fec.Activacion" ItemStyle-HorizontalAlign="Right" DataFormatString="{0:dd/MM/yyyy}">
-                                        <HeaderStyle HorizontalAlign="Left" />
-                                        <ItemStyle HorizontalAlign="Left" />
-                                    </asp:BoundField>
-                                </Columns>
-                                <FooterStyle BackColor="White" ForeColor="#000066" />
-                                <HeaderStyle BackColor="#006699" Font-Bold="True" ForeColor="White" />
-                                <PagerStyle BackColor="White" ForeColor="#000066" HorizontalAlign="Left" />
-                                <RowStyle BorderColor="#DEDFDE" BorderWidth="1px" BorderStyle="Solid" ForeColor="#000066" />
-                                <SelectedRowStyle BackColor="#669999" Font-Bold="True" ForeColor="White" />
-                                <SortedAscendingCellStyle BackColor="#F1F1F1" />
-                                <SortedAscendingHeaderStyle BackColor="#007DBB" />
-                                <SortedDescendingCellStyle BackColor="#CAC9C9" />
-                                <SortedDescendingHeaderStyle BackColor="#00547E" />
-                            </asp:GridView>                         
-                        </ContentTemplate>
-                        <Triggers>                        
-                            <asp:AsyncPostBackTrigger ControlID="btConsult" EventName="Click" />
-                            <asp:AsyncPostBackTrigger ControlID="gvpromotor" EventName="PageIndexChanging" />
-                        </Triggers>
-                    </asp:UpdatePanel>
-                    <ajaxToolkit:UpdatePanelAnimationExtender ID="upae" runat="server" TargetControlID="uppromotor">
+    <!-- PANEL DE RESULTADOS -->
+    
+    <div style="margin: 1px 1px 1px 1px;  width: 1078px; overflow: auto;">
+        <asp:UpdatePanel ID="upGrid" runat="server" UpdateMode="Conditional">
+            <ContentTemplate>
+                <asp:GridView ID="gvReturns" runat="server" AllowSorting="True" 
+                    ShowFooter="True" AllowPaging="True" PageSize="14"
+                 SkinID="gridviewSkin" PagerStyle-HorizontalAlign="Left" Font-Size="Small" 
+                    CellPadding="4" ForeColor="#333333" GridLines="None" Width="1072px">
+                    <FooterStyle BackColor="#507CD1" Font-Bold="True" ForeColor="White" />
+                    <HeaderStyle BackColor="#507CD1" Font-Bold="True" ForeColor="White" />
+                    <PagerStyle CssClass="GridViewBlue-tf" BackColor="#2461BF" ForeColor="White" 
+                        HorizontalAlign="Center" />
+                    <AlternatingRowStyle BackColor="White" />
+                    <EditRowStyle BackColor="#2461BF" />
+                    <EmptyDataTemplate>
+                        No existen registros para mostrar.
+                    </EmptyDataTemplate>
+                    <RowStyle BackColor="#EFF3FB" />
+                    <SelectedRowStyle BackColor="#D1DDF1" Font-Bold="True" ForeColor="#333333" />
+                    <SortedAscendingCellStyle BackColor="#F5F7FB" />
+                    <SortedAscendingHeaderStyle BackColor="#6D95E1" />
+                    <SortedDescendingCellStyle BackColor="#E9EBEF" />
+                    <SortedDescendingHeaderStyle BackColor="#4870BE" />
+                </asp:GridView>
+              
+            </ContentTemplate>
+            <Triggers>
+                <asp:AsyncPostBackTrigger ControlID="btConsult" EventName="click" />
+            </Triggers>
+        </asp:UpdatePanel>
+        <asp:ObjectDataSource ID="odsReturns" runat="server" SelectMethod="getconsultaKPI"
+            TypeName="www.aquarella.com.pe.bll.Ventas.Facturacion" OnSelected="odsReturns_Selected">
+            <SelectParameters>
+                <asp:Parameter Name="_area_id" Type="String" />
+                <asp:Parameter Name="_asesor" Type="String" ConvertEmptyStringToNull="false"/>
+                <asp:ControlParameter ControlID="txtDateStart" Name="_date_start" PropertyName="Text" Type="DateTime" />
+                <asp:ControlParameter ControlID="txtDateEnd" Name="_date_end" PropertyName="Text" Type="DateTime" />
+            </SelectParameters>
+        </asp:ObjectDataSource>
+        <!-- ACTIVITY PANEL -->
+        <ajaxToolkit:UpdatePanelAnimationExtender ID="upae" runat="server" TargetControlID="upGrid">
             <Animations>
                                         <OnUpdating>
                                             <Sequence>
@@ -255,6 +269,5 @@
                                         </OnUpdated>
             </Animations>
         </ajaxToolkit:UpdatePanelAnimationExtender>
-                </div>  
-    
+    </div>
 </asp:Content>

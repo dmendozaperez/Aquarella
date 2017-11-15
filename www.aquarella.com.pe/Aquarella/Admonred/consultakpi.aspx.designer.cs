@@ -10,7 +10,7 @@
 namespace www.aquarella.com.pe.Aquarella.Admonred {
     
     
-    public partial class ConsultaPromotorXLider {
+    public partial class consultakpi {
         
         /// <summary>
         /// Control ScriptManager1.
@@ -58,13 +58,13 @@ namespace www.aquarella.com.pe.Aquarella.Admonred {
         protected global::System.Web.UI.WebControls.Panel pnlDwCustomers;
         
         /// <summary>
-        /// Control dwlider.
+        /// Control dwCustomers.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList dwlider;
+        protected global::System.Web.UI.WebControls.DropDownList dwCustomers;
         
         /// <summary>
         /// Control upStartDate.
@@ -211,22 +211,31 @@ namespace www.aquarella.com.pe.Aquarella.Admonred {
         protected global::System.Web.UI.WebControls.ValidationSummary vsConsultForm;
         
         /// <summary>
-        /// Control uppromotor.
+        /// Control upGrid.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.UpdatePanel uppromotor;
+        protected global::System.Web.UI.UpdatePanel upGrid;
         
         /// <summary>
-        /// Control gvpromotor.
+        /// Control gvReturns.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView gvpromotor;
+        protected global::System.Web.UI.WebControls.GridView gvReturns;
+        
+        /// <summary>
+        /// Control odsReturns.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.ObjectDataSource odsReturns;
         
         /// <summary>
         /// Control upae.

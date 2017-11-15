@@ -207,6 +207,8 @@ namespace www.aquarella.com.pe.Aquarella.Ventas
          //   sbcargarcrystal();   
             
             //
+
+
             if ((_user._usu_tip_id == "01") || (_user._usu_tip_id == "03"))
             {
                 formForCustomer();
@@ -369,13 +371,23 @@ namespace www.aquarella.com.pe.Aquarella.Ventas
             this.Session[this._nombreSession] = null;
 
 
-            if ((_user._usu_tip_id == "02"))
+            //if ((_user._usu_tip_id == "01") || (_user._usu_tip_id == "03"))
+            //{
+            //    formForCustomer();
+            //}
+            //else
+            //{
+            //    formForEmployee();
+            //}
+
+            if ((_user._usu_tip_id == "01") || (_user._usu_tip_id == "03"))
             {
                 sbcargarcrystal(Convert.ToInt16(_user._usv_area));
             }
             else
             {
                 sbcargarcrystal(Convert.ToInt16(dwCustomers.SelectedValue));
+                
             }
 
             //if (_user._usv_employee == true && _user._usv_area == "%%")

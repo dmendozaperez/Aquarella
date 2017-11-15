@@ -923,7 +923,7 @@ namespace Integrado.Sistemas.Ventas
                             //****enviar los xml al server
 
                             await Task.Run(() => Basico._enviar_webservice_xml());
-
+                            //byte[] img_qr = null;
                             string _genera_tk = await Task.Run(() => Imprimir_Doc.Generar_Impresion("N", results[0].ToString()) /*Impresora_Epson.Config_Imp_NC.GenerarTicketNC(results[0].ToString(), 1, _codigo_hash)*/);
                             //string _genera_tk = Impresora_Epson.Config_Imp_NC.GenerarTicketNC(results[0].ToString(), 1, _codigo_hash);
                             if (_genera_tk == null)

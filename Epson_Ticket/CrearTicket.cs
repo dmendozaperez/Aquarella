@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
+using System.Drawing.Printing;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
@@ -371,6 +373,79 @@ namespace Epson_Ticket
             _esta_imp = RawPrinterHelper.SendStringToPrinter(impresora, linea.ToString()); //Imprime texto.
             linea.Clear();//Al cabar de imprimir limpia la linea de todo el texto agregado.
         }
+
+        #region<REGION DE CODIGO QR IMPRESION>
+        private Font printFont; private string fontName = "Tahoma"; private int fontSize = 9;
+        private Graphics gfx; private Image headerImage; private float topMargin = 0.5f;
+        private string line; private SolidBrush myBrush = new SolidBrush(Color.Black);
+        private float leftMargin;
+        private int imageWith;
+        private int imageHeight;
+        private int count;
+        public Image HeaderImage
+        {
+            get
+            {
+                return this.headerImage;
+            }
+            set
+            {
+                if (this.headerImage == value)
+                    return;
+                this.headerImage = value;
+            }
+        }
+        public void PrintQR(string impresora)
+        {
+            this.printFont = new Font(this.fontName, (float)this.fontSize, FontStyle.Regular);
+            PrintDocument printDocument = new PrintDocument();
+            printDocument.PrinterSettings.PrinterName = impresora;
+
+            printDocument.PrintPage += new PrintPageEventHandler(this.pr_PrintPage);
+
+            printDocument.Print();
+        }
+        private void pr_PrintPage(object sender, PrintPageEventArgs e)
+        {
+            e.Graphics.PageUnit = GraphicsUnit.Millimeter;
+            this.gfx = e.Graphics;
+            this.DrawImage();
+            //this.leftMargin = 0.0f;
+            this.DrawEspacio();
+            //this.DrawEspacio();
+            //this.DrawEspacio();
+            //this.DrawEspacio();
+
+            //this.DrawEspacio();
+        }
+        private float YPosition()
+        {
+            return this.topMargin + ((float)this.count * this.printFont.GetHeight(this.gfx) + (float)this.imageHeight);
+        }
+        private void DrawImage()
+        {
+            if (this.headerImage == null)
+                return;
+            try
+            {                
+                this.gfx.DrawImage(this.headerImage, new Point((int)22, (int)this.YPosition()));
+
+                float f = this.YPosition();
+             
+                this.imageHeight = 28;
+                this.imageWith = 100;
+            }
+            catch (Exception ex)
+            {
+            }
+        }
+        private void DrawEspacio()
+        {
+            this.line = "-".PadRight(58,'-');
+            this.gfx.DrawString(this.line, this.printFont, (Brush)this.myBrush, this.leftMargin, this.YPosition(), new StringFormat());
+            ++this.count;
+        }
+        #endregion
     }
 
 

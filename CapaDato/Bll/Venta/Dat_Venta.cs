@@ -353,7 +353,7 @@ namespace CapaDato.Bll.Venta
                 cmd.ExecuteNonQuery();
                 valor = cmd.Parameters["@resulado"].Value.ToString();
             }
-            catch
+            catch(Exception exc)
             {
                 valor = "-1";
                 throw;                

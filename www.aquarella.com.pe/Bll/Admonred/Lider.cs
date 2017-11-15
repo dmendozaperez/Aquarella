@@ -553,7 +553,7 @@ namespace www.aquarella.com.pe.Aquarella.Lider
             catch (Exception e) { throw new Exception(e.Message, e.InnerException); }
         }
 
-        public static DataTable get_promotorXlider(string _idarea)
+        public static DataTable get_promotorXlider(string _idarea,DateTime fechaini,DateTime fechafin,string asesor)
         {
             string sqlquery = "USP_BuscarPromotorXLider";
             SqlConnection cn = null;
@@ -567,6 +567,9 @@ namespace www.aquarella.com.pe.Aquarella.Lider
                 cmd.CommandTimeout = 0;
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.Parameters.AddWithValue("@bas_are", _idarea);
+                cmd.Parameters.AddWithValue("@fecha_ini", fechaini);
+                cmd.Parameters.AddWithValue("@fecha_fin", fechafin);
+                cmd.Parameters.AddWithValue("@asesor", asesor);
                 da = new SqlDataAdapter(cmd);
                 dt = new DataTable();
                 da.Fill(dt);

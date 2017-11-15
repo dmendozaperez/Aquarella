@@ -207,22 +207,40 @@ namespace Integrado.Sistemas.Ventas
             
             if (result == MessageDialogResult.Affirmative)
             {
-                //Mouse.OverrideCursor = Cursors.Wait;
-                var ProgressAlert = await this.ShowProgressAsync(Ent_Msg.msgcargando, "Imprimiendo Documento N°:" + _numdoc_r);  //show message
-                ProgressAlert.SetIndeterminate(); //Infinite   
-                string tickets= await Task.Run(() =>  Imprimir_Doc.Generar_Impresion("B",_doc_r) /*Config_Imp.GenerarTicketFact(_doc_r, 1, _cod_hash)*/);
-                //show info
-                await ProgressAlert.CloseAsync();
-                //await this.ShowMessageAsync("End", "Succes!");
 
-                //string tickets = ""; //Config_Imp.GenerarTicketFact(_doc_r, 1, _cod_hash);
+                #region<CODIGO QR FACTURACION ELECTRONICA>
+                //string _error = "";
+                //byte[] img_qr = null;
+                var ProgressAlert = await this.ShowProgressAsync(Ent_Msg.msgcargando, "Imprimiendo Documento N°:" + _numdoc_r);
+                //await Task.Run(() => Facturacion_Electronica.FE_QR("F", _doc_r.ToString(), ref img_qr, ref _error));
+                #endregion
+                //show message
+                //if (_error.Length == 0)
+                //{
+                    //Mouse.OverrideCursor = Cursors.Wait;
+                   
+                    ProgressAlert.SetIndeterminate(); //Infinite   
+                    string tickets = await Task.Run(() => Imprimir_Doc.Generar_Impresion("B", _doc_r) /*Config_Imp.GenerarTicketFact(_doc_r, 1, _cod_hash)*/);
+                    //show info
+                    await ProgressAlert.CloseAsync();
+                    //await this.ShowMessageAsync("End", "Succes!");
 
-                if (tickets == null)
-                {
-                    await this.ShowMessageAsync(Ent_Msg.msginfomacion, " >> Se producjo un error en la impresión del ticket");
-                    //MessageBox.Show(" >> Se producjo un error en la impresión del ticket", Ent_Msg.msginfomacion, MessageBoxButton.OK, MessageBoxImage.Error);
-                    //Mouse.OverrideCursor = null; 
-                }
+                    //string tickets = ""; //Config_Imp.GenerarTicketFact(_doc_r, 1, _cod_hash);
+
+                    if (tickets == null)
+                    {
+                        await this.ShowMessageAsync(Ent_Msg.msginfomacion, " >> Se producjo un error en la impresión del ticket");
+                        //MessageBox.Show(" >> Se producjo un error en la impresión del ticket", Ent_Msg.msginfomacion, MessageBoxButton.OK, MessageBoxImage.Error);
+                        //Mouse.OverrideCursor = null; 
+                    }
+                //}
+                //else
+                //{
+                //    await ProgressAlert.CloseAsync();
+                //    await this.ShowMessageAsync(Ent_Msg.msginfomacion, _error);
+                //}
+
+                 
 
             }
             #region<REGION DE EJEMPLO DE SINCRONIZACION ESPERA>

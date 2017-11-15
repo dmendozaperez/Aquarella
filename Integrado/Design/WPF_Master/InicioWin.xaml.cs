@@ -16,6 +16,8 @@ using CapaEntidad.Bll.Util;
 using Integrado.Design.WPF_Master;
 using Integrado.Bll;
 using CapaDato.Bll.Control;
+using Epson_QR;
+using System.IO;
 
 namespace Integrado.Design.WPF_Master
 {
@@ -47,6 +49,17 @@ namespace Integrado.Design.WPF_Master
 
         private void btnaquarella_Click(object sender, RoutedEventArgs e)
         {
+            //string _formato_doc = "";
+            //StreamReader sr = new StreamReader(@"D:\F03000000053.txt", Encoding.Default);
+            //_formato_doc = sr.ReadToEnd();
+            //sr.Close();
+            //Fe_Sunat_Qr qr = new Fe_Sunat_Qr();
+            //qr.GetQrSunatNoteCdp(_formato_doc);
+            
+            ////Ticket ticket = new Ticket();
+            ////ticket.TextoCentro("BATA");
+            ////ticket.PrintTicket("AQ");
+            //return;
             _referenciar_Base_Datos("AQ");
         }
         private void _referenciar_Base_Datos(string _base)

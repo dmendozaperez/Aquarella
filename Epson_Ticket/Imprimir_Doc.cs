@@ -1,8 +1,11 @@
 ﻿using CapaDato.Bll.Venta;
 using CapaEntidad.Bll.Util;
+using SunatQR;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -197,8 +200,32 @@ namespace Epson_Ticket
                                 tk.TextoIzquierda(_nota);
                                 tk.lineasGuio();
                                 tk.TextoCentro("*** GRACIAS POR SU COMPRA ***");
-                                tk.CortaTicket();
-                                tk.ImprimirTicket(_impresora);      
+                                tk.lineasGuio();
+                                tk.ImprimirTicket(_impresora);
+
+                                #region<EN ESTE CASO CAPTURAMOS EL FORMATO DE TXT SUNAT PARA EL QR>
+                                DataTable dtformato = ds.Tables[2];
+
+                                string _formato_doc = "";
+
+                                if (dtformato!=null)
+                                {
+                                    if (dtformato.Rows.Count>0)
+                                    {
+                                        _formato_doc = dtformato.Rows[0]["formatsunat"].ToString();
+                                    }
+                                }
+
+                                #endregion
+
+                                Fe_Sunat_Qr fesunat_qr = new Fe_Sunat_Qr();
+                                byte[] codigo_qr= fesunat_qr.GetQrSunatInvoiceCdp(_formato_doc);
+
+                                Image im = byteArrayToImage(codigo_qr);
+                                Bitmap bmp = new Bitmap(im, new Size(100, 100));
+                                tk.HeaderImage = bmp;
+                                tk.PrintQR(_impresora);
+                              
                                 if (!CrearTicket._esta_imp)
                                 {
                                     return null;
@@ -354,8 +381,40 @@ namespace Epson_Ticket
                                 tk.TextoIzquierda(_nota);
                                 tk.lineasGuio();
                                 tk.TextoCentro("*** GRACIAS POR SU COMPRA ***");
-                                tk.CortaTicket();
+                                tk.lineasGuio();
                                 tk.ImprimirTicket(_impresora);
+
+                                #region<EN ESTE CASO CAPTURAMOS EL FORMATO DE TXT SUNAT PARA EL QR>
+                                DataTable dtformato = ds.Tables[1];
+
+                                string _formato_doc = "";
+
+                                if (dtformato != null)
+                                {
+                                    if (dtformato.Rows.Count > 0)
+                                    {
+                                        _formato_doc = dtformato.Rows[0]["formatsunat"].ToString();
+                                    }
+                                }
+                                #endregion
+                                Fe_Sunat_Qr fesunat_qr = new Fe_Sunat_Qr();
+                                byte[] codigo_qr = fesunat_qr.GetQrSunatNoteCdp(_formato_doc);
+
+                                Image im = byteArrayToImage(codigo_qr);
+                                Bitmap bmp = new Bitmap(im, new Size(100, 100));
+                                tk.HeaderImage = bmp;
+                                tk.PrintQR(_impresora);
+
+                                //byte[] codigo_qr = null;
+                                //Image im = byteArrayToImage(codigo_qr);
+                                //Bitmap bmp = new Bitmap(im, new Size(100, 100));
+                                //tk.HeaderImage = bmp;
+                                //tk.PrintQR(_impresora);
+
+                                //tk.CortaTicket();
+                                //tk.ImprimirTicket(_impresora);
+
+
                                 if (!CrearTicket._esta_imp)
                                 {
                                     return null;
@@ -373,6 +432,12 @@ namespace Epson_Ticket
             {
                 return null;
             }
+        }
+        private static Image byteArrayToImage(byte[] bytesArr)
+        {
+            MemoryStream memstr = new MemoryStream(bytesArr);
+            Image img = Image.FromStream(memstr);
+            return img;
         }
         #endregion
     }

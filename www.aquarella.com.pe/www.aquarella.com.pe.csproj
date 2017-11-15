@@ -99,6 +99,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Aquarella\Admonred\AfiliadosClientes.aspx" />
+    <Content Include="Aquarella\Admonred\consultakpi.aspx" />
     <Content Include="Aquarella\Admonred\ConsultaPromotorXLider.aspx" />
     <Content Include="Aquarella\Admonred\ConsultaRucDniReniec.aspx" />
     <Content Include="Aquarella\Admonred\Contactenos.aspx" />
@@ -695,6 +696,13 @@
     </Compile>
     <Compile Include="Aquarella\Admonred\AfiliadosClientes.aspx.designer.cs">
       <DependentUpon>AfiliadosClientes.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Aquarella\Admonred\consultakpi.aspx.cs">
+      <DependentUpon>consultakpi.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Aquarella\Admonred\consultakpi.aspx.designer.cs">
+      <DependentUpon>consultakpi.aspx</DependentUpon>
     </Compile>
     <Compile Include="Aquarella\Admonred\ConsultaPromotorXLider.aspx.cs">
       <DependentUpon>ConsultaPromotorXLider.aspx</DependentUpon>

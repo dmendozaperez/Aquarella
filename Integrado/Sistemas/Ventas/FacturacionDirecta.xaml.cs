@@ -1632,7 +1632,7 @@ namespace Integrado.Sistemas.Ventas
                         }
 
                         await Task.Run(() => Basico._enviar_webservice_xml());
-
+                        //byte[] img_qr = null;
                         await Task.Run(() => Dat_Venta.insertar_codigo_hash(grabar_numerodoc, _codigo_hash, "V"));
                         string _genera_tk = await Task.Run(() => Imprimir_Doc.Generar_Impresion("F", grabar_numerodoc) /*Impresora_Epson.Config_Imp.GenerarTicketFact(grabar_numerodoc, 1, _codigo_hash)*/);
                         //string _genera_tk = Impresora_Epson.Config_Imp.GenerarTicketFact(grabar_numerodoc, 1, _codigo_hash);
