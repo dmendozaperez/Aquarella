@@ -167,8 +167,10 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MenuController.cs" />
     <Compile Include="Controllers\PermisosController.cs" />
+    <Compile Include="Controllers\PersonalController.cs" />
     <Compile Include="Controllers\RolesController.cs" />
     <Compile Include="Data\Cliente\Lider.cs" />
+    <Compile Include="Data\Cliente\Personal.cs" />
     <Compile Include="Data\Cliente\Promotor.cs" />
     <Compile Include="Data\Control\Aplicacion.cs" />
     <Compile Include="Data\Control\Estado.cs" />
@@ -177,12 +179,14 @@
     <Compile Include="Data\Control\Permisos.cs" />
     <Compile Include="Data\Control\Roles.cs" />
     <Compile Include="Data\Control\Usuario.cs" />
+    <Compile Include="Data\Maestros\DataBasico.cs" />
     <Compile Include="Data\Util\Conexion.cs" />
     <Compile Include="Data\Util\Cryptographic.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\Cuenta\LoginViewModel.cs" />
+    <Compile Include="Models\General\jQueryDataTableParams.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -230,6 +234,7 @@
     <Content Include="Content\AdminLTE\skins\skin-yellow.min.css" />
     <Content Include="Content\AdminLTE\skins\_all-skins.css" />
     <Content Include="Content\AdminLTE\skins\_all-skins.min.css" />
+    <Content Include="Content\bootstrap-datepicker.css" />
     <Content Include="Content\bootstrap-datepicker.min.css" />
     <Content Include="Content\bootstrap-select.css" />
     <Content Include="Content\bootstrap-select.min.css" />
@@ -244,6 +249,7 @@
     <Content Include="Content\font-awesome-4.5.0\fonts\fontawesome-webfont.svg" />
     <Content Include="Content\images\glyphicons-halflings-white.png" />
     <Content Include="Content\images\glyphicons-halflings.png" />
+    <Content Include="Content\images\wall-calendar-with-lines.svg" />
     <Content Include="Content\sweetalert.css" />
     <Content Include="Content\toastr.css" />
     <Content Include="Content\toastr.min.css" />
@@ -1020,6 +1026,9 @@
     <Content Include="Views\Permisos\ListaUsuario.cshtml" />
     <Content Include="Views\Permisos\Roles.cshtml" />
     <Content Include="Views\Permisos\ListaRolUsu.cshtml" />
+    <Content Include="Views\Personal\Index.cshtml" />
+    <Content Include="Views\Personal\ListaPersonal.cshtml" />
+    <Content Include="Views\Personal\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

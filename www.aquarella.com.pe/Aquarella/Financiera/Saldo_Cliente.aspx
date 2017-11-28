@@ -210,6 +210,10 @@
                         HorizontalAlign="Center" />
                     <AlternatingRowStyle BackColor="White" />
                     <Columns>
+                         <asp:BoundField DataField="asesor" HeaderText="Asesor">
+                        <HeaderStyle HorizontalAlign="Left" />
+                        <ItemStyle HorizontalAlign="Left" />
+                        </asp:BoundField>
                         <asp:BoundField DataField="lider" HeaderText="Lider">
                         <HeaderStyle HorizontalAlign="Left" />
                         <ItemStyle HorizontalAlign="Left" />

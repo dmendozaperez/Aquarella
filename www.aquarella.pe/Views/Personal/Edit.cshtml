@@ -1,0 +1,237 @@
+﻿@model www.aquarella.pe.Data.Cliente.Personal
+@{ 
+    Layout = null;
+}
+@Scripts.Render("~/bundles/bootstrap-select")
+@Styles.Render("~/Content/Bootstrap-Select/css")
+<link rel="stylesheet" type="text/css" href="~/Content/bootstrap-select.css" />
+<div class="modal-content">   
+    <div  class="modal-header modal-header-danger">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Editando Usuario</h4>
+    </div>
+    <div class="modal-body">
+        <input type="hidden" id="idfun" value="@Model.bas_id" />
+        <div class="panel panel-info">
+            <div class="panel-heading">
+                <h3 class="panel-title">Datos basicos de información personal</h3>
+            </div>
+            <div class="panel-body">
+                <div class="form-horizontal">                   
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="dniruc" class="col-sm-4 control-label">Dni ó Ruc</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" value="@Model.dni_ruc" id="dniruc" placeholder="Dni ó Ruc">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="tipdoc" class="col-sm-4 control-label">Tipo de Documento</label>
+                            <div class="col-sm-8">                             
+                                @Html.DropDownList("dwtipodoc", new SelectList(ViewBag.tipodocumento, "doc_tip_id", "doc_tip_nom",Model.tipo_doc), new { @class = "selectCountry form-control", @data_live_search = "false", @id = "dwtipodoc" })                                
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="primnom" class="col-sm-4 control-label">Primer Nombre</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" value="@Model.primer_nombre" id="primnom" placeholder="Primer Nombre">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="segnom" class="col-sm-4 control-label">Segundo Nombre</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" value="@Model.segundo_nombre" id="segnom" placeholder="Segundo Nombre">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="primape" class="col-sm-4 control-label">Primer Apellido</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" value="@Model.primer_apellido" id="primape" placeholder="Primer Apellido">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="segape" class="col-sm-4 control-label">Segundo Apellido</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" value="@Model.segundo_apellido" id="segape" placeholder="Segundo Apellido">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="fecnac" class="col-sm-4 control-label">Fecha de Nacimiento</label>
+                            <div class="col-sm-8">
+                                <div class="input-group">
+                                    <div id="datepicker" class="input-group date" data-date-format="dd-mm-yyyy">
+                                        <input id="fecnac" value="@Model.fec_nac" class="form-control custom-input" placeholder="dd-mm-yyyy" type="text" />
+                                        <span class="input-group-addon  bg-white"><img src="~/Content/images/wall-calendar-with-lines.svg" height="20" width="20"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="inputEmail" class="col-sm-4 control-label">Sexo</label>
+                            <div class="col-sm-8">
+                                <div class="radio-inline">
+                                    @if (@Model.sexo == "F")
+                                    {
+                                        @Html.RadioButton("grupo_gen", "Femenino", true, new { id = "rdbfem" }) @:Femenino
+                                    }
+                                    else
+                                    {
+                                        @Html.RadioButton("grupo_gen", "Femenino", false, new { id = "rdbfem" }) @:Femeinio
+                                    }
+                                </div>
+                                <div class="radio-inline">
+                                    @if (Model.sexo=="M")
+                                    { 
+                                        @Html.RadioButton("grupo_gen", "Masculino",true,new { id = "rdbmas" }) @:Masculino
+                                    }
+                                    else
+                                    {
+                                        @Html.RadioButton("grupo_gen", "Masculino", false, new { id = "rdbmas" }) @:Masculino
+                                    }
+                                </div>                               
+                            </div>
+                        </div>
+                    </div>                    
+                </div>
+            </div>
+        </div><!-- END PANEL -->
+        <div class="panel panel-info">
+            <div class="panel-heading">
+                <h3 class="panel-title">Tipo de persona y otros aspectos</h3>
+            </div>
+            <div class="panel-body">
+                <div class="form-horizontal">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="tipperson" class="col-sm-4 control-label">Tipo de Persona</label>
+                            <div class="col-sm-8">
+                               @Html.DropDownList("dwtipoper", new SelectList(ViewBag.tipopersona, "per_tip_id", "per_tip_des",Model.tipo_persona), new { @class = "selectCountry form-control", @data_live_search = "false", @id = "dwtipoper" })                                
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="email" class="col-sm-4 control-label">E-Mail</label>
+                            <div class="col-sm-8">
+
+                                <div class="input-group">
+                                    <div id="datepicker" class="input-group date">
+                                        <input type="email" value="@Model.correo" id="email" name="email" class="form-control" placeholder="E-Mail" >
+                                        <span class="input-group-addon glyphicon-envelope bg-green-active" id="basic-addon2"></span>
+                                    </div>
+                                </div>
+                              
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="telefono" class="col-sm-4 control-label">Telefono</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" value="@Model.telefono" id="telefono" placeholder="Telefono">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="fax" class="col-sm-4 control-label">Numero de Fax</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" value="" id="fax" placeholder="Numero de Fax">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="celular" class="col-sm-4 control-label">Numero de Celular</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" value="@Model.celular" id="celular" placeholder="Numero de Celular">
+                            </div>
+                        </div>
+                    </div>                                                           
+                </div>
+            </div>
+        </div><!-- END PANEL -->
+        <div class="panel panel-info">
+            <div class="panel-heading">
+                <h3 class="panel-title">Ubicación</h3>
+            </div>
+            <div class="panel-body">
+                <div class="form-horizontal">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="departamento" class="col-sm-4 control-label">Departamento</label>
+                            <div class="col-sm-8">
+                               @Html.DropDownList("dwdepar", new SelectList(ViewBag.departamento, "dep_id", "dep_nom",Model.depar), new { @class = "selectCountry form-control", @data_live_search = "true", @id = "dwdepar" })                                
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="provincia" class="col-sm-4 control-label">Provincia</label>
+                            <div class="col-sm-8">
+                                @Html.DropDownList("dwprov", new SelectList(ViewBag.provincia, "prv_id", "prv_descripcion",Model.prv_id), new { @class = "selectCountry form-control", @data_live_search = "true", @id = "dwprov" })                                
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="distrito" class="col-sm-4 control-label">Distrito</label>
+                            <div class="col-sm-8">
+                               @Html.DropDownList("dwdis", new SelectList(ViewBag.distrito, "dis_id", "dis_descripcion",Model.dis_id), new { @class = "selectCountry form-control", @data_live_search = "true", @id = "dwdis" })                                
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="direccion" class="col-sm-4 control-label">Dirección</label>
+                            <div class="col-sm-8">
+                                <input type="text" value="@Model.direccion" class="form-control" id="direccion" placeholder="Dirección">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="areusu" class="col-sm-4 control-label">Area de Usuario</label>
+                            <div class="col-sm-8">
+                              @Html.DropDownList("dwtipusu", new SelectList(ViewBag.tipousuario, "usu_tip_id", "usu_tip_nom",Model.tipo_usuid), new { @class = "selectCountry form-control", @data_live_search = "false", @id = "dwtipusu" })                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div><!-- END PANEL -->                  
+    </div>    
+    <div class="modal-footer" style="margin-top:-30px">
+        <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
+        <input type="submit" class="btn btn-primary" id="btnSubmit" value="Guardar los cambios" />
+    </div>
+</div>
+
+
+
+
+<script>
+    $(function () {
+        $("#datepicker").datepicker({            
+            autoclose: true,
+            todayHighlight: true
+        }).datepicker();;
+    });
+
+</script>

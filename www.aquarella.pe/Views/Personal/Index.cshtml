@@ -1,0 +1,15 @@
+﻿@using www.aquarella.pe.Data.Cliente
+@model IEnumerable<Personal>
+@{
+    ViewBag.Title = "Creación de Usuario";
+}
+<p class="text-danger">Muestra la lista de usuarios. Permite crear nuevos usuarios dentro del sistema y editar las existentes.</p>
+<div class="box box-body box-primary">
+    <button type="submit" id="btnaceptar" name="btnaceptar" title="Agregar" class="nuevo btn btn-small btn-primary" data-modal="" data-toggle="modal">Agregar Usuario</button>
+
+
+
+    <div class="box-body" id="lista">
+        @{Html.RenderPartial("ListaPersonal", Model);}
+    </div>
+ </div> 
