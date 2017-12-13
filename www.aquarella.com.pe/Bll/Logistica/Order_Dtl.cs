@@ -296,4 +296,23 @@ namespace www.aquarella.com.pe.bll
         #endregion
 
     }
+    public class Order_Dtl_Temp
+    {
+        /// <summary>
+        /// numero de item de la fila
+        /// </summary>
+        public Int32 items { get; set; }
+        /// <summary>
+        /// codigo de articulo
+        /// </summary>
+        public string articulo { get; set; }
+        /// <summary>
+        /// talla del articulo
+        /// </summary>
+        public string talla { get; set; }
+        /// <summary>
+        /// cantidad del producto
+        /// </summary>
+        public Decimal cantidad { get; set; }
+    }
 }

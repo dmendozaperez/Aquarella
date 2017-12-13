@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Design/Site.Master" AutoEventWireup="true" CodeBehind="consultakpi.aspx.cs" Inherits="www.aquarella.com.pe.Aquarella.Admonred.consultakpi" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Design/Site.Master" AutoEventWireup="true" CodeBehind="reportepedidovencidos.aspx.cs" Inherits="www.aquarella.com.pe.Aquarella.Logistica.reportepedidovencidos" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="headCPH" runat="server">
     <style type="text/css">
         .style1
@@ -30,26 +30,19 @@
         {
             height: 23px;
         }
-        .auto-style1 {
-            width: 314px;
-            height: 63px;
-        }
-        .auto-style2 {
-            height: 63px;
-        }
-    </style>
+        </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolderTitle" runat="server">
-    Consulta de Resultado KPI
+    Consulta de Pedidos Vencidos
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="ContentPlaceHolderPageDesc" runat="server">
-    Consulte entre un rango de fechas, Asesor o por lideres
+    Consulte entre un rango de fecha del pedido, Asesor o por lideres
 </asp:Content>
 <asp:Content ID="Content4" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-    <asp:ScriptManager ID="ScriptManager1" runat="server" 
+       <asp:ScriptManager ID="ScriptManager1" runat="server" 
         EnableScriptGlobalization="True">
     </asp:ScriptManager>
-      <!-- Area de errores -->
+       <!-- Area de errores -->
     <asp:UpdatePanel ID="upPanelMsg" runat="server">
         <ContentTemplate>
             <AQControl:Message runat="server" Visible="false" ID="msnMessage"></AQControl:Message>
@@ -66,8 +59,7 @@
             </center>
         </ProgressTemplate>
     </asp:UpdateProgress>
-    <!-- -->
-    <asp:Panel ID="pnlDwCustomers" Visible="false" runat="server">
+     <asp:Panel ID="Panel1" Visible="true" runat="server">
         <div style="margin: 10px auto 0 auto;">
             <table width="100%" class="tablagris" cellpadding="4">
                 <tr>
@@ -76,14 +68,27 @@
                              <tr>
                                  <td class="f12" width="5%">
                                     Asesor:</td>
-                                <td class="auto-style1">
+                                <td>
                                     <asp:DropDownList ID="dwasesor" runat="server" AppendDataBoundItems="true"                                       
                                         ToolTip="Selecionar un asesor" Width="280px" style="cursor:pointer">
                                         <asp:ListItem Text=" -- Seleccionar a todos --" Value=""></asp:ListItem>
                                     </asp:DropDownList>
                                 </td>                              
                             </tr>
-
+                         
+                        </table>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </asp:Panel>
+     <!-- -->
+    <asp:Panel ID="pnlDwCustomers" Visible="true" runat="server">
+        <div style="margin: 10px auto 0 auto;">
+            <table width="100%" class="tablagris" cellpadding="4">
+                <tr>
+                    <td>
+                        <table cellpadding="1" cellspacing="1" width="100%">                           
                             <tr>                                
                                 <td class="f12" width="5%">
                                     Lider:</td>
@@ -109,13 +114,13 @@
                     <table>
                         <tr>
                             <td class="f12">
-                                Fecha de Inicio</td>
+                                Fecha de Inicio Pedido</td>
                              <td>
                             </td>
                              <td>
                             </td>
                              <td class="f12">
-                                 Fecha de Cierre</td>
+                                 Fecha de Cierre Pedido</td>
                              <td>
                                  &nbsp;</td>
                              <td>
@@ -234,12 +239,42 @@
                 <asp:GridView ID="gvReturns" runat="server" AllowSorting="True" 
                     ShowFooter="True" AllowPaging="True" PageSize="14"
                  SkinID="gridviewSkin" PagerStyle-HorizontalAlign="Left" Font-Size="Small" 
-                    CellPadding="4" ForeColor="#333333" GridLines="None" Width="1072px">
+                    CellPadding="4" ForeColor="#333333" GridLines="None" Width="1072px" AutoGenerateColumns="False">
                     <FooterStyle BackColor="#507CD1" Font-Bold="True" ForeColor="White" />
                     <HeaderStyle BackColor="#507CD1" Font-Bold="True" ForeColor="White" />
                     <PagerStyle CssClass="GridViewBlue-tf" BackColor="#2461BF" ForeColor="White" 
                         HorizontalAlign="Center" />
                     <AlternatingRowStyle BackColor="White" />
+                    <Columns>
+                        <asp:BoundField DataField="pedido" HeaderText="Nro Pedido">
+                        <HeaderStyle HorizontalAlign="Left" />
+                        <ItemStyle HorizontalAlign="Left" />
+                        </asp:BoundField>
+                        <asp:BoundField DataField="asesor" HeaderText="Asesor">
+                        <HeaderStyle HorizontalAlign="Left" />
+                        <ItemStyle HorizontalAlign="Left" />
+                        </asp:BoundField>
+                        <asp:BoundField DataField="lider" HeaderText="Lider">
+                        <HeaderStyle HorizontalAlign="Left" />
+                        <ItemStyle HorizontalAlign="Left" />
+                        </asp:BoundField>
+                        <asp:BoundField DataField="Promotor" HeaderText="Promotor">
+                        <HeaderStyle HorizontalAlign="Left" />
+                        <ItemStyle HorizontalAlign="Left" />
+                        </asp:BoundField>
+                        <asp:BoundField DataField="fechapedido" HeaderText="Fec.Pedido">
+                        <HeaderStyle HorizontalAlign="Center" />
+                        <ItemStyle HorizontalAlign="Center" />
+                        </asp:BoundField>
+                        <asp:BoundField DataField="fechaven" HeaderText="Fec.Ven">
+                        <HeaderStyle HorizontalAlign="Center" />
+                        <ItemStyle HorizontalAlign="Center" />
+                        </asp:BoundField>
+                        <asp:BoundField DataField="pares" HeaderText="Pares">
+                        <HeaderStyle HorizontalAlign="Center" />
+                        <ItemStyle HorizontalAlign="Center" />
+                        </asp:BoundField>
+                    </Columns>
                     <EditRowStyle BackColor="#2461BF" />
                     <EmptyDataTemplate>
                         No existen registros para mostrar.
@@ -257,8 +292,8 @@
                 <asp:AsyncPostBackTrigger ControlID="btConsult" EventName="click" />
             </Triggers>
         </asp:UpdatePanel>
-        <asp:ObjectDataSource ID="odsReturns" runat="server" SelectMethod="getconsultaKPI"
-            TypeName="www.aquarella.com.pe.bll.Ventas.Facturacion" OnSelected="odsReturns_Selected">
+        <asp:ObjectDataSource ID="odsReturns" runat="server" SelectMethod="getconsultapedidoven"
+            TypeName="www.aquarella.com.pe.bll.Liquidations_Hdr" OnSelected="odsReturns_Selected">
             <SelectParameters>
                 <asp:Parameter Name="_area_id" Type="String" />
                 <asp:Parameter Name="_asesor" Type="String" ConvertEmptyStringToNull="false"/>
@@ -289,3 +324,4 @@
         </ajaxToolkit:UpdatePanelAnimationExtender>
     </div>
 </asp:Content>
+

@@ -23,6 +23,43 @@
     
 </script>
 <script type="text/javascript" language="javascript">
+   
+    function ejecutapedido() {
+        //Ajax
+        var urlMethod = "ordersForm.aspx/get_despacho";
+        var jsonData = '{}';
+        SendAjax(urlMethod, jsonData, showdes);
+    }
+    function showdes(msg) {
+        var val = msg.d;
+        $("#tpedido").html(val.tpedido);
+        $("#tdispo").html(val.tdisponible);
+       
+        if (val.tpedido!=val.tdisponible)
+        {
+            $("#dialogp").dialog().dialog("widget").find(".ui-dialog-titlebar-close").hide();
+            $("#dialogp").dialog({
+                title: "Observacion del Pedido",
+                buttons: {
+                    Ok: function () {
+                        $(this).dialog('close');
+                        openDialogLoad();
+                        btCreateLiq.click();
+                    }
+                },
+                modal: true,
+                closeOnEscape: false,
+                closeText: 'hide',
+                resizable: false
+            });
+        }
+        else
+        {
+            openDialogLoad();
+            btCreateLiq.click();
+        }
+    }
+
 
     $(document).ready(function () {
         btsaveorder = $("#btsaveorder");
@@ -64,6 +101,8 @@
             openDialogLoadPedido();
             btsaveorderasp.click();
         });
+
+
 
         btsaveorderexit.click(function (event) {
             openDialogLoadPedido();
@@ -137,8 +176,28 @@
                         }
                         /*---------------------FIN de validar los campos numero Voucher  y  numero de tarjeta de credito */
 
-                        openDialogLoad();
-                        btCreateLiq.click();
+                        ejecutapedido();
+
+                      
+                        //if (valida_pedido=="1"){
+                        //    $("#dialogp").dialog({
+                        //        title: "Observacion del Pedido",
+                        //        buttons: {
+                        //            Ok: function () {
+                        //                $(this).dialog('close');
+                        //                openDialogLoad();
+                        //                btCreateLiq.click();
+                        //            }
+                        //        },
+                        //        modal: true
+                        //    });
+                        //}
+                        //else
+                        //{
+                        //    openDialogLoad();
+                        //    btCreateLiq.click();
+                        //}
+                       
                         //alert('grabo');
                     },
                     "Cancelar": function () {
@@ -210,8 +269,9 @@
                         }
                         /*---------------------FIN de validar los campos numero Voucher  y  numero de tarjeta de credito */
 
-                        openDialogLoad();
-                        btCreateLiq.click();
+                        ejecutapedido();
+                        //openDialogLoad();
+                        //btCreateLiq.click();
                         //alert('grabo');
                     },
                     "Cancelar": function () {
@@ -575,4 +635,14 @@
         <img src="../../Design/images/ajax-loader.gif" alt="Por Favor Espere; Cargando Información." />
         <br />
         </p>
+</div>
+<div id="dialogp" style="display: none">
+     <p>
+    <b>Total Pares del Pedido:</b> <span id="tpedido" style="color:red;font-size:15px;font-weight:bold"></span>
+          </p>  
+    <br />
+    <p>
+    <b>Total Pares Disponible:</b> <span id="tdispo" style="color:red;font-size:15px;font-weight:bold"></span>
+    <br />   
+     </p>     
 </div>

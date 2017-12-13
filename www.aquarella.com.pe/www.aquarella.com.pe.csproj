@@ -177,6 +177,7 @@
     <Content Include="Aquarella\Logistica\panelSeparatedOrders.aspx" />
     <Content Include="Aquarella\Logistica\Panel_Liquidacion_Lider.aspx" />
     <Content Include="Aquarella\Logistica\RecalcularStock.aspx" />
+    <Content Include="Aquarella\Logistica\reportepedidovencidos.aspx" />
     <Content Include="Aquarella\Logistica\stockacth.aspx" />
     <Content Include="Aquarella\Logistica\stockcategoria.aspx" />
     <Content Include="Aquarella\Logistica\stockForm.aspx" />
@@ -196,6 +197,9 @@
     <Content Include="Aquarella\Ventas\reportlider_afiliadoventa.aspx" />
     <Content Include="Aquarella\Ventas\reportventadetCN.aspx" />
     <Content Include="Aquarella\Ventas\reportventaformaCN.aspx" />
+    <Content Include="Aquarella\Ventas\reportventaperdida.aspx" />
+    <Content Include="Aquarella\Ventas\reportventaxtallastk.aspx" />
+    <Content Include="Aquarella\Ventas\resumventas.aspx" />
     <Content Include="Aquarella\Ventas\returnArticlesForm.aspx" />
     <Content Include="Aquarella\Ventas\rptComisionLider.aspx" />
     <Content Include="Aquarella\Ventas\rptcomisionlider_xdoc.aspx" />
@@ -1248,6 +1252,13 @@
     <Compile Include="Aquarella\Logistica\RecalcularStock.aspx.designer.cs">
       <DependentUpon>RecalcularStock.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Aquarella\Logistica\reportepedidovencidos.aspx.cs">
+      <DependentUpon>reportepedidovencidos.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Aquarella\Logistica\reportepedidovencidos.aspx.designer.cs">
+      <DependentUpon>reportepedidovencidos.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Aquarella\Logistica\stockacth.aspx.cs">
       <DependentUpon>stockacth.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -1386,6 +1397,27 @@
     </Compile>
     <Compile Include="Aquarella\Ventas\reportventaformaCN.aspx.designer.cs">
       <DependentUpon>reportventaformaCN.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Aquarella\Ventas\reportventaperdida.aspx.cs">
+      <DependentUpon>reportventaperdida.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Aquarella\Ventas\reportventaperdida.aspx.designer.cs">
+      <DependentUpon>reportventaperdida.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Aquarella\Ventas\reportventaxtallastk.aspx.cs">
+      <DependentUpon>reportventaxtallastk.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Aquarella\Ventas\reportventaxtallastk.aspx.designer.cs">
+      <DependentUpon>reportventaxtallastk.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Aquarella\Ventas\resumventas.aspx.cs">
+      <DependentUpon>resumventas.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Aquarella\Ventas\resumventas.aspx.designer.cs">
+      <DependentUpon>resumventas.aspx</DependentUpon>
     </Compile>
     <Compile Include="Aquarella\Ventas\returnArticlesForm.aspx.cs">
       <DependentUpon>returnArticlesForm.aspx</DependentUpon>

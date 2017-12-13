@@ -40,7 +40,7 @@ namespace www.aquarella.com.pe.Aquarella.Logistica
         string _nameList = "ListDocTx";
         List<Documents_Trans> _lstDocTx;
         public static string _valida = "monto";
-        public static string _nSOrder = "_nSOrder", _pageLiquidReport = "panelFramesLiqReports.aspx", _nSNewOrdrLine = "_nSNewOrdrLine",
+        public static string _nSOrder = "_nSOrder",_nSOrderTemp= "_nSOrderTemp", _pageLiquidReport = "panelFramesLiqReports.aspx", _nSNewOrdrLine = "_nSNewOrdrLine",
             _nSArtSiz = "_nSArtSiz", _nameSessionShipTo = "ShippingInfoObj", _nameSessionCustomer = "nameSessionCustomer",
             _nSCatalog = "_nSCatalog", _nsDtlArticle = "_nsDtlArticle", _nSOrderUrl = "_nSorderUrl", _estadoliqui = "_estadoliqui",_pagocredito="pagocredito", _nropedido = "_nropedido", _idliquidacion = "_idliquidacion",_valor_subtotal="_valor_subtotal",
             _number = ConfigurationManager.AppSettings["kNumber"], _currency = ConfigurationManager.AppSettings["kCurrency"],
@@ -227,6 +227,10 @@ namespace www.aquarella.com.pe.Aquarella.Logistica
             HttpContext.Current.Session[_nSOrder] = new List<Order_Dtl>();
             HttpContext.Current.Session[_nSNewOrdrLine] = new List<Order_Dtl>();
             HttpContext.Current.Session[_nSArtSiz] = new List<Articles_Sizes>();
+
+            HttpContext.Current.Session[_nSOrderTemp] = new List<Order_Dtl_Temp>();
+            
+
 
             Coordinator cust = (Coordinator)HttpContext.Current.Session[_nameSessionCustomer];
 
@@ -1645,7 +1649,143 @@ namespace www.aquarella.com.pe.Aquarella.Logistica
 
             if (h_numTipPago.Value == "007") _pago_credito = true;
 
-            List<Order_Dtl> orderLines = (List<Order_Dtl>)(((object)HttpContext.Current.Session[_nSOrder]) != null ? (object)HttpContext.Current.Session[_nSOrder] : new List<Order_Dtl>()); ;
+            List<Order_Dtl> orderLines = (List<Order_Dtl>)(((object)HttpContext.Current.Session[_nSOrder]) != null ? (object)HttpContext.Current.Session[_nSOrder] : new List<Order_Dtl>());
+
+
+            //#region<EN ESTE CASO VERIFICAMOS EL PEDIDO ORIGINAL Y SOLO LIQUIDAMOS LOS QUE HAY STOCK>
+            //List<Order_Dtl_Temp> orderLines_Temp = new List<Order_Dtl_Temp>();
+            //if (orderLines.Count > 0)
+            //{
+            //    Int32 item_temp = 0;
+            //    foreach (Order_Dtl fila in orderLines)
+            //    {
+            //        item_temp += 1;
+            //        Order_Dtl_Temp item = new Order_Dtl_Temp();
+            //        item.items = item_temp;
+            //        item.articulo = fila._code;
+            //        item.talla = fila._size;
+            //        item.cantidad = fila._qty;
+
+            //        orderLines_Temp.Add(item);
+            //    }
+
+            //    string noOrder = (string)HttpContext.Current.Session[_nSOrderUrl];
+            //    if (string.IsNullOrEmpty(noOrder))
+            //    {
+            //        noOrder = "";
+            //    }
+
+            //    Coordinator cust = (Coordinator)HttpContext.Current.Session[_nameSessionCustomer];
+            //    // Cargar session de compañia
+            //    string co = cust._co;
+            //    string chain = string.Empty;
+            //    string iconStock = string.Empty;
+
+
+            //    Boolean upd_list = false;
+
+            //    ///
+            //    /*agrupar codigo de articulo*/
+            //    var grup_art = from item in orderLines_Temp.AsEnumerable()
+            //                   group item by
+            //                   new
+            //                   {
+            //                       articulo = item.articulo
+            //                   }
+            //                   into G
+            //                   select new
+            //                   {
+            //                       articulo = G.Key.articulo
+            //                   };
+
+            //    foreach (var key in  grup_art)
+            //    {
+            //        string article = key.articulo;
+            //        DataSet dsItems = Stock.getStockByArtWithAllSizes(co, cust._idWare, "", article, noOrder);/*extraer stock de articulos*/
+
+            //        if (dsItems.Tables.Count>0)
+            //        {                       
+
+            //            foreach(Order_Dtl_Temp item_tempo in orderLines_Temp.Where(r=>r.articulo==article))
+            //            {
+            //                string articulo = item_tempo.articulo;
+            //                string talla = item_tempo.talla;
+            //                decimal stk_user = item_tempo.cantidad;
+
+            //                var stk_data_base = from item in dsItems.Tables[0].AsEnumerable()
+            //                                    where item.Field<string>("Art_id") == articulo.ToString() &&
+            //                                          item.Field<string>("Stk_TalId") == talla.ToString()
+            //                                    select new
+            //                                    {                                                 
+            //                                        stock = Convert.ToInt32(item["Stk_Cantidad"]),
+            //                                    };
+            //                decimal sum_cant = 0;
+            //                decimal stk_data = 0;
+
+            //                foreach(var s in stk_data_base)
+            //                {
+            //                    stk_data = s.stock;
+            //                }
+
+            //                for (Int32 a=1;a<=stk_user;++a)
+            //                {
+            //                    //sum_cant += 1;
+
+            //                    if (stk_data<a)
+            //                    {
+            //                        break;
+            //                    }
+
+            //                    sum_cant += 1;
+            //                }
+            //                /*en este caso quiere decir que no hay productos en la base de datos*/
+            //                if (sum_cant==0)
+            //                {
+            //                    List<Order_Dtl> orderLines_borrar = orderLines.Where(b => b._code == articulo && b._size == talla).ToList();
+
+            //                    foreach(var keydelete in orderLines_borrar)
+            //                    {
+            //                        orderLines.Remove(keydelete);
+            //                        upd_list = true;
+            //                    }                                
+
+            //                }
+            //                else
+            //                {
+            //                    if (stk_user> stk_data)
+            //                    { 
+            //                        List<Order_Dtl> orderLinesupdate = orderLines.Where(u => u._code == articulo && u._size == talla).ToList();
+
+            //                        foreach(var upd in orderLinesupdate)
+            //                        {
+            //                            orderLines.Remove(upd);
+            //                            upd._qty = (Int32)sum_cant;
+            //                            orderLines.Add(upd);
+            //                            upd_list = true;
+            //                        }
+            //                    }
+            //                }
+                            
+            //            }
+
+            //        }
+
+            //    }
+            //    /*este caso es si es que se modifico la lista para volver a recalcular*/
+            //    if (upd_list)
+            //    {
+            //        HttpContext.Current.Session[_nSOrder] = orderLines;
+
+            //        fupdateitemforma();
+            //        fupdateitemoferta();
+            //        getTotals();
+
+            //    }
+
+            //}
+            //#endregion
+
+
             if (orderLines.Count == 0)
             {
                 msnMessage.LoadMessage("No se genero la liquidacion, porque no hay detalle  ", UserControl.ucMessage.MessageType.Information);
@@ -1751,6 +1891,8 @@ namespace www.aquarella.com.pe.Aquarella.Logistica
             {
                 string articulo = "";
                 string talla = "";
+
+                /*comentando datos por la validacion de stock*/
                 if (!(fvalidastock(ref articulo, ref talla)))
                 {
                     msnMessage.LoadMessage("No se genero la liquidacion, porque no hay suficiente stock en el producto: " + articulo + " Talla: " + talla, UserControl.ucMessage.MessageType.Error);
@@ -1760,7 +1902,7 @@ namespace www.aquarella.com.pe.Aquarella.Logistica
 
                     return;
                 }
-
+                /********cerrar codigo***************/
                 //string ordersChain = saveOrderDtl(false, btnLiquidation);
 
                 //if (!string.IsNullOrEmpty(ordersChain))
@@ -2062,6 +2204,8 @@ namespace www.aquarella.com.pe.Aquarella.Logistica
             string estadoliquid = (string)HttpContext.Current.Session[_estadoliqui];
             Coordinator cust = (Coordinator)HttpContext.Current.Session[_nameSessionCustomer];
             List<Order_Dtl> order = (List<Order_Dtl>)HttpContext.Current.Session[_nSOrder];
+            List<Order_Dtl_Temp> orderLines_Temp = (List<Order_Dtl_Temp>)HttpContext.Current.Session[_nSOrderTemp];
+            
             comision_customer = cust._commission;
 
             mtopercepcion =Convert.ToDecimal(Session[_opcional_percepcion]); //cust._mtopercepcion;
@@ -2106,7 +2250,7 @@ namespace www.aquarella.com.pe.Aquarella.Logistica
             if (string.IsNullOrEmpty(estadoliquid))
             {
 
-                noOrder = Liquidations_Hdr.Gua_Mod_Liquidacion(user._bas_id, cust._idCust, string.Empty, comision_customer, 0, string.Empty, string.Empty, order, mtopercepcion, 1, hdNoOrder.Value, "", 0, 0, "", "", 0, dtpago, _pago_credito, cust._percepcion);
+                noOrder = Liquidations_Hdr.Gua_Mod_Liquidacion(user._bas_id, cust._idCust, string.Empty, comision_customer, 0, string.Empty, string.Empty, order, mtopercepcion, 1, hdNoOrder.Value, "", 0, 0, "", "", 0, dtpago, _pago_credito, cust._percepcion, orderLines_Temp);
 
                 //noOrder = Liquidations_Hdr.liquidation(user._usv_co, ordersChain, shipping, typeLiq, _varPercepcion);
             }
@@ -2117,7 +2261,7 @@ namespace www.aquarella.com.pe.Aquarella.Logistica
                 string varNumVoucher = txtNoVoucher.Text.Trim();
                 decimal varMonto = Convert.ToDecimal(txtValue.Text);
                 string vpedido = this.Session[_nropedido].ToString();
-                noOrder = Liquidations_Hdr.Gua_Mod_Liquidacion(user._bas_id, cust._idCust, string.Empty, comision_customer, 0, string.Empty, string.Empty, order, mtopercepcion, 2, vpedido, _liq, 0, 0, "", "", 0, dtpago, _pago_credito, cust._percepcion);
+                noOrder = Liquidations_Hdr.Gua_Mod_Liquidacion(user._bas_id, cust._idCust, string.Empty, comision_customer, 0, string.Empty, string.Empty, order, mtopercepcion, 2, vpedido, _liq, 0, 0, "", "", 0, dtpago, _pago_credito, cust._percepcion, orderLines_Temp);
                 //noOrder = Liquidations_Hdr.modyliquidation(user._usv_co, ordersChain, shipping, typeLiq, _varPercepcion, pagospos, varNumTarjeta, varNumVoucher, varMonto, user._usn_userid, h_numConfigPagoPOS.Value, listDoc);
             }
 
@@ -2984,6 +3128,175 @@ namespace www.aquarella.com.pe.Aquarella.Logistica
             }
             return formaList;
         }
+
+        [WebMethod()]
+        public static msgdisponible get_despacho()
+        {
+            msgdisponible msgdisponible;
+            try
+            {
+
+                #region<EN ESTE CASO VERIFICAMOS EL PEDIDO ORIGINAL Y SOLO LIQUIDAMOS LOS QUE HAY STOCK>
+                List<Order_Dtl> orderLines = (List<Order_Dtl>)(((object)HttpContext.Current.Session[_nSOrder]) != null ? (object)HttpContext.Current.Session[_nSOrder] : new List<Order_Dtl>());
+                List<Order_Dtl_Temp> orderLines_Temp = new List<Order_Dtl_Temp>();
+
+                HttpContext.Current.Session[_nSOrderTemp] = orderLines_Temp;
+
+                if (orderLines.Count > 0)
+                {
+                  
+                    Int32 item_temp = 0;
+                    foreach (Order_Dtl fila in orderLines)
+                    {
+                        item_temp += 1;
+                        Order_Dtl_Temp item = new Order_Dtl_Temp();
+                        item.items = item_temp;
+                        item.articulo = fila._code;
+                        item.talla = fila._size;
+                        item.cantidad = fila._qty;
+
+                        orderLines_Temp.Add(item);
+                    }
+                    HttpContext.Current.Session[_nSOrderTemp]= orderLines_Temp;
+
+                    /*codigo agregado para que no valide*/
+                    msgdisponible = new msgdisponible();
+                    msgdisponible.tpedido = (Int32)1;
+                    msgdisponible.tdisponible = (Int32)1;
+
+                    return msgdisponible;
+                    /****************************/
+
+
+                    string noOrder = (string)HttpContext.Current.Session[_nSOrderUrl];
+                    if (string.IsNullOrEmpty(noOrder))
+                    {
+                        noOrder = "";
+                    }
+
+                    Coordinator cust = (Coordinator)HttpContext.Current.Session[_nameSessionCustomer];
+                    // Cargar session de compañia
+                    string co = cust._co;
+                    string chain = string.Empty;
+                    string iconStock = string.Empty;
+
+
+                    Boolean upd_list = false;
+
+                    ///
+                    /*agrupar codigo de articulo*/
+                    var grup_art = from item in orderLines_Temp.AsEnumerable()
+                                   group item by
+                                   new
+                                   {
+                                       articulo = item.articulo
+                                   }
+                                   into G
+                                   select new
+                                   {
+                                       articulo = G.Key.articulo
+                                   };
+
+                    foreach (var key in grup_art)
+                    {
+                        string article = key.articulo;
+                        DataSet dsItems = Stock.getStockByArtWithAllSizes(co, cust._idWare, "", article, noOrder);/*extraer stock de articulos*/
+
+                        if (dsItems.Tables.Count > 0)
+                        {
+
+                            foreach (Order_Dtl_Temp item_tempo in orderLines_Temp.Where(r => r.articulo == article))
+                            {
+                                string articulo = item_tempo.articulo;
+                                string talla = item_tempo.talla;
+                                decimal stk_user = item_tempo.cantidad;
+
+                                var stk_data_base = from item in dsItems.Tables[0].AsEnumerable()
+                                                    where item.Field<string>("Art_id") == articulo.ToString() &&
+                                                          item.Field<string>("Stk_TalId") == talla.ToString()
+                                                    select new
+                                                    {
+                                                        stock = Convert.ToInt32(item["Stk_Cantidad"]),
+                                                    };
+                                decimal sum_cant = 0;
+                                decimal stk_data = 0;
+
+                                foreach (var s in stk_data_base)
+                                {
+                                    stk_data = s.stock;
+                                }
+
+                                for (Int32 a = 1; a <= stk_user; ++a)
+                                {
+                                    //sum_cant += 1;
+
+                                    if (stk_data < a)
+                                    {
+                                        break;
+                                    }
+
+                                    sum_cant += 1;
+                                }
+                                /*en este caso quiere decir que no hay productos en la base de datos*/
+                                if (sum_cant == 0)
+                                {
+                                    List<Order_Dtl> orderLines_borrar = orderLines.Where(b => b._code == articulo && b._size == talla).ToList();
+
+                                    foreach (var keydelete in orderLines_borrar)
+                                    {
+                                        orderLines.Remove(keydelete);
+                                        upd_list = true;
+                                    }
+
+                                }
+                                else
+                                {
+                                    if (stk_user > stk_data)
+                                    {
+                                        List<Order_Dtl> orderLinesupdate = orderLines.Where(u => u._code == articulo && u._size == talla).ToList();
+
+                                        foreach (var upd in orderLinesupdate)
+                                        {
+                                            orderLines.Remove(upd);
+                                            upd._qty = (Int32)sum_cant;
+                                            orderLines.Add(upd);
+                                            upd_list = true;
+                                        }
+                                    }
+                                }
+
+                            }
+
+                        }
+
+                    }
+                    /*este caso es si es que se modifico la lista para volver a recalcular*/
+                    if (upd_list)
+                    {
+                        HttpContext.Current.Session[_nSOrder] = orderLines;
+
+                        fupdateitemforma();
+                        fupdateitemoferta();
+                        getTotals();
+
+                    }
+
+                }
+                #endregion
+
+                var tpedido_original = orderLines_Temp.Sum(s => s.cantidad);
+                var tpedido_disponible = orderLines.Sum(s => s._qty);
+                msgdisponible = new msgdisponible();
+                msgdisponible.tpedido =(Int32) tpedido_original;
+                msgdisponible.tdisponible =(Int32) tpedido_disponible;
+            }
+            catch
+            {
+                msgdisponible = new msgdisponible();
+            }
+            return msgdisponible;
+        }
+
         [WebMethod()]
         public static formapago get_formapago(string strformapagoid, string strformapago)
         {

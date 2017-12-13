@@ -427,4 +427,11 @@ namespace www.aquarella.com.pe.bll.Util
         #endregion
 
     }
+    public class msgdisponible
+    {
+        public Int32 tpedido { get; set; }
+        public Int32 tdisponible { get; set; }
+
+
+    }
 }

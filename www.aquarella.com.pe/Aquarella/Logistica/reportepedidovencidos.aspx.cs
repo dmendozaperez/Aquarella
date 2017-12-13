@@ -9,12 +9,12 @@ using www.aquarella.com.pe.bll;
 using www.aquarella.com.pe.bll.Util;
 using www.aquarella.com.pe.Bll.Admonred;
 
-namespace www.aquarella.com.pe.Aquarella.Admonred
+namespace www.aquarella.com.pe.Aquarella.Logistica
 {
-    public partial class consultakpi : System.Web.UI.Page
+    public partial class reportepedidovencidos : System.Web.UI.Page
     {
         Users _user;
-        string _nameSessionData = "_ReturnDataKPI";
+        string _nameSessionData = "_ReturnPedidoVencido";
         protected void Page_Load(object sender, EventArgs e)
         {
             // Vencimiento de sesion
@@ -29,7 +29,7 @@ namespace www.aquarella.com.pe.Aquarella.Admonred
                 txtDateStart.Text = DateTime.Today.ToString("dd/MM/yyyy");
                 txtDateEnd.Text = DateTime.Today.ToString("dd/MM/yyyy");
 
-               // btConsult_Click(btConsult, new EventArgs());
+                btConsult_Click(btConsult, new EventArgs());
 
             }
         }
@@ -43,13 +43,13 @@ namespace www.aquarella.com.pe.Aquarella.Admonred
         protected void cargarLider()
         {
             // Mostrar Panel de Seleccion de Coordinador
-            pnlDwCustomers.Visible = true;
+            pnlDwCustomers.Visible = (_user._asesor.Length == 0) ? false : false;
             /// Realizar la consulta de lideres        
             dwCustomers.Focus();
             dwCustomers.DataSource = Area.getAllAreas(_user._asesor);
             dwCustomers.DataBind();
 
-            if (_user._asesor.Length>0)
+            if (_user._asesor.Length > 0)
             {
                 dwasesor.SelectedValue = _user._asesor;
                 dwasesor.Enabled = false;
@@ -58,7 +58,6 @@ namespace www.aquarella.com.pe.Aquarella.Admonred
         }
         protected void btConsult_Click(object sender, EventArgs e)
         {
-            //
             if ((_user._usu_tip_id == "01") || (_user._usu_tip_id == "03"))
             {
                 formForCustomer();
@@ -80,7 +79,7 @@ namespace www.aquarella.com.pe.Aquarella.Admonred
             {
 
                 odsReturns.SelectParameters[0].DefaultValue = dwCustomers.SelectedValue;
-                odsReturns.SelectParameters[1].DefaultValue =  (_user._asesor.Length>0)?_user._asesor:dwasesor.SelectedValue;
+                odsReturns.SelectParameters[1].DefaultValue = (_user._asesor.Length > 0) ? _user._asesor : dwasesor.SelectedValue;
             }
             catch
             {
@@ -107,20 +106,19 @@ namespace www.aquarella.com.pe.Aquarella.Admonred
             GridViewExportUtil.removeFormats(ref gvReturns);
             gvReturns.DataBind();
 
-            string nameFile = "ResultadoKPI";
+            string nameFile = "pedidovencido";
 
             Decimal[] columna = { 1 };
             //  pass the grid that for exporting ...
             GridViewExportUtil.Export(nameFile + ".xls", gvReturns, false, columna);
         }
-
         protected void odsReturns_Selected(object sender, ObjectDataSourceStatusEventArgs e)
         {
             try
             {
                 DataTable dt = ((DataSet)e.ReturnValue).Tables[0];
                 Session[_nameSessionData] = dt;
-               
+
 
             }
             catch

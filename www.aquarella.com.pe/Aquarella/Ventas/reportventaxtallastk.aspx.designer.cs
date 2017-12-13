@@ -7,10 +7,10 @@
 // </generado automáticamente>
 //------------------------------------------------------------------------------
 
-namespace www.aquarella.com.pe.Aquarella.Admonred {
+namespace www.aquarella.com.pe.Aquarella.Ventas {
     
     
-    public partial class consultakpi {
+    public partial class reportventaxtallastk {
         
         /// <summary>
         /// Control ScriptManager1.
@@ -47,33 +47,6 @@ namespace www.aquarella.com.pe.Aquarella.Admonred {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.UpdateProgress UpdateProgress1;
-        
-        /// <summary>
-        /// Control pnlDwCustomers.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel pnlDwCustomers;
-        
-        /// <summary>
-        /// Control dwasesor.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList dwasesor;
-        
-        /// <summary>
-        /// Control dwCustomers.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList dwCustomers;
         
         /// <summary>
         /// Control upStartDate.
@@ -236,15 +209,6 @@ namespace www.aquarella.com.pe.Aquarella.Admonred {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.GridView gvReturns;
-        
-        /// <summary>
-        /// Control odsReturns.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.ObjectDataSource odsReturns;
         
         /// <summary>
         /// Control upae.

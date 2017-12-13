@@ -412,6 +412,70 @@ namespace www.aquarella.com.pe.bll
         #endregion
         #region <Metodos Estaticos>
 
+///<summary>
+///Consulta de venta detallada comparativo 
+///</summary>
+        public static DataTable getresventa(decimal anio_act)
+        {
+            string sqlquery = "USP_LeerResventa";
+            DataTable dt = null;
+            try
+            {
+                using (SqlConnection cn = new SqlConnection(Conexion.myconexion()))
+                {
+                    using (SqlCommand cmd = new SqlCommand(sqlquery, cn))
+                    {
+                        cmd.CommandTimeout = 0;
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        cmd.Parameters.AddWithValue("@ANIOACT", anio_act);
+                        using (SqlDataAdapter da = new SqlDataAdapter(cmd))
+                        {
+                            dt = new DataTable();
+                            da.Fill(dt);
+                        }
+                    }
+                }
+            }
+            catch (Exception)
+            {
+
+                dt = null;
+            }
+            return dt;
+        }
+
+        public static DataSet get_ventastkXTalla(DateTime fe_ini, DateTime fec_fin)
+        {
+            DataSet ds = null;
+            string sqlquery = "USP_ConsultaVentTalla_Stk";
+            try
+            {
+                using (SqlConnection cn = new SqlConnection(Conexion.myconexion()))
+                {
+                    using (SqlCommand cmd = new SqlCommand(sqlquery, cn))
+                    {
+                        cmd.CommandTimeout = 0;
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        cmd.Parameters.AddWithValue("@fechaini", fe_ini);
+                        cmd.Parameters.AddWithValue("@fechafin", fec_fin);
+
+                        using (SqlDataAdapter da = new SqlDataAdapter(cmd))
+                        {
+                            ds = new DataSet();
+                            da.Fill(ds);
+                        }
+
+                    }
+                }
+            }
+            catch (Exception)
+            {
+
+                ds = null;
+            }
+            return ds;
+        }
+
         public static DataTable getventazonacategoria(DateTime _fecha_ini,DateTime _fecha_fin,string _asesor ,
 	                                                String _lider,String _dep,String _prov ,String _categ,String _linea)
         {

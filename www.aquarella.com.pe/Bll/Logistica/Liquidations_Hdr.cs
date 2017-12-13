@@ -17,11 +17,40 @@ namespace www.aquarella.com.pe.bll
         /// <summary>
         /// Nombre de cadena de conexion en el web.config
         /// </summary>
-        
+
 
         #endregion
 
         #region < Metodos estaticos >
+
+        public static DataSet getconsultapedidoven(int _area_id, String _asesor, DateTime _date_start, DateTime _date_end)
+        {
+            string sqlquery = "USP_ConsultaPedidovencidos";
+            SqlConnection cn = null;
+            SqlCommand cmd = null;
+            SqlDataAdapter da = null;
+            DataSet ds = null;
+            try
+            {
+                cn = new SqlConnection(Conexion.myconexion());
+                cmd = new SqlCommand(sqlquery, cn);
+                cmd.CommandTimeout = 0;
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@lider", _area_id);
+                cmd.Parameters.AddWithValue("@fechaini", _date_start);
+                cmd.Parameters.AddWithValue("@fechafin", _date_end);
+                cmd.Parameters.AddWithValue("@asesor", _asesor);
+                da = new SqlDataAdapter(cmd);
+                ds = new DataSet();
+                da.Fill(ds);
+                return ds;
+            }
+            catch (Exception e)
+            {
+                return ds;
+                //throw new Exception(e.Message, e.InnerException);
+            }
+        }
 
 
         public static DataTable get_pedido_lidergrupo()
@@ -686,7 +715,7 @@ namespace www.aquarella.com.pe.bll
         public static string[] Gua_Mod_Liquidacion(decimal _usu, decimal _idCust, string _reference, decimal _discCommPctg,
                                                decimal _discCommValue, string _shipTo, string _specialInstr, List<Order_Dtl> _itemsDetail,
                                                decimal _varpercepcion, Int32 _estado, string _ped_id = "",string _liq="",Int32 _liq_dir=0,
-                                               Int32 _PagPos=0,string _PagoPostarjeta="",string _PagoNumConsignacion="",decimal _PagoTotal=0,DataTable dtpago=null,Boolean _pago_credito=false,Decimal _porc_percepcion=0)
+                                               Int32 _PagPos=0,string _PagoPostarjeta="",string _PagoNumConsignacion="",decimal _PagoTotal=0,DataTable dtpago=null,Boolean _pago_credito=false,Decimal _porc_percepcion=0,List<Order_Dtl_Temp> order_dtl_temp=null)
         {
             string[] resultDoc = new string[2];
             string sqlquery = "USP_Insertar_Modifica_Liquidacion";
@@ -723,6 +752,25 @@ namespace www.aquarella.com.pe.bll
                     }
                 }
 
+                /*pedido original*/
+                DataTable dtordertmp = new DataTable();
+                dtordertmp.Columns.Add("items", typeof(Int32));
+                dtordertmp.Columns.Add("articulo", typeof(string));
+                dtordertmp.Columns.Add("talla", typeof(string));
+                dtordertmp.Columns.Add("cantidad", typeof(Int32));
+                
+
+
+
+                if (order_dtl_temp!=null)
+                {
+                    foreach(Order_Dtl_Temp item in order_dtl_temp)
+                    {
+                        dtordertmp.Rows.Add(item.items, item.articulo, item.talla, item.cantidad);
+                    }
+                }
+
+
                 //grabar pedido
                 cn = new SqlConnection(Conexion.myconexion());
                 if (cn.State == 0) cn.Open();
@@ -741,13 +789,16 @@ namespace www.aquarella.com.pe.bll
                 cmd.Parameters.AddWithValue("@Liq_Usu", _usu);
                 cmd.Parameters.AddWithValue("@Detalle_Pedido", dt);
                 cmd.Parameters.AddWithValue("@Liquidacion_Directa", _liq_dir);
-                
+
+                /*PEDIDO ORIGINAL*/
+                cmd.Parameters.AddWithValue("@pedido_original", dtordertmp);
 
                 //opcional pago por pos liquidacion directa
                 cmd.Parameters.AddWithValue("@Pago_Pos", _PagPos);
                 cmd.Parameters.AddWithValue("@Pago_PosTarjeta", _PagoPostarjeta);
                 cmd.Parameters.AddWithValue("@Pago_numconsigacion", _PagoNumConsignacion);
                 cmd.Parameters.AddWithValue("@Pago_Total", _PagoTotal);
+
                 
                 //pago directo de la liquidacion
                 cmd.Parameters.AddWithValue("@DetallePago", dtpago);

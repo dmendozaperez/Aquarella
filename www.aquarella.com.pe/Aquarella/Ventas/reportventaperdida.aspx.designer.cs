@@ -7,10 +7,10 @@
 // </generado automáticamente>
 //------------------------------------------------------------------------------
 
-namespace www.aquarella.com.pe.Aquarella.Admonred {
+namespace www.aquarella.com.pe.Aquarella.Ventas {
     
     
-    public partial class consultakpi {
+    public partial class reportventaperdida {
         
         /// <summary>
         /// Control ScriptManager1.
@@ -49,13 +49,13 @@ namespace www.aquarella.com.pe.Aquarella.Admonred {
         protected global::System.Web.UI.UpdateProgress UpdateProgress1;
         
         /// <summary>
-        /// Control pnlDwCustomers.
+        /// Control Panel1.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel pnlDwCustomers;
+        protected global::System.Web.UI.WebControls.Panel Panel1;
         
         /// <summary>
         /// Control dwasesor.
@@ -65,6 +65,15 @@ namespace www.aquarella.com.pe.Aquarella.Admonred {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList dwasesor;
+        
+        /// <summary>
+        /// Control pnlDwCustomers.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel pnlDwCustomers;
         
         /// <summary>
         /// Control dwCustomers.

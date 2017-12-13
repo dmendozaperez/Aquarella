@@ -1357,6 +1357,7 @@ namespace www.aquarella.com.pe.bll.Ventas
             catch (Exception e) { throw new Exception(e.Message, e.InnerException); }
         }
 
+
         public static DataSet getconsultaKPI(int _area_id, String _asesor, DateTime _date_start, DateTime _date_end)
         {
             string sqlquery = "USP_ConsultaKPI";
@@ -1371,6 +1372,36 @@ namespace www.aquarella.com.pe.bll.Ventas
                 cmd.CommandTimeout = 0;
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.Parameters.AddWithValue("@are_id", _area_id);
+                cmd.Parameters.AddWithValue("@fechaini", _date_start);
+                cmd.Parameters.AddWithValue("@fechafin", _date_end);
+                cmd.Parameters.AddWithValue("@asesor", _asesor);
+                da = new SqlDataAdapter(cmd);
+                ds = new DataSet();
+                da.Fill(ds);
+                return ds;
+            }
+            catch (Exception e)
+            {
+                return ds;
+                //throw new Exception(e.Message, e.InnerException);
+            }
+        }
+
+
+        public static DataSet getconsultaventaperdida(int _area_id, String _asesor, DateTime _date_start, DateTime _date_end)
+        {
+            string sqlquery = "USP_ConsultaVentaPerdida";
+            SqlConnection cn = null;
+            SqlCommand cmd = null;
+            SqlDataAdapter da = null;
+            DataSet ds = null;
+            try
+            {
+                cn = new SqlConnection(Conexion.myconexion());
+                cmd = new SqlCommand(sqlquery, cn);
+                cmd.CommandTimeout = 0;
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@lider", _area_id);
                 cmd.Parameters.AddWithValue("@fechaini", _date_start);
                 cmd.Parameters.AddWithValue("@fechafin", _date_end);
                 cmd.Parameters.AddWithValue("@asesor", _asesor);

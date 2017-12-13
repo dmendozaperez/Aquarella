@@ -116,7 +116,7 @@ namespace www.aquarella.com.pe.Aquarella.Financiera
                             string op = lin.Substring(139, 8).Trim();
                             DateTime op_fecha =DateTime.ParseExact(lin.Substring(82, 8).Trim(), "yyyyMMdd", null, DateTimeStyles.None);                          
                             string enter =Convert.ToInt32(lin.Substring(96, 11).Trim()).ToString();
-                            string decim =Convert.ToInt32(lin.Substring(96+11, 2).Trim()).ToString();
+                            string decim= lin.Substring(96+11, 2).Trim().ToString();
                             Decimal op_monto =Convert.ToDecimal(enter + "." + decim);
 
                             dtinter.Rows.Add(dniruc, pedido, op, op_fecha, op_monto);
