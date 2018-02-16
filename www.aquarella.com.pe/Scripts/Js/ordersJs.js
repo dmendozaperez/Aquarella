@@ -155,7 +155,7 @@ $(document).ready(function () {
     $el.focus();
     });*/
     $el.keypress(function (event) {
-        if (event.which == 13) {
+        if (event.which == 13 || event.which == 9) {
             // Prevent postback event to the serever
             event.preventDefault();
             $el.val($el.val().trim().replace("-", ""));
@@ -167,6 +167,20 @@ $(document).ready(function () {
                 $el.focus();
         }
     });
+    $el.on('keydown', function (e) {
+        var keyCode = e.keyCode || e.which;
+        if (keyCode == 9) {
+            e.preventDefault();
+            $el.val($el.val().trim().replace("-", ""));
+            allFields.removeClass("ui-state-error");
+            var bValid = checkLengthAlert($el, "Código de artículo", 7, 8, "Código de artículo invalido, recuerde el código del artículo posee 8 caracteres.");
+            if (bValid)
+                getArticle($el.val());
+            else
+                $el.focus();
+        }
+    });
+
     // Select a size
     $dwSizes.blur(function () {
         //

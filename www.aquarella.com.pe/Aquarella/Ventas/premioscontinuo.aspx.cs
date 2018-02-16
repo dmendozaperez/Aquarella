@@ -10,10 +10,10 @@ using www.aquarella.com.pe.bll.Util;
 
 namespace www.aquarella.com.pe.Aquarella.Ventas
 {
-    public partial class reportventaxtallastk : System.Web.UI.Page
+    public partial class premioscontinuo : System.Web.UI.Page
     {
         Users _user;
-        string _nameSessionData = "_ReturnDataVentaTalla";
+        string _nameSessionData = "_ReturnDataPremios";
         protected void Page_Load(object sender, EventArgs e)
         {
             if (Session[Constants.NameSessionUser] == null) Utilities.logout(Page.Session, Page.Response);
@@ -28,14 +28,19 @@ namespace www.aquarella.com.pe.Aquarella.Ventas
                 //DateTime fecha_ini;
 
                 //fecha_ini = new DateTime(_fechaactual.Year, _fechaactual.Month + 1, 1).AddMonths(-1);
+                DateTime fechatemp;
+                DateTime fecha1;
+               
+                fechatemp = DateTime.Today;
+                fecha1 = new DateTime(fechatemp.Year, fechatemp.Month, 1);
 
-
+                //fecha1 = new DateTime(fechatemp.Year, fechatemp.Month, 1);
 
                 ////vpri = vprimerdia.AddDays(1 - Convert.ToDouble(vprimerdia.DayOfWeek));
                 ////DateTime Vult = vpri.AddDays(6);
 
                 //txtDateStart.Text = fecha_ini.ToString("dd/MM/yyyy");
-                txtDateStart.Text = DateTime.Today.ToString("dd/MM/yyyy");
+                txtDateStart.Text = fecha1.ToString("dd/MM/yyyy");
                 txtDateEnd.Text = DateTime.Today.ToString("dd/MM/yyyy");
 
                 consultar();
@@ -48,11 +53,9 @@ namespace www.aquarella.com.pe.Aquarella.Ventas
             {
                 msnMessage.Visible = false;
 
-                string articulo = (txtFilter.Text.Trim().Length == 0) ? "-1" : txtFilter.Text.Trim();
+                Session[_nameSessionData] = invoice.get_PremiosContinuo(Convert.ToDateTime(txtDateStart.Text), Convert.ToDateTime(txtDateEnd.Text));
 
-                Session[_nameSessionData] = invoice.get_ventastkXTalla(Convert.ToDateTime(txtDateStart.Text), Convert.ToDateTime(txtDateEnd.Text),articulo);
-
-                DataSet ds =(DataSet) Session[_nameSessionData];
+                DataSet ds = (DataSet)Session[_nameSessionData];
 
                 if (ds.Tables.Count != 0)
                 {
@@ -87,10 +90,18 @@ namespace www.aquarella.com.pe.Aquarella.Ventas
             gvReturns.DataSource = (DataSet)Session[_nameSessionData];
             gvReturns.DataBind();
 
-            string nameFile = "ventatalla_stock";
-
+            string nameFile = "PremiosContinuo";
+            decimal[] columna = { 3 };
             //  pass the grid that for exporting ...
-            GridViewExportUtil.Export(nameFile + ".xls", gvReturns);
+            GridViewExportUtil.Export(nameFile + ".xls", gvReturns,false,columna);
+        }
+
+        protected void gvReturns_PageIndexChanging(object sender, GridViewPageEventArgs e)
+        {
+            gvReturns.PageIndex = e.NewPageIndex;
+            gvReturns.DataSource = (DataSet)Session[_nameSessionData];
+
+            gvReturns.DataBind();
         }
 
         protected void gvReturns_RowCreated(object sender, GridViewRowEventArgs e)
@@ -101,14 +112,6 @@ namespace www.aquarella.com.pe.Aquarella.Ventas
         protected void gvReturns_DataBinding(object sender, EventArgs e)
         {
 
-        }
-
-        protected void gvReturns_PageIndexChanging(object sender, GridViewPageEventArgs e)
-        {
-            gvReturns.PageIndex = e.NewPageIndex;
-            gvReturns.DataSource = (DataSet)Session[_nameSessionData];
-
-            gvReturns.DataBind();
         }
     }
 }

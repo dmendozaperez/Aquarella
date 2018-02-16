@@ -102,6 +102,20 @@ namespace Integrado.Design.WPF_Master
         }
         private void inicio()
         {
+            
+            if  (Ent_Global._canal_venta == "AQ")
+            {
+                var uriSource = new Uri("/Integrado;component/Design/Images/aq_lineal.jpg", UriKind.Relative);
+                imglogo.Source = new BitmapImage(uriSource);
+            }
+            else
+            {
+                var uriSource = new Uri("/Integrado;component/Design/Images/BataLogo.png", UriKind.Relative);
+                imglogo.Source = new BitmapImage(uriSource);
+            }
+
+            
+
             MetroDialogOptions.ColorScheme = MetroDialogColorScheme.Accented;
             if (!(Ent_Global._session_activa))
             { 
@@ -123,6 +137,8 @@ namespace Integrado.Design.WPF_Master
         }
         private async void inicio_windows()
         {
+
+
             lblnombre_login.Content = "";
             lblusuario.Content = "";
             MetroDialogOptions.ColorScheme = MetroDialogColorScheme.Accented;

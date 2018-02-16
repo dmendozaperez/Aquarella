@@ -19,6 +19,7 @@ namespace Integrado.Bll
                 if (_tipo_doc == "B" || _tipo_doc == "F")
                 {
                     img_qr = generatorCdp.GetImageQrCodeForInvoiceCdp(_formato_doc);
+
                 }
                 else
                 {

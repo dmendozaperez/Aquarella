@@ -170,30 +170,33 @@ namespace www.aquarella.com.pe.Aquarella.Logistica
                         //para validar su modificacion de liquidacion con pago de nota de credito
                         string vidliq = ((object)str.Split(new char[1] { '@' })[0].Trim()).ToString();
                         this.Session[_idliquidacion] = vidliq;
-                        DataTable dtgetncliq = www.aquarella.com.pe.bll.Liquidations_Hdr.get_montoliqnc(vidliq);
-                        if (dtgetncliq.Rows.Count > 0)
-                        {
-                            decimal vmonto=0;
-                            _lstDocTx = getListFromSes();
+                        Decimal monto_liq = www.aquarella.com.pe.bll.Liquidations_Hdr.get_montoliqnc(vidliq);
 
-                            for (Int32 i = 0; i < dtgetncliq.Rows.Count; ++i)
-                            {
-                                _lstDocTx.Add(new Documents_Trans
-                                {
-                                    _check = Convert.ToBoolean(dtgetncliq.Rows[i]["checks"].ToString()),
-                                    _docNo = dtgetncliq.Rows[i]["ncredito"].ToString(),
-                                    _numeroid =dtgetncliq.Rows[i]["rhv_return_no"].ToString(),
-                                    _value = Convert.ToDecimal(dtgetncliq.Rows[i]["importe"].ToString()),
-                                    //_date="NOTA DE CREDITO",
-                                    //_fechadoc = (Convert.ToDateTime(DataBinder.Eval(e.Row.DataItem, "dtd_document_date")).ToShortDateString()),
-                                    //* Convert.ToDecimal(DataBinder.Eval(e.Row.DataItem, "von_increase")),
-                                    // _increase = Convert.ToDecimal(DataBinder.Eval(e.Row.DataItem, "von_increase"))
-                                });
-                                vmonto+=Convert.ToDecimal(dtgetncliq.Rows[i]["importe"].ToString());
-                            }
-                            Session[_nameList] = _lstDocTx;
-                            HttpContext.Current.Session[_valida] = vmonto;
-                        }
+                        Session["_valor_subtotal"] = monto_liq;
+
+                        //if (dtgetncliq.Rows.Count > 0)
+                        //{
+                        //    decimal vmonto=0;
+                        //    _lstDocTx = getListFromSes();
+
+                        //    for (Int32 i = 0; i < dtgetncliq.Rows.Count; ++i)
+                        //    {
+                        //        _lstDocTx.Add(new Documents_Trans
+                        //        {
+                        //            _check = Convert.ToBoolean(dtgetncliq.Rows[i]["checks"].ToString()),
+                        //            _docNo = dtgetncliq.Rows[i]["ncredito"].ToString(),
+                        //            _numeroid =dtgetncliq.Rows[i]["rhv_return_no"].ToString(),
+                        //            _value = Convert.ToDecimal(dtgetncliq.Rows[i]["importe"].ToString()),
+                        //            //_date="NOTA DE CREDITO",
+                        //            //_fechadoc = (Convert.ToDateTime(DataBinder.Eval(e.Row.DataItem, "dtd_document_date")).ToShortDateString()),
+                        //            //* Convert.ToDecimal(DataBinder.Eval(e.Row.DataItem, "von_increase")),
+                        //            // _increase = Convert.ToDecimal(DataBinder.Eval(e.Row.DataItem, "von_increase"))
+                        //        });
+                        //        vmonto+=Convert.ToDecimal(dtgetncliq.Rows[i]["importe"].ToString());
+                        //    }
+                        //    Session[_nameList] = _lstDocTx;
+                        //    HttpContext.Current.Session[_valida] = vmonto;
+                        //}
 
                         //
                     }
@@ -573,14 +576,37 @@ namespace www.aquarella.com.pe.Aquarella.Logistica
                     /*si es que tiee oferta entonces vamos a filtrar*/
                     List<Order_Dtl> orderLinesOferta_filter = orderLines.Where(c => c._ofe_id != 0).ToList();
 
+
+
                     if (orderLinesOferta_filter.Count>0)
-                    {                                                
+                    {
 
-                        /*capturamos el maximo de pares y por descuento*/
-                        Decimal _max_pares = orderLinesOferta_filter[0]._ofe_maxpares;
-                        Decimal _por_desc = orderLinesOferta_filter[0]._ofe_porc/100;
+                        //var grupo_oferta = orderLines.GroupBy(c => c._ofe_id != 0).ToList();
+                        var lista_gr = from item in orderLines where item._ofe_id!=0
+                                     group item by 
+                                     new
+                                     {
+                                         ofertaid=item._ofe_id,
+                                         ofemaxpar=item._ofe_maxpares,
+                                         oferporc=item._ofe_porc,
+                                     } into g
+                                     select new
+                                     {
+                                         ofertaid = g.Key.ofertaid,
+                                         ofemaxpar = g.Key.ofemaxpar,
+                                         oferporc = g.Key.oferporc,
 
-                        Decimal _total = orderLinesOferta_filter.Sum(x => x._qty);
+                                     };
+                        foreach(var it in lista_gr)
+                        {
+
+
+
+                            /*capturamos el maximo de pares y por descuento*/
+                            Decimal _max_pares = it.ofemaxpar;//  orderLinesOferta_filter[0]._ofe_maxpares;
+                            Decimal _por_desc =it.oferporc/100 /* orderLinesOferta_filter[0]._ofe_porc/100*/;
+
+                            Decimal _total = orderLinesOferta_filter.Where(r=>r._ofe_id==it.ofertaid).Sum(x => x._qty);
 
                         /*ahora capturado el total de pares le hacemos un for para */
 
@@ -595,22 +621,43 @@ namespace www.aquarella.com.pe.Aquarella.Logistica
                         dt.Columns.Add("cantidad", typeof(Decimal));
                         dt.Columns.Add("porc_comision", typeof(Decimal));
                         dt.Columns.Add("descuento", typeof(Decimal));
+                            dt.Columns.Add("oferta", typeof(string));
 
-                        for (Int32 a=0;a< orderLinesOferta_filter.Count;++a)
-                        {
+                        //for (Int32 a=0;a< orderLinesOferta_filter.Where(r => r._ofe_id == it.ofertaid).ToList().Count;++a)
+                        //{                            
+                                foreach(var filas in orderLinesOferta_filter.Where(r => r._ofe_id == it.ofertaid).ToList())
+                                {
+                                    for (Int32 c = 0; c < filas._qty; ++c)
+                                    {
+                                    dt.Rows.Add(filas._code.ToString(),
+                                         filas._size.ToString(),
+                                         filas._price,
+                                         1,
+                                         filas._commissionPctg,
+                                         0, filas._ofe_id.ToString());
 
-                            for (Int32 c=0;c< orderLinesOferta_filter[a]._qty;++c)
-                            {
-                                dt.Rows.Add(orderLinesOferta_filter[a]._code.ToString(),
-                                        orderLinesOferta_filter[a]._size.ToString(),
-                                        orderLinesOferta_filter[a]._price,
-                                        1,
-                                        orderLinesOferta_filter[a]._commissionPctg,
-                                        0);
-                            }
+                                    //dt.Rows.Add(orderLinesOferta_filter[a]._code.ToString(),
+                                    //            orderLinesOferta_filter[a]._size.ToString(),
+                                    //            orderLinesOferta_filter[a]._price,
+                                    //            1,
+                                    //            orderLinesOferta_filter[a]._commissionPctg,
+                                    //            0, orderLinesOferta_filter[a]._ofe_id.ToString());
+                                    }
+                                }
+
+                            //for (Int32 c=0;c< orderLinesOferta_filter[a]._qty;++c)
+                            //{
+
+                            //    dt.Rows.Add(orderLinesOferta_filter[a]._code.ToString(),
+                            //            orderLinesOferta_filter[a]._size.ToString(),
+                            //            orderLinesOferta_filter[a]._price,
+                            //            1,
+                            //            orderLinesOferta_filter[a]._commissionPctg,
+                            //            0,orderLinesOferta_filter[a]._ofe_id.ToString());
+                            //}
 
                             
-                        }
+                        //}
 
                         if (!isInt)
                             _res = Convert.ToInt32((_res) - Convert.ToDecimal(0.1));
@@ -618,7 +665,7 @@ namespace www.aquarella.com.pe.Aquarella.Logistica
 
                         if (_res != 0)
                         {
-                            DataRow[] _filas = dt.Select("len(articulo)>0", "precio asc");
+                            DataRow[] _filas = dt.Select("len(articulo)>0 and oferta='" + it.ofertaid.ToString() + "'", "precio asc");
                             if (_filas.Length>0)
                             { 
                                 for (Int32 i = 0; i < _res; ++i)
@@ -638,9 +685,10 @@ namespace www.aquarella.com.pe.Aquarella.Logistica
                                 {
                                     string _articulo = orderLines[i]._code.ToString();
                                     string _talla = orderLines[i]._size.ToString();
-                                    foreach(DataRow vfila in _filas)
+                                    string _oferta_id= orderLines[i]._ofe_id.ToString();
+                                        foreach (DataRow vfila in _filas)
                                     {
-                                        if( _articulo==vfila["articulo"].ToString() && _talla==vfila["talla"].ToString())
+                                        if( _articulo==vfila["articulo"].ToString() && _talla==vfila["talla"].ToString() && _oferta_id==vfila["oferta"].ToString())
                                         {
                                             orderLines[i]._dscto += Convert.ToDecimal(vfila["descuento"]);
                                             orderLines[i]._dsctoDesc = orderLines[i]._dscto.ToString(_currency);
@@ -652,141 +700,9 @@ namespace www.aquarella.com.pe.Aquarella.Logistica
                                 }
                             }
                         }
-                        //else
-                        //{
-                        //    _res = Convert.ToInt32((_res) - Convert.ToDecimal(0.1));
-
-                        //    if (_res!=0)
-                        //    {
-
-                        //        DataRow[] _filas = dt.Select("len(articulo)>0", "precio asc");
-                        //        if (_filas.Length > 0)
-                        //        {
-                        //            for (Int32 i = 0; i < _res; ++i)
-                        //            {
-                        //                string _articulo = _filas[i]["articulo"].ToString();
-                        //                string _talla = _filas[i]["talla"].ToString();
-                        //                Decimal _precio = Convert.ToDecimal(_filas[i]["precio"]);
-                        //                Decimal _com_porc = Convert.ToDecimal(_filas[i]["porc_comision"]);
-                        //                Decimal _cant = Convert.ToDecimal(_filas[i]["cantidad"]);
-                        //                decimal _com_mon = Math.Round((_precio * _cant) * _com_porc, 2, MidpointRounding.AwayFromZero);
-                        //                Decimal _des_oferta = Math.Round(((_precio * _cant) - _com_mon) * (_por_desc), 2, MidpointRounding.AwayFromZero);
-
-                        //                _filas[i]["descuento"] = _des_oferta;
-                        //            }
-
-                        //            for (Int32 i = 0; i < orderLines.Count; ++i)
-                        //            {
-                        //                string _articulo = orderLines[i]._code.ToString();
-                        //                string _talla = orderLines[i]._size.ToString();
-                        //                foreach (DataRow vfila in _filas)
-                        //                {
-                        //                    if (_articulo == vfila["articulo"].ToString() && _talla == vfila["talla"].ToString())
-                        //                    {
-                        //                        orderLines[i]._dscto += Convert.ToDecimal(vfila["descuento"]);
-                        //                        orderLines[i]._dsctoDesc = orderLines[i]._dscto.ToString(_currency);
-
-                        //                        orderLines[i]._lineTotal = Math.Round((orderLines[i]._qty * orderLines[i]._price) - (orderLines[i]._commission) - (orderLines[i]._dscto), 2, MidpointRounding.AwayFromZero);
-                        //                        orderLines[i]._lineTotDesc = orderLines[i]._lineTotal.ToString(_currency);
-                        //                    }
-                        //                }
-                        //            }
-                        //        }
-
-                        //    }
-                        //}
-
-
-
-
-                       
-                        
-
-                        /*capturamos el total de pares que se tiene con esta oferta*/
-
-
-
-
-                        /*verificar que hay 1 numero de pares por items*/
-                        //List<Order_Dtl> orderLinesOferta_filter_par = orderLinesOferta_filter.Where(c => c._qty == 1).ToList();
-
-                        //if (orderLinesOferta_filter_par.Count>0)
-                        //{
-                        //    Decimal _contar_max = 0;
-
-                        /*para verificar el precio menor*/
-                        //DataTable dt = new DataTable();
-                        //dt.Columns.Add("articulo", typeof(string));
-                        //dt.Columns.Add("talla", typeof(string));
-                        //dt.Columns.Add("precio", typeof(decimal));
-
-                        //for(Int32 a=0;a< orderLinesOferta_filter_par.Count;++a)
-                        //{                                
-                        //    _contar_max += 1;
-                        //    dt.Rows.Add(orderLinesOferta_filter_par[a]._code.ToString(), orderLinesOferta_filter_par[a]._size.ToString(), orderLinesOferta_filter_par[a]._price);
-                        //    if (_max_pares==_contar_max)
-                        //    {
-                        //        DataRow[] fila_precio_menor = dt.Select("len(articulo)>0", "precio asc");
-
-                        //        string _articulo = fila_precio_menor[0]["articulo"].ToString(); 
-                        //        string _talla = fila_precio_menor[0]["talla"].ToString();
-                        //        Decimal _precio =Convert.ToDecimal(fila_precio_menor[0]["precio"]);
-
-                        //        /*ahora en este paso vamos hacer update al padre*/
-                        //        for (Int32 i=0;i<orderLines.Count;++i)
-                        //        {
-                        //            if(_articulo==orderLines[i]._code.ToString() && _talla==orderLines[i]._size.ToString() && _precio==orderLines[i]._price)
-                        //            {
-
-                        //                orderLines[i]._dscto =Math.Round(((orderLines[i]._qty * orderLines[i]._price) - (orderLines[i]._commission)) * _por_desc,2, MidpointRounding.AwayFromZero);
-                        //                orderLines[i]._dsctoDesc= orderLines[i]._dscto.ToString(_currency);
-
-                        //                orderLines[i]._lineTotal = Math.Round((orderLines[i]._qty * orderLines[i]._price) - (orderLines[i]._commission) - (orderLines[i]._dscto), 2, MidpointRounding.AwayFromZero);
-                        //                orderLines[i]._lineTotDesc = orderLines[i]._lineTotal.ToString(_currency);
-
-                        //                break;
-                        //            }
-                        //        }
-
-                        //        /**/
-                        //        dt.Rows.Clear();
-                        //        _contar_max= 0;
-                        //    }                                
-                        //}
-                        //}
-                        //else
-                        //{
-                        /*en este ver si es que es mayor a un par*/
-                        //List<Order_Dtl> orderLinesOferta_filter_max = orderLinesOferta_filter.Where(c => c._qty >= _max_pares).ToList();
-
-                        //for (Int32 b=0;b< orderLinesOferta_filter_max.Count;++b)
-                        //{
-                        //    Decimal porc_com = orderLinesOferta_filter_max[b]._commissionPctg;
-                        //    string _articulo = orderLinesOferta_filter_max[b]._code.ToString();
-                        //    string _talla = orderLinesOferta_filter_max[b]._size.ToString();
-
-                        //    for (Int32 i = 0; i < orderLines.Count; ++i)
-                        //    {
-                        //        if (_articulo == orderLines[i]._code.ToString() && _talla == orderLines[i]._size.ToString())
-                        //        {
-                        //            Decimal _can_tot = orderLines[i]._qty;
-                        //            Int32 _cant_calcula =Convert.ToInt32((_can_tot / _max_pares).ToString().Substring(0,1));
-
-                        //            orderLines[i]._dscto = Math.Round(((_cant_calcula * orderLines[i]._price) - ((orderLines[i]._price* _cant_calcula) * porc_com)) * _por_desc, 2, MidpointRounding.AwayFromZero);
-                        //            orderLines[i]._dsctoDesc = orderLines[i]._dscto.ToString(_currency);
-
-                        //            orderLines[i]._lineTotal = Math.Round((orderLines[i]._qty * orderLines[i]._price) - (orderLines[i]._commission) - (orderLines[i]._dscto), 2, MidpointRounding.AwayFromZero);
-                        //            orderLines[i]._lineTotDesc = orderLines[i]._lineTotal.ToString(_currency);
-
-                        //            break;
-                        //        }
-                        //    }
-
-                        //}
-
-                        //}
-
                     }
+
+                }
                    
                     
 

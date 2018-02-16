@@ -158,6 +158,7 @@ namespace Integrado.Bll
             string _ruta_copy = _xml + "\\copy";
             try
             {
+                return;
                 if (!Directory.Exists(@_ruta_copy))
                 {
                     Directory.CreateDirectory(@_ruta_copy);

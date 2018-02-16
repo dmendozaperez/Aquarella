@@ -64,7 +64,7 @@
 						Margin="10,6,-42,4" HorizontalAlignment="Center" Grid.ColumnSpan="2" Grid.Column="1"/>
                 </Grid>
             </Button>
-            <Button x:Name="btnbata" Grid.Column="1" Grid.Row="2" Cursor="Hand" IsEnabled="False" Margin="48,3,-48,-3" >
+            <Button x:Name="btnbata" Grid.Column="1" Grid.Row="2" Cursor="Hand" IsEnabled="True" Margin="48,3,-48,-3" Click="btnbata_Click" >
                 <Button.ToolTip>
                     <ToolTip>
                         <StackPanel>

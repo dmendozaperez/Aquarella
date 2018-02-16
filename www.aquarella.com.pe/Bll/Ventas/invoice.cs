@@ -444,7 +444,39 @@ namespace www.aquarella.com.pe.bll
             return dt;
         }
 
-        public static DataSet get_ventastkXTalla(DateTime fe_ini, DateTime fec_fin)
+        public static DataSet get_PremiosContinuo(DateTime fe_ini, DateTime fec_fin)
+        {
+            DataSet ds = null;
+            string sqlquery = "USP_ConsultaPremios";
+            try
+            {
+                using (SqlConnection cn = new SqlConnection(Conexion.myconexion()))
+                {
+                    using (SqlCommand cmd = new SqlCommand(sqlquery, cn))
+                    {
+                        cmd.CommandTimeout = 0;
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        cmd.Parameters.AddWithValue("@FECHA_INI_3", fe_ini);
+                        cmd.Parameters.AddWithValue("@FECHA_FIN_3", fec_fin);
+
+                        using (SqlDataAdapter da = new SqlDataAdapter(cmd))
+                        {
+                            ds = new DataSet();
+                            da.Fill(ds);
+                        }
+
+                    }
+                }
+            }
+            catch (Exception)
+            {
+
+                ds = null;
+            }
+            return ds;
+        }
+
+        public static DataSet get_ventastkXTalla(DateTime fe_ini, DateTime fec_fin,string articulo="-1")
         {
             DataSet ds = null;
             string sqlquery = "USP_ConsultaVentTalla_Stk";
@@ -458,6 +490,7 @@ namespace www.aquarella.com.pe.bll
                         cmd.CommandType = CommandType.StoredProcedure;
                         cmd.Parameters.AddWithValue("@fechaini", fe_ini);
                         cmd.Parameters.AddWithValue("@fechafin", fec_fin);
+                        cmd.Parameters.AddWithValue("@articulo", articulo);
 
                         using (SqlDataAdapter da = new SqlDataAdapter(cmd))
                         {

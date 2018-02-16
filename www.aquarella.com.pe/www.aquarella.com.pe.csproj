@@ -194,6 +194,7 @@
     <Content Include="Aquarella\Ventas\panelSalesByMajCat.aspx" />
     <Content Include="Aquarella\Ventas\panelSalesHall.aspx" />
     <Content Include="Aquarella\Ventas\panel_FE.aspx" />
+    <Content Include="Aquarella\Ventas\premioscontinuo.aspx" />
     <Content Include="Aquarella\Ventas\reportlider_afiliadoventa.aspx" />
     <Content Include="Aquarella\Ventas\reportventadetCN.aspx" />
     <Content Include="Aquarella\Ventas\reportventaformaCN.aspx" />
@@ -1376,6 +1377,13 @@
     </Compile>
     <Compile Include="Aquarella\Ventas\panel_FE.aspx.designer.cs">
       <DependentUpon>panel_FE.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Aquarella\Ventas\premioscontinuo.aspx.cs">
+      <DependentUpon>premioscontinuo.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Aquarella\Ventas\premioscontinuo.aspx.designer.cs">
+      <DependentUpon>premioscontinuo.aspx</DependentUpon>
     </Compile>
     <Compile Include="Aquarella\Ventas\reportlider_afiliadoventa.aspx.cs">
       <DependentUpon>reportlider_afiliadoventa.aspx</DependentUpon>

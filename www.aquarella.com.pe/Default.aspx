@@ -73,7 +73,7 @@
                                 </div>
                             </td>
                             <td align="center" width="20%">
-                                <script src="https://d39v39m55yawr.cloudfront.net/assets/clr.js" type="text/javascript"></script>
+                               <%-- <script src="https://d39v39m55yawr.cloudfront.net/assets/clr.js" type="text/javascript"></script>--%>
                                 <a href="https://urtak.com/clr/gbdyygukbddadvikjszwfem3vztoumcd">Aquarella Perú</a>
                             </td>
                         </tr>

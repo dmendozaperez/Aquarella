@@ -207,7 +207,7 @@
             if (txtFirstName.val().length == 0) {
                 bValid = bValid && checkLength(txtFirstSurname, " Primer apellido", 2, 50);
             }
-           // bValid = bValid && checkLength(txtPhone, " Telefono", 7, 20);
+            bValid = bValid && checkLength(txtPhone, " Telefono", 7, 20);
             bValid = bValid && checkLength(txtAddress, " Dirección", 10, 125);
 
             //

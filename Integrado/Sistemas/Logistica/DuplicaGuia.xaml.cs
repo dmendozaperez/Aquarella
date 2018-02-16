@@ -34,6 +34,10 @@ namespace Integrado.Sistemas.Logistica
         {
             Mouse.OverrideCursor = Cursors.Wait;
 
+
+
+
+
             //string _codigo_hash = "";
             //string _error = "";
 

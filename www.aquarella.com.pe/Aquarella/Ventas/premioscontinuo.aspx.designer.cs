@@ -10,7 +10,7 @@
 namespace www.aquarella.com.pe.Aquarella.Ventas {
     
     
-    public partial class reportventaxtallastk {
+    public partial class premioscontinuo {
         
         /// <summary>
         /// Control ScriptManager1.
@@ -164,15 +164,6 @@ namespace www.aquarella.com.pe.Aquarella.Ventas {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.CompareValidator cvDateStartDateEnd;
-        
-        /// <summary>
-        /// Control txtFilter.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtFilter;
         
         /// <summary>
         /// Control btConsult.

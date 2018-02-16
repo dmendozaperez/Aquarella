@@ -12,6 +12,8 @@ namespace CapaEntidad.Bll.Util
 
         public static string _modulo_activo { set; get; }
 
+        public static string _canal_venta { get; set; }
+
         public static Ent_Usuario _usuario_var { set; get; }
 
         public static Boolean _session_activa { set; get; }

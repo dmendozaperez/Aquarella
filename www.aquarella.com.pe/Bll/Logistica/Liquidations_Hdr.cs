@@ -1031,10 +1031,39 @@ namespace www.aquarella.com.pe.bll
             }
             catch (Exception e) { throw new Exception(e.Message, e.InnerException); }
         }
-        public static DataTable get_montoliqnc(string _nroliq)
+        public static decimal get_montoliqnc(string _nroliq)
         {
-            DataTable ds = new DataTable();
-            return ds;
+            Decimal _monto = 0;
+            string sqlquery = "USP_ConsultaMontoLiqNC";
+            try
+            {
+                using (SqlConnection cn = new SqlConnection(Conexion.myconexion()))
+                {
+                    if (cn.State == 0) cn.Open();
+
+                    using (SqlCommand cmd = new SqlCommand(sqlquery, cn))
+                    {
+                        cmd.CommandTimeout = 0;
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        cmd.Parameters.AddWithValue("@liq_id", _nroliq);
+                        cmd.Parameters.Add("@monto_nc", SqlDbType.Money);
+                        cmd.Parameters["@monto_nc"].Direction = ParameterDirection.Output;
+
+                        cmd.ExecuteNonQuery();
+
+                        _monto =Convert.ToDecimal(cmd.Parameters["@monto_nc"].Value);
+                    }
+
+                }
+            }
+            catch (Exception)
+            {
+
+                _monto=0;
+            }
+            return _monto;
+            //DataTable ds = new DataTable();
+            //return ds;
             //try
             //{
             //    object results = new object[1];

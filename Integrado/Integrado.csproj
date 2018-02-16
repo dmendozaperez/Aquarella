@@ -493,6 +493,7 @@
     <Resource Include="Design\Images\inicaja.png" />
     <Resource Include="Design\Images\fincaja.jpg" />
     <Resource Include="Design\Images\fincaja.png" />
+    <Resource Include="Design\Images\BataLogo.png" />
     <Content Include="Esquemas\FACTURA_BOLETA.xml" />
     <Content Include="Esquemas\NOTAS.xml" />
   </ItemGroup>

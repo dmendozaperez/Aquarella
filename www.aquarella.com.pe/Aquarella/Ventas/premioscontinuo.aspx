@@ -1,33 +1,19 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Design/Site.Master" AutoEventWireup="true" CodeBehind="reportventaxtallastk.aspx.cs" Inherits="www.aquarella.com.pe.Aquarella.Ventas.reportventaxtallastk" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Design/Site.Master" AutoEventWireup="true" CodeBehind="premioscontinuo.aspx.cs" Inherits="www.aquarella.com.pe.Aquarella.Ventas.premioscontinuo" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="headCPH" runat="server">
-        <style type="text/css">
+     <style type="text/css">
         .auto-style7 {
-        width: 653px;
-    }
+            width: 464px;
+        }
         .auto-style8 {
-            width: 96px;
-        height: 72px;
-    }
-    .auto-style9 {
-        width: 112px;
-    }
-    .auto-style10 {
-        width: 144px;
-    }
-    .auto-style11 {
-        width: 653px;
-        height: 72px;
-    }
-    .auto-style12 {
-        height: 72px;
-    }
+            width: 125px;
+        }
     </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolderTitle" runat="server">
-    Reporte de venta y stock final por talla
+    Reporte de Premios de Continuidad
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="ContentPlaceHolderPageDesc" runat="server">
-    Consulte entre un rango de fechas, este rango de fecha solo afecta las ventas
+    Consulte entre un rango de fechas de ventas
 </asp:Content>
 <asp:Content ID="Content4" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
       <asp:ScriptManager ID="ScriptManager1" runat="server" 
@@ -53,7 +39,7 @@
        <div style="margin: 10px auto 0 auto;">
         <table width="100%" class="tablagris" cellpadding="4">
             <tr>
-                <td class="auto-style11">
+                <td class="auto-style7">
                     <table>
                         <tr>
                             <td class="f12">
@@ -125,12 +111,6 @@
                                      Operator="GreaterThanEqual" SetFocusOnError="true" Type="Date" 
                                      ValidationGroup="vsConsultForm">*</asp:CompareValidator>
                             </td>
-                            <td class="auto-style9">
-                                Filtrar por articulo</td>
-                <td valign="middle" class="auto-style10"  >
-                                                    <asp:TextBox ID="txtFilter" runat="server" 
-                           Width="102px"></asp:TextBox>
-                </td>
                         </tr>
                     </table>
                 </td>
@@ -138,7 +118,7 @@
                     <asp:Button ID="btConsult" runat="server" Text="Consultar" ValidationGroup="vsConsultForm"
                         CausesValidation="true" OnClick="btConsult_Click" />
                 </td>
-                <td align="left" style="border-left: solid 1px silver;" class="auto-style12">
+                <td align="left" style="border-left: solid 1px silver;">
                     <asp:ImageButton ID="ibExportToExcel" ImageUrl="~/Design/images/Botones/b_toExcel.png"
                         onmouseover="this.style.background='green';" onmouseout="this.style.background=''"
                         runat="server" Height="25px" Width="24px" 
