@@ -240,6 +240,10 @@
                         <HeaderStyle HorizontalAlign="Left" />
                         <ItemStyle HorizontalAlign="Left" />
                         </asp:BoundField>
+                          <asp:BoundField DataField="dnipromotor" HeaderText="Dni-Promotor">
+                        <HeaderStyle HorizontalAlign="Left" />
+                        <ItemStyle HorizontalAlign="Left" />
+                        </asp:BoundField>
                         <asp:BoundField DataField="departamento" 
                             HeaderText="Depart.">
                         <HeaderStyle HorizontalAlign="Left" />

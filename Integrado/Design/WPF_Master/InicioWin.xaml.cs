@@ -58,88 +58,34 @@ namespace Integrado.Design.WPF_Master
         }
         private void btnaquarella_Click(object sender, RoutedEventArgs e)
         {
+            Mouse.OverrideCursor = Cursors.Wait;
             _server = "www.aquarellaperu.com.pe";
             _base_datos = "BdAquarella";
             _user = "sa";
             _password = "Bata2013";
-           
 
-            inicia_modulo(_server, _base_datos, _user, _password);
-            //StreamReader sr = new StreamReader("D:/10002.txt", Encoding.Default);
-            //string _formato_doc = sr.ReadToEnd();
-            //sr.Close();
+            Boolean ini_mod = false;
+            inicia_modulo(_server, _base_datos, _user, _password,ref ini_mod);
 
-
-            //string[] str2 = System.Text.RegularExpressions.Regex.Split(_formato_doc, "<td>");
-
-            //RawPrinterHelper.SendStringToPrinter("aq", str2[0].ToString()); //Imprime texto.
-            //CrearTicket tk = new CrearTicket();
-            //Fe_Sunat_Qr fesunat_qr = new Fe_Sunat_Qr();
-
-            //Carvajal.FEPE.PreSC.Core.GeneratorCdp generatorCdp = new Carvajal.FEPE.PreSC.Core.GeneratorCdp();
-            //byte[]  qr = generatorCdp.GetImageQrCodeFromString(str2[1].ToString().Trim());
-
-            //System.Drawing.Image im = byteArrayToImage(qr);
-            //System.Drawing.Bitmap bmp = new System.Drawing.Bitmap(im, new System.Drawing.Size(100, 100));
-            //tk.HeaderImage = bmp;
-            //tk.PrintQR("AQ");
-
-            //string abrecaj = str2[2].ToString().Trim();
-
-            //RawPrinterHelper.SendStringToPrinter("aq", str2[3].ToString());
-            //tk.CortaTicket();
-
-            //if (abrecaj == "1")
-            //{
-            //    RawPrinterHelper.SendStringToPrinter("aq", "\x1B" + "p" + "\x00" + "\x0F" + "\x96");
-            //}
-
-            //StreamReader srQR = new StreamReader(@"D:\INTERFA\CARVAJAL\F1021545.TXT", Encoding.Default);
-            ////string _formato_doc_QR = srQR.ReadToEnd();
-            ////sr.Close();
-
-            //Carvajal.FEPE.PreSC.Core.GeneratorCdp generatorCdp = new Carvajal.FEPE.PreSC.Core.GeneratorCdp();
-            //byte[] codigo_qr = generatorCdp.GetImageQrCodeFromString(textpipestr);
-
-            //byte[] codigo_qr = fesunat_qr.GetQrSunatInvoiceCdp(_formato_doc_QR);
-
-            //System.Drawing.Image im = byteArrayToImage(codigo_qr);
-            //Bitmap bmp = new Bitmap(im, new System.Drawing.Size(100, 100));
-            //tk.HeaderImage = bmp;
-            //tk.PrintQR("AQ");
-
-            //RawPrinterHelper.SendStringToPrinter("aq", str2[1].ToString());
-
-            //Al cabar de imprimir limpia la linea de todo el texto agregado.
-
-            //string _formato_doc = "";
-            //StreamReader sr = new StreamReader(@"D:\F03000000053.txt", Encoding.Default);
-            //_formato_doc = sr.ReadToEnd();
-            //sr.Close();
-            //Fe_Sunat_Qr qr = new Fe_Sunat_Qr();
-            //qr.GetQrSunatNoteCdp(_formato_doc);
-
-            ////Ticket ticket = new Ticket();
-            ////ticket.TextoCentro("BATA");
-            ////ticket.PrintTicket("AQ");
-            //return;
-            _referenciar_Base_Datos("AQ");
+            if (ini_mod) _referenciar_Base_Datos("AQ");
+            Mouse.OverrideCursor = null;
         }
 
         private void btnbata_Click(object sender, RoutedEventArgs e)
         {
+            Mouse.OverrideCursor = Cursors.Wait;
             _server = "ecommerce.bgr.pe";
             _base_datos = "BD_ECOMMERCE";
             _user = "ecommerce";
             _password = "Bata2018.*@=?++";
+
+            Boolean ini_mod = false;
+
+            inicia_modulo(_server, _base_datos, _user, _password,ref ini_mod);
             
-            inicia_modulo(_server, _base_datos, _user, _password);
-            
-            _referenciar_Base_Datos("BA");
+            if (ini_mod) _referenciar_Base_Datos("BA");
 
-
-
-
+            Mouse.OverrideCursor = null;
 
         }
 
@@ -167,7 +113,7 @@ namespace Integrado.Design.WPF_Master
             }
         }
 
-        private void inicia_modulo(string _server,string _base,string _user,string _password)
+        private void inicia_modulo(string _server,string _base,string _user,string _password,ref Boolean _ini)
         {
             try
             {
@@ -196,10 +142,12 @@ namespace Integrado.Design.WPF_Master
 
                 Boolean inicio_config = Dat_Acceso.getpunto_vta(_entorno);
 
+                _ini = inicio_config;
                 if (!inicio_config)
                 {
-                    btnaquarella.IsEnabled = false;
-                    lblconfig.Content = "!El Entorno del sistema no esta configurado correctamente";
+                    
+                    //btnaquarella.IsEnabled = false;
+                    lblconfig.Content = "!El Entorno del sistema no esta configurado correctamente ó la conexion esta cerrada";
                 }
             }
             catch (Exception)

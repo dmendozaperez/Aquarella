@@ -71,7 +71,7 @@ namespace CapaDato.Bll.Control
             }
             catch
             {
-                _valida = true;
+                _valida = false;
             }
             return _valida;
         }

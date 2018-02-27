@@ -41,6 +41,8 @@
   <ItemGroup>
     <Compile Include="Bll\Admonred\Dat_ClienteVenta.cs" />
     <Compile Include="Bll\Control\Dat_Acceso.cs" />
+    <Compile Include="Bll\Ecommerce\Dat_PrestaShop.cs" />
+    <Compile Include="Bll\Ecommerce\Dat_Urbano.cs" />
     <Compile Include="Bll\Logistica\Dat_ConfigGuia.cs" />
     <Compile Include="Bll\Logistica\Dat_Liquidacion.cs" />
     <Compile Include="Bll\Util\Dat_Banco.cs" />

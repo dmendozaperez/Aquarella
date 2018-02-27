@@ -16,7 +16,7 @@
         Height="710"
         Width="1300"              
         ResizeMode="CanMinimize"                      
-        WindowState="Maximized" Loaded="MetroWindow_Loaded">
+        WindowState="Maximized" Loaded="MetroWindow_Loaded" Activated="MetroWindow_Activated">
     <Controls:MetroWindow.Flyouts>
         <Controls:FlyoutsControl x:Name="flyoutsControl">
             <Controls:Flyout Header="Modal"
@@ -328,7 +328,7 @@
                                     <Rectangle Style="{StaticResource DividerStyle}" />
                                 </StackPanel>
                             </Border>
-                            <Image Margin="6,4,0,2" Source="/Integrado;component/Design/Images/aq_lineal.jpg" Width="205" Grid.Column="0" HorizontalAlignment="Left" />
+                            <Image Name="imglogo" Margin="6,4,0,2" Source="/Integrado;component/Design/Images/aq_lineal.jpg" Width="205" Grid.Column="0" HorizontalAlignment="Left" />
                             <Label x:Name="lblnom_modulo" FontFamily="Georgia" Foreground="WhiteSmoke" FontSize="35" Margin="224,11,0,-5" HorizontalAlignment="Left" Grid.Column="0" Content="aa" Width="auto" FontStretch="Expanded"/>
                             <Rectangle Height="0" VerticalAlignment="Bottom" Fill="WhiteSmoke" HorizontalAlignment="Left" Width="189" Margin="130,0,0,26" />
                             <Label Visibility="Hidden"  FontFamily="Georgia" Foreground="WhiteSmoke" FontSize="10" Width="95" 
@@ -422,7 +422,7 @@
                 </Grid>
                 <Grid Grid.Row="1" >
                     <TabControl  x:Name="tabempaque"  HorizontalAlignment="Left" VerticalAlignment="Top"  Margin="0,-31,0,0" >
-                        <TabItem Header="Liquidaciones para facturar" VerticalAlignment="Top" >
+                        <TabItem Header="Pedidos para facturar" VerticalAlignment="Top" >
                             <Grid Background="#FFE5E5E5" >
                                 <DataGrid Name="dg1" HorizontalAlignment="Left"  Width="1350"   IsReadOnly="True"   AutoGenerateColumns="False" GridLinesVisibility="All" AlternatingRowBackground="#FFD2F1BB"   >
                                     <DataGrid.Columns>
@@ -433,7 +433,7 @@
                                                 </Style>
                                             </DataGridTextColumn.ElementStyle>
                                         </DataGridTextColumn>
-                                        <DataGridTextColumn Binding="{Binding Liq_Id}" ClipboardContentBinding="{x:Null}" Header="Liquidacion">
+                                        <DataGridTextColumn Binding="{Binding Liq_Id}" ClipboardContentBinding="{x:Null}" Header="Nro.Pedido">
                                             <DataGridTextColumn.ElementStyle>
                                                 <Style TargetType="TextBlock">
                                                     <Setter Property="Background" Value="#FFF3CCBE"></Setter>

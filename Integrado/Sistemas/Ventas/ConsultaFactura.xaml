@@ -287,7 +287,7 @@
                                     <Rectangle Style="{StaticResource DividerStyle}" />
                                 </StackPanel>
                             </Border>
-                            <Image Margin="6,4,0,2" Source="/Integrado;component/Design/Images/aq_lineal.jpg" Width="205" Grid.Column="0" HorizontalAlignment="Left" />
+                            <Image Name="imglogo" Margin="6,4,0,2" Source="/Integrado;component/Design/Images/aq_lineal.jpg" Width="205" Grid.Column="0" HorizontalAlignment="Left" />
                             <Label x:Name="lblnom_modulo" FontFamily="Georgia" Foreground="WhiteSmoke" FontSize="35" Margin="224,11,0,-5" HorizontalAlignment="Left" Grid.Column="0" Content="aa" Width="auto" FontStretch="Expanded"/>
                             <Rectangle Height="0" VerticalAlignment="Bottom" Fill="WhiteSmoke" HorizontalAlignment="Left" Width="189" Margin="130,0,0,26" />
                             <Label Visibility="Hidden"  FontFamily="Georgia" Foreground="WhiteSmoke" FontSize="10" Width="95" 

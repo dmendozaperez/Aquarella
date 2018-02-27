@@ -2,8 +2,8 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="headCPH" runat="server">
      <style type="text/css">
         .auto-style7 {
-            width: 464px;
-        }
+             width: 560px;
+         }
         .auto-style8 {
             width: 125px;
         }
@@ -111,6 +111,9 @@
                                      Operator="GreaterThanEqual" SetFocusOnError="true" Type="Date" 
                                      ValidationGroup="vsConsultForm">*</asp:CompareValidator>
                             </td>
+                            <td>
+                                                <asp:CheckBox ID="chkvalida" runat="server" Text="Promotoras en carrera" Font-Bold="true" Checked="false" AutoPostBack="True" OnCheckedChanged="chkresumen_CheckedChanged" />
+                             </td>
                         </tr>
                     </table>
                 </td>
@@ -159,6 +162,7 @@
             <Triggers>
                 <asp:AsyncPostBackTrigger ControlID="btConsult" EventName="click" />
                 <asp:AsyncPostBackTrigger ControlID="gvReturns" EventName="PageIndexChanging" />
+                <asp:AsyncPostBackTrigger ControlID="chkvalida" EventName="CheckedChanged" />
             </Triggers>
         </asp:UpdatePanel>
         <!-- ACTIVITY PANEL -->

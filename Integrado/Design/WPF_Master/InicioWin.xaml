@@ -68,8 +68,8 @@
                 <Button.ToolTip>
                     <ToolTip>
                         <StackPanel>
-                            <TextBlock FontWeight="Bold" TextAlignment="Left" ><Run Text="Modulo de Bata"/></TextBlock>
-                            <TextBlock><Run Text="Ingresara al modulo de Facturacion - Bata."/></TextBlock>
+                            <TextBlock FontWeight="Bold" TextAlignment="Left" ><Run Text="Modulo de E-Commerce"/></TextBlock>
+                            <TextBlock><Run Text="Ingresara al modulo de Facturacion - E-Commerce."/></TextBlock>
                             <TextBlock><Run Text="No lo presione hasta estar seguro de ingresar."/></TextBlock>
                         </StackPanel>
                     </ToolTip>
@@ -81,7 +81,7 @@
                         <ColumnDefinition Width="80*" />
                     </Grid.ColumnDefinitions>
                     <Image Margin="-35,6,0,-6" Source="/Integrado;component/Design/Images/bata.ico" Width="32" HorizontalAlignment="Left"/>
-                    <TextBlock Text="SISTEMA BATA" VerticalAlignment="Center" FontSize="16"
+                    <TextBlock Text="E-COMMERCE" VerticalAlignment="Center" FontSize="16"
 						Margin="19,6,-2,4" HorizontalAlignment="Center" Grid.ColumnSpan="2" Grid.Column="1"/>
                 </Grid>
             </Button>

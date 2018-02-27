@@ -41,6 +41,14 @@ namespace Epson_Ticket
                             if (dt.Rows.Count > 0)
                             {
                                 #region<VARIABLES DE EMPRESA TICKETS>
+
+                                decimal _costo_envio = 0;
+
+                                if (Ent_Global._canal_venta== "BA")
+                                {
+                                    _costo_envio = Convert.ToDecimal(dt.Rows[0]["ven_costo_e"]);
+                                }
+
                                 string _marca_emp = dt.Rows[0]["Alm_Descripcion"].ToString();
                                 string _direccion_emp = dt.Rows[0]["Alm_Direccion"].ToString();
                                 string _Telefono_emp = dt.Rows[0]["Alm_Telefono"].ToString();
@@ -64,15 +72,22 @@ namespace Epson_Ticket
                                 DateTime _fecha_doc = Convert.ToDateTime(dt.Rows[0]["Ven_Fecha"]);
                                 string _fecha_doc_text = "Fecha : " + _fecha_doc.ToString("dd/MM/yyyy") + " , " + _fecha_doc.ToString("hh:mm tt");
                                 decimal _igv = Convert.ToDecimal(dt.Rows[0]["Ven_Igv_Porc"].ToString());
+
                                 decimal _percepcionp = Convert.ToDecimal(dt.Rows[0]["Ven_PercepcionP"].ToString());
                                 decimal _percepcionm = Convert.ToDecimal(dt.Rows[0]["Ven_PercepcionM"].ToString());
                                 string _cod_hash = dt.Rows[0]["cod_hash"].ToString();
                                 String _estadook = dt.Rows[0]["EstadoOk"].ToString();
                                 Decimal _monto_nc = Convert.ToDecimal(dt.Rows[0]["monto_nc"].ToString());
                                 string _referencia_nc = dt.Rows[0]["referencia_nc"].ToString();
-                                #endregion
-                                #region<VARIABLES DE CLIENTES>
-                                string _cliente_nom = dt.Rows[0]["nombres"].ToString();
+                                string _ven_pst_ref = "";
+                                if (Ent_Global._canal_venta == "BA")
+                                {
+                                    _ven_pst_ref= dt.Rows[0]["ven_pst_ref"].ToString();
+                                }
+
+                                    #endregion
+                                    #region<VARIABLES DE CLIENTES>
+                                    string _cliente_nom = dt.Rows[0]["nombres"].ToString();
                                 string _cliente_dni_ruc = dt.Rows[0]["Bas_Documento"].ToString();
                                 #endregion
                                 #region<FORMATO DE IMPRESION FACTURA O BOLETA>
@@ -85,6 +100,12 @@ namespace Epson_Ticket
                                 tk.TextoIzquierda(_autoriacion_imp);
                                 tk.TextoIzquierda(_serie_imp);
                                 tk.TextoIzquierda(_tipo_numero);
+
+                                if (Ent_Global._canal_venta == "BA")
+                                {
+                                    tk.TextoIzquierda("Ref.Pedido " + _ven_pst_ref);
+                                }
+
                                 tk.TextoIzquierda("");
                                 tk.TextoCentro("DETALLE DE COMPRA");
                                 tk.TextoIzquierda("");
@@ -116,19 +137,44 @@ namespace Epson_Ticket
                                     descuento += _comision;
                                 }
 
-                                double mtoigv = Math.Round((Double.Parse(dSubtotal.ToString()) - Convert.ToDouble(descuento)) * double.Parse(_igv.ToString()), 2, MidpointRounding.AwayFromZero);
+                                //dSubtotal += _costo_envio;
+                                double mtoigv = 0;
+                                if (Ent_Global._canal_venta== "BA")
+                                {
+                                    decimal _igv_monto = Convert.ToDecimal(dt.Rows[0]["ven_igv"].ToString());
+                                    dSubtotal = Math.Round(dSubtotal, 1, MidpointRounding.AwayFromZero);
+                                    //mtoigv = Math.Round(((Double.Parse(dSubtotal.ToString()) - Convert.ToDouble(descuento)) + Convert.ToDouble(_costo_envio) ) * double.Parse(_igv.ToString()), 1, MidpointRounding.AwayFromZero);
+                                    mtoigv = Math.Round(Double.Parse(_igv_monto.ToString()), 1, MidpointRounding.AwayFromZero);
+                                }
+                                else
+                                { 
+                                    mtoigv = Math.Round((Double.Parse(dSubtotal.ToString()) - Convert.ToDouble(descuento)) * double.Parse(_igv.ToString()), 2, MidpointRounding.AwayFromZero);
+                                }
                                 Int32 porcigv = Convert.ToInt32((_igv * 100));
                                 decimal totalpagar = ((dSubtotal - descuento) + Convert.ToDecimal(mtoigv)) + _percepcionm;
 
                                 tk.lineasGuio();
                                 tk.AgregarFooter("     " + TruncateAt("SUB-TOTAL".ToString().PadRight(16), 16) + TruncateAt("S/".ToString().PadRight(3), 3) + TruncateAt(dSubtotal.ToString("#0.00").PadLeft(14), 14));
                                 tk.AgregarFooter("     " + TruncateAt("DESCUENTO(-)".ToString().PadRight(16), 16) + TruncateAt("S/".ToString().PadRight(3), 3) + TruncateAt(descuento.ToString("#0.00").PadLeft(14), 14));
+
+                                //if (Ent_Global._canal_venta == "BA")
+                                //{
+                                //    tk.AgregarFooter("     " + TruncateAt("COST.ENVI(+)".ToString().PadRight(16), 16) + TruncateAt("S/".ToString().PadRight(3), 3) + TruncateAt(_costo_envio.ToString("#0.00").PadLeft(14), 14));
+                                //}
+
                                 tk.AgregarFooter("     " + TruncateAt("IGV " + porcigv + "%".ToString().PadRight(16), 16) + TruncateAt("S/".ToString().PadRight(3), 3) + TruncateAt(mtoigv.ToString("#0.00").PadLeft(14), 14));
                                 tk.AgregarFooter("     " + TruncateAt("------------".ToString().PadRight(14), 14));
 
                                 if (_estadook != "2")
                                 {
-                                    tk.AgregarFooter("     " + TruncateAt("TOTAL".ToString().PadRight(16), 16) + TruncateAt("S/".ToString().PadRight(3), 3) + TruncateAt(((dSubtotal - descuento) + Convert.ToDecimal(mtoigv)).ToString("#0.00").PadLeft(14), 14));
+                                    if (Ent_Global._canal_venta == "BA")
+                                    {
+                                        tk.AgregarFooter("     " + TruncateAt("TOTAL".ToString().PadRight(16), 16) + TruncateAt("S/".ToString().PadRight(3), 3) + TruncateAt((((dSubtotal - descuento) ) + Convert.ToDecimal(mtoigv)).ToString("#0.00").PadLeft(14), 14));
+                                    }
+                                    else
+                                    { 
+                                        tk.AgregarFooter("     " + TruncateAt("TOTAL".ToString().PadRight(16), 16) + TruncateAt("S/".ToString().PadRight(3), 3) + TruncateAt(((dSubtotal - descuento) + Convert.ToDecimal(mtoigv)).ToString("#0.00").PadLeft(14), 14));
+                                    }
                                 }
 
                                 if (_estadook == "1")

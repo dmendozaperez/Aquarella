@@ -209,6 +209,10 @@ CodeBehind="rptComisionLider.aspx.cs" Inherits="www.aquarella.com.pe.Aquarella.V
                         <HeaderStyle HorizontalAlign="Left" />
                         <ItemStyle HorizontalAlign="Left" />
                         </asp:BoundField>
+                         <asp:BoundField DataField="dnilider" HeaderText="Dni-Lider">
+                        <HeaderStyle HorizontalAlign="Left" />
+                        <ItemStyle HorizontalAlign="Left" />
+                        </asp:BoundField>
                         <asp:BoundField DataField="Total Pares" HeaderText="Total Pares">
                         <HeaderStyle HorizontalAlign="Center" />
                         <ItemStyle HorizontalAlign="Center" />
@@ -225,6 +229,11 @@ CodeBehind="rptComisionLider.aspx.cs" Inherits="www.aquarella.com.pe.Aquarella.V
                         </asp:BoundField>
                         <asp:BoundField DataField="% de Comision" DataFormatString="{0:N0}" 
                             HeaderText="% de Comision">
+                        <HeaderStyle HorizontalAlign="Center" />
+                        <ItemStyle HorizontalAlign="Center" />
+                        </asp:BoundField>
+                         <asp:BoundField DataField="pmargen" DataFormatString="{0:C}" 
+                            HeaderText="Margen">
                         <HeaderStyle HorizontalAlign="Center" />
                         <ItemStyle HorizontalAlign="Center" />
                         </asp:BoundField>

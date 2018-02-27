@@ -171,6 +171,7 @@ namespace Integrado.Sistemas.Ventas
         }
         private void Inicio_Windows()
         {
+            Integrado.Bll.Basico.cambio_img(imglogo);
             DataTable dt = this.createStructureDataTable();
             dtv_grilla = new DataView(dt);
 

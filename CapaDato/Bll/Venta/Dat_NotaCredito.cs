@@ -134,7 +134,7 @@ namespace CapaDato.Bll.Venta
                 results[0] = Convert.ToString(cmd.Parameters["@not_id"].Value);
                 return results;
             }
-            catch
+            catch(Exception exc)
             {
                 return null;
                 //        connection.Close();

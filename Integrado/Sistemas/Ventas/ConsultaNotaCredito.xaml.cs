@@ -89,6 +89,7 @@ namespace Integrado.Sistemas.Ventas
         }
         private void Inicio_Windows()
         {
+            Integrado.Bll.Basico.cambio_img(imglogo);
             DateTime fecha = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1);
             dtpdesde.Text = fecha.ToString();
             dtphasta.Text = DateTime.Today.ToString();

@@ -61,13 +61,14 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>sistema_ico.ico</ApplicationIcon>
+    <ApplicationIcon>
+    </ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestCertificateThumbprint>611AD95EF1504AAF843BFA48C4A02851D7E471C3</ManifestCertificateThumbprint>
+    <ManifestCertificateThumbprint>552CE31FA601BB16F9A6A67914206EAA61536C82</ManifestCertificateThumbprint>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestKeyFile>Integrado_ClaveTemporal.pfx</ManifestKeyFile>
+    <ManifestKeyFile>Integrado_TemporaryKey.pfx</ManifestKeyFile>
   </PropertyGroup>
   <PropertyGroup>
     <GenerateManifests>true</GenerateManifests>
@@ -75,9 +76,16 @@
   <PropertyGroup>
     <SignManifests>false</SignManifests>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationManifest>Properties\app.manifest</ApplicationManifest>
+  </PropertyGroup>
+  <PropertyGroup>
+    <TargetZone>LocalIntranet</TargetZone>
+  </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Carvajal.FEPE.PreSC">
-      <HintPath>..\..\..\Generacion Hash\Generacion_Hash\Modulo_Hash\bin\x86\Debug\Carvajal.FEPE.PreSC.dll</HintPath>
+    <Reference Include="Carvajal.FEPE.PreSC, Version=2.2.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Debug\Carvajal.FEPE.PreSC.dll</HintPath>
     </Reference>
     <Reference Include="CrystalDecisions.CrystalReports.Engine, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -99,6 +107,10 @@
     <Reference Include="DevExpress.Xpf.Grid.v15.1, Version=15.1.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
     <Reference Include="DevExpress.Xpf.Grid.v15.1.Core, Version=15.1.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
     <Reference Include="DevExpress.Xpf.LayoutControl.v15.1, Version=15.1.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="Gma.QrCodeNet.Encoding, Version=0.4.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Debug\Gma.QrCodeNet.Encoding.dll</HintPath>
+    </Reference>
     <Reference Include="GrayscaleEffect">
       <HintPath>..\GrayscaleEffect.dll</HintPath>
     </Reference>
@@ -111,15 +123,29 @@
     <Reference Include="Microsoft.Threading.Tasks.Extensions.Desktop">
       <HintPath>..\..\..\..\..\..\..\..\Sist_Integrado\Version 1.3\Integrado\Integrado\bin\Debug\Microsoft.Threading.Tasks.Extensions.Desktop.dll</HintPath>
     </Reference>
+    <Reference Include="MySql.Data">
+      <HintPath>..\..\..\E-COMMERCE\Leer de EComerce\LeerPedido\bin\Debug\MySql.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.11.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="ReachFramework" />
+    <Reference Include="RestSharp, Version=105.0.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\RestSharp.105.0.1\lib\net4\RestSharp.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="sapbusinessobjects.wpf.viewer, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
     <Reference Include="SAPBusinessObjects.WPF.ViewerShared, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Data.Entity" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Printing" />
     <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.ServiceModel" />
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Extensions" />
@@ -132,8 +158,9 @@
     <Reference Include="System.Xaml">
       <RequiredTargetFramework>4.0</RequiredTargetFramework>
     </Reference>
-    <Reference Include="UBL20">
-      <HintPath>..\..\..\Generacion Hash\Generacion_Hash\Modulo_Hash\bin\x86\Debug\UBL20.dll</HintPath>
+    <Reference Include="UBL20, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Debug\UBL20.dll</HintPath>
     </Reference>
     <Reference Include="UIAutomationProvider" />
     <Reference Include="UIAutomationTypes" />
@@ -168,6 +195,9 @@
     <Compile Include="Design\WPF_Master\OpcionesMenu.xaml.cs">
       <DependentUpon>OpcionesMenu.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Prestashop\Conexion.cs" />
+    <Compile Include="Prestashop\LeerPedidos.cs" />
+    <Compile Include="Prestashop\TraerPedidos.cs" />
     <Compile Include="Reportes\ReportGuiaRem.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -221,6 +251,7 @@
     <Compile Include="Sistemas\Ventas\NotaCredito.xaml.cs">
       <DependentUpon>NotaCredito.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Urbano\EnviaPedido.cs" />
     <Page Include="Design\Control\LoginForm.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -325,6 +356,9 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
     <Content Include="Certificado\CDBATA.pfx" />
+    <None Include="Integrado_TemporaryKey.pfx" />
+    <None Include="packages.config" />
+    <None Include="Properties\app.manifest" />
     <None Include="Service References\ServiceBata\ws_bata1.disco" />
     <None Include="Service References\ServiceBata\Integrado.ServiceBata.ws_control_errorResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
@@ -384,6 +418,10 @@
     <ProjectReference Include="..\MahApps.Metro\MahApps.Metro.csproj">
       <Project>{abc7f1dc-e843-48d4-93d2-4721755fd1fa}</Project>
       <Name>MahApps.Metro</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\WSPrestashop\WSPrestashop.csproj">
+      <Project>{d0e8aba3-bbda-46f4-9dda-14c1395d8bb7}</Project>
+      <Name>WSPrestashop</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

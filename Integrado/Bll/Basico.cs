@@ -1,10 +1,11 @@
-﻿using System;
+﻿using CapaEntidad.Bll.Util;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Text;
-
+using System.Windows.Media.Imaging;
 
 namespace Integrado.Bll
 {
@@ -205,5 +206,29 @@ namespace Integrado.Bll
             }
         }
         #endregion
+
+        public static void cambio_img(System.Windows.Controls.Image imglogo)
+        {
+            if (Ent_Global._canal_venta == "AQ")
+            {
+                var uriSource = new Uri("/Integrado;component/Design/Images/aq_lineal.jpg", UriKind.Relative);
+                imglogo.Source = new BitmapImage(uriSource);
+
+
+
+            }
+            else
+            {
+                var uriSource = new Uri("/Integrado;component/Design/Images/BataLogo.png", UriKind.Relative);
+                imglogo.Source = new BitmapImage(uriSource);
+
+                //#region<ENVIO DATA URBANO>
+                //EnviaPedido envia = new EnviaPedido();
+                //envia.sendUrbano();
+                ////envia.send();
+                //#endregion
+
+            }
+        }
     }
 }

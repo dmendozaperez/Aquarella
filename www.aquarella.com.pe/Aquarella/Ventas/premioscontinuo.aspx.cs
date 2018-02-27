@@ -53,7 +53,7 @@ namespace www.aquarella.com.pe.Aquarella.Ventas
             {
                 msnMessage.Visible = false;
 
-                Session[_nameSessionData] = invoice.get_PremiosContinuo(Convert.ToDateTime(txtDateStart.Text), Convert.ToDateTime(txtDateEnd.Text));
+                Session[_nameSessionData] = invoice.get_PremiosContinuo(Convert.ToDateTime(txtDateStart.Text), Convert.ToDateTime(txtDateEnd.Text),chkvalida.Checked);
 
                 DataSet ds = (DataSet)Session[_nameSessionData];
 
@@ -112,6 +112,11 @@ namespace www.aquarella.com.pe.Aquarella.Ventas
         protected void gvReturns_DataBinding(object sender, EventArgs e)
         {
 
+        }
+
+        protected void chkresumen_CheckedChanged(object sender, EventArgs e)
+        {
+            consultar();
         }
     }
 }

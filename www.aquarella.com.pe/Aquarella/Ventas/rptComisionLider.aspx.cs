@@ -109,6 +109,13 @@ namespace www.aquarella.com.pe.Aquarella.Ventas
             //    formForCustomer();
             gvReturns.DataSourceID = odsReturns.ID;
             gvReturns.DataBind();
+
+
+            if ((_user._usu_tip_id == "01") || (_user._usu_tip_id == "03") || (_user._usu_tip_id == "02") || (_user._usu_tip_id== "09") )
+            {
+                gvReturns.Columns.RemoveAt(7);
+            }
+
         }
 
         protected void odsReturns_Selected(object sender, ObjectDataSourceStatusEventArgs e)

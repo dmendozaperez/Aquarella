@@ -444,7 +444,7 @@ namespace www.aquarella.com.pe.bll
             return dt;
         }
 
-        public static DataSet get_PremiosContinuo(DateTime fe_ini, DateTime fec_fin)
+        public static DataSet get_PremiosContinuo(DateTime fe_ini, DateTime fec_fin,Boolean valida)
         {
             DataSet ds = null;
             string sqlquery = "USP_ConsultaPremios";
@@ -458,6 +458,7 @@ namespace www.aquarella.com.pe.bll
                         cmd.CommandType = CommandType.StoredProcedure;
                         cmd.Parameters.AddWithValue("@FECHA_INI_3", fe_ini);
                         cmd.Parameters.AddWithValue("@FECHA_FIN_3", fec_fin);
+                        cmd.Parameters.AddWithValue("@VALIDA", valida);
 
                         using (SqlDataAdapter da = new SqlDataAdapter(cmd))
                         {

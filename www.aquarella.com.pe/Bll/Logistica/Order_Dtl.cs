@@ -91,6 +91,7 @@ namespace www.aquarella.com.pe.bll
         /// </summary>
         public decimal _commission { get; set; }
         public decimal _commissionigv { get; set; }
+        public Decimal _det_dcto_sigv { get; set; }
         /// <summary>
         /// % de comision
         /// </summary>

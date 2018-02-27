@@ -23,6 +23,7 @@ using CapaDato.Bll.Control;
 using Integrado.Sistemas.Logistica;
 using Integrado.Sistemas.Ventas;
 using CapaDato.Bll.Util;
+using Integrado.Urbano;
 
 namespace Integrado.Design.WPF_Master
 {
@@ -41,6 +42,9 @@ namespace Integrado.Design.WPF_Master
         public OpcionesMenu()
         {
             InitializeComponent();
+
+            //if (Ent_Global._pvt_nombre == null) return;
+            
             //DataContext = new MainViewModel();
             //MainViewModel._principal = this;
             lblnom_modulo.Content = "{" + Ent_Global._nom_modulo.ToString() + "}";
@@ -79,11 +83,28 @@ namespace Integrado.Design.WPF_Master
                 //this.lin1.Width = 321;
                 //this.lbldupl.Visibility = Visibility.Hidden;
                 Dat_Basico.VerificaCierreVenta();
-            }                
+            }
+            DispatcherTimer dispatcherTimerE = new DispatcherTimer();
+            if (Ent_Global._canal_venta != "AQ")
+            {
+                dispatcherTimerE.Tick += new EventHandler(dispatcherTimerE_Tick);
+                dispatcherTimerE.Interval = new TimeSpan(0, 0, 1);
+                dispatcherTimerE.Start();
+            }
 
+
+        }
+        private void dispatcherTimerE_Tick(object sender, EventArgs e)
+        {
+            #region<ENVIO DATA URBANO>
+            EnviaPedido envia = new EnviaPedido();
+            envia.sendUrbano();
+            //envia.send();
+            #endregion
         }
         private void dispatcherTimer_Tick(object sender, EventArgs e)
         {
+
             lblhora.Content = DateTime.Now.ToLongTimeString();
             if (Ent_Global._pvt_directo)
             {
@@ -102,19 +123,29 @@ namespace Integrado.Design.WPF_Master
         }
         private void inicio()
         {
-            
-            if  (Ent_Global._canal_venta == "AQ")
-            {
-                var uriSource = new Uri("/Integrado;component/Design/Images/aq_lineal.jpg", UriKind.Relative);
-                imglogo.Source = new BitmapImage(uriSource);
-            }
-            else
-            {
-                var uriSource = new Uri("/Integrado;component/Design/Images/BataLogo.png", UriKind.Relative);
-                imglogo.Source = new BitmapImage(uriSource);
-            }
+            Integrado.Bll.Basico.cambio_img(imglogo);
+            //if  (Ent_Global._canal_venta == "AQ")
+            //{
+            //    var uriSource = new Uri("/Integrado;component/Design/Images/aq_lineal.jpg", UriKind.Relative);
+            //    imglogo.Source = new BitmapImage(uriSource);
 
-            
+
+               
+            //}
+            //else
+            //{
+            //    var uriSource = new Uri("/Integrado;component/Design/Images/BataLogo.png", UriKind.Relative);
+            //    imglogo.Source = new BitmapImage(uriSource);
+
+            //    //#region<ENVIO DATA URBANO>
+            //    //EnviaPedido envia = new EnviaPedido();
+            //    //envia.sendUrbano();
+            //    ////envia.send();
+            //    //#endregion
+
+            //}
+
+
 
             MetroDialogOptions.ColorScheme = MetroDialogColorScheme.Accented;
             if (!(Ent_Global._session_activa))

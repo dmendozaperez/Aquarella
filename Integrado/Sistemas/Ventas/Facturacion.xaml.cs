@@ -92,6 +92,7 @@ namespace Integrado.Sistemas.Ventas
         private void InicioWindows()
         {
             MetroDialogOptions.ColorScheme = MetroDialogColorScheme.Accented;
+            Integrado.Bll.Basico.cambio_img(imglogo);
             Mouse.OverrideCursor = Cursors.Wait;
             chkbarra.IsChecked = true;
             determina_paquete();

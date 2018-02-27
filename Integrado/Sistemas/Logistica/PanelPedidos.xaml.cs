@@ -18,6 +18,9 @@ using Integrado.Design.WPF_Master;
 using System.Data;
 using CapaDato.Bll.Logistica;
 using Integrado.Sistemas.Ventas;
+using Integrado.Prestashop;
+using System.Threading.Tasks;
+
 namespace Integrado.Sistemas.Logistica
 {
     /// <summary>
@@ -103,7 +106,17 @@ namespace Integrado.Sistemas.Logistica
         private void InicioWindows()
         {
             MetroDialogOptions.ColorScheme = MetroDialogColorScheme.Accented;
-            refrescagrilla();
+            Integrado.Bll.Basico.cambio_img(imglogo);
+            if (Ent_Global._canal_venta == "AQ")
+            {
+                refrescagrilla();
+            }
+            else
+            {
+                cargar_prestashop();
+            }
+
+            //refrescagrilla();
         }
         public void refrescagrilla()
         {
@@ -161,9 +174,70 @@ namespace Integrado.Sistemas.Logistica
 
         private void btnrefresh_Click(object sender, RoutedEventArgs e)
         {
-            refrescagrilla();
+            if (Ent_Global._canal_venta== "AQ")
+            { 
+                refrescagrilla();
+            }
+            else
+            {
+                cargar_prestashop();
+            }
+
         }
 
+        public async void refrescagrilla_prestashop()
+        {           
+            try
+            {
+
+                //dg1.AutoGenerateColumns = false;
+                dt = await Task.Run(()=>Dat_Liquidacion.liquidacionXfacturar());
+
+                dg1.ItemsSource = dt.DefaultView;
+         
+                totales(dt);
+            }
+            catch (Exception exc)
+            {
+              
+            }
+           
+        }
+        private async  void cargar_prestashop()
+        {
+            var metroWindow = this;
+            metroWindow.MetroDialogOptions.ColorScheme = MetroDialogOptions.ColorScheme;
+            ProgressDialogController ProgressAlert = null;
+            LeerPedidos carga_data = null;
+            try
+            {
+                carga_data = new LeerPedidos();
+
+                ProgressAlert = await this.ShowProgressAsync(Ent_Msg.msgcargando, "Espere un momento por favor, cargando pedidos");  //show message
+                ProgressAlert.SetIndeterminate();
+                string _cargar_data =await Task.Run(() =>carga_data.ImportaDataPrestaShop());
+                if (_cargar_data.Length==0)
+                {
+                    //await Task.Run(() => refrescagrilla_prestashop());
+                    dt = await Task.Run(() => Dat_Liquidacion.liquidacionXfacturar());
+                    await ProgressAlert.CloseAsync();
+                    dg1.AutoGenerateColumns = false;
+                    dg1.ItemsSource = dt.DefaultView;
+                    totales(dt);
+                }
+                else
+                {                    
+                    await ProgressAlert.CloseAsync();
+                    await metroWindow.ShowMessageAsync(Ent_Msg.msginfomacion, "ERROR EN LA IMPORTACION DE DATOS.. POR FAVOR CONSULTE CON SISTEMAS..==>> TIPO DE ERROR (" + _cargar_data + ")", MessageDialogStyle.Affirmative, metroWindow.MetroDialogOptions);
+                }
+               
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
         private void txtbuscar_TextChanged(object sender, TextChangedEventArgs e)
         {
             try
@@ -335,6 +409,11 @@ namespace Integrado.Sistemas.Logistica
                 this.Close();
             
             }
+
+        }
+
+        private void MetroWindow_Activated(object sender, EventArgs e)
+        {
 
         }
     }
