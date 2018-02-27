@@ -20,10 +20,10 @@ namespace informativa.aquarella.com.oe.Controllers
 
             //string ruta = Server.MapPath("~/Slider");
 
-           
+
             //string[] _archivos_foto = Directory.GetFiles(@ruta, "*.png");
 
-            //for (Int32 i=0;i<_archivos_foto.Length;++i)
+            //for (Int32 i = 0; i < _archivos_foto.Length; ++i)
             //{
             //    Imagen img = new Imagen();
             //    img.name = Path.GetFileNameWithoutExtension(@_archivos_foto[i].ToString());
@@ -33,8 +33,18 @@ namespace informativa.aquarella.com.oe.Controllers
             //}
 
             //return View(imagen);
-            return View();
+            return View(lista());
         }
+
+        public List<Ent_PasarelaDetalle> lista()
+        {
+            PasarelaDA pasarela = new PasarelaDA();
+            List<Ent_PasarelaDetalle> listPasarela = new List<Ent_PasarelaDetalle>();
+            listPasarela = pasarela.get_listaPasarelaDetalle();
+
+            return listPasarela;
+        }
+
 
         public ActionResult About()
         {

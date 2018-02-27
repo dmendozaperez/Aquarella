@@ -421,15 +421,23 @@ namespace Integrado.Sistemas.Ventas
 
             if (Ent_Global._canal_venta != "AQ")
             {
-                ///                 
-                lblmensaje.Content = " > No puede facturar un pedido sin ningun artículo empacado.";
+                decimal saldo = 0;
+                decimal despacho =Convert.ToDecimal(lblcantidade.Content);
 
-                await metroWindow.ShowMessageAsync(Ent_Msg.msginfomacion, "No puede facturar un pedido sin ningun artículo empacado.", MessageDialogStyle.Affirmative, metroWindow.MetroDialogOptions);
+                saldo = (_liq_cantidad - despacho);
 
-                ///               
-                validaf = 1;
-                return validaf;
+                if (saldo!=0)
+                {
+                    lblmensaje.Content = " > Tiene que despachar el total de articulos del pedido.";
+
+                    await metroWindow.ShowMessageAsync(Ent_Msg.msginfomacion, "Tiene que despachar el total de articulos del pedido.", MessageDialogStyle.Affirmative, metroWindow.MetroDialogOptions);
+
+                    ///               
+                    validaf = 1;
+                    return validaf;
+                }
             }
+
 
                 return validaf;
         }
