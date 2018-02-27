@@ -92,8 +92,9 @@
     <Reference Include="System.Configuration" />
     <Reference Include="System.Web.Services" />
     <Reference Include="System.EnterpriseServices" />
-    <Reference Include="UBL20">
-      <HintPath>D:\dllAquarela\UBL20.dll</HintPath>
+    <Reference Include="UBL20, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\UBL20.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>

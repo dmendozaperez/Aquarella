@@ -418,7 +418,20 @@ namespace Integrado.Sistemas.Ventas
                 validaf = 1;
                 return validaf;
             }
-            return validaf;
+
+            if (Ent_Global._canal_venta != "AQ")
+            {
+                ///                 
+                lblmensaje.Content = " > No puede facturar un pedido sin ningun artículo empacado.";
+
+                await metroWindow.ShowMessageAsync(Ent_Msg.msginfomacion, "No puede facturar un pedido sin ningun artículo empacado.", MessageDialogStyle.Affirmative, metroWindow.MetroDialogOptions);
+
+                ///               
+                validaf = 1;
+                return validaf;
+            }
+
+                return validaf;
         }
         private void deshabilita_controles()
         {
