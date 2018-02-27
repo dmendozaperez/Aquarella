@@ -1,0 +1,40 @@
+﻿@model informativa.aquarella.com.oe.Models.LoginModel
+@{
+    Layout = null;
+    Layout = "~/Views/Shared/_LayoutMantenedor.cshtml";
+}
+
+@section Scripts
+{
+    <script type="text/javascript">
+
+        function InvalidMsg(textbox,str) {
+
+            if (textbox.value.length == 0) {
+                textbox.setCustomValidity(str);
+            }
+            else {
+                    textbox.setCustomValidity('');
+            }
+            return true;
+        }
+    </script>
+}
+<link href="~/Content/AdminLTE.min.css" rel="stylesheet" />
+<div class="page-title-containerM">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12 wow fadeIn">
+                <i class="fa fa-user"></i>
+                <h1>Bienvenido al Sistema./</h1>
+                @{informativa.aquarella.com.oe.Models.Ent_Usuario user = (informativa.aquarella.com.oe.Models.Ent_Usuario)HttpContext.Current.Session[informativa.aquarella.com.oe.Models.Util.Ent_Constantes.NameSessionUser];}
+                <p>@user.usu_nombre</p>
+            </div>
+            
+
+        </div>
+    </div>
+</div>
+<section class="content">
+   
+</section>

@@ -1,0 +1,445 @@
+﻿@using informativa.aquarella.com.oe.Models
+@model Ent_Pasarela
+@{
+    ViewBag.Title = "Control de Generacion de Vales";
+    Layout = "~/Views/Shared/_LayoutMantenedor.cshtml";
+}
+<link href="~/Content/jasny-bootstrap.min.css" rel="stylesheet" />
+<style>
+    img, object {
+        max-height: 100%;
+        max-width: 100%;
+    }
+
+    img {
+        border: 0 none;
+        height: auto;
+        max-width: 100%;
+        vertical-align: middle;
+    }
+
+    .table {
+        margin-bottom: 0px;
+    }
+
+    a {
+        cursor: pointer;
+    }
+
+    .img-polaroid {
+        background-color: #fff;
+        border: 1px solid rgba(0, 0, 0, 0.2);
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        padding: 4px;
+        width: 200px;
+        height: 160px;
+    }
+
+    .img-fondo {
+        width: 100%;
+        height: 100%;
+        text-align: center;
+        background-color: #EEEEEE;
+    }
+
+    textarea {
+        resize: none;
+    }
+</style>
+
+<div class="page-title-containerM">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-10 wow fadeIn">
+                <i class="fa fa-newspaper-o"></i>
+                <h1>Nueva Pasarela /</h1>
+                <p>Permite agrupar imagenes para una nueva pasarela de inicio.</p>
+            </div>
+            <div class="col-sm-2 wow fadeIn">
+                <a href="@Url.Action("ListarPasarela", "Pasarela")"><i class="fa fa-align-justify fa-2x"><p>Listar</p></i></a>
+            </div>
+
+        </div>
+    </div>
+</div>
+<br />
+<div class="slider-container">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-10 col-sm-offset-1 slider">
+                <div class="box box-body box-primary">
+
+                    <div class="box-body" id="lista">
+                        <div class="modal-body">
+                            <table class="table table-striped" RULES="none">
+
+                                <tr>
+                                    <td colspan="1" valign="middle"><label for="nombre">Titulo</label></td>
+                                    <td colspan="1">
+                                        <input type="text" id="titulo" value="" placeholder="Ingrese el Titulo" autofocus class="form-control" oninvalid="InvalidMsg(this, 'Ingrese el comcepto')" required="required" />
+                                    </td>
+                                    <td colspan="1" valign="middle"><label for="nombre">Descripcion</label></td>
+                                    <td colspan="1">
+                                        <input type="text" id="descripcion" value="" placeholder="Ingrese la Descripcion" autofocus class="form-control" oninvalid="InvalidMsg(this, 'Ingrese el comcepto')" required="required" />
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="1" valign="middle">
+                                        <input id="activarPredeterminado" type="checkbox" name="activarPrincial">
+                                    </td>
+                                    <td colspan="1" valign="middle" style="text-align:left">
+                                        <label for="nombre"> Establecer como pasarela predeterminada</label>
+                                    </td>
+                                    <td colspan="2" valign="middle" align="right">
+                                        <input type="submit" onclick="GuardarPasarela()" id="result" value="Guardar" class="btn btn-primary" />
+                                    </td>
+
+                                </tr>
+
+                            </table>
+                            <div class="color: White; background-color: #333; font-weight: bold;">
+                                <table class="table table-striped" RULES="none">
+                                    <tr>
+                                        <td colspan="4" valign="middle" style="color: White; background-color: #333; font-weight: bold;">
+                                            Lista de Imagenes
+                                        </td>
+                                    </tr>
+                                </table>
+
+                            </div>
+                            <table style="height:20px;" id="tabla" class="table table-striped">
+
+                                <tr style="background-color: rgb(204, 204, 204);" border="2px" id="1" class="FilaDatos">
+
+                                    <td align="center" style="text-align:center;vertical-align:middle;width:30%;height:20px;padding-bottom:0px;padding-top:0px;color: black; font-weight: bold;"><p style="text-align: center;"><b>Orden</b></p></td>
+                                    <td align="center" style="text-align:center;vertical-align:middle;width:50%;height:20px;padding-bottom:0px;padding-top:0px;color: black; font-weight: bold;"><label>Imagen</label></td>
+                                    <td vertical-align="middle" style="text-align:center;vertical-align:middle;width:20%;height:20px;;padding-bottom:0px;padding-top:0px;color: black; font-weight: bold;" align="center">
+                                        <div id="cabeceraDetalle">
+                                            <a title='Agregar Detalle' onclick="javascript:AgregarImagen();"><span class="glyphicon glyphicon-plus-sign" style="font-size:30px;"></span></a>
+
+                                        </div>
+                                    </td>
+
+                                </tr>
+
+
+                            </table>
+                            <div style="height:300px;width: 100%; overflow-y: auto; ">
+                                <table id="tblImagenes" class="table table-striped">
+                                    @*<thead>
+                                            <tr id="1" class="FilaDatos">
+
+                                                <td align="center" style="text-align:center;vertical-align:middle;width:30%"><label>Orden</label></td>
+                                                <td align="center" style="text-align:center;vertical-align:middle;width:50%" colspan="2"><label>Imagen</label></td>
+                                                <td vertical-align="middle" style="text-align:center;vertical-align:middle;width:20%" align="center">
+                                                    <div id="cabeceraDetalle">
+                                                        <a title='Agregar Detalle' onclick="javascript:AgregarImagen();"><span class="glyphicon glyphicon-plus-sign" style="font-size:30px;"></span></a>
+                                                   </div>
+                                                </td>
+
+                                            </tr>
+                                        </thead>*@
+                                    <tbody></tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@Html.Hidden("lblIdPasarela", 0)
+<script src="~/Scripts/waitingfor.js"></script>
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script src="~/assets/js/jquery-1.11.1.min.js"></script>
+<script src="~/assets/bootstrap/js/bootstrap.min.js"></script>
+<script src="~/Scripts/bootstrap-select.min.js"></script>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+
+        AgregarImagen();
+
+    });
+
+    var myApp;
+    myApp = myApp || (function () {
+        var pleaseWaitDiv = $('<div class="modal fade" id="pleaseWaitDialog" data-backdrop="static" data-keyboard="false" role="dialog" aria-labelledby="basicModal" aria-hidden="true" tabindex="-1"><div class="modal-dialog"><div class="modal-content"><div class="modal-header"><h1 style="font-size:18px;font-weight:bold;color:#1c334f">Espere un momento por favor...</h1></div><div class="modal-body"><div class="progress progress-striped active"><div class="progress-bar" style="width: 100%;"><span class="sr-only">60% Complete</span></div></div></div></div></div></div></div></div>');
+        return {
+            showPleaseWait: function () {
+                pleaseWaitDiv.modal();
+            },
+            hidePleaseWait: function () {
+                pleaseWaitDiv.modal('hide');
+            },
+
+        };
+    })();
+    function showLoading() {
+        myApp.showPleaseWait();
+    }
+
+    function removeLoading() {
+        myApp.hidePleaseWait();
+    }
+
+    function AgregarImagen() {
+
+        var nId = $("#tblImagenes tbody > tr:last-child").data("id");
+
+        var strDelete = '<a title="Eliminar Imagen" onclick="javascript:EliminarImagen(this);"><span class="glyphicon glyphicon-remove-sign" style="font-size:30px;"></span></a>'
+        if (nId == null)
+            strDelete = '<a title="Eliminar Imagen" ><span class="glyphicon glyphicon-remove-sign btn-default" style="font-size:30px;"></span></a>'
+
+        nId++
+
+        var strImg = ''
+
+        strImg += '<td vertical-align="middle" style="text-align:center;vertical-align:middle;"  align="center"  >'
+        strImg += '<div>'
+        strImg += '<div id="divImagenmensaje" style="padding-top:0px;display:none">'
+        strImg += '<i>Only image (png, jpg, jpeg).</i>'
+        strImg += '</div>'
+        strImg += '<div style="padding-top:3px;">'
+        strImg += '<span class="input-group-btn">'
+        strImg += '<span class="btn btn-success btn-sm btn-file">'
+        strImg += '<span class="glyphicon glyphicon-upload"></span> &nbsp;Elegir Imagen <input id="archivo_' + nId + '" onchange="previewFile(' + nId + ')" type="file" />'
+        strImg += '</span>'
+        strImg += '</span>'
+        strImg += '</div>'
+        strImg += '</div>'
+        strImg += '</td>'
+        strImg += '<td vertical-align="middle"  align="center"  >'
+        strImg += '<div class="img-polaroid">'
+        strImg += '<div class="img-fondo">'
+        strImg += '<img src="" id="imagen_' + nId + '"  data-initial="" name="imgEstilo" />'
+        strImg += '</div>'
+        strImg += '</div>'
+        strImg += '</td>'
+
+
+        var row = '';
+        row += '<tr  height="50px" data-id="' + nId + '" class="FilaDatos">'
+        row += '<td  vertical-align="middle" style="text-align:center;vertical-align:middle;width:30%"  align="center" >'
+        row += '<div  style="display:none"><input type="text" id="txtnombreNuevo_' + nId + '" value=""/></div>'
+        row += '<input name ="orden" type="number" id="txtOrden_' + nId + '" value="" placeholder="Ingrese  Orden" autofocus class="form-control" />'
+        row += '</td>'
+        row += strImg
+        row += '<td  vertical-align="middle" style="text-align:center;vertical-align:middle;width:20%;"  align="center"  >'
+        row +=  strDelete
+        row += '</td>'
+        row += ' </tr>'
+
+        $("#tblImagenes tbody").append(row)
+
+    }
+
+    function EliminarImagen(Id) {
+
+        $(Id).closest('tr').remove();
+
+    }
+
+
+</script>
+<script type="text/javascript">
+
+
+    function previewFile(strId) {
+
+        var preview = document.querySelector('#imagen_' + strId); //selects the query named img
+        var file = document.querySelector('#archivo_' + strId).files[0]; //sames as here
+        var reader = new FileReader();
+
+        reader.onloadend = function () {
+            preview.src = reader.result;
+        }
+
+        if (file) {
+            reader.readAsDataURL(file); //reads the data as a URL
+        } else {
+            preview.src = "";
+        }
+    }
+
+    function ValidarPasarela() {
+
+        var validacion = true;
+        var strMensaje = '';
+       
+        var strTitulo = $("#titulo").val();
+        var strDescripcion = $("#descripcion").val();
+           
+
+        strTitulo = strTitulo.replace(/\s/g, '');
+
+        if (strTitulo.length < 1) {
+            strMensaje += '<br/>* Ingrese Titulo. ';
+            $.toaster('* Ingrese Titulo. ', 'Mensaje', 'danger');
+        }
+
+        strDescripcion = strDescripcion.replace(/\s/g, '');
+
+        if (strDescripcion.length < 1) {
+            strMensaje += '<br/>* Ingrese Descripción . ';
+            $.toaster('* Ingrese Descripción. ', 'Mensaje', 'danger');
+        }
+
+        var strMensajeDetalle = '';
+
+        $('input[name="orden"]').each(function () {
+
+            var Id = $(this).attr("id").substr(9);
+            var archivo = $("#archivo_" + Id)[0].files[0];
+            var orden = $("#txtOrden_" + Id).val();
+
+            if (orden == '' || orden == 0) {
+                strMensajeDetalle += '<br/>* El orden del detalle no es valido. <br/>'
+                $.toaster('* El orden del detalle no es valido.', 'Mensaje', 'danger');
+            }
+
+            if (archivo == '' || archivo == null) {
+                strMensajeDetalle += '<br/> * Debe elegir una imagen para el detalle.'
+                $.toaster('* Debe elegir una imagen para el detalle.', 'Mensaje', 'danger');
+            }
+
+         
+
+            if (strMensajeDetalle != '')
+                return false;
+
+        });
+
+        strMensaje += strMensajeDetalle;
+
+        if (strMensaje != '') {
+            validacion = false;
+         }
+
+        return validacion
+    }
+    
+    function GuardarPasarela() {
+       
+        if (ValidarPasarela()) {
+            showLoading();
+
+            var strTitulo = $("#titulo").val();
+            var strDescripcion = $("#descripcion").val();
+            var strPredeterminado = 'I';
+
+            if ($('#activarPredeterminado').is(':checked')) {
+                strPredeterminado = 'A';
+            }
+
+            var objPasarela = {};
+
+            objPasarela["Pasarela_id"] = $("#lblIdPasarela").val();
+            objPasarela["Pasarela_Titulo"] = strTitulo;
+            objPasarela["Pasarela_Descripcion"] = strDescripcion;
+            objPasarela["Pasarela_Estado"] = strPredeterminado;
+
+            var contador = 0;
+            var contadorAux = 0;
+            var d = new Date()
+            var mm = d.getTime()
+            var pasarelaDetalle_strList = "";
+            var formData = new FormData();
+
+            $('input[name="orden"]').each(function () {
+                contador++
+                contadorAux++
+
+                var nombre = mm + contador;
+
+                var Id = $(this).attr("id").substr(9);
+                var archivo = $("#archivo_" + Id)[0].files[0];
+                var orden = $("#txtOrden_" + Id).val();
+                var PasarelaDetalle_id = 0;
+                var strext = archivo.name;
+                var ext = strext.split(".");
+                var newNombre = nombre + '.' + ext[1];
+                formData.append("PasarelaDeta_Nombre" + contadorAux, newNombre);
+                formData.append("PasarelaDet_archivo" + contadorAux, archivo);
+
+                $("#txtnombreNuevo_" + Id).val(newNombre);
+
+                if (contadorAux == 6) {
+                    contadorAux = 0;
+                    GuardarArchivoDetalle(formData)
+                    formData = new FormData()
+                }
+
+                pasarelaDetalle_strList += 'row1 PasarelaDetalle_id="' + PasarelaDetalle_id + '"  orden="' + orden + '" nombrearchivo ="' + newNombre + '" row2'
+            });
+
+            if (contadorAux > 0)
+                GuardarArchivoDetalle(formData)
+
+            objPasarela["Pasarela_strDetalle"] = pasarelaDetalle_strList;
+
+            var url = '@Url.Action("GuardarPasarela", "Pasarela")';
+            $.ajax({
+                type: "POST",
+                url: url,
+                data: JSON.stringify({ pasarela: objPasarela }),
+                contentType: 'application/json',
+                success: function (rpta) {
+
+                    removeLoading();
+                    $("#lblIdPasarela").val(rpta.Data);
+                    $.toaster("Coleccion ha sido guardada.", 'Mensaje', 'success');
+                    setTimeout("RefrescarPagina ();", 1000);
+                    @*url = '@Url.Action("Editar", "Pasarela", new { strId = "xxxx"})';
+                    url = url.replace("xxxx", rpta.Data);
+
+                    location.href = url;*@
+
+                },
+                error: function (error) {
+
+                }
+            });
+        }
+
+    }
+
+    function RefrescarPagina() {
+
+        var strIdPasarela = $("#lblIdPasarela").val();
+        url = '@Url.Action("Editar", "Pasarela", new { strId = "xxxx"})';
+        url = url.replace("xxxx", strIdPasarela);
+        location.href = url;
+    }
+
+    function GuardarArchivoDetalle(formData) {
+       
+        var url = '@Url.Action("GuardarPasarelaArchivo", "Pasarela")';
+        $.ajax({
+            type: "POST",
+            url: url,
+            data: formData,
+            dataType: 'json',
+            contentType: false,
+            processData: false,
+            success: function (rpta) {
+                if (rpta.Success) {
+
+                }
+                else {
+                    console.log("error")
+                }
+            },
+            error: function (error) {
+                alert("errorarchivo")
+            }
+        });
+    }
+
+  
+</script>
+
+
+
+
