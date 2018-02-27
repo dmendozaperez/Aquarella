@@ -571,42 +571,6 @@ footer {
 }
 
 
-.page-title-containerM {
-    margin: 0 auto;
-    padding: 0px 0 0px 0;
-    background: #f8f8f8 url(../img/pattern.jpg) left top repeat;
-    text-align: left;
-    -moz-box-shadow: 0 5px 15px 0 rgba(0,0,0,.05) inset, 0 -5px 15px 0 rgba(0,0,0,.05) inset;
-    -webkit-box-shadow: 0 5px 15px 0 rgba(0,0,0,.05) inset, 0 -5px 15px 0 rgba(0,0,0,.05) inset;
-    box-shadow: 0 5px 15px 0 rgba(0,0,0,.05) inset, 0 -5px 15px 0 rgba(0,0,0,.05) inset;
-}
-
-.page-title-containerM h1 {
-    display: inline;
-    margin-left: 10px;
-    font-family: 'Lobster', cursive;
-    font-size: 24px;
-    color: #5d5d5d;
-    font-weight: bold;
-    text-shadow: 0 1px 0 rgba(255, 255, 255, .7);
-    vertical-align: middle;
-}
-
-.page-title-containerM p {
-    display: inline;
-    margin-left: 5px;
-    font-size: 14px;
-    font-style: italic;
-    vertical-align: middle;
-}
-
-.page-title-containerM i {
-    font-size: 46px;
-    color: #ccc;
-    vertical-align: middle;
-}
-
-
 /* ----- ABOUT PAGE ----- */
 
 /***** About us text *****/
