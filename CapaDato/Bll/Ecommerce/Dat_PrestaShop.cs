@@ -192,5 +192,68 @@ namespace CapaDato.Bll.Ecommerce
             }
             return valida;
         }
+
+        /// <summary>
+        /// retorna las guias de prestashop para cambiar a estado facturado
+        /// </summary>
+        /// <returns></returns>
+        public DataTable getestadofac()
+        {
+            string sqlquery = "USP_Get_EstadoPresta";
+            DataTable dt = null;
+            try
+            {
+                using (SqlConnection cn = new SqlConnection(Ent_Conexion.conexion))
+                {
+                    using (SqlCommand cmd = new SqlCommand(sqlquery, cn))
+                    {
+                        cmd.CommandTimeout =0;
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        using (SqlDataAdapter da = new SqlDataAdapter(cmd))
+                        {
+                            dt = new DataTable();
+                            da.Fill(dt);
+                        }
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                dt = null;
+            }
+            return dt;
+        }
+        /// <summary>
+        /// validacion en la base sql para el estado sql
+        /// </summary>
+        /// <returns></returns>
+        public Boolean updestafac_prestashop(string guia_prestashop)
+        {
+            string sqlquery = "USP_Upd_EstadoPresta";
+            Boolean valida = false;
+            try
+            {
+                using (SqlConnection cn = new SqlConnection(Ent_Conexion.conexion))
+                {
+                    if (cn.State == 0) cn.Open();
+
+                    using (SqlCommand cmd = new SqlCommand(sqlquery, cn))
+                    {
+                        cmd.CommandTimeout = 0;
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        cmd.Parameters.AddWithValue("@Ven_Pst_Ref", guia_prestashop);
+                        cmd.ExecuteNonQuery();
+                        valida = true;
+                    }
+
+                }
+            }
+            catch (Exception)
+            {
+
+                valida = false;
+            }
+            return valida;
+        }
     }
 }

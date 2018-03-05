@@ -83,6 +83,10 @@
     <TargetZone>LocalIntranet</TargetZone>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Bukimedia.PrestaSharp, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Bukimedia.PrestaSharp.1.157\lib\Bukimedia.PrestaSharp.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Carvajal.FEPE.PreSC, Version=2.2.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>bin\Debug\Carvajal.FEPE.PreSC.dll</HintPath>
@@ -195,6 +199,7 @@
     <Compile Include="Design\WPF_Master\OpcionesMenu.xaml.cs">
       <DependentUpon>OpcionesMenu.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Prestashop\ActTracking.cs" />
     <Compile Include="Prestashop\Conexion.cs" />
     <Compile Include="Prestashop\LeerPedidos.cs" />
     <Compile Include="Prestashop\TraerPedidos.cs" />

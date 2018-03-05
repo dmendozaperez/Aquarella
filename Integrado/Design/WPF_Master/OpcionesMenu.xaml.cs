@@ -24,6 +24,7 @@ using Integrado.Sistemas.Logistica;
 using Integrado.Sistemas.Ventas;
 using CapaDato.Bll.Util;
 using Integrado.Urbano;
+using Integrado.Prestashop;
 
 namespace Integrado.Design.WPF_Master
 {
@@ -85,14 +86,35 @@ namespace Integrado.Design.WPF_Master
                 Dat_Basico.VerificaCierreVenta();
             }
             DispatcherTimer dispatcherTimerE = new DispatcherTimer();
+            DispatcherTimer dispatcherTimerU = new DispatcherTimer();
+
             if (Ent_Global._canal_venta != "AQ")
             {
                 dispatcherTimerE.Tick += new EventHandler(dispatcherTimerE_Tick);
                 dispatcherTimerE.Interval = new TimeSpan(0, 0, 1);
                 dispatcherTimerE.Start();
+
+                /*PROCESO PARA URBANO HACIA PRESTASHOP*/
+                dispatcherTimerU.Tick += new EventHandler(dispatcherTimerU_Tick);
+                dispatcherTimerU.Interval = new TimeSpan(0, 0, 1);
+                dispatcherTimerU.Start();
+
             }
 
 
+        }
+        private void dispatcherTimerU_Tick(object sender, EventArgs e)
+        {
+            #region<ENVIO DATA URBANO HACIA PRESTASHOP>
+            ActTracking envia = new ActTracking();
+            //EnviaPedido envia = new EnviaPedido();
+            envia.UpdGuiaUrbano_Prestashop();
+
+
+            UpdaEstado updpresta = new UpdaEstado();
+            updpresta.updateestadofac_presta();
+            //envia.send();
+            #endregion
         }
         private void dispatcherTimerE_Tick(object sender, EventArgs e)
         {

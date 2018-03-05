@@ -233,7 +233,11 @@ namespace Integrado.Sistemas.Ventas
             dwestado.ItemsSource = dsestado.Tables[0].DefaultView;
             dwestado.DisplayMemberPath = "Est_Descripcion";
             dwestado.SelectedValuePath = "Est_Id";
-            dwestado.SelectedIndex = 1;
+
+
+            dwestado.SelectedValue = "06";
+
+            //dwestado.SelectedIndex = 1;
         }
         protected void paintInfoUser(DataTable dtable)
         {
@@ -685,6 +689,7 @@ namespace Integrado.Sistemas.Ventas
 
         private void dwestado_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            if (dwestado.SelectedValue == null) return;
             if (!dwestado.Focusable) return;
             string _cod = dwestado.SelectedValue.ToString();
 
@@ -760,8 +765,37 @@ namespace Integrado.Sistemas.Ventas
                 lblinfo.Content = " > No hay datos para generar la nota de credito.";
                 //Mouse.OverrideCursor = null;
                 return;
-            }           
-            var mySettings = new MetroDialogSettings()
+            }
+
+            #region<REGION PARA VALIDAR LA NOTA DE CREDITO DEVOLUCION TOTAL>
+            if (Ent_Global._canal_venta != "AQ")
+            {
+                DataView dv = ((DataView)dtv_grilla);
+                if (dv != null && dv.Table.Rows.Count > 0)
+                {
+                    DataTable dt = dv.ToTable();
+
+                    if (dt.Rows.Count>0)
+                    {
+                        String ndoc = dt.Rows[0]["IDV_INVOICE"].ToString();
+                        var cantidad = dt.AsEnumerable().Sum(s => s.Field<Decimal>("IDN_QTY"));
+
+                        Boolean valida_tot= Dat_NotaCredito.getvalidaNota_DevTot(ndoc, cantidad);
+
+                        if (!valida_tot)
+                        {
+                            lblinfo.Foreground = (Brush)new BrushConverter().ConvertFromString("#ee7749");// System.Drawing.ColorTranslator.FromHtml("#ee7749");
+                            lblinfo.Content = " > Se tiene que realizar la devolucion en su totalidad.";
+                            return;
+                        }
+
+                    }
+                }
+
+            }
+                #endregion
+
+                var mySettings = new MetroDialogSettings()
             {
                 AffirmativeButtonText = "Si",
                 NegativeButtonText = "No",

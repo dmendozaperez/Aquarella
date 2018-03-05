@@ -115,5 +115,68 @@ namespace CapaDato.Bll.Ecommerce
             }
             return valida;
         }
+        /// <summary>
+        /// leer guia de urbano para enviar a prestashop
+        /// </summary>
+        /// <returns></returns>
+       public DataTable getguiaUrbano()
+       {
+            DataTable dt = null;
+            string sqlquery = "USP_GetGuiaUrbano";
+            try
+            {
+                using (SqlConnection cn = new SqlConnection(Ent_Conexion.conexion))
+                {
+                    using (SqlCommand cmd = new SqlCommand(sqlquery, cn))
+                    {
+                        cmd.CommandTimeout = 0;
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        using (SqlDataAdapter da = new SqlDataAdapter(cmd))
+                        {
+                            dt = new DataTable();
+                            da.Fill(dt);
+                        }
+                    }
+                }
+            }
+            catch (Exception exc)
+            {
+                dt = null;
+                
+            }
+            return dt;
+        }
+        /// <summary>
+        /// update en la tabla venta , para ya no volver a enviar la guia
+        /// </summary>
+        /// <returns></returns>
+        public Boolean updprestashopGuia(string guia_prestashop,string guia_urbano)
+        {
+            string sqlquery = "USP_UpdPrestashop_Guia";
+            Boolean valida = false;
+            try
+            {
+                using (SqlConnection cn = new SqlConnection(Ent_Conexion.conexion))
+                {
+                    if (cn.State == 0) cn.Open();
+                    using (SqlCommand cmd = new SqlCommand(sqlquery, cn))
+                    {
+                        cmd.CommandTimeout = 0;
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        cmd.Parameters.AddWithValue("@ven_pst_ref", guia_prestashop);
+                        cmd.Parameters.AddWithValue("@ven_guia_urbano", guia_urbano);
+                        cmd.ExecuteNonQuery();
+                        valida = true;
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                valida = false;
+            }
+            return valida;
+        }
+
+
     }
 }
