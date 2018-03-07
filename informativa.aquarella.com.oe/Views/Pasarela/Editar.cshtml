@@ -449,14 +449,18 @@
                 contentType: 'application/json',
                 success: function (rpta) {
 
-                    $.toaster("Coleccion ha sido actualizada.", 'Mensaje', 'success');
+                    var id = rpta.Data;
                     removeLoading();
-                    $("#lblIdPasarela").val(rpta.Data);
+
+                    if (id < 0) {
+                        $.toaster(rpta.Message, 'Mensaje', 'danger');
+                    }
+                    else {
+                        $.toaster(rpta.Message, 'Mensaje', 'success');
+                        $("#lblIdPasarela").val(rpta.Data);
+                        setTimeout("RefrescarPagina ();", 1000);
+                    }
                   
-                    setTimeout("RefrescarPagina ();", 1000);
-                    @*url = '@Url.Action("Editar", "Pasarela", new { strId = "xxxx"})';
-                url = url.replace("xxxx", rpta.Data);
-                location.href = url;*@
 
                 },
                 error: function (error) {

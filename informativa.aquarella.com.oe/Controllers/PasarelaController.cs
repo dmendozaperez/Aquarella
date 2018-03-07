@@ -20,7 +20,7 @@ namespace informativa.aquarella.com.oe.Controllers
 
             if (_usuario == null)
             {
-                return RedirectToAction("Index", "Login", "");
+                return RedirectToAction("Index", "Admin", "");
 
             }
             else
@@ -35,7 +35,7 @@ namespace informativa.aquarella.com.oe.Controllers
 
             if (_usuario == null)
             {
-                return RedirectToAction("Index", "Login", "");
+                return RedirectToAction("Index", "Admin", "");
 
             }
             else
@@ -61,7 +61,7 @@ namespace informativa.aquarella.com.oe.Controllers
 
             if (_usuario == null)
             {
-                return RedirectToAction("Index", "Login", "");
+                return RedirectToAction("Index", "Admin", "");
 
             }
             else
@@ -75,7 +75,6 @@ namespace informativa.aquarella.com.oe.Controllers
 
         }
 
-
         [HttpGet]
         public ActionResult Nuevo()
         {
@@ -84,7 +83,7 @@ namespace informativa.aquarella.com.oe.Controllers
 
             if (_usuario == null)
             {
-                return RedirectToAction("Index", "Login", "");
+                return RedirectToAction("Index", "Admin", "");
 
             }
             else
@@ -101,13 +100,23 @@ namespace informativa.aquarella.com.oe.Controllers
         {
 
             var oJRespuesta = new JsonResponse();
+          
             Ent_Usuario _usuario = (Ent_Usuario)Session[Ent_Constantes.NameSessionUser];
 
-            pasarela.Pasarela_UsuCrea = _usuario.usu_login;
-            pasarela.Pasarela_Ip = _usuario.usu_ip;
+            if (_usuario == null)
+            {
+                oJRespuesta.Data = -1;
+                oJRespuesta.Message = "Debe Iniciar sessión.";
 
-            oJRespuesta.Data = pasarelaBl.InsertarPasarela(pasarela);
 
+            }
+            else
+            {
+                pasarela.Pasarela_UsuCrea = _usuario.usu_login;
+                pasarela.Pasarela_Ip = _usuario.usu_ip;
+                oJRespuesta.Data = pasarelaBl.InsertarPasarela(pasarela);
+                oJRespuesta.Message = "Coleccion ha sido guardada.";
+            }   
 
             return Json(oJRespuesta, JsonRequestBehavior.AllowGet);
         }

@@ -11,7 +11,8 @@ namespace informativa.aquarella.com.oe.Controllers
 {
     public class HomeController : Controller
     {
-        
+        private CatalogoBL catalogoBL = new CatalogoBL();
+
         public ActionResult Index()
         {
 
@@ -64,7 +65,16 @@ namespace informativa.aquarella.com.oe.Controllers
         }
         public ActionResult Catalogo()
         {
-            return View();
+            return View(listaCatalogo());
+        }
+
+        public List<Ent_Catalogo> listaCatalogo()
+        {
+            List<Ent_Catalogo> lista = new List<Ent_Catalogo>();
+            lista = catalogoBL.get_listaCatalogo();
+
+
+            return lista;
         }
 
         [HttpPost]

@@ -20,8 +20,8 @@ namespace informativa.aquarella.com.oe
                         "~/Scripts/modernizr-*"));
 
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
-                      //"~/assets/js/jquery-1.11.1.min.js",
-                      //"~/assets/bootstrap/js/bootstrap.min.js",
+                      "~/assets/js/jquery-1.11.1.min.js",
+                      "~/assets/bootstrap/js/bootstrap.min.js",
                       "~/assets/js/bootstrap-hover-dropdown.min.js",
                       "~/assets/js/jquery.backstretch.min.js",
                       "~/assets/js/wow.min.js",

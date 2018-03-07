@@ -49,6 +49,9 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="NReco.PdfGenerator">
+      <HintPath>..\..\SLBATA\CapaPresentacion\bin\NReco.PdfGenerator.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -120,9 +123,13 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\CatalogoController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\PasarelaController.cs" />
+    <Compile Include="Data\CatalogoBL.cs" />
+    <Compile Include="Data\CatalogoDA.cs" />
     <Compile Include="Data\Conexion.cs" />
     <Compile Include="Data\Correo.cs" />
     <Compile Include="Data\LoginBL.cs" />
@@ -134,6 +141,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\Ent_Catalogo.cs" />
     <Compile Include="Models\Ent_Pasarela.cs" />
     <Compile Include="Models\Ent_PasarelaArchivo.cs" />
     <Compile Include="Models\Ent_PasarelaDetalle.cs" />
@@ -217,21 +225,6 @@
     <Content Include="assets\js\scripts.js" />
     <Content Include="assets\js\wow.js" />
     <Content Include="assets\js\wow.min.js" />
-    <Content Include="Catalogo\catalogo_prueba_html\css\jquery.ui.css" />
-    <Content Include="Catalogo\catalogo_prueba_html\css\jquery.ui.html4.css" />
-    <Content Include="Catalogo\catalogo_prueba_html\css\magazine.css" />
-    <Content Include="Catalogo\catalogo_prueba_html\extras\jGestures-license.txt" />
-    <Content Include="Catalogo\catalogo_prueba_html\extras\jquery-ui-1.8.20.custom.min.js" />
-    <Content Include="Catalogo\catalogo_prueba_html\index.html" />
-    <Content Include="Catalogo\catalogo_prueba_html\index_bk.html" />
-    <Content Include="Catalogo\catalogo_prueba_html\logo\descargar.png" />
-    <Content Include="Catalogo\catalogo_prueba_html\logo\logo.png" />
-    <Content Include="Catalogo\catalogo_prueba_html\pdf\catalogo.html" />
-    <Content Include="Catalogo\catalogo_prueba_html\pics\arrows.png" />
-    <Content Include="Catalogo\catalogo_prueba_html\pics\loader.gif" />
-    <Content Include="Catalogo\catalogo_prueba_html\pics\zoom-icons-editable.png" />
-    <Content Include="Catalogo\catalogo_prueba_html\pics\zoom-icons.png" />
-    <Content Include="Catalogo\catalogo_prueba_html\pics\zoom.png" />
     <Content Include="Content\AdminLTE.css" />
     <Content Include="Content\AdminLTE.min.css" />
     <Content Include="Content\bootstrap-select.css" />
@@ -243,6 +236,14 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Scripts\AdminLTE\app.js" />
+    <Content Include="Scripts\AdminLTE\app.min.js" />
+    <Content Include="Scripts\AdminLTE\demo.js" />
+    <Content Include="Scripts\AdminLTE\pages\dashboard.js" />
+    <Content Include="Scripts\AdminLTE\pages\dashboard2.js" />
+    <Content Include="Scripts\AdminLTE\plugins\dataTables.bootstrap.css" />
+    <Content Include="Scripts\AdminLTE\plugins\dataTables.bootstrap.js" />
+    <Content Include="Scripts\AdminLTE\plugins\jquery.dataTables.js" />
     <Content Include="Scripts\alertasdiag.js" />
     <Content Include="Scripts\bootstrap-select.js" />
     <Content Include="Scripts\bootstrap-select.min.js" />
@@ -260,12 +261,84 @@
     <Content Include="assets\font-awesome\fonts\fontawesome-webfont.ttf" />
     <Content Include="assets\font-awesome\fonts\fontawesome-webfont.woff" />
     <Content Include="assets\font-awesome\fonts\FontAwesome.otf" />
-    <Content Include="Catalogo\catalogo_prueba_html\lib\compress.sh" />
-    <Content Include="Catalogo\catalogo_prueba_html\pdf\catalogo.pdf" />
     <Content Include="Scripts\bootstrap-select.js.map" />
     <Content Include="Content\bootstrap-select.css.map" />
     <None Include="Properties\PublishProfiles\web_info.pubxml" />
+    <Content Include="Scripts\DataTables\AutoFill-2.0.0\css\autoFill.bootstrap.css" />
+    <Content Include="Scripts\DataTables\AutoFill-2.0.0\css\autoFill.bootstrap.min.css" />
+    <Content Include="Scripts\DataTables\AutoFill-2.0.0\css\autoFill.dataTables.css" />
+    <Content Include="Scripts\DataTables\AutoFill-2.0.0\css\autoFill.dataTables.min.css" />
+    <Content Include="Scripts\DataTables\AutoFill-2.0.0\css\autoFill.foundation.css" />
+    <Content Include="Scripts\DataTables\AutoFill-2.0.0\css\autoFill.foundation.min.css" />
+    <Content Include="Scripts\DataTables\AutoFill-2.0.0\css\autoFill.jqueryui.css" />
+    <Content Include="Scripts\DataTables\AutoFill-2.0.0\css\autoFill.jqueryui.min.css" />
+    <Content Include="Scripts\DataTables\AutoFill-2.0.0\js\autoFill.bootstrap.js" />
+    <Content Include="Scripts\DataTables\AutoFill-2.0.0\js\autoFill.bootstrap.min.js" />
+    <Content Include="Scripts\DataTables\AutoFill-2.0.0\js\autoFill.foundation.js" />
+    <Content Include="Scripts\DataTables\AutoFill-2.0.0\js\autoFill.foundation.min.js" />
+    <Content Include="Scripts\DataTables\AutoFill-2.0.0\js\autoFill.jqueryui.js" />
+    <Content Include="Scripts\DataTables\AutoFill-2.0.0\js\autoFill.jqueryui.min.js" />
+    <Content Include="Scripts\DataTables\AutoFill-2.0.0\js\dataTables.autoFill.js" />
+    <Content Include="Scripts\DataTables\AutoFill-2.0.0\js\dataTables.autoFill.min.js" />
+    <Content Include="Scripts\DataTables\ColReorder-1.2.0\css\colReorder.bootstrap.css" />
+    <Content Include="Scripts\DataTables\ColReorder-1.2.0\css\colReorder.bootstrap.min.css" />
+    <Content Include="Scripts\DataTables\ColReorder-1.2.0\css\colReorder.dataTables.css" />
+    <Content Include="Scripts\DataTables\ColReorder-1.2.0\css\colReorder.dataTables.min.css" />
+    <Content Include="Scripts\DataTables\ColReorder-1.2.0\css\colReorder.foundation.css" />
+    <Content Include="Scripts\DataTables\ColReorder-1.2.0\css\colReorder.foundation.min.css" />
+    <Content Include="Scripts\DataTables\ColReorder-1.2.0\css\colReorder.jqueryui.css" />
+    <Content Include="Scripts\DataTables\ColReorder-1.2.0\css\colReorder.jqueryui.min.css" />
+    <Content Include="Scripts\DataTables\ColReorder-1.2.0\js\dataTables.colReorder.js" />
+    <Content Include="Scripts\DataTables\ColReorder-1.2.0\js\dataTables.colReorder.min.js" />
+    <Content Include="Scripts\DataTables\DataTables-1.10.9\css\dataTables.bootstrap.css" />
+    <Content Include="Scripts\DataTables\DataTables-1.10.9\css\dataTables.bootstrap.min.css" />
+    <Content Include="Scripts\DataTables\DataTables-1.10.9\css\dataTables.foundation.css" />
+    <Content Include="Scripts\DataTables\DataTables-1.10.9\css\dataTables.foundation.min.css" />
+    <Content Include="Scripts\DataTables\DataTables-1.10.9\css\dataTables.jqueryui.css" />
+    <Content Include="Scripts\DataTables\DataTables-1.10.9\css\dataTables.jqueryui.min.css" />
+    <Content Include="Scripts\DataTables\DataTables-1.10.9\css\jquery.dataTables.css" />
+    <Content Include="Scripts\DataTables\DataTables-1.10.9\css\jquery.dataTables.min.css" />
+    <Content Include="Scripts\DataTables\DataTables-1.10.9\css\jquery.dataTables_themeroller.css" />
+    <Content Include="Scripts\DataTables\DataTables-1.10.9\images\sort_asc.png" />
+    <Content Include="Scripts\DataTables\DataTables-1.10.9\images\sort_asc_disabled.png" />
+    <Content Include="Scripts\DataTables\DataTables-1.10.9\images\sort_both.png" />
+    <Content Include="Scripts\DataTables\DataTables-1.10.9\images\sort_desc.png" />
+    <Content Include="Scripts\DataTables\DataTables-1.10.9\images\sort_desc_disabled.png" />
+    <Content Include="Scripts\DataTables\DataTables-1.10.9\js\dataTables.bootstrap.js" />
+    <Content Include="Scripts\DataTables\DataTables-1.10.9\js\dataTables.bootstrap.min.js" />
+    <Content Include="Scripts\DataTables\DataTables-1.10.9\js\dataTables.foundation.js" />
+    <Content Include="Scripts\DataTables\DataTables-1.10.9\js\dataTables.foundation.min.js" />
+    <Content Include="Scripts\DataTables\DataTables-1.10.9\js\dataTables.jqueryui.js" />
+    <Content Include="Scripts\DataTables\DataTables-1.10.9\js\dataTables.jqueryui.min.js" />
+    <Content Include="Scripts\DataTables\DataTables-1.10.9\js\jquery.dataTables.js" />
+    <Content Include="Scripts\DataTables\DataTables-1.10.9\js\jquery.dataTables.min.js" />
+    <Content Include="Scripts\DataTables\Responsive-1.0.7\css\responsive.bootstrap.css" />
+    <Content Include="Scripts\DataTables\Responsive-1.0.7\css\responsive.bootstrap.min.css" />
+    <Content Include="Scripts\DataTables\Responsive-1.0.7\css\responsive.dataTables.css" />
+    <Content Include="Scripts\DataTables\Responsive-1.0.7\css\responsive.dataTables.min.css" />
+    <Content Include="Scripts\DataTables\Responsive-1.0.7\css\responsive.foundation.css" />
+    <Content Include="Scripts\DataTables\Responsive-1.0.7\css\responsive.foundation.min.css" />
+    <Content Include="Scripts\DataTables\Responsive-1.0.7\css\responsive.jqueryui.css" />
+    <Content Include="Scripts\DataTables\Responsive-1.0.7\css\responsive.jqueryui.min.css" />
+    <Content Include="Scripts\DataTables\Responsive-1.0.7\js\dataTables.responsive.js" />
+    <Content Include="Scripts\DataTables\Responsive-1.0.7\js\dataTables.responsive.min.js" />
+    <Content Include="Scripts\DataTables\Select-1.0.1\css\select.bootstrap.css" />
+    <Content Include="Scripts\DataTables\Select-1.0.1\css\select.bootstrap.min.css" />
+    <Content Include="Scripts\DataTables\Select-1.0.1\css\select.dataTables.css" />
+    <Content Include="Scripts\DataTables\Select-1.0.1\css\select.dataTables.min.css" />
+    <Content Include="Scripts\DataTables\Select-1.0.1\css\select.foundation.css" />
+    <Content Include="Scripts\DataTables\Select-1.0.1\css\select.foundation.min.css" />
+    <Content Include="Scripts\DataTables\Select-1.0.1\css\select.jqueryui.css" />
+    <Content Include="Scripts\DataTables\Select-1.0.1\css\select.jqueryui.min.css" />
+    <Content Include="Scripts\DataTables\Select-1.0.1\js\dataTables.select.js" />
+    <Content Include="Scripts\DataTables\Select-1.0.1\js\dataTables.select.min.js" />
+    <Content Include="Scripts\DataTables\Spanish.json" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="Scripts\DataTables\datatables.css" />
+    <Content Include="Scripts\DataTables\datatables.js" />
+    <Content Include="Scripts\DataTables\datatables.min.css" />
+    <Content Include="Scripts\DataTables\datatables.min.js" />
+    <Content Include="Scripts\DataTables\TableTools.js" />
     <Content Include="Scripts\i18n\defaults-ar_AR.js" />
     <Content Include="Scripts\i18n\defaults-ar_AR.min.js" />
     <Content Include="Scripts\i18n\defaults-bg_BG.js" />
@@ -341,6 +414,7 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
+    <Content Include="Scripts\pace\pace.min.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\toastr.js" />
@@ -371,11 +445,18 @@
     <Content Include="Views\Pasarela\Editar.cshtml" />
     <Content Include="Views\Login\Index.cshtml" />
     <Content Include="Views\Login\Inicio.cshtml" />
+    <Content Include="Views\Admin\Index.cshtml" />
+    <Content Include="Views\Admin\Inicio.cshtml" />
+    <Content Include="Views\Catalogo\Index.cshtml" />
+    <Content Include="Views\Catalogo\Nuevo.cshtml" />
+    <Content Include="Views\Catalogo\ListCatalogo.cshtml" />
+    <Content Include="Views\Catalogo\Editar.cshtml" />
+    <Content Include="Views\Catalogo\List.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="assets\img\portfolio\" />
-    <Folder Include="Catalogo\catalogo_prueba_html\pages\" />
+    <Folder Include="CatalogoVirtual\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

@@ -1,0 +1,247 @@
+﻿@using informativa.aquarella.com.oe.Models
+@model Ent_Catalogo
+@{
+    Layout = null;
+}
+<style>
+    img, object {
+        max-height: 100%;
+        max-width: 100%;
+    }
+
+    img {
+        border: 0 none;
+        height: auto;
+        max-width: 100%;
+        vertical-align: middle;
+    }
+
+    .table {
+        margin-bottom: 0px;
+    }
+
+    a {
+        cursor: pointer;
+    }
+
+    .img-polaroid {
+        background-color: #fff;
+        border: 1px solid rgba(0, 0, 0, 0.2);
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        padding: 4px;
+        width: 200px;
+        height: 160px;
+    }
+
+    .img-fondo {
+        width: 100%;
+        height: 100%;
+        text-align: center;
+        background-color: #EEEEEE;
+    }
+
+    textarea {
+        resize: none;
+    }
+</style>
+
+<div class="modal-content">
+    <div class="page-title-containerM">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-10 wow fadeIn">
+                    <i class="fa fa-edit"></i>
+                    <h1>Catalogo</h1>
+                </div>
+            </div>
+        </div>
+       
+    </div>
+    <div class="modal-body">
+        <table class="table table-striped" border="1" style="border-color:rgba(0, 0, 0, 0.2)" RULES="none">
+            <tr>
+                <td colspan="2" valign="middle"><label for="nombre">Titulo</label></td>
+                <td colspan="2">
+                    <input type="text" id="TituloHeader" value="@Model.Catalogo_Titulo" placeholder="Ingrese Titulo." autofocus class="form-control" oninvalid="InvalidMsg(this, 'Ingrese el comcepto')" required="required" />
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" valign="middle"><label for="nombre">Descripción</label></td>
+                <td colspan="2">
+                    <input type="text" id="nombreVirtual" value="@Model.Catalogo_Descripcion" placeholder="Ingrese Descripcion." autofocus class="form-control" oninvalid="InvalidMsg(this, 'Ingrese el comcepto')" required="required" />
+                </td>
+            </tr>
+            <tr>
+                <td width="45%" colspan="2" vertical-align="middle">
+                    <label for="segape">&nbsp;&nbsp;Orden</label>
+                </td>
+                <td colspan="2" width="35%">
+                    <input id="orden" type="number" value="@Model.Catologo_Orden"  autofocus class="form-control" />
+                </td>
+            </tr>
+            <tr>
+                <td width="45%" colspan="2" vertical-align="middle">
+                    <label for="segape">Activo</label>
+                </td>
+                <td colspan="2" width="35%" align="left">
+                    <input id="chkEstado" type="checkbox" name="chkEstado">
+                </td>
+            </tr>
+            
+           <tr>
+                <td width="45%" colspan="2" vertical-align="middle">
+                    <label for="segape">&nbsp;&nbsp;Nro Pag.</label>
+                </td>
+                <td colspan="2" width="35%">
+                    <input id="nroPagina" type="text" value="@Model.Catalogo_strNroPag" disabled autofocus class="form-control" />
+                </td>
+            </tr>
+            <tr>
+                <td width="45%" colspan="2" vertical-align="middle">
+                    <label for="segape">&nbsp;&nbsp;Cargar Fotos.</label>
+                </td>
+                <td colspan="1" width="50%">
+                    <input id="ruta" type="text" value="--" disabled autofocus class="form-control" />
+                </td>
+                <td colspan="1" width="5%">
+                    <div>
+                        <div style="padding-top:3px;">
+                            <span class="input-group-btn">
+                                <span class="btn btn-success btn-sm btn-file">
+                                    <span class="glyphicon glyphicon-upload"></span>
+                                    <input type="file" onchange="contadorArchivos()" id="Archivos" webkitdirectory="" directory="">
+                                </span>
+                            </span>
+                        </div>
+                    </div>
+                </td>
+                
+            </tr>
+            <tr>
+                <td width="45%" colspan="2" vertical-align="middle">
+                  
+                </td>
+                <td colspan="2" width="35%">
+                  
+                </td>
+            </tr>
+        </table>
+     
+    </div>
+    <br />
+    <div class="modal-footer" style="margin-top:-30px">
+        <table style="width:100%">
+            <tr>
+                <td style="width:70%"></td>
+                <td>
+                    <input type="submit" data-dismiss="modal" id="result" value="Cerrar" class="btn btn-default">
+                    @*<button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>*@
+                </td>
+                <td>
+                    <div id="btnGuardar">
+                        <input type="submit" onclick="GuardarCatalogo()" id="result" value="Guardar" class="btn btn-primary">
+                    </div>
+                </td>
+                <td>
+                   
+                </td>
+            </tr>
+        </table>
+
+    </div>
+</div>
+@Html.Hidden("lblIdCatalogo", Model.Catalogo_Id)
+@Html.Hidden("lblCarpeta", Model.Catologo_Carpeta)
+@Html.Hidden("lblIdPagina", Model.Catalogo_strNroPag)
+@Html.Hidden("lblEstado", Model.Catalogo_Estado)
+@Html.Hidden("lblMcaUpdArchivo", 'N')
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+
+        if ($("#lblEstado").val() == 'A')
+            document.getElementById("chkEstado").checked = true;
+
+    });
+
+    function GuardarCatalogo() {
+
+        if (validarCatalogo()) {
+            showLoading();
+
+            var nombreCarpeta = $("#lblCarpeta").val();
+            var mcaUpdate = $("#lblMcaUpdArchivo").val();
+            var strTitulo = $("#TituloHeader").val();
+            var strDescripcion = $("#nombreVirtual").val();
+            var strNroPagina = $("#lblIdPagina").val();
+            var strOrden = $("#orden").val();
+            var EstrEstado = 'I';
+
+
+            if ($('#chkEstado').is(':checked')) {
+                EstrEstado = 'A';
+            }
+
+
+            var frm = new FormData();
+            var fileList = document.getElementById('Archivos').files;
+            var pripona = 'jpg';
+            var contador = 0;
+            var d = new Date();
+            //console.log(nombreCarpeta);
+
+            if (mcaUpdate == 'S') {
+                nombreCarpeta = d.getTime();
+                $("#lblcarpeta").val(nombreCarpeta);
+            }
+
+
+            for (var i = 0, file; file = fileList[i]; i++) {
+                if (endsWithIgnoreCase(file.name, pripona)) {
+                    contador++
+
+                    frm.append("Catalogo_Nombre" + contador, file.name);
+                    frm.append("Catalogo_archivo" + contador, file);
+
+                }
+            }
+
+            frm.append("Catalogo_Id", $("#lblIdCatalogo").val());
+            frm.append("Catalogo_Titulo", strTitulo);
+            frm.append("Catalogo_Descripcion", strDescripcion);
+            frm.append("Catalogo_Estado", EstrEstado);
+            frm.append("Catologo_Orden", strOrden);
+            frm.append("Catalogo_strNroPag", strNroPagina);
+            frm.append("Catalogo_UpdArchivo", mcaUpdate);
+            frm.append("Catologo_Carpeta", nombreCarpeta);
+
+            Post('Catalogo/GuardarCatalogo', frm, ActualizarList);
+        }
+    }
+
+    function ActualizarList(data) {
+   
+        var rpta = JSON.parse(data);
+        var id = parseInt(rpta.Data)
+
+        if (id > 0) {
+            $("#lblMcaUpdArchivo").val('N');
+            $("#lblIdCatalogo").val(rpta.Data);
+            setTimeout("MostrarListado();", 300);
+        }
+    
+        removeLoading();
+        console.log(id)
+        if (id < 0) {
+            $.toaster(rpta.Message, 'Mensaje', 'danger');
+
+        }
+        else {
+            $.toaster("El catálogo ha sido actualizado.", 'Mensaje', 'success');
+        }
+
+    }
+
+    
+</script>

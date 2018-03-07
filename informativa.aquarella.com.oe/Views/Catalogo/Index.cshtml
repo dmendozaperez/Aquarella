@@ -1,0 +1,365 @@
+﻿@using informativa.aquarella.com.oe.Models
+@model IEnumerable<Ent_Catalogo>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutMantenedor.cshtml";
+}
+<link href="~/Content/jasny-bootstrap.min.css" rel="stylesheet" />
+<style>
+    img, object {
+        max-height: 100%;
+        max-width: 100%;
+    }
+
+    img {
+        border: 0 none;
+        height: auto;
+        max-width: 100%;
+        vertical-align: middle;
+    }
+
+    .table {
+        margin-bottom: 0px;
+    }
+
+    a {
+        cursor: pointer;
+    }
+
+    .img-polaroid {
+        background-color: #fff;
+        border: 1px solid rgba(0, 0, 0, 0.2);
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        padding: 4px;
+        width: 200px;
+        height: 160px;
+    }
+
+    .img-fondo {
+        width: 100%;
+        height: 100%;
+        text-align: center;
+        background-color: #EEEEEE;
+    }
+
+    textarea {
+        resize: none;
+    }
+</style>
+<div class="page-title-containerM">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-10 wow fadeIn">
+                <i class="fa fa-align-justify"></i>
+                <h1>Lista Catalogo /</h1>
+                <p>Muestra la lista de catalogos existentes (Activos e Inactivos).</p>
+            </div>
+            <div class="col-sm-2 wow fadeIn">
+                <a onclick="javascript: Nuevo();"><i class="fa fa-plus-square fa-2x"><p>Nuevo</p></i></a>
+            </div>
+            
+        </div>
+    </div>
+</div>
+<br />
+<div>
+
+</div>
+<div></div>
+<div class="slider-container">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-10 col-sm-offset-1 slider">
+
+                <div class="box box-body box-primary">
+                    
+                    <div class="box-body" id="lista" style="height:550px;overflow-y: auto;" >
+                       
+                        
+                    </div>
+                    <br/><br />
+                    <div class="box-body" style="text-align:right">
+
+                        <input type="submit" onclick="GuardarListadoCatalogo()" id="result" value="Guardar" class="btn btn-primary" />
+                    </div>
+                   
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" ng-app>
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div id='myModalContent'></div>
+        </div>
+    </div>
+</div>
+@*<script src="~/Scripts/waitingfor.js"></script>*@
+@*<script src="~/assets/js/jquery-1.11.1.min.js"></script>*@
+<script src="~/Scripts/jquery-1.10.2.js"></script>
+<script src="~/assets/bootstrap/js/bootstrap.min.js"></script>
+<script src="@Url.Content("~/assets/bootstrap/js/bootstrap.min.js")"></script>
+<script src="~/Scripts/pace/pace.min.js"></script>
+<script>
+    $(document).ready(function () {
+
+
+        MostrarListado();
+    });
+
+
+    var myApp;
+    myApp = myApp || (function () {
+        var pleaseWaitDiv = $('<div class="modal fade" id="pleaseWaitDialog" data-backdrop="static" data-keyboard="false" role="dialog" aria-labelledby="basicModal" aria-hidden="true" tabindex="-1"><div class="modal-dialog"><div class="modal-content"><div class="modal-header"><h1 style="font-size:18px;font-weight:bold;color:#1c334f">Espere un momento por favor...</h1></div><div class="modal-body"><div class="progress progress-striped active"><div class="progress-bar" style="width: 100%;"><span class="sr-only">60% Complete</span></div></div></div></div></div></div></div></div>');
+        return {
+            showPleaseWait: function () {
+                pleaseWaitDiv.modal();
+            },
+            hidePleaseWait: function () {
+                pleaseWaitDiv.modal('hide');
+            },
+
+        };
+    })();
+
+    function showLoading() {
+        myApp.showPleaseWait();
+    }
+
+    function removeLoading() {
+        myApp.hidePleaseWait();
+    }
+
+
+    function performClick(elemId) {
+        var elem = document.getElementById(elemId);
+        if (elem && document.createEvent) {
+            var evt = document.createEvent("MouseEvents");
+            evt.initEvent("click", true, false);
+            elem.dispatchEvent(evt);
+        }
+    }
+
+
+    function contadorArchivos() {
+
+        var fileList = document.getElementById('Archivos').files;
+        var filteredFiles = [];
+        var pripona = 'jpg';
+        var contador = 0;
+        var ruta = ''
+
+        for (var i = 0, file; file = fileList[i]; i++) {
+            if (endsWithIgnoreCase(file.name, pripona)) {
+                contador++
+                ruta = file.webkitRelativePath;
+            }
+            filteredFiles.push(file);
+        }
+        var listRuta = ruta.split("/");
+
+        $("#lblMcaUpdArchivo").val('S');
+        $("#lblIdPagina").val(contador);
+        $("#nroPagina").val(contador + '  paginas.');
+        $("#ruta").val(listRuta[0])
+    }
+
+    function validarCatalogo() {
+
+        var valida = true;
+
+        var strTitulo = $("#TituloHeader").val();
+        var strDescripcion = $("#nombreVirtual").val();
+        var strNroPagina = $("#lblIdPagina").val();
+        var strOrden = $("#orden").val();
+
+
+        strTitulo = strTitulo.replace(/\s/g, '');
+
+        if (strTitulo.length < 1) {
+            valida = false;
+            $.toaster('* Ingrese Titulo. ', 'Mensaje', 'danger');
+        }
+
+        if (strDescripcion.length < 1) {
+            valida = false;
+            $.toaster('* Ingrese Nombre Virtual. ', 'Mensaje', 'danger');
+        }
+
+
+        if (strOrden == '' || strOrden == 0 || strOrden < 0) {
+            valida = false;
+            $.toaster('* El orden no es valido.', 'Mensaje', 'danger');
+        }
+
+        if (strNroPagina == '' || strNroPagina == 0 || strNroPagina < 0) {
+            valida = false;
+            $.toaster('* Debe elegir una coleccion de imagenes.', 'Mensaje', 'danger');
+        }
+
+        return valida
+    }
+
+
+    function endsWithIgnoreCase(str, suffix) {
+        return str.toLowerCase().indexOf(suffix.toLowerCase(), str.length - suffix.length) !== -1;
+    }
+
+
+
+    function Nuevo()
+    {
+        showLoading();
+        var TeamDetailPostBackURL ="@Url.Action("Nuevo", "Catalogo")";
+        var $buttonClicked = $(this);
+        var options = { "backdrop": "static", keyboard: true };
+        $.ajax({
+            type: "GET",
+            url: TeamDetailPostBackURL,
+            contentType: "application/json; charset=utf-8",
+            data: {},
+            datatype: "json",
+            cache: true,
+            success: function (data) {
+
+                $('#myModalContent').html(data);
+                $('#myModal').modal(options);
+                removeLoading();
+
+            },
+            error: function () {
+
+                $('#myModalContent').html(data);
+                $('#myModal').modal(options);
+                removeLoading();
+            }
+        });
+    }
+
+     function Editar(strId) {
+
+         showLoading();
+        var TeamDetailPostBackURL ="@Url.Action("Editar", "Catalogo")";
+        var $buttonClicked = $(this);
+
+
+        var options = { "backdrop": "static", keyboard: true };
+        $.ajax({
+            type: "GET",
+            url: TeamDetailPostBackURL,
+            contentType: "application/json; charset=utf-8",
+            data: { "strId": strId },
+            datatype: "json",
+            cache: true,
+            success: function (data) {
+                removeLoading();
+                $('#myModalContent').html(data);
+                $('#myModal').modal(options);
+
+            },
+            error: function () {
+                removeLoading();
+            }
+        });
+
+     }
+
+    function MostrarListado() {
+
+        var TeamDetailPostBackURL ="@Url.Action("List", "Catalogo")";
+     
+        var options = { "backdrop": "static", keyboard: true };
+        $.ajax({
+            type: "GET",
+            url: TeamDetailPostBackURL,
+            contentType: "application/json; charset=utf-8",
+            data: {},
+            datatype: "json",
+            cache: true,
+            success: function (data) {
+                document.getElementById("lista").innerHTML = data;
+
+            },
+            error: function () {
+
+            }
+        });
+
+    }
+    
+
+    function Post(url, frm, metodo) {
+        var xhr = new XMLHttpRequest();
+        xhr.open("post", url, true);
+        xhr.send(frm);
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState == 4 && xhr.status == 200) {
+                metodo(xhr.responseText);
+            }
+        }
+    };
+
+    //Seccion de funciones utilizados en el index
+
+    function GuardarListadoCatalogo() {
+        showLoading();
+
+        var catalogo_strList = ""
+        $('input[name="orden"]').each(function () {
+        
+            var Id = $(this).attr("id").substr(9);
+          
+            var orden = $("#txtOrden_" + Id).val();
+            var estado = 'I';
+
+            if (orden == "")
+                orden="0"
+
+            if ($('#chkEstado_' + Id).is(':checked')) {
+                estado = 'A';
+            }
+
+            catalogo_strList += 'row1 Catalogo_Id="' + Id + '"  orden="' + orden + '" estado ="' + estado + '" row2'
+        });
+
+
+        var url = '@Url.Action("ActualizarListCatalogo", "Catalogo")';
+        $.ajax({
+            type: "POST",
+            url: url,
+            data: { strListCatalogo:catalogo_strList },
+            success: function (rpta) {
+         
+                    var id = parseInt(rpta.Data);
+                 
+                    if (id < 0) {
+                        $.toaster(rpta.Message, 'Mensaje', 'danger');
+
+                    }
+                    else {
+                        $.toaster(rpta.Message, 'Mensaje', 'success');
+                    }
+                    
+                    MostrarListado();
+                    removeLoading(); 
+
+             },
+            error: function (error) {
+                removeLoading();
+                $.toaster('Error', 'Mensaje', 'danger');
+        }
+        });    
+    
+
+    }
+  
+    //fin de Seccion de funciones utilizados en el index
+
+
+</script>
+
+
+
+
+

@@ -1,4 +1,5 @@
-﻿
+﻿@using informativa.aquarella.com.oe.Models
+@model IEnumerable<Ent_Catalogo>
 @{
     ViewBag.Title = "Catalogo";
 }
@@ -18,114 +19,25 @@
  <!-- Portfolio -->
 <div class="portfolio-container">
     <div class="container">
-        @*<div class="row">
-            <div class="col-sm-12 portfolio-filters wow fadeInLeft">
-                <a href="#" class="filter-all active">All</a> /
-                <a href="#" class="filter-web-design">Web Design</a> /
-                <a href="#" class="filter-logo-design">Logo Design</a> /
-                <a href="#" class="filter-print-design">Print Design</a>
-            </div>
-        </div>*@
+     
         <div class="row">
             <div class="col-sm-12 portfolio-masonry">
-              
+                 
+            @foreach (Ent_Catalogo item in Model)
+            {
                 <div class="portfolio-box web-design">
                     <div class="portfolio-box-container">
-                        <a href="~/Catalogo/catalogo_vida_colores_2018/index.html" target="_blank"> <img src="~/Catalogo/catalogo_vida_colores_2018/pages/1.jpg" style="width:200px;height:250px" alt="" @*data-at2x="../assets/img/catalogo1/1.jpg"*@></a>
+                        <a href="@item.Catologo_strRuta@item.Catologo_Carpeta/index.html" target="_blank"> <img src="@item.Catologo_strRuta@item.Catologo_Carpeta/pages/1.jpg" style="width:200px;height:250px" alt="" </a>
                         <div class="portfolio-box-text">
-                            <h3>Especial Aquarella</h3>
-                            <p>La Vida en Colores</p>
+                            <h3>@item.Catalogo_Titulo</h3>
+                            <p>@item.Catalogo_Descripcion</p>
                         </div>
                     </div>
                 </div>
+        }
+                
 
-
-                <div class="portfolio-box web-design">
-                    <div class="portfolio-box-container">
-                        <a href="~/Catalogo/catalogo_escolar_2018/index.html" target="_blank"> <img src="~/Catalogo/catalogo_escolar_2018/pages/1.jpg" style="width:200px;height:250px" alt="" @*data-at2x="../assets/img/catalogo1/1.jpg"*@></a>
-                        <div class="portfolio-box-text">
-                            <h3>Escolar 2018</h3>
-                            <p>De vuelta al colegio</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="portfolio-box web-design">
-                    <div class="portfolio-box-container">
-                        <a href="~/Catalogo/catalogo_navidad_2017/index.html" target="_blank"> <img src="~/Catalogo/catalogo_navidad_2017/pages/1.jpg" style="width:200px;height:250px" alt="" @*data-at2x="../assets/img/catalogo1/1.jpg"*@></a>
-                        <div class="portfolio-box-text">
-                            <h3>Navidad 2017</h3>
-                            <p>Feliz Navidad</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="portfolio-box web-design">
-                    <div class="portfolio-box-container">
-                        <a href="~/Catalogo/catalogo_primavera_2017/index.html" target="_blank"> <img src="~/Catalogo/catalogo_primavera_2017/pages/1.jpg" style="width:200px;height:250px" alt="" @*data-at2x="../assets/img/catalogo1/1.jpg"*@></a>
-                        <div class="portfolio-box-text">
-                            <h3>Primavera 2017</h3>
-                            <p>Pasión por los zapatos</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="portfolio-box web-design">
-                    <div class="portfolio-box-container">
-                        <a href="~/Catalogo/catalogo_total_2017_II/index.html" target="_blank"> <img src="~/Catalogo/catalogo_total_2017_II/pages/1.jpg" style="width:200px;height:250px" alt="" @*data-at2x="../assets/img/catalogo1/1.jpg"*@></a>
-                        <div class="portfolio-box-text">
-                            <h3>Precios de locura</h3>
-                            <p>Total 2017 - II</p>
-                        </div>
-                    </div>
-                </div>
-               
-               
-                <div class="portfolio-box web-design">
-                    <div class="portfolio-box-container">
-                        <a href="~/Catalogo/catalogo_fiestas_patrias_2017/index.html" target="_blank"> <img src="~/Catalogo/catalogo_fiestas_patrias_2017/pages/1.jpg" style="width:200px;height:250px" alt="" @*data-at2x="../assets/img/catalogo1/1.jpg"*@></a>
-                        <div class="portfolio-box-text">
-                            <h3>Fiestas Patrias 2017</h3>
-                            <p>Siempre a la Moda.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="portfolio-box web-design">
-                    <div class="portfolio-box-container">
-                        <a href="~/Catalogo/catalogo_padre_2017/index.html" target="_blank"> <img src="~/Catalogo/catalogo_padre_2017/pages/1.jpg" style="width:200px;height:250px" alt="" @*data-at2x="../assets/img/catalogo1/1.jpg"*@></a>
-                        <div class="portfolio-box-text">
-                            <h3>Padres 2017</h3>
-                            <p>Ofertas mes de Papá.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="portfolio-box web-design">
-                    <div class="portfolio-box-container">
-                        <a href="~/Catalogo/catalogo_tu_conmigo_2017/index.html" target="_blank"> <img src="~/Catalogo/catalogo_tu_conmigo_2017/pages/1.jpg" style="width:200px;height:250px" alt="" @*data-at2x="../assets/img/catalogo1/1.jpg"*@></a>
-                        <div class="portfolio-box-text">
-                            <h3>Madres 2017</h3>
-                            <p>Tu conmigo.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="portfolio-box web-design">
-                    <div class="portfolio-box-container">
-                        <a href="~/Catalogo/catalogo_liquid_total_2017/index.html" target="_blank"> <img src="~/Catalogo/catalogo_liquid_total_2017/pages/1.jpg" style="width:200px;height:250px" alt="" @*data-at2x="../assets/img/catalogo1/1.jpg"*@></a>
-                        <div class="portfolio-box-text">
-                            <h3>Liquidacion 2017</h3>
-                            <p>Liquidacion Total.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="portfolio-box web-design">
-                    <div class="portfolio-box-container">
-                        <a href="~/Catalogo/catalogo_escolar_2017/index.html" target="_blank"> <img src="~/Catalogo/catalogo_escolar_2017/pages/1.jpg" style="width:200px;height:250px" alt="" @*data-at2x="../assets/img/catalogo1/1.jpg"*@></a>
-                        <div class="portfolio-box-text">
-                            <h3>Escolar 2017</h3>
-                            <p>Summer Colecction.</p>
-                        </div>
-                    </div>
-                </div>
+    
             </div>
         </div>
     </div>

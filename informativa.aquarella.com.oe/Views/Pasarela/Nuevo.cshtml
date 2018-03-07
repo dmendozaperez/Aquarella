@@ -267,19 +267,16 @@
 
         var validacion = true;
         var strMensaje = '';
-       
         var strTitulo = $("#titulo").val();
         var strDescripcion = $("#descripcion").val();
-           
 
         strTitulo = strTitulo.replace(/\s/g, '');
+        strDescripcion = strDescripcion.replace(/\s/g, '');
 
         if (strTitulo.length < 1) {
             strMensaje += '<br/>* Ingrese Titulo. ';
             $.toaster('* Ingrese Titulo. ', 'Mensaje', 'danger');
         }
-
-        strDescripcion = strDescripcion.replace(/\s/g, '');
 
         if (strDescripcion.length < 1) {
             strMensaje += '<br/>* Ingrese Descripción . ';
@@ -303,8 +300,6 @@
                 strMensajeDetalle += '<br/> * Debe elegir una imagen para el detalle.'
                 $.toaster('* Debe elegir una imagen para el detalle.', 'Mensaje', 'danger');
             }
-
-         
 
             if (strMensajeDetalle != '')
                 return false;
@@ -387,14 +382,21 @@
                 contentType: 'application/json',
                 success: function (rpta) {
 
+                    var id = rpta.Data;
                     removeLoading();
-                    $("#lblIdPasarela").val(rpta.Data);
-                    $.toaster("Coleccion ha sido guardada.", 'Mensaje', 'success');
-                    setTimeout("RefrescarPagina ();", 1000);
-                    @*url = '@Url.Action("Editar", "Pasarela", new { strId = "xxxx"})';
-                    url = url.replace("xxxx", rpta.Data);
 
-                    location.href = url;*@
+                    if (id < 0) {
+                        $.toaster(rpta.Message, 'Mensaje', 'danger');
+                      
+
+                    }
+                    else {
+                        $.toaster(rpta.Message, 'Mensaje', 'success');
+                        $("#lblIdPasarela").val(rpta.Data);
+                        setTimeout("RefrescarPagina ();", 1000);
+                    }
+
+                                  
 
                 },
                 error: function (error) {
