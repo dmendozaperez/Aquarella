@@ -86,7 +86,7 @@
                                 </tr>
                                 <tr>
                                     <td colspan="1" valign="middle">
-                                        <input id="activarPredeterminado" type="checkbox" name="activarPrincial">
+                                        <input id="activarPredeterminado" type="checkbox"  name="activarPrincial">
                                     </td>
                                     <td colspan="1" valign="middle" style="text-align:left">
                                         <label for="nombre"> Establecer como pasarela predeterminada</label>
@@ -223,9 +223,10 @@
         var nId = $("#tblImagenes tbody > tr:last-child").data("id");
 
         var strDelete = '<a title="Eliminar Imagen" onclick="javascript:EliminarImagen(this);"><span class="glyphicon glyphicon-remove-sign" style="font-size:30px;"></span></a>'
-        if (nId == null)
+        if (nId == null) {
             strDelete = '<a title="Eliminar Imagen" ><span class="glyphicon glyphicon-remove-sign btn-default" style="font-size:30px;"></span></a>'
-
+            nId = 0;
+        }
         nId++
 
         var strImg = ''
@@ -284,8 +285,8 @@
 
     function previewFile(strId) {
 
-        var preview = document.querySelector('#imagen_' + strId); //selects the query named img
-        var file = document.querySelector('#archivo_' + strId).files[0]; //sames as here
+        var preview = document.querySelector('#imagen_' + strId); 
+        var file = document.querySelector('#archivo_' + strId).files[0]; 
         
         $("#txtCambio_" + strId).val('S');
         var reader = new FileReader();
@@ -295,10 +296,8 @@
         }
 
         if (file) {
-            reader.readAsDataURL(file); //reads the data as a URL
-        } else {
-            preview.src = "";
-        }
+            reader.readAsDataURL(file); 
+        } 
     }
 
     function ValidarPasarela() {
@@ -493,7 +492,7 @@
                
             },
             error: function (error) {
-                alert("errorarchivo")
+               
             }
         });
     }
