@@ -126,20 +126,7 @@
                             </table>
                             <div style="height:300px;width: 100%; overflow-y: auto; ">
                                 <table id="tblImagenes" class="table table-striped">
-                                    @*<thead>
-                                            <tr id="1" class="FilaDatos">
-
-                                                <td align="center" style="text-align:center;vertical-align:middle;width:30%"><label>Orden</label></td>
-                                                <td align="center" style="text-align:center;vertical-align:middle;width:50%" colspan="2"><label>Imagen</label></td>
-                                                <td vertical-align="middle" style="text-align:center;vertical-align:middle;width:20%" align="center">
-                                                    <div id="cabeceraDetalle">
-                                                        <a title='Agregar Detalle' onclick="javascript:AgregarImagen();"><span class="glyphicon glyphicon-plus-sign" style="font-size:30px;"></span></a>
-                                                   </div>
-                                                </td>
-
-                                            </tr>
-                                        </thead>*@
-                                    <tbody></tbody>
+                                   <tbody></tbody>
                                 </table>
                             </div>
                         </div>
@@ -187,10 +174,12 @@
     function AgregarImagen() {
 
         var nId = $("#tblImagenes tbody > tr:last-child").data("id");
-
+       
         var strDelete = '<a title="Eliminar Imagen" onclick="javascript:EliminarImagen(this);"><span class="glyphicon glyphicon-remove-sign" style="font-size:30px;"></span></a>'
-        if (nId == null)
+        if (nId == null) {
             strDelete = '<a title="Eliminar Imagen" ><span class="glyphicon glyphicon-remove-sign btn-default" style="font-size:30px;"></span></a>'
+            nId = 0;
+        }
 
         nId++
 
@@ -248,8 +237,8 @@
 
     function previewFile(strId) {
 
-        var preview = document.querySelector('#imagen_' + strId); //selects the query named img
-        var file = document.querySelector('#archivo_' + strId).files[0]; //sames as here
+        var preview = document.querySelector('#imagen_' + strId); 
+        var file = document.querySelector('#archivo_' + strId).files[0];
         var reader = new FileReader();
 
         reader.onloadend = function () {
@@ -257,10 +246,9 @@
         }
 
         if (file) {
-            reader.readAsDataURL(file); //reads the data as a URL
-        } else {
-            preview.src = "";
+            reader.readAsDataURL(file); 
         }
+     
     }
 
     function ValidarPasarela() {
