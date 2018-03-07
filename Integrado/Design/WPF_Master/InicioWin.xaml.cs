@@ -18,6 +18,7 @@ using Integrado.Bll;
 using CapaDato.Bll.Control;
 using System.IO;
 using Epson_Ticket;
+using MahApps.Metro;
 //using Epson_QR;
 //using System.IO;
 //using Epson_Ticket;
@@ -81,14 +82,58 @@ namespace Integrado.Design.WPF_Master
 
             Boolean ini_mod = false;
 
-            inicia_modulo(_server, _base_datos, _user, _password,ref ini_mod);
-            
+            inicia_modulo(_server, _base_datos, _user, _password, ref ini_mod);
+
             if (ini_mod) _referenciar_Base_Datos("BA");
+
+            //MahApps.Metro.Accent accent = new MahApps.Metro.Accent("Green", new Uri("pack://application:,,,/MahApps.Metro;component/Styles/Accents/Green.xaml", UriKind.RelativeOrAbsolute));
+            //MahApps.Metro.AppTheme LightTheme = new MahApps.Metro.AppTheme("BaseLight", new Uri("pack://application:,,,/MahApps.Metro;component/Styles/Accents/BaseLight.xaml", UriKind.RelativeOrAbsolute));
+            //MahApps.Metro.AppTheme DarkTheme = new MahApps.Metro.AppTheme("BaseDark", new Uri("pack://application:,,,/MahApps.Metro;component/Styles/Accents/BaseDark.xaml", UriKind.RelativeOrAbsolute));
+
+            //ThemeManager.ChangeAppStyle(Application.Current, accent, DarkTheme);
+            //        Dim accent As MahApps.Metro.Accent = New MahApps.Metro.Accent("Green", New Uri("pack://application:,,,/MahApps.Metro;component/Styles/Accents/Green.xaml", UriKind.RelativeOrAbsolute))
+            //Dim LightTheme As MahApps.Metro.AppTheme = New MahApps.Metro.AppTheme("BaseLight", New Uri("pack://application:,,,/MahApps.Metro;component/Styles/Accents/BaseLight.xaml", UriKind.RelativeOrAbsolute))
+            //Dim DarkTheme As MahApps.Metro.AppTheme = New MahApps.Metro.AppTheme("BaseDark", New Uri("pack://application:,,,/MahApps.Metro;component/Styles/Accents/BaseDark.xaml", UriKind.RelativeOrAbsolute))
+            //If Me.DarkThemeSelect_check.IsChecked = True Then
+            //    ThemeManager.ChangeAppStyle(Application.Current, accent, DarkTheme)
+            //ElseIf Me.LightThemeSelect_check.IsChecked = True Then
+            //    ThemeManager.ChangeAppStyle(Application.Current, accent, LightTheme)
+            //End If
+
+
+
 
             Mouse.OverrideCursor = null;
 
         }
+        /// <summary>
+        /// Color de acento
+        /// </summary>
+        /// <param name="color"></param>
+        private void accent_metro(string color="B")
+        {
+            try
+            {
+                Accent accent = null;
+                if (color!="B")
+                { 
+                    accent = new Accent("Red", new Uri("pack://application:,,,/MahApps.Metro;component/Styles/Accents/Red.xaml", UriKind.RelativeOrAbsolute));
+                }
+                else
+                {
+                    accent = new Accent("Blue", new Uri("pack://application:,,,/MahApps.Metro;component/Styles/Accents/Blue.xaml", UriKind.RelativeOrAbsolute));
+                }
 
+                AppTheme LightTheme = new AppTheme("BaseLight", new Uri("pack://application:,,,/MahApps.Metro;component/Styles/Accents/BaseLight.xaml", UriKind.RelativeOrAbsolute));
+                ThemeManager.ChangeAppStyle(Application.Current, accent, LightTheme);
+
+            }
+            catch (Exception)
+            {
+
+                
+            }
+        }
         private void _referenciar_Base_Datos(string _base)
         {
             Ent_Global._canal_venta = _base;
@@ -96,6 +141,8 @@ namespace Integrado.Design.WPF_Master
             {
                 case "AQ":
                     //Ent_Conexion._Base_Datos = "BdAQ";//"BdAquarella"; //"BdAQ";
+
+                    accent_metro();
                     Ent_Global._modulo_activo = _base;
                     Ent_Global._nom_modulo = "Sistema Aquarella";
                    
@@ -104,6 +151,8 @@ namespace Integrado.Design.WPF_Master
                     this.Close();
                     break;
                 case "BA":
+                    accent_metro("R");
+
                     Ent_Global._modulo_activo = _base;
                     Ent_Global._nom_modulo = "Sistema E-Commerce";
                     OpcionesMenu frmbata = new OpcionesMenu();
@@ -158,7 +207,8 @@ namespace Integrado.Design.WPF_Master
         }
      
         private void Window_Loaded(object sender, RoutedEventArgs e)
-        {          
+        {
+            accent_metro();
             btnaquarella.Focus();
         }
     }
