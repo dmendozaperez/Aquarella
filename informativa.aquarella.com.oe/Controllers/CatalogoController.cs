@@ -83,7 +83,7 @@ namespace informativa.aquarella.com.oe.Controllers
             try
             {
 
-                string _folder_principal_path = System.Web.HttpContext.Current.Server.MapPath(Conexion.Str_RutaPlantilla);
+                string _folder_principal_path = System.Web.HttpContext.Current.Server.MapPath("~" +Conexion.Str_RutaPlantilla);
                 string ruta_foto = _folder_principal_path + "\\" + NombreCarpeta + "\\pages";
 
                 string[] _foto = null;
@@ -179,26 +179,13 @@ namespace informativa.aquarella.com.oe.Controllers
             }
             return _valida;
         }
-
-        private void eliminarTemporalImagenes(string NombreCarpeta)
+               
+        private void CopiarFolderPlantilla(string NombreCarpeta )
         {
             try
             {
-                string _folder_principal_path = System.Web.HttpContext.Current.Server.MapPath(Conexion.Str_RutaPlantilla);
-                string _folder_path_destino = _folder_principal_path + "\\" + NombreCarpeta+"_F";
-                
-                    System.IO.File.Delete(_folder_path_destino);
-              
-            }
-            catch (Exception ex)
-            {
-                throw;
-            }
-        }
-        private void CopiarFolderPlantilla(string NombreCarpeta )
-        {
-            
-                string _folder_principal_path = System.Web.HttpContext.Current.Server.MapPath(Conexion.Str_RutaPlantilla);
+
+                string _folder_principal_path = System.Web.HttpContext.Current.Server.MapPath("~" + Conexion.Str_RutaPlantilla);
                 string _folder_defecto = Conexion.Str_FolderPlantilla;
 
 
@@ -221,14 +208,27 @@ namespace informativa.aquarella.com.oe.Controllers
                 }
 
                       
-           
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
         }
+        #region<METODOS>
 
+   
+        #endregion
+        /// <summary>
+        /// xxxxxccccccc
+        /// </summary>
+        /// <param name="NombreCarpeta"></param>
+        /// <param name="nroPaginas"></param>
+        /// <param name="titulo"></param>
         private void editar_html(string NombreCarpeta,string nroPaginas,string titulo)
         {
             try
             {
-                string _folder_principal_path = System.Web.HttpContext.Current.Server.MapPath(Conexion.Str_RutaPlantilla);
+                string _folder_principal_path = System.Web.HttpContext.Current.Server.MapPath("~" + Conexion.Str_RutaPlantilla);
                 string _folder_path_destino = _folder_principal_path + "\\" + NombreCarpeta;
 
                 string _ruta_index = _folder_path_destino + "\\index.html";
@@ -287,71 +287,61 @@ namespace informativa.aquarella.com.oe.Controllers
         [OutputCache(CacheProfile = "OneMinuteValidate")]
         public ActionResult GuardarCatalogo()
         {
-
-
             var oJRespuesta = new JsonResponse();
+            Ent_Usuario _usuario = (Ent_Usuario)Session[Ent_Constantes.NameSessionUser];
 
-            try {
-                Ent_Usuario _usuario = (Ent_Usuario)Session[Ent_Constantes.NameSessionUser];
-
-                if (_usuario == null)
-                {
-                    oJRespuesta.Data = -1;
-                    oJRespuesta.Message = "Debe Iniciar sessión.";
-
-
-                }
-                else
-                {
-                    string NombreCarpeta = Post("Catologo_Carpeta");
-
-
-                    Ent_Catalogo catalogo = new Ent_Catalogo();
-                    catalogo.Catalogo_Id = Convert.ToInt32(Post("Catalogo_Id"));
-                    catalogo.Catalogo_Titulo = Post("Catalogo_Titulo");
-                    catalogo.Catalogo_Descripcion = Post("Catalogo_Descripcion");
-                    catalogo.Catalogo_Estado = Post("Catalogo_Estado");
-                    catalogo.Catologo_Orden = Post("Catologo_Orden");
-                    catalogo.Catalogo_strNroPag = Post("Catalogo_strNroPag");
-                    catalogo.Catalogo_UpdArchivo = Post("Catalogo_UpdArchivo");
-                    catalogo.Catologo_Carpeta = NombreCarpeta;
-                    catalogo.UsuCrea = _usuario.usu_login;
-                    catalogo.Ip = _usuario.usu_ip;
-                    int IdCatalogo = catalogoBL.InsertarCatalogo(catalogo);
-                    oJRespuesta.Data = IdCatalogo;
-
-                    if (IdCatalogo > 0)
-                    {
-                        if (catalogo.Catalogo_UpdArchivo == "S")
-                        {
-                            CopiarFolderPlantilla(catalogo.Catologo_Carpeta);
-
-
-                            foreach (string fileName in Request.Files)
-                            {
-
-                                HttpPostedFileBase file = Request.Files[fileName];
-                                string nombrelbl = fileName.Remove(0, 16);
-                                string nombre = Post("Catalogo_Nombre" + nombrelbl);
-
-                                Boolean valido = true;
-                                valido = catalogoBL.GuardarCatalogoArchivo(NombreCarpeta, nombre, file);
-
-                            }
-
-
-                            editar_html(catalogo.Catologo_Carpeta, catalogo.Catalogo_strNroPag, catalogo.Catalogo_Titulo);
-                            //cargar_fotos(catalogo.Catologo_Carpeta);
-                            crear_pdf(catalogo.Catologo_Carpeta);
-                        }
-
-                    }
-                }
-            } catch (Exception ex)
+            if (_usuario == null)
             {
                 oJRespuesta.Data = -1;
-                oJRespuesta.Message = ex.Message.ToString();
+                oJRespuesta.Message = "Debe Iniciar sessión.";
 
+
+            }
+            else
+            {
+                string NombreCarpeta = Post("Catologo_Carpeta");
+
+
+                Ent_Catalogo catalogo = new Ent_Catalogo();
+                catalogo.Catalogo_Id = Convert.ToInt32(Post("Catalogo_Id"));
+                catalogo.Catalogo_Titulo = Post("Catalogo_Titulo");
+                catalogo.Catalogo_Descripcion = Post("Catalogo_Descripcion");
+                catalogo.Catalogo_Estado = Post("Catalogo_Estado");
+                catalogo.Catologo_Orden = Post("Catologo_Orden");
+                catalogo.Catalogo_strNroPag = Post("Catalogo_strNroPag");
+                catalogo.Catalogo_UpdArchivo = Post("Catalogo_UpdArchivo");
+                catalogo.Catologo_Carpeta = NombreCarpeta;
+                catalogo.UsuCrea = _usuario.usu_login;
+                catalogo.Ip = _usuario.usu_ip;
+                int IdCatalogo = catalogoBL.InsertarCatalogo(catalogo);
+                oJRespuesta.Data = IdCatalogo;
+
+                if (IdCatalogo > 0)
+                {
+                    if (catalogo.Catalogo_UpdArchivo == "S")
+                    {
+                        CopiarFolderPlantilla(catalogo.Catologo_Carpeta);
+
+                       
+                        foreach (string fileName in Request.Files)
+                        {
+
+                            HttpPostedFileBase file = Request.Files[fileName];
+                            string nombrelbl = fileName.Remove(0, 16);
+                            string nombre = Post("Catalogo_Nombre" + nombrelbl);
+
+                            Boolean valido = true;
+                            valido = catalogoBL.GuardarCatalogoArchivo(NombreCarpeta, nombre, file);
+
+                        }
+
+                        
+                        editar_html(catalogo.Catologo_Carpeta, catalogo.Catalogo_strNroPag, catalogo.Catalogo_Titulo);
+                        //cargar_fotos(catalogo.Catologo_Carpeta);
+                        crear_pdf(catalogo.Catologo_Carpeta);
+                    }
+
+                }
             }
 
             return Json(oJRespuesta, JsonRequestBehavior.AllowGet);
