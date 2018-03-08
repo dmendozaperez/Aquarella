@@ -207,14 +207,16 @@
 
     function ActualizarList(data)
     {
+        removeLoading();
         var rpta = JSON.parse(data);
+        $.toaster(rpta.Message, 'Mensaje', 'danger');
         var id = parseInt(rpta.Data)
         if (id > 0) {
             $("#lblMcaUpdArchivo").val('N');
             $("#lblIdCatalogo").val(rpta.Data);
             setTimeout("MostrarListado();", 300);
         }
-        removeLoading();
+        
      
         if (id < 0) {
             $.toaster(rpta.Message, 'Mensaje', 'danger');
