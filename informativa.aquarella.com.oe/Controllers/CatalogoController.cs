@@ -215,7 +215,15 @@ namespace informativa.aquarella.com.oe.Controllers
             }
         }
         #region<METODOS>
+
+   
         #endregion
+        /// <summary>
+        /// xxxxx
+        /// </summary>
+        /// <param name="NombreCarpeta"></param>
+        /// <param name="nroPaginas"></param>
+        /// <param name="titulo"></param>
         private void editar_html(string NombreCarpeta,string nroPaginas,string titulo)
         {
             try
