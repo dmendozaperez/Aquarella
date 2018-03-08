@@ -215,11 +215,11 @@ namespace informativa.aquarella.com.oe.Controllers
             }
         }
         #region<METODOS>
-
+        ///////
    
         #endregion
         /// <summary>
-        /// xxxxxccccccc
+        /// xxxxx de de codigo c# prueba
         /// </summary>
         /// <param name="NombreCarpeta"></param>
         /// <param name="nroPaginas"></param>
