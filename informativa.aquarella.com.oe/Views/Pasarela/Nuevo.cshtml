@@ -142,6 +142,7 @@
 <script src="~/assets/js/jquery-1.11.1.min.js"></script>
 <script src="~/assets/bootstrap/js/bootstrap.min.js"></script>
 <script src="~/Scripts/bootstrap-select.min.js"></script>
+<script src="~/Scripts/pace/pace.min.js"></script>
 
 <script type="text/javascript">
     $(document).ready(function () {
@@ -212,7 +213,7 @@
         row += '<tr  height="50px" data-id="' + nId + '" class="FilaDatos">'
         row += '<td  vertical-align="middle" style="text-align:center;vertical-align:middle;width:30%"  align="center" >'
         row += '<div  style="display:none"><input type="text" id="txtnombreNuevo_' + nId + '" value=""/></div>'
-        row += '<input name ="orden" type="number" id="txtOrden_' + nId + '" value="" placeholder="Ingrese  Orden" autofocus class="form-control" />'
+        row += '<input name ="orden" type="number" id="txtOrden_' + nId + '" value="' + nId + '" placeholder="Ingrese  Orden" autofocus class="form-control" />'
         row += '</td>'
         row += strImg
         row += '<td  vertical-align="middle" style="text-align:center;vertical-align:middle;width:20%;"  align="center"  >'
@@ -316,19 +317,21 @@
                 strPredeterminado = 'A';
             }
 
-            var objPasarela = {};
+      
 
-            objPasarela["Pasarela_id"] = $("#lblIdPasarela").val();
-            objPasarela["Pasarela_Titulo"] = strTitulo;
-            objPasarela["Pasarela_Descripcion"] = strDescripcion;
-            objPasarela["Pasarela_Estado"] = strPredeterminado;
+            var frm = new FormData();
+            frm.append("Pasarela_id", $("#lblIdPasarela").val());
+            frm.append("Pasarela_Titulo", strTitulo);
+            frm.append("Pasarela_Descripcion", strDescripcion);
+            frm.append("Pasarela_Estado", strPredeterminado);
+        
 
             var contador = 0;
             var contadorAux = 0;
             var d = new Date()
             var mm = d.getTime()
             var pasarelaDetalle_strList = "";
-            var formData = new FormData();
+           
 
             $('input[name="orden"]').each(function () {
                 contador++
@@ -343,64 +346,45 @@
                 var strext = archivo.name;
                 var ext = strext.split(".");
                 var newNombre = nombre + '.' + ext[1];
-                formData.append("PasarelaDeta_Nombre" + contadorAux, newNombre);
-                formData.append("PasarelaDet_archivo" + contadorAux, archivo);
 
+                frm.append("PasarelaDeta_Nombre" + contador, newNombre);
+                frm.append("PasarelaDet_archivo" + contador, archivo);
+              
                 $("#txtnombreNuevo_" + Id).val(newNombre);
-
-                if (contadorAux == 6) {
-                    contadorAux = 0;
-                    GuardarArchivoDetalle(formData)
-                    formData = new FormData()
-                }
-
+                
                 pasarelaDetalle_strList += 'row1 PasarelaDetalle_id="' + PasarelaDetalle_id + '"  orden="' + orden + '" nombrearchivo ="' + newNombre + '" row2'
             });
 
-            if (contadorAux > 0)
-                GuardarArchivoDetalle(formData)
 
-            objPasarela["Pasarela_strDetalle"] = pasarelaDetalle_strList;
+            frm.append("Pasarela_strDetalle", pasarelaDetalle_strList);
 
-            var url = '@Url.Action("GuardarPasarela", "Pasarela")';
-            $.ajax({
-                type: "POST",
-                url: url,
-                data: JSON.stringify({ pasarela: objPasarela }),
-                contentType: 'application/json',
-                success: function (rpta) {
-
-                    var id = rpta.Data;
-                    removeLoading();
-
-                    if (id < 0) {
-                        $.toaster(rpta.Message, 'Mensaje', 'danger');
-                      
-
-                    }
-                    else {
-                        $.toaster(rpta.Message, 'Mensaje', 'success');
-                        $("#lblIdPasarela").val(rpta.Data);
-                        setTimeout("RefrescarPagina ();", 1000);
-                    }
-
-                                  
-
-                },
-                error: function (error) {
-
-                }
-            });
+            
+            Post('GuardarPasarela', frm, RefrescarPagina);
         }
      
 
     }
 
-    function RefrescarPagina() {
+    function RefrescarPagina(data) {
+        removeLoading();
+        var rpta = JSON.parse(data);
+        var id = parseInt(rpta.Data)
+        if (id > 0) {
+            $("#lblIdPasarela").val(id);
+        }
+     
 
-        var strIdPasarela = $("#lblIdPasarela").val();
+        if (id < 0) {
+            $.toaster(rpta.Message, 'Mensaje', 'danger');
+
+        }
+        else {
+            $.toaster(rpta.Message, 'Mensaje', 'success');
+        }
+
+       
         url = '@Url.Action("Editar", "Pasarela", new { strId = "xxxx"})';
-        url = url.replace("xxxx", strIdPasarela);
+        url = url.replace("xxxx", id);
         location.href = url;
     }
 
@@ -427,7 +411,18 @@
             }
         });
     }
-    //modificacion
+ 
+
+    function Post(url, frm, metodo) {
+        var xhr = new XMLHttpRequest();
+        xhr.open("post", url, true);
+        xhr.send(frm);
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState == 4 && xhr.status == 200) {
+                metodo(xhr.responseText);
+            }
+        }
+    };
 
   
 </script>

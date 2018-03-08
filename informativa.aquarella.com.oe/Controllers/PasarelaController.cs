@@ -93,10 +93,9 @@ namespace informativa.aquarella.com.oe.Controllers
                 return View("Nuevo", pasarela);
             }
         }
-       
-       
-        [HttpPost]
-        public ActionResult GuardarPasarela(Ent_Pasarela pasarela)
+
+        [OutputCache(CacheProfile = "OneMinuteValidate")]
+        public ActionResult GuardarPasarela()
         {
 
             var oJRespuesta = new JsonResponse();
@@ -105,6 +104,7 @@ namespace informativa.aquarella.com.oe.Controllers
 
             if (_usuario == null)
             {
+                
                 oJRespuesta.Data = -1;
                 oJRespuesta.Message = "Debe Iniciar sessión.";
 
@@ -112,6 +112,26 @@ namespace informativa.aquarella.com.oe.Controllers
             }
             else
             {
+
+                foreach (string fileName in Request.Files)
+                {
+
+                    HttpPostedFileBase file = Request.Files[fileName];
+                    string nombrelbl = fileName.Remove(0, 19);
+                    string nombre = Post("PasarelaDeta_Nombre" + nombrelbl);
+
+                    Boolean valido = true;
+                    valido = pasarelaBl.GuardarPasarelaArchivo(nombre, file);
+
+                }
+
+                Ent_Pasarela pasarela = new Ent_Pasarela();
+                pasarela.Pasarela_id = Convert.ToInt32(Post("Pasarela_id"));
+                pasarela.Pasarela_Titulo = Post("Pasarela_Titulo");
+                pasarela.Pasarela_Descripcion = Post("Pasarela_Descripcion");
+                pasarela.Pasarela_Estado = Post("Pasarela_Estado");
+                pasarela.Pasarela_strDetalle = Post("Pasarela_strDetalle");
+             
                 pasarela.Pasarela_UsuCrea = _usuario.usu_login;
                 pasarela.Pasarela_Ip = _usuario.usu_ip;
                 oJRespuesta.Data = pasarelaBl.InsertarPasarela(pasarela);
@@ -121,21 +141,13 @@ namespace informativa.aquarella.com.oe.Controllers
             return Json(oJRespuesta, JsonRequestBehavior.AllowGet);
         }
       
-
-        [HttpPost]
-        public ActionResult GuardarPasarelaArchivo(Ent_PasarelaArchivo pasarelaArchivo)
+        
+        public static string Post(string campo)
         {
-            //int nIdRegistro = 0;
-            var oJRespuesta = new JsonResponse();
-            Boolean valido = true;
-            valido = pasarelaBl.GuardarPasarelaArchivo(pasarelaArchivo.PasarelaDeta_Nombre1, pasarelaArchivo.PasarelaDet_archivo1);
-            valido = pasarelaBl.GuardarPasarelaArchivo(pasarelaArchivo.PasarelaDeta_Nombre2, pasarelaArchivo.PasarelaDet_archivo2);
-            valido = pasarelaBl.GuardarPasarelaArchivo(pasarelaArchivo.PasarelaDeta_Nombre3, pasarelaArchivo.PasarelaDet_archivo3);
-            valido = pasarelaBl.GuardarPasarelaArchivo(pasarelaArchivo.PasarelaDeta_Nombre4, pasarelaArchivo.PasarelaDet_archivo4);
-            valido = pasarelaBl.GuardarPasarelaArchivo(pasarelaArchivo.PasarelaDeta_Nombre5, pasarelaArchivo.PasarelaDet_archivo5);
-            valido = pasarelaBl.GuardarPasarelaArchivo(pasarelaArchivo.PasarelaDeta_Nombre6, pasarelaArchivo.PasarelaDet_archivo6);
 
-            return Json(oJRespuesta, JsonRequestBehavior.AllowGet);
+            bool existeParametro = System.Web.HttpContext.Current.Request.Form[campo] != null;
+            string parametro = existeParametro ? System.Web.HttpContext.Current.Request.Form[campo].ToString().Trim() : string.Empty;
+            return parametro;
         }
 
 

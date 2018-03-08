@@ -260,7 +260,7 @@
         row += '<div  style="display:none"><input type="text" id="txtnombreNuevo_' + nId + '" value=""/></div>'
         row += '<div style="display:none"><input type="text" id="txtId_' + nId + '" value="0" /></div>'
         row += '<div style="display:none"><input type="text" id="txtCambio_' + nId + '" value="S" /></div>'
-        row += '<input name ="orden" type="number" id="txtOrden_' + nId + '" value="" placeholder="Ingrese  Orden" autofocus class="form-control" />'
+        row += '<input name ="orden" type="number" id="txtOrden_' + nId + '" value="' + nId + '" placeholder="Ingrese  Orden" autofocus class="form-control" />'
         row += '</td>'
         row += strImg
         row += '<td  vertical-align="middle" style="text-align:center;vertical-align:middle;width:20%;"  align="center"  >'
@@ -285,9 +285,9 @@
 
     function previewFile(strId) {
 
-        var preview = document.querySelector('#imagen_' + strId); 
-        var file = document.querySelector('#archivo_' + strId).files[0]; 
-        
+        var preview = document.querySelector('#imagen_' + strId);
+        var file = document.querySelector('#archivo_' + strId).files[0];
+
         $("#txtCambio_" + strId).val('S');
         var reader = new FileReader();
 
@@ -296,8 +296,8 @@
         }
 
         if (file) {
-            reader.readAsDataURL(file); 
-        } 
+            reader.readAsDataURL(file);
+        }
     }
 
     function ValidarPasarela() {
@@ -360,9 +360,100 @@
         return validacion
     }
 
- 
+    function Post(url, frm, metodo) {
+        var xhr = new XMLHttpRequest();
+        xhr.open("post", url, true);
+        xhr.send(frm);
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState == 4 && xhr.status == 200) {
+                metodo(xhr.responseText);
+            }
+        }
+    };
+
 
     function GuardarPasarela() {
+
+        if (ValidarPasarela()) {
+            showLoading();
+
+            var strTitulo = $("#titulo").val();
+            var strDescripcion = $("#descripcion").val();
+            var strPredeterminado = 'I';
+
+            if ($('#activarPredeterminado').is(':checked')) {
+                strPredeterminado = 'A';
+            }
+
+            var objPasarela = {};
+
+            var frm = new FormData();
+            frm.append("Pasarela_id", $("#lblIdPasarela").val());
+            frm.append("Pasarela_Titulo", strTitulo);
+            frm.append("Pasarela_Descripcion", strDescripcion);
+            frm.append("Pasarela_Estado", strPredeterminado);
+
+            var contador = 0;
+            var contadorAux = 0;
+            var d = new Date()
+            var mm = d.getTime()
+            var pasarelaDetalle_strList = "";
+
+
+            $('input[name="orden"]').each(function () {
+                contador++
+
+
+                var nombre = mm + contador;
+
+                var Id = $(this).attr("id").substr(9);
+                var archivo;
+                var orden = $("#txtOrden_" + Id).val();
+                var cambio = $("#txtCambio_" + Id).val();
+                var PasarelaDetalle_id = $("#txtId_" + Id).val();
+
+                var strext;
+                var ext;
+                var newNombre = "";
+
+                if (cambio == 'S') {
+
+                    contadorAux++
+
+                    archivo = $("#archivo_" + Id)[0].files[0];
+                    strext = archivo.name;
+                    ext = strext.split(".")
+                    newNombre = nombre + '.' + ext[1];
+
+                    frm.append("PasarelaDeta_Nombre" + contador, newNombre);
+                    frm.append("PasarelaDet_archivo" + contador, archivo);
+
+                    $("#txtnombreNuevo_" + Id).val(newNombre);
+                } else {
+                    newNombre = $("#txtnombreNuevo_" + Id).val();
+                }
+
+
+                pasarelaDetalle_strList += 'row1 PasarelaDetalle_id="' + PasarelaDetalle_id + '"  orden="' + orden + '" nombrearchivo ="' + newNombre + '" row2'
+            });
+
+
+
+
+
+            objPasarela["Pasarela_strDetalle"] = pasarelaDetalle_strList;
+
+            frm.append("Pasarela_strDetalle", pasarelaDetalle_strList);
+
+
+            Post('GuardarPasarela', frm, RefrescarPagina);
+        }
+
+    }
+
+
+
+    function GuardarPasarelaBK() {
 
         if (ValidarPasarela()) {
             showLoading();
@@ -459,7 +550,7 @@
                         $("#lblIdPasarela").val(rpta.Data);
                         setTimeout("RefrescarPagina ();", 1000);
                     }
-                  
+
 
                 },
                 error: function (error) {
@@ -470,12 +561,23 @@
 
     }
 
-    function RefrescarPagina() {
+    function RefrescarPagina(data) {
 
-        var strIdPasarela = $("#lblIdPasarela").val();
-        url = '@Url.Action("Editar", "Pasarela", new { strId = "xxxx"})';
-        url = url.replace("xxxx", strIdPasarela);
-        location.href = url;
+        removeLoading();
+        var rpta = JSON.parse(data);
+        var id = parseInt(rpta.Data)
+        console.log(id)
+        if (id > 0) {
+            $("#lblIdPasarela").val(id);
+        }
+
+          if (id < 0) {
+            $.toaster(rpta.Message, 'Mensaje', 'danger');
+
+        }
+        else {
+            $.toaster(rpta.Message, 'Mensaje', 'success');
+        }
     }
 
     function GuardarArchivoDetalle(formData) {
@@ -489,10 +591,10 @@
             contentType: false,
             processData: false,
             success: function (rpta) {
-               
+
             },
             error: function (error) {
-               
+
             }
         });
     }
