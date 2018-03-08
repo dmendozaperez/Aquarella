@@ -238,7 +238,7 @@
 
     function previewFile(strId) {
 
-        var preview = document.querySelector('#imagen_' + strId); 
+        var preview = document.querySelector('#imagen_' + strId);
         var file = document.querySelector('#archivo_' + strId).files[0];
         var reader = new FileReader();
 
@@ -247,9 +247,9 @@
         }
 
         if (file) {
-            reader.readAsDataURL(file); 
+            reader.readAsDataURL(file);
         }
-     
+
     }
 
     function ValidarPasarela() {
@@ -303,9 +303,9 @@
 
         return validacion
     }
-    
+
     function GuardarPasarela() {
-       
+
         if (ValidarPasarela()) {
             showLoading();
 
@@ -317,21 +317,21 @@
                 strPredeterminado = 'A';
             }
 
-      
+
 
             var frm = new FormData();
             frm.append("Pasarela_id", $("#lblIdPasarela").val());
             frm.append("Pasarela_Titulo", strTitulo);
             frm.append("Pasarela_Descripcion", strDescripcion);
             frm.append("Pasarela_Estado", strPredeterminado);
-        
+
 
             var contador = 0;
             var contadorAux = 0;
             var d = new Date()
             var mm = d.getTime()
             var pasarelaDetalle_strList = "";
-           
+
 
             $('input[name="orden"]').each(function () {
                 contador++
@@ -349,30 +349,30 @@
 
                 frm.append("PasarelaDeta_Nombre" + contador, newNombre);
                 frm.append("PasarelaDet_archivo" + contador, archivo);
-              
+
                 $("#txtnombreNuevo_" + Id).val(newNombre);
-                
+
                 pasarelaDetalle_strList += 'row1 PasarelaDetalle_id="' + PasarelaDetalle_id + '"  orden="' + orden + '" nombrearchivo ="' + newNombre + '" row2'
             });
 
 
             frm.append("Pasarela_strDetalle", pasarelaDetalle_strList);
 
-            
+
             Post('GuardarPasarela', frm, RefrescarPagina);
         }
-     
+
 
     }
 
     function RefrescarPagina(data) {
-        removeLoading();
+
         var rpta = JSON.parse(data);
         var id = parseInt(rpta.Data)
         if (id > 0) {
             $("#lblIdPasarela").val(id);
         }
-     
+
 
         if (id < 0) {
             $.toaster(rpta.Message, 'Mensaje', 'danger');
@@ -382,14 +382,20 @@
             $.toaster(rpta.Message, 'Mensaje', 'success');
         }
 
-       
+        setTimeout(cargarEditar, 3000);
+    }
+
+    function cargarEditar() {
+
+        var id = $("#lblIdPasarela").val()
         url = '@Url.Action("Editar", "Pasarela", new { strId = "xxxx"})';
         url = url.replace("xxxx", id);
         location.href = url;
+
     }
 
     function GuardarArchivoDetalle(formData) {
-       
+
         var url = '@Url.Action("GuardarPasarelaArchivo", "Pasarela")';
         $.ajax({
             type: "POST",
@@ -407,11 +413,11 @@
                 }
             },
             error: function (error) {
-            
+
             }
         });
     }
- 
+
 
     function Post(url, frm, metodo) {
         var xhr = new XMLHttpRequest();
@@ -424,7 +430,7 @@
         }
     };
 
-  
+
 </script>
 
 

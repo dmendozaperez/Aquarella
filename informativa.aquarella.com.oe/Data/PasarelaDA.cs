@@ -153,11 +153,10 @@ namespace informativa.aquarella.com.oe.Data
 
 
         }
-            
-
-        public Ent_Pasarela GetPasarela(string strId)
+        
+         public Ent_Pasarela GetPasarela(string strId)
         {
-            Ent_Pasarela Pasarela = null;
+            Ent_Pasarela Pasarela = new Ent_Pasarela(); ;
             List<Ent_PasarelaDetalle> lisDetalle = null;
             Int32 IdPasarela = 0;
             string Titulo = "";
@@ -179,7 +178,7 @@ namespace informativa.aquarella.com.oe.Data
 
                         if (dr.HasRows)
                         {
-                            Pasarela = new Ent_Pasarela();
+                           
                             lisDetalle = new List<Ent_PasarelaDetalle>();
 
 
@@ -220,6 +219,49 @@ namespace informativa.aquarella.com.oe.Data
             }
             return Pasarela;
         }
-  
+
+        public int EliminarPasarelaDetalle(Ent_PasarelaDetalle pasarelaDetalle)
+        {
+            //string sqlquery = "USP_Insertar_pasarela";
+            int idPasarelaDetalle = 0;
+            try
+            {
+                using (SqlConnection cn = new SqlConnection(Conexion.conexion_data))
+                {
+                    if (cn.State == 0) cn.Open();
+
+                    SqlCommand oComando = new SqlCommand("USP_Eliminar_pasarelaDetalle", cn);
+                    oComando.CommandType = CommandType.StoredProcedure;
+
+                    SqlParameter oPasarelaDetalle_id = oComando.Parameters.Add("@PasarelaDetalle_id", SqlDbType.Int);
+                    oPasarelaDetalle_id.Direction = ParameterDirection.Input;
+                    oPasarelaDetalle_id.Value = pasarelaDetalle.PasarelaDet_id;
+                    
+                    SqlParameter oPasarela_UsuCrea = oComando.Parameters.Add("@Pasarela_usuCrea", SqlDbType.VarChar);
+                    oPasarela_UsuCrea.Direction = ParameterDirection.Input;
+                    oPasarela_UsuCrea.Value = pasarelaDetalle.Pasarela_UsuCrea;
+
+                    SqlParameter oPasarela_IpCrea = oComando.Parameters.Add("@Pasarela_IpCrea", SqlDbType.VarChar);
+                    oPasarela_IpCrea.Direction = ParameterDirection.Input;
+                    oPasarela_IpCrea.Value = pasarelaDetalle.Pasarela_Ip;
+
+                    SqlParameter oIdRespuesta = oComando.Parameters.Add("@PasarelaDetalle_id", SqlDbType.Int);
+                    oIdRespuesta.Direction = ParameterDirection.ReturnValue;
+
+                    oComando.ExecuteNonQuery();
+                    idPasarelaDetalle = (int)oIdRespuesta.Value;
+
+                }
+
+            }
+            catch (Exception exc)
+            {
+                idPasarelaDetalle = -1;
+                //valida = false;
+            }
+            return idPasarelaDetalle;
+
+
+        }
     }
 }

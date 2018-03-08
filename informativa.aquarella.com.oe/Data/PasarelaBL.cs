@@ -32,6 +32,17 @@ namespace informativa.aquarella.com.oe.Data
             return IdPasarela;
         }
 
+        public int EliminarPasarelaDetalle(Ent_PasarelaDetalle pasarelaDetalle)
+        {
+
+            int IdPasarelaDetalle = 0;
+            
+            IdPasarelaDetalle = pasarelaDA.EliminarPasarelaDetalle(pasarelaDetalle);
+
+
+            return IdPasarelaDetalle;
+        }
+
         public Ent_Pasarela GetPasarela(string strId)
         {
 

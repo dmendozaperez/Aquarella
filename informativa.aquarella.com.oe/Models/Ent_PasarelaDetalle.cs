@@ -18,6 +18,9 @@ namespace informativa.aquarella.com.oe.Models
         public string PasarelaDeta_NombreImagen { get; set; }
         public byte[] PasarelaDet_Imagen { get; set; }
         public HttpPostedFileBase PasarelaDet_archivo { get; set; }
-        
+
+        public string Pasarela_UsuCrea { get; set; }
+        public string Pasarela_Ip { get; set; }
+
     }
 }

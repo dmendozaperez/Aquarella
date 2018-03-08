@@ -140,8 +140,39 @@ namespace informativa.aquarella.com.oe.Controllers
 
             return Json(oJRespuesta, JsonRequestBehavior.AllowGet);
         }
-      
-        
+
+        public ActionResult EliminarPasarelaDetalle()
+        {
+
+            var oJRespuesta = new JsonResponse();
+
+            Ent_Usuario _usuario = (Ent_Usuario)Session[Ent_Constantes.NameSessionUser];
+
+            if (_usuario == null)
+            {
+               
+                oJRespuesta.Data = -1;
+                oJRespuesta.Message = "Debe Iniciar sessión.";
+
+
+            }
+            else
+            {
+
+                Ent_PasarelaDetalle pasarelaDetalle = new Ent_PasarelaDetalle();
+
+                pasarelaDetalle.PasarelaDet_id = Convert.ToInt32(Post("PasarelaDet_id"));
+                pasarelaDetalle.Pasarela_UsuCrea = _usuario.usu_login;
+                pasarelaDetalle.Pasarela_Ip = _usuario.usu_ip;
+                oJRespuesta.Data = pasarelaBl.EliminarPasarelaDetalle(pasarelaDetalle);
+                oJRespuesta.Message = "El detalle ha sido eliminado.";
+            }
+
+            return Json(oJRespuesta, JsonRequestBehavior.AllowGet);
+        }
+
+
+
         public static string Post(string campo)
         {
 
