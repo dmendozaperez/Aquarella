@@ -83,7 +83,7 @@ namespace informativa.aquarella.com.oe.Controllers
             try
             {
 
-                string _folder_principal_path = System.Web.HttpContext.Current.Server.MapPath(Conexion.Str_RutaPlantilla);
+                string _folder_principal_path = System.Web.HttpContext.Current.Server.MapPath("~" +Conexion.Str_RutaPlantilla);
                 string ruta_foto = _folder_principal_path + "\\" + NombreCarpeta + "\\pages";
 
                 string[] _foto = null;
@@ -179,28 +179,13 @@ namespace informativa.aquarella.com.oe.Controllers
             }
             return _valida;
         }
-
-        private void eliminarTemporalImagenes(string NombreCarpeta)
-        {
-            try
-            {
-                string _folder_principal_path = System.Web.HttpContext.Current.Server.MapPath(Conexion.Str_RutaPlantilla);
-                string _folder_path_destino = _folder_principal_path + "\\" + NombreCarpeta+"_F";
-                
-                    System.IO.File.Delete(_folder_path_destino);
-              
-            }
-            catch (Exception ex)
-            {
-                throw;
-            }
-        }
+               
         private void CopiarFolderPlantilla(string NombreCarpeta )
         {
             try
             {
 
-                string _folder_principal_path = System.Web.HttpContext.Current.Server.MapPath(Conexion.Str_RutaPlantilla);
+                string _folder_principal_path = System.Web.HttpContext.Current.Server.MapPath("~" + Conexion.Str_RutaPlantilla);
                 string _folder_defecto = Conexion.Str_FolderPlantilla;
 
 
@@ -229,12 +214,13 @@ namespace informativa.aquarella.com.oe.Controllers
                 throw;
             }
         }
-
+        #region<METODOS>
+        #endregion
         private void editar_html(string NombreCarpeta,string nroPaginas,string titulo)
         {
             try
             {
-                string _folder_principal_path = System.Web.HttpContext.Current.Server.MapPath(Conexion.Str_RutaPlantilla);
+                string _folder_principal_path = System.Web.HttpContext.Current.Server.MapPath("~" + Conexion.Str_RutaPlantilla);
                 string _folder_path_destino = _folder_principal_path + "\\" + NombreCarpeta;
 
                 string _ruta_index = _folder_path_destino + "\\index.html";
