@@ -50,7 +50,7 @@
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="NReco.PdfGenerator">
-      <HintPath>..\..\SLBATA\CapaPresentacion\bin\NReco.PdfGenerator.dll</HintPath>
+      <HintPath>..\CatalogoVirtual\bin\Debug\NReco.PdfGenerator.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -189,17 +189,6 @@
     <Content Include="assets\img\logo.png" />
     <Content Include="assets\img\logo1.png" />
     <Content Include="assets\img\pattern.jpg" />
-    <Content Include="assets\img\slider\1.jpg" />
-    <Content Include="assets\img\slider\10.jpg" />
-    <Content Include="assets\img\slider\11.jpg" />
-    <Content Include="assets\img\slider\2.jpg" />
-    <Content Include="assets\img\slider\3.jpg" />
-    <Content Include="assets\img\slider\4.jpg" />
-    <Content Include="assets\img\slider\5.jpg" />
-    <Content Include="assets\img\slider\6.jpg" />
-    <Content Include="assets\img\slider\7.jpg" />
-    <Content Include="assets\img\slider\8.jpg" />
-    <Content Include="assets\img\slider\9.jpg" />
     <Content Include="assets\img\team\1.jpg" />
     <Content Include="assets\img\team\2.jpg" />
     <Content Include="assets\img\team\3.jpg" />
@@ -456,6 +445,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="assets\img\portfolio\" />
+    <Folder Include="assets\img\slider\" />
     <Folder Include="CatalogoVirtual\" />
   </ItemGroup>
   <ItemGroup>
