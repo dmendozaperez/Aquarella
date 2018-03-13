@@ -14,16 +14,18 @@ namespace Integrado.Urbano
     public class EnviaPedido
     {
 
-        public Boolean sendUrbano()
+        public Ent_Urbano sendUrbano(string _ven_id)
         {
             Boolean valida = false;
             DataTable dt = null;
+            Ent_Urbano post_data = null;
             try
             {
+                post_data = new Ent_Urbano();
                 Dat_Urbano data_urbano = new Dat_Urbano();
                 Ent_Urbano acceso = data_urbano.get_acceso();
 
-                dt = data_urbano.get_data();
+                dt = data_urbano.get_data(_ven_id);
                 
                 if (dt!=null)
                 {
@@ -192,11 +194,12 @@ namespace Integrado.Urbano
 
 
                                 //en este paso envia si es que urbano recibio los datos con exito
-
-                                if (post.error=="1")
-                                {
-                                    data_urbano.update_guia(key.cod_rastreo, post.guia);
-                                }
+                                post_data = post;
+                                //if (post.error=="1")
+                               // {
+                               //     if (post.guia.Trim().Length>0)
+                                //        data_urbano.update_guia(key.cod_rastreo, post.guia);
+                                //}
 
                                 //Console.WriteLine(post.guia);
 
@@ -216,10 +219,9 @@ namespace Integrado.Urbano
             }
             catch (Exception exc)
             {
-
-                valida=true;
+                post_data = null;                                
             }
-            return valida;
+            return post_data ;
         }
         public Boolean send()
         {

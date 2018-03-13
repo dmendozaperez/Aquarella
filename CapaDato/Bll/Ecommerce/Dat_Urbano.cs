@@ -57,7 +57,7 @@ namespace CapaDato.Bll.Ecommerce
         /// acceso a los datos a enviar urbano
         /// </summary>
         /// <returns></returns>
-        public DataTable get_data()
+        public DataTable get_data(string _ven_id)
         {
             DataTable dt = null;
             string sqlquery = "USP_Urbano_SendData";
@@ -69,6 +69,7 @@ namespace CapaDato.Bll.Ecommerce
                     {
                         cmd.CommandTimeout = 0;
                         cmd.CommandType = CommandType.StoredProcedure;
+                        cmd.Parameters.AddWithValue("@ven_id", _ven_id);
                         using (SqlDataAdapter da = new SqlDataAdapter(cmd))
                         {
                             dt = new DataTable();
@@ -111,7 +112,8 @@ namespace CapaDato.Bll.Ecommerce
             }
             catch (Exception)
             {
-                valida = false;   
+                valida = false;
+                throw;
             }
             return valida;
         }

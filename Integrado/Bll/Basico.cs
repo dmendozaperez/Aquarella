@@ -1,4 +1,8 @@
-﻿using CapaEntidad.Bll.Util;
+﻿using CapaDato.Bll.Ecommerce;
+using CapaEntidad.Bll.Ecommerce;
+using CapaEntidad.Bll.Util;
+using Integrado.Prestashop;
+using Integrado.Urbano;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -230,5 +234,67 @@ namespace Integrado.Bll
 
             }
         }
+
+        #region<PROCESOS DE E-CCOMERCE>
+        public static void act_presta_urbano(string ven_id, ref string error)
+        {
+            Dat_PrestaShop action_presta = null;
+            Dat_Urbano data_urbano =null;
+            error = "";
+            try
+            {
+                string guia_presta = ""; string guia_urb = "";
+                action_presta = new Dat_PrestaShop();
+                data_urbano = new Dat_Urbano();
+                action_presta.get_guia_presta_urba(ven_id, ref guia_presta, ref guia_urb);
+
+                if (guia_presta.Trim().Length > 0)
+                {
+                    UpdaEstado updateestado = new UpdaEstado();
+                    Boolean valida = updateestado.ActualizarReference(guia_presta);
+
+                    if (valida)
+                    {
+                        action_presta.updestafac_prestashop(guia_presta);
+
+                        /*enviamos urbano la guia*/
+                        EnviaPedido envia = new EnviaPedido();
+                        //intentando 3 veces
+                        for (Int32 i=0;i<3;++i)
+                        {
+                            Ent_Urbano ent_urbano=envia.sendUrbano(ven_id);
+                            if (ent_urbano.error == "1")
+                            {
+                                if (ent_urbano.guia.Trim().Length > 0)
+                                {                                   
+                                    data_urbano.update_guia(guia_presta, ent_urbano.guia);
+                                    guia_urb = ent_urbano.guia;
+                                    break;
+                                }
+                            }
+                        }
+                        //guia_urb=
+                        //action_presta.get_guia_presta_urba(ven_id, ref guia_presta, ref guia_urb);
+
+                        ActTracking enviaguia_presta = new ActTracking();
+                        string[] valida_prest = enviaguia_presta.ActualizaTrackin(guia_presta, guia_urb);
+                        /*el valor 1 quiere decir que actualizo prestashop*/
+                        if (valida_prest[0] == "1")
+                        {
+                            data_urbano.updprestashopGuia(guia_presta, guia_urb);
+                        }
+
+
+                        /************************/
+                    }
+                }
+
+            }
+            catch (Exception exc)
+            {
+                error = exc.Message;
+            }
+        }
+        #endregion
     }
 }

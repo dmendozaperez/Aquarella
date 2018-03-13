@@ -21,6 +21,8 @@ using System.Data;
 using System.Threading.Tasks;
 using Integrado.Bll;
 using Epson_Ticket;
+using Integrado.Prestashop;
+
 namespace Integrado.Sistemas.Ventas
 {
     /// <summary>
@@ -495,11 +497,19 @@ namespace Integrado.Sistemas.Ventas
                             string _codigo_hash = "";
                             string _error = "";
                             await Task.Run(() => Facturacion_Electronica.ejecutar_factura_electronica(Basico.Left(grabar_numerodoc, 1), grabar_numerodoc, ref _codigo_hash, ref _error));
-                                //*************
+                        //*************
 
-                                //****enviar los xml al server
-                            
-                            if (_codigo_hash.Length==0 || _codigo_hash==null)
+                        #region<SOLO PARA E-CCOMMERCE>
+                            if (Ent_Global._canal_venta=="BA")
+                            {
+                                await Task.Run(() => Basico.act_presta_urbano(grabar_numerodoc,ref _error));
+                            }
+                        #endregion
+
+
+                        //****enviar los xml al server
+
+                        if (_codigo_hash.Length==0 || _codigo_hash==null)
                             {
                                 await Task.Run(() => Facturacion_Electronica.ejecutar_factura_electronica(Basico.Left(grabar_numerodoc, 1), grabar_numerodoc, ref _codigo_hash, ref _error));
                             }

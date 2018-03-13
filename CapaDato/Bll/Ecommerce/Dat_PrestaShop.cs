@@ -255,5 +255,42 @@ namespace CapaDato.Bll.Ecommerce
             }
             return valida;
         }
+        /// <summary>
+        /// retorna el numero de guia de prestashop y de urbano
+        /// </summary>
+        public void get_guia_presta_urba(string ven_id,ref string guia_presta,ref string guia_urb)
+        {
+            string sqlquery = "USP_Get_GuiaUrbXVentas";
+            try
+            {
+                using (SqlConnection cn = new SqlConnection(Ent_Conexion.conexion))
+                {
+                    if (cn.State == 0) cn.Open();
+                    using (SqlCommand cmd = new SqlCommand(sqlquery, cn))
+                    {
+                        cmd.CommandTimeout = 0;
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        cmd.Parameters.AddWithValue("@ven_id", ven_id);
+
+                        cmd.Parameters.Add("@cod_prestashop", SqlDbType.VarChar, 30);
+                        cmd.Parameters.Add("@cod_urbano", SqlDbType.VarChar, 30);
+
+                        cmd.Parameters["@cod_prestashop"].Direction = ParameterDirection.Output;
+                        cmd.Parameters["@cod_urbano"].Direction = ParameterDirection.Output;
+
+                        cmd.ExecuteNonQuery();
+
+                        guia_presta =(string)cmd.Parameters["@cod_prestashop"].Value;
+                        guia_urb = (string)cmd.Parameters["@cod_urbano"].Value; 
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                guia_presta = "";
+                guia_urb = "";
+                throw;
+            }
+        }
     }
 }

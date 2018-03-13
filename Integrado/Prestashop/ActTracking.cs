@@ -17,7 +17,7 @@ namespace Integrado.Prestashop
         
 
 
-        private string[] ActualizaTrackin(string orden, string tracking)//0=error 1=ok
+        public string[] ActualizaTrackin(string orden, string tracking)//0=error 1=ok
         {
             //SqlConnection sql;
             //Conexion oConexion = new Conexion();
@@ -146,7 +146,7 @@ namespace Integrado.Prestashop
         /// <param name="id_orden">Id de Orden</param>
         /// <param name="serie_guia">Numero de Guia</param>
         /// <returns>Verdadero/Falso</returns>
-        private  bool ActualizarReference(string reference)
+        public  bool ActualizarReference(string reference)
         {
             bool result = false;
             try
@@ -167,11 +167,40 @@ namespace Integrado.Prestashop
             catch (Exception exc)
             {
                 result = false;
+                throw;
             }
             return result;
         }
+
+        //public void act_presta_urbano(string ven_id,ref string error)
+        //{
+        //    Dat_PrestaShop action_presta = null;
+        //    error = "";
+        //    try
+        //    {
+        //        string guia_presta = ""; string guia_urb = "";
+        //        action_presta = new Dat_PrestaShop();
+        //        action_presta.get_guia_presta_urba(ven_id, ref guia_presta, ref guia_urb);
+
+        //        if (guia_presta.Trim().Length>0)
+        //        {                   
+        //            Boolean valida = ActualizarReference(guia_presta);
+
+        //            if (valida)
+        //            {
+        //                action_presta.updestafac_prestashop(guia_presta);
+        //            }
+        //        }
+
+        //    }
+        //    catch (Exception exc)
+        //    {
+        //        error = exc.Message;
+        //    }
+        //}
+
         /// <summary>
-        /// actualizar estado prestashop
+        /// actualizar estado prestashop por lista
         /// </summary>
         public void updateestadofac_presta()
         {

@@ -96,7 +96,7 @@ namespace Integrado.Design.WPF_Master
 
                 /*PROCESO PARA URBANO HACIA PRESTASHOP*/
                 dispatcherTimerU.Tick += new EventHandler(dispatcherTimerU_Tick);
-                dispatcherTimerU.Interval = new TimeSpan(0, 0, 1);
+                dispatcherTimerU.Interval = new TimeSpan(0, 3, 0);
                 dispatcherTimerU.Start();
 
             }
@@ -106,21 +106,25 @@ namespace Integrado.Design.WPF_Master
         private void dispatcherTimerU_Tick(object sender, EventArgs e)
         {
             #region<ENVIO DATA URBANO HACIA PRESTASHOP>
-            ActTracking envia = new ActTracking();
-            //EnviaPedido envia = new EnviaPedido();
-            envia.UpdGuiaUrbano_Prestashop();
+            //ActTracking envia = new ActTracking();
+            ////EnviaPedido envia = new EnviaPedido();
+            //envia.UpdGuiaUrbano_Prestashop();
 
 
-            UpdaEstado updpresta = new UpdaEstado();
-            updpresta.updateestadofac_presta();
+           
             //envia.send();
             #endregion
         }
         private void dispatcherTimerE_Tick(object sender, EventArgs e)
         {
+            #region<ACTUALIZAR EL ESTADO DE PRESTASHOP>
+                //UpdaEstado updpresta = new UpdaEstado();
+                //updpresta.updateestadofac_presta();
+            #endregion
+
             #region<ENVIO DATA URBANO>
-            EnviaPedido envia = new EnviaPedido();
-            envia.sendUrbano();
+                //EnviaPedido envia = new EnviaPedido();
+                //envia.sendUrbano();
             //envia.send();
             #endregion
         }
