@@ -236,7 +236,7 @@ namespace Integrado.Bll
         }
 
         #region<PROCESOS DE E-CCOMERCE>
-        public static void act_presta_urbano(string ven_id, ref string error)
+        public static void act_presta_urbano(string ven_id, ref string error,ref string cod_urbano)
         {
             Dat_PrestaShop action_presta = null;
             Dat_Urbano data_urbano =null;
@@ -284,7 +284,7 @@ namespace Integrado.Bll
                             data_urbano.updprestashopGuia(guia_presta, guia_urb);
                         }
 
-
+                        cod_urbano = guia_urb;
                         /************************/
                     }
                 }
@@ -292,6 +292,7 @@ namespace Integrado.Bll
             }
             catch (Exception exc)
             {
+                cod_urbano = "";
                 error = exc.Message;
             }
         }

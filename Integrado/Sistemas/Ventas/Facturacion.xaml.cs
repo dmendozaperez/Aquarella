@@ -22,6 +22,7 @@ using System.Threading.Tasks;
 using Integrado.Bll;
 using Epson_Ticket;
 using Integrado.Prestashop;
+using Integrado.Urbano;
 
 namespace Integrado.Sistemas.Ventas
 {
@@ -499,12 +500,7 @@ namespace Integrado.Sistemas.Ventas
                             await Task.Run(() => Facturacion_Electronica.ejecutar_factura_electronica(Basico.Left(grabar_numerodoc, 1), grabar_numerodoc, ref _codigo_hash, ref _error));
                         //*************
 
-                        #region<SOLO PARA E-CCOMMERCE>
-                            if (Ent_Global._canal_venta=="BA")
-                            {
-                                await Task.Run(() => Basico.act_presta_urbano(grabar_numerodoc,ref _error));
-                            }
-                        #endregion
+                      
 
 
                         //****enviar los xml al server
@@ -538,6 +534,41 @@ namespace Integrado.Sistemas.Ventas
                         ///
                         //byte[] img_qr = null;
                         string _genera_tk = await Task.Run(() => Imprimir_Doc.Generar_Impresion("F", grabar_numerodoc) /*Impresora_Epson.Config_Imp.GenerarTicketFact(grabar_numerodoc, 1, _codigo_hash)*/);
+
+
+                        #region<SOLO PARA E-CCOMMERCE>
+
+                        if (Ent_Global._canal_venta == "BA")
+                        {
+                            string _cod_urbano = "";
+                            await Task.Run(() => Basico.act_presta_urbano(grabar_numerodoc, ref _error, ref _cod_urbano));
+                            await ProgressAlert.CloseAsync();
+                            string msj_eccomer = "Se Genero correctamente la factura nro: " + grabar_numerodoc + "\n" +
+                                                 "Se envío correctamente la solicitud a Urbano, Nro guía obtenida: " + _cod_urbano + "\n \n" +
+                                                 "¿Desea Imprimir la etiqueta de este pedido? " + _liq_id;
+                            MessageDialogResult resultetiq = await this.ShowMessageAsync(Ent_Msg.msginfomacion, msj_eccomer,
+                            MessageDialogStyle.AffirmativeAndNegative, mySettings);
+
+                            if (resultetiq == MessageDialogResult.Affirmative)
+                            {
+                                ProgressAlert = await this.ShowProgressAsync(Ent_Msg.msgcargando, "Generando Facturacion Electronica del pedido N°:" + _liq_id);  //show message
+                                ProgressAlert.SetIndeterminate();
+                                /*FALTA PONER LA VALIDACION DE LA ETIQUETA*/
+                                //resultetiq
+                                GenerarEtiqueta genera_etiqueta = new GenerarEtiqueta();
+                                await Task.Run(() => genera_etiqueta.imp_etiqueta(grabar_numerodoc));
+                            }
+                            else
+                            {
+                                ProgressAlert = await this.ShowProgressAsync(Ent_Msg.msgcargando, "Generando Facturacion Electronica del pedido N°:" + _liq_id);  //show message
+                                ProgressAlert.SetIndeterminate();
+                            }
+
+
+                            //await metroWindow.ShowMessageAsync(Ent_Msg.msginfomacion, msj_eccomer, MessageDialogStyle.Affirmative, metroWindow.MetroDialogOptions);
+                        }
+                        #endregion
+
                         //string _genera_tk = Impresora_Epson.Config_Imp.GenerarTicketFact(grabar_numerodoc, 1, _codigo_hash);
 
                         if (_genera_tk == null)
@@ -551,7 +582,10 @@ namespace Integrado.Sistemas.Ventas
                                 Reporte_Guia_Remision._idv_invoice = grabar_numerodoc;
                                 Reporte_Guia_Remision form = new Reporte_Guia_Remision();
                                 form.Show();
-                               await ProgressAlert.CloseAsync();
+
+                    
+
+                        await ProgressAlert.CloseAsync();
                     }
                 else
                 {

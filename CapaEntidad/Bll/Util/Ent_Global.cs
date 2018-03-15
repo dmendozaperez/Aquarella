@@ -40,6 +40,8 @@ namespace CapaEntidad.Bll.Util
         public static string _serie_imp { get; set; }
         public static string _impresora { get; set; }
 
+        public static string _impresora_etiquetas { get; set; }
+
         #endregion
 
     }

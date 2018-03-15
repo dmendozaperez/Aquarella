@@ -66,6 +66,7 @@ namespace Integrado.Design.WPF_Master
             _password = "Bata2013";
 
             Boolean ini_mod = false;
+            Ent_Global._canal_venta = "AQ";
             inicia_modulo(_server, _base_datos, _user, _password,ref ini_mod);
 
             if (ini_mod) _referenciar_Base_Datos("AQ");
@@ -81,6 +82,8 @@ namespace Integrado.Design.WPF_Master
             _password = "Bata2018.*@=?++";
 
             Boolean ini_mod = false;
+
+            Ent_Global._canal_venta = "BA";
 
             inicia_modulo(_server, _base_datos, _user, _password, ref ini_mod);
 

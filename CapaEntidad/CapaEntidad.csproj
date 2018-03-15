@@ -41,6 +41,7 @@
   <ItemGroup>
     <Compile Include="Bll\Control\Ent_Aplicacion.cs" />
     <Compile Include="Bll\Ecommerce\Cliente.cs" />
+    <Compile Include="Bll\Ecommerce\Ent_Etiqueta.cs" />
     <Compile Include="Bll\Ecommerce\Ent_GuiaUrbano.cs" />
     <Compile Include="Bll\Ecommerce\Ent_Producto.cs" />
     <Compile Include="Bll\Ecommerce\Ent_Urbano.cs" />
