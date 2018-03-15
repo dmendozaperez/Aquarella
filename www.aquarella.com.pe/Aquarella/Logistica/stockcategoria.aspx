@@ -72,6 +72,7 @@ StylesheetTheme="SiteTheme" CodeBehind="stockcategoria.aspx.cs" Inherits="www.aq
             <AQControl:Message runat="server" Visible="false" ID="msnMessage"></AQControl:Message>
         </ContentTemplate>
     </asp:UpdatePanel>
+ 
     <asp:UpdateProgress ID="UpdateProgress1" runat="server">
         <ProgressTemplate>
             <center>
@@ -117,13 +118,17 @@ StylesheetTheme="SiteTheme" CodeBehind="stockcategoria.aspx.cs" Inherits="www.aq
                                                     <asp:ListItem Text=" -- Seleccionar a todos --" Value="-1"></asp:ListItem>
                                                 </asp:DropDownList>
                                             </td>
+                                              
                                             <td class="style2">
+                             
                                                 <asp:ImageButton ID="ibExportToExcel" runat="server" Height="25px" 
                                                     ImageUrl="~/Design/images/Botones/b_toExcel.png" 
                                                     onclick="ibExportToExcel_Click" onmouseout="this.style.background=''" 
                                                     onmouseover="this.style.background='green';" 
                                                     ToolTip="Exportar Panel de Resultados a Excel." Width="24px" />
+                                                
                                             </td>
+                                            
                                         </tr>
                                     </table>
                                 </td>                              

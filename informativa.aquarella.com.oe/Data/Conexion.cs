@@ -7,7 +7,7 @@ namespace informativa.aquarella.com.oe.Data
 {
     public class Conexion
     {
-        public static string conexion_data = "Server=10.10.10.206;Database=BdAquarella;UID=dmendoza;Password=Bata2013";
+        public static string conexion_data = "Server=10.10.10.206;Database=BdAquarellaDes;UID=dmendoza;Password=Bata2013";
 
         public static string Str_RutaImg = "assets/img/slider/";
 

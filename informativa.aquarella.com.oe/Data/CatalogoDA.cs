@@ -212,7 +212,7 @@ namespace informativa.aquarella.com.oe.Data
                     }
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
 
                 Catalogo = null;

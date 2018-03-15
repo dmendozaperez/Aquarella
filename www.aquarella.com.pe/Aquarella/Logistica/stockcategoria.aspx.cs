@@ -12,6 +12,9 @@ using www.aquarella.com.pe.bll;
 //using Bata.Aquarella.BLL;
 using System.Data;
 using www.aquarella.com.pe.bll.Ventas;
+using System.IO;
+
+using System.Text;
 //using Bata.Aquarella.Pe.BLL.Ventas;
 //using Bata.Aquarella.Bll;
 namespace www.aquarella.com.pe.Aquarella.Logistica
@@ -25,7 +28,7 @@ namespace www.aquarella.com.pe.Aquarella.Logistica
             
 
             // Vencimiento de sesion
-            if (Session[Constants.NameSessionUser] == null) Utilities.logout(Page.Session, Page.Response);
+            if (Session[Constants.NameSessionUser] == null) bll.Util.Utilities.logout(Page.Session, Page.Response);
             else
                 _user = (Users)Session[Constants.NameSessionUser];
 
@@ -141,7 +144,7 @@ namespace www.aquarella.com.pe.Aquarella.Logistica
 
             if ((e.Row.RowType == DataControlRowType.Header))
             {
-                e.Row.Cells[3].Visible = false;
+                e.Row.Cells[2].Visible = false;
                 e.Row.Cells[7].Visible = false;
                 //e.Row.Cells[3].Visible = false;
             }
@@ -161,7 +164,7 @@ namespace www.aquarella.com.pe.Aquarella.Logistica
 
 
                     e.Row.Cells[7].Visible = false;
-                    e.Row.Cells[3].Visible = false;
+                    e.Row.Cells[2].Visible = false;
                    
                     //
                     string referencia = DataBinder.Eval(e.Row.DataItem, "Codigo").ToString();
@@ -230,26 +233,8 @@ namespace www.aquarella.com.pe.Aquarella.Logistica
         /// <param name="e"></param>
         protected void ibExportToExcel_Click(object sender, ImageClickEventArgs e)
         {
-            gvReturns.AllowPaging = false;
-
-            Pivot pvt = new Pivot((DataTable)Session[_nameSessionData]);
-            string[] fila = { "Categoria", "Codigo", "Descripcion", "tempo", "stock" };
-            //string[] col = {"Ano", "Mes","Semana", "Dia" };
-            string[] col = { "talla" };
-
-            gvReturns.DataSource = pvt.PivotData("Cantidad", AggregateFunction.Sum, fila, col);
-
-            gvReturns.DataBind();
-
-            MergeRows(gvReturns, 1);
-
-            GridViewExportUtil.removeFormats(ref gvReturns);
-            gvReturns.DataBind();
-
-            string nameFile = "stockdetallado";
-
-            //  pass the grid that for exporting ...
-            GridViewExportUtil.Export(nameFile + ".xls", gvReturns);
+            
+            ExportarExcel();
         }
 
         #endregion
@@ -290,6 +275,78 @@ namespace www.aquarella.com.pe.Aquarella.Logistica
         {
             string vidcategoria = dwcategoria.SelectedValue;
             sbconsulta(vidcategoria);
+        }
+                
+
+        private void ExportarExcel()
+        {
+            DataTable dt = new DataTable();
+
+            DataTable dt1 = (DataTable)Session[_nameSessionData];
+            Pivot pvt = new Pivot((DataTable)Session[_nameSessionData]);
+            string[] fila = { "Categoria", "Codigo", "foto", "Descripcion", "tempo", "stock" };
+            string[] col = { "talla" };
+
+            dt = pvt.PivotData("Cantidad", AggregateFunction.Sum, fila, col);
+
+            StringBuilder sb = new StringBuilder();
+            StringWriter sw = new StringWriter(sb);
+            HtmlTextWriter htw = new HtmlTextWriter(sw);
+
+            Page page = new Page();
+
+            String inicio;
+
+            Style stylePrueba = new Style();
+            stylePrueba.Width = Unit.Pixel(200);
+            string strRows = "";
+            string strRowsHead = "";
+            strRowsHead = strRowsHead + "<tr height=38 >";
+            for (int i = 0; i < dt.Columns.Count; i++)
+            {
+                strRowsHead = strRowsHead + "<td height=38  bgcolor='#969696' width='38'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" + dt.Columns[i].ColumnName + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</ td > ";
+            }
+
+            strRowsHead = strRowsHead + "</tr>";
+
+            foreach (DataRow row in dt.Rows)
+            {
+                strRows = strRows + "<tr height='38' >";
+                for (int i = 0; i < dt.Columns.Count; i++)
+                {
+                    string dato = row[i].ToString();
+                    if (i == 2)
+                    {
+                        strRows = strRows + "<td height='38'  align='center' style='text-align:center'  WIDTH='38'><img WIDTH='34' HEIGHT='34' alt='Logo_FR'  style='margin: 50px 50px 50px 50px' src='" + row[i].ToString() + "'/></td>";
+                    }
+                    else
+                    {
+                        strRows = strRows + "<td width='400'   >" + row[i].ToString() + "</ td > ";
+                    }
+                }
+
+                strRows = strRows + "</tr>";
+            }
+
+            inicio = "<div> " +
+                    "<table <Table border='1' bgColor='#ffffff' " +
+                    "borderColor='#000000' cellSpacing='2' cellPadding='2' " +
+                    "style='font-size:10.0pt; font-family:Calibri; background:white;'>" +
+                    strRowsHead +
+                     strRows +
+                    "</table>" +
+                    "</div>";
+
+            sb.Append(inicio);
+
+            Response.Clear();
+            Response.Buffer = true;
+            Response.ContentType = "application/vnd.ms-excel";
+            Response.AddHeader("Content-Disposition", "attachment;filename=stockdetallado.xls");
+            Response.Charset = "UTF-8";
+            Response.ContentEncoding = Encoding.Default;
+            Response.Write(sb.ToString());
+            Response.End();
         }
     }
 
