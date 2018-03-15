@@ -374,6 +374,17 @@ namespace Integrado.Sistemas.Logistica
         private async void btnfacturar_Click(object sender, RoutedEventArgs e)
         {
 
+
+            //var metroWindow = this;
+            //metroWindow.MetroDialogOptions.ColorScheme = MetroDialogOptions.ColorScheme;
+            //ProgressDialogController ProgressAlert = null;
+
+            //string msj_eccomer = "sssssss  \n" + "xxxxx";
+            ////await ProgressAlert.CloseAsync();
+            //await metroWindow.ShowMessageAsync(Ent_Msg.msginfomacion, msj_eccomer, MessageDialogStyle.Affirmative, metroWindow.MetroDialogOptions);
+
+            //return;
+
             DataRowView row = (DataRowView)((Button)e.Source).DataContext;
 
             string _guia_no = (string)row["tra_gui_no"].ToString();

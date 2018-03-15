@@ -341,7 +341,7 @@ namespace Integrado.Prestashop
                     Dat_PrestaShop update_psth = new Dat_PrestaShop();
                     /*agrupamos los pedidos*/
                     var grupo_pedido = from item in dtpedidos.AsEnumerable()
-                                        //   where item.Field<string>("ped_id") == "40" //|| item.Field<Int32>("ped_id") ==40
+                                          // where item.Field<string>("ped_id") == "115" //|| item.Field<Int32>("ped_id") ==40
                                        group item by
                                        new
                                        {
@@ -413,7 +413,7 @@ namespace Integrado.Prestashop
                         /*capturamos el detalle */
                         var ped_det = from item in dtpedidos.AsEnumerable()
                                       where  item.Field<string>("ped_id") ==Convert.ToString(key.pedido)
-                                      && item.Field<string>("det_artic_ref").Length == 11
+                                      //&& item.Field<string>("det_artic_ref").Length == 11
                                       select new
                                       {
                                           det_artic_ref = item["det_artic_ref"].ToString(),
