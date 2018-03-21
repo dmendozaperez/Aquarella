@@ -226,16 +226,26 @@ namespace Integrado.Sistemas.Logistica
                     totales(dt);
                 }
                 else
-                {                    
+                {
+
+                    dt = await Task.Run(() => Dat_Liquidacion.liquidacionXfacturar());
+                    //await ProgressAlert.CloseAsync();
+                    dg1.AutoGenerateColumns = false;
+                    dg1.ItemsSource = dt.DefaultView;
+                    totales(dt);
+
                     await ProgressAlert.CloseAsync();
                     await metroWindow.ShowMessageAsync(Ent_Msg.msginfomacion, "ERROR EN LA IMPORTACION DE DATOS.. POR FAVOR CONSULTE CON SISTEMAS..==>> TIPO DE ERROR (" + _cargar_data + ")", MessageDialogStyle.Affirmative, metroWindow.MetroDialogOptions);
+
+
                 }
                
             }
-            catch (Exception)
+            catch (Exception exc)
             {
-
-                throw;
+                await ProgressAlert.CloseAsync();
+                await metroWindow.ShowMessageAsync(Ent_Msg.msginfomacion, "ERROR EN LA IMPORTACION DE DATOS.. POR FAVOR CONSULTE CON SISTEMAS..==>> TIPO DE ERROR (" + exc.Message + ")", MessageDialogStyle.Affirmative, metroWindow.MetroDialogOptions);
+                //throw;
             }
         }
         private void txtbuscar_TextChanged(object sender, TextChangedEventArgs e)

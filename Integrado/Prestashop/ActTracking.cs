@@ -127,8 +127,14 @@ namespace Integrado.Prestashop
 
     public class UpdaEstado
     {
-        public static string BaseUrl = "http://10.10.10.247/bata/api/";
+        /*DESARROLLO*/
+        public static string BaseUrl = "http://181.177.242.172/bata/api/";
         public static string Account = "7UAQDKE187QTB3JT14NLQ3V3XSB6R7HR";
+        /*************************/
+        /*PRODUCCION*/
+        //public static string BaseUrl = "http://bata.com.pe/tienda/api/";
+        //public static string Account = "7UAQDKE187QTB3JT14NLQ3V3XSB6R7HR";
+        /****************/
         public static string Password = "";
 
 

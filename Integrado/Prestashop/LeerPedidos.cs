@@ -322,7 +322,7 @@ namespace Integrado.Prestashop
             catch (Exception)
             {
                 Prestashop = null;
-
+                throw;
             }
             return Prestashop;
 
