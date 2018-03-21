@@ -540,30 +540,36 @@ namespace Integrado.Sistemas.Ventas
 
                         if (Ent_Global._canal_venta == "BA")
                         {
-                            string _cod_urbano = "";
+                            string _cod_urbano = "";                            
                             await Task.Run(() => Basico.act_presta_urbano(grabar_numerodoc, ref _error, ref _cod_urbano));
+                            string mensaje_urb =(_cod_urbano.Trim().Length==0)? "":"Se envío correctamente la solicitud a Urbano, Nro guía obtenida: " + _cod_urbano + "\n \n";
                             await ProgressAlert.CloseAsync();
                             string msj_eccomer = "Se Genero correctamente la factura nro: " + grabar_numerodoc + "\n" +
-                                                 "Se envío correctamente la solicitud a Urbano, Nro guía obtenida: " + _cod_urbano + "\n \n" +
+                                                  mensaje_urb +
                                                  "¿Desea Imprimir la etiqueta de este pedido? " + _liq_id;
-                            MessageDialogResult resultetiq = await this.ShowMessageAsync(Ent_Msg.msginfomacion, msj_eccomer,
-                            MessageDialogStyle.AffirmativeAndNegative, mySettings);
 
-                            if (resultetiq == MessageDialogResult.Affirmative)
-                            {
-                                ProgressAlert = await this.ShowProgressAsync(Ent_Msg.msgcargando, "Generando Facturacion Electronica del pedido N°:" + _liq_id);  //show message
-                                ProgressAlert.SetIndeterminate();
-                                /*FALTA PONER LA VALIDACION DE LA ETIQUETA*/
-                                //resultetiq
-                                GenerarEtiqueta genera_etiqueta = new GenerarEtiqueta();
-                                await Task.Run(() => genera_etiqueta.imp_etiqueta(grabar_numerodoc));
-                            }
-                            else
-                            {
-                                ProgressAlert = await this.ShowProgressAsync(Ent_Msg.msgcargando, "Generando Facturacion Electronica del pedido N°:" + _liq_id);  //show message
-                                ProgressAlert.SetIndeterminate();
-                            }
+                            /*si el codigo de urbano esta null entonces no va el mensaje*/
 
+                            if (mensaje_urb.Trim().Length>0)
+                            { 
+                                MessageDialogResult resultetiq = await this.ShowMessageAsync(Ent_Msg.msginfomacion, msj_eccomer,
+                                MessageDialogStyle.AffirmativeAndNegative, mySettings);
+
+                                if (resultetiq == MessageDialogResult.Affirmative)
+                                {
+                                    ProgressAlert = await this.ShowProgressAsync(Ent_Msg.msgcargando, "Generando Facturacion Electronica del pedido N°:" + _liq_id);  //show message
+                                    ProgressAlert.SetIndeterminate();
+                                    /*FALTA PONER LA VALIDACION DE LA ETIQUETA*/
+                                    //resultetiq
+                                    GenerarEtiqueta genera_etiqueta = new GenerarEtiqueta();
+                                    await Task.Run(() => genera_etiqueta.imp_etiqueta(grabar_numerodoc));
+                                }
+                                else
+                                {
+                                    ProgressAlert = await this.ShowProgressAsync(Ent_Msg.msgcargando, "Generando Facturacion Electronica del pedido N°:" + _liq_id);  //show message
+                                    ProgressAlert.SetIndeterminate();
+                                }
+                            }
 
                             //await metroWindow.ShowMessageAsync(Ent_Msg.msginfomacion, msj_eccomer, MessageDialogStyle.Affirmative, metroWindow.MetroDialogOptions);
                         }

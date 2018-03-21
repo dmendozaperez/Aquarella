@@ -25,13 +25,13 @@
     <UpdatePeriodically>false</UpdatePeriodically>
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
-    <InstallUrl>http://10.10.10.206/ECOMMERCE/</InstallUrl>
+    <InstallUrl>http://167.249.8.11/ECOMMERCE/</InstallUrl>
     <ProductName>Sistema Facturacion</ProductName>
     <PublisherName>Bata Peru</PublisherName>
     <SuiteName>%28Corporacion Bata%29</SuiteName>
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <WebPage>publish.htm</WebPage>
-    <ApplicationRevision>53</ApplicationRevision>
+    <ApplicationRevision>61</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>true</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
@@ -390,7 +390,9 @@
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>ReportGuiaRem.cs</LastGenOutput>
     </EmbeddedResource>
-    <None Include="App.config" />
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Service References\ServiceBata\ws_bata1.wsdl" />
     <Resource Include="bata.ico" />
     <None Include="Integrado_ClaveTemporal.pfx" />

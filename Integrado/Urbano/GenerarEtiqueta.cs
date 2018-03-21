@@ -79,8 +79,8 @@ namespace Integrado.Urbano
                 strb.Append("^FO195,562^A0,040,028^FD" + referencia + "^FS\n");
                 strb.Append("^FO195,632^A0,040,028^FD" + ubigeo + "^FS\n");
                 strb.Append("^FO060,687^A0,060,030^FDNro. Pedido: " + nro_pedido + "^FS\n");
-                strb.Append("^FO455,697^A0,040,030^FDTrasladado por: Urbano^FS\n");
-                strb.Append("^FO200,130^BCN,110,Y,N,N^FDWYB17868551^FS\n");
+                strb.Append("^FO200,130^BCN,110,Y,N,N^" + strNroGuia + "^FS\n");
+                strb.Append("^PQ2^FS\n");
                 strb.Append("^XZ\n");
                 return strb.ToString();
 
