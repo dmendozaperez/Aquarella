@@ -25,6 +25,11 @@
         
     </script>
     <style type="text/css">
+        .styleV
+        {
+            width: 8px;
+            height:10px
+        }
         .style1
         {
             width: 458px;
@@ -163,6 +168,23 @@
                         runat="server" Height="25px" Width="24px" 
                         ToolTip="Exportar Panel de Resultados a Excel." 
                         onclick="ibExportToExcel_Click" /> 
+                </td>
+                <td>
+                    <table>
+                        <tr>
+                            <td class="styleV" bgcolor="#00CC00"  ></td>
+                            <td >Activos en el rango de fechas.</td>
+                        </tr>
+                         <tr>
+                            <td class="styleV" bgcolor="#0099FF" ></td>
+                            <td>Activos.</td>
+                        </tr>
+                         <tr>
+                            <td class="styleV"	bgcolor="#FF0000" ></td>
+                            <td>Inactivos.</td>
+                        </tr>
+                    </table>
+
                 </td>
             </tr>
             <tr>
