@@ -580,6 +580,32 @@ namespace www.aquarella.com.pe.Aquarella.Lider
             }
             return dt;
         }
+
+
+
+        public static DataSet getprospectacionXLider( DateTime _date_start, DateTime _date_end)
+        {
+  
+            string sqlquery = "USP_Leer_prospectacionXLider";
+            SqlConnection cn = null;
+            SqlCommand cmd = null;
+            SqlDataAdapter da = null;
+            DataSet ds = null;
+            try
+            {
+                cn = new SqlConnection(Conexion.myconexion());
+                cmd = new SqlCommand(sqlquery, cn);
+                cmd.CommandTimeout = 0;
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@fecha_inicio", _date_start);
+                cmd.Parameters.AddWithValue("@fecha_final", _date_end);
+                da = new SqlDataAdapter(cmd);
+                ds = new DataSet();
+                da.Fill(ds);
+                return ds;
+            }
+            catch (Exception e) { throw new Exception(e.Message, e.InnerException); }
+        }
         #endregion
     }
 
