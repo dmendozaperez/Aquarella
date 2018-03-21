@@ -173,15 +173,19 @@
                     <table>
                         <tr>
                             <td class="styleV" bgcolor="#00CC00"  ></td>
-                            <td >Activos en el rango de fechas.</td>
+                            <td >Nuevo Activo.</td>
                         </tr>
                          <tr>
                             <td class="styleV" bgcolor="#0099FF" ></td>
-                            <td>Activos.</td>
+                            <td>Activo.</td>
                         </tr>
                          <tr>
                             <td class="styleV"	bgcolor="#FF0000" ></td>
-                            <td>Inactivos.</td>
+                            <td>Desactivo.</td>
+                        </tr>
+                        <tr>
+                            <td class="styleV"	bgcolor="#FF6600" ></td>
+                            <td>Prospectado.</td>
                         </tr>
                     </table>
 
