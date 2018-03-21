@@ -43,7 +43,7 @@
       <HintPath>..\AjaxControlToolkit.dll</HintPath>
     </Reference>
     <Reference Include="AsyncCtpLibrary">
-      <HintPath>..\..\..\..\PRODUCCION\www.aquarella.com.pe\www.aquarella.com.pe\bin\AsyncCtpLibrary.dll</HintPath>
+      <HintPath>C:\Users\Junior Mallqui\Desktop\dllAquarela\AsyncCtpLibrary.dll</HintPath>
     </Reference>
     <Reference Include="Carvajal.FEPE.PreSC, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -51,19 +51,78 @@
     </Reference>
     <Reference Include="CrystalDecisions.CrystalReports.Engine, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\David\AQUARELLA SQL\Sistema\Vb C# 2013\ELECTRONICO_CARVAJAL\ELECTRONICO\Sistema\www.aquarella.com.pe\Integrado\bin\Debug\CrystalDecisions.CrystalReports.Engine.dll</HintPath>
+      <HintPath>C:\Users\Junior Mallqui\Desktop\CRYSTAL DLL\CrystalDecisions.CrystalReports.Engine.dll</HintPath>
+    </Reference>
+    <Reference Include="CrystalDecisions.ReportAppServer.ClientDoc, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+      <HintPath>C:\Users\Junior Mallqui\Desktop\CRYSTAL DLL\CrystalDecisions.ReportAppServer.ClientDoc.dll</HintPath>
+    </Reference>
+    <Reference Include="CrystalDecisions.ReportAppServer.CommLayer, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+      <HintPath>C:\Users\Junior Mallqui\Desktop\CRYSTAL DLL\CrystalDecisions.ReportAppServer.CommLayer.dll</HintPath>
+    </Reference>
+    <Reference Include="CrystalDecisions.ReportAppServer.CommonControls, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+      <HintPath>C:\Users\Junior Mallqui\Desktop\CRYSTAL DLL\CrystalDecisions.ReportAppServer.CommonControls.dll</HintPath>
+    </Reference>
+    <Reference Include="CrystalDecisions.ReportAppServer.CommonObjectModel, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+      <HintPath>C:\Users\Junior Mallqui\Desktop\CRYSTAL DLL\CrystalDecisions.ReportAppServer.CommonObjectModel.dll</HintPath>
+    </Reference>
+    <Reference Include="CrystalDecisions.ReportAppServer.Controllers, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+      <HintPath>C:\Users\Junior Mallqui\Desktop\CRYSTAL DLL\CrystalDecisions.ReportAppServer.Controllers.dll</HintPath>
+    </Reference>
+    <Reference Include="CrystalDecisions.ReportAppServer.CubeDefModel, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+      <HintPath>C:\Users\Junior Mallqui\Desktop\CRYSTAL DLL\CrystalDecisions.ReportAppServer.CubeDefModel.dll</HintPath>
+    </Reference>
+    <Reference Include="CrystalDecisions.ReportAppServer.DataDefModel, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+      <HintPath>C:\Users\Junior Mallqui\Desktop\CRYSTAL DLL\CrystalDecisions.ReportAppServer.DataDefModel.dll</HintPath>
+    </Reference>
+    <Reference Include="CrystalDecisions.ReportAppServer.DataSetConversion, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>C:\Users\Junior Mallqui\Desktop\CRYSTAL DLL\CrystalDecisions.ReportAppServer.DataSetConversion.dll</HintPath>
+    </Reference>
+    <Reference Include="CrystalDecisions.ReportAppServer.ObjectFactory, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+      <HintPath>C:\Users\Junior Mallqui\Desktop\CRYSTAL DLL\CrystalDecisions.ReportAppServer.ObjectFactory.dll</HintPath>
+    </Reference>
+    <Reference Include="CrystalDecisions.ReportAppServer.Prompting, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+      <HintPath>C:\Users\Junior Mallqui\Desktop\CRYSTAL DLL\CrystalDecisions.ReportAppServer.Prompting.dll</HintPath>
+    </Reference>
+    <Reference Include="CrystalDecisions.ReportAppServer.ReportDefModel, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+      <HintPath>C:\Users\Junior Mallqui\Desktop\CRYSTAL DLL\CrystalDecisions.ReportAppServer.ReportDefModel.dll</HintPath>
+    </Reference>
+    <Reference Include="CrystalDecisions.ReportAppServer.XmlSerialize, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+      <HintPath>C:\Users\Junior Mallqui\Desktop\CRYSTAL DLL\CrystalDecisions.ReportAppServer.XmlSerialize.dll</HintPath>
     </Reference>
     <Reference Include="CrystalDecisions.ReportSource, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\David\AQUARELLA SQL\Sistema\Vb C# 2013\ELECTRONICO_CARVAJAL\ELECTRONICO\Sistema\www.aquarella.com.pe\Integrado\bin\Debug\CrystalDecisions.ReportSource.dll</HintPath>
+      <HintPath>C:\Users\Junior Mallqui\Desktop\CRYSTAL DLL\CrystalDecisions.ReportSource.dll</HintPath>
     </Reference>
     <Reference Include="CrystalDecisions.Shared, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\David\AQUARELLA SQL\Sistema\Vb C# 2013\ELECTRONICO_CARVAJAL\ELECTRONICO\Sistema\www.aquarella.com.pe\Integrado\bin\Debug\CrystalDecisions.Shared.dll</HintPath>
+      <HintPath>C:\Users\Junior Mallqui\Desktop\CRYSTAL DLL\CrystalDecisions.Shared.dll</HintPath>
     </Reference>
     <Reference Include="CrystalDecisions.Web, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\David\AQUARELLA SQL\Sistema\Vb C# 2013\ELECTRONICO_CARVAJAL\ELECTRONICO\Sistema\www.aquarella.com.pe\www.aquarella.com.pe\bin\CrystalDecisions.Web.dll</HintPath>
+      <HintPath>C:\Users\Junior Mallqui\Desktop\CRYSTAL DLL\CrystalDecisions.Web.dll</HintPath>
     </Reference>
     <Reference Include="Jayrock">
       <HintPath>..\Jayrock.dll</HintPath>
@@ -194,6 +253,7 @@
     <Content Include="Aquarella\Ventas\panelSalesHall.aspx" />
     <Content Include="Aquarella\Ventas\panel_FE.aspx" />
     <Content Include="Aquarella\Ventas\premioscontinuo.aspx" />
+    <Content Include="Aquarella\Admonred\prospectacionLider.aspx" />
     <Content Include="Aquarella\Ventas\reportlider_afiliadoventa.aspx" />
     <Content Include="Aquarella\Ventas\reportventadetCN.aspx" />
     <Content Include="Aquarella\Ventas\reportventaformaCN.aspx" />
@@ -806,6 +866,7 @@
     <Compile Include="Aquarella\Admonred\Relacion_Usuario_Asesor.aspx.designer.cs">
       <DependentUpon>Relacion_Usuario_Asesor.aspx</DependentUpon>
     </Compile>
+    
     <Compile Include="Aquarella\Admonred\updateProfileForm.aspx.cs">
       <DependentUpon>updateProfileForm.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -1384,6 +1445,13 @@
     <Compile Include="Aquarella\Ventas\premioscontinuo.aspx.designer.cs">
       <DependentUpon>premioscontinuo.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Aquarella\Admonred\prospectacionLider.aspx.cs">
+      <DependentUpon>prospectacionLider.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Aquarella\Admonred\prospectacionLider.aspx.designer.cs">
+      <DependentUpon>prospectacionLider.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Aquarella\Ventas\reportlider_afiliadoventa.aspx.cs">
       <DependentUpon>reportlider_afiliadoventa.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -1758,6 +1826,7 @@
     <Content Include="Scripts\jquery-ui-date\development-bundle\ui.widget.jquery.json" />
   </ItemGroup>
   <ItemGroup>
+
     <EmbeddedResource Include="Aquarella\Logistica\liquidacion_grupo_consulta.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>liquidacion_grupo_consulta.cs</LastGenOutput>
