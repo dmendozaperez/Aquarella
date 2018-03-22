@@ -444,6 +444,8 @@
     <Content Include="Views\Catalogo\List.cshtml" />
     <Content Include="Views\Beneficio\Index.cshtml" />
     <Content Include="Views\Beneficio\ListBeneficio.cshtml" />
+    <Content Include="Views\Beneficio\Nuevo.cshtml" />
+    <Content Include="Views\Beneficio\Editar.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -207,7 +207,7 @@
                             <table style="width: 100%;">
                                 <tr>
                                     <td align="center">
-                                        <asp:TextBox ID="txttemporada" Text='<%# Bind("Art_Temporada") %>'  runat="server"  MaxLength="9" Height="13" style="text-align: right"  Width="60"></asp:TextBox>
+                                        <asp:TextBox ID="txttemporada" Text='<%# Bind("Art_Temporada") %>'  runat="server"  MaxLength="20" Height="13" style="text-align: right"  Width="60"></asp:TextBox>
                                     </td>
                                 </tr>
                             </table>
