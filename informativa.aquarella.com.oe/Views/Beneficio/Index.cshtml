@@ -1,0 +1,64 @@
+﻿@using informativa.aquarella.com.oe.Models
+@model IEnumerable<Ent_Pasarela>
+@{
+    ViewBag.Title = "Control de Generacion de Beneficios";
+    Layout = "~/Views/Shared/_LayoutMantenedor.cshtml";
+}
+
+<div class="page-title-containerM">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-10 wow fadeIn">
+                <i class="fa fa-align-justify"></i>
+                <h1>Lista Pasarela /</h1>
+                <p>Muestra la lista de pasarelas Creados.</p>
+            </div>
+            <div class="col-sm-2 wow fadeIn">
+                <a href="@Url.Action("Nuevo", "Pasarela")"><i class="fa fa-plus-square fa-2x"><p>Nuevo</p></i></a>
+            </div>
+          
+        </div>
+    </div>
+</div>
+<br />
+<div class="slider-container">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-10 col-sm-offset-1 slider">
+
+                <div class="box box-body box-primary">
+                   <div class="box-body" id="lista">
+                        @{Html.RenderPartial("ListaBeneficio", Model); }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="~/Scripts/waitingfor.js"></script>
+<script src="~/assets/js/jquery-1.11.1.min.js"></script>
+<script src="~/assets/bootstrap/js/bootstrap.min.js"></script>
+<script src="@Url.Content("~/assets/bootstrap/js/bootstrap.min.js")"></script>
+<script>
+     $(document).ready(function () {
+
+        $(".btnconsultar").click(function () {
+
+
+            
+            var $buttonClicked = $(this);
+            var Id = $buttonClicked.attr('data-id');
+
+            url = '@Url.Action("Editar", "Beneficio", new { strId = "xxxx"})';
+            url = url.replace("xxxx", Id);
+          
+            location.href = url;
+
+          
+        });
+
+    });
+</script>
+
+
+

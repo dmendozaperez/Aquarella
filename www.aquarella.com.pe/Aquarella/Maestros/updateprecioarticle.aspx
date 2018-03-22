@@ -147,7 +147,7 @@
         <ContentTemplate>
             <asp:GridView ID="gvreturn" runat="server" 
                 BackColor="White" BorderColor="#CCCCCC" BorderStyle="Solid" BorderWidth="1px" 
-                CellPadding="1" Width="800px" 
+                CellPadding="1" Width="900px" 
                 Font-Size="Small" 
                 PageSize="14" AutoGenerateColumns="False" 
                 PagerStyle-HorizontalAlign="Left" SkinID="gridviewSkin" Height="55px" 
@@ -170,10 +170,10 @@
                     <HeaderStyle HorizontalAlign="Left" />
                     <ItemStyle HorizontalAlign="Left" />
                     </asp:BoundField>
-                    <asp:BoundField DataField="precioigv" DataFormatString="{0:N2}" 
+                    <asp:BoundField DataField="precioigv" ItemStyle-Width="80px"  DataFormatString="{0:N2}" 
                         HeaderText="Precio">
-                    <HeaderStyle HorizontalAlign="Right" />
-                    <ItemStyle HorizontalAlign="Right" />
+                    <HeaderStyle HorizontalAlign="center" />
+                    <ItemStyle HorizontalAlign="center" />
                     </asp:BoundField>
                     <asp:TemplateField HeaderText="Ingrese Precio">
                          <EditItemTemplate>
@@ -194,6 +194,20 @@
                                 <tr>
                                     <td align="center">
                                         <asp:TextBox ID="txtprecio" runat="server"  MaxLength="9" Height="13" style="text-align: right"  Width="60"></asp:TextBox>
+                                    </td>
+                                </tr>
+                            </table>
+                        </ItemTemplate>
+                    </asp:TemplateField>
+                    <asp:TemplateField HeaderText="Temporada">
+                         <EditItemTemplate>
+                        <asp:TextBox ID="TextBox5"  runat="server" Text='<%# Bind("Art_Temporada") %>'></asp:TextBox>
+                        </EditItemTemplate>
+                        <ItemTemplate>
+                            <table style="width: 100%;">
+                                <tr>
+                                    <td align="center">
+                                        <asp:TextBox ID="txttemporada" Text='<%# Bind("Art_Temporada") %>'  runat="server"  MaxLength="9" Height="13" style="text-align: right"  Width="60"></asp:TextBox>
                                     </td>
                                 </tr>
                             </table>

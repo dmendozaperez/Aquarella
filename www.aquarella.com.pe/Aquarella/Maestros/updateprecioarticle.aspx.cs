@@ -145,6 +145,9 @@ namespace www.aquarella.com.pe.Aquarella.Maestros
                         Decimal.TryParse(vtxt.Text, out _precio);
                         dt.Rows[i]["precion"] = _precio;
 
+                        TextBox vtxttemp = (TextBox)gvreturn.Rows[i].FindControl("txttemporada");
+                        dt.Rows[i]["Art_Temporada"] = vtxttemp.Text;
+
 
                     }
                 }
@@ -429,6 +432,7 @@ namespace www.aquarella.com.pe.Aquarella.Maestros
             dt.Columns.Add("tipo", typeof(string));
             dt.Columns.Add("articulo", typeof(string));
             dt.Columns.Add("precio", typeof(Decimal));
+            dt.Columns.Add("temporada", typeof(string));
 
             DataTable dt_Complete = new DataTable();
             cmdExcel.Connection = connExcel;
@@ -445,7 +449,7 @@ namespace www.aquarella.com.pe.Aquarella.Maestros
 
             if (val_dwTipArc == 1)
             {
-                cmdExcel.CommandText = "SELECT [tipo],[articulo] ,[precio] From [" + SheetName + "]";
+                cmdExcel.CommandText = "SELECT [tipo],[articulo] ,[precio],[temporada] From [" + SheetName + "]";
             }
             //else
             //{
@@ -471,6 +475,10 @@ namespace www.aquarella.com.pe.Aquarella.Maestros
 
                 dt.Rows[i]["articulo"] = _articulo.ToString();
 
+                string _strTemporada = dt.Rows[i]["temporada"].ToString();
+                _strTemporada = _strTemporada.Trim();
+                dt.Rows[i]["temporada"] = _strTemporada.ToString();
+
 
             }
 
@@ -485,19 +493,20 @@ namespace www.aquarella.com.pe.Aquarella.Maestros
                 dt_import.Columns.Add("tipo", typeof(string));
                 dt_import.Columns.Add("Art_Id", typeof(string));
                 dt_import.Columns.Add("Precio_Igv", typeof(decimal));
+                dt_import.Columns.Add("Art_Temporada", typeof(string));
 
 
                 for (Int32 i = 0; i<dt.Rows.Count; ++i)
                 {
-                    dt_import.Rows.Add(dt.Rows[i]["tipo"].ToString(), dt.Rows[i]["articulo"].ToString(),Convert.ToDecimal(dt.Rows[i]["precio"].ToString()));
+                    dt_import.Rows.Add(dt.Rows[i]["tipo"].ToString(), dt.Rows[i]["articulo"].ToString(),Convert.ToDecimal(dt.Rows[i]["precio"].ToString()), dt.Rows[i]["temporada"].ToString());
                 }
 
-                    //foreach (DataRow fila in dt.Rows)
-                    //{
-                    //    dt_import.ImportRow(fila);
-                    //}
+                //foreach (DataRow fila in dt.Rows) 
+                //{
+                //    dt_import.ImportRow(fila);
+                //}
 
-                
+
 
                 DataSet dsreturn = Article.lista_articulo_precio(dt_import);
                 Session[_nameSessionData] = dsreturn.Tables[0];

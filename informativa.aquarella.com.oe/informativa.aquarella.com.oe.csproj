@@ -123,6 +123,7 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\BeneficioController.cs" />
     <Compile Include="Controllers\CatalogoController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
@@ -441,6 +442,8 @@
     <Content Include="Views\Catalogo\ListCatalogo.cshtml" />
     <Content Include="Views\Catalogo\Editar.cshtml" />
     <Content Include="Views\Catalogo\List.cshtml" />
+    <Content Include="Views\Beneficio\Index.cshtml" />
+    <Content Include="Views\Beneficio\ListBeneficio.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
