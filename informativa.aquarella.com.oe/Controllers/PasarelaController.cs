@@ -130,6 +130,7 @@ namespace informativa.aquarella.com.oe.Controllers
                 pasarela.Pasarela_Titulo = Post("Pasarela_Titulo");
                 pasarela.Pasarela_Descripcion = Post("Pasarela_Descripcion");
                 pasarela.Pasarela_Estado = Post("Pasarela_Estado");
+                pasarela.Pasarela_Tipo = Post("Pasarela_Tipo");
                 pasarela.Pasarela_strDetalle = Post("Pasarela_strDetalle");
              
                 pasarela.Pasarela_UsuCrea = _usuario.usu_login;
@@ -180,8 +181,6 @@ namespace informativa.aquarella.com.oe.Controllers
             string parametro = existeParametro ? System.Web.HttpContext.Current.Request.Form[campo].ToString().Trim() : string.Empty;
             return parametro;
         }
-
-
 
     }
 }

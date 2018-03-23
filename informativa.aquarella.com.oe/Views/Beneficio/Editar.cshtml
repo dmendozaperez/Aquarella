@@ -53,11 +53,11 @@
         <div class="row">
             <div class="col-sm-10 wow fadeIn">
                 <i class="fa fa-edit"></i>
-                <h1>Edicion Pasarela /</h1>
-                <p>Permite agrupar imagenes para una nueva pasarela de inicio.</p>
+                <h1>Edicion  Pasarela de Beneficios /</h1>
+                <p>Permite agrupar imagenes para una nueva colección de Beneficios.</p>
             </div>
             <div class="col-sm-2 wow align-justify">
-                <a href="@Url.Action("ListarBeneficio", "Beneficio")"><i class="fa fa-align-justify fa-2x"><p>Listar</p></i></a>
+                <a href="@Url.Action("Index", "Beneficio")"><i class="fa fa-align-justify fa-2x"><p>Listar</p></i></a>
             </div>
 
         </div>
@@ -300,7 +300,7 @@
             $(Id).closest('tr').remove();
             var frm = new FormData();
             frm.append("PasarelaDet_id",IdDetalle);
-            Post('EliminarBeneficioDetalle', frm, notificarEliminacion);
+            Post('EliminarPasarelaDetalle', frm, notificarEliminacion);
         }
     
 
@@ -431,6 +431,7 @@
                 frm.append("Pasarela_Titulo", strTitulo);
                 frm.append("Pasarela_Descripcion", strDescripcion);
                 frm.append("Pasarela_Estado", strPredeterminado);
+                frm.append("Pasarela_Tipo", "B");
 
                 var contador = 0;
                 var contadorAux = 0;

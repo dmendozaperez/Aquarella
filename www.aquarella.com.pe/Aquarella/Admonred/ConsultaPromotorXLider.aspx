@@ -150,7 +150,7 @@
                 </td>
                 <td valign="middle" class="auto-style5">
                     <asp:Button ID="btConsult" runat="server" Text="Consultar" ValidationGroup="vsConsultForm"
-                        CausesValidation="true" OnClick="btConsult_Click" />
+                        CausesValidation="true" OnClick="btConsult_Click" style="width: 83px" />
                 </td>
                 <td align="left" style="border-left: solid 1px silver;">
                     <asp:ImageButton ID="ibExportToExcel" ImageUrl="~/Design/images/Botones/b_toExcel.png"

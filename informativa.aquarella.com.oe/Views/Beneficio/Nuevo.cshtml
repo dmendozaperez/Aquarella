@@ -53,10 +53,10 @@
             <div class="col-sm-10 wow fadeIn">
                 <i class="fa fa-newspaper-o"></i>
                 <h1>Nueva Pasarela de Beneficios/</h1>
-                <p>Permite agrupar imagenes para una nueva pasarela de Beneficios.</p>
+                <p>Permite agrupar imagenes para una nueva colección de Beneficios.</p>
             </div>
             <div class="col-sm-2 wow fadeIn">
-                <a href="@Url.Action("ListarPasarela", "Pasarela")"><i class="fa fa-align-justify fa-2x"><p>Listar</p></i></a>
+                <a href="@Url.Action("Index", "Beneficio")"><i class="fa fa-align-justify fa-2x"><p>Listar</p></i></a>
             </div>
 
         </div>
@@ -324,6 +324,7 @@
             frm.append("Pasarela_Titulo", strTitulo);
             frm.append("Pasarela_Descripcion", strDescripcion);
             frm.append("Pasarela_Estado", strPredeterminado);
+            frm.append("Pasarela_Tipo", "B");
 
 
             var contador = 0;

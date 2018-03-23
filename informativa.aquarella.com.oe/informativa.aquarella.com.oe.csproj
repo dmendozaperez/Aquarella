@@ -188,8 +188,10 @@
     <Content Include="assets\img\logo%402x.png" />
     <Content Include="assets\img\logo.jpg" />
     <Content Include="assets\img\logo.png" />
+    <Content Include="assets\img\logo1.jpg" />
     <Content Include="assets\img\logo1.png" />
     <Content Include="assets\img\pattern.jpg" />
+    <Content Include="assets\img\regalo.jpg" />
     <Content Include="assets\img\team\1.jpg" />
     <Content Include="assets\img\team\2.jpg" />
     <Content Include="assets\img\team\3.jpg" />
@@ -446,6 +448,7 @@
     <Content Include="Views\Beneficio\ListBeneficio.cshtml" />
     <Content Include="Views\Beneficio\Nuevo.cshtml" />
     <Content Include="Views\Beneficio\Editar.cshtml" />
+    <Content Include="Views\Home\Beneficio.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -52,9 +52,87 @@ namespace informativa.aquarella.com.oe.Data
             return listar;
         }
 
+        public List<Ent_PasarelaDetalle> get_listaBeneficioDetalle()
+        {
+            string sqlquery = "USP_GetBeneficioDetalle";
+            List<Ent_PasarelaDetalle> listar = null;
+            try
+            {
+                using (SqlConnection cn = new SqlConnection(Conexion.conexion_data))
+                {
+                    using (SqlCommand cmd = new SqlCommand(sqlquery, cn))
+                    {
+                        cmd.CommandTimeout = 0;
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        using (SqlDataAdapter da = new SqlDataAdapter(cmd))
+                        {
+                            DataTable dt = new DataTable();
+                            da.Fill(dt);
+                            listar = new List<Ent_PasarelaDetalle>();
+                            listar = (from DataRow dr in dt.Rows
+                                      select new Ent_PasarelaDetalle()
+                                      {
+                                          PasarelaDet_id = Convert.ToInt32(dr["IdPasarelaDetalle"]),
+                                          Pasarela_id = Convert.ToInt32(dr["IdPasarela"]),
+                                          PasarelaDet_Ruta = dr["Ruta"].ToString(),
+                                          PasarelaDet_Nombre = (dr["NombreImagen"]).ToString(),
+                                          PasarelaDet_Orden = Convert.ToInt32(dr["Orden"]),
+                                          PasarelaDet_Estado = dr["Est_Id"].ToString(),
+
+                                      }).ToList();
+
+                        }
+                    }
+                }
+            }
+            catch (Exception exc)
+            {
+
+                listar = null;
+            }
+            return listar;
+        }
+
         public List<Ent_Pasarela> get_listaPasarela()
         {
             string sqlquery = "USP_GetLisPasarela";
+            List<Ent_Pasarela> listar = null;
+            try
+            {
+                using (SqlConnection cn = new SqlConnection(Conexion.conexion_data))
+                {
+                    using (SqlCommand cmd = new SqlCommand(sqlquery, cn))
+                    {
+                        cmd.CommandTimeout = 0;
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        using (SqlDataAdapter da = new SqlDataAdapter(cmd))
+                        {
+                            DataTable dt = new DataTable();
+                            da.Fill(dt);
+                            listar = new List<Ent_Pasarela>();
+                            listar = (from DataRow dr in dt.Rows
+                                      select new Ent_Pasarela()
+                                      {
+                                          Pasarela_id = Convert.ToInt32(dr["IdPasarela"]),
+                                          Pasarela_Titulo = dr["Titulo"].ToString(),
+                                          Pasarela_Descripcion = dr["Descripcion"].ToString(),
+                                          Pasarela_Estado = (dr["Est_id"]).ToString(),
+
+                                      }).ToList();
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+
+                listar = null;
+            }
+            return listar;
+        }
+        public List<Ent_Pasarela> get_listaBeneficio()
+        {
+            string sqlquery = "USP_GetLisBeneficio";
             List<Ent_Pasarela> listar = null;
             try
             {
@@ -119,6 +197,10 @@ namespace informativa.aquarella.com.oe.Data
                     oPasarela_estado.Direction = ParameterDirection.Input;
                     oPasarela_estado.Value = pasarela.Pasarela_Estado;
 
+                    SqlParameter oPasarela_tipo = oComando.Parameters.Add("@Pasarela_Tipo", SqlDbType.VarChar);
+                    oPasarela_tipo.Direction = ParameterDirection.Input;
+                    oPasarela_tipo.Value = pasarela.Pasarela_Tipo;
+
                     SqlParameter oPasarela_strDetalle = oComando.Parameters.Add("@Pasarela_strDetalle", SqlDbType.VarChar);
                     oPasarela_strDetalle.Direction = ParameterDirection.Input;
                     oPasarela_strDetalle.Value = pasarela.Pasarela_strDetalle;
@@ -162,7 +244,8 @@ namespace informativa.aquarella.com.oe.Data
             string Titulo = "";
             string Descripcion = "";
             string Estado = "";
-           
+            string Tipo = "";
+
             string sqlquery = "USP_Pasarela_IND";
             try
             {
@@ -191,6 +274,7 @@ namespace informativa.aquarella.com.oe.Data
                                 Titulo = dr["Titulo"].ToString();
                                 Descripcion = dr["Descripcion"].ToString();
                                 Estado = dr["Est_Id"].ToString();
+                                Tipo = dr["Tipo"].ToString();
 
                                 pasarelaDetalle.PasarelaDet_id = Int32.Parse(dr["IdPasarelaDetalle"].ToString());
                                 pasarelaDetalle.PasarelaDet_Ruta = dr["Ruta"].ToString();
@@ -206,6 +290,7 @@ namespace informativa.aquarella.com.oe.Data
                             Pasarela.Pasarela_Titulo = Titulo;
                             Pasarela.Pasarela_Descripcion = Descripcion;
                             Pasarela.Pasarela_Estado = Estado;
+                            Pasarela.Pasarela_Tipo = Tipo;
 
 
                         }

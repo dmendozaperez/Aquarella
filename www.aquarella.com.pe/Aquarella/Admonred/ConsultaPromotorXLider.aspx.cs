@@ -8,6 +8,9 @@ using www.aquarella.com.pe.bll;
 using www.aquarella.com.pe.bll.Util;
 using www.aquarella.com.pe.Aquarella.Lider;
 using System.Data;
+using System.IO;
+
+using System.Text;
 namespace www.aquarella.com.pe.Aquarella.Admonred
 {
     public partial class ConsultaPromotorXLider : System.Web.UI.Page
@@ -128,16 +131,94 @@ namespace www.aquarella.com.pe.Aquarella.Admonred
 
         protected void ibExportToExcel_Click(object sender, ImageClickEventArgs e)
         {
-            gvpromotor.DataSource = (DataTable)Session[_nameSessionData];
-            gvpromotor.AllowPaging = false;
-            GridViewExportUtil.removeFormats(ref gvpromotor);
-            gvpromotor.DataBind();
+            //gvpromotor.DataSource = (DataTable)Session[_nameSessionData];
+            //gvpromotor.AllowPaging = false;
+            //GridViewExportUtil.removeFormats(ref gvpromotor);
+            //gvpromotor.DataBind();
 
-            string nameFile = "ListaPromotorXLider";
+            //string nameFile = "ListaPromotorXLider";
 
-            //  pass the grid that for exporting ...
-            Decimal[] _columnacaracter = { 4 };
-            GridViewExportUtil.Export(nameFile + ".xls", gvpromotor,true, _columnacaracter);
+            ////  pass the grid that for exporting ...
+            //Decimal[] _columnacaracter = { 4 };
+            //GridViewExportUtil.Export(nameFile + ".xls", gvpromotor,true, _columnacaracter);
+
+            ExportarExcel();
         }
+
+
+        private void ExportarExcel()
+        {
+
+            DataTable dt = (DataTable)Session[_nameSessionData];
+
+            StringBuilder sb = new StringBuilder();
+            StringWriter sw = new StringWriter(sb);
+            HtmlTextWriter htw = new HtmlTextWriter(sw);
+
+            Page page = new Page();
+
+            String inicio;
+
+            Style stylePrueba = new Style();
+            stylePrueba.Width = Unit.Pixel(200);
+            string strRows = "";
+            string strRowsHead = "";
+            strRowsHead = strRowsHead + "<tr height=38 >";
+            for (int i = 0; i < dt.Columns.Count; i++)
+            {
+                string strDescrip = dt.Columns[i].ColumnName;
+
+                switch (i)
+                {
+                    case 11:
+                        strDescrip= "Fec.Ing";
+
+                        break;
+                    case 12:
+                        strDescrip = "Fec.Activacion";
+                        break;
+                }
+
+                strRowsHead = strRowsHead + "<td height=38  bgcolor='#969696' width='38'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" + strDescrip + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</ td > ";
+            }
+
+            strRowsHead = strRowsHead + "</tr>";
+
+            foreach (DataRow row in dt.Rows)
+            {
+                strRows = strRows + "<tr height='38' >";
+                for (int i = 0; i < dt.Columns.Count; i++)
+                {
+
+                   
+                        strRows = strRows + "<td width='400'   >" + row[i].ToString() + "</ td > ";
+                   
+                }
+
+                strRows = strRows + "</tr>";
+            }
+
+            inicio = "<div> " +
+                    "<table <Table border='1' bgColor='#ffffff' " +
+                    "borderColor='#000000' cellSpacing='2' cellPadding='2' " +
+                    "style='font-size:10.0pt; font-family:Calibri; background:white;'>" +
+                    strRowsHead +
+                     strRows +
+                    "</table>" +
+                    "</div>";
+
+            sb.Append(inicio);
+
+            Response.Clear();
+            Response.Buffer = true;
+            Response.ContentType = "application/vnd.ms-excel";
+            Response.AddHeader("Content-Disposition", "attachment;filename=ListaPromotorXLider.xls");
+            Response.Charset = "UTF-8";
+            Response.ContentEncoding = Encoding.Default;
+            Response.Write(sb.ToString());
+            Response.End();
+        }
+
+
     }
 }
