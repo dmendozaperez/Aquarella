@@ -866,7 +866,6 @@
     <Compile Include="Aquarella\Admonred\Relacion_Usuario_Asesor.aspx.designer.cs">
       <DependentUpon>Relacion_Usuario_Asesor.aspx</DependentUpon>
     </Compile>
-    
     <Compile Include="Aquarella\Admonred\updateProfileForm.aspx.cs">
       <DependentUpon>updateProfileForm.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -1826,7 +1825,6 @@
     <Content Include="Scripts\jquery-ui-date\development-bundle\ui.widget.jquery.json" />
   </ItemGroup>
   <ItemGroup>
-
     <EmbeddedResource Include="Aquarella\Logistica\liquidacion_grupo_consulta.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>liquidacion_grupo_consulta.cs</LastGenOutput>

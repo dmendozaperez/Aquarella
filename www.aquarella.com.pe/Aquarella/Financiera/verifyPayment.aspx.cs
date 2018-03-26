@@ -103,18 +103,28 @@ namespace www.aquarella.com.pe.Aquarella.Financiera
                     msnMessage.LoadMessage("Seleccione el NUEVO ESTADO que se le aplicará al pago No." + noPay, UserControl.ucMessage.MessageType.Error);
                 else
                 {
-                    bool answ = Payments.updatePayment(noPay, newStatus);
 
-                    if (!answ)
-                        msnMessage.LoadMessage("Error intentando aplicar el nuevo estado al pedido No." + noPay + "; por favor intente de nuevo.", UserControl.ucMessage.MessageType.Error);
+                    /*validacion solo para usuarios sistemas y finanzas*/
+
+                    if (_user._usu_tip_id== "04" || _user._usu_tip_id== "08") 
+                    { 
+                        bool answ = Payments.updatePayment(noPay, newStatus);
+
+                        if (!answ)
+                            msnMessage.LoadMessage("Error intentando aplicar el nuevo estado al pedido No." + noPay + "; por favor intente de nuevo.", UserControl.ucMessage.MessageType.Error);
+                        else
+                        {
+                            msnMessage.LoadMessage("Nuevo estado aplicado correctamente al pago No." + noPay + ".", UserControl.ucMessage.MessageType.Information);
+                            // Async 
+                            Log_Transaction.registerUserInfo(_user, "UPDATE PAYMENT NO.:"+ noPay +" STATUS:" + newStatus);
+                        }
+                        refreshGridView();
+                    }
                     else
                     {
-                        msnMessage.LoadMessage("Nuevo estado aplicado correctamente al pago No." + noPay + ".", UserControl.ucMessage.MessageType.Information);
-                        // Async 
-                        Log_Transaction.registerUserInfo(_user, "UPDATE PAYMENT NO.:"+ noPay +" STATUS:" + newStatus);
+                        msnMessage.LoadMessage("El usuario no tiene permiso para validar el pago : " + noPay , UserControl.ucMessage.MessageType.Error);
                     }
-
-                    refreshGridView();
+                   
                 }
             }
         }
