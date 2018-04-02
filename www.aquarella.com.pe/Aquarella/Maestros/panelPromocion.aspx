@@ -93,7 +93,7 @@
     del sistema y editar las existentes.
 </asp:Content>
 <asp:Content ID="Content4" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-    <asp:ScriptManager ID="ScriptManager1" runat="server">
+    <asp:ScriptManager ID="ScriptManager1" runat="server" EnableScriptGlobalization="True">
     </asp:ScriptManager>
     <!-- Area de errores -->
     <asp:UpdateProgress ID="UpdateProgress1" runat="server">

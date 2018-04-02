@@ -42,8 +42,8 @@ namespace Integrado.Sistemas.Logistica
             //string _error = "";
 
             //#region<VENTA DE LA FACTURACION ELECTRONICA>
-            //Bll.Facturacion_Electronica.ejecutar_factura_electronica("B", "B03100000088", ref _codigo_hash, ref _error);
-            //Dat_Venta.insertar_codigo_hash("B03100000088", _codigo_hash, "V");
+            //Bll.Facturacion_Electronica.ejecutar_factura_electronica("B", "B03000027595", ref _codigo_hash, ref _error);
+            //Dat_Venta.insertar_codigo_hash("B03000027595", _codigo_hash, "V");
             //Bll.Basico._enviar_webservice_xml();
             //#endregion
 

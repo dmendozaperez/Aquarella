@@ -1611,7 +1611,6 @@
     <Compile Include="Bll\Maestros\Concepts.cs" />
     <Compile Include="Bll\Maestros\Departments.cs" />
     <Compile Include="Bll\Maestros\Employees.cs" />
-    <Compile Include="Bll\Maestros\Nuevo.cs" />
     <Compile Include="Bll\Maestros\Promocion.cs" />
     <Compile Include="Bll\Reports\LiqNcSubinforme.cs" />
     <Compile Include="Bll\Reports\Liquidation.cs" />
