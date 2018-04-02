@@ -129,7 +129,7 @@
                         <asp:TextBox ID="txtDescripcion" runat="server" Width="260px" />
                     </td>
                     <td style="color:red">
-                        <asp:RequiredFieldValidator ID="RFValidator" runat="server" ErrorMessage="*" ControlToValidate="txtDescripcion"></asp:RequiredFieldValidator>
+                        <asp:RequiredFieldValidator ID="RFValidator" ValidationGroup="Nuevo" runat="server" ErrorMessage="*" ControlToValidate="txtDescripcion"></asp:RequiredFieldValidator>
                     </td>
                 </tr>
                 <tr>
@@ -140,7 +140,7 @@
                         <asp:TextBox ID="txtPares" onkeypress="return numbersonly(event);" runat="server" Width="260px" />
                     </td>
                     <td style="color:red">
-                       <asp:RequiredFieldValidator ID="RequiredFieldValidator6" runat="server" ErrorMessage="*" ControlToValidate="txtPares"></asp:RequiredFieldValidator>
+                       <asp:RequiredFieldValidator ID="RequiredFieldValidator6" ValidationGroup="Nuevo" runat="server" ErrorMessage="*" ControlToValidate="txtPares"></asp:RequiredFieldValidator>
                     </td>
                 </tr>
                 <tr>
@@ -151,8 +151,8 @@
                         <asp:TextBox ID="txtPorc" runat="server" Width="260px" />
                     </td>
                     <td style="color:red">
-                        <asp:RegularExpressionValidator ID="RegexDecimal" runat="server" ValidationExpression="((\d+)((\.\d{1,2})?))$" ErrorMessage="Ingrese porcentaje Valido" ControlToValidate="txtPorc" />
-                        <asp:RequiredFieldValidator ID="RequiredFieldValidator7" runat="server" ErrorMessage="*" ControlToValidate="txtPorc"></asp:RequiredFieldValidator>
+                        <asp:RegularExpressionValidator ID="RegexDecimal" runat="server"  ValidationGroup="Nuevo"  ValidationExpression="((\d+)((\.\d{1,2})?))$" ErrorMessage="Ingrese porcentaje Valido" ControlToValidate="txtPorc" />
+                        <asp:RequiredFieldValidator ID="RequiredFieldValidator7" ValidationGroup="Nuevo"  runat="server" ErrorMessage="*" ControlToValidate="txtPorc"></asp:RequiredFieldValidator>
 
                     </td>
                 </tr>
@@ -175,10 +175,11 @@
 
                             </td> 
                             <td style="color:red">
-                           <asp:Image ID="imgCalendar" runat="server" ImageUrl="~/Design/images/Botones/b_calendar_ico.gif"
+                         <asp:Image ID="imgCalendar" runat="server" ImageUrl="~/Design/images/Botones/b_calendar_ico.gif"
                                                 onmouseover="this.style.background='red';" onmouseout="this.style.background=''"
                                                 Style="cursor: pointer;" />
-                                 <asp:RequiredFieldValidator ID="RequiredFieldValidator8" runat="server" ErrorMessage="*" ControlToValidate="txtDateStart"></asp:RequiredFieldValidator>
+                                   <asp:RequiredFieldValidator ID="RequiredFieldValidator8"  ValidationGroup="Nuevo"  runat="server" ErrorMessage="*" ControlToValidate="txtDateStart"></asp:RequiredFieldValidator>
+                            
                             </td> 
                             </tr>
                             </table>
@@ -190,10 +191,10 @@
                                            
                     </td>
                     <td>
-                                <asp:RequiredFieldValidator ValidationGroup="vsConsultForm" ID="rfvDateStart" runat="server"
+                                <asp:RequiredFieldValidator ValidationGroup="Nuevo"  ID="rfvDateStart" runat="server"
                                     ToolTip="Fecha de inicio" CssClass="error_asterisck" ErrorMessage="Dígite fecha inicial"
                                     Display="Dynamic" SetFocusOnError="true" ControlToValidate="txtDateStart">*</asp:RequiredFieldValidator>
-                                <asp:CompareValidator ID="cvDateStart" runat="server" ValidationGroup="vsConsultForm"
+                                <asp:CompareValidator ID="cvDateStart" runat="server" ValidationGroup="Nuevo"
                                     Type="Date" SetFocusOnError="true" CssClass="error_asterisck" ControlToValidate="txtDateStart"
                                     Operator="DataTypeCheck" ErrorMessage="Dígite una fecha válida">*</asp:CompareValidator>
                 </td>
@@ -220,23 +221,23 @@
                                      ImageUrl="~/Design/images/Botones/b_calendar_ico.gif" 
                                      onmouseout="this.style.background=''" 
                                      onmouseover="this.style.background='red';" Style="cursor:pointer;" />
-                                 <asp:RequiredFieldValidator ID="RequiredFieldValidator9" runat="server" ErrorMessage="*" ControlToValidate="txtDateEnd"></asp:RequiredFieldValidator>
+                                 <asp:RequiredFieldValidator ID="RequiredFieldValidator9"  ValidationGroup="Nuevo"  runat="server" ErrorMessage="*" ControlToValidate="txtDateEnd"></asp:RequiredFieldValidator>
                             </td>
                                 <td>
-                                 <asp:RequiredFieldValidator ID="rfvDateEnd" runat="server" 
+                                 <asp:RequiredFieldValidator ID="rfvDateEnd"  ValidationGroup="Nuevo"  runat="server" 
                                      ControlToValidate="txtDateEnd" CssClass="error_asterisck" Display="Dynamic" 
                                      ErrorMessage="Dígite fecha final*" SetFocusOnError="true" ToolTip="Fecha final" 
-                                     ValidationGroup="vsConsultForm">*</asp:RequiredFieldValidator>
-                                 <asp:CompareValidator ID="cvDateEnd" runat="server" 
+                                    >*</asp:RequiredFieldValidator>
+                                 <asp:CompareValidator ID="cvDateEnd"  ValidationGroup="Nuevo" runat="server" 
                                      ControlToValidate="txtDateEnd" CssClass="error_asterisck" 
                                      ErrorMessage="Dígite una fecha final válida" Operator="DataTypeCheck" 
-                                     SetFocusOnError="true" Type="Date" ValidationGroup="vsConsultForm">*</asp:CompareValidator>
+                                     SetFocusOnError="true" Type="Date" >*</asp:CompareValidator>
                                  <asp:CompareValidator ID="cvDateStartDateEnd" runat="server" 
                                      ControlToCompare="txtDateStart" ControlToValidate="txtDateEnd" 
                                      CssClass="error_asterisck" 
                                      ErrorMessage="Dígite una fecha final superior a la fecha inicial" 
                                      Operator="GreaterThanEqual" SetFocusOnError="true" Type="Date" 
-                                     ValidationGroup="vsConsultForm">*</asp:CompareValidator>
+                                      ValidationGroup="Nuevo" >*</asp:CompareValidator>
                             </td> 
                             </tr>
                             </table>
@@ -248,10 +249,10 @@
                                            
                     </td>
                     <td>
-                                <asp:RequiredFieldValidator ValidationGroup="vsConsultForm" ID="RequiredFieldValidator1" runat="server"
+                                <asp:RequiredFieldValidator  ValidationGroup="Nuevo"  ID="RequiredFieldValidator1" runat="server"
                                     ToolTip="Fecha de inicio" CssClass="error_asterisck" ErrorMessage="Dígite fecha inicial"
                                     Display="Dynamic" SetFocusOnError="true" ControlToValidate="txtDateStart">*</asp:RequiredFieldValidator>
-                                <asp:CompareValidator ID="CompareValidator1" runat="server" ValidationGroup="vsConsultForm"
+                                <asp:CompareValidator ID="CompareValidator1" runat="server"  ValidationGroup="Nuevo" 
                                     Type="Date" SetFocusOnError="true" CssClass="error_asterisck" ControlToValidate="txtDateStart"
                                     Operator="DataTypeCheck" ErrorMessage="Dígite una fecha válida">*</asp:CompareValidator>
                 </td>
@@ -262,7 +263,7 @@
                     <td>
                     </td>
                     <td align="center">
-                        <asp:Button ID="btnSavePromocion" Text="Guardar" runat="server" OnClick="btnSavePromocion_Click" />
+                        <asp:Button ID="btnSavePromocion" Text="Guardar"  ValidationGroup="Nuevo" runat="server" OnClick="btnSavePromocion_Click" />
                     </td>
                     <td>
                     </td>
@@ -320,7 +321,7 @@
                         <asp:TextBox ID="txtDesPromo" runat="server" Width="260px" />
                     </td>
                     <td>
-                        <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ErrorMessage="*" ControlToValidate="txtDesPromo"></asp:RequiredFieldValidator>
+                        <asp:RequiredFieldValidator ID="RequiredFieldValidator2" ValidationGroup="upd"  runat="server" ErrorMessage="*" ControlToValidate="txtDesPromo"></asp:RequiredFieldValidator>
                     </td>
                 </tr>
                 <tr>
@@ -331,7 +332,7 @@
                         <asp:TextBox ID="txtparProm" onkeypress="return numbersonly(event);"  runat="server" Width="260px" />
                     </td>
                     <td style="color:red">
-                       <asp:RequiredFieldValidator ID="RequiredFieldValidator11" runat="server" ErrorMessage="*" ControlToValidate="txtparProm"></asp:RequiredFieldValidator>
+                       <asp:RequiredFieldValidator ID="RequiredFieldValidator11" runat="server" ValidationGroup="upd"   ErrorMessage="*" ControlToValidate="txtparProm"></asp:RequiredFieldValidator>
                     </td>
                 </tr>
                 <tr>
@@ -342,8 +343,8 @@
                         <asp:TextBox ID="txtporcPromo" runat="server" Width="260px" />
                     </td>
                      <td style="color:red">
-                        <asp:RegularExpressionValidator ID="RegularExpressionValidator1" runat="server" ValidationExpression="((\d+)((\.\d{1,2})?))$" ErrorMessage="Ingrese porcentaje Valido" ControlToValidate="txtporcPromo" />
-                        <asp:RequiredFieldValidator ID="RequiredFieldValidator10" runat="server" ErrorMessage="*" ControlToValidate="txtporcPromo"></asp:RequiredFieldValidator>
+                        <asp:RegularExpressionValidator ID="RegularExpressionValidator1" runat="server" ValidationGroup="upd"   ValidationExpression="((\d+)((\.\d{1,2})?))$" ErrorMessage="Ingrese porcentaje Valido" ControlToValidate="txtporcPromo" />
+                        <asp:RequiredFieldValidator ID="RequiredFieldValidator10" runat="server" ValidationGroup="upd"   ErrorMessage="*" ControlToValidate="txtporcPromo"></asp:RequiredFieldValidator>
 
                     </td>
                 </tr>
@@ -380,10 +381,10 @@
                                            
                     </td>
                     <td>
-                                <asp:RequiredFieldValidator ValidationGroup="vsConsultForm" ID="RequiredFieldValidator3" runat="server"
+                                <asp:RequiredFieldValidator ValidationGroup="upd"   ID="RequiredFieldValidator3" runat="server"
                                     ToolTip="Fecha de inicio" CssClass="error_asterisck" ErrorMessage="Dígite fecha inicial"
                                     Display="Dynamic" SetFocusOnError="true" ControlToValidate="txtiniPromo">*</asp:RequiredFieldValidator>
-                                <asp:CompareValidator ID="CompareValidator2" runat="server" ValidationGroup="vsConsultForm"
+                                <asp:CompareValidator ID="CompareValidator2" runat="server" ValidationGroup="upd"  
                                     Type="Date" SetFocusOnError="true" CssClass="error_asterisck" ControlToValidate="txtiniPromo"
                                     Operator="DataTypeCheck" ErrorMessage="Dígite una fecha válida">*</asp:CompareValidator>
                 </td>
@@ -415,17 +416,17 @@
                                  <asp:RequiredFieldValidator ID="RequiredFieldValidator4" runat="server" 
                                      ControlToValidate="txtDateEnd" CssClass="error_asterisck" Display="Dynamic" 
                                      ErrorMessage="Dígite fecha final*" SetFocusOnError="true" ToolTip="Fecha final" 
-                                     ValidationGroup="vsConsultForm">*</asp:RequiredFieldValidator>
+                                     ValidationGroup="upd"  >*</asp:RequiredFieldValidator>
                                  <asp:CompareValidator ID="CompareValidator3" runat="server" 
                                      ControlToValidate="txtfinPromo" CssClass="error_asterisck" 
                                      ErrorMessage="Dígite una fecha final válida" Operator="DataTypeCheck" 
-                                     SetFocusOnError="true" Type="Date" ValidationGroup="vsConsultForm">*</asp:CompareValidator>
+                                     SetFocusOnError="true" Type="Date" ValidationGroup="upd"  >*</asp:CompareValidator>
                                  <asp:CompareValidator ID="CompareValidator4" runat="server" 
                                      ControlToCompare="txtiniPromo" ControlToValidate="txtfinPromo" 
                                      CssClass="error_asterisck" 
                                      ErrorMessage="Dígite una fecha final superior a la fecha inicial" 
                                      Operator="GreaterThanEqual" SetFocusOnError="true" Type="Date" 
-                                     ValidationGroup="vsConsultForm">*</asp:CompareValidator>
+                                     ValidationGroup="upd"  >*</asp:CompareValidator>
                             </td> 
                             </tr>
                             </table>
@@ -437,10 +438,10 @@
                                            
                     </td>
                     <td>
-                                <asp:RequiredFieldValidator ValidationGroup="vsConsultForm" ID="RequiredFieldValidator5" runat="server"
+                                <asp:RequiredFieldValidator ValidationGroup="upd"   ID="RequiredFieldValidator5" runat="server"
                                     ToolTip="Fecha de inicio" CssClass="error_asterisck" ErrorMessage="Dígite fecha inicial"
                                     Display="Dynamic" SetFocusOnError="true" ControlToValidate="txtDateStart">*</asp:RequiredFieldValidator>
-                                <asp:CompareValidator ID="CompareValidator5" runat="server" ValidationGroup="vsConsultForm"
+                                <asp:CompareValidator ID="CompareValidator5" runat="server" ValidationGroup="upd"  
                                     Type="Date" SetFocusOnError="true" CssClass="error_asterisck" ControlToValidate="txtDateStart"
                                     Operator="DataTypeCheck" ErrorMessage="Dígite una fecha válida">*</asp:CompareValidator>
                 </td>
