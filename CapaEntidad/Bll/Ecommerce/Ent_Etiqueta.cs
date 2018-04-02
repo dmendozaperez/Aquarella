@@ -14,5 +14,6 @@ namespace CapaEntidad.Bll.Ecommerce
         public string direccion { get; set; }
         public string referencia { get; set; }
         public string ubigeo { get; set; }
+        public string cod_refer { get; set; }
     }
 }
