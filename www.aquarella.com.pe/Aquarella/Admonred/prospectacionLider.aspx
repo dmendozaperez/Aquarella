@@ -25,6 +25,11 @@
         
     </script>
     <style type="text/css">
+        .styleV
+        {
+            width: 8px;
+            height:10px
+        }
         .style1
         {
             width: 458px;
@@ -47,7 +52,7 @@
         </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolderTitle" runat="server">
-    Prospectación de Lideres 
+    Status y venta de Lideres 
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="ContentPlaceHolderPageDesc" runat="server">
     Consulte entre un rango de fechas.
@@ -163,6 +168,27 @@
                         runat="server" Height="25px" Width="24px" 
                         ToolTip="Exportar Panel de Resultados a Excel." 
                         onclick="ibExportToExcel_Click" /> 
+                </td>
+                <td>
+                    <table>
+                        <tr>
+                            <td class="styleV" bgcolor="#00CC00"  ></td>
+                            <td >Nuevo Activo.</td>
+                        </tr>
+                         <tr>
+                            <td class="styleV" bgcolor="#0099FF" ></td>
+                            <td>Activo.</td>
+                        </tr>
+                         <tr>
+                            <td class="styleV"	bgcolor="#FF0000" ></td>
+                            <td>Desactivo.</td>
+                        </tr>
+                        <tr>
+                            <td class="styleV"	bgcolor="#FF6600" ></td>
+                            <td>Prospectado.</td>
+                        </tr>
+                    </table>
+
                 </td>
             </tr>
             <tr>

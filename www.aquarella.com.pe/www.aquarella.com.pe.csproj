@@ -241,6 +241,8 @@
     <Content Include="Aquarella\Logistica\stockForm.aspx" />
     <Content Include="Aquarella\Maestros\informationarticle.aspx" />
     <Content Include="Aquarella\Maestros\Lista_PreciosAQ.aspx" />
+    <Content Include="Aquarella\Maestros\panelProm_App.aspx" />
+    <Content Include="Aquarella\Maestros\panelPromocion.aspx" />
     <Content Include="Aquarella\Maestros\updateprecioarticle.aspx" />
     <Content Include="Aquarella\Ventas\ComisionLiderDet.aspx" />
     <Content Include="Aquarella\Ventas\ConsultaVentaTk.aspx" />
@@ -866,7 +868,6 @@
     <Compile Include="Aquarella\Admonred\Relacion_Usuario_Asesor.aspx.designer.cs">
       <DependentUpon>Relacion_Usuario_Asesor.aspx</DependentUpon>
     </Compile>
-    
     <Compile Include="Aquarella\Admonred\updateProfileForm.aspx.cs">
       <DependentUpon>updateProfileForm.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -1355,6 +1356,20 @@
     <Compile Include="Aquarella\Maestros\Lista_PreciosAQ.aspx.designer.cs">
       <DependentUpon>Lista_PreciosAQ.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Aquarella\Maestros\panelProm_App.aspx.cs">
+      <DependentUpon>panelProm_App.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Aquarella\Maestros\panelProm_App.aspx.designer.cs">
+      <DependentUpon>panelProm_App.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Aquarella\Maestros\panelPromocion.aspx.cs">
+      <DependentUpon>panelPromocion.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Aquarella\Maestros\panelPromocion.aspx.designer.cs">
+      <DependentUpon>panelPromocion.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Aquarella\Maestros\updateprecioarticle.aspx.cs">
       <DependentUpon>updateprecioarticle.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -1596,6 +1611,8 @@
     <Compile Include="Bll\Maestros\Concepts.cs" />
     <Compile Include="Bll\Maestros\Departments.cs" />
     <Compile Include="Bll\Maestros\Employees.cs" />
+    <Compile Include="Bll\Maestros\Nuevo.cs" />
+    <Compile Include="Bll\Maestros\Promocion.cs" />
     <Compile Include="Bll\Reports\LiqNcSubinforme.cs" />
     <Compile Include="Bll\Reports\Liquidation.cs" />
     <Compile Include="Bll\Reports\Manifiesto_Reports.cs" />
@@ -1826,7 +1843,6 @@
     <Content Include="Scripts\jquery-ui-date\development-bundle\ui.widget.jquery.json" />
   </ItemGroup>
   <ItemGroup>
-
     <EmbeddedResource Include="Aquarella\Logistica\liquidacion_grupo_consulta.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>liquidacion_grupo_consulta.cs</LastGenOutput>

@@ -10,6 +10,7 @@ namespace informativa.aquarella.com.oe.Models
         public Int32 Pasarela_id { get; set; }
         public string Pasarela_Descripcion { get; set; }
         public string Pasarela_Titulo { get; set; }
+        public string Pasarela_Tipo { get; set; }
         public string Pasarela_Estado { get; set; }
         public string Pasarela_strDetalle { get; set; }
         public string Pasarela_strRuta { get; set; }

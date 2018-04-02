@@ -46,6 +46,20 @@ namespace informativa.aquarella.com.oe.Controllers
             return listPasarela;
         }
 
+        public ActionResult Beneficio()
+        {
+            return View(listaBeneficio());
+        }
+
+        public List<Ent_PasarelaDetalle> listaBeneficio()
+        {
+            PasarelaDA pasarela = new PasarelaDA();
+            List<Ent_PasarelaDetalle> listPasarela = new List<Ent_PasarelaDetalle>();
+            listPasarela = pasarela.get_listaBeneficioDetalle();
+
+            return listPasarela;
+        }
+
 
         public ActionResult About()
         {

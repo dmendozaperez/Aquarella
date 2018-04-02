@@ -1,7 +1,7 @@
 ﻿@using informativa.aquarella.com.oe.Models
 @model Ent_Pasarela
 @{
-    ViewBag.Title = "Control de Generacion de Vales";
+    ViewBag.Title = "Control de Generacion de Beneficios";
     Layout = "~/Views/Shared/_LayoutMantenedor.cshtml";
 }
 <link href="~/Content/jasny-bootstrap.min.css" rel="stylesheet" />
@@ -52,11 +52,11 @@
         <div class="row">
             <div class="col-sm-10 wow fadeIn">
                 <i class="fa fa-newspaper-o"></i>
-                <h1>Nueva Pasarela /</h1>
-                <p>Permite agrupar imagenes para una nueva pasarela de inicio.</p>
+                <h1>Nueva colección de Beneficios/</h1>
+                <p>Permite agrupar imagenes para una nueva colección de Beneficios.</p>
             </div>
             <div class="col-sm-2 wow fadeIn">
-                <a href="@Url.Action("ListarPasarela", "Pasarela")"><i class="fa fa-align-justify fa-2x"><p>Listar</p></i></a>
+                <a href="@Url.Action("Index", "Beneficio")"><i class="fa fa-align-justify fa-2x"><p>Listar</p></i></a>
             </div>
 
         </div>
@@ -88,7 +88,7 @@
                                         <input id="activarPredeterminado" type="checkbox" checked name="activarPrincial">
                                     </td>
                                     <td colspan="1" valign="middle" style="text-align:left">
-                                        <label for="nombre"> Establecer como pasarela predeterminada</label>
+                                        <label for="nombre"> Establecer como pasarela de Beneficio predeterminada</label>
                                     </td>
                                     <td colspan="2" valign="middle" align="right">
                                         <input type="submit" onclick="GuardarPasarela()" id="result" value="Guardar" class="btn btn-primary" />
@@ -324,7 +324,7 @@
             frm.append("Pasarela_Titulo", strTitulo);
             frm.append("Pasarela_Descripcion", strDescripcion);
             frm.append("Pasarela_Estado", strPredeterminado);
-            frm.append("Pasarela_Tipo", "P");
+            frm.append("Pasarela_Tipo", "B");
 
 
             var contador = 0;
@@ -360,7 +360,7 @@
             frm.append("Pasarela_strDetalle", pasarelaDetalle_strList);
 
 
-            Post('GuardarPasarela', frm, RefrescarPagina);
+            Post('GuardarBeneficio', frm, RefrescarPagina);
         }
 
 
@@ -389,34 +389,10 @@
     function cargarEditar() {
 
         var id = $("#lblIdPasarela").val()
-        url = '@Url.Action("Editar", "Pasarela", new { strId = "xxxx"})';
+        url = '@Url.Action("Editar", "Beneficio", new { strId = "xxxx"})';
         url = url.replace("xxxx", id);
         location.href = url;
 
-    }
-
-    function GuardarArchivoDetalle(formData) {
-
-        var url = '@Url.Action("GuardarPasarelaArchivo", "Pasarela")';
-        $.ajax({
-            type: "POST",
-            url: url,
-            data: formData,
-            dataType: 'json',
-            contentType: false,
-            processData: false,
-            success: function (rpta) {
-                if (rpta.Success) {
-
-                }
-                else {
-                    console.log("error")
-                }
-            },
-            error: function (error) {
-
-            }
-        });
     }
 
 

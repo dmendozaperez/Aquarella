@@ -125,7 +125,8 @@ a.big-link-3:active {
 ul.navbar-nav {
 	font-size: 14px;
 	color: #888;
-	text-transform: uppercase;
+    font-family: 'Open Sans';
+	/*text-transform: uppercase;*/
 }
 
 ul.navbar-nav li a { padding: 23px 20px; background: #fff; border-top: 5px solid #fff; color: #5d5d5d; }
@@ -160,11 +161,12 @@ ul.navbar-nav li.active .dropdown-menu > .active > a:focus { background: #9d426b
 .navbar>.container .navbar-brand { margin-left: 0; }
 
 .navbar-brand {
-	width: 167px;
+	width:500px;
 	height: 106px;
-	background: url(../img/logo.png) left center no-repeat;
+	background: url(../img/logo1.jpg) left center no-repeat;
 	/*text-indent: -99999px;*/
 }
+
 
 /***** Slider *****/
 

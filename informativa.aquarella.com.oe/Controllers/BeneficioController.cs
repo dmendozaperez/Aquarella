@@ -6,31 +6,16 @@ using System.Web.Mvc;
 using informativa.aquarella.com.oe.Data;
 using informativa.aquarella.com.oe.Models;
 using informativa.aquarella.com.oe.Models.Util;
-using System.Web;
 
 namespace informativa.aquarella.com.oe.Controllers
 {
-    public class PasarelaController : Controller
+    public class BeneficioController : Controller
     {
-        // GET: Pasarela
+        // GET: Beneficio
         private PasarelaBL pasarelaBl = new PasarelaBL();
         public ActionResult Index()
         {
-            Ent_Usuario _usuario = (Ent_Usuario)Session[Ent_Constantes.NameSessionUser];
 
-            if (_usuario == null)
-            {
-                return RedirectToAction("Index", "Admin", "");
-
-            }
-            else
-            {
-                return RedirectToAction("ListarPasarela", "Pasarela", "");
-            }
-        }
-
-        public ActionResult ListarPasarela()
-        {
             Ent_Usuario _usuario = (Ent_Usuario)Session[Ent_Constantes.NameSessionUser];
 
             if (_usuario == null)
@@ -48,7 +33,7 @@ namespace informativa.aquarella.com.oe.Controllers
         {
             PasarelaDA pasarela = new PasarelaDA();
             List<Ent_Pasarela> listPasarela = new List<Ent_Pasarela>();
-            listPasarela = pasarela.get_listaPasarela();
+            listPasarela = pasarela.get_listaBeneficio();
 
             return listPasarela;
         }
@@ -75,6 +60,7 @@ namespace informativa.aquarella.com.oe.Controllers
 
         }
 
+
         [HttpGet]
         public ActionResult Nuevo()
         {
@@ -95,16 +81,16 @@ namespace informativa.aquarella.com.oe.Controllers
         }
 
         [OutputCache(CacheProfile = "OneMinuteValidate")]
-        public ActionResult GuardarPasarela()
+        public ActionResult GuardarBeneficio()
         {
 
             var oJRespuesta = new JsonResponse();
-          
+
             Ent_Usuario _usuario = (Ent_Usuario)Session[Ent_Constantes.NameSessionUser];
 
             if (_usuario == null)
             {
-                
+
                 oJRespuesta.Data = -1;
                 oJRespuesta.Message = "Debe Iniciar sessión.";
 
@@ -132,12 +118,12 @@ namespace informativa.aquarella.com.oe.Controllers
                 pasarela.Pasarela_Estado = Post("Pasarela_Estado");
                 pasarela.Pasarela_Tipo = Post("Pasarela_Tipo");
                 pasarela.Pasarela_strDetalle = Post("Pasarela_strDetalle");
-             
+
                 pasarela.Pasarela_UsuCrea = _usuario.usu_login;
                 pasarela.Pasarela_Ip = _usuario.usu_ip;
                 oJRespuesta.Data = pasarelaBl.InsertarPasarela(pasarela);
                 oJRespuesta.Message = "Coleccion ha sido guardada.";
-            }   
+            }
 
             return Json(oJRespuesta, JsonRequestBehavior.AllowGet);
         }
@@ -151,7 +137,7 @@ namespace informativa.aquarella.com.oe.Controllers
 
             if (_usuario == null)
             {
-               
+
                 oJRespuesta.Data = -1;
                 oJRespuesta.Message = "Debe Iniciar sessión.";
 
@@ -172,8 +158,6 @@ namespace informativa.aquarella.com.oe.Controllers
             return Json(oJRespuesta, JsonRequestBehavior.AllowGet);
         }
 
-
-
         public static string Post(string campo)
         {
 
@@ -181,6 +165,5 @@ namespace informativa.aquarella.com.oe.Controllers
             string parametro = existeParametro ? System.Web.HttpContext.Current.Request.Form[campo].ToString().Trim() : string.Empty;
             return parametro;
         }
-
     }
 }

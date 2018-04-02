@@ -1,0 +1,70 @@
+﻿
+<table class="table table-hover dataTable  table-striped table-responsive">
+    <thead>
+        <tr style="background-color:#3d566e; color:#ecf0f1">
+            <th>Id</th>
+            <th>Titulo</th>
+            <th>Descripcion</th>
+            <th>Estado</th>
+           <th>
+            </th>
+        </tr>
+    </thead>
+    <tbody data-bind="foreach:">
+       @using informativa.aquarella.com.oe.Models
+       @model IEnumerable<Ent_Pasarela>
+
+        @foreach (Ent_Pasarela item in Model)
+        {
+            <tr>
+                <td>@item.Pasarela_id.ToString()</td>
+                <td>@item.Pasarela_Titulo.ToString()</td>
+                <td>@item.Pasarela_Descripcion.ToString()</td>
+                <td>@item.Pasarela_Estado.ToString()</td>
+               <td>
+                    <table style="width:100%">
+                        <tr>
+                            <td>
+                                &nbsp;&nbsp;
+                                <div class="pull-right">
+                                    <button title="Ver Detalle" class="btnconsultar btn btn-success" data-id="@item.Pasarela_id" data-modal="" data-toggle="modal"><span class="glyphicon glyphicon-list-alt"></span></button>
+                                </div>
+                            </td>
+                       
+                        </tr>
+                    </table>
+
+                </td>
+            </tr>
+
+        }
+    </tbody>
+    @if (Model.Count() != 0)
+    {
+        <tfoot>
+            <tr>
+                <th>Id</th>
+                <th>Titulo</th>
+                <th>Descripcion</th>
+                <th>Estado</th>
+                <th>
+                </th>
+            </tr>
+        </tfoot>
+    }
+</table>
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" ng-app>
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div id='myModalContent'></div>
+        </div>
+    </div>
+</div>
+<script src="~/assets/js/jquery-1.11.1.min.js"></script>
+<script src="~/assets/bootstrap/js/bootstrap.min.js"></script>
+<script src="@Url.Content("~/assets/bootstrap/js/bootstrap.min.js")"></script>
+<script>
+   
+
+
+</script>

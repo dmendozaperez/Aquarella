@@ -110,12 +110,14 @@ namespace www.aquarella.com.pe.Aquarella.Admonred
             if ((e.Row.RowType == DataControlRowType.Header))
             {
                 e.Row.Cells[1].Visible = false;
-               
+                e.Row.Cells[9].Visible = false;
+
             }
 
             if ((e.Row.RowType == DataControlRowType.DataRow))
             {
                 e.Row.Cells[1].Visible = false;
+                e.Row.Cells[9].Visible = false;
             }
 
        }
@@ -231,6 +233,9 @@ namespace www.aquarella.com.pe.Aquarella.Admonred
                     case "2":
                         e.Row.Cells[4].BackColor = System.Drawing.Color.FromName("#FF0000");
                         break;
+                    case "3":
+                        e.Row.Cells[4].BackColor = System.Drawing.Color.FromName("#FF6600");
+                        break;
                     default:
                         Console.WriteLine("Default case");
                         break;
@@ -279,13 +284,16 @@ namespace www.aquarella.com.pe.Aquarella.Admonred
                         switch (intActivo)
                         {
                             case "0":
-                                strRows = strRows + "<td width='400'   >Activo</ td > ";
+                                strRows = strRows + "<td width='400' bgcolor='#00CC00'  >Nuevo Activo</ td > ";
                                 break;
                             case "1":
-                                strRows = strRows + "<td width='400'   >Activo</ td > ";
+                                strRows = strRows + "<td width='400' bgcolor='#0099FF'  >Activo</ td > ";
                                 break;
                             case "2":
-                                strRows = strRows + "<td width='400'   >Inactivo</ td > ";
+                                strRows = strRows + "<td width='400' bgcolor='#FF0000'  >Desactivo</ td > ";
+                                break;
+                            case "3":
+                                strRows = strRows + "<td width='400'  bgcolor='#FF6600'  >Prospectado</ td > ";
                                 break;
                             default:
                                 Console.WriteLine("Default case");

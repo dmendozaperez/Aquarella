@@ -53,11 +53,11 @@
         <div class="row">
             <div class="col-sm-10 wow fadeIn">
                 <i class="fa fa-edit"></i>
-                <h1>Edicion Pasarela /</h1>
-                <p>Permite agrupar imagenes para una nueva pasarela de inicio.</p>
+                <h1>Edicion de Beneficios /</h1>
+                <p>Permite agrupar imagenes para una nueva colección de Beneficios.</p>
             </div>
             <div class="col-sm-2 wow align-justify">
-                <a href="@Url.Action("ListarPasarela", "Pasarela")"><i class="fa fa-align-justify fa-2x"><p>Listar</p></i></a>
+                <a href="@Url.Action("Index", "Beneficio")"><i class="fa fa-align-justify fa-2x"><p>Listar</p></i></a>
             </div>
 
         </div>
@@ -431,7 +431,7 @@
                 frm.append("Pasarela_Titulo", strTitulo);
                 frm.append("Pasarela_Descripcion", strDescripcion);
                 frm.append("Pasarela_Estado", strPredeterminado);
-                frm.append("Pasarela_Tipo", "P");
+                frm.append("Pasarela_Tipo", "B");
 
                 var contador = 0;
                 var contadorAux = 0;
@@ -486,7 +486,7 @@
                 frm.append("Pasarela_strDetalle", pasarelaDetalle_strList);
 
 
-                Post('GuardarPasarela', frm, RefrescarPagina);
+                Post('GuardarBeneficio', frm, RefrescarPagina);
             }
 
         }
@@ -516,30 +516,13 @@
     function cargarEditar(){
          
         var id = $("#lblIdPasarela").val()
-        url = '@Url.Action("Editar", "Pasarela", new { strId = "xxxx"})';
+        url = '@Url.Action("Editar", "Beneficio", new { strId = "xxxx"})';
         url = url.replace("xxxx", id);
         location.href = url;
     
     }
 
-        function GuardarArchivoDetalle(formData) {
 
-            var url = '@Url.Action("GuardarPasarelaArchivo", "Pasarela")';
-            $.ajax({
-                type: "POST",
-                url: url,
-                data: formData,
-                dataType: 'json',
-                contentType: false,
-                processData: false,
-                success: function (rpta) {
-
-                },
-                error: function (error) {
-
-                }
-            });
-        }
 
 
 </script>

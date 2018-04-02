@@ -1142,13 +1142,15 @@ namespace www.aquarella.com.pe.bll
                 dt.Columns.Add("tipo", typeof(string));
                 dt.Columns.Add("Art_Id", typeof(string));
                 dt.Columns.Add("Art_Precio", typeof(Decimal));
+                dt.Columns.Add("Art_Temporada", typeof(string));
 
                 for (Int32 i = 0; i < dtactualiza.Rows.Count; ++i)
                 {
                     string vtipo= dtactualiza.Rows[i]["tipo"].ToString();
                     string varticulo = dtactualiza.Rows[i]["articulo"].ToString();
+                    string vtemporada = dtactualiza.Rows[i]["Art_Temporada"].ToString();
                     Decimal vprecio = Convert.ToDecimal(dtactualiza.Rows[i]["precion"].ToString());
-                    dt.Rows.Add(vtipo, varticulo, vprecio);
+                    dt.Rows.Add(vtipo, varticulo, vprecio, vtemporada);
                 }
 
                 cn = new SqlConnection(Conexion.myconexion());
