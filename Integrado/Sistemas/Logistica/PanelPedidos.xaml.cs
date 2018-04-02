@@ -56,6 +56,11 @@ namespace Integrado.Sistemas.Logistica
             lblusuario.Content = user._nombre;
 
             this.Title = "PAGINA DE PEDIDOS [" + Ent_Global._nom_modulo + "]";
+
+            // Mostrar Boton, solo para Ecommerce (CHRISTIAN-TAWA)
+            btnreenvio.Visibility = (Ent_Global._canal_venta == "AQ") ? Visibility.Hidden : Visibility.Visible;
+            btnimprimirurbano.Visibility = (Ent_Global._canal_venta == "AQ") ? Visibility.Hidden : Visibility.Visible;
+
         }
         private void dispatcherTimer_Tick(object sender, EventArgs e)
         {
@@ -77,7 +82,7 @@ namespace Integrado.Sistemas.Logistica
             {
                 //cerrar session
                 Ent_Global._session_activa = false;
-                OpcionesMenu frm = new OpcionesMenu();                
+                OpcionesMenu frm = new OpcionesMenu();
                 frm.Show();
                 this.Close();
                 //Modulos._session_activa = false;
@@ -120,12 +125,12 @@ namespace Integrado.Sistemas.Logistica
         }
         public void refrescagrilla()
         {
-            Mouse.OverrideCursor=Cursors.Wait;
+            Mouse.OverrideCursor = Cursors.Wait;
             try
             {
 
                 dg1.AutoGenerateColumns = false;
-                dt =Dat_Liquidacion.liquidacionXfacturar();
+                dt = Dat_Liquidacion.liquidacionXfacturar();
 
                 dg1.ItemsSource = dt.DefaultView;
 
@@ -134,7 +139,7 @@ namespace Integrado.Sistemas.Logistica
             }
             catch (Exception exc)
             {
-                MessageBox.Show(exc.Message, Ent_Msg.msginfomacion, MessageBoxButton.OK, MessageBoxImage.Error);                
+                MessageBox.Show(exc.Message, Ent_Msg.msginfomacion, MessageBoxButton.OK, MessageBoxImage.Error);
             }
             Mouse.OverrideCursor = null;
         }
@@ -174,8 +179,8 @@ namespace Integrado.Sistemas.Logistica
 
         private void btnrefresh_Click(object sender, RoutedEventArgs e)
         {
-            if (Ent_Global._canal_venta== "AQ")
-            { 
+            if (Ent_Global._canal_venta == "AQ")
+            {
                 refrescagrilla();
             }
             else
@@ -186,24 +191,24 @@ namespace Integrado.Sistemas.Logistica
         }
 
         public async void refrescagrilla_prestashop()
-        {           
+        {
             try
             {
 
                 //dg1.AutoGenerateColumns = false;
-                dt = await Task.Run(()=>Dat_Liquidacion.liquidacionXfacturar());
+                dt = await Task.Run(() => Dat_Liquidacion.liquidacionXfacturar());
 
                 dg1.ItemsSource = dt.DefaultView;
-         
+
                 totales(dt);
             }
             catch (Exception exc)
             {
-              
+
             }
-           
+
         }
-        private async  void cargar_prestashop()
+        private async void cargar_prestashop()
         {
             var metroWindow = this;
             metroWindow.MetroDialogOptions.ColorScheme = MetroDialogOptions.ColorScheme;
@@ -215,8 +220,8 @@ namespace Integrado.Sistemas.Logistica
 
                 ProgressAlert = await this.ShowProgressAsync(Ent_Msg.msgcargando, "Espere un momento por favor, cargando pedidos");  //show message
                 ProgressAlert.SetIndeterminate();
-                string _cargar_data =await Task.Run(() =>carga_data.ImportaDataPrestaShop());
-                if (_cargar_data.Length==0)
+                string _cargar_data = await Task.Run(() => carga_data.ImportaDataPrestaShop());
+                if (_cargar_data.Length == 0)
                 {
                     //await Task.Run(() => refrescagrilla_prestashop());
                     dt = await Task.Run(() => Dat_Liquidacion.liquidacionXfacturar());
@@ -239,7 +244,7 @@ namespace Integrado.Sistemas.Logistica
 
 
                 }
-               
+
             }
             catch (Exception exc)
             {
@@ -251,14 +256,14 @@ namespace Integrado.Sistemas.Logistica
         private void txtbuscar_TextChanged(object sender, TextChangedEventArgs e)
         {
             try
-            { 
-            string fieldName = string.Concat("[", dt.Columns["Liq_Id"].ColumnName, "]");
-            dt.DefaultView.Sort = fieldName;
-            DataView view = dt.DefaultView;
-            view.RowFilter = string.Empty;
-            if (txtbuscar.Text != string.Empty)
-                view.RowFilter = fieldName + " LIKE '%" + txtbuscar.Text + "%'";
-            dg1.ItemsSource = view;
+            {
+                string fieldName = string.Concat("[", dt.Columns["Liq_Id"].ColumnName, "]");
+                dt.DefaultView.Sort = fieldName;
+                DataView view = dt.DefaultView;
+                view.RowFilter = string.Empty;
+                if (txtbuscar.Text != string.Empty)
+                    view.RowFilter = fieldName + " LIKE '%" + txtbuscar.Text + "%'";
+                dg1.ItemsSource = view;
             }
             catch
             {
@@ -296,7 +301,7 @@ namespace Integrado.Sistemas.Logistica
                 lblcliente.Content = _cliente;
                 txtguia.Text = Dat_ConfigGuia.guiasecuencia();
             }
-            catch(Exception exc)
+            catch (Exception exc)
             {
                 MessageBox.Show(exc.Message, Ent_Msg.msginfomacion, MessageBoxButton.OK, MessageBoxImage.Error);
             }
@@ -330,12 +335,12 @@ namespace Integrado.Sistemas.Logistica
         private void aceptar_guia()
         {
             try
-            { 
+            {
                 if (!(fvalida())) return;
                 Int32 _valida_guia;
                 Int32 _idtrans = Convert.ToInt32(cbotransportadora.SelectedValue);
                 string _gui_no = txtguia.Text;
-                Mouse.OverrideCursor= Cursors.Wait;
+                Mouse.OverrideCursor = Cursors.Wait;
                 Dat_ConfigGuia.insertar_guia(_gui_no, _idtrans, _liq, out _valida_guia);
 
                 if (_valida_guia == 0)
@@ -351,7 +356,7 @@ namespace Integrado.Sistemas.Logistica
                     txtguia.Focus();
                 }
             }
-            catch(Exception exc)
+            catch (Exception exc)
             {
                 MessageBox.Show(exc.Message, Ent_Msg.msginfomacion, MessageBoxButton.OK, MessageBoxImage.Error);
             }
@@ -414,21 +419,21 @@ namespace Integrado.Sistemas.Logistica
             if (result == MessageDialogResult.Affirmative)
             {
                 Facturacion._liq_id = _liq_no;
-                Facturacion._liq_fecha= (string)row["Liq_FechaIng"].ToString();
-                Facturacion._guia_no= (string)row["tra_gui_no"].ToString();
+                Facturacion._liq_fecha = (string)row["Liq_FechaIng"].ToString();
+                Facturacion._guia_no = (string)row["tra_gui_no"].ToString();
                 Facturacion._transportadora = (string)row["tra_descripcion"].ToString();
-                Facturacion._cli_id= (string)row["Liq_BasId"].ToString();
+                Facturacion._cli_id = (string)row["Liq_BasId"].ToString();
                 Facturacion._cli_doc = (string)row["Bas_Documento"].ToString();
-                Facturacion._cli_nombre= (string)row["nombres"].ToString();
-                Facturacion._cli_direccion =(string)row["Bas_Direccion"].ToString();
-                Facturacion._cli_ciudad= (string)row["ubicacion"].ToString();
+                Facturacion._cli_nombre = (string)row["nombres"].ToString();
+                Facturacion._cli_direccion = (string)row["Bas_Direccion"].ToString();
+                Facturacion._cli_ciudad = (string)row["ubicacion"].ToString();
                 Int32 cantida_liq = Convert.ToInt32(row["tpares"]);
-                Facturacion._liq_cliente="(" + _liq_no + " | Cliente: " + (string)row["nombres"].ToString() + ")";
+                Facturacion._liq_cliente = "(" + _liq_no + " | Cliente: " + (string)row["nombres"].ToString() + ")";
                 Facturacion._liq_cantidad = cantida_liq;
                 Facturacion frm = new Facturacion();
                 frm.Show();
                 this.Close();
-            
+
             }
 
         }
@@ -436,6 +441,44 @@ namespace Integrado.Sistemas.Logistica
         private void MetroWindow_Activated(object sender, EventArgs e)
         {
 
+        }
+
+        private void btnreenvio_Click(object sender, RoutedEventArgs e)
+        {
+            if (!Ent_Global._pvt_directo)
+            {
+                ConsultaUrbano frm = new ConsultaUrbano();
+                frm.Show();
+                this.Close();
+            }
+        }
+
+        private void btnimprimirurbano_Click(object sender, RoutedEventArgs e)
+        {
+            if (!Ent_Global._pvt_directo)
+            {
+                Window win = null;
+
+                foreach (Window openWin in System.Windows.Application.Current.Windows)
+                {
+                    if (openWin.GetType() == typeof(ImprimeUrbano))
+                    {
+                        win = openWin;
+                    }
+                }
+
+                if (win != null)
+                {
+                    win.Focus();
+                }
+                else {
+                    ImprimeUrbano frm = new ImprimeUrbano();
+                    frm.WindowStartupLocation = System.Windows.WindowStartupLocation.CenterOwner;
+                    frm.Owner = this;
+                    frm.Show();
+                }
+
+            }
         }
     }
 }
