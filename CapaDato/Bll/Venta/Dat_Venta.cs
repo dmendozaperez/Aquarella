@@ -572,6 +572,41 @@ namespace CapaDato.Bll.Venta
         }
 
         #endregion
+
+        #region<REGION DE PEDIDO - URBANO>
+
+        //
+        public static DataTable dt_consulta_pedido_urbano(Boolean _tipo, DateTime _fecha_ini, DateTime _fecha_fin, string _doc)
+        {
+            string sqlquery = "USP_Consultar_Pedido_Urbano";
+            SqlConnection cn = null;
+            SqlCommand cmd = null;
+            SqlDataAdapter da = null;
+            DataTable dt = null;
+            try
+            {
+                cn = new SqlConnection(Ent_Conexion.conexion);
+                cmd = new SqlCommand(sqlquery, cn);
+                cmd.CommandTimeout = 0;
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@tipo", _tipo);
+                cmd.Parameters.AddWithValue("@fechaini", _fecha_ini);
+                cmd.Parameters.AddWithValue("@fechafin", _fecha_fin);
+                cmd.Parameters.AddWithValue("@doc", _doc);
+                cmd.Parameters.AddWithValue("@alm_id", Ent_Global._pvt_almaid);
+                da = new SqlDataAdapter(cmd);
+                dt = new DataTable();
+                da.Fill(dt);
+            }
+            catch
+            {
+                dt = null;
+            }
+            return dt;
+        }
+
+        #endregion
+
     }
     public class Vent_Talla_Cant
     {

@@ -32,7 +32,7 @@ namespace Integrado.Sistemas.Ventas
     public partial class Facturacion : MetroWindow
     {
         #region<VARIABLES>
-        public static  string _liq_id { set; get; }
+        public static string _liq_id { set; get; }
         public static string _liq_fecha { set; get; }
         public static string _guia_no { set; get; }
         public static string _transportadora { set; get; }
@@ -113,7 +113,7 @@ namespace Integrado.Sistemas.Ventas
         }
         private void cargar_grilla_packing()
         {
-          
+
             DataTable dt = Dat_Venta.leerarticulopaqliq(_liq_id);
             dg3.ItemsSource = dt.DefaultView;
             calculartotal();
@@ -122,7 +122,7 @@ namespace Integrado.Sistemas.Ventas
         private void calculartotal()
         {
 
-            DataTable dt= ((DataView)dg1.ItemsSource).ToTable();
+            DataTable dt = ((DataView)dg1.ItemsSource).ToTable();
             Int32 paquete_actual = 0;
             if (dt != null)
             {
@@ -157,23 +157,23 @@ namespace Integrado.Sistemas.Ventas
         }
         private void determina_paquete()
         {
-            Mouse.OverrideCursor = Cursors.Wait;    
+            Mouse.OverrideCursor = Cursors.Wait;
             try
-            { 
-            _paq_id = Dat_Venta.insertar_leer_paquete(_liq_id);
-
-            if (_paq_id == -2)
             {
-                txtarticulo.IsEnabled = false;
-                btnpaquete.IsEnabled = false;
-                btnbuscar.IsEnabled = false;
-            }
-            
+                _paq_id = Dat_Venta.insertar_leer_paquete(_liq_id);
 
-            _paq_no = Dat_Venta.leer_maxnopaqliq(_liq_id);
-            lblnpaquete.Content = _paq_no.ToString();
+                if (_paq_id == -2)
+                {
+                    txtarticulo.IsEnabled = false;
+                    btnpaquete.IsEnabled = false;
+                    btnbuscar.IsEnabled = false;
+                }
+
+
+                _paq_no = Dat_Venta.leer_maxnopaqliq(_liq_id);
+                lblnpaquete.Content = _paq_no.ToString();
             }
-            catch(Exception exc)
+            catch (Exception exc)
             {
                 MessageBox.Show(exc.Message, Ent_Msg.msginfomacion, MessageBoxButton.OK, MessageBoxImage.Error);
             }
@@ -251,62 +251,62 @@ namespace Integrado.Sistemas.Ventas
         {
             try
             {
-            var metroWindow = this;
-            metroWindow.MetroDialogOptions.ColorScheme = MetroDialogOptions.ColorScheme;
-            if (txtarticulo.Text.Trim().Length == 0)
-            {
-                await metroWindow.ShowMessageAsync(Ent_Msg.msginfomacion, "Ingrese el codigo de articulo...", MessageDialogStyle.Affirmative, metroWindow.MetroDialogOptions);
-                pnlarticulo.Background = Brushes.Red;
+                var metroWindow = this;
+                metroWindow.MetroDialogOptions.ColorScheme = MetroDialogOptions.ColorScheme;
+                if (txtarticulo.Text.Trim().Length == 0)
+                {
+                    await metroWindow.ShowMessageAsync(Ent_Msg.msginfomacion, "Ingrese el codigo de articulo...", MessageDialogStyle.Affirmative, metroWindow.MetroDialogOptions);
+                    pnlarticulo.Background = Brushes.Red;
                     txtarticulo.Focus();
                     return;
-            }
+                }
 
-            //en este caso vamos a digitar la calidad
-            //string v_articulo = txtarticulo.Text.Substring(0,txtarticulo.Text.Length-1);
+                //en este caso vamos a digitar la calidad
+                //string v_articulo = txtarticulo.Text.Substring(0,txtarticulo.Text.Length-1);
 
-            string v_articulo = txtarticulo.Text.Trim();
-            //
-            string _barra = (txtarticulo.Text.Trim().Length == 18) ? txtarticulo.Text.Trim() : "";
+                string v_articulo = txtarticulo.Text.Trim();
+                //
+                string _barra = (txtarticulo.Text.Trim().Length == 18) ? txtarticulo.Text.Trim() : "";
 
 
-            string[] info_articulo = Ent_BarCodes.getInfoFromTheBarCode(v_articulo);
-            if (info_articulo != null && info_articulo.Length > 0)
-            {
-                String sizeToAdd = info_articulo[1];
-                /// Article 
-                String articleToAdd = info_articulo[0];
-
-                String calidadToAdd = info_articulo[2];
-
-                string varreturn = Dat_Venta.insertar_articulopaq(_paq_id, _liq_id, articleToAdd, sizeToAdd, 1, calidadToAdd, _barra);
-
-                if (varreturn.Equals("1"))
+                string[] info_articulo = Ent_BarCodes.getInfoFromTheBarCode(v_articulo);
+                if (info_articulo != null && info_articulo.Length > 0)
                 {
-                    cargar_grilla();
-                    pnlarticulo.Background = Brushes.YellowGreen;
-                    lblmensaje.Content = " > Artículo " + articleToAdd + " adicionado correctamente.";
-                    txtarticulo.Text = "";
+                    String sizeToAdd = info_articulo[1];
+                    /// Article 
+                    String articleToAdd = info_articulo[0];
+
+                    String calidadToAdd = info_articulo[2];
+
+                    string varreturn = Dat_Venta.insertar_articulopaq(_paq_id, _liq_id, articleToAdd, sizeToAdd, 1, calidadToAdd, _barra);
+
+                    if (varreturn.Equals("1"))
+                    {
+                        cargar_grilla();
+                        pnlarticulo.Background = Brushes.YellowGreen;
+                        lblmensaje.Content = " > Artículo " + articleToAdd + " adicionado correctamente.";
+                        txtarticulo.Text = "";
                         txtarticulo.Focus();
                     }
+                    else
+                    {
+
+                        await metroWindow.ShowMessageAsync(Ent_Msg.msginfomacion, "El Código Leído ( " + txtarticulo.Text + " ) no Corresponde a un Artículo en el Pedido o ya Ha Sido Empacado en Su Totalidad.", MessageDialogStyle.Affirmative, metroWindow.MetroDialogOptions);
+                        pnlarticulo.Background = Brushes.Red;
+                        txtarticulo.Focus();
+                    }
+
+                }
                 else
                 {
-
-                    await metroWindow.ShowMessageAsync(Ent_Msg.msginfomacion, "El Código Leído ( " + txtarticulo.Text + " ) no Corresponde a un Artículo en el Pedido o ya Ha Sido Empacado en Su Totalidad.", MessageDialogStyle.Affirmative, metroWindow.MetroDialogOptions);
+                    lblmensaje.Foreground = Brushes.Maroon;
+                    lblmensaje.Content = " > Articulo " + txtarticulo.Text + " desconocido o codigo de barras incorrecto !!.";
+                    await metroWindow.ShowMessageAsync(Ent_Msg.msginfomacion, "Articulo desconocido o codigo de barras incorrecto !!.", MessageDialogStyle.Affirmative, metroWindow.MetroDialogOptions);
                     pnlarticulo.Background = Brushes.Red;
-                        txtarticulo.Focus();
-                    }
-
-            }
-            else
-            {
-                lblmensaje.Foreground = Brushes.Maroon;
-                lblmensaje.Content = " > Articulo " + txtarticulo.Text + " desconocido o codigo de barras incorrecto !!.";
-                await metroWindow.ShowMessageAsync(Ent_Msg.msginfomacion, "Articulo desconocido o codigo de barras incorrecto !!.", MessageDialogStyle.Affirmative, metroWindow.MetroDialogOptions);
-                pnlarticulo.Background = Brushes.Red;
                     txtarticulo.Focus();
                 }
-        }
-            catch(Exception exc)
+            }
+            catch (Exception exc)
             {
                 MessageBox.Show(exc.Message, Ent_Msg.msginfomacion, MessageBoxButton.OK, MessageBoxImage.Error);
             }
@@ -318,24 +318,24 @@ namespace Integrado.Sistemas.Ventas
         }
         private void cargar_grilla_actualpacking()
         {
-           
-            DataTable dt =Dat_Venta.leer_articulopacking_paquete(_liq_id, _paq_id);
+
+            DataTable dt = Dat_Venta.leer_articulopacking_paquete(_liq_id, _paq_id);
             dg1.ItemsSource = dt.DefaultView;
             calculartotal();
         }
 
         private void btnbuscar_Click(object sender, RoutedEventArgs e)
         {
-            Mouse.OverrideCursor = Cursors.Wait;            
+            Mouse.OverrideCursor = Cursors.Wait;
             if (chkbarra.IsChecked.Value)
             {
-                txtarticulo_KeyDown(btnbuscar, new KeyEventArgs(Keyboard.PrimaryDevice, Keyboard.PrimaryDevice.ActiveSource, 0,(Key.Enter)));
+                txtarticulo_KeyDown(btnbuscar, new KeyEventArgs(Keyboard.PrimaryDevice, Keyboard.PrimaryDevice.ActiveSource, 0, (Key.Enter)));
             }
             else
             {
-                dg2.ItemsSource =Dat_Venta.Datos_art_tallaemp(_liq_id, txtarticulo.Text).DefaultView;               
+                dg2.ItemsSource = Dat_Venta.Datos_art_tallaemp(_liq_id, txtarticulo.Text).DefaultView;
             }
-            Mouse.OverrideCursor = null;            
+            Mouse.OverrideCursor = null;
         }
 
         private async void btneliminar_Click(object sender, RoutedEventArgs e)
@@ -343,9 +343,9 @@ namespace Integrado.Sistemas.Ventas
             if (!(txtarticulo.IsEnabled)) return;
 
             DataRowView row = (DataRowView)((Button)e.Source).DataContext;
-          
-            string articulo = (string)row["Art_Id"].ToString(); 
-            string marca = (string)row["Mar_Descripcion"].ToString(); 
+
+            string articulo = (string)row["Art_Id"].ToString();
+            string marca = (string)row["Mar_Descripcion"].ToString();
             string talla = (string)row["Liq_Det_TalId"].ToString();
 
             var mySettings = new MetroDialogSettings()
@@ -370,12 +370,12 @@ namespace Integrado.Sistemas.Ventas
                 }
                 lblmensaje.Content = msge;
             }
-            
+
         }
 
         private void btnpaquete_Click(object sender, RoutedEventArgs e)
         {
-            Mouse.OverrideCursor = Cursors.Wait;            
+            Mouse.OverrideCursor = Cursors.Wait;
             determina_paquete();
             if (!(txtarticulo.IsEnabled)) cargar_grilla_actualpacking();
             lblmensaje.Content = " > Nuevo paquete creado.";
@@ -401,12 +401,12 @@ namespace Integrado.Sistemas.Ventas
 
                 await metroWindow.ShowMessageAsync(Ent_Msg.msginfomacion, "Configure su numero de guia de remision.", MessageDialogStyle.Affirmative, metroWindow.MetroDialogOptions);
 
-             
+
                 validaf = 1;
                 return validaf;
             }
 
-            
+
 
             DataTable dt = ((DataView)dg3.ItemsSource).ToTable();
             if (dt.Rows.Count == 0)
@@ -425,11 +425,11 @@ namespace Integrado.Sistemas.Ventas
             if (Ent_Global._canal_venta != "AQ")
             {
                 decimal saldo = 0;
-                decimal despacho =Convert.ToDecimal(lblcantidade.Content);
+                decimal despacho = Convert.ToDecimal(lblcantidade.Content);
 
                 saldo = (_liq_cantidad - despacho);
 
-                if (saldo!=0)
+                if (saldo != 0)
                 {
                     lblmensaje.Content = " > Tiene que despachar el total de articulos del pedido.";
 
@@ -442,7 +442,7 @@ namespace Integrado.Sistemas.Ventas
             }
 
 
-                return validaf;
+            return validaf;
         }
         private void deshabilita_controles()
         {
@@ -455,82 +455,89 @@ namespace Integrado.Sistemas.Ventas
         {
             var metroWindow = this;
             metroWindow.MetroDialogOptions.ColorScheme = MetroDialogOptions.ColorScheme;
-            ProgressDialogController ProgressAlert=null;
+            ProgressDialogController ProgressAlert = null;
             try
-            { 
-
-            Int32 _valida= await valida_facturar();
-
-            if (_valida == 1) return;
-
-            
-
-            var mySettings = new MetroDialogSettings()
             {
-                AffirmativeButtonText = "Si",
-                NegativeButtonText = "No",
-                //FirstAuxiliaryButtonText = "Cancelar",
-                ColorScheme = MetroDialogOptions.ColorScheme,
-            };
 
-            
+                Int32 _valida = await valida_facturar();
+
+                if (_valida == 1) return;
+
+
+
+                var mySettings = new MetroDialogSettings()
+                {
+                    AffirmativeButtonText = "Si",
+                    NegativeButtonText = "No",
+                    //FirstAuxiliaryButtonText = "Cancelar",
+                    ColorScheme = MetroDialogOptions.ColorScheme,
+                };
+
+
+                var okSettings = new MetroDialogSettings()
+                {
+                    AffirmativeButtonText = "Ok",
+                    ColorScheme = MetroDialogOptions.ColorScheme,
+                };
+
+
 
                 MessageDialogResult result = await this.ShowMessageAsync(Ent_Msg.msginfomacion, "¿Realmente desea FACTURAR este pedido ? " + _liq_id,
               MessageDialogStyle.AffirmativeAndNegative, mySettings);
 
 
-            if (result == MessageDialogResult.Affirmative)
-            {
+                if (result == MessageDialogResult.Affirmative)
+                {
                     string _error_venta = "";
                     //Mouse.OverrideCursor = Cursors.Wait;
                     ProgressAlert = await this.ShowProgressAsync(Ent_Msg.msgcargando, "Generando Facturacion Electronica del pedido N°:" + _liq_id);  //show message
                     ProgressAlert.SetIndeterminate();
-                    string grabar_numerodoc = await Task.Run(() => Dat_Venta.insertar_venta(_liq_id,ref _error_venta));
+                    string grabar_numerodoc = await Task.Run(() => Dat_Venta.insertar_venta(_liq_id, ref _error_venta));
                     //string grabar_numerodoc = Dat_Venta.insertar_venta(_liq_id);
 
                     if (grabar_numerodoc != "-1")
                     {
-                            lblmensaje.Content = " > Factura generada con exito - Número : " + grabar_numerodoc + ".";
-                            ///
-                            deshabilita_controles();
+                        lblmensaje.Content = " > Factura generada con exito - Número : " + grabar_numerodoc + ".";
+                        ///
+                        deshabilita_controles();
 
-                            //aca generamos el codigo hash
-                            string _codigo_hash = "";
-                            string _error = "";
-                            await Task.Run(() => Facturacion_Electronica.ejecutar_factura_electronica(Basico.Left(grabar_numerodoc, 1), grabar_numerodoc, ref _codigo_hash, ref _error));
+                        //aca generamos el codigo hash
+                        string _codigo_hash = "";
+                        string _error = "";
+                        await Task.Run(() => Facturacion_Electronica.ejecutar_factura_electronica(Basico.Left(grabar_numerodoc, 1), grabar_numerodoc, ref _codigo_hash, ref _error));
                         //*************
 
-                      
+
 
 
                         //****enviar los xml al server
 
-                        if (_codigo_hash.Length==0 || _codigo_hash==null)
-                            {
-                                await Task.Run(() => Facturacion_Electronica.ejecutar_factura_electronica(Basico.Left(grabar_numerodoc, 1), grabar_numerodoc, ref _codigo_hash, ref _error));
-                            }
-                            if (_codigo_hash.Length == 0 || _codigo_hash == null)
-                            {
-                                _error = "GENERACION DE HASH";
-                                await ProgressAlert.CloseAsync();
-                                 await metroWindow.ShowMessageAsync(Ent_Msg.msginfomacion, "ERROR EN LA GENERACION POR FAVOR CONSULTE CON SISTEMAS..==>> TIPO DE ERROR (" + _error + ")", MessageDialogStyle.Affirmative, metroWindow.MetroDialogOptions);
+                        if (_codigo_hash.Length == 0 || _codigo_hash == null)
+                        {
+                            await Task.Run(() => Facturacion_Electronica.ejecutar_factura_electronica(Basico.Left(grabar_numerodoc, 1), grabar_numerodoc, ref _codigo_hash, ref _error));
+                        }
+                        if (_codigo_hash.Length == 0 || _codigo_hash == null)
+                        {
+                            _error = "GENERACION DE HASH";
+                            await ProgressAlert.CloseAsync();
+                            await metroWindow.ShowMessageAsync(Ent_Msg.msginfomacion, "ERROR EN LA GENERACION POR FAVOR CONSULTE CON SISTEMAS..==>> TIPO DE ERROR (" + _error + ")", MessageDialogStyle.Affirmative, metroWindow.MetroDialogOptions);
                             //MessageBox.Show("ERROR EN LA GENERACION POR FAVOR CONSULTE CON SISTEMAS..==>> TIPO DE ERROR (" + _error + ")", Ent_Msg.msginfomacion,MessageBoxButton.OK,MessageBoxImage.Error);
-                                return;
-                            }
+                            return;
+                        }
 
 
                         //
 
                         if (_error.Length > 0)
-                            {
-                                await ProgressAlert.CloseAsync();
-                                await metroWindow.ShowMessageAsync(Ent_Msg.msginfomacion, "ERROR EN LA GENERACION POR FAVOR CONSULTE CON SISTEMAS..==>> TIPO DE ERROR (" + _error + ")", MessageDialogStyle.Affirmative, metroWindow.MetroDialogOptions);
-                                //MessageBox.Show("ERROR EN LA GENERACION POR FAVOR CONSULTE CON SISTEMAS..==>> TIPO DE ERROR (" + _error + ")", Ent_Msg.msginfomacion,MessageBoxButton.OK,MessageBoxImage.Error);
-                                return;
-                            }
-                            await Task.Run(() => Basico._enviar_webservice_xml());
+                        {
+                            await ProgressAlert.CloseAsync();
+                            await metroWindow.ShowMessageAsync(Ent_Msg.msginfomacion, "ERROR EN LA GENERACION POR FAVOR CONSULTE CON SISTEMAS..==>> TIPO DE ERROR (" + _error + ")", MessageDialogStyle.Affirmative, metroWindow.MetroDialogOptions);
+                            //MessageBox.Show("ERROR EN LA GENERACION POR FAVOR CONSULTE CON SISTEMAS..==>> TIPO DE ERROR (" + _error + ")", Ent_Msg.msginfomacion,MessageBoxButton.OK,MessageBoxImage.Error);
+                            return;
+                        }
+                        await Task.Run(() => Basico._enviar_webservice_xml());
                         //EN ESTE PASO VAMOS A GRABAR EL CODIGO HASH
-                           await Task.Run(() => Dat_Venta.insertar_codigo_hash(grabar_numerodoc, _codigo_hash, "V"));
+                        await Task.Run(() => Dat_Venta.insertar_codigo_hash(grabar_numerodoc, _codigo_hash, "V"));
                         ///
                         //byte[] img_qr = null;
                         string _genera_tk = await Task.Run(() => Imprimir_Doc.Generar_Impresion("F", grabar_numerodoc) /*Impresora_Epson.Config_Imp.GenerarTicketFact(grabar_numerodoc, 1, _codigo_hash)*/);
@@ -540,20 +547,20 @@ namespace Integrado.Sistemas.Ventas
 
                         if (Ent_Global._canal_venta == "BA")
                         {
-                            string _cod_urbano = "";                            
+                            string _cod_urbano = "";
                             await Task.Run(() => Basico.act_presta_urbano(grabar_numerodoc, ref _error, ref _cod_urbano));
-                            string mensaje_urb =(_cod_urbano.Trim().Length==0)? "":"Se envío correctamente la solicitud a Urbano, Nro guía obtenida: " + _cod_urbano + "\n \n";
+                            //string mensaje_urb = (_cod_urbano.Trim().Length == 0) ? "" : "Se envío correctamente la solicitud a Urbano, Nro guía obtenida: " + _cod_urbano + "\n\n";
                             await ProgressAlert.CloseAsync();
-                            string msj_eccomer = "Se Genero correctamente la factura nro: " + grabar_numerodoc + "\n" +
-                                                  mensaje_urb +
-                                                 "¿Desea Imprimir la etiqueta de este pedido? " + _liq_id;
+                            string msj_eccomer = "";
 
                             /*si el codigo de urbano esta null entonces no va el mensaje*/
+                            if (_cod_urbano.Trim().Length > 0)
+                            {
+                                msj_eccomer = "Se Genero correctamente la factura nro: " + grabar_numerodoc + "\n"
+                                                   + "Se envío correctamente la solicitud a Urbano, Nro guía obtenida: " + _cod_urbano + "\n\n"
+                                                   + "¿Desea imprimir la etiqueta de este pedido? " + _liq_id;
 
-                            if (mensaje_urb.Trim().Length>0)
-                            { 
-                                MessageDialogResult resultetiq = await this.ShowMessageAsync(Ent_Msg.msginfomacion, msj_eccomer,
-                                MessageDialogStyle.AffirmativeAndNegative, mySettings);
+                                MessageDialogResult resultetiq = await this.ShowMessageAsync(Ent_Msg.msginfomacion, msj_eccomer, MessageDialogStyle.AffirmativeAndNegative, mySettings);
 
                                 if (resultetiq == MessageDialogResult.Affirmative)
                                 {
@@ -569,6 +576,14 @@ namespace Integrado.Sistemas.Ventas
                                     ProgressAlert = await this.ShowProgressAsync(Ent_Msg.msgcargando, "Generando Facturacion Electronica del pedido N°:" + _liq_id);  //show message
                                     ProgressAlert.SetIndeterminate();
                                 }
+                                // await ProgressAlert.CloseAsync();
+                                
+                            }
+                            else
+                            {
+                                msj_eccomer = "Se Genero correctamente la factura nro: " + grabar_numerodoc + "\n"
+                                                   + "No se pudo enviar la solicitud a Urbano.\n\n";
+                                MessageDialogResult resultetiq = await this.ShowMessageAsync(Ent_Msg.msginfomacion, msj_eccomer, MessageDialogStyle.Affirmative, okSettings);
                             }
 
                             //await metroWindow.ShowMessageAsync(Ent_Msg.msginfomacion, msj_eccomer, MessageDialogStyle.Affirmative, metroWindow.MetroDialogOptions);
@@ -578,23 +593,23 @@ namespace Integrado.Sistemas.Ventas
                         //string _genera_tk = Impresora_Epson.Config_Imp.GenerarTicketFact(grabar_numerodoc, 1, _codigo_hash);
 
                         if (_genera_tk == null)
-                                {
-                                    lbltickets.Content = " >> Se producjo un error en la impresion del ticket";
-                                }
-                                else
-                                {
-                                    lbltickets.Content = " > Ticket Generado con exito";
-                                }
-                                Reporte_Guia_Remision._idv_invoice = grabar_numerodoc;
-                                Reporte_Guia_Remision form = new Reporte_Guia_Remision();
-                                form.Show();
+                        {
+                            lbltickets.Content = " >> Se producjo un error en la impresion del ticket";
+                        }
+                        else
+                        {
+                            lbltickets.Content = " > Ticket Generado con exito";
+                        }
+                        Reporte_Guia_Remision._idv_invoice = grabar_numerodoc;
+                        Reporte_Guia_Remision form = new Reporte_Guia_Remision();
+                        form.Show();
 
-                    
+                        if (ProgressAlert.IsOpen)
+                            await ProgressAlert.CloseAsync();
 
-                        await ProgressAlert.CloseAsync();
                     }
-                else
-                {
+                    else
+                    {
 
                         deshabilita_controles();
                         lblmensaje.Foreground = Brushes.Maroon;
@@ -605,20 +620,20 @@ namespace Integrado.Sistemas.Ventas
                         await ProgressAlert.CloseAsync();
                         await metroWindow.ShowMessageAsync(Ent_Msg.msginfomacion, _error_venta, MessageDialogStyle.Affirmative, metroWindow.MetroDialogOptions);
 
-                    
+
+                    }
                 }
             }
-            }
-            catch(Exception exc)
+            catch (Exception exc)
             {
 
-                
+
                 deshabilita_controles();
                 lblmensaje.Foreground = Brushes.Maroon;
                 /// 
                 lblmensaje.Content = exc.Message;
                 ///
-                if (ProgressAlert!=null) await ProgressAlert.CloseAsync();
+                if (ProgressAlert != null) await ProgressAlert.CloseAsync();
                 await metroWindow.ShowMessageAsync(Ent_Msg.msginfomacion, exc.Message, MessageDialogStyle.Affirmative, metroWindow.MetroDialogOptions);
             }
             //Mouse.OverrideCursor = null;

@@ -207,6 +207,7 @@ namespace CapaDato.Bll.Ecommerce
                                 etiqueta.direccion = dr["direccion"].ToString();
                                 etiqueta.referencia = dr["Ven_Dir_Ref"].ToString();
                                 etiqueta.ubigeo = dr["Ven_Ubigeo_Ent"].ToString();
+                                etiqueta.cod_refer = dr["Ven_Pst_Ref"].ToString();
                             }
                         }
                     }

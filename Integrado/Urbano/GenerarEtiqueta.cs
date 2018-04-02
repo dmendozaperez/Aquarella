@@ -38,6 +38,9 @@ namespace Integrado.Urbano
                 Dat_Urbano dat_etiqueta = new Dat_Urbano();
                 Ent_Etiqueta etiqueta = dat_etiqueta.get_etiqueta(ven_id);
 
+                if (etiqueta.strNroGuia.Length == 0)
+                    return "";                
+
                 string strNroGuia = etiqueta.strNroGuia;
                 //GuiaUrbano oGuia = guiaUrbano;
 
@@ -48,6 +51,7 @@ namespace Integrado.Urbano
                 string direccion = etiqueta.direccion;//RemoverDiacriticos(oGuia.dir_entrega + " " + oGuia.nro_via + " " + oGuia.nro_int);
                 string referencia = etiqueta.referencia;//; RemoverDiacriticos(oGuia.ref_direc);
                 string ubigeo = etiqueta.ubigeo;// RemoverDiacriticos(GenerarNombreUbigeo(oGuia.ubi_direc) + oGuia.ubi_direc);
+                string cod_refer = etiqueta.cod_refer;
 
                 // Generar Código ZPL
                 StringBuilder strb = new StringBuilder();
@@ -78,8 +82,8 @@ namespace Integrado.Urbano
                 strb.Append("^FO195,495^A0,040,028^FD" + direccion + "^FS\n");
                 strb.Append("^FO195,562^A0,040,028^FD" + referencia + "^FS\n");
                 strb.Append("^FO195,632^A0,040,028^FD" + ubigeo + "^FS\n");
-                strb.Append("^FO060,687^A0,060,030^FDNro. Pedido: " + nro_pedido + "^FS\n");
-                strb.Append("^FO200,130^BCN,110,Y,N,N^" + strNroGuia + "^FS\n");
+                strb.Append("^FO060,687^A0,060,030^FDNro. Pedido: " + cod_refer + "^FS\n");
+                strb.Append("^FO200,130^BCN,110,Y,N,N^FD" + strNroGuia + "^FS\n");
                 strb.Append("^PQ2^FS\n");
                 strb.Append("^XZ\n");
                 return strb.ToString();
@@ -97,6 +101,9 @@ namespace Integrado.Urbano
             try
             {
                 string strGuia = str_etiqueta(ven_id);
+                if (strGuia.Length == 0)
+                    return;
+                
                 PrintDocument doc = new PrintDocument();
                 doc.PrinterSettings = new PrinterSettings();
                 //doc.PrinterSettings.PrinterName = ConfigurationManager.AppSettings["Impresora"].ToString();

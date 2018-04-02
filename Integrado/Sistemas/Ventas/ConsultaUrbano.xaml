@@ -1,12 +1,11 @@
-﻿<Controls:MetroWindow xmlns:dxlc="http://schemas.devexpress.com/winfx/2008/xaml/layoutcontrol"  x:Class="Integrado.Sistemas.Logistica.PanelPedidos"
+﻿<Controls:MetroWindow x:Class="Integrado.Sistemas.Ventas.ConsultaUrbano"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"                       
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:dxga="http://schemas.devexpress.com/winfx/2008/xaml/gauges"                      
-        xmlns:local="clr-namespace:Integrado.Sistemas.Logistica"
-        Title="PAGINA PRINCIPAL [SISTEMA AQUARELLA]"    
+        xmlns:local="clr-namespace:Integrado.Sistemas.Ventas"
+        xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"    
+        Title="PAGINA PRINCIPAL [SISTEMA INTEGRADO]"    
         Icon="/Integrado;component/Design/Icono/sistema_ico.ico"
         ShowIconOnTitleBar="True"
         ShowTitleBar="True"
@@ -14,49 +13,9 @@
         GlowBrush="{DynamicResource AccentColorBrush}"
         NonActiveGlowBrush="#CDFF0000"        
         Height="710"
-        Width="1300"              
+        Width="1350"              
         ResizeMode="CanMinimize"                      
-        WindowState="Maximized" Loaded="MetroWindow_Loaded" Activated="MetroWindow_Activated">
-    <Controls:MetroWindow.Flyouts>
-        <Controls:FlyoutsControl x:Name="flyoutsControl">
-            <Controls:Flyout Header="Modal"
-                             Position="Right"
-                             IsModal="True" Width="510"
-                             Theme="Adapt">
-                <StackPanel Height="510"
-                            Margin="0,0,0,0"
-                            Orientation="Vertical">
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="510"></ColumnDefinition>
-                        </Grid.ColumnDefinitions>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="*"></RowDefinition>
-                            <RowDefinition Height="*"></RowDefinition>
-                        </Grid.RowDefinitions>
-                        <dxlc:GroupBox Content="Configuracion de Guia y transportadora" Background="Transparent" HorizontalAlignment="Center" Height="250" Width="420"  Grid.Column="0" Grid.Row="0"/>
-                        <Label Content="1. Seleccione transportadora" FontSize="12" Grid.Column="0" Grid.Row="0" Margin="75,60,0,0" ></Label>
-                        <ComboBox Name="cbotransportadora" Cursor="Hand" Grid.Column="0" Grid.Row="0" Width="195" Height="27" FontSize="12" Margin="200,-100,0,0"></ComboBox>
-                        <Label Content="2. Numero de Guia" FontSize="12" Grid.Column="0" Grid.Row="0" Margin="75,100,0,0" ></Label>
-                        <TextBox Name="txtguia" Grid.Column="0" Cursor="Hand" Grid.Row="0" FontSize="12" Width="195" Height="27" Margin="200,-25,0,0"></TextBox>
-                        <Label Content="Liquidacion Numero:" FontSize="12" Grid.Column="0" Grid.Row="0" Margin="75,140,0,0" ></Label>
-                        <Label Name="lblliq" FontSize="12" Content="22604" Grid.Column="0" Grid.Row="0" Width="140" Height="27" HorizontalAlignment="Left" Margin="200,57,0,0"></Label>
-                        <Label Content="Nombre Cliente:" FontSize="12" Grid.Column="0" Grid.Row="0" Margin="75,180,0,0" ></Label>
-                        <Label Name="lblcliente" FontSize="12" Content="Miriam Garcia Billaverde" Grid.Column="0" Grid.Row="0" Width="140" Height="27" HorizontalAlignment="Left" Margin="200,134,0,0"></Label>
-                        <Label Name="lblmsg" Content="Por Favor selecciona la transportadora" Foreground="Red" FontSize="12" Grid.Column="0" Grid.Row="0" Margin="48,220,0,0" ></Label>
-                        <Grid Grid.Row="1">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*"></ColumnDefinition>
-                                <ColumnDefinition Width="*"></ColumnDefinition>
-                            </Grid.ColumnDefinitions>
-                            <Button Name="btnaceptarguia" Margin="23,20,0,0" Width="180" Content="Aceptar y Guardar Guia" Grid.Column="0" Cursor="Hand" Click="btnaceptarguia_Click"></Button>
-                            <Button Name="btncancelarguia" Margin="-20,20,0,0" Width="180" Content="Cancelar y No Guardar Guia" Grid.Column="1" Cursor="Hand" Click="btncancelarguia_Click"></Button>
-                        </Grid>
-                    </Grid>
-                </StackPanel>
-            </Controls:Flyout>
-        </Controls:FlyoutsControl>
-    </Controls:MetroWindow.Flyouts>
+        WindowState="Maximized" Loaded="MetroWindow_Loaded">
     <Controls:MetroWindow.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -311,7 +270,7 @@
                                         <Image Source="/Integrado;component/Design/images/reiniciar.png" Width="48" Margin="8,4,0,4"/>
                                     </Button>
                                     <Rectangle Style="{StaticResource DividerStyle}" />
-                                    <Button x:Name="btnprincipal"  Cursor="Hand"   HorizontalAlignment="Left" Width="35" Height="35"  Style="{DynamicResource NoChromeButton}" Click="btnprincipal_Click"   >
+                                    <Button x:Name="btnprincipal"  Cursor="Hand"   HorizontalAlignment="Left" Width="35" Height="35"  Style="{DynamicResource NoChromeButton}" Click="btnprincipal_Click"  >
                                         <Button.ToolTip>
                                             <ToolTip>
                                                 <StackPanel>
@@ -328,7 +287,7 @@
                                     <Rectangle Style="{StaticResource DividerStyle}" />
                                 </StackPanel>
                             </Border>
-                            <Image Name="imglogo" Margin="6,4,0,2" Source="/Integrado;component/Design/Images/aq_lineal.jpg" Width="205" Grid.Column="0" HorizontalAlignment="Left" />
+                            <Image Name="imglogo" Margin="6,4,0,2" Source="/Integrado;component/Design/Images/BataLogo.png" Width="205" Grid.Column="0" HorizontalAlignment="Left" />
                             <Label x:Name="lblnom_modulo" FontFamily="Georgia" Foreground="WhiteSmoke" FontSize="35" Margin="224,11,0,-5" HorizontalAlignment="Left" Grid.Column="0" Content="aa" Width="auto" FontStretch="Expanded"/>
                             <Rectangle Height="0" VerticalAlignment="Bottom" Fill="WhiteSmoke" HorizontalAlignment="Left" Width="189" Margin="130,0,0,26" />
                             <Label Visibility="Hidden"  FontFamily="Georgia" Foreground="WhiteSmoke" FontSize="10" Width="95" 
@@ -346,7 +305,7 @@
                                     <TextBlock Style="{StaticResource SpacerStyle}"/>
                                     <Rectangle Style="{StaticResource DividerStyleSmoke}" />
                                     <TextBlock Style="{StaticResource SpacerStyle}"/>
-                                    <Button x:Name="btCloseSesion"   Style="{StaticResource LoginRegisterLinkStyle}" Content="Salir del Sistema" Click="btCloseSesion_Click"/>
+                                    <Button x:Name="btCloseSesion"   Style="{StaticResource LoginRegisterLinkStyle}" Content="Salir del Sistema" Click="btCloseSesion_Click" />
                                     <!-- Gears -->
                                     <Rectangle Style="{StaticResource DividerStyleSmoke}" />
                                     <TextBlock Style="{StaticResource SpacerStyle}"/>
@@ -364,198 +323,113 @@
                 </StatusBarItem>
                 <StatusBarItem Content="{Binding SelectedItem.Header, ElementName=MainTabControl, Mode=OneWay}" />
             </StatusBar>
-
-
-            <!--<Label Grid.Column="0" Content="Filtro de pedidos para facturar"  HorizontalAlignment="Right" ></Label>
-                    <TextBox Grid.Column="1" Name="txtbuscar" ></TextBox>
-                    <Button Name="btnrefresh" Style="{DynamicResource NoChromeButton}"  Grid.Column="2" Cursor="Hand" Grid.ColumnSpan="2" >
+            <Grid Grid.Row="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="150"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
+                </Grid.RowDefinitions>
+                <Grid Grid.Row="0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="45"></RowDefinition>
+                        <RowDefinition Height="45"></RowDefinition>
+                        <RowDefinition Height="28"></RowDefinition>
+                        <RowDefinition Height="*"></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="110"></ColumnDefinition>
+                        <ColumnDefinition Width="100"></ColumnDefinition>
+                        <ColumnDefinition Width="320"></ColumnDefinition>
+                        <ColumnDefinition Width="520"></ColumnDefinition>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <Label Content="Fecha Inicio" VerticalAlignment="Center" FontSize="14" FontWeight="Bold" Grid.Column="1" Grid.Row="0"></Label>
+                    <Label Content="Fecha Final" VerticalAlignment="Top" FontSize="14" FontWeight="Bold" Grid.Column="1" Grid.Row="1"></Label>
+                    <DatePicker Name="dtpdesde" HorizontalAlignment="Left" Width="180" Cursor="Hand" FontSize="14" Height="25" Grid.Column="2" Grid.Row="0"></DatePicker>
+                    <DatePicker Name="dtphasta" HorizontalAlignment="Left" Width="180" VerticalAlignment="Top" Cursor="Hand" FontSize="14" Height="25" Grid.Column="2" Grid.Row="1"></DatePicker>
+                    <CheckBox Name="chkactivar" Cursor="Hand" FontSize="13" FontWeight="Bold" VerticalAlignment="Top" Content="Activar consulta por numero de documento" Grid.Column="2" Grid.Row="2" Click="chkactivar_Click" ></CheckBox>
+                    <Label Content="Buscar por documento" Grid.Row="3" Grid.Column="2" HorizontalAlignment="Left" VerticalAlignment="Top" Height="25" Width="180"></Label>
+                    <TextBox Name="txtdoc" Grid.Row="3" Grid.Column="2" FontSize="14" FontWeight="Bold" Height="25" Width="180" HorizontalAlignment="Right" VerticalAlignment="Top" ></TextBox>
+                    <Button Name="btnbuscar"  Margin="0,-25,0,0" Cursor="Hand" Height="38" Width="120" HorizontalAlignment="Right" Grid.Column="2" Grid.Row="1" Click="btnbuscar_Click" >
                         <Button.ToolTip>
                             <ToolTip>
                                 <StackPanel>
-                                    <TextBlock FontWeight="Bold" TextAlignment="Left" >Panel de refrescado del panel de liquidacion</TextBlock>
-                                    <TextBlock>Actualizar liquidaciones.</TextBlock>
-                                    <TextBlock>No lo presione hasta estar seguro de Actualizar.</TextBlock>
+                                    <TextBlock FontWeight="Bold" TextAlignment="Left" >Consultar Pedidos</TextBlock>
+                                    <TextBlock>Permite consultar pedidos pedientes de envio a Urbano.</TextBlock>
                                 </StackPanel>
                             </ToolTip>
                         </Button.ToolTip>
-                        <Grid Width="40">
+                        <Grid Width="140">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="7*" />
                                 <ColumnDefinition Width="54*" />
                                 <ColumnDefinition Width="80*" />
                             </Grid.ColumnDefinitions>
-                            <Image Margin="0,0,0,0" Source="/Integrado;component/Design/Images/bt_refresh.png" Height="18" Width="18" HorizontalAlignment="Left" Grid.ColumnSpan="2"></Image>
-                        </Grid>
-                    </Button>-->
-            <Grid Grid.Row="1" >
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="26"></RowDefinition>
-                    <RowDefinition Height="390"></RowDefinition>
-                    <RowDefinition Height="200"></RowDefinition>
-                </Grid.RowDefinitions>
-                <Grid Grid.Row="0">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*"></ColumnDefinition>
-                        <ColumnDefinition Width="280"></ColumnDefinition>
-                        <ColumnDefinition Width="40"></ColumnDefinition>
-                        <ColumnDefinition Width="110"></ColumnDefinition>
-                        <ColumnDefinition Width="110"></ColumnDefinition>
-                    </Grid.ColumnDefinitions>
-                    <Label Grid.Column="0" Content="Filtro de pedidos para facturar" FontWeight="Bold"  HorizontalAlignment="Right" ></Label>
-                    <TextBox Grid.Column="1" Name="txtbuscar" Width="280" HorizontalAlignment="Left" TextChanged="txtbuscar_TextChanged" ></TextBox>
-                    <Button Name="btnrefresh" Style="{DynamicResource NoChromeButton}" HorizontalAlignment="Left"  Grid.Column="2" Cursor="Hand" Grid.ColumnSpan="2" Margin="0,0,0,0" Click="btnrefresh_Click" >
-                        <Button.ToolTip>
-                            <ToolTip>
-                                <StackPanel>
-                                    <TextBlock FontWeight="Bold" TextAlignment="Left" >Panel de refrescado del panel de liquidacion</TextBlock>
-                                    <TextBlock>Actualizar liquidaciones.</TextBlock>
-                                    <TextBlock>No lo presione hasta estar seguro de Actualizar.</TextBlock>
-                                </StackPanel>
-                            </ToolTip>
-                        </Button.ToolTip>
-                        <Grid Width="40">
-                            <Grid.ColumnDefinitions>
-
-                                <ColumnDefinition Width="80*" />
-                            </Grid.ColumnDefinitions>
-                            <Image Margin="0,0,0,0" Source="/Integrado;component/Design/Images/bt_refresh.png" Height="18" Width="18" HorizontalAlignment="Center" Grid.ColumnSpan="2"></Image>
+                            <Image Margin="5,0,0,0" Source="/Integrado;component/Design/Images/lupa.jpg" Width="32" HorizontalAlignment="Left" Grid.ColumnSpan="2"></Image>
+                            <TextBlock Text="Consultar" VerticalAlignment="Center" 
+                                          Margin="0,0,10,0" HorizontalAlignment="Center" Grid.ColumnSpan="2" Grid.Column="1"></TextBlock>
                         </Grid>
                     </Button>
-                    <Button Name="btnreenvio" Cursor="Hand" Content="Reenviar Urbano"  Grid.Column="3" HorizontalAlignment="Left"  Margin="0,0,0,0" Click="btnreenvio_Click" ></Button>
-                    <Button Name="btnimprimirurbano" Cursor="Hand" Content="Imprimir Urbano"  Grid.Column="4" HorizontalAlignment="Left"  Margin="0,0,0,0" Click="btnimprimirurbano_Click" ></Button>
+                    <Label Content="Re-Envio de Solicitud de Servicio a Urbano (Courier)" Grid.Column="3" Grid.ColumnSpan="2" HorizontalAlignment="Left" Grid.Row="1" FontSize="28" FontWeight="Bold" Width="756" Margin="48,0,0,0"></Label>
+                    <Label x:Name="lblTotal" Content="Total: 0 Reg." Grid.Column="4" Grid.Row="3" FontSize="12" FontWeight="Bold" Margin="0,5,50,0" VerticalAlignment="Top" HorizontalAlignment="Right" HorizontalContentAlignment="Right"/>
                 </Grid>
-                <Grid Grid.Row="1" >
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="779*"/>
-                        <ColumnDefinition Width="37*"/>
-                        <ColumnDefinition Width="407*"/>
-                        <ColumnDefinition Width="71*"/>
-                    </Grid.ColumnDefinitions>
-                    <TabControl  x:Name="tabempaque"  HorizontalAlignment="Left" VerticalAlignment="Top"  Margin="0,-31,0,0" Grid.ColumnSpan="4" >
-                        <TabItem Header="Pedidos para facturar" VerticalAlignment="Top" >
-                            <Grid Background="#FFE5E5E5" >
-                                <DataGrid Name="dg1" HorizontalAlignment="Left"  Width="1350"   IsReadOnly="True"   AutoGenerateColumns="False" GridLinesVisibility="All" AlternatingRowBackground="#FFD2F1BB"   >
-                                    <DataGrid.Columns>
-                                        <DataGridTextColumn Binding="{Binding lider}" ClipboardContentBinding="{x:Null}" Header="Lider" >
-                                            <DataGridTextColumn.ElementStyle>
-                                                <Style TargetType="TextBlock">
-                                                    <Setter Property="Background" Value="#FFBEDBF3"></Setter>
-                                                </Style>
-                                            </DataGridTextColumn.ElementStyle>
-                                        </DataGridTextColumn>
-                                        <DataGridTextColumn Binding="{Binding Liq_Id}" ClipboardContentBinding="{x:Null}" Header="Nro.Pedido">
-                                            <DataGridTextColumn.ElementStyle>
-                                                <Style TargetType="TextBlock">
-                                                    <Setter Property="Background" Value="#FFF3CCBE"></Setter>
-                                                </Style>
-                                            </DataGridTextColumn.ElementStyle>
-                                        </DataGridTextColumn>
-                                        <DataGridTextColumn Binding="{Binding Liq_FechaIng}" ClipboardContentBinding="{x:Null}" Header="Fecha"/>
-                                        <DataGridTextColumn Binding="{Binding Liq_EstId}" ClipboardContentBinding="{x:Null}" Header="Estado" >
-                                            <DataGridTextColumn.ElementStyle>
-                                                <Style TargetType="TextBlock">
-                                                    <Setter Property="TextAlignment" Value="Center"></Setter>
-                                                </Style>
-                                            </DataGridTextColumn.ElementStyle>
-                                        </DataGridTextColumn>
-                                        <DataGridTextColumn Binding="{Binding tpares}" ClipboardContentBinding="{x:Null}" Header="Uds.Liq" >
-                                            <DataGridTextColumn.ElementStyle>
-                                                <Style TargetType="TextBlock">
-                                                    <Setter Property="TextAlignment" Value="Center"></Setter>
-                                                </Style>
-                                            </DataGridTextColumn.ElementStyle>
-                                        </DataGridTextColumn>
-                                        <DataGridTextColumn Binding="{Binding cantidadp}" ClipboardContentBinding="{x:Null}" Header="Uds.Emp" >
-                                            <DataGridTextColumn.ElementStyle>
-                                                <Style TargetType="TextBlock">
-                                                    <Setter Property="TextAlignment" Value="Center"></Setter>
-                                                    <Setter Property="Background" Value="#FFF3F3BE"></Setter>
-                                                    <Setter Property="Foreground" Value="#FFD4501D"></Setter>
-                                                </Style>
-                                            </DataGridTextColumn.ElementStyle>
-                                        </DataGridTextColumn>
-                                        <DataGridTextColumn Binding="{Binding Liq_BasId}" ClipboardContentBinding="{x:Null}" Header="Cliente"  />
-                                        <DataGridTextColumn Binding="{Binding nombres}" ClipboardContentBinding="{x:Null}" Header="Nombre"  />
-                                        <DataGridTextColumn Binding="{Binding ubicacion}" ClipboardContentBinding="{x:Null}" Header="Ubicación"  />
-                                        <DataGridTextColumn Binding="{Binding tra_gui_no}" ClipboardContentBinding="{x:Null}" Header="Guia"  />
-                                        <DataGridTextColumn Binding="{Binding tra_descripcion}" ClipboardContentBinding="{x:Null}" Header="Transportadora"  />
-                                        <DataGridTemplateColumn Header="">
-                                            <DataGridTemplateColumn.CellTemplate>
-                                                <DataTemplate>
-                                                    <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
-                                                        <Button Name="btnguia" Style="{DynamicResource NoChromeButton}" Cursor="Hand" Click="btnguia_Click">
-                                                            <Image Source="/Integrado;component/Design/Images/bt_destiny.png" Height="16" Width="16" VerticalAlignment="Bottom" Grid.RowSpan="2">
-                                                            </Image>
-                                                            <Button.ToolTip>
-                                                                <ToolTip>
-                                                                    <StackPanel>
-                                                                        <TextBlock FontWeight="Bold" TextAlignment="Left" >Configurar guia y transportista</TextBlock>
-                                                                        <TextBlock>Configuracion de Correlativo de guia.</TextBlock>
-                                                                        <TextBlock>No lo presione hasta estar seguro de abrir ventana.</TextBlock>
-                                                                    </StackPanel>
-                                                                </ToolTip>
-                                                            </Button.ToolTip>
-                                                        </Button>
-                                                    </StackPanel>
-                                                </DataTemplate>
-                                            </DataGridTemplateColumn.CellTemplate>
-                                        </DataGridTemplateColumn>
-                                        <DataGridTemplateColumn Header="">
-                                            <DataGridTemplateColumn.CellTemplate>
-                                                <DataTemplate>
-                                                    <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
-                                                        <Button Name="btnfacturar" Style="{DynamicResource NoChromeButton}" Cursor="Hand" Click="btnfacturar_Click">
-                                                            <Image Source="/Integrado;component/Design/Images/bt_pack_order.png" Height="16" Width="16" VerticalAlignment="Bottom" Grid.RowSpan="2">
-                                                            </Image>
-                                                            <Button.ToolTip>
-                                                                <ToolTip>
-                                                                    <StackPanel>
-                                                                        <TextBlock FontWeight="Bold" TextAlignment="Left" >Facturacion de pedido</TextBlock>
-                                                                        <TextBlock>Generar facturación.</TextBlock>
-                                                                        <TextBlock>No lo presione hasta estar seguro de abrir ventana.</TextBlock>
-                                                                    </StackPanel>
-                                                                </ToolTip>
-                                                            </Button.ToolTip>
-                                                        </Button>
-                                                    </StackPanel>
-                                                </DataTemplate>
-                                            </DataGridTemplateColumn.CellTemplate>
-                                        </DataGridTemplateColumn>
-                                    </DataGrid.Columns>
-                                </DataGrid>
-                            </Grid>
-                        </TabItem>
-                    </TabControl>
-                </Grid>
-                <Grid Grid.Row="2">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="10"></RowDefinition>
-                        <RowDefinition Height="32"></RowDefinition>
-                        <RowDefinition Height="32"></RowDefinition>
-                        <RowDefinition Height="32"></RowDefinition>
-                        <RowDefinition Height="32"></RowDefinition>
-                    </Grid.RowDefinitions>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="980"></ColumnDefinition>
-                        <ColumnDefinition Width="230"></ColumnDefinition>
-                        <ColumnDefinition Width="100"></ColumnDefinition>
-                    </Grid.ColumnDefinitions>
-                    <Label Content="Número de pedidos" FontWeight="Bold" FontSize="14" Grid.Column="1" Grid.Row="1" ></Label>
-                    <Label Content="Cantidades Totales" FontWeight="Bold" FontSize="14" Grid.Column="1" Grid.Row="2" ></Label>
-                    <Label Content="Cantidades totales empacados" FontWeight="Bold" FontSize="14"  Grid.Column="1" Grid.Row="3" ></Label>
-                    <Label Content="Cantidades restante por empacar" FontWeight="Bold" FontSize="14"  Grid.Column="1" Grid.Row="4" ></Label>
-                    <Label Name="lblnped" Grid.Column="2" Grid.Row="1" Content="0" HorizontalAlignment="Right" FontSize="16" FontWeight="Bold"></Label>
-                    <Label Name="lblcantot" Grid.Column="2" Grid.Row="2" Content="0" HorizontalAlignment="Right" FontSize="16" FontWeight="Bold"></Label>
-                    <Label Name="lblcanemp" Grid.Column="2" Grid.Row="3" Content="0" HorizontalAlignment="Right" FontSize="16" FontWeight="Bold"></Label>
-                    <Label Name="lblresemp" Grid.Column="2" Grid.Row="4" Content="0" HorizontalAlignment="Right" FontSize="16" FontWeight="Bold"></Label>
-                    <dxga:LinearGaugeControl Background="#FFECEAE2" HorizontalAlignment="Left"  Grid.Column="1" Grid.Row="1"  VerticalAlignment="Top" Height="1.5" Margin="4,27,0,0" Width="360" Grid.ColumnSpan="2"/>
-                    <dxga:LinearGaugeControl Background="#FFECEAE2" HorizontalAlignment="Left"  Grid.Column="1" Grid.Row="2"  VerticalAlignment="Top" Height="1.5" Margin="4,27,0,0" Width="360" Grid.ColumnSpan="2"/>
-                    <dxga:LinearGaugeControl Background="#FFECEAE2" HorizontalAlignment="Left"  Grid.Column="1" Grid.Row="3"  VerticalAlignment="Top" Height="1.5" Margin="4,27,0,0" Width="360" Grid.ColumnSpan="2"/>
-                    <dxga:LinearGaugeControl Background="#FFECEAE2" HorizontalAlignment="Left"  Grid.Column="1" Grid.Row="4"  VerticalAlignment="Top" Height="1.5" Margin="4,27,0,0" Width="360" Grid.ColumnSpan="2"/>
+                <Grid Grid.Row="1" Margin="0,0,0,0" VerticalAlignment="Top">
+                    <GroupBox Header="Lista de Facturas y Boletas" HorizontalAlignment="Center" Width="1324" Margin="10,5,10,-391" VerticalAlignment="Center" Height="386" HorizontalContentAlignment="Stretch">
+                        <DataGrid Name="dg1" HorizontalAlignment="Left"  Width="1282" Margin="10,10,0,6"   IsReadOnly="True"   AutoGenerateColumns="False" GridLinesVisibility="All"    >
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Binding="{Binding tipodoc}" ClipboardContentBinding="{x:Null}" Header="Tipo" >
+                                    <DataGridTextColumn.ElementStyle>
+                                        <Style TargetType="TextBlock">
+                                            <Setter Property="Background" Value="#FFBEDBF3"></Setter>
+                                        </Style>
+                                    </DataGridTextColumn.ElementStyle>
+                                </DataGridTextColumn>
+                                <DataGridTextColumn Binding="{Binding numdoc}" ClipboardContentBinding="{x:Null}" Header="Numero">
+                                    <DataGridTextColumn.ElementStyle>
+                                        <Style TargetType="TextBlock">
+                                            <Setter Property="Background" Value="#FFF3CCBE"></Setter>
+                                        </Style>
+                                    </DataGridTextColumn.ElementStyle>
+                                </DataGridTextColumn>
+                                <DataGridTextColumn Binding="{Binding fechadoc}" ClipboardContentBinding="{x:Null}" Header="Fecha"/>
+                                <DataGridTextColumn Binding="{Binding cliente}" ClipboardContentBinding="{x:Null}" Header="Cliente"  />
+                                <DataGridTextColumn Binding="{Binding total, StringFormat=\{0:C2\}}" ClipboardContentBinding="{x:Null}" Header="Total"  >
+                                    <DataGridTextColumn.ElementStyle>
+                                        <Style TargetType="{x:Type TextBlock}">
+                                            <Setter Property="TextAlignment" Value="Right"/>
+                                        </Style>
+                                    </DataGridTextColumn.ElementStyle>
+                                </DataGridTextColumn>
+
+                                <DataGridTemplateColumn Header="Enviar">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+                                                <Button Name="btnenviar" Style="{DynamicResource NoChromeButton}" Cursor="Hand" Click="btnenviar_Click" >
+                                                    <Image Source="/Integrado;component/Design/Images/bt_pack_order.png" Height="16" Width="16" VerticalAlignment="Bottom" Grid.RowSpan="2">
+                                                    </Image>
+                                                    <Button.ToolTip>
+                                                        <ToolTip>
+                                                            <StackPanel>
+                                                                <TextBlock FontWeight="Bold" TextAlignment="Left" >Enviar Pedido</TextBlock>
+                                                                <TextBlock>No lo presione hasta estar seguro de Enviar Pedido.</TextBlock>
+                                                            </StackPanel>
+                                                        </ToolTip>
+                                                    </Button.ToolTip>
+                                                </Button>
+                                            </StackPanel>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+
+
+
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </GroupBox>
+
                 </Grid>
             </Grid>
 
         </Grid>
-
     </DockPanel>
 </Controls:MetroWindow>
