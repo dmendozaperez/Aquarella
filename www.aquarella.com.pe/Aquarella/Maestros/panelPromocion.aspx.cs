@@ -47,8 +47,7 @@ namespace www.aquarella.com.pe.Aquarella.Maestros
         {
             gridFunctions.PageIndex = e.NewPageIndex;
             DataSet data = (DataSet)Session[DSPromociones];
-            data.Tables[0].DefaultView.Sort = "FUN_NOMBRE";
-            gridFunctions.DataSource = data.Tables[0];
+           gridFunctions.DataSource = data.Tables[0];
             gridFunctions.DataBind();
 
         }
