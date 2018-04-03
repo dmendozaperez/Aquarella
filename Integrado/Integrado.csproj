@@ -25,13 +25,13 @@
     <UpdatePeriodically>false</UpdatePeriodically>
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
-    <InstallUrl>http://167.249.8.11/ECOMMERCE/</InstallUrl>
+    <InstallUrl>http://10.10.10.207/ECOMMERCE/</InstallUrl>
     <ProductName>Sistema Facturacion</ProductName>
     <PublisherName>Bata Peru</PublisherName>
     <SuiteName>%28Corporacion Bata%29</SuiteName>
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <WebPage>publish.htm</WebPage>
-    <ApplicationRevision>61</ApplicationRevision>
+    <ApplicationRevision>62</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>true</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
@@ -217,6 +217,9 @@
     <Compile Include="Sistemas\Logistica\DuplicaGuia.xaml.cs">
       <DependentUpon>DuplicaGuia.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Sistemas\Logistica\ImprimeUrbano.xaml.cs">
+      <DependentUpon>ImprimeUrbano.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Sistemas\Logistica\PanelPedidos.xaml.cs">
       <DependentUpon>PanelPedidos.xaml</DependentUpon>
     </Compile>
@@ -234,6 +237,9 @@
     </Compile>
     <Compile Include="Sistemas\Ventas\ConsultaNotaCredito.xaml.cs">
       <DependentUpon>ConsultaNotaCredito.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Sistemas\Ventas\ConsultaUrbano.xaml.cs">
+      <DependentUpon>ConsultaUrbano.xaml</DependentUpon>
     </Compile>
     <Compile Include="Sistemas\Ventas\Efectivo.xaml.cs">
       <DependentUpon>Efectivo.xaml</DependentUpon>
@@ -294,6 +300,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Sistemas\Logistica\ImprimeUrbano.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Sistemas\Logistica\PanelPedidos.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -317,6 +327,10 @@
     <Page Include="Sistemas\Ventas\ConsultaNotaCredito.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Sistemas\Ventas\ConsultaUrbano.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Sistemas\Ventas\Efectivo.xaml">
       <SubType>Designer</SubType>
