@@ -67,67 +67,48 @@ namespace www.bata.aquarella.com.pe.Aquarella.Maestros
         protected void btnAdicionar_Click(object sender, EventArgs e)
         {
             String strMarcaId = DDMarca.SelectedValue;
-            string strArticuloId = dwArticulo.SelectedValue;
+            //string strArticuloId = dwArticulo.SelectedValue;
+            lblError.Text = "";
+            string strArticuloId = txtArticulo.Text;
+            string idMarca = DDMarca.SelectedValue;
+            bool validar = true;
+            strArticuloId = strArticuloId.Trim();
 
-            respuesta = Promocion.insertarMarcaArticulo(_Promo_ID, strMarcaId, strArticuloId);
 
-            if (respuesta)
-            {
-              
-                llenarGrilla();
-            }
+            if (strArticuloId != "")
+                validar = Promocion.BuscarArticuloMarca(idMarca, strArticuloId);
             else
-            {
-               
+                strArticuloId = "99999T";
+
+            if (validar) {
+                respuesta = Promocion.insertarMarcaArticulo(_Promo_ID, strMarcaId, strArticuloId);
+
+                if (respuesta)
+                {
+                    llenarGrilla();
+
+                    lblError.Text = "Se agrego correctamente.";
+                    lblError.ForeColor = System.Drawing.Color.Green;
+                }
             }
+            else {
+                lblError.Text = "Código de Articulo Incorrecto";
+                lblError.ForeColor = System.Drawing.Color.Red;
+            }
+
+        }
+
+        protected void txtArticulo_TextChanged(object sender, EventArgs e)
+        {
+            string articulo = txtArticulo.Text;
         }
 
         protected void DDMarca_SelectedIndexChanged(object sender, EventArgs e)
-        {          
-
-            string  IdMarca = DDMarca.SelectedValue;
-            if (!(DDMarca.SelectedValue == "-1"))
-            {
-                fcombo_Articulo(IdMarca);
-            }
-            else
-            {
-                dwArticulo.Items.Clear();
-               
-                ListItem vlista = new ListItem();
-                vlista.Text = "--Seleccionar de la lista--";
-                vlista.Value = "-1";
-                dwArticulo.Items.Add(vlista);
-                dwArticulo.DataBind();
-                
-            }
-        }
-
-        protected void fcombo_Articulo(string idMarca)
         {
-            try
-            {
-                DataTable dt = Promocion.GetAllArticuloDt(idMarca);
-                dwArticulo.Items.Clear();
-                dwArticulo.Items.Clear();
-                ListItem vlista = new ListItem();
-                vlista.Text = "--Seleccionar de la lista--";
-                vlista.Value = "-1";
-                
-                dwArticulo.Items.Add(vlista);
-                if (dt.Rows.Count > 0)
-                {
-                    ListItem vlista2 = new ListItem();
-                    vlista2.Text = "--Todos--";
-                    vlista2.Value = "99999T";
-                    dwArticulo.Items.Add(vlista2);
-                }
-                dwArticulo.DataSource = dt;
-                dwArticulo.DataBind();
-                
-            }
-            catch (Exception e) { throw new Exception(e.Message, e.InnerException); }
+
+            lblError.Text = "";
         }
+      
 
         protected void GridArticulos_RowCommand(object sender, GridViewCommandEventArgs e)
         {

@@ -131,6 +131,28 @@ namespace www.aquarella.com.pe.bll
             }
         }
 
+        public static bool BuscarArticuloMarca(string idMarca, string idArticulo)
+        {
+           
+            bool valido = true;
+            string sqlquery = "USP_BuscarArticuloMarca";
+            SqlConnection cn = new SqlConnection(Conexion.myconexion());
+            SqlCommand cmd = new SqlCommand(sqlquery, cn);
+            cmd.CommandTimeout = 0;
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.AddWithValue("@marcaId", idMarca);
+            cmd.Parameters.AddWithValue("@articuloId", idArticulo);
+            SqlDataAdapter da = new SqlDataAdapter(cmd);
+            DataSet ds = new DataSet();
+            da.Fill(ds);
+
+            if (ds.Tables[0].Rows.Count == 0)
+                valido = false;
+
+            return valido;
+
+        }
+
         public bool InsertarPromocion()
         {
             string sqlquery = "USP_Insertar_Promocion";
@@ -153,7 +175,7 @@ namespace www.aquarella.com.pe.bll
                 cmd.ExecuteNonQuery();
                 return true;
 
-    }
+            }
             catch (Exception ex)
             {
                 return false;

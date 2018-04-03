@@ -67,13 +67,22 @@ namespace www.bata.aquarella.com.pe.Aquarella.Maestros {
         protected global::System.Web.UI.UpdatePanel UpdatePanel3;
         
         /// <summary>
-        /// Control dwArticulo.
+        /// Control txtArticulo.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList dwArticulo;
+        protected global::System.Web.UI.WebControls.TextBox txtArticulo;
+        
+        /// <summary>
+        /// Control lblError.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblError;
         
         /// <summary>
         /// Control btnAdicionar.

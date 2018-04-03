@@ -8,6 +8,8 @@
     <script src="../../Scripts/Colorbox/jquery.colorbox.js" type="text/javascript"></script>
     <script type="text/javascript">
         $(document).ready(function () {
+
+
             $(".iframe").colorbox({ width: "40%", height: "80%", iframe: true });
             $("#tabs").tabs({
                 collapsible: true
@@ -51,22 +53,33 @@
         }
 
         function updatePromocionAjax(Ofe_Id) {
-            $.ajax({
-                type: "POST",
-                data: "{  'promo_id': '" + Ofe_Id + "','Ofe_Descripcion': '" + $("#ContentPlaceHolder1_txtDesPromo").val() + "','Ofe_MaxPares': '" + $("#ContentPlaceHolder1_txtparProm").val() + "','Ofe_Porc': '" + $("#ContentPlaceHolder1_txtporcPromo").val() + "','FechaIni': '" + $("#ContentPlaceHolder1_txtiniPromo").val() + "','FechaFin': '" + $("#ContentPlaceHolder1_txtfinPromo").val() + "'}",
-                url: "panelPromocion.aspx/ajaxUpdatePromocion",
-                contentType: "application/json; charset=utf-8",
-                dataType: "json",
-                success: function (result) {
-                    if (result.d == new String("1")) {
-                        $('#dialog').dialog("close");
-                    }
-                    else {
-                        alert("Ocurrio un error durante la acutalizacion");
-                    }
-                },
-                error: function (result) { alert("A ocurrido un error y no se han realizado los cambios, verifique que su sesión no haya expirado, e intente de nuevo." + result); }
-            });
+
+            var descripcion = $("#ContentPlaceHolder1_txtDesPromo").val();
+            var par = $("#ContentPlaceHolder1_txtparProm").val();
+            var porc = $("#ContentPlaceHolder1_txtporcPromo").val();
+
+            if (descripcion == "" || par == "" || porc == "") {
+                alert("Ingresar datos requeridos (*).")
+            } else { 
+
+
+                $.ajax({
+                    type: "POST",
+                    data: "{  'promo_id': '" + Ofe_Id + "','Ofe_Descripcion': '" + $("#ContentPlaceHolder1_txtDesPromo").val() + "','Ofe_MaxPares': '" + $("#ContentPlaceHolder1_txtparProm").val() + "','Ofe_Porc': '" + $("#ContentPlaceHolder1_txtporcPromo").val() + "','FechaIni': '" + $("#ContentPlaceHolder1_txtiniPromo").val() + "','FechaFin': '" + $("#ContentPlaceHolder1_txtfinPromo").val() + "'}",
+                    url: "panelPromocion.aspx/ajaxUpdatePromocion",
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    success: function (result) {
+                        if (result.d == new String("1")) {
+                            $('#dialog').dialog("close");
+                        }
+                        else {
+                            alert("Ocurrio un error durante la acutalizacion");
+                        }
+                    },
+                    error: function (result) { alert("A ocurrido un error y no se han realizado los cambios, verifique que su sesión no haya expirado, e intente de nuevo." + result); }
+                });
+            }
         }
 
         function removeFieldsErrors() {
@@ -151,8 +164,9 @@
                         <asp:TextBox ID="txtPorc" runat="server" Width="260px" />
                     </td>
                     <td style="color:red">
-                        <asp:RegularExpressionValidator ID="RegexDecimal" runat="server"  ValidationGroup="Nuevo"  ValidationExpression="((\d+)((\.\d{1,2})?))$" ErrorMessage="Ingrese porcentaje Valido" ControlToValidate="txtPorc" />
                         <asp:RequiredFieldValidator ID="RequiredFieldValidator7" ValidationGroup="Nuevo"  runat="server" ErrorMessage="*" ControlToValidate="txtPorc"></asp:RequiredFieldValidator>
+                        <asp:RegularExpressionValidator ID="RegexDecimal" runat="server"  ValidationGroup="Nuevo"  ValidationExpression="((\d+)((\.\d{1,2})?))$" ErrorMessage="Ingrese porcentaje Valido" ControlToValidate="txtPorc" />
+                        
 
                     </td>
                 </tr>
@@ -190,13 +204,8 @@
                     <td>
                                            
                     </td>
-                    <td>
-                                <asp:RequiredFieldValidator ValidationGroup="Nuevo"  ID="rfvDateStart" runat="server"
-                                    ToolTip="Fecha de inicio" CssClass="error_asterisck" ErrorMessage="Dígite fecha inicial"
-                                    Display="Dynamic" SetFocusOnError="true" ControlToValidate="txtDateStart">*</asp:RequiredFieldValidator>
-                                <asp:CompareValidator ID="cvDateStart" runat="server" ValidationGroup="Nuevo"
-                                    Type="Date" SetFocusOnError="true" CssClass="error_asterisck" ControlToValidate="txtDateStart"
-                                    Operator="DataTypeCheck" ErrorMessage="Dígite una fecha válida">*</asp:CompareValidator>
+                    <td>                               
+                               
                 </td>
                 </tr>
                 <tr>
@@ -224,20 +233,8 @@
                                  <asp:RequiredFieldValidator ID="RequiredFieldValidator9"  ValidationGroup="Nuevo"  runat="server" ErrorMessage="*" ControlToValidate="txtDateEnd"></asp:RequiredFieldValidator>
                             </td>
                                 <td>
-                                 <asp:RequiredFieldValidator ID="rfvDateEnd"  ValidationGroup="Nuevo"  runat="server" 
-                                     ControlToValidate="txtDateEnd" CssClass="error_asterisck" Display="Dynamic" 
-                                     ErrorMessage="Dígite fecha final*" SetFocusOnError="true" ToolTip="Fecha final" 
-                                    >*</asp:RequiredFieldValidator>
-                                 <asp:CompareValidator ID="cvDateEnd"  ValidationGroup="Nuevo" runat="server" 
-                                     ControlToValidate="txtDateEnd" CssClass="error_asterisck" 
-                                     ErrorMessage="Dígite una fecha final válida" Operator="DataTypeCheck" 
-                                     SetFocusOnError="true" Type="Date" >*</asp:CompareValidator>
-                                 <asp:CompareValidator ID="cvDateStartDateEnd" runat="server" 
-                                     ControlToCompare="txtDateStart" ControlToValidate="txtDateEnd" 
-                                     CssClass="error_asterisck" 
-                                     ErrorMessage="Dígite una fecha final superior a la fecha inicial" 
-                                     Operator="GreaterThanEqual" SetFocusOnError="true" Type="Date" 
-                                      ValidationGroup="Nuevo" >*</asp:CompareValidator>
+                                
+                         
                             </td> 
                             </tr>
                             </table>
@@ -249,12 +246,7 @@
                                            
                     </td>
                     <td>
-                                <asp:RequiredFieldValidator  ValidationGroup="Nuevo"  ID="RequiredFieldValidator1" runat="server"
-                                    ToolTip="Fecha de inicio" CssClass="error_asterisck" ErrorMessage="Dígite fecha inicial"
-                                    Display="Dynamic" SetFocusOnError="true" ControlToValidate="txtDateStart">*</asp:RequiredFieldValidator>
-                                <asp:CompareValidator ID="CompareValidator1" runat="server"  ValidationGroup="Nuevo" 
-                                    Type="Date" SetFocusOnError="true" CssClass="error_asterisck" ControlToValidate="txtDateStart"
-                                    Operator="DataTypeCheck" ErrorMessage="Dígite una fecha válida">*</asp:CompareValidator>
+                               
                 </td>
                 </tr>
         
@@ -320,7 +312,7 @@
                     <td>
                         <asp:TextBox ID="txtDesPromo" runat="server" Width="260px" />
                     </td>
-                    <td>
+                    <td style="color:red">
                         <asp:RequiredFieldValidator ID="RequiredFieldValidator2" ValidationGroup="upd"  runat="server" ErrorMessage="*" ControlToValidate="txtDesPromo"></asp:RequiredFieldValidator>
                     </td>
                 </tr>
@@ -343,7 +335,7 @@
                         <asp:TextBox ID="txtporcPromo" runat="server" Width="260px" />
                     </td>
                      <td style="color:red">
-                        <asp:RegularExpressionValidator ID="RegularExpressionValidator1" runat="server" ValidationGroup="upd"   ValidationExpression="((\d+)((\.\d{1,2})?))$" ErrorMessage="Ingrese porcentaje Valido" ControlToValidate="txtporcPromo" />
+                        <asp:RegularExpressionValidator ID="RegularExpressionValidator1" runat="server" ValidationGroup="upd"   ValidationExpression="((\d+)((\.\d{1,2})?))$" ErrorMessage="*" ControlToValidate="txtporcPromo" />
                         <asp:RequiredFieldValidator ID="RequiredFieldValidator10" runat="server" ValidationGroup="upd"   ErrorMessage="*" ControlToValidate="txtporcPromo"></asp:RequiredFieldValidator>
 
                     </td>
