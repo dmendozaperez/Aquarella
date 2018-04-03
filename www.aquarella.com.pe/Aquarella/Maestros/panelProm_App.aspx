@@ -34,7 +34,7 @@
                 <div class="ui-dialog-titlebar ui-widget-header ui-corner-all ui-helper-clearfix" style="font-size:10px">
                     <span class="ui-dialog-title" id="ui-dialog-title-dialog">
                         <br/>
-                        Agregar Articulos a la Promoción
+                        Agregar Articulos a la Promoción : "<asp:Label ID="lblTitulo" runat="server" Text="Label"></asp:Label>"
                         <br/>
                     </span>
 
