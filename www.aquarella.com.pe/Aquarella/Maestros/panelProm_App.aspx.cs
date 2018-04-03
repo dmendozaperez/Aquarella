@@ -14,7 +14,7 @@ namespace www.bata.aquarella.com.pe.Aquarella.Maestros
     {
         private Users _user;
 
-        public string _FUV_CO { get; set; }
+        public string _TITULO { get; set; }
         public string _Estado_ID { get; set; }
         public int _Promo_ID { get; set; }
         public decimal _APN_ID { get; set; }
@@ -32,7 +32,8 @@ namespace www.bata.aquarella.com.pe.Aquarella.Maestros
 
             _Promo_ID = Convert.ToInt32(Request.QueryString["PROM_ID"]);
             _Estado_ID = Request.QueryString["ESTADO"];
-
+            _TITULO = Request.QueryString["TITULO"];
+            lblTitulo.Text = _TITULO;
 
             if (!IsPostBack)
             {

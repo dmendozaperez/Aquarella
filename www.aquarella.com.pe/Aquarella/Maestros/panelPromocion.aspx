@@ -45,11 +45,7 @@
                 }
             }]
             });
-            if (estadoId == 'I') {
-                document.getElementById('botonActualizar').style.display= 'none';
-            }
-            
-
+       
         }
 
         function updatePromocionAjax(Ofe_Id) {
