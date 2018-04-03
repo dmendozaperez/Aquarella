@@ -72,23 +72,45 @@ namespace www.bata.aquarella.com.pe.Aquarella.Maestros
             string strArticuloId = txtArticulo.Text;
             string idMarca = DDMarca.SelectedValue;
             bool validar = true;
+            bool validarMarca = true;
             strArticuloId = strArticuloId.Trim();
 
 
             if (strArticuloId != "")
-                validar = Promocion.BuscarArticuloMarca(idMarca, strArticuloId);
+                validar = Promocion.BuscarArticuloMarca(_Promo_ID,idMarca, strArticuloId);
             else
-                strArticuloId = "99999T";
-
-            if (validar) {
-                respuesta = Promocion.insertarMarcaArticulo(_Promo_ID, strMarcaId, strArticuloId);
-
-                if (respuesta)
+            {
+                foreach (GridViewRow row in GridArticulos.Rows)
                 {
-                    llenarGrilla();
 
-                    lblError.Text = "Se agrego correctamente.";
-                    lblError.ForeColor = System.Drawing.Color.Green;
+                    string valor = row.Cells[0].Text;
+                    if (valor == strMarcaId)
+                        validarMarca = false;
+                }
+
+                if (!(validarMarca))
+                {
+                    lblError.Text = "Debe digitar Codigo de Articulo.";
+                    lblError.ForeColor = System.Drawing.Color.Red;
+                }
+                else {
+                    strArticuloId = "999999T";
+                }
+            }
+                
+             if (validar) {
+
+                if (validarMarca)
+                {
+                    respuesta = Promocion.insertarMarcaArticulo(_Promo_ID, strMarcaId, strArticuloId);
+
+                    if (respuesta)
+                    {
+                        llenarGrilla();
+
+                        lblError.Text = "Se agrego correctamente.";
+                        lblError.ForeColor = System.Drawing.Color.Green;
+                    }
                 }
             }
             else {

@@ -131,23 +131,30 @@ namespace www.aquarella.com.pe.bll
             }
         }
 
-        public static bool BuscarArticuloMarca(string idMarca, string idArticulo)
+        public static bool BuscarArticuloMarca(int idOferta,string idMarca, string idArticulo)
         {
            
             bool valido = true;
             string sqlquery = "USP_BuscarArticuloMarca";
-            SqlConnection cn = new SqlConnection(Conexion.myconexion());
-            SqlCommand cmd = new SqlCommand(sqlquery, cn);
-            cmd.CommandTimeout = 0;
-            cmd.CommandType = CommandType.StoredProcedure;
-            cmd.Parameters.AddWithValue("@marcaId", idMarca);
-            cmd.Parameters.AddWithValue("@articuloId", idArticulo);
-            SqlDataAdapter da = new SqlDataAdapter(cmd);
-            DataSet ds = new DataSet();
-            da.Fill(ds);
+            try
+            {
+                SqlConnection cn = new SqlConnection(Conexion.myconexion());
+                SqlCommand cmd = new SqlCommand(sqlquery, cn);
+                cmd.CommandTimeout = 0;
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@PromoId", idOferta);
+                cmd.Parameters.AddWithValue("@marcaId", idMarca);
+                cmd.Parameters.AddWithValue("@articuloId", idArticulo);
+                SqlDataAdapter da = new SqlDataAdapter(cmd);
+                DataSet ds = new DataSet();
+                da.Fill(ds);
 
-            if (ds.Tables[0].Rows.Count == 0)
+                if (ds.Tables[0].Rows.Count == 0)
+                    valido = false;
+            }
+            catch (Exception ex) {
                 valido = false;
+            }
 
             return valido;
 
