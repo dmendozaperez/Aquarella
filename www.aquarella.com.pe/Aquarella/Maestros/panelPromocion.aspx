@@ -292,7 +292,7 @@
                     <asp:TemplateField HeaderText="ver Articulos">
                         <ItemTemplate>
                             <center>
-                                <a class="iframe" href="panelProm_App.aspx?PROM_ID=<%# Eval("Ofe_Id")%>&PROM_DESCRIPCION=<%# Eval("Ofe_Descripcion") %>&ESTADO=<%# Eval("estadoId")%>"
+                                <a class="iframe" href="panelProm_App.aspx?PROM_ID=<%# Eval("Ofe_Id")%>&PROM_DESCRIPCION=<%# Eval("Ofe_Descripcion") %>&ESTADO=<%# Eval("estadoId")%>&TITULO=<%# Eval("Ofe_Descripcion")%>"
                                  title="Adicionar un articulo a la promocion.">
                                     <asp:Image ID="Image2" ImageUrl="~/Design/images/Botones/b_app.png" runat="server" />
                                 </a>
