@@ -190,7 +190,7 @@ namespace www.aquarella.com.pe.bll
 
         }
 
-        public static bool updatePromocion(int promo_id, string Ofe_Descripcion, string Ofe_MaxPares, string Ofe_Porc, string FechaIni, string FechaFin)
+        public static bool updatePromocion(int promo_id, string Ofe_Descripcion, string Ofe_MaxPares, string Ofe_Porc, string FechaIni, string FechaFin, int IdUser)
         {
             SqlConnection cn = null;
             SqlCommand cmd = null;
@@ -207,7 +207,8 @@ namespace www.aquarella.com.pe.bll
                 cmd.Parameters.AddWithValue("@prom_porcentaje", Ofe_Porc);
                 cmd.Parameters.AddWithValue("@prom_pares", Ofe_MaxPares);
                 cmd.Parameters.AddWithValue("@prom_FecIni", FechaIni);
-                cmd.Parameters.AddWithValue("@prom_FecFin", FechaFin);
+                cmd.Parameters.AddWithValue("@prom_FecFin", FechaFin); 
+                cmd.Parameters.AddWithValue("@prom_usuario", IdUser);
 
                 cmd.ExecuteNonQuery();
                 return true;

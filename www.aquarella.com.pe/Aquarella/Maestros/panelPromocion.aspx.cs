@@ -14,7 +14,7 @@ namespace www.aquarella.com.pe.Aquarella.Maestros
 {
     public partial class panelPromocion : System.Web.UI.Page
     {
-        private Users _user;
+        private static Users _user;
 
         private bool respuesta;
 
@@ -42,7 +42,7 @@ namespace www.aquarella.com.pe.Aquarella.Maestros
             gridFunctions.DataBind();
             Session[DSPromociones] = data;
         }
-
+             
         protected void gridFunctions_PageIndexChanging(object sender, GridViewPageEventArgs e)
         {
             gridFunctions.PageIndex = e.NewPageIndex;
@@ -97,12 +97,15 @@ namespace www.aquarella.com.pe.Aquarella.Maestros
         [WebMethod()]
         public static string ajaxUpdatePromocion(int promo_id, string Ofe_Descripcion, string Ofe_MaxPares, string Ofe_Porc, string FechaIni, string FechaFin)
         {
-            
-            bool respuesta = Promocion.updatePromocion(promo_id, Ofe_Descripcion, Ofe_MaxPares, Ofe_Porc, FechaIni, FechaFin);
+
+            Int16 idUser = Convert.ToInt16(_user._usn_userid);
+
+            bool respuesta = Promocion.updatePromocion(promo_id, Ofe_Descripcion, Ofe_MaxPares, Ofe_Porc, FechaIni, FechaFin, idUser);
 
             if (respuesta)
             {
                 return "1";
+       
             }
             else
                 return "-1";

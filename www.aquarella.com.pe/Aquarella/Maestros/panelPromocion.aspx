@@ -17,6 +17,13 @@
             $('#tabs').tabs('select', '#tab-1'); // Para seleccionar el tab 1 y que este colapsado el panel de insercion de rol 
         });
 
+        function pageLoad() {
+            var isAsyncPostback = Sys.WebForms.PageRequestManager.getInstance().get_isInAsyncPostBack();
+            
+
+
+        }
+
         function numbersonly(e) {
             var unicode = e.charCode ? e.charCode : e.keyCode
             if (unicode != 8 && unicode != 44) {
@@ -45,6 +52,7 @@
                 }
             }]
             });
+
        
         }
 
@@ -75,7 +83,12 @@
                     },
                     error: function (result) { alert("A ocurrido un error y no se han realizado los cambios, verifique que su sesión no haya expirado, e intente de nuevo." + result); }
                 });
+
+                window.location.href = "panelPromocion.aspx"
+            
             }
+
+           
         }
 
         function removeFieldsErrors() {
