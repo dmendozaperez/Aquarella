@@ -241,6 +241,7 @@
     <Content Include="Aquarella\Logistica\stockForm.aspx" />
     <Content Include="Aquarella\Maestros\informationarticle.aspx" />
     <Content Include="Aquarella\Maestros\Lista_PreciosAQ.aspx" />
+    <Content Include="Aquarella\Maestros\panelComisiones.aspx" />
     <Content Include="Aquarella\Maestros\panelProm_App.aspx" />
     <Content Include="Aquarella\Maestros\panelPromocion.aspx" />
     <Content Include="Aquarella\Maestros\updateprecioarticle.aspx" />
@@ -263,6 +264,7 @@
     <Content Include="Aquarella\Ventas\reportventaxtallastk.aspx" />
     <Content Include="Aquarella\Ventas\resumventas.aspx" />
     <Content Include="Aquarella\Ventas\returnArticlesForm.aspx" />
+    <Content Include="Aquarella\Ventas\rptComisiones.aspx" />
     <Content Include="Aquarella\Ventas\rptComisionLider.aspx" />
     <Content Include="Aquarella\Ventas\rptcomisionlider_xdoc.aspx" />
     <Content Include="Aquarella\Ventas\rptVentaLider.aspx" />
@@ -1356,6 +1358,13 @@
     <Compile Include="Aquarella\Maestros\Lista_PreciosAQ.aspx.designer.cs">
       <DependentUpon>Lista_PreciosAQ.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Aquarella\Maestros\panelComisiones.aspx.cs">
+      <DependentUpon>panelComisiones.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Aquarella\Maestros\panelComisiones.aspx.designer.cs">
+      <DependentUpon>panelComisiones.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Aquarella\Maestros\panelProm_App.aspx.cs">
       <DependentUpon>panelProm_App.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -1515,6 +1524,13 @@
     </Compile>
     <Compile Include="Aquarella\Ventas\returnArticlesForm.aspx.designer.cs">
       <DependentUpon>returnArticlesForm.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Aquarella\Ventas\rptComisiones.aspx.cs">
+      <DependentUpon>rptComisiones.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Aquarella\Ventas\rptComisiones.aspx.designer.cs">
+      <DependentUpon>rptComisiones.aspx</DependentUpon>
     </Compile>
     <Compile Include="Aquarella\Ventas\rptComisionLider.aspx.cs">
       <DependentUpon>rptComisionLider.aspx</DependentUpon>

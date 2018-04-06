@@ -58,7 +58,34 @@ namespace www.aquarella.com.pe.Bll.Ventas
                 cmd = new SqlCommand(sqlquery, cn);
                 cmd.CommandTimeout = 0;
                 cmd.CommandType = CommandType.StoredProcedure;
-                cmd.Parameters.AddWithValue("@are_id", _idlider);
+                //cmd.Parameters.AddWithValue("@are_id", _idlider);
+                cmd.Parameters.AddWithValue("@fecha_ini", _fechaini);
+                cmd.Parameters.AddWithValue("@fecha_fin", _fechafin);
+                da = new SqlDataAdapter(cmd);
+                ds = new DataSet();
+                da.Fill(ds);
+            }
+            catch
+            {
+                ds = null;
+            }
+            return ds;
+        }
+
+        public static DataSet _reportecomisionbono(DateTime _fechaini, DateTime _fechafin)
+        {
+            string sqlquery = "USP_Reporte_Comision";
+            SqlConnection cn = null;
+            SqlCommand cmd = null;
+            SqlDataAdapter da = null;
+            DataSet ds = null;
+            try
+            {
+                cn = new SqlConnection(Conexion.myconexion());
+                cmd = new SqlCommand(sqlquery, cn);
+                cmd.CommandTimeout = 0;
+                cmd.CommandType = CommandType.StoredProcedure;
+                //cmd.Parameters.AddWithValue("@are_id", _idlider);
                 cmd.Parameters.AddWithValue("@fecha_ini", _fechaini);
                 cmd.Parameters.AddWithValue("@fecha_fin", _fechafin);
                 da = new SqlDataAdapter(cmd);
