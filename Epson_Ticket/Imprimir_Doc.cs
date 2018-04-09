@@ -141,13 +141,16 @@ namespace Epson_Ticket
                                 double mtoigv = 0;
                                 if (Ent_Global._canal_venta== "BA")
                                 {
+                                    /*
                                     decimal _igv_monto = Convert.ToDecimal(dt.Rows[0]["ven_igv"].ToString());
-                                    dSubtotal = Math.Round(dSubtotal, 1, MidpointRounding.AwayFromZero);
+                                    dSubtotal = Math.Round(dSubtotal, 2, MidpointRounding.AwayFromZero);
                                     //mtoigv = Math.Round(((Double.Parse(dSubtotal.ToString()) - Convert.ToDouble(descuento)) + Convert.ToDouble(_costo_envio) ) * double.Parse(_igv.ToString()), 1, MidpointRounding.AwayFromZero);
-                                    mtoigv = Math.Round(Double.Parse(_igv_monto.ToString()), 1, MidpointRounding.AwayFromZero);
+                                    mtoigv = Math.Round(Double.Parse(_igv_monto.ToString()), 2, MidpointRounding.AwayFromZero);
+                                    */
+                                    mtoigv = Math.Round((Double.Parse(dSubtotal.ToString()) - Convert.ToDouble(descuento)) * double.Parse(_igv.ToString()), 2, MidpointRounding.AwayFromZero);
                                 }
                                 else
-                                { 
+                                {
                                     mtoigv = Math.Round((Double.Parse(dSubtotal.ToString()) - Convert.ToDouble(descuento)) * double.Parse(_igv.ToString()), 2, MidpointRounding.AwayFromZero);
                                 }
                                 Int32 porcigv = Convert.ToInt32((_igv * 100));
@@ -367,7 +370,10 @@ namespace Epson_Ticket
                                     descuento += _comision;
                                 }
 
-                                double mtoigv = Math.Round((Double.Parse(dSubtotal.ToString()) - Convert.ToDouble(descuento)) * double.Parse(_igv.ToString()), 2, MidpointRounding.AwayFromZero);
+                                double mtoigv = 0;
+                                
+                                mtoigv = Math.Round((Double.Parse(dSubtotal.ToString()) - Convert.ToDouble(descuento)) * double.Parse(_igv.ToString()), 2, MidpointRounding.AwayFromZero);
+
                                 Int32 porcigv = Convert.ToInt32((_igv * 100));
                                 decimal totalpagar = ((dSubtotal - descuento) + Convert.ToDecimal(mtoigv));
 

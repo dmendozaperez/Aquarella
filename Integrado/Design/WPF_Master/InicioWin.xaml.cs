@@ -30,7 +30,7 @@ namespace Integrado.Design.WPF_Master
     /// </summary>
     public partial class InicioWin : MetroWindow
     {
-        private string _server,_base_datos,_user,_password;
+        private string _server, _base_datos, _user, _password;
         public InicioWin()
         {
             InitializeComponent();
@@ -67,7 +67,7 @@ namespace Integrado.Design.WPF_Master
 
             Boolean ini_mod = false;
             Ent_Global._canal_venta = "AQ";
-            inicia_modulo(_server, _base_datos, _user, _password,ref ini_mod);
+            inicia_modulo(_server, _base_datos, _user, _password, ref ini_mod);
 
             if (ini_mod) _referenciar_Base_Datos("AQ");
             Mouse.OverrideCursor = null;
@@ -76,7 +76,12 @@ namespace Integrado.Design.WPF_Master
         private void btnbata_Click(object sender, RoutedEventArgs e)
         {
             Mouse.OverrideCursor = Cursors.Wait;
-            _server = "ecommerce.bgr.pe";
+            /*_server = "ecommerce.bgr.pe";
+            _base_datos = "BD_ECOMMERCE";
+            _user = "ecommerce";
+            _password = "Bata2018.*@=?++";*/
+
+            _server = "200.60.109.28";
             _base_datos = "BD_ECOMMERCE";
             _user = "ecommerce";
             _password = "Bata2018.*@=?++";
@@ -113,13 +118,13 @@ namespace Integrado.Design.WPF_Master
         /// Color de acento
         /// </summary>
         /// <param name="color"></param>
-        private void accent_metro(string color="B")
+        private void accent_metro(string color = "B")
         {
             try
             {
                 Accent accent = null;
-                if (color!="B")
-                { 
+                if (color != "B")
+                {
                     accent = new Accent("Red", new Uri("pack://application:,,,/MahApps.Metro;component/Styles/Accents/Red.xaml", UriKind.RelativeOrAbsolute));
                 }
                 else
@@ -134,7 +139,7 @@ namespace Integrado.Design.WPF_Master
             catch (Exception)
             {
 
-                
+
             }
         }
         private void _referenciar_Base_Datos(string _base)
@@ -148,8 +153,8 @@ namespace Integrado.Design.WPF_Master
                     accent_metro();
                     Ent_Global._modulo_activo = _base;
                     Ent_Global._nom_modulo = "Sistema Aquarella";
-                   
-                    OpcionesMenu frm = new OpcionesMenu();                    
+
+                    OpcionesMenu frm = new OpcionesMenu();
                     frm.Show();
                     this.Close();
                     break;
@@ -165,7 +170,7 @@ namespace Integrado.Design.WPF_Master
             }
         }
 
-        private void inicia_modulo(string _server,string _base,string _user,string _password,ref Boolean _ini)
+        private void inicia_modulo(string _server, string _base, string _user, string _password, ref Boolean _ini)
         {
             try
             {
@@ -173,7 +178,7 @@ namespace Integrado.Design.WPF_Master
                 Ent_Conexion._server = _server;
                 Ent_Conexion._user = _user;
                 Ent_Conexion._password = _password;
-              
+
                 string _error = "";
                 Basico.copiar_archivo_config(ref _error);
                 if (_error.Length > 0)
@@ -197,7 +202,7 @@ namespace Integrado.Design.WPF_Master
                 _ini = inicio_config;
                 if (!inicio_config)
                 {
-                    
+
                     //btnaquarella.IsEnabled = false;
                     lblconfig.Content = "!El Entorno del sistema no esta configurado correctamente ó la conexion esta cerrada";
                 }
@@ -208,7 +213,7 @@ namespace Integrado.Design.WPF_Master
                 throw;
             }
         }
-     
+
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             accent_metro();

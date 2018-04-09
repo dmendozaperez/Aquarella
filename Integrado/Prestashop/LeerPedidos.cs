@@ -468,7 +468,8 @@ namespace Integrado.Prestashop
                             if (saldo!=0)
                             {
                                 items_det[0]._commission = items_det[0]._commission - saldo;
-
+                                // ¨****** Verificar
+                                // Cambiar si el Saldo es diferente de 0,sumarlo al Pet_Det_Precio (dtl._price) 
                             }
 
                             #endregion
