@@ -128,8 +128,8 @@ namespace www.aquarella.com.pe.Aquarella.Ventas
 
         protected void ibExportToExcel_Click(object sender, ImageClickEventArgs e)
         {
-
-            ExportarExcel();
+            DataTable dt = (DataTable)Session[_nameSessionData];
+            ExportarExcel(dt,"0","2", "comisione_bono_xlider");
 
         }
 
@@ -150,18 +150,17 @@ namespace www.aquarella.com.pe.Aquarella.Ventas
         }
 
 
-        private void ExportarExcel()
-        {
-
-            DataTable dt = (DataTable)Session[_nameSessionData];
+        private void ExportarExcel(DataTable dt, string ColumnasOcultas, string ColumnasTexto,string NombreArchivo)
+        {           
 
             StringBuilder sb = new StringBuilder();
             StringWriter sw = new StringWriter(sb);
             HtmlTextWriter htw = new HtmlTextWriter(sw);
             String style = style = @"<style> .textmode { mso-number-format:\@; } </script> ";
             Page page = new Page();
-
             String inicio;
+            ColumnasOcultas = ',' + ColumnasOcultas + ",";
+            ColumnasTexto = ',' + ColumnasTexto + ",";
 
             Style stylePrueba = new Style();
             stylePrueba.Width = Unit.Pixel(200);
@@ -170,7 +169,15 @@ namespace www.aquarella.com.pe.Aquarella.Ventas
             strRowsHead = strRowsHead + "<tr height=38 >";
             for (int i = 0; i < dt.Columns.Count; i++)
             {
+                bool ocultar = false;
+                string comp = "," + i.ToString() + ",";
 
+                if (ColumnasOcultas != ",,")
+                {
+                    ocultar = ColumnasOcultas.Contains(comp);
+                }
+
+                if (!ocultar)
                 strRowsHead = strRowsHead + "<td height=38  bgcolor='#969696' width='38'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" + dt.Columns[i].ColumnName + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</ td > ";
             }
 
@@ -181,12 +188,26 @@ namespace www.aquarella.com.pe.Aquarella.Ventas
                 strRows = strRows + "<tr height='38' >";
                 for (int i = 0; i < dt.Columns.Count; i++)
                 {
+                    bool ocultar = false;
+                    string comp = "," + i.ToString() + ",";
                     string strClass = "";
 
-                    if (i == 2)
-                        strClass = " class='textmode'";
+                    if (ColumnasTexto != ",,")
+                    {
+                        
+                        if (ColumnasTexto.Contains(comp))
+                            strClass = " class='textmode'";
+                    }
 
-                    strRows = strRows + "<td width='400' "+ strClass + " >" + row[i].ToString() + "</ td > ";
+                    if (ColumnasOcultas != ",,")
+                    {
+                      
+                        ocultar = ColumnasOcultas.Contains(comp);
+
+                    }
+
+                    if (!ocultar)
+                        strRows = strRows + "<td width='400' "+ strClass + " >" + row[i].ToString() + "</ td > ";
                }
 
                 strRows = strRows + "</tr>";
@@ -206,7 +227,7 @@ namespace www.aquarella.com.pe.Aquarella.Ventas
             Response.Clear();
             Response.Buffer = true;
             Response.ContentType = "application/vnd.ms-excel";
-            Response.AddHeader("Content-Disposition", "attachment;filename=comisione_bono_xlider.xls");
+            Response.AddHeader("Content-Disposition", "attachment;filename="+ NombreArchivo + ".xls");
             Response.Charset = "UTF-8";
             Response.ContentEncoding = Encoding.Default;
             Response.Write(style);
