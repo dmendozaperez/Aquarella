@@ -158,7 +158,7 @@ namespace www.aquarella.com.pe.Aquarella.Ventas
             StringBuilder sb = new StringBuilder();
             StringWriter sw = new StringWriter(sb);
             HtmlTextWriter htw = new HtmlTextWriter(sw);
-
+            String style = style = @"<style> .textmode { mso-number-format:\@; } </script> ";
             Page page = new Page();
 
             String inicio;
@@ -181,7 +181,12 @@ namespace www.aquarella.com.pe.Aquarella.Ventas
                 strRows = strRows + "<tr height='38' >";
                 for (int i = 0; i < dt.Columns.Count; i++)
                 {
-                    strRows = strRows + "<td width='400'   >" + row[i].ToString() + "</ td > ";
+                    string strClass = "";
+
+                    if (i == 2)
+                        strClass = " class='textmode'";
+
+                    strRows = strRows + "<td width='400' "+ strClass + " >" + row[i].ToString() + "</ td > ";
                }
 
                 strRows = strRows + "</tr>";
@@ -204,6 +209,7 @@ namespace www.aquarella.com.pe.Aquarella.Ventas
             Response.AddHeader("Content-Disposition", "attachment;filename=comisione_bono_xlider.xls");
             Response.Charset = "UTF-8";
             Response.ContentEncoding = Encoding.Default;
+            Response.Write(style);
             Response.Write(sb.ToString());
             Response.End();
         }
