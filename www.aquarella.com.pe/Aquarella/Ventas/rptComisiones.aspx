@@ -167,6 +167,7 @@ CodeBehind="rptComisiones.aspx.cs" Inherits="www.aquarella.com.pe.Aquarella.Vent
                   <asp:GridView ID="gvReturns" runat="server" AllowSorting="True" 
                     ShowFooter="True" AllowPaging="True" PageSize="12"
                  SkinID="gridviewSkin" PagerStyle-HorizontalAlign="Left" Font-Size="Small" 
+                      OnPageIndexChanging="gvReturns_PageIndexChanging" 
                     CellPadding="4" ForeColor="#333333" GridLines="None" Width="1072px" 
                     AutoGenerateColumns="False">
                     <FooterStyle BackColor="#507CD1" Font-Bold="True" ForeColor="White" />
