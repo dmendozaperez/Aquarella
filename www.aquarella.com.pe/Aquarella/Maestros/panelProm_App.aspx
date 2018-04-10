@@ -34,7 +34,7 @@
                 <div class="ui-dialog-titlebar ui-widget-header ui-corner-all ui-helper-clearfix" style="font-size:10px">
                     <span class="ui-dialog-title" id="ui-dialog-title-dialog">
                         <br/>
-                        Agregar Articulos a la Promoción
+                        Agregar Articulos a la Promoción : "<asp:Label ID="lblTitulo" runat="server" Text="Label"></asp:Label>"
                         <br/>
                     </span>
 
@@ -67,6 +67,7 @@
                     </td>
                   
                 </tr>
+                    
 
                   <tr>
                     <td style="color:White;background-color:#2191c0;font-weight:bold;width:200px;text-align:center"  > 
@@ -77,12 +78,7 @@
                              <br/>
                         <asp:UpdatePanel ID="UpdatePanel3" runat="server">
                             <ContentTemplate>
-                                <asp:DropDownList AccessKey="o" ID="dwArticulo" Width="400px" runat="server" DataValueField="Art_id"
-                                    DataTextField="Art_Descripcion" AppendDataBoundItems="True" AutoPostBack="True" 
-                                  >
-                                    <asp:ListItem Value="-1">--Seleccionar de la lista--</asp:ListItem>
-                                </asp:DropDownList>
-                                <br />
+                                <asp:TextBox ID="txtArticulo" runat="server"  OnTextChanged="txtArticulo_TextChanged" Width="390px" />
                             </ContentTemplate>
                       
                         </asp:UpdatePanel>
@@ -90,9 +86,11 @@
                     </tr>
                     <tr>
                         <td>
-                            &nbsp;
+                           
+                          
                         </td>
                        <td style="text-align:right">
+                           <asp:Label ID="lblError" Width="200px" runat="server" ></asp:Label>
                            <asp:Button ID="btnAdicionar" runat="server" Text="Adicionar" OnClick="btnAdicionar_Click" />
                         </td>
                        

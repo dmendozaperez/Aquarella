@@ -14,7 +14,7 @@ namespace Integrado.Prestashop
 {
     public class ActTracking
     {
-
+        
 
 
         public string[] ActualizaTrackin(string orden, string tracking)//0=error 1=ok
@@ -61,7 +61,7 @@ namespace Integrado.Prestashop
                 } // end try
 
                 if (mysql != null)
-                    if (mysql.State == ConnectionState.Open) mysql.Close();
+                    if (mysql.State ==ConnectionState.Open) mysql.Close(); 
 
             } // end using
 
@@ -88,18 +88,18 @@ namespace Integrado.Prestashop
                 Dat_Urbano guias_urbano = new Dat_Urbano();
                 dtguia_urbano = guias_urbano.getguiaUrbano();
 
-                if (dtguia_urbano != null)
+                if (dtguia_urbano!=null)
                 {
-                    if (dtguia_urbano.Rows.Count > 0)
+                    if (dtguia_urbano.Rows.Count>0)
                     {
-                        foreach (DataRow fila in dtguia_urbano.Rows)
+                        foreach(DataRow fila in dtguia_urbano.Rows)
                         {
                             string guia_prestashop = fila["Ven_Pst_Ref"].ToString();
                             string guia_urbano = fila["Ven_Guia_Urbano"].ToString();
-                            string[] valida = ActualizaTrackin(guia_prestashop, guia_urbano);
+                            string[] valida= ActualizaTrackin(guia_prestashop, guia_urbano);
 
                             /*el valor 1 quiere decir que actualizo prestashop*/
-                            if (valida[0] == "1")
+                            if (valida[0]=="1")
                             {
                                 guias_urbano.updprestashopGuia(guia_prestashop, guia_urbano);
                             }
@@ -113,7 +113,7 @@ namespace Integrado.Prestashop
             catch (Exception)
             {
 
-
+                
             }
         }
 
@@ -129,12 +129,14 @@ namespace Integrado.Prestashop
     {
         /*DESARROLLO*/
         //public static string BaseUrl = "http://181.177.242.172/bata/api/";
-        //public static string BaseUrl = "http://10.10.10.247/bata/api/";
         //public static string Account = "7UAQDKE187QTB3JT14NLQ3V3XSB6R7HR";
+
+
         /*************************/
-        /*PRODUCCION*/
-        public static string BaseUrl = "http://bata.com.pe/tienda/api/";
-        public static string Account = "7UAQDKE187QTB3JT14NLQ3V3XSB6R7HR";
+      	/*PRODUCCION*/
+	    public static string BaseUrl = "http://bata.com.pe/tienda/api/";
+    	public static string Account = "7UAQDKE187QTB3JT14NLQ3V3XSB6R7HR";
+
         /****************/
         public static string Password = "";
 
@@ -153,7 +155,7 @@ namespace Integrado.Prestashop
         /// <param name="id_orden">Id de Orden</param>
         /// <param name="serie_guia">Numero de Guia</param>
         /// <returns>Verdadero/Falso</returns>
-        public bool ActualizarReference(string reference)
+        public  bool ActualizarReference(string reference)
         {
             bool result = false;
             try
@@ -217,11 +219,11 @@ namespace Integrado.Prestashop
                 Dat_PrestaShop estadofac_presta = new Dat_PrestaShop();
                 dt = estadofac_presta.getestadofac();
 
-                if (dt != null)
+                if (dt!=null)
                 {
-                    if (dt.Rows.Count > 0)
+                    if (dt.Rows.Count>0)
                     {
-                        foreach (DataRow fila in dt.Rows)
+                        foreach(DataRow fila in dt.Rows)
                         {
                             string guiaref_presta = fila["Ven_Pst_Ref"].ToString();
                             Boolean valida = ActualizarReference(guiaref_presta);

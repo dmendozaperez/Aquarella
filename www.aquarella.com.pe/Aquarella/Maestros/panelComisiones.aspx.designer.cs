@@ -10,7 +10,7 @@
 namespace www.aquarella.com.pe.Aquarella.Maestros {
     
     
-    public partial class panelPromocion {
+    public partial class panelComisiones {
         
         /// <summary>
         /// Control ScriptManager1.
@@ -58,13 +58,40 @@ namespace www.aquarella.com.pe.Aquarella.Maestros {
         protected global::System.Web.UI.WebControls.RequiredFieldValidator RFValidator;
         
         /// <summary>
-        /// Control txtPares.
+        /// Control txtMontoMin.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtPares;
+        protected global::System.Web.UI.WebControls.TextBox txtMontoMin;
+        
+        /// <summary>
+        /// Control RequiredFieldValidator1.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator1;
+        
+        /// <summary>
+        /// Control RegularExpressionValidator2.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RegularExpressionValidator RegularExpressionValidator2;
+        
+        /// <summary>
+        /// Control txtMontoMax.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtMontoMax;
         
         /// <summary>
         /// Control RequiredFieldValidator6.
@@ -76,13 +103,22 @@ namespace www.aquarella.com.pe.Aquarella.Maestros {
         protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator6;
         
         /// <summary>
-        /// Control txtPorc.
+        /// Control RegularExpressionValidator3.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtPorc;
+        protected global::System.Web.UI.WebControls.RegularExpressionValidator RegularExpressionValidator3;
+        
+        /// <summary>
+        /// Control txtComision.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtComision;
         
         /// <summary>
         /// Control RequiredFieldValidator7.
@@ -193,22 +229,22 @@ namespace www.aquarella.com.pe.Aquarella.Maestros {
         protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator9;
         
         /// <summary>
-        /// Control btnSavePromocion.
+        /// Control btnSaveComision.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnSavePromocion;
+        protected global::System.Web.UI.WebControls.Button btnSaveComision;
         
         /// <summary>
-        /// Control gridFunctions.
+        /// Control gridComisiones.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView gridFunctions;
+        protected global::System.Web.UI.WebControls.GridView gridComisiones;
         
         /// <summary>
         /// Control txtDesPromo.

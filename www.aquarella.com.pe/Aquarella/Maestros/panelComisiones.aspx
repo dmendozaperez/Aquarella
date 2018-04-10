@@ -1,5 +1,5 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Design/Site.Master" AutoEventWireup="true"
-    CodeBehind="panelPromocion.aspx.cs" Inherits="www.aquarella.com.pe.Aquarella.Maestros.panelPromocion"
+    CodeBehind="panelComisiones.aspx.cs" Inherits="www.aquarella.com.pe.Aquarella.Maestros.panelComisiones"
     Theme="SiteTheme" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="headCPH" runat="server">
@@ -156,25 +156,38 @@
                 </tr>
                 <tr>
                     <td style="width:200px">
-                        Max. Pares
+                        Monto Min.
                     </td>
                     <td>
-                        <asp:TextBox ID="txtPares" onkeypress="return numbersonly(event);" runat="server" Width="260px" />
+                        <asp:TextBox ID="txtMontoMin" runat="server" Width="260px" />
                     </td>
                     <td style="color:red">
-                       <asp:RequiredFieldValidator ID="RequiredFieldValidator6" ValidationGroup="Nuevo" runat="server" ErrorMessage="*" ControlToValidate="txtPares"></asp:RequiredFieldValidator>
+                       <asp:RequiredFieldValidator ID="RequiredFieldValidator1" ValidationGroup="Nuevo"  runat="server" ErrorMessage="*" ControlToValidate="txtMontoMin"></asp:RequiredFieldValidator>
+                        <asp:RegularExpressionValidator ID="RegularExpressionValidator2" runat="server"  ValidationGroup="Nuevo"  ValidationExpression="((\d+)((\.\d{1,2})?))$" ErrorMessage="Ingrese porcentaje Valido" ControlToValidate="txtMontoMin" />
+                     </td>
+                </tr>
+                <tr>
+                    <td style="width:200px">
+                        Monto Max.
                     </td>
+                    <td>
+                        <asp:TextBox ID="txtMontoMax" runat="server" Width="260px" />
+                    </td>
+                    <td style="color:red">
+                       <asp:RequiredFieldValidator ID="RequiredFieldValidator6" ValidationGroup="Nuevo"  runat="server" ErrorMessage="*" ControlToValidate="txtMontoMax"></asp:RequiredFieldValidator>
+                        <asp:RegularExpressionValidator ID="RegularExpressionValidator3" runat="server"  ValidationGroup="Nuevo"  ValidationExpression="((\d+)((\.\d{1,2})?))$" ErrorMessage="Ingrese porcentaje Valido" ControlToValidate="txtMontoMax" />
+                     </td>
                 </tr>
                 <tr>
                     <td>
-                        Porcentaje(%):
+                       Comision(%):
                     </td>
                     <td>
-                        <asp:TextBox ID="txtPorc" runat="server" Width="260px" />
+                        <asp:TextBox ID="txtComision" runat="server" Width="260px" />
                     </td>
                     <td style="color:red">
-                        <asp:RequiredFieldValidator ID="RequiredFieldValidator7" ValidationGroup="Nuevo"  runat="server" ErrorMessage="*" ControlToValidate="txtPorc"></asp:RequiredFieldValidator>
-                        <asp:RegularExpressionValidator ID="RegexDecimal" runat="server"  ValidationGroup="Nuevo"  ValidationExpression="((\d+)((\.\d{1,2})?))$" ErrorMessage="Ingrese porcentaje Valido" ControlToValidate="txtPorc" />
+                        <asp:RequiredFieldValidator ID="RequiredFieldValidator7" ValidationGroup="Nuevo"  runat="server" ErrorMessage="*" ControlToValidate="txtComision"></asp:RequiredFieldValidator>
+                        <asp:RegularExpressionValidator ID="RegexDecimal" runat="server"  ValidationGroup="Nuevo"  ValidationExpression="((\d+)((\.\d{1,2})?))$" ErrorMessage="Ingrese porcentaje Valido" ControlToValidate="txtComision" />
                         
 
                     </td>
@@ -264,7 +277,7 @@
                     <td>
                     </td>
                     <td align="center">
-                        <asp:Button ID="btnSavePromocion" Text="Guardar"  ValidationGroup="Nuevo" runat="server" OnClick="btnSavePromocion_Click" />
+                        <asp:Button ID="btnSaveComision" Text="Guardar"  ValidationGroup="Nuevo" runat="server" OnClick="btnSaveComision_Click" />
                     </td>
                     <td>
                     </td>
@@ -276,38 +289,29 @@
     <br />
     <asp:UpdatePanel runat="server">
         <ContentTemplate>
-            <asp:GridView ID="gridFunctions" AllowPaging="True" runat="server" AutoGenerateColumns="False"
+            <asp:GridView ID="gridComisiones" AllowPaging="True" runat="server" AutoGenerateColumns="False"
                 SkinID="gridviewSkin" 
-                OnPageIndexChanging="gridFunctions_PageIndexChanging">
+                OnPageIndexChanging="gridComisiones_PageIndexChanging">
                 <%--<RowStyle HorizontalAlign="center" />--%>
                 <Columns>                    
-                    <asp:BoundField DataField="Ofe_Id" HeaderText="Id" ItemStyle-HorizontalAlign="center"  />
-                    <asp:BoundField DataField="Ofe_Descripcion" HeaderText="Descripcion" />
-                    <asp:BoundField DataField="Ofe_MaxPares" ItemStyle-HorizontalAlign="center" HeaderText="Nro. Pares" />
-                    <asp:BoundField DataField="Ofe_Porc" ItemStyle-HorizontalAlign="center"  HeaderText="Porcentaje (%)" />
+                    <asp:BoundField DataField="Comision_Id" HeaderText="Id" ItemStyle-HorizontalAlign="center"  />
+                    <asp:BoundField DataField="Comision_Descripcion" HeaderText="Descripcion" />
+                    <asp:BoundField DataField="Comision_MontoMin" ItemStyle-HorizontalAlign="center"  HeaderText="Monto min." />
+                     <asp:BoundField DataField="Comision_MontoMax" ItemStyle-HorizontalAlign="center"  HeaderText="Monto max." />
+                     <asp:BoundField DataField="Comision_Porc" ItemStyle-HorizontalAlign="center"  HeaderText="Porcentaje (%)" />
                     <asp:BoundField DataField="FechaIni" ItemStyle-HorizontalAlign="center"  HeaderText="Fec. Inicio" />
                     <asp:BoundField DataField="FechaFin" ItemStyle-HorizontalAlign="center"  HeaderText="Fec. Fin" />
                       <asp:BoundField DataField="Estado" ItemStyle-HorizontalAlign="center"  HeaderText="Estado" />
                      <asp:TemplateField HeaderText="Editar">
                         <ItemTemplate>
                             <center>
-                                <a href="#" onclick="updateFunction('<%# Eval("Ofe_Id") %>','<%# Eval("Ofe_Descripcion") %>','<%# Eval("Ofe_MaxPares") %>','<%# Eval("Ofe_Porc") %>','<%# Eval("FechaIni") %>','<%# Eval("FechaFin") %>','<%# Eval("estadoId") %>')">
+                              <%--<a href="#" onclick="updateFunction('<%# Eval("Comision_Id") %>','<%# Eval("Ofe_Descripcion") %>','<%# Eval("Ofe_MaxPares") %>','<%# Eval("Ofe_Porc") %>','<%# Eval("FechaIni") %>','<%# Eval("FechaFin") %>','<%# Eval("estadoId") %>')">
                                     <asp:Image ID="Image1" ImageUrl="~/Design/images/Botones/editOrder.png" runat="server" />
-                                </a>
+                                </a>--%>
                             </center>
                         </ItemTemplate>
                     </asp:TemplateField>
        
-                    <asp:TemplateField HeaderText="ver Articulos">
-                        <ItemTemplate>
-                            <center>
-                                <a class="iframe" href="panelProm_App.aspx?PROM_ID=<%# Eval("Ofe_Id")%>&PROM_DESCRIPCION=<%# Eval("Ofe_Descripcion") %>&ESTADO=<%# Eval("estadoId")%>&TITULO=<%# Eval("Ofe_Descripcion")%>"
-                                 title="Adicionar un articulo a la promocion.">
-                                    <asp:Image ID="Image2" ImageUrl="~/Design/images/Botones/b_app.png" runat="server" />
-                                </a>
-                            </center>
-                        </ItemTemplate>
-                    </asp:TemplateField>
                 </Columns>
             </asp:GridView>
         </ContentTemplate>
