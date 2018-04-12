@@ -32,23 +32,24 @@
             }
         }
 
-        function updateFunction(Ofe_Id, Ofe_Descripcion, Ofe_MaxPares, Ofe_Porc, FechaIni, FechaFin,estadoId) {
+        function updateComision(Comision_Id, Descripcion, MontoMin, MontoMax, Porc, FechaIni, FechaFin, Estado) {
             removeFieldsErrors();
 
-            $("#ContentPlaceHolder1_txtDesPromo").val(Ofe_Descripcion);
-            $("#ContentPlaceHolder1_txtparProm").val(Ofe_MaxPares);
-            $("#ContentPlaceHolder1_txtporcPromo").val(Ofe_Porc);
-            $("#ContentPlaceHolder1_txtiniPromo").val(FechaIni);
-            $("#ContentPlaceHolder1_txtfinPromo").val(FechaFin);
+            $("#ContentPlaceHolder1_txtDescomi").val(Descripcion);
+            $("#ContentPlaceHolder1_txtMontominupd").val(MontoMin);
+            $("#ContentPlaceHolder1_txtMontomaxupd").val(MontoMax);
+            $("#ContentPlaceHolder1_txtporc").val(Porc);
+            $("#ContentPlaceHolder1_txtiniComi").val(FechaIni);
+            $("#ContentPlaceHolder1_txtfinComi").val(FechaFin);
      
-            $("#dialog").dialog({ width: 400, height: 400, modal: true, title: 'Editar Promocion', open: true });
+            $("#dialog").dialog({ width: 400, height: 400, modal: true, title: 'Editar Comision', open: true });
             
             $("#dialog").dialog({ buttons: [{
-                text: "Actualizar Promocion",
+                text: "Actualizar Comision",
                 Id:"botonActualizar",
                 click: function () {
                     //if (Validacion())
-                    updatePromocionAjax(Ofe_Id);
+                    updatePromocionAjax(Comision_Id);
                 }
             }]
             });
@@ -134,7 +135,7 @@
             <AQControl:Message ID="msnMessage" Visible="false" runat="server" />
         </ContentTemplate>
         <Triggers>
-            <asp:AsyncPostBackTrigger ControlID="btnSavePromocion" EventName="click" />
+            <asp:AsyncPostBackTrigger ControlID="btnSaveComision" EventName="click" />
         </Triggers>
     </asp:UpdatePanel>
     <div id="tabs">
@@ -305,9 +306,9 @@
                      <asp:TemplateField HeaderText="Editar">
                         <ItemTemplate>
                             <center>
-                              <%--<a href="#" onclick="updateFunction('<%# Eval("Comision_Id") %>','<%# Eval("Ofe_Descripcion") %>','<%# Eval("Ofe_MaxPares") %>','<%# Eval("Ofe_Porc") %>','<%# Eval("FechaIni") %>','<%# Eval("FechaFin") %>','<%# Eval("estadoId") %>')">
+                              <a href="#" onclick="updateComision('<%# Eval("Comision_Id") %>','<%# Eval("Comision_Descripcion") %>','<%# Eval("Comision_MontoMin") %>','<%# Eval("Comision_MontoMax") %>','<%# Eval("Comision_Porc") %>','<%# Eval("FechaIni") %>','<%# Eval("FechaFin") %>','<%# Eval("Estado") %>')">
                                     <asp:Image ID="Image1" ImageUrl="~/Design/images/Botones/editOrder.png" runat="server" />
-                                </a>--%>
+                                </a>
                             </center>
                         </ItemTemplate>
                     </asp:TemplateField>
@@ -323,21 +324,32 @@
                         Descripcion:
                     </td>
                     <td>
-                        <asp:TextBox ID="txtDesPromo" runat="server" Width="260px" />
+                        <asp:TextBox ID="txtDescomi" runat="server" Width="260px" />
                     </td>
                     <td style="color:red">
-                        <asp:RequiredFieldValidator ID="RequiredFieldValidator2" ValidationGroup="upd"  runat="server" ErrorMessage="*" ControlToValidate="txtDesPromo"></asp:RequiredFieldValidator>
+                        <asp:RequiredFieldValidator ID="RequiredFieldValidator2" ValidationGroup="upd"  runat="server" ErrorMessage="*" ControlToValidate="txtDescomi"></asp:RequiredFieldValidator>
                     </td>
                 </tr>
                 <tr>
                     <td style="width:200px">
-                        Max. Pares
+                        Monto  Min.
                     </td>
                     <td>
-                        <asp:TextBox ID="txtparProm" onkeypress="return numbersonly(event);"  runat="server" Width="260px" />
+                        <asp:TextBox ID="txtMontominupd" onkeypress="return numbersonly(event);"  runat="server" Width="260px" />
                     </td>
                     <td style="color:red">
-                       <asp:RequiredFieldValidator ID="RequiredFieldValidator11" runat="server" ValidationGroup="upd"   ErrorMessage="*" ControlToValidate="txtparProm"></asp:RequiredFieldValidator>
+                       <asp:RequiredFieldValidator ID="RequiredFieldValidator11" runat="server" ValidationGroup="upd"   ErrorMessage="*" ControlToValidate="txtMontominupd"></asp:RequiredFieldValidator>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="width:200px">
+                        Monto  Max.
+                    </td>
+                    <td>
+                        <asp:TextBox ID="txtMontomaxupd" onkeypress="return numbersonly(event);"  runat="server" Width="260px" />
+                    </td>
+                    <td style="color:red">
+                       <asp:RequiredFieldValidator ID="RequiredFieldValidator12" runat="server" ValidationGroup="upd"   ErrorMessage="*" ControlToValidate="txtMontomaxupd"></asp:RequiredFieldValidator>
                     </td>
                 </tr>
                 <tr>
@@ -345,11 +357,11 @@
                         Porcentaje(%):
                     </td>
                     <td>
-                        <asp:TextBox ID="txtporcPromo" runat="server" Width="260px" />
+                        <asp:TextBox ID="txtporc" runat="server" Width="260px" />
                     </td>
                      <td style="color:red">
-                        <asp:RegularExpressionValidator ID="RegularExpressionValidator1" runat="server" ValidationGroup="upd"   ValidationExpression="((\d+)((\.\d{1,2})?))$" ErrorMessage="*" ControlToValidate="txtporcPromo" />
-                        <asp:RequiredFieldValidator ID="RequiredFieldValidator10" runat="server" ValidationGroup="upd"   ErrorMessage="*" ControlToValidate="txtporcPromo"></asp:RequiredFieldValidator>
+                        <asp:RegularExpressionValidator ID="RegularExpressionValidator1" runat="server" ValidationGroup="upd"   ValidationExpression="((\d+)((\.\d{1,2})?))$" ErrorMessage="*" ControlToValidate="txtporc" />
+                        <asp:RequiredFieldValidator ID="RequiredFieldValidator10" runat="server" ValidationGroup="upd"   ErrorMessage="*" ControlToValidate="txtporc"></asp:RequiredFieldValidator>
 
                     </td>
                 </tr>
@@ -363,10 +375,10 @@
                             <td>
                                 <asp:UpdatePanel ID="UpdatePanel1" runat="server">
                                     <ContentTemplate>
-                                        <asp:TextBox ID="txtiniPromo" disabled runat="server"  AccessKey="f"></asp:TextBox>
+                                        <asp:TextBox ID="txtiniComi" disabled runat="server"  AccessKey="f"></asp:TextBox>
                                         <ajaxToolkit:CalendarExtender ID="CalendarExtender2" runat="server" Animated="true" 
                                             FirstDayOfWeek="Monday" Format="dd/MM/yyyy" PopupButtonID="Image3" 
-                                            TargetControlID="txtiniPromo" />
+                                            TargetControlID="txtiniComi" />
                                     </ContentTemplate>
                                 </asp:UpdatePanel>
 
@@ -388,9 +400,9 @@
                     <td>
                                 <asp:RequiredFieldValidator ValidationGroup="upd"   ID="RequiredFieldValidator3" runat="server"
                                     ToolTip="Fecha de inicio" CssClass="error_asterisck" ErrorMessage="Dígite fecha inicial"
-                                    Display="Dynamic" SetFocusOnError="true" ControlToValidate="txtiniPromo">*</asp:RequiredFieldValidator>
+                                    Display="Dynamic" SetFocusOnError="true" ControlToValidate="txtiniComi">*</asp:RequiredFieldValidator>
                                 <asp:CompareValidator ID="CompareValidator2" runat="server" ValidationGroup="upd"  
-                                    Type="Date" SetFocusOnError="true" CssClass="error_asterisck" ControlToValidate="txtiniPromo"
+                                    Type="Date" SetFocusOnError="true" CssClass="error_asterisck" ControlToValidate="txtiniComi"
                                     Operator="DataTypeCheck" ErrorMessage="Dígite una fecha válida">*</asp:CompareValidator>
                 </td>
                 </tr>
@@ -404,10 +416,10 @@
                             <td>
                                  <asp:UpdatePanel ID="UpdatePanel2" runat="server">
                                      <ContentTemplate>
-                                         <asp:TextBox ID="txtfinPromo" disabled runat="server"  AccessKey="f"></asp:TextBox>
+                                         <asp:TextBox ID="txtfinComi" disabled runat="server"  AccessKey="f"></asp:TextBox>
                                          <ajaxToolkit:CalendarExtender ID="CalendarExtender3" runat="server" 
                                              Animated="true" FirstDayOfWeek="Monday" Format="dd/MM/yyyy" 
-                                             PopupButtonID="Image4" TargetControlID="txtfinPromo" />
+                                             PopupButtonID="Image4" TargetControlID="txtfinComi" />
                                      </ContentTemplate>
                                  </asp:UpdatePanel>
                             </td>
@@ -423,11 +435,11 @@
                                      ErrorMessage="Dígite fecha final*" SetFocusOnError="true" ToolTip="Fecha final" 
                                      ValidationGroup="upd"  >*</asp:RequiredFieldValidator>
                                  <asp:CompareValidator ID="CompareValidator3" runat="server" 
-                                     ControlToValidate="txtfinPromo" CssClass="error_asterisck" 
+                                     ControlToValidate="txtfinComi" CssClass="error_asterisck" 
                                      ErrorMessage="Dígite una fecha final válida" Operator="DataTypeCheck" 
                                      SetFocusOnError="true" Type="Date" ValidationGroup="upd"  >*</asp:CompareValidator>
                                  <asp:CompareValidator ID="CompareValidator4" runat="server" 
-                                     ControlToCompare="txtiniPromo" ControlToValidate="txtfinPromo" 
+                                     ControlToCompare="txtiniPromo" ControlToValidate="txtfinComi" 
                                      CssClass="error_asterisck" 
                                      ErrorMessage="Dígite una fecha final superior a la fecha inicial" 
                                      Operator="GreaterThanEqual" SetFocusOnError="true" Type="Date" 

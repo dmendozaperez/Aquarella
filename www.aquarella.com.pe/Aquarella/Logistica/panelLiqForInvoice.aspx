@@ -96,6 +96,7 @@
                         No existen liquidaciones para marcar.
                     </EmptyDataTemplate>
                     <Columns>
+                         <asp:BoundField DataField="asesor" HeaderText="Asesor" SortExpression="asesor" />    
                         <asp:BoundField DataField="Are_Descripcion" HeaderText="Área" SortExpression="Are_Descripcion" />                        
                         <asp:BoundField DataField="nombres" HeaderText="Cliente" SortExpression="nombres" />
                         <asp:BoundField DataField="ubicacion" HeaderText="Ubicación" SortExpression="ubicacion" />

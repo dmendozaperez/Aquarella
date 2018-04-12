@@ -247,13 +247,13 @@ namespace www.aquarella.com.pe.Aquarella.Maestros {
         protected global::System.Web.UI.WebControls.GridView gridComisiones;
         
         /// <summary>
-        /// Control txtDesPromo.
+        /// Control txtDescomi.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtDesPromo;
+        protected global::System.Web.UI.WebControls.TextBox txtDescomi;
         
         /// <summary>
         /// Control RequiredFieldValidator2.
@@ -265,13 +265,13 @@ namespace www.aquarella.com.pe.Aquarella.Maestros {
         protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator2;
         
         /// <summary>
-        /// Control txtparProm.
+        /// Control txtMontominupd.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtparProm;
+        protected global::System.Web.UI.WebControls.TextBox txtMontominupd;
         
         /// <summary>
         /// Control RequiredFieldValidator11.
@@ -283,13 +283,31 @@ namespace www.aquarella.com.pe.Aquarella.Maestros {
         protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator11;
         
         /// <summary>
-        /// Control txtporcPromo.
+        /// Control txtMontomaxupd.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtporcPromo;
+        protected global::System.Web.UI.WebControls.TextBox txtMontomaxupd;
+        
+        /// <summary>
+        /// Control RequiredFieldValidator12.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator12;
+        
+        /// <summary>
+        /// Control txtporc.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtporc;
         
         /// <summary>
         /// Control RegularExpressionValidator1.
@@ -319,13 +337,13 @@ namespace www.aquarella.com.pe.Aquarella.Maestros {
         protected global::System.Web.UI.UpdatePanel UpdatePanel1;
         
         /// <summary>
-        /// Control txtiniPromo.
+        /// Control txtiniComi.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtiniPromo;
+        protected global::System.Web.UI.WebControls.TextBox txtiniComi;
         
         /// <summary>
         /// Control CalendarExtender2.
@@ -373,13 +391,13 @@ namespace www.aquarella.com.pe.Aquarella.Maestros {
         protected global::System.Web.UI.UpdatePanel UpdatePanel2;
         
         /// <summary>
-        /// Control txtfinPromo.
+        /// Control txtfinComi.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtfinPromo;
+        protected global::System.Web.UI.WebControls.TextBox txtfinComi;
         
         /// <summary>
         /// Control CalendarExtender3.
