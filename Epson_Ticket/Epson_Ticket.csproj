@@ -34,7 +34,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Carvajal.FEPE.PreSC">
-      <HintPath>..\..\..\Generacion Hash\DLL VERSION 2.0\Carvajal.FEPE.PreSC.dll</HintPath>
+      <HintPath>..\Integrado\bin\Debug\Carvajal.FEPE.PreSC.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />

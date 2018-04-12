@@ -97,23 +97,27 @@
     <div style="margin: 10px auto 0 auto;" class="f-small">
         <asp:UpdatePanel ID="upGridLiqPick" runat="server" UpdateMode="Conditional">
             <ContentTemplate>
-                <asp:GridView ID="gvListPays" runat="server" SkinID="gridviewSkin" ShowFooter="true"
-                    DataKeyNames="Pag_Id" OnRowCommand="gvListPays_RowCommand" AllowPaging="true"
-                    PageSize="10" OnDataBound="gvListPays_DataBound" OnRowDataBound="gvListPays_RowDataBound">
+                <asp:GridView ID="gvListPays" runat="server" SkinID="gridviewSkin" ShowFooter="True"
+                    DataKeyNames="Pag_Id" OnRowCommand="gvListPays_RowCommand" AllowPaging="True" OnDataBound="gvListPays_DataBound" OnRowDataBound="gvListPays_RowDataBound">
                     <EmptyDataTemplate>
                         No existen pagos o consignaciones en espera de revisión.
                     </EmptyDataTemplate>
                     <Columns>
                         <asp:BoundField DataField="Pag_Id" ItemStyle-ForeColor="Maroon" HeaderText="Pago No."
-                            ReadOnly="True" SortExpression="Pag_Id" />
+                            ReadOnly="True" SortExpression="Pag_Id" >
+                        <ItemStyle ForeColor="Maroon" />
+                        </asp:BoundField>
                         <asp:BoundField DataField="Lider" ItemStyle-ForeColor="#47B224" HeaderText="Lider"
-                            ReadOnly="True" SortExpression="Lider" />
+                            ReadOnly="True" SortExpression="Lider" >
+                        <ItemStyle ForeColor="#47B224" />
+                        </asp:BoundField>
                         <asp:BoundField DataField="Bas_Documento" HeaderText="Documento" ReadOnly="True"
                             SortExpression="Bas_Documento" />
                         <asp:BoundField DataField="Promotor" HeaderText="Promotor" ReadOnly="True" SortExpression="Promotor" />
                         <asp:BoundField DataField="Ban_Descripcion" ItemStyle-ForeColor="DimGray" HeaderText="Banco"
                             SortExpression="Ban_Descripcion" ReadOnly="True">
                             <ControlStyle CssClass="campo1" />
+                        <ItemStyle ForeColor="DimGray" />
                         </asp:BoundField>
                         <asp:BoundField DataField="Pag_Num_Consignacion" HeaderText="Compr. Pago" SortExpression="Pag_Num_Consignacion"
                             ReadOnly="True" />
@@ -129,11 +133,21 @@
                                     DataValueField="Est_Id" SelectedValue='<%# Bind("Est_Id") %>'>
                                 </asp:DropDownList>
                             </ItemTemplate>
+                            <ItemStyle HorizontalAlign="Center" />
                         </asp:TemplateField>
                         <asp:TemplateField HeaderText="Aplicar" ItemStyle-HorizontalAlign="Center">
                             <ItemTemplate>
                                 <asp:ImageButton ID="ibApplyUpdate" CommandName="ApplyUpdate" CommandArgument='<%# Eval("Pag_Id")%>'
                                     runat="server" ImageUrl="~/Design/images/Botones/chulo.png" ToolTip="Aplicar cambio en estado" />
+                            </ItemTemplate>
+                            <ItemStyle HorizontalAlign="Center" />
+                        </asp:TemplateField>
+                        <asp:TemplateField Visible="False">
+                            <EditItemTemplate>
+                                <asp:TextBox ID="txtconid" runat="server" Text='<%# Bind("Con_Id") %>'></asp:TextBox>
+                            </EditItemTemplate>
+                            <ItemTemplate>
+                                <asp:Label ID="lblconid" runat="server" Text='<%# Bind("Con_Id") %>'></asp:Label>
                             </ItemTemplate>
                         </asp:TemplateField>
                     </Columns>

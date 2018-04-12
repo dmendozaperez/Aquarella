@@ -220,6 +220,7 @@ namespace Integrado.Sistemas.Ventas
                 Decimal query = dv.Table.AsEnumerable().Sum(x => x.Field<Decimal>("IDN_QTY"));
                 lblcantidad.Content = query.ToString();
                 ///
+
                 lbltotal.Content = String.Format("{0:C2}",
                     dv.Table.AsEnumerable().Sum(y => (y.Field<Decimal>("IDN_SELLPRICE") * y.Field<Decimal>("IDN_QTY")) -
                         (y.Field<Decimal>("idn_commission") + y.Field<Decimal>("idn_disscount")) + y.Field<Decimal>("taxes")));

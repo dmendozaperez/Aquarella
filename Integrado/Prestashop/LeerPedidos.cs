@@ -341,7 +341,7 @@ namespace Integrado.Prestashop
                     Dat_PrestaShop update_psth = new Dat_PrestaShop();
                     /*agrupamos los pedidos*/
                     var grupo_pedido = from item in dtpedidos.AsEnumerable()
-                                          // where item.Field<string>("ped_id") == "115" //|| item.Field<Int32>("ped_id") ==40
+                                           where item.Field<string>("ped_id") == "73" //|| item.Field<Int32>("ped_id") ==40
                                        group item by
                                        new
                                        {
@@ -467,8 +467,20 @@ namespace Integrado.Prestashop
 
                             if (saldo!=0)
                             {
-                                items_det[0]._commission = items_det[0]._commission - saldo;
+                                
 
+                                if (items_det[0]._commission!=0)
+                                {
+                                    items_det[0]._commission = items_det[0]._commission - saldo;
+                                }
+                                else
+                                {
+                                    Int32 item_ult = items_det.Count() - 1;
+                                    items_det[item_ult]._price = items_det[item_ult]._price + saldo;
+                                }
+
+                                // ¨****** Verificar
+                                // Cambiar si el Saldo es diferente de 0,sumarlo al Pet_Det_Precio (dtl._price) 
                             }
 
                             #endregion

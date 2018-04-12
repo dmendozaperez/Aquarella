@@ -97,7 +97,18 @@ namespace www.aquarella.com.pe.Aquarella.Financiera
 
                 GridViewRow row = (GridViewRow)(((ImageButton)e.CommandSource).NamingContainer);
 
+                //GridViewRow row2 = (GridViewRow)(((TextBox)e.CommandSource).NamingContainer);
+
                 string newStatus = ((DropDownList)row.FindControl("dwStatusPay")).SelectedValue;
+
+                string concepto = ((Label)row.FindControl("lblconid")).Text;
+
+                //DataRowView rowView = (DataRowView)row.DataItem;
+
+                //string situacao = rowView["Con_Id"].ToString();
+
+                // string _conid = System.Web.UI.DataBinder.Eval(row, "Con_Id").ToString();
+                //string val = (string)this.gvListPays.da [row.RowIndex]["Con_Id"];
 
                 if (string.IsNullOrEmpty(newStatus) || newStatus.Equals("-1"))
                     msnMessage.LoadMessage("Seleccione el NUEVO ESTADO que se le aplicará al pago No." + noPay, UserControl.ucMessage.MessageType.Error);
@@ -106,7 +117,7 @@ namespace www.aquarella.com.pe.Aquarella.Financiera
 
                     /*validacion solo para usuarios sistemas y finanzas*/
 
-                    if (_user._usu_tip_id== "04" || _user._usu_tip_id== "08") 
+                    if ((_user._usu_tip_id== "04" || _user._usu_tip_id== "08") || concepto=="AJU")
                     { 
                         bool answ = Payments.updatePayment(noPay, newStatus);
 
