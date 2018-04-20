@@ -281,6 +281,107 @@ namespace Sistema_AQLocal
                     med = Basico.Right("0".ToString().PadLeft(1, '0') + (ini + Convert.ToInt32(medida) * 2), 2);
                     //med =Basico.Right(replicate('0', 1) + CAST(@ini + @aux * 2 AS varchar(12)), 2);
                     break;
+                case "J":
+                    switch (medida)
+                    {
+                        case "00":
+                            med = "00";
+                            break;
+                        case "01":
+                            med = "03";
+                            break;
+                        case "02":
+                            med = "06";
+                            break;
+                        case "03":
+                            med = "12";
+                            break;
+                        case "04":
+                            med = "13";
+                            break;
+                    }
+                    break;
+
+                case "M":
+                    switch (medida)
+                    {
+                        case "00":
+                            med = "50";
+                            break;
+                        case "01":
+                            med = "55";
+                            break;
+                        case "02":
+                            med = "60";
+                            break;
+                        case "03":
+                            med = "65";
+                            break;
+                        case "04":
+                            med = "70";
+                            break;
+                        case "05":
+                            med = "75";
+                            break;
+                        case "06":
+                            med = "80";
+                            break;
+                        case "07":
+                            med = "85";
+                            break;
+                        case "08":
+                            med = "90";
+                            break;
+                        case "09":
+                            med = "95";
+                            break;
+                        case "10":
+                            med = "98";
+                            break;
+                    }
+                    break;
+
+                case "N":
+                    switch (medida)
+                    {
+                        case "00":
+                            med = "65";
+                            break;
+                        case "01":
+                            med = "70";
+                            break;
+                        case "02":
+                            med = "75";
+                            break;
+                        case "03":
+                            med = "80";
+                            break;
+                        case "04":
+                            med = "85";
+                            break;
+                        case "05":
+                            med = "90";
+                            break;
+                        case "06":
+                            med = "94";
+                            break;
+                        case "07":
+                            med = "95";
+                            break;
+                        case "08":
+                            med = "96";
+                            break;
+                        case "09":
+                            med = "97";
+                            break;
+                        case "10":
+                            med = "98";
+                            break;
+                        case "11":
+                            med = "99";
+                            break;
+                    }
+                    break;
                 default:
                     med = (Convert.ToInt32(medida) + ini).ToString().PadLeft(2, '0');
                     break;
