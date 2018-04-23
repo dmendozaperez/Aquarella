@@ -554,6 +554,8 @@
     <Resource Include="Design\Images\fincaja.jpg" />
     <Resource Include="Design\Images\fincaja.png" />
     <Resource Include="Design\Images\BataLogo.png" />
+    <Resource Include="Design\Images\imprimir-urbano.png" />
+    <Resource Include="Design\Images\reenviar-urbano.png" />
     <Content Include="Esquemas\FACTURA_BOLETA.xml" />
     <Content Include="Esquemas\NOTAS.xml" />
   </ItemGroup>
