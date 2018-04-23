@@ -231,7 +231,7 @@ namespace www.aquarella.com.pe.bll
         /// <param name="sov_article">Codigo del articulo, puede utilizar el comodin %</param>
         /// <param name="stv_publicacces">T storages de acceso publico, F storages no publicos, TF ambos</param>
         /// <returns>Todos los datos del Artículo, tallas y cantidad</returns>
-        public static DataSet getArticleStock(string _art)
+        public static DataSet getArticleStock(string _art,string _usu_tip)
         {
             string sqlquery = "USP_Leer_Articulo_Stock";
             SqlConnection cn = null;
@@ -246,6 +246,7 @@ namespace www.aquarella.com.pe.bll
                 cmd.CommandTimeout = 0;
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.Parameters.AddWithValue("@art_id", _art);
+                cmd.Parameters.AddWithValue("@usu_tip", _usu_tip);
                 da = new SqlDataAdapter(cmd);
                 ds = new DataSet();
                 da.Fill(ds);

@@ -38,7 +38,8 @@ namespace www.aquarella.com.pe.Aquarella.Logistica
 
         private void initGrid( string item)
         {
-            this.Session[this._nameSessionData] = (object)Stock.getArticleStock(item);
+            
+            this.Session[this._nameSessionData] = (object)Stock.getArticleStock(item,_user._usu_tip_id);
             this.gvStock.DataSourceID = this.odsConsult.ID;
             this.gvStock.DataBind();
         }
