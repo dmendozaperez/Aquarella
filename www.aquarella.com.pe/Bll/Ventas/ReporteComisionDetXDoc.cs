@@ -58,7 +58,7 @@ namespace www.aquarella.com.pe.Bll.Ventas
                 cmd = new SqlCommand(sqlquery, cn);
                 cmd.CommandTimeout = 0;
                 cmd.CommandType = CommandType.StoredProcedure;
-                //cmd.Parameters.AddWithValue("@are_id", _idlider);
+                cmd.Parameters.AddWithValue("@are_id", _idlider);
                 cmd.Parameters.AddWithValue("@fecha_ini", _fechaini);
                 cmd.Parameters.AddWithValue("@fecha_fin", _fechafin);
                 da = new SqlDataAdapter(cmd);

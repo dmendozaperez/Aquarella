@@ -15,7 +15,7 @@
     <WarningLevel>4</WarningLevel>
     <TargetFrameworkProfile />
     <IsWebBootstrapper>true</IsWebBootstrapper>
-    <PublishUrl>\\10.10.10.207\wwwroot\ECOMMERCE\</PublishUrl>
+    <PublishUrl>\\ecommerce.bgr.pe\wwwroot\AppEC\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Web</InstallFrom>
     <UpdateEnabled>true</UpdateEnabled>
@@ -25,13 +25,13 @@
     <UpdatePeriodically>false</UpdatePeriodically>
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
-    <InstallUrl>http://10.10.10.207/ECOMMERCE/</InstallUrl>
+    <InstallUrl>http://ecommerce.bgr.pe/AppEC/</InstallUrl>
     <ProductName>Sistema Facturacion</ProductName>
     <PublisherName>Bata Peru</PublisherName>
     <SuiteName>%28Corporacion Bata%29</SuiteName>
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <WebPage>publish.htm</WebPage>
-    <ApplicationRevision>62</ApplicationRevision>
+    <ApplicationRevision>63</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>true</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
@@ -554,6 +554,8 @@
     <Resource Include="Design\Images\fincaja.jpg" />
     <Resource Include="Design\Images\fincaja.png" />
     <Resource Include="Design\Images\BataLogo.png" />
+    <Resource Include="Design\Images\imprimir-urbano.png" />
+    <Resource Include="Design\Images\reenviar-urbano.png" />
     <Content Include="Esquemas\FACTURA_BOLETA.xml" />
     <Content Include="Esquemas\NOTAS.xml" />
   </ItemGroup>
