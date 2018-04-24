@@ -138,9 +138,12 @@ namespace www.aquarella.com.pe.Aquarella.Ventas
             for (int i = 0; i <= gvReturns.Rows.Count - 1; i++)
             {
                 string strhf_flete = ((HiddenField)(gvReturns.Rows[i].FindControl("hf_flete"))).Value;
-               
+                string strhf_Lider = ((HiddenField)(gvReturns.Rows[i].FindControl("hf_Lider"))).Value;
+
                 if (strhf_flete.Equals("S"))
                     ((CheckBox)(gvReturns.Rows[i].FindControl("chkFlete"))).Checked = true;
+
+                ((TextBox)(gvReturns.Rows[i].FindControl("txtRotulo"))).Text = strhf_Lider;
 
             }
         }
@@ -296,6 +299,7 @@ namespace www.aquarella.com.pe.Aquarella.Ventas
             string strDataDetalle = "";
             string strLiqLiderDespacho = "";
             int intIdDespacho = Convert.ToInt32(_iddespacho);
+           string msjError = ""; 
 
             string Descripcion = TxtDescripcion.Text;
             Descripcion = TxtDescripcion.Text;
@@ -334,29 +338,55 @@ namespace www.aquarella.com.pe.Aquarella.Ventas
 
                     strLiqLiderDespacho += devolverIdliquidacion(strIdLider);
 
+                    if (strRotulo.Trim() == "") { 
+                       msjError += "Rotulo,";
+                    }
+
+                    if (strAgencia.Trim() == "")
+                    {
+                       msjError += "Agencia,";
+                    }
+
+                    if (strDestino.Trim() == "")
+                    {                       
+                        msjError += "Destino,";
+                    }
                 }
+
+                if (msjError != "")
+                    break;
             }
 
 
             if (strDataDetalle != "")
             {
-
-
-                DataSet dsreturn = www.aquarella.com.pe.Bll.Ventas.DespachoAlmacen.InsertarDespacho(_user._bas_id,intIdDespacho, strDataDetalle, strLiqLiderDespacho, Descripcion);
-                DataTable dtResult = new DataTable();
-                dtResult = dsreturn.Tables[0];
-
-                string NroDespacho = "";
-                foreach (DataRow row in dtResult.Rows)
+                if (msjError == "")
                 {
-                    _iddespacho = row["DESPACHO_ID"].ToString();
 
+                    DataSet dsreturn = www.aquarella.com.pe.Bll.Ventas.DespachoAlmacen.InsertarDespacho(_user._bas_id, intIdDespacho, strDataDetalle, strLiqLiderDespacho, Descripcion);
+                    DataTable dtResult = new DataTable();
+                    dtResult = dsreturn.Tables[0];
+
+                    foreach (DataRow row in dtResult.Rows)
+                    {
+                        _iddespacho = row["DESPACHO_ID"].ToString();
+
+                    }
+
+                    Response.Redirect("EditDespachoAlmacen.aspx?IdDespacho=" + _iddespacho);
                 }
+                else {
+                    msjError = msjError.TrimEnd(',');
+                    string mensaje = "El Campo :" + msjError + " es obligatorio.";
 
-                Response.Redirect("EditDespachoAlmacen.aspx?IdDespacho=" + _iddespacho);
+                    if (msjError.Length > 8)
+                        mensaje = "Los campos :" + msjError + " son obligatorios.";
+
+                    this.msnMessage.LoadMessage(mensaje, ucMessage.MessageType.Error);
+                }
             }
             else {
-                this.msnMessage.LoadMessage("Error : Debele elegir al menos un elemento de la lista." , ucMessage.MessageType.Error);
+                this.msnMessage.LoadMessage("Error : Debe elegir al menos un elemento de la lista." , ucMessage.MessageType.Error);
             }
 
         }

@@ -255,15 +255,7 @@
         </div>
     </div>
     <div style="margin: 10px auto 0 auto;">
-        <table width="100%" style="border: 1px solid silver;" cellpadding="4" cellspacing="4"
-            class="f-small">
-            <tr>               
-                <td align="center">
-                    <asp:Button ID="btncrear" runat="server"   
-                        Text="(C)rear Nuevo Despacho"  OnClick="btncrear_Click"/>                    
-                </td>
-            </tr>
-        </table>         
+           
     </div>
     <AQControl:ShippingForm runat="server" Visible="true" ID="ShippForm" />
 </asp:Content>

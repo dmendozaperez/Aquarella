@@ -30,7 +30,7 @@ namespace www.aquarella.com.pe.Aquarella.Ventas
         string _nameSessionData = "_ReturnData";
         string _nameSessionDataLiq = "_ReturnDataLiq";
         string _Separator = ".";
-        string _gStrEstado = ".";
+        string _gStrEstado = "R";
         private string _iddespacho { get; set; }
 
         private string _nombreSession = "ValoresventaxLider";
@@ -177,7 +177,7 @@ namespace www.aquarella.com.pe.Aquarella.Ventas
         protected void ibExportToExcel_Click(object sender, ImageClickEventArgs e)
         {
             DataTable dt = (DataTable)Session[_nameSessionData];
-            ExportarExcel(dt, "0", "2", "comisione_bono_xlider");
+            ExportarExcel(dt, "0,1,2,3,14,15,16,17,18,19", "2", "Orden_Despacho");
 
         }
 
@@ -261,14 +261,29 @@ namespace www.aquarella.com.pe.Aquarella.Ventas
                 strRows = strRows + "</tr>";
             }
 
-            inicio = "<div> " +
-                    "<table <Table border='1' bgColor='#ffffff' " +
-                    "borderColor='#000000' cellSpacing='2' cellPadding='2' " +
-                    "style='font-size:10.0pt; font-family:Calibri; background:white;'>" +
-                    strRowsHead +
-                     strRows +
-                    "</table>" +
-                    "</div>";
+            string desc = TxtDescripcion.Text;
+            string nrodoc = txtDocumento.Text;
+            string est = txtEstado.Text;
+            string fec = TextFecha.Text;
+
+            string strTable = "<table <Table border='1' bgColor='#ffffff' " +
+            "borderColor='#000000' cellSpacing='2' cellPadding='2' " +
+            "style='font-size:10.0pt; font-family:Calibri; background:white;'>";
+            strTable += "<tr height=38 ><td height=38  bgcolor='#969696' width='38'>Nro. Documento </ td ><td width='400' >" + nrodoc + "</ td > ";
+            strTable += "<td height=38  bgcolor='#969696' width='38'>Descripción</ td ><td width='400' >" + desc + "</ td > </tr>";
+            strTable += "<tr height=38 ><td height=38  bgcolor='#969696' width='38'>Fec. Creación. </ td ><td width='400' align='left' >" + fec + "</ td > ";
+            strTable += "<td height=38  bgcolor='#969696' width='38'>Estado </ td ><td width='400' >" + est + "</ td ></tr>";
+            strTable += "</table>";
+
+
+            inicio = "<div> " + strTable +
+            "<table <Table border='1' bgColor='#ffffff' " +
+            "borderColor='#000000' cellSpacing='2' cellPadding='2' " +
+            "style='font-size:10.0pt; font-family:Calibri; background:white;'>" +
+            strRowsHead +
+            strRows +
+            "</table>" +
+            "</div>";
 
             sb.Append(inicio);
 
@@ -282,6 +297,7 @@ namespace www.aquarella.com.pe.Aquarella.Ventas
             Response.Write(sb.ToString());
             Response.End();
         }
+
 
         protected void btGuardar_Click(object sender, EventArgs e)
         {

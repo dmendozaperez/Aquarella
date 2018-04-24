@@ -160,14 +160,7 @@ namespace www.aquarella.com.pe.Aquarella.Ventas
             gvReturns.DataBind();
 
         }
-
-        protected void btncrear_Click(object sender, EventArgs e)
-        {
-          
-            Response.Redirect("DespachoAlmacen.aspx?IdDespacho=0");
-        
-        }
-
+    
 
         protected void gvReturns_RowCommand(object sender, GridViewCommandEventArgs e)
         {

@@ -106,6 +106,13 @@
                         <tr>
                             <td><asp:CheckBox ID="chkEstSalida" runat="server" /></td>
                             <td style="font-size:13px;" ><b>Dar salida al despacho.</b></td>
+                            <td align="right" style="width:20px">
+                                   <asp:ImageButton ID="ibExportToExcel" ImageUrl="~/Design/images/Botones/b_toExcel.png"
+                                    onmouseover="this.style.background='green';" onmouseout="this.style.background=''"
+                                    runat="server" Height="25px" Width="24px" 
+                                    ToolTip="Exportar Panel de Resultados a Excel." 
+                                    onclick="ibExportToExcel_Click" /> 
+                             </td>
                             <td> <asp:Button ID="btGuardar" runat="server" Text="Guardar Cambios" CausesValidation="true" OnClick="btGuardar_Click" /> </td>
                              <td></td>
                              <td></td>

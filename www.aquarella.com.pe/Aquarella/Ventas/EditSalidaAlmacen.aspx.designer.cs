@@ -94,6 +94,15 @@ namespace www.aquarella.com.pe.Aquarella.Ventas {
         protected global::System.Web.UI.WebControls.CheckBox chkEstSalida;
         
         /// <summary>
+        /// Control ibExportToExcel.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.ImageButton ibExportToExcel;
+        
+        /// <summary>
         /// Control btGuardar.
         /// </summary>
         /// <remarks>

@@ -227,7 +227,7 @@ namespace www.aquarella.com.pe.Aquarella.Ventas
             DataTable dt = (DataTable)Session[_nameSessionData];
 
 
-            ExportarExcel(dt, "0,1,2,3,14,15,16,17,18,19", "2", "Orde_Despacho");
+            ExportarExcel(dt, "0,1,2,3,14,15,16,17,18,19", "2", "Orden_Despacho");
 
         }
                 
@@ -347,6 +347,7 @@ namespace www.aquarella.com.pe.Aquarella.Ventas
             string strDataDetalle = "";
             string strDescripcion= TxtDescripcion.Text;
             int intIdDespacho = Convert.ToInt32(_iddespacho);
+            string msjError = "";
 
             for (int i = 0; i <= gvReturns.Rows.Count - 1; i++)
             {
@@ -371,18 +372,45 @@ namespace www.aquarella.com.pe.Aquarella.Ventas
                 strDataDetalle += " McaFlete=¿" + strMcaFlete + "¿ ";
                 strDataDetalle += "/>";
 
+                if (strRotulo.Trim() == "")
+                {
+                    msjError += "Rotulo,";
+                }
+
+                if (strAgencia.Trim() == "")
+                {
+                    msjError += "Agencia,";
+                }
+
+                if (strDestino.Trim() == "")
+                {
+                    msjError += "Destino,";
+                }
+
+                if (msjError != "")
+                    break;
             }
 
-
-            Boolean valida = www.aquarella.com.pe.Bll.Ventas.DespachoAlmacen.ActualizarDespacho(intIdDespacho, strDataDetalle, strDescripcion);
-            if (valida)
+            if (msjError == "")
             {
-                msnMessage.LoadMessage("Los datos del despacho fueron Actualizados ", UserControl.ucMessage.MessageType.Information);
-                sbconsulta();
-            }
-            else {
-                msnMessage.LoadMessage("Hubo un error en la Actualización.", UserControl.ucMessage.MessageType.Error);
+                Boolean valida = www.aquarella.com.pe.Bll.Ventas.DespachoAlmacen.ActualizarDespacho(intIdDespacho, strDataDetalle, strDescripcion);
+                if (valida)
+                {
+                    msnMessage.LoadMessage("Los datos del despacho fueron Actualizados ", UserControl.ucMessage.MessageType.Information);
+                    sbconsulta();
+                }
+                else {
+                    msnMessage.LoadMessage("Hubo un error en la Actualización.", UserControl.ucMessage.MessageType.Error);
 
+                }
+            }else{
+                msjError = msjError.TrimEnd(',');
+                string mensaje = "El Campo :" + msjError + " es obligatorio.";
+
+                if (msjError.Length>8)
+                    mensaje = "Los campos :" + msjError + " son obligatorios.";
+
+                this.msnMessage.LoadMessage(mensaje, ucMessage.MessageType.Error);
             }
         }
 

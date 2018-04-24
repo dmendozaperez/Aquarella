@@ -229,15 +229,6 @@ namespace www.aquarella.com.pe.Aquarella.Ventas {
         protected global::System.Web.UI.WebControls.GridView gvReturns;
         
         /// <summary>
-        /// Control btncrear.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btncrear;
-        
-        /// <summary>
         /// Control ShippForm.
         /// </summary>
         /// <remarks>
