@@ -248,6 +248,10 @@
     <Content Include="Aquarella\Ventas\ComisionLiderDet.aspx" />
     <Content Include="Aquarella\Ventas\ConsultaVentaTk.aspx" />
     <Content Include="Aquarella\Ventas\descargar_pdf.aspx" />
+    <Content Include="Aquarella\Ventas\EditSalidaAlmacen.aspx" />
+    <Content Include="Aquarella\Ventas\EditDespachoAlmacen.aspx" />
+    <Content Include="Aquarella\Ventas\ListaSalidaAlmacen.aspx" />
+    <Content Include="Aquarella\Ventas\ListaDespachoAlmacen.aspx" />
     <Content Include="Aquarella\Ventas\getventasemanal.aspx" />
     <Content Include="Aquarella\Ventas\panelcomisionlider_xdoc.aspx" />
     <Content Include="Aquarella\Ventas\panelInvReports.aspx" />
@@ -257,6 +261,7 @@
     <Content Include="Aquarella\Ventas\panel_FE.aspx" />
     <Content Include="Aquarella\Ventas\premioscontinuo.aspx" />
     <Content Include="Aquarella\Admonred\prospectacionLider.aspx" />
+    <Content Include="Aquarella\Ventas\DespachoAlmacen.aspx" />
     <Content Include="Aquarella\Ventas\reportlider_afiliadoventa.aspx" />
     <Content Include="Aquarella\Ventas\reportventadetCN.aspx" />
     <Content Include="Aquarella\Ventas\reportventaformaCN.aspx" />
@@ -1413,6 +1418,34 @@
     <Compile Include="Aquarella\Ventas\descargar_pdf.aspx.designer.cs">
       <DependentUpon>descargar_pdf.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Aquarella\Ventas\EditSalidaAlmacen.aspx.cs">
+      <DependentUpon>EditSalidaAlmacen.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Aquarella\Ventas\EditSalidaAlmacen.aspx.designer.cs">
+      <DependentUpon>EditSalidaAlmacen.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Aquarella\Ventas\EditDespachoAlmacen.aspx.cs">
+      <DependentUpon>EditDespachoAlmacen.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Aquarella\Ventas\EditDespachoAlmacen.aspx.designer.cs">
+      <DependentUpon>EditDespachoAlmacen.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Aquarella\Ventas\ListaSalidaAlmacen.aspx.cs">
+      <DependentUpon>ListaSalidaAlmacen.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Aquarella\Ventas\ListaSalidaAlmacen.aspx.designer.cs">
+      <DependentUpon>ListaSalidaAlmacen.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Aquarella\Ventas\ListaDespachoAlmacen.aspx.cs">
+      <DependentUpon>ListaDespachoAlmacen.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Aquarella\Ventas\ListaDespachoAlmacen.aspx.designer.cs">
+      <DependentUpon>ListaDespachoAlmacen.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Aquarella\Ventas\getventasemanal.aspx.cs">
       <DependentUpon>getventasemanal.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -1475,6 +1508,13 @@
     </Compile>
     <Compile Include="Aquarella\Admonred\prospectacionLider.aspx.designer.cs">
       <DependentUpon>prospectacionLider.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Aquarella\Ventas\DespachoAlmacen.aspx.cs">
+      <DependentUpon>DespachoAlmacen.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Aquarella\Ventas\DespachoAlmacen.aspx.designer.cs">
+      <DependentUpon>DespachoAlmacen.aspx</DependentUpon>
     </Compile>
     <Compile Include="Aquarella\Ventas\reportlider_afiliadoventa.aspx.cs">
       <DependentUpon>reportlider_afiliadoventa.aspx</DependentUpon>
@@ -1649,6 +1689,7 @@
     <Compile Include="Bll\Ventas\Facturacion.cs" />
     <Compile Include="Bll\Ventas\F_Electronico.cs" />
     <Compile Include="Bll\Ventas\invoice.cs" />
+    <Compile Include="Bll\Ventas\DespachoAlmacen.cs" />
     <Compile Include="Bll\Ventas\Pivot.cs" />
     <Compile Include="Bll\Ventas\ReporteComisionDetXDoc.cs" />
     <Compile Include="Bll\Ventas\ReporteDevolucion.cs" />
