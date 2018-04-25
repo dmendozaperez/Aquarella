@@ -157,10 +157,12 @@
                          <asp:TemplateField HeaderText="Rotulo" SortExpression="pin_employee" ItemStyle-HorizontalAlign="Center" ItemStyle-Width="110px">
                             <ItemTemplate> 
                                     <asp:HiddenField ID="hf_IdDetalle" runat="server" Value='<%# Eval("Desp_IdDetalle")%>' />
+                                    <asp:HiddenField ID="hf_IdLider" runat="server" Value='<%# Eval("IdLider")%>' />
                                     <asp:HiddenField ID="hf_Descripcion" runat="server" Value='<%# Eval("Desp_Descripcion")%>' />
                                     <asp:HiddenField ID="hf_FecCrea" runat="server" Value='<%# Eval("Desp_FechaCre")%>' />
                                     <asp:HiddenField ID="hf_nroDoc" runat="server" Value='<%# Eval("Desp_NroDoc")%>' />
                                     <asp:HiddenField ID="hf_Estado" runat="server" Value='<%# Eval("estado")%>' />
+                                    <asp:HiddenField ID="hf_Atendido" runat="server" Value='<%# Eval("atendido")%>' />
                                      <asp:HiddenField ID="hf_IdEstado" runat="server" Value='<%# Eval("IdEstado")%>' />
                                     <asp:HiddenField ID="hf_flete" runat="server" Value='<%# Eval("McaFlete")%>' />
                                     <asp:TextBox id="txtRotulo" Text='<%# Eval("Rotulo")%>'  TextMode="multiline" Columns="10" Rows="2" runat="server" />

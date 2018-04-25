@@ -104,6 +104,8 @@
                 <td align="right">
                     <table>
                         <tr>
+                            <td><asp:CheckBox ID="chkAtender" runat="server" /></td>
+                            <td style="font-size:13px;" ><b>Atender Documento.</b></td>
                             <td><asp:CheckBox ID="chkEstSalida" runat="server" /></td>
                             <td style="font-size:13px;" ><b>Dar salida al despacho.</b></td>
                             <td align="right" style="width:20px">
@@ -174,7 +176,8 @@
                                 <asp:HiddenField ID="hf_Descripcion" runat="server" Value='<%# Eval("Desp_Descripcion")%>' />
                                     <asp:HiddenField ID="hf_FecCrea" runat="server" Value='<%# Eval("Desp_FechaCre")%>' />
                                     <asp:HiddenField ID="hf_nroDoc" runat="server" Value='<%# Eval("Desp_NroDoc")%>' />
-                                  <asp:HiddenField ID="hf_Estado" runat="server" Value='<%# Eval("estado")%>' />
+                                    <asp:HiddenField ID="hf_Estado" runat="server" Value='<%# Eval("estado")%>' />
+                                    <asp:HiddenField ID="hf_Atendido" runat="server" Value='<%# Eval("atendido")%>' />
                                 <asp:HiddenField ID="hf_IdEstado" runat="server" Value='<%# Eval("IdEstado")%>' />
                                   <asp:HiddenField ID="hf_IdDetalle" runat="server" Value='<%# Eval("Desp_IdDetalle")%>' />
                                 <asp:TextBox id="txtPares"  Style="width:50px;font-size:12px" Columns="2" type="number" MaxLength="3"  Text='<%# Eval("TotalParesEnviadoEdit")%>'  runat="server" />

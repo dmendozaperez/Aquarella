@@ -90,7 +90,7 @@ namespace www.aquarella.com.pe.Aquarella.Ventas
 
         private void sbconsulta()
         {
-
+            string strFlgAtendido = "N";
             int idDespacho = Convert.ToInt32(_iddespacho);
             DataSet dsreturn = www.aquarella.com.pe.Bll.Ventas.DespachoAlmacen.getDespacho(idDespacho);
             DataTable dt1 = new DataTable("tabla1");
@@ -113,10 +113,14 @@ namespace www.aquarella.com.pe.Aquarella.Ventas
             Session[_nameSessionData] = dsreturn.Tables[0];
 
             TxtDescripcion.Text = ((HiddenField)(gvReturns.Rows[0].FindControl("hf_Descripcion"))).Value;
+            strFlgAtendido = ((HiddenField)(gvReturns.Rows[0].FindControl("hf_Atendido"))).Value;
             TextFecha.Text = ((HiddenField)(gvReturns.Rows[0].FindControl("hf_FecCrea"))).Value;
             txtEstado.Text = ((HiddenField)(gvReturns.Rows[0].FindControl("hf_Estado"))).Value;
             txtDocumento.Text = ((HiddenField)(gvReturns.Rows[0].FindControl("hf_nroDoc"))).Value;
             _gStrEstado = ((HiddenField)(gvReturns.Rows[0].FindControl("hf_IdEstado"))).Value;
+
+            if (strFlgAtendido == "S")
+               chkAtender.Checked = true;
 
             if (_gStrEstado == "S")
                 deshabilitarControles();
@@ -125,9 +129,13 @@ namespace www.aquarella.com.pe.Aquarella.Ventas
 
         protected void deshabilitarControles()
         {
+
+            chkAtender.Checked = true;
+            chkAtender.Enabled = false;
             chkEstSalida.Checked = true;
             chkEstSalida.Enabled = false;
             btGuardar.Visible = false;
+
             for (int i = 0; i <= gvReturns.Rows.Count - 1; i++)
             {
                 TextBox txtPares = (TextBox)(gvReturns.Rows[i].FindControl("txtPares"));
@@ -302,7 +310,11 @@ namespace www.aquarella.com.pe.Aquarella.Ventas
         protected void btGuardar_Click(object sender, EventArgs e)
         {
             string strDataDetalle = "";
+            string strAtender = "N";
             int intIdDespacho = Convert.ToInt32(_iddespacho);
+
+            if (chkAtender.Checked)
+                strAtender = "S";
 
             string IdEstado = _gStrEstado;
             if (chkEstSalida.Checked)
@@ -320,7 +332,7 @@ namespace www.aquarella.com.pe.Aquarella.Ventas
                 strDataDetalle += "/>";
 
             }
-            Boolean bValida = www.aquarella.com.pe.Bll.Ventas.DespachoAlmacen.ActualizarSalidaDespacho(_user._bas_id, intIdDespacho, IdEstado, strDataDetalle);
+            Boolean bValida = www.aquarella.com.pe.Bll.Ventas.DespachoAlmacen.ActualizarSalidaDespacho(_user._bas_id, intIdDespacho, IdEstado, strDataDetalle, strAtender);
             if (bValida)
             {
                 sbconsulta();

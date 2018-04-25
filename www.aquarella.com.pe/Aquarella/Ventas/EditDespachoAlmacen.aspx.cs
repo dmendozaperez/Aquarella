@@ -138,6 +138,7 @@ namespace www.aquarella.com.pe.Aquarella.Ventas
             string strFecCreacion = "";
             string strEstado = "";
             string strIdEstado = "";
+            string strFlgAtendido = "";
             string strnroDocumento = "";
 
             for (int i = 0; i <= gvReturns.Rows.Count - 1; i++)
@@ -147,12 +148,13 @@ namespace www.aquarella.com.pe.Aquarella.Ventas
                 strFecCreacion = ((HiddenField)(gvReturns.Rows[i].FindControl("hf_FecCrea"))).Value;
                 strEstado = ((HiddenField)(gvReturns.Rows[i].FindControl("hf_Estado"))).Value;
                 strIdEstado = ((HiddenField)(gvReturns.Rows[0].FindControl("hf_IdEstado"))).Value;
+                strFlgAtendido = ((HiddenField)(gvReturns.Rows[0].FindControl("hf_Atendido"))).Value;
                 strnroDocumento = ((HiddenField)(gvReturns.Rows[i].FindControl("hf_nroDoc"))).Value;
-
+                            
                 if (strhf_flete.Equals("S"))
                     ((CheckBox)(gvReturns.Rows[i].FindControl("chkFlete"))).Checked = true;
 
-                if (strIdEstado == "S")
+                if (strIdEstado == "S"|| strFlgAtendido=="S")
                     deshabilitarControl(i);
             }
 
@@ -161,7 +163,7 @@ namespace www.aquarella.com.pe.Aquarella.Ventas
             txtDocumento.Text = strnroDocumento;
             TextFecha.Text = strFecCreacion;
 
-            if (strIdEstado.Equals("S")) {
+            if (strIdEstado.Equals("S") || strFlgAtendido.Equals("S")) {
                 btGuardar.Visible = false;
                 btAgregarLider.Visible = false;
                 TxtDescripcion.Enabled = false;
@@ -356,7 +358,8 @@ namespace www.aquarella.com.pe.Aquarella.Ventas
                 string strRotulo = ((TextBox)(gvReturns.Rows[i].FindControl("txtRotulo"))).Text;
                 string strDestino = ((TextBox)(gvReturns.Rows[i].FindControl("TxtDestino"))).Text;
                 string strAgencia = ((TextBox)(gvReturns.Rows[i].FindControl("txtAgencia"))).Text;
-                   
+                string strIdLider = ((HiddenField)(gvReturns.Rows[i].FindControl("hf_IdLider"))).Value;  
+
                 string strObs = ((TextBox)(gvReturns.Rows[i].FindControl("TxtObservacion"))).Text;
                 string strMcaFlete = "N";
                 CheckBox ckFlete = ((CheckBox)(gvReturns.Rows[i].FindControl("chkFlete")));
@@ -364,6 +367,7 @@ namespace www.aquarella.com.pe.Aquarella.Ventas
                 strMcaFlete = "S";
 
                 strDataDetalle += "<row  ";
+                strDataDetalle += " IdLider=¿" + strIdLider + "¿ ";
                 strDataDetalle += " IdDetalle=¿" + strIdDetalle + "¿ ";
                 strDataDetalle += " Rotulo=¿" + strRotulo + "¿ ";
                 strDataDetalle += " Destino=¿" + strDestino + "¿ ";
