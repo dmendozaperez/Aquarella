@@ -140,7 +140,7 @@ namespace www.aquarella.com.pe.Bll.Ventas
             return _valida;
         }
                 
-        public static Boolean ActualizarSalidaDespacho(Decimal _usu, int IdDespacho, string strEstadoDespacho, string strListDetalle)
+        public static Boolean ActualizarSalidaDespacho(Decimal _usu, int IdDespacho, string strEstadoDespacho, string strListDetalle, string strFlgAtendido)
         {
             string sqlquery = "USP_Actualizar_Salida_Despacho";
             SqlConnection cn = null;
@@ -156,6 +156,7 @@ namespace www.aquarella.com.pe.Bll.Ventas
                 cmd.Parameters.AddWithValue("@IdDespacho", IdDespacho);
                 cmd.Parameters.AddWithValue("@strEstadoDespacho", strEstadoDespacho);
                 cmd.Parameters.AddWithValue("@strListDetalle", strListDetalle);
+                cmd.Parameters.AddWithValue("@strFlgAtendido", strFlgAtendido);
                 cmd.Parameters.AddWithValue("@UsuCrea", _usu);
                 cmd.ExecuteNonQuery();
                 _valida = true;
