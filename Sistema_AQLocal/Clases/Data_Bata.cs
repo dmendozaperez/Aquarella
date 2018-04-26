@@ -427,6 +427,46 @@ namespace Sistema_AQLocal
             return med;
         }
 
+        //public static DataTable Binddata()
+        //{
+        //    DataTable dtTable = new DataTable();
+        //    DataRow dtRow;
+        //    dtTable.Columns.Add("A000", typeof(string));
+        //    dtTable.Columns.Add("A001", typeof(string));
+        //    dtTable.Columns.Add("A002", typeof(string));
+        //    dtTable.Columns.Add("A003", typeof(string));
+        //    if (true)
+        //    {
+        //        dtRow = dtTable.NewRow();
+        //        dtRow[0] = "2015/01";
+        //        dtRow[1] = "10";
+        //        dtRow[2] = "10";
+        //        dtRow[3] = "10";
+        //        dtTable.Rows.Add(dtRow);
+        //    }
+        //    if (true)
+        //    {
+        //        dtRow = dtTable.NewRow();
+        //        dtRow[0] = "2015/02";
+        //        dtRow[1] = "20";
+        //        dtRow[2] = "20";
+        //        dtRow[3] = "20";
+        //        dtTable.Rows.Add(dtRow);
+        //    }
+        //    if (true)
+        //    {
+        //        dtRow = dtTable.NewRow();
+        //        dtRow[0] = "2015/03";
+        //        dtRow[1] = "30";
+        //        dtRow[2] = "30";
+        //        dtRow[3] = "30";
+        //        dtTable.Rows.Add(dtRow);
+        //    }
+        //    return dtTable;
+
+        //}
+       
+
         private static DataTable genera_Stocks(ref string _error, ref string _codigoalmacen)
         {
             string _codalm = _codigoalmacen;
@@ -435,11 +475,39 @@ namespace Sistema_AQLocal
             try
             {
 
+                //DataTable c = Binddata();
 
+                //if (c.Rows.Count > 0 && c.Columns.Count > 1)
+                //{
+                //    int index = 1;
+                //    DataRow dtRow;
+                //    DataTable ndt = new DataTable();
+                //    ndt.Columns.Add("id", typeof(int));
+                //    ndt.Columns.Add("code", typeof(string));
+                //    ndt.Columns.Add("date", typeof(string));
+                //    ndt.Columns.Add("data", typeof(string));
 
+                //    for (int i = 1; i < c.Columns.Count; i++)
+                //    {
+                //        DataColumn dc = c.Columns[i];
+                //        string clname = dc.ColumnName;
+                //        for (int y = 0; y < c.Rows.Count; y++)
+                //        {
+                //            dtRow = ndt.NewRow();
+                //            dtRow[0] = index;
+                //            dtRow[1] = clname;
+                //            dtRow[2] = c.Rows[y][0].ToString();
+                //            dtRow[3] = c.Rows[y][i].ToString();
+                //            ndt.Rows.Add(dtRow);
+                //            index++;
+                //        }
+                //    }
+                //    DataTable dt2 = ndt;
+                //}
+                //return null;
 
-                //ruta = @"N:\sistemas\comun\";
-                ruta = @"D:\STKAQ\";
+                ruta = @"N:\sistemas\comun\";
+               // ruta = @"D:\STKAQ\";
                 //string strConnDbase = @"Provider = Microsoft.Jet.OLEDB.4.0" +
                 //                       ";Data Source = " + ruta +
                 //                       ";Extended Properties = dBASE IV" +
@@ -487,54 +555,93 @@ namespace Sistema_AQLocal
 
                     cn.Close();
 
+                    DataTable tmp = dt.Tables[1];
                     DataTable dt_tabla = new DataTable();
-                    dt_tabla.Columns.Add("cod_artic", typeof(string));
-                    dt_tabla.Columns.Add("talla", typeof(string));
-                    dt_tabla.Columns.Add("precio", typeof(double));
-                    dt_tabla.Columns.Add("stock", typeof(int));
+                    if (tmp.Rows.Count > 0 && tmp.Columns.Count > 1)
+                    {
+                        int index = 1;
+                        DataRow dtRow;
+
+                        dt_tabla.Columns.Add("cod_artic", typeof(string));
+                        dt_tabla.Columns.Add("cod_rgmed", typeof(string));
+                        dt_tabla.Columns.Add("talla", typeof(string));
+                        dt_tabla.Columns.Add("precio", typeof(double));
+                        dt_tabla.Columns.Add("stock", typeof(int));
+
+                        //DataTable ndt = new DataTable();
+                        //ndt.Columns.Add("id", typeof(int));
+                        //ndt.Columns.Add("code", typeof(string));
+                        //ndt.Columns.Add("date", typeof(string));
+                        //ndt.Columns.Add("data", typeof(string));
+
+                        for (int i = 7; i < tmp.Columns.Count; i++)
+                        {
+                            DataColumn dc = tmp.Columns[i];
+                            string clname = dc.ColumnName;
+                            for (int y = 0; y < tmp.Rows.Count; y++)
+                            {
+                                dtRow = dt_tabla.NewRow();
+                                dtRow[0] = tmp.Rows[y][3].ToString();
+                                dtRow[1] = tmp.Rows[y][4].ToString();
+                                dtRow[2] ="des_"  + Basico.Right(clname,5);
+                                dtRow[3] = 0;
+                                //dtRow[2] = tmp.Rows[y][0].ToString();
+                                dtRow[4] =Convert.ToInt32(tmp.Rows[y][i]);
+                                dt_tabla.Rows.Add(dtRow);
+                                index++;
+                            }
+                        }
+                        //dt_stk = dt_tabla;
+                    }
+                    //return dt_stk;
+                    //DataTable dt_tabla = new DataTable();
+                    //dt_tabla.Columns.Add("cod_artic", typeof(string));
+                    //dt_tabla.Columns.Add("talla", typeof(string));
+                    //dt_tabla.Columns.Add("precio", typeof(double));
+                    //dt_tabla.Columns.Add("stock", typeof(int));
                     
                     //RECIBOS
-                    for (Int32 i = 0; i < dt.Tables["ACSAL"].Rows.Count; ++i)
-                    {
-                        for (Int32 j = 0; j <= 11; ++j)
-                        {
-                            string cmp;
-                            if (j < 10)
-                            {
-                                cmp = String.Concat("0", j.ToString());
-                            }
-                            else
-                            {
-                                cmp = j.ToString();
-                            }
-                            int val = Convert.ToInt32(dt.Tables["ACSAL"].Rows[i]["csal_med" + cmp].ToString());
-                            int val1 = 0;
-                            if (val < 0)
-                            {
-                                val1 = 0;
-                            }
-                            else
-                            {
-                                val1 = val;
-                            }
+                    //for (Int32 i = 0; i < dt.Tables["ACSAL"].Rows.Count; ++i)
+                    //{
+                    //    for (Int32 j = 0; j <= 11; ++j)
+                    //    {
+                    //        string cmp;
+                    //        if (j < 10)
+                    //        {
+                    //            cmp = String.Concat("0", j.ToString());
+                    //        }
+                    //        else
+                    //        {
+                    //            cmp = j.ToString();
+                    //        }
+                    //        int val = Convert.ToInt32(dt.Tables["ACSAL"].Rows[i]["csal_med" + cmp].ToString());
+                    //        int val1 = 0;
+                    //        if (val < 0)
+                    //        {
+                    //            val1 = 0;
+                    //        }
+                    //        else
+                    //        {
+                    //            val1 = val;
+                    //        }
 
-                            string regla = dt.Tables["ACSAL"].Rows[i]["csal_rmed"].ToString();
+                    //        string regla = dt.Tables["ACSAL"].Rows[i]["csal_rmed"].ToString();
 
-                            DataRow dr = dt_tabla.NewRow();
-                            dr[0] = dt.Tables["ACSAL"].Rows[i]["csal_artic"].ToString();
-                            dr[1] = medida(regla, cmp.ToString());
-                            dr[2] = Convert.ToDecimal(dt.Tables["ACSAL"].Rows[i]["mart_pvta1"].ToString());
-                            dr[3] = val1;
+                    //        DataRow dr = dt_tabla.NewRow();
+                    //        dr[0] = dt.Tables["ACSAL"].Rows[i]["csal_artic"].ToString();
+                    //        dr[1] = medida(regla, cmp.ToString());
+                    //        dr[2] = Convert.ToDecimal(dt.Tables["ACSAL"].Rows[i]["mart_pvta1"].ToString());
+                    //        dr[3] = val1;
 
-                            if (dr[1].ToString() != "")
-                            {
-                                dt_tabla.Rows.Add(dr);
-                            }
-                            //dt_tabla.Rows.Add(dt.Rows[i]["talla"].ToString(), dt.Rows[i]["campo"].ToString());
-                            //}
-                            //catch (Exception e) { }
-                        }
-                    }
+                    //        if (dr[1].ToString() != "")
+                    //        {
+                    //            dt_tabla.Rows.Add(dr);
+                    //        }
+                    //        //dt_tabla.Rows.Add(dt.Rows[i]["talla"].ToString(), dt.Rows[i]["campo"].ToString());
+                    //        //}
+                    //        //catch (Exception e) { }
+                    //    }
+                    //}
 
                     dt_stk=dt_tabla;
                 }
@@ -547,17 +654,89 @@ namespace Sistema_AQLocal
             return dt_stk;
         }
 
+        private static DataTable dt_rmedida()
+        {
+            string sqlquery = "USP_Leer_ReglaMedida";
+            SqlConnection cn = null;
+            SqlCommand cmd = null;
+            SqlDataAdapter da = null;
+            DataTable dt = null;            
+            try
+            {
+                cn = new SqlConnection(Conexion.conexion_local);
+                if (cn.State == 0) cn.Open();
+                cmd = new SqlCommand(sqlquery, cn);
+                cmd.CommandTimeout = 0;
+                cmd.CommandType = CommandType.StoredProcedure;
+                da = new SqlDataAdapter(cmd);
+                dt = new DataTable();
+                da.Fill(dt);
+                
+            }
+            catch (Exception exc)
+            {
+                dt = null;
+            }
+           
+            return dt;
+        }
+
+        private static string get_talla(string cod_reg_med,string regm,DataTable dt_medida)
+        {
+            string _talla = "";
+            try
+            {
+                DataTable dt = dt_medida;
+
+                var talla = from tallas in dt.AsEnumerable()
+                                where tallas.Field<string>("cod_rgmed") == cod_reg_med &&
+                                      tallas.Field<string>("regm") == regm
+                            select new
+                                {
+                                    talla = tallas.Field<string>("talla"),                                  
+                                };
+                foreach(var t in talla)
+                {
+                    _talla = t.talla;
+                    break;
+                }
+               
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            return _talla;
+        }
         public static DataTable tabla_stock(ref string _error, ref string _codigoalmacen)
         {
             DataTable dt_importar = null;
             try
             {
                 DataTable dt_stk = genera_Stocks(ref _error, ref _codigoalmacen);
+               
+
+                
+
+            
+                //ConvertReglaTalla(ref dt_stk);
 
                 if (_error.Length == 0)
                 {
                     if (dt_stk != null)
                     {
+                        DataTable dt_talla_rgmed = dt_rmedida();
+                        /*get tallas de le ragla de medida*/
+                        for (Int32 i = 0; i < dt_stk.Rows.Count; ++i)
+                        {
+                            string cod_rgmed = dt_stk.Rows[i]["cod_rgmed"].ToString();
+                            string talla_rg = dt_stk.Rows[i]["talla"].ToString();
+                            string talla = get_talla(cod_rgmed, talla_rg, dt_talla_rgmed);
+                            string articulo = dt_stk.Rows[i]["cod_artic"].ToString();
+
+                            dt_stk.Rows[i]["talla"] = talla;
+                        }
+
 
                         DataTable dt = new DataTable();
 
@@ -576,7 +755,12 @@ namespace Sistema_AQLocal
                         //DataRow[] dr01 = dt_stk.Select("cantidad > 0");
                         foreach (DataRow vrow in dt_stk.Rows)
                         {
-                            dt.Rows.Add(_codigoalmacen, "", "", "", "", vrow["COD_ARTIC"].ToString().Trim(), vrow["TALLA"].ToString().Trim(), Convert.ToDecimal(vrow["STOCK"].ToString()));
+                            string _talla_stk = vrow["TALLA"].ToString().Trim();
+
+                            if (_talla_stk.Length>0)
+                            { 
+                                dt.Rows.Add(_codigoalmacen, "", "", "", "", vrow["COD_ARTIC"].ToString().Trim(), _talla_stk, Convert.ToDecimal(vrow["STOCK"].ToString()));
+                            }
                         }
 
                         //foreach (DataRow dr0 in dt_stk.Rows)
