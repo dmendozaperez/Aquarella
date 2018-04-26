@@ -441,15 +441,21 @@ namespace www.aquarella.com.pe.Aquarella.Ventas
                         Boolean _valida = www.aquarella.com.pe.Bll.Ventas.DespachoAlmacen.Anular_DetalleDespacho(_user._bas_id, idDespachoDetalle);
                         if (_valida)
                         {
-                          flgAnulado = "N";
+                          flgAnulado = "S";
                           
                             sbconsulta();
 
-                            if(gEstado!="S"& flgAnulado =="S")
+                            if (gEstado != "S" && flgAnulado == "S")
                                 msnMessage.LoadMessage("Se Anulo el Detalle seleccionado.", UserControl.ucMessage.MessageType.Information);
                             else
+                            {
                                 msnMessage.LoadMessage("No se puede Realizar la accion.", UserControl.ucMessage.MessageType.Information);
-
+                                btAgregarLider.Visible = false;
+                                btAgregarLider.Enabled = false;
+                                btGuardar.Visible = false;
+                                btGuardar.Enabled = false;
+                                Response.Redirect("EditDespachoAlmacen.aspx?IdDespacho=" + _iddespacho);
+                            }
                             flgAnulado = "N";
                         }
                         else

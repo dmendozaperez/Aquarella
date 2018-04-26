@@ -98,15 +98,15 @@
             <tr>
                 
                 <td align="left" style="border-left: solid 1px silver;">
-                    <asp:Button ID="btAgregarLider" runat="server" Text="Agregar Lider" ValidatioGroup="vsConsultForm"
-                        CausesValidation="true" OnClick="btAgregarLider_Click" /> 
+                    <asp:Button ID="btAgregarLider"  runat="server" Text="Agregar Lider" 
+                        OnClick="btAgregarLider_Click" /> 
                 </td>
                   
                 
                 <td align="right">
                   
                      <asp:Button ID="btGuardar" runat="server" Text="Guardar Cambios"  
-                        CausesValidation="true" OnClick="btGuardar_Click" /> 
+                        OnClick="btGuardar_Click" /> 
                 </td>
                 <td align="right" style="width:20px">
                        <asp:ImageButton ID="ibExportToExcel" ImageUrl="~/Design/images/Botones/b_toExcel.png"
