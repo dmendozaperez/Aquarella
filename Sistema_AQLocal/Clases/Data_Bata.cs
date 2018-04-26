@@ -434,7 +434,12 @@ namespace Sistema_AQLocal
             string ruta = "";
             try
             {
-                ruta = @"N:\sistemas\comun\";
+
+
+
+
+                //ruta = @"N:\sistemas\comun\";
+                ruta = @"D:\STKAQ\";
                 //string strConnDbase = @"Provider = Microsoft.Jet.OLEDB.4.0" +
                 //                       ";Data Source = " + ruta +
                 //                       ";Extended Properties = dBASE IV" +
