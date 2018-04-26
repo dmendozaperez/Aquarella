@@ -30,6 +30,8 @@ namespace www.aquarella.com.pe.Aquarella.Ventas
         string _nameSessionData = "_ReturnData";
         string _nameSessionDataLiq = "_ReturnDataLiq";
         string _Separator = ".";
+        string flgAnulado = "N";
+        string gEstado = "";
         private string _iddespacho { get; set; }
 
         private string _nombreSession = "ValoresventaxLider";
@@ -154,8 +156,11 @@ namespace www.aquarella.com.pe.Aquarella.Ventas
                 if (strhf_flete.Equals("S"))
                     ((CheckBox)(gvReturns.Rows[i].FindControl("chkFlete"))).Checked = true;
 
-                if (strIdEstado == "S"|| strFlgAtendido=="S")
+                if (strIdEstado =="S" || strFlgAtendido =="S")
+                {
                     deshabilitarControl(i);
+                    gEstado = "S";
+                }
             }
 
             TxtDescripcion.Text = strDescripcion;
@@ -436,8 +441,16 @@ namespace www.aquarella.com.pe.Aquarella.Ventas
                         Boolean _valida = www.aquarella.com.pe.Bll.Ventas.DespachoAlmacen.Anular_DetalleDespacho(_user._bas_id, idDespachoDetalle);
                         if (_valida)
                         {
+                          flgAnulado = "N";
+                          
                             sbconsulta();
-                            msnMessage.LoadMessage("Se Anulo el Detalle seleccionado.", UserControl.ucMessage.MessageType.Information);
+
+                            if(gEstado!="S"& flgAnulado =="S")
+                                msnMessage.LoadMessage("Se Anulo el Detalle seleccionado.", UserControl.ucMessage.MessageType.Information);
+                            else
+                                msnMessage.LoadMessage("No se puede Realizar la accion.", UserControl.ucMessage.MessageType.Information);
+
+                            flgAnulado = "N";
                         }
                         else
                         {
