@@ -219,7 +219,7 @@
                                      <asp:HiddenField ID="hf_Monto" runat="server" Value='<%# Eval("TotalVenta")%>' />
                                      <asp:HiddenField ID="hf_flete" runat="server" Value='<%# Eval("McaFlete")%>' />
                                   
-                                <asp:TextBox id="txtRotulo" Text='' TextMode="multiline" Columns="10" Rows="2" runat="server" />
+                                <asp:TextBox id="txtRotulo" Text='<%# Eval("Rotulo")%>'  TextMode="multiline" Columns="10" Rows="2" runat="server" />
                             </ItemTemplate>
                        </asp:TemplateField>
                          <asp:BoundField DataField="TotalPares" HeaderText="Pares" ItemStyle-Width="50px">
@@ -281,6 +281,7 @@
             </ContentTemplate>
             <Triggers>
                 <asp:AsyncPostBackTrigger ControlID="btConsult" EventName="click" />
+                 <asp:AsyncPostBackTrigger ControlID="btGuardar" EventName="click" />
                 <asp:AsyncPostBackTrigger ControlID="gvReturns" EventName="PageIndexChanging" />
           
             </Triggers>

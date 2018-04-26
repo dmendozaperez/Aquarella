@@ -138,12 +138,9 @@ namespace www.aquarella.com.pe.Aquarella.Ventas
             for (int i = 0; i <= gvReturns.Rows.Count - 1; i++)
             {
                 string strhf_flete = ((HiddenField)(gvReturns.Rows[i].FindControl("hf_flete"))).Value;
-                string strhf_Lider = ((HiddenField)(gvReturns.Rows[i].FindControl("hf_Lider"))).Value;
-
+               
                 if (strhf_flete.Equals("S"))
-                    ((CheckBox)(gvReturns.Rows[i].FindControl("chkFlete"))).Checked = true;
-
-                ((TextBox)(gvReturns.Rows[i].FindControl("txtRotulo"))).Text = strhf_Lider;
+                    ((CheckBox)(gvReturns.Rows[i].FindControl("chkFlete"))).Checked = true;             
 
             }
         }

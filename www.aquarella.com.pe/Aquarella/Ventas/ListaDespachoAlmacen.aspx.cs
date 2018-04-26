@@ -37,6 +37,7 @@ namespace www.aquarella.com.pe.Aquarella.Ventas
         protected void Page_Load(object sender, EventArgs e)
         {
             // Vencimiento de sesion
+                      
             if (Session[Constants.NameSessionUser] == null) Utilities.logout(Page.Session, Page.Response);
             else
                 _user = (Users)Session[Constants.NameSessionUser];
@@ -79,8 +80,7 @@ namespace www.aquarella.com.pe.Aquarella.Ventas
         }
 
 
-
-
+     
         private void sbconsulta()
         {
             DataSet dsreturn = www.aquarella.com.pe.Bll.Ventas.DespachoAlmacen.getDespachos(Convert.ToDateTime(txtDateStart.Text), Convert.ToDateTime(txtDateEnd.Text),"");
