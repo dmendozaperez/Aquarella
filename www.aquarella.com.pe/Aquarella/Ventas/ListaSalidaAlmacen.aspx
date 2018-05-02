@@ -212,7 +212,7 @@
                                         <HeaderStyle HorizontalAlign="Left" />
                                         <ItemStyle HorizontalAlign="Left" />
                                     </asp:BoundField>
-                                    <asp:BoundField DataField="Desp_Descripcion" HeaderText="Descripcion" >
+                                    <asp:BoundField DataField="Desp_Descripcion"  ItemStyle-Width="510px" HeaderText="Descripcion" >
                                     <HeaderStyle HorizontalAlign="Left" />
                                     <ItemStyle HorizontalAlign="Left" />
                                     </asp:BoundField>
