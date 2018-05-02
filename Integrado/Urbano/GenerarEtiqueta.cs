@@ -53,8 +53,9 @@ namespace Integrado.Urbano
                 string ubigeo = etiqueta.ubigeo;// RemoverDiacriticos(GenerarNombreUbigeo(oGuia.ubi_direc) + oGuia.ubi_direc);
                 string cod_refer = etiqueta.cod_refer;
 
+                // *** 2018-04-27
                 // Generar Código ZPL
-                StringBuilder strb = new StringBuilder();
+                /*StringBuilder strb = new StringBuilder();
                 strb.Append("^XA\n");                       // - Inic. Etiqueta
                 strb.Append("^CI27\n");                     // - Imprimir Caracteres Latinos
                 strb.Append("^JMA\n");                      // - Resolución: A=8d/mm, B=8d/mm 
@@ -87,6 +88,27 @@ namespace Integrado.Urbano
                 strb.Append("^PQ2^FS\n");
                 strb.Append("^XZ\n");
                 return strb.ToString();
+                */
+
+                StringBuilder strb = new StringBuilder();
+                strb.Append("^XA\n");                       // - Inic. Etiqueta
+                strb.Append("^CI27\n");                     // - Imprimir Caracteres Latinos
+                strb.Append("^JMA\n");                      // - Resolución: A=8d/mm, B=8d/mm 
+                strb.Append("^PRC\n");                      // - Velocidad impresion 4pulg/seg.
+                strb.Append("^FWN\n");                      // - Sin Rotar
+                strb.Append("^BY3,,70^FS\n");               // - Ancho y Alto de Código de Barras
+                strb.Append("^BY2,,20^FS\n");               // - Ancho y Alto de Código de Barras
+                strb.Append("^LH 0,20\n");                  // - Set Coordenada Inicial
+                strb.Append("^FO090,105^A0,030,020^FB280,2,0,C,0^FD" + cliente.ToUpper() + "^FS\n");
+                strb.Append("^FO090,155^A0,030,020^FB280,1,0,C,0^FDPEDIDO: " + nro_pedido + "^FS\n");
+                strb.Append("^FO110,015^BCN,62,Y,N,N^FD" + strNroGuia + "^FS\n");
+                strb.Append("^FO480,105^A0,030,020^FB280,2,0,C,0^FD" + cliente.ToUpper() + "^FS\n");
+                strb.Append("^FO480,155^A0,030,020^FB280,1,0,C,0^FDPEDIDO: " + nro_pedido + "^FS\n");
+                strb.Append("^FO500,015^BCN,62,Y,N,N^FD" + strNroGuia + "^FS\n");
+                strb.Append("^XZ\n");
+                return strb.ToString();
+                
+
 
             }
             catch (Exception)
