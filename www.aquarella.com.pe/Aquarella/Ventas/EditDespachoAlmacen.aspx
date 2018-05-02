@@ -74,7 +74,7 @@
                 Descripcion:
             </td>
             <td>
-                    <asp:TextBox id="TxtDescripcion"   TextMode="multiline"   Style="font-size:12px"  Columns="50" Rows="4" runat="server" />
+                    <asp:TextBox id="TxtDescripcion"   TextMode="multiline" MaxLength="500"   Style="font-size:12px"  Columns="50" Rows="4" runat="server" />
             </td>
            
         </tr>
@@ -90,6 +90,21 @@
             </td>
             <td>
                     <asp:TextBox id="txtEstado"   Enabled="false"  runat="server" />
+            </td>
+            
+        </tr>
+            <tr>
+            <td class="f12">
+                Total Pedido:
+            </td>
+            <td>
+                 <asp:TextBox id="txtPedido"  Enabled="false"    runat="server" />
+            </td>
+            <td class="f12">
+               Total Enviado:
+            </td>
+            <td>
+                    <asp:TextBox id="txtEnviado"   Enabled="false"  runat="server" />
             </td>
             
         </tr>
@@ -165,7 +180,7 @@
                                     <asp:HiddenField ID="hf_Atendido" runat="server" Value='<%# Eval("atendido")%>' />
                                      <asp:HiddenField ID="hf_IdEstado" runat="server" Value='<%# Eval("IdEstado")%>' />
                                     <asp:HiddenField ID="hf_flete" runat="server" Value='<%# Eval("McaFlete")%>' />
-                                    <asp:TextBox id="txtRotulo" Text='<%# Eval("Rotulo")%>'  TextMode="multiline" Columns="10" Rows="2" runat="server" />
+                                    <asp:TextBox id="txtRotulo" Text='<%# Eval("Rotulo")%>'  TextMode="multiline" Columns="10" Rows="5" runat="server" />
                             </ItemTemplate>
                        </asp:TemplateField>
                          <asp:BoundField DataField="TotalPares" HeaderText="Pares" ItemStyle-Width="50px">
@@ -178,12 +193,12 @@
                         </asp:BoundField>
                         <asp:TemplateField HeaderText="Agencia" SortExpression="pin_employee" ItemStyle-HorizontalAlign="Center" ItemStyle-Width="110px">
                             <ItemTemplate>
-                                <asp:TextBox id="txtAgencia" Text='<%# Eval("Agencia")%>' TextMode="multiline" Columns="10" Rows="2" runat="server" />
+                                <asp:TextBox id="txtAgencia" Text='<%# Eval("Agencia")%>' TextMode="multiline" MaxLength="500"  Columns="10"  Rows="5" runat="server" />
                             </ItemTemplate>
                        </asp:TemplateField>
                          <asp:TemplateField HeaderText="Destino" SortExpression="pin_employee" ItemStyle-HorizontalAlign="Center" ItemStyle-Width="110px">
                             <ItemTemplate>
-                                <asp:TextBox id="TxtDestino" Text='<%# Eval("Destino")%>' TextMode="multiline" Columns="10" Rows="2" runat="server" />
+                                <asp:TextBox id="TxtDestino" Text='<%# Eval("Destino")%>' TextMode="multiline" MaxLength="500"  Columns="10" Rows="5" runat="server" />
                             </ItemTemplate>
                        </asp:TemplateField>
                         <asp:BoundField DataField="TotalVenta" DataFormatString="{0:C}"  ItemStyle-Width="50px"
@@ -198,7 +213,12 @@
                        </asp:TemplateField>
                          <asp:TemplateField HeaderText="Observación" SortExpression="pin_employee" ItemStyle-HorizontalAlign="Center" ItemStyle-Width="110px">
                             <ItemTemplate>
-                                <asp:TextBox id="TxtObservacion" Text='<%# Eval("Observacion")%>' TextMode="multiline" Columns="10" Rows="2" runat="server" />
+                                <asp:TextBox id="TxtObservacion" Text='<%# Eval("Observacion")%>' TextMode="multiline" Columns="10" MaxLength="500"  Rows="5" runat="server" />
+                            </ItemTemplate>
+                       </asp:TemplateField>
+                         <asp:TemplateField HeaderText="Detalle" SortExpression="pin_employee" ItemStyle-HorizontalAlign="Center" ItemStyle-Width="110px">
+                            <ItemTemplate>
+                                <asp:TextBox id="TxtDetalle" Text='<%# Eval("Detalle")%>' TextMode="multiline" Columns="10" Rows="5" MaxLength="500" runat="server" />
                             </ItemTemplate>
                        </asp:TemplateField>
                         <asp:TemplateField HeaderText="Eliminar" ItemStyle-HorizontalAlign="Center">

@@ -94,12 +94,22 @@ namespace www.aquarella.com.pe.Aquarella.Ventas
             int idDespacho = Convert.ToInt32(_iddespacho);
             DataSet dsreturn = www.aquarella.com.pe.Bll.Ventas.DespachoAlmacen.getDespacho(idDespacho);
             DataTable dt1 = new DataTable("tabla1");
-           
+            DataTable dtDt = new DataTable();
+
 
             if (dsreturn.Tables.Count > 0)
             {
                 dt1 = dsreturn.Tables[0];
-             
+                dtDt = dsreturn.Tables[1];
+
+                foreach (DataRow row in dtDt.Rows)
+                {
+                    string _TotalPedido = row["NroPedidos"].ToString();
+                    string _TotalEnviado = row["NroEnviados"].ToString();
+                    txtPedido.Text = _TotalPedido;
+                    txtEnviado.Text = _TotalEnviado;
+                }
+
             }
             else
             {

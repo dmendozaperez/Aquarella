@@ -93,6 +93,21 @@
             </td>
             
         </tr>
+             <tr>
+            <td class="f12">
+                Total Pedido:
+            </td>
+            <td>
+                 <asp:TextBox id="txtPedido"  Enabled="false"    runat="server" />
+            </td>
+            <td class="f12">
+               Total Enviado:
+            </td>
+            <td>
+                    <asp:TextBox id="txtEnviado"   Enabled="false"  runat="server" />
+            </td>
+            
+        </tr>
         </table>
         <table width="100%" class="tablagris" cellpadding="4">
             <tr>
@@ -207,6 +222,11 @@
                         </asp:BoundField>
 
                          <asp:BoundField DataField="Observacion" HeaderText="Observación" ItemStyle-Width="110px">
+                        <HeaderStyle HorizontalAlign="Left" />
+                        <ItemStyle HorizontalAlign="Left" />
+                        </asp:BoundField>
+
+                        <asp:BoundField DataField="Detalle" HeaderText="Detalle" ItemStyle-Width="80px">
                         <HeaderStyle HorizontalAlign="Left" />
                         <ItemStyle HorizontalAlign="Left" />
                         </asp:BoundField>

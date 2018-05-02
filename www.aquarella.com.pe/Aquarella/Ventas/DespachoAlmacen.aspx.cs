@@ -316,6 +316,7 @@ namespace www.aquarella.com.pe.Aquarella.Ventas
                     string strAgencia = ((TextBox)(gvReturns.Rows[i].FindControl("txtAgencia"))).Text;
                     string strMonto = ((HiddenField)(gvReturns.Rows[i].FindControl("hf_Monto"))).Value;
                     string strObs = ((TextBox)(gvReturns.Rows[i].FindControl("TxtObservacion"))).Text;
+                    string strDetalle = ((TextBox)(gvReturns.Rows[i].FindControl("TxtDetalle"))).Text;
                     string strMcaFlete = "N";
                     CheckBox ckFlete = ((CheckBox)(gvReturns.Rows[i].FindControl("chkFlete")));
                     if (ckFlete.Checked)
@@ -330,6 +331,7 @@ namespace www.aquarella.com.pe.Aquarella.Ventas
                     strDataDetalle += " Agencia=¿" + strAgencia + "¿ ";
                     strDataDetalle += " Monto=¿" + strMonto + "¿ ";
                     strDataDetalle += " Obs=¿" + strObs + "¿ ";
+                    strDataDetalle += " Det=¿" + strDetalle + "¿ ";
                     strDataDetalle += " McaFlete=¿" + strMcaFlete + "¿ ";
                     strDataDetalle += "/>";
 

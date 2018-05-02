@@ -256,6 +256,7 @@
     <Content Include="Aquarella\Ventas\panelcomisionlider_xdoc.aspx" />
     <Content Include="Aquarella\Ventas\panelInvReports.aspx" />
     <Content Include="Aquarella\Ventas\panelReturns.aspx" />
+    <Content Include="Aquarella\Ventas\panelRep_CategoriaMarca.aspx" />
     <Content Include="Aquarella\Ventas\panelSalesByMajCat.aspx" />
     <Content Include="Aquarella\Ventas\panelSalesHall.aspx" />
     <Content Include="Aquarella\Ventas\panel_FE.aspx" />
@@ -1474,6 +1475,13 @@
     <Compile Include="Aquarella\Ventas\panelReturns.aspx.designer.cs">
       <DependentUpon>panelReturns.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Aquarella\Ventas\panelRep_CategoriaMarca.aspx.cs">
+      <DependentUpon>panelRep_CategoriaMarca.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Aquarella\Ventas\panelRep_CategoriaMarca.aspx.designer.cs">
+      <DependentUpon>panelRep_CategoriaMarca.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Aquarella\Ventas\panelSalesByMajCat.aspx.cs">
       <DependentUpon>panelSalesByMajCat.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -1685,6 +1693,7 @@
     <Compile Include="Bll\Util\TreeViewState.cs" />
     <Compile Include="Bll\Util\Utilities.cs" />
     <Compile Include="Bll\Util\ValuesDB.cs" />
+    <Compile Include="Bll\Ventas\ReporteMarcaxCategoria.cs" />
     <Compile Include="Bll\Ventas\Discounts.cs" />
     <Compile Include="Bll\Ventas\Facturacion.cs" />
     <Compile Include="Bll\Ventas\F_Electronico.cs" />

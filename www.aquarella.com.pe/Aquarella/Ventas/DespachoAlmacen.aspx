@@ -161,7 +161,7 @@
                         <tr>
                             <td>
                                  <%--<asp:TextBox id="TxtDescripcion"   TextMode="multiline"   Style="font-size:12px"  Columns="50" Rows="4" runat="server" />--%>
-                                <asp:TextBox ID="TxtDescripcion"  TextMode="multiline"   Style="font-size:12px"  Columns="50" Rows="4" runat="server"></asp:TextBox></td>
+                                <asp:TextBox ID="TxtDescripcion"  TextMode="multiline"   Style="font-size:12px" MaxLength="500"   Columns="50" Rows="4" runat="server"></asp:TextBox></td>
                         </tr>
                     </table>
                 </td>
@@ -219,21 +219,21 @@
                                      <asp:HiddenField ID="hf_Monto" runat="server" Value='<%# Eval("TotalVenta")%>' />
                                      <asp:HiddenField ID="hf_flete" runat="server" Value='<%# Eval("McaFlete")%>' />
                                   
-                                <asp:TextBox id="txtRotulo" Text='<%# Eval("Rotulo")%>'  TextMode="multiline" Columns="10" Rows="2" runat="server" />
+                                <asp:TextBox id="txtRotulo" Text='<%# Eval("Rotulo")%>'  TextMode="multiline" Columns="10" Rows="5" runat="server" />
                             </ItemTemplate>
                        </asp:TemplateField>
                          <asp:BoundField DataField="TotalPares" HeaderText="Pares" ItemStyle-Width="50px">
                         <HeaderStyle HorizontalAlign="Center" />
                         <ItemStyle HorizontalAlign="Center" />
                         </asp:BoundField>
-                        <asp:TemplateField HeaderText="Agencia" SortExpression="pin_employee" ItemStyle-HorizontalAlign="Center" ItemStyle-Width="110px">
+                        <asp:TemplateField HeaderText="Agencia" SortExpression="pin_employee" ItemStyle-HorizontalAlign="Center"  ItemStyle-Width="110px">
                             <ItemTemplate>
-                                <asp:TextBox id="txtAgencia" Text='<%# Eval("Agencia")%>' TextMode="multiline" Columns="10" Rows="2" runat="server" />
+                                <asp:TextBox id="txtAgencia" Text='<%# Eval("Agencia")%>' TextMode="multiline" MaxLength="500"  Columns="10" Rows="5" runat="server" />
                             </ItemTemplate>
                        </asp:TemplateField>
                          <asp:TemplateField HeaderText="Destino" SortExpression="pin_employee" ItemStyle-HorizontalAlign="Center" ItemStyle-Width="110px">
                             <ItemTemplate>
-                                <asp:TextBox id="TxtDestino" Text='<%# Eval("Destino")%>' TextMode="multiline" Columns="10" Rows="2" runat="server" />
+                                <asp:TextBox id="TxtDestino" Text='<%# Eval("Destino")%>' TextMode="multiline" MaxLength="500"  Columns="10" Rows="5" runat="server" />
                             </ItemTemplate>
                        </asp:TemplateField>
                         <asp:BoundField DataField="TotalVenta" DataFormatString="{0:C}"  ItemStyle-Width="50px"
@@ -248,7 +248,12 @@
                        </asp:TemplateField>
                          <asp:TemplateField HeaderText="Observación" SortExpression="pin_employee" ItemStyle-HorizontalAlign="Center" ItemStyle-Width="110px">
                             <ItemTemplate>
-                                <asp:TextBox id="TxtObservacion" Text='' TextMode="multiline" Columns="10" Rows="2" runat="server" />
+                                <asp:TextBox id="TxtObservacion" Text='' TextMode="multiline" MaxLength="500"  Columns="10" Rows="5" runat="server" />
+                            </ItemTemplate>
+                       </asp:TemplateField>
+                          <asp:TemplateField HeaderText="Detalle" SortExpression="pin_employee" ItemStyle-HorizontalAlign="Center" ItemStyle-Width="110px">
+                            <ItemTemplate>
+                                <asp:TextBox id="TxtDetalle" Text='' TextMode="multiline" MaxLength="500"  Columns="10" Rows="5" runat="server" />
                             </ItemTemplate>
                        </asp:TemplateField>
                        <asp:TemplateField HeaderText="Agregar" SortExpression="pin_employee" ItemStyle-HorizontalAlign="Center" ItemStyle-Width="110px">
