@@ -1173,7 +1173,19 @@ namespace Integrado.Sistemas.Ventas
                 _tarjeta_numero = num_tarjeta;
             }
 
-           
+
+            /*validacion de pagoz con tarjeta*/
+            Boolean valida_pago_tarjeta = (_forma_pago_id == "TAR" ? true : false);
+
+            if (valida_pago_tarjeta)
+            {
+                if (_tarjeta_numero.Length==0)
+                {
+                    lblinforma.Text = ">Debe de ingresar el numero de las tarjeta....";
+                    return;
+                }
+            }
+
             Decimal _forma_monto = Convert.ToDecimal(txtmonto.Text);
 
 
