@@ -46,11 +46,10 @@
     </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolderTitle" runat="server">
-    Consulta de ventas por categoría
+    Consulta de ventas de marca por categoría
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="ContentPlaceHolderPageDesc" runat="server">
-    Información de ventas por categoría y semana, opcional, dado que podrá obviar y
-    generar la información por sólo categorías, sin semana.
+    Información de ventas .
 </asp:Content>
 <asp:Content ID="Content4" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <asp:ScriptManager ID="ScriptManager1" runat="server" 
@@ -227,12 +226,12 @@
                                                
                                                 <asp:BoundField DataField="asesor" HeaderText="Asesor" ItemStyle-HorizontalAlign="Center"
                                                     SortExpression="Asesor" >
-                                                <ItemStyle HorizontalAlign="Center" />
+                                                <ItemStyle HorizontalAlign="left" />
                                                 </asp:BoundField>
 
                                                 <asp:BoundField DataField="NombreLider" HeaderText="Lider" ItemStyle-HorizontalAlign="Center"
                                                     SortExpression="Lider" >
-                                                <ItemStyle HorizontalAlign="Center" />
+                                                <ItemStyle HorizontalAlign="left" />
                                                 </asp:BoundField>
 
                                                 <asp:BoundField DataField="Promotora" HeaderText="Promotor" ItemStyle-HorizontalAlign="Center"
@@ -267,7 +266,7 @@
                                     </ContentTemplate>
                                     <Triggers>
                                         <asp:AsyncPostBackTrigger ControlID="btConsult" EventName="click" />
-                                        <asp:AsyncPostBackTrigger ControlID="chkGroupByWeek" EventName="checkedchanged" />
+                                       
                                     </Triggers>
                                 </asp:UpdatePanel>
                                 <!-- ACTIVITY PANEL -->
@@ -299,10 +298,10 @@
                 <div id="fragment-2">
                     <table width="100%">
                         <tr>
-                            <td align="center" style="width:100%">
+                            <td align="left" style="width:70%">
                                 <asp:UpdatePanel ID="upGraph" runat="server" UpdateMode="Conditional">
                                     <ContentTemplate>
-                                        <asp:Chart ID="chartSales" runat="server" Width="1000px" BackColor="243, 223, 193" 
+                                        <asp:Chart ID="chartSales"  runat="server" Width="700px" BackColor="243, 223, 193" 
                                             Height="350px" BorderlineDashStyle="Solid" BackGradientStyle="TopBottom" BorderWidth="2px"
                                             BorderColor="#B54001">
                                             <Titles>
@@ -342,7 +341,9 @@
                                     <Triggers>
                                         <asp:AsyncPostBackTrigger ControlID="btConsult" EventName="click" />
                                         <asp:AsyncPostBackTrigger ControlID="CheckboxShow3D" EventName="CheckedChanged" />
-                                        <asp:AsyncPostBackTrigger ControlID="FontAngleList" EventName="SelectedIndexChanged" />
+                                            <asp:AsyncPostBackTrigger ControlID="ddlLVerPor" EventName="SelectedIndexChanged" />
+                                      
+                                        <%--<asp:AsyncPostBackTrigger ControlID="FontAngleList" EventName="SelectedIndexChanged" />--%>
                                     </Triggers>
                                 </asp:UpdatePanel>
                             </td>
@@ -362,46 +363,95 @@
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td>
-                                            Angulo leyenda del Eje X:
+                                        <td class="label" style="width: 181px">
+                                            Ver Por:
                                         </td>
                                         <td>
-                                            <asp:UpdatePanel ID="upFontAngle" runat="server">
+                                            <asp:UpdatePanel ID="UpdatePanel3" runat="server">
                                                 <ContentTemplate>
-                                                    <asp:DropDownList ID="FontAngleList" runat="server" AutoPostBack="True" OnSelectedIndexChanged="FontAngleList_SelectedIndexChanged">
-                                                        <asp:ListItem Value="0" Selected="True">0</asp:ListItem>
-                                                        <asp:ListItem Value="30">30</asp:ListItem>
-                                                        <asp:ListItem Value="45">45</asp:ListItem>
-                                                        <asp:ListItem Value="60">60</asp:ListItem>
-                                                        <asp:ListItem Value="90">90</asp:ListItem>
-                                                        <asp:ListItem Value="-30">-30</asp:ListItem>
-                                                        <asp:ListItem Value="-45">-90</asp:ListItem>
-                                                        <asp:ListItem Value="-60">-60</asp:ListItem>
-                                                        <asp:ListItem Value="-90">-90</asp:ListItem>
-                                                        <asp:ListItem></asp:ListItem>
+                                                    <asp:DropDownList ID="ddlLverPor" runat="server" CssClass="spaceright" AutoPostBack="True"
+                                                        Width="120px"  OnSelectedIndexChanged="ddlLider_SelectedIndexChanged" >
+                                                        <asp:ListItem Value="M" Selected="True">Monto</asp:ListItem>
+                                                        <asp:ListItem Value="U">Unidades</asp:ListItem>
                                                     </asp:DropDownList>
                                                 </ContentTemplate>
                                             </asp:UpdatePanel>
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td valign="bottom" class="f13 fsal">
-                                            Venta:
+                                        <td class="label" style="width: 181px">
+                                            Lider:
                                         </td>
                                         <td>
-                                            <asp:UpdatePanel ID="upTotSales1" runat="server">
+                                           
+                                        </td>
+                                    </tr>
+                                     <tr>
+                                        <td colspan="2">
+                                            <asp:UpdatePanel ID="UpdatePanel6" runat="server">
                                                 <ContentTemplate>
-                                                    <asp:Label ID="lblTotSales1" CssClass="f13" runat="server"></asp:Label>
+                                                    <asp:DropDownList ID="ddlLider"   runat="server" CssClass="spaceright" AutoPostBack="True"
+                                                        Width="310px" OnSelectedIndexChanged="ddlLider_SelectedIndexChanged">
+                                                    </asp:DropDownList>
                                                 </ContentTemplate>
                                             </asp:UpdatePanel>
                                         </td>
                                     </tr>
-                                    <tr>
+                                     <tr>
                                         <td colspan="2">
-                                            <p style="text-align: justify;">
-                                                <b>Tips:</b>Ubique el Scroll del mouse sobre las barras para observar el valor de
-                                                la venta y la participación en porcentaje.</p>
+                                         
+                                           <asp:UpdatePanel ID="UpdatePanel4" runat="server" UpdateMode="Conditional">
+	                                            <ContentTemplate>
+		                                            <asp:GridView ID="gvLiderCategoria" runat="server" SkinID="gridviewSkin" ShowFooter="True"
+                                                         onpageindexchanging="gvLiderCategoria_PageIndexChanging" PageSize="4"
+			                                            Font-Size="Small" >
+			                                            <EmptyDataTemplate>
+				                                            No existen registros para mostrar.
+			                                            </EmptyDataTemplate>
+			                                            <Columns>
+			                                                <asp:BoundField DataField="Categoria" HeaderText="Categoria" ItemStyle-HorizontalAlign="Center"
+                                                                SortExpression="Categoria" >
+                                                            <ItemStyle HorizontalAlign="Left" />
+                                                            </asp:BoundField>
+                                                              <asp:BoundField DataField="Prc" HeaderText="Porc. (%)" SortExpression="pventas"
+                                                                    ItemStyle-HorizontalAlign="center" DataFormatString="{0:N2}" >
+                                                                <ItemStyle HorizontalAlign="center" />
+                                                                </asp:BoundField>
+
+			  
+			                                            </Columns>
+			                                            <FooterStyle HorizontalAlign="Right" />
+		                                            </asp:GridView>
+	                                            </ContentTemplate>
+	                                            <Triggers> 
+                                                    <asp:AsyncPostBackTrigger ControlID="btConsult" EventName="click" />
+                                                     <asp:AsyncPostBackTrigger ControlID="ddlLider" EventName="SelectedIndexChanged" />
+                                                      <asp:AsyncPostBackTrigger ControlID="ddlLverPor" EventName="SelectedIndexChanged" />
+		                                        </Triggers>
+                                            </asp:UpdatePanel>
+                                             <ajaxToolkit:UpdatePanelAnimationExtender ID="UpdatePanelAnimationExtender2" runat="server" TargetControlID="upGrid">
+                                                <Animations>
+                                                    <OnUpdating>
+                                                        <Sequence>
+                                                            <%-- Disable all the controls --%>
+                                                            <Parallel duration="0">
+                                                                <EnableAction AnimationTarget="btConsult" Enabled="false" />                                                   
+                                                            </Parallel>
+                                                        </Sequence>
+                                                    </OnUpdating>
+                                                    <OnUpdated>
+                                                        <Sequence>
+                                                            <%-- Enable all the controls --%>
+                                                            <Parallel duration="0">
+                                                                <EnableAction AnimationTarget="btConsult" Enabled="true" />
+                                                            </Parallel>
+                                                        </Sequence>
+                                                    </OnUpdated>
+                                                </Animations>
+                                            </ajaxToolkit:UpdatePanelAnimationExtender>
+                                         
                                         </td>
+                                        
                                     </tr>
                                 </table>
                             </td>
@@ -477,6 +527,8 @@
                                         <asp:AsyncPostBackTrigger ControlID="comboBoxChartType" EventName="SelectedIndexChanged" /> 
                                          <asp:AsyncPostBackTrigger ControlID="ddlVerPor" EventName="SelectedIndexChanged" />
                                          <asp:AsyncPostBackTrigger ControlID="ddlCategoria" EventName="SelectedIndexChanged" />
+                                         <asp:AsyncPostBackTrigger ControlID="ddlLVerPor" EventName="SelectedIndexChanged" />
+                                         <asp:AsyncPostBackTrigger ControlID="ddlLider" EventName="SelectedIndexChanged" />
                                     </Triggers>
                                 </asp:UpdatePanel>
                                 <!-- ACTIVITY PANEL -->
@@ -568,8 +620,7 @@
                                            <asp:UpdatePanel ID="upGrid2" runat="server" UpdateMode="Conditional">
 	                                            <ContentTemplate>
 		                                            <asp:GridView ID="gvSales2" runat="server" SkinID="gridviewSkin" ShowFooter="True"
-			                                            Font-Size="Small" OnDataBound="gvSales_DataBound" OnPageIndexChanging="gvSales_PageIndexChanging"
-			                                            OnSorting="gvSales_Sorting">
+			                                            Font-Size="Small" onpageindexchanging="gvSales2_PageIndexChanging" PageSize="5" >
 			                                            <EmptyDataTemplate>
 				                                            No existen registros para mostrar.
 			                                            </EmptyDataTemplate>
@@ -578,9 +629,9 @@
                                                                 SortExpression="Marca" >
                                                             <ItemStyle HorizontalAlign="Left" />
                                                             </asp:BoundField>
-                                                              <asp:BoundField DataField="Prc" HeaderText="Porc." SortExpression="pventas"
-                                                                    ItemStyle-HorizontalAlign="Right" DataFormatString="{0:N2}" >
-                                                                <ItemStyle HorizontalAlign="Right" />
+                                                              <asp:BoundField DataField="Prc" HeaderText="Porc. (%)" SortExpression="pventas"
+                                                                    ItemStyle-HorizontalAlign="center" DataFormatString="{0:N2}" >
+                                                                <ItemStyle HorizontalAlign="center" />
                                                                 </asp:BoundField>
 
 			  
@@ -589,6 +640,7 @@
 		                                            </asp:GridView>
 	                                            </ContentTemplate>
 	                                            <Triggers>
+                                                     <asp:AsyncPostBackTrigger ControlID="btConsult" EventName="click" />
                                                      <asp:AsyncPostBackTrigger ControlID="ddlCategoria" EventName="SelectedIndexChanged" />
                                                       <asp:AsyncPostBackTrigger ControlID="ddlVerPor" EventName="SelectedIndexChanged" />
 		                                        </Triggers>
@@ -626,31 +678,5 @@
             </div>
         </div>
     </div>
-    <%-- Disable all the controls --%>
-    <table width="100%">
-        <tr>
-            <td>
-                <div style="margin: 10px auto 0 auto;">
-                    <p class="fsal f13">
-                        Opciones de consulta</p>
-                    <table class="f12" cellpadding="4" cellspacing="4">
-                        <tr>
-                            <td>
-                                <asp:CheckBox ID="chkGroupByWeek" runat="server" Checked="true" AutoPostBack="true"
-                                    ToolTip="Chequeado: Muestra semanas, No Chequeado: Totales por fechas dAQUARELLAs."
-                                    OnCheckedChanged="chkGroupByWeek_CheckedChanged" />
-                            </td>
-                            <td>
-                                <b>Agrupar: </b>
-                            </td>
-                            <td>
-                                Seleccione para ver las ventas por semana, no chequeado mostrará las ventas netas
-                                por categorías entre las fechas establecidas.
-                            </td>
-                        </tr>
-                    </table>
-                </div>
-            </td>
-        </tr>
-    </table>
+  
 </asp:Content>

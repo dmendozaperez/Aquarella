@@ -8,13 +8,15 @@ using www.aquarella.com.pe.bll;
 using www.aquarella.com.pe.bll.Util;
 //using Bata.Aquarella.BLL.Util;
 using System.Web.UI.DataVisualization.Charting;
+using System.Text;
+using System.IO;
 
 namespace www.aquarella.com.pe.Aquarella.Ventas
 {
     public partial class panelRep_CategoriaMarca : System.Web.UI.Page
     {
         Users _user;
-        string _nameSessionData = "InfoSales", _nameSessionDataFiltered = "InfoSalesFilter", _sesionCategoriaMarca="CategoriaMarca", _sesionListLider = "ListaLideres";
+        string _nameSessionData = "InfoSales", _nameSessionDataFiltered = "InfoSalesFilter", _sesionCategoriaMarca="CategoriaMarca", _sesionListLider = "ListaLideres", _sesionListLiderCategoria = "ListaLideresCategoria", _sesionLiderCategoriaSelect = "LiderCategoriaSelect", _sesionCategoriaMarcaSelect = "CategoriaMarcaSelect";
         DataSet _dsResult;
         SortDirection _sortDir;
 
@@ -50,10 +52,7 @@ namespace www.aquarella.com.pe.Aquarella.Ventas
             }
         }
 
-        /// <summary>
-        /// Preparar formulario para empleado
-        /// </summary>
-        /// 
+  
         protected void sbllenarcombo()
         {
             DataSet dsCombos = new DataSet();
@@ -78,30 +77,11 @@ namespace www.aquarella.com.pe.Aquarella.Ventas
         protected void formForEmployee()
         {
             sbllenarcombo();
-            //if (!string.IsNullOrEmpty(_user._usv_warehouse))
-            //{
-            //    if (!string.IsNullOrEmpty(_user._usv_area))
-            //    {
-            //        WareAreaForm.wareAreaForm(_user._usv_co, _user._usv_region);
-            //        //WareAreaForm.setFormByUser(_user);
-            //    }
-            //    else
-            //        msnMessage.LoadMessage("No se encuentra asociado a ninguna area", UserControl.ucMessage.MessageType.Error);
-            //}
-            //else
-            //    msnMessage.LoadMessage("No se encuentra asociado a ninguna bodega", UserControl.ucMessage.MessageType.Error);
-
-            // Enlazar datoS
-            //refreshGridView();
+          
         }
 
         #endregion        
-        
-        /// <summary>
-        /// Calculo de totales
-        /// </summary>
-        /// <param name="gv"></param>
-        /// <param name="dt"></param>
+       
         protected void calculateTotals(GridView gv, DataTable dt)
         {
             try
@@ -129,7 +109,7 @@ namespace www.aquarella.com.pe.Aquarella.Ventas
                     gv.FooterRow.Cells[7].Text = t.x6.ToString("N2");
                     gv.FooterRow.Cells[8].Text = ((t.x5 - t.x3) / t.x5).ToString("P2");
 
-                    lblTotSales1.Text = t.x5.ToString("C0");
+                    //lblTotSales1.Text = t.x5.ToString("C0");
                     //lblTotSales2.Text = t.x5.ToString("C0");
                 }
             }
@@ -149,9 +129,11 @@ namespace www.aquarella.com.pe.Aquarella.Ventas
             _dsResult =www.aquarella.com.pe.Bll.Ventas.ReporteMarcaxCategoria.getReporteMarcaCategoria(dw_Marca.SelectedValue.ToString(), dw_Lider.SelectedValue.ToString(), DateTime.Parse(txtDateStart.Text), DateTime.Parse(txtDateEnd.Text));
             Session[_nameSessionData] = _dsResult.Tables[0];
             Session[_sesionListLider] = _dsResult.Tables[1];
-            Session[_sesionCategoriaMarca] = _dsResult.Tables[2];
+            Session[_sesionListLiderCategoria] = _dsResult.Tables[2];
+            Session[_sesionCategoriaMarca] = _dsResult.Tables[3];
             gvSales.DataSource = _dsResult;
 
+            //llenamos el combo de categoria
             var Categoria =
            from p in _dsResult.Tables[0].AsEnumerable()
            group p by p.Field<string>("Categoria") into g
@@ -163,6 +145,31 @@ namespace www.aquarella.com.pe.Aquarella.Ventas
             ddlCategoria.DataTextField = "Categoria";
             ddlCategoria.DataValueField = "Categoria";
             ddlCategoria.DataBind();
+
+
+            //llevamos el combo de lideres
+
+            var Lider =
+          from p in _dsResult.Tables[0].AsEnumerable()
+          group p by p.Field<string>("NombreLider") into g
+          select new { NombreLider = g.Key, Monto = g.Sum(p => p.Field<decimal>("Monto")), Cantidad = g.Sum(p => p.Field<int>("Cantidad")) };
+            Lider.OrderByDescending(x => x.Monto);
+
+            DataTable dtlider = DataUtil.toDataTable(Lider.ToList());
+          
+
+            ddlLider.DataSource = dtlider;
+            ddlLider.DataTextField = "NombreLider";
+            ddlLider.DataValueField = "NombreLider";
+            ddlLider.DataBind();
+
+            this.gvSales2.DataSource = null;
+            gvSales2.DataBind();
+            this.gvLiderCategoria.DataSource = null;
+            gvLiderCategoria.DataBind();
+
+            CargarGrillaCategoria();
+            cargarGillaLider();
 
         }
 
@@ -176,7 +183,24 @@ namespace www.aquarella.com.pe.Aquarella.Ventas
         private void refreshGridView()
         {
             gvSales.DataBind();
+            MergeRows(gvSales, 1);
           
+        }
+        private void MergeRows(GridView gv, int rowPivotLevel)
+        {
+            for (int rowIndex = gv.Rows.Count - 2; rowIndex >= 0; rowIndex--)
+            {
+                GridViewRow row = gv.Rows[rowIndex];
+                GridViewRow prevRow = gv.Rows[rowIndex + 1];
+                for (int colIndex = 0; colIndex < rowPivotLevel; colIndex++)
+                {
+                    if (row.Cells[colIndex].Text == prevRow.Cells[colIndex].Text)
+                    {
+                        row.Cells[colIndex].RowSpan = (prevRow.Cells[colIndex].RowSpan < 2) ? 2 : prevRow.Cells[colIndex].RowSpan + 1;
+                        prevRow.Cells[colIndex].Visible = false;
+                    }
+                }
+            }
         }
 
         /// <summary>
@@ -222,6 +246,7 @@ namespace www.aquarella.com.pe.Aquarella.Ventas
             _sortDir = GridViewSortDirection;
             Utilities.pageAndSort(gv, ref _sortDir, sortField, dt, iPage);
             GridViewSortDirection = _sortDir;
+            MergeRows(gvSales, 1);
         }
 
         /// <summary>
@@ -277,77 +302,117 @@ namespace www.aquarella.com.pe.Aquarella.Ventas
         
         }       
         
-
-        protected void chkGroupByWeek_CheckedChanged(object sender, EventArgs e)
-        {
-            // Realizar filtro siempre sobre la fuente de datos original
-            DataTable dt = (DataTable)Session[_nameSessionData];
-
-            if (!chkGroupByWeek.Checked)
-            {
-                if (dt != null)
-                {
-                    var t = (from x in dt.AsEnumerable()
-                             group x by x.Field<object>("mcv_description") into y
-                             select new
-                             {
-                                 anno = string.Empty,
-                                 can_week_no = string.Empty,
-                                 mcv_description = y.Key,
-                                 ventas = y.Sum(x => x.Field<decimal>("ventas")),
-                                 podv = y.Sum(x => x.Field<decimal>("podv")),
-                                 pventas = y.Sum(x => x.Field<decimal>("pventas")),
-                                 pventasneto = y.Sum(x => x.Field<decimal>("pventasneto")),
-                                 pmargen = y.Sum(x => x.Field<decimal>("pmargen")),
-                                 pmargenpor = y.Sum(x => x.Field<decimal>("pmargenpor"))
-                             }).Distinct().ToList();
-
-                    DataTable dtGroup = DataUtil.toDataTable(t.ToList());
-                    Session[_nameSessionDataFiltered] = dtGroup;
-                    gvSales.DataSource = dtGroup;
-                }
-            }
-            else
-            {
-                gvSales.DataSource = dt;
-              
-            }
-            gvSales.DataBind();
-
-          
-        }
-
         protected void ibExportToExcel_Click(object sender, ImageClickEventArgs e)
         {
-            gvSales.AllowPaging = false;
-            GridViewExportUtil.removeFormats(ref gvSales);
-            gridStatus();
+            //gvSales.AllowPaging = false;
+            //GridViewExportUtil.removeFormats(ref gvSales);
+            //gridStatus();
 
-            string nameFile;
+            //string nameFile;
 
-            if (chkGroupByWeek.Checked)
-                nameFile = "VentaxCategoriaxSemana";
-            else
-                nameFile = "VentaxCategoria";
+            //nameFile = "VentaxCategoria";
+          
+            //GridViewExportUtil.Export(nameFile + ".xls", gvSales);
 
-            //  pass the grid that for exporting ...
-            GridViewExportUtil.Export(nameFile + ".xls", gvSales);
+            DataTable dt = (DataTable)Session[_nameSessionData];
+
+            ExportarExcel(dt, "", "", "ReporteMarcaxCategoria");
         }
 
+
+        private void ExportarExcel(DataTable dt, string ColumnasOcultas, string ColumnasTexto, string NombreArchivo)
+        {
+
+                StringBuilder sb = new StringBuilder();
+                StringWriter sw = new StringWriter(sb);
+                HtmlTextWriter htw = new HtmlTextWriter(sw);
+                String style = style = @"<style> .textmode { mso-number-format:\@; } </script> ";
+                Page page = new Page();
+                String inicio;
+                ColumnasOcultas = ',' + ColumnasOcultas + ",";
+                ColumnasTexto = ',' + ColumnasTexto + ",";
+
+                Style stylePrueba = new Style();
+                stylePrueba.Width = Unit.Pixel(200);
+                string strRows = "";
+                string strRowsHead = "";
+                strRowsHead = strRowsHead + "<tr height=38 >";
+                for (int i = 0; i < dt.Columns.Count; i++)
+                {
+                    bool ocultar = false;
+                    string comp = "," + i.ToString() + ",";
+
+                    if (ColumnasOcultas != ",,")
+                    {
+                        ocultar = ColumnasOcultas.Contains(comp);
+                    }
+
+                    if (!ocultar)
+                        strRowsHead = strRowsHead + "<td height=38  bgcolor='#969696' width='38'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" + dt.Columns[i].ColumnName + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</ td > ";
+                }
+
+                strRowsHead = strRowsHead + "</tr>";
+            int j = 0;
+                foreach (DataRow row in dt.Rows)
+                {
+                j++;
+                    strRows = strRows + "<tr height='38' >";
+                    for (int i = 0; i < dt.Columns.Count; i++)
+                    {
+                        bool ocultar = false;
+                        string comp = "," + i.ToString() + ",";
+                        string strClass = "";
+
+                        if (ColumnasTexto != ",,")
+                        {
+
+                            if (ColumnasTexto.Contains(comp))
+                                strClass = " class='textmode'";
+                        }
+
+                        if (ColumnasOcultas != ",,")
+                        {
+
+                            ocultar = ColumnasOcultas.Contains(comp);
+
+                        }
+
+                        if (!ocultar)
+                            strRows = strRows + "<td width='400' " + strClass + " >" + row[i].ToString() + "</ td > ";
+                    }
+
+                    strRows = strRows + "</tr>";
+                }
+
+                inicio = "<div> " +
+                        "<table <Table border='1' bgColor='#ffffff' " +
+                        "borderColor='#000000' cellSpacing='2' cellPadding='2' " +
+                        "style='font-size:10.0pt; font-family:Calibri; background:white;'>" +
+                        strRowsHead +
+                         strRows +
+                        "</table>" +
+                        "</div>";
+
+                sb.Append(inicio);
+
+                Response.Clear();
+                Response.Buffer = true;
+                Response.ContentType = "application/vnd.ms-excel";
+                Response.AddHeader("Content-Disposition", "attachment;filename=" + NombreArchivo + ".xls");
+                Response.Charset = "UTF-8";
+                Response.ContentEncoding = Encoding.Default;
+                Response.Write(style);
+                Response.Write(sb.ToString());
+                Response.End();
+            }
+
+
         #endregion
-        
-        /// <summary>
-        /// Fuente de datos con la cual se este trabajando
-        /// </summary>
-        /// <returns></returns>
+
+
         protected DataTable getSource()
         {
-            // Chequeado es ventas por semana y categoria
-            if (chkGroupByWeek.Checked)
-                return (DataTable)Session[_nameSessionData];
-                // No chequeado es ventas netas entre las fechas dAQUARELLAs
-            else
-                return (DataTable)Session[_nameSessionDataFiltered];
+           return (DataTable)Session[_nameSessionData];
         }
 
         #region < Gráficos >
@@ -360,10 +425,14 @@ namespace www.aquarella.com.pe.Aquarella.Ventas
         public void buildGraph(int bars, int pie)
         {
             DataTable dt = (DataTable)Session[_nameSessionData];
+            DataTable dtLider = (DataTable)Session[_sesionListLider];
 
-            if (ddlVerPor.SelectedValue == "U") {
+            if (ddlVerPor.SelectedValue == "U") 
                 pie = 2;
-            }
+
+            if (ddlLverPor.SelectedValue == "U")
+                bars = 2;
+           
 
             var sales =
             from p in dt.AsEnumerable()
@@ -371,13 +440,57 @@ namespace www.aquarella.com.pe.Aquarella.Ventas
             select new { category = g.Key, sales = g.Sum(p => p.Field<decimal>("Monto")) };
 
             var Lider =
-          from p in dt.AsEnumerable()
+          from p in dtLider.AsEnumerable()
           group p by p.Field<string>("NombreLider") into g
-          select new { category = g.Key, sales = g.Sum(p => p.Field<decimal>("Monto")) };
+          select new { category = g.Key, sales = g.Sum(p => p.Field<decimal>("porc")) };
 
             sales.OrderByDescending(x => x.sales);
+            if (bars ==2 )
+            {
+                //foreach (var series in chartSales.Series)
+                //{
+                //    series.Points.Clear();
+                //}
 
-            if (bars > 0)
+                //chartSales.DataBind();
+                
+                var Lider2 =
+                  from p in dtLider.AsEnumerable()
+                  group p by p.Field<string>("NombreLider") into g
+                  select new { category = g.Key, sales = g.Sum(p => p.Field<decimal>("Cantidadporc")) };
+
+                DataTable dtvew = new DataTable();
+                dtvew = DataUtil.toDataTable(Lider2.ToList());
+
+                chartSales.DataSource = Lider2;
+                // Show as 2D or 3D
+                if (CheckboxShow3D.Checked)
+                    chartSales.ChartAreas["ChartArea1"].Area3DStyle.Enable3D = true;
+                else
+                    chartSales.ChartAreas["ChartArea1"].Area3DStyle.Enable3D = false;
+
+                chartSales.Series[0].ToolTip = "#LEGENDTEXT: #VAL{P0} - #PERCENT";
+                chartSales.ChartAreas[0].AxisY.LabelStyle.Format = "{#,##}%";
+                chartSales.Series[0].LegendToolTip = "#PERCENT";
+
+                chartSales.Series[0].LabelFormat = "{#,##}%";
+                chartSales.Series[0].IsValueShownAsLabel = true;
+                // Set series members names for the X and Y values 
+                chartSales.Series[0].XValueType = System.Web.UI.DataVisualization.Charting.ChartValueType.String;
+                chartSales.ChartAreas["ChartArea1"].AxisX.LabelStyle.Format = "#.##";
+                chartSales.ChartAreas[0].AxisX.LabelStyle.Format = "0.00";
+                chartSales.ChartAreas[0].AxisX.LabelStyle.Format = "{0:0.00}";
+                // Set axis labels angle                
+                //chartSales.ChartAreas["ChartArea1"].AxisX.LabelStyle.Angle = int.Parse(FontAngleList.SelectedItem.Text);
+                chartSales.ChartAreas["ChartArea1"].AxisX.LabelStyle.Angle = -40;
+                // Set offset labels style
+                chartSales.AntiAliasing = System.Web.UI.DataVisualization.Charting.AntiAliasingStyles.All;
+
+                // Paint labels of all bars
+                chartSales.ChartAreas[0].AxisX.Interval = 1;
+
+                chartSales.DataBind();
+            } else if (bars > 0)
             {
                 chartSales.DataSource = Lider;
                 // Show as 2D or 3D
@@ -386,17 +499,18 @@ namespace www.aquarella.com.pe.Aquarella.Ventas
                 else
                     chartSales.ChartAreas["ChartArea1"].Area3DStyle.Enable3D = false;
 
-                chartSales.Series[0].ToolTip = "#LEGENDTEXT: #VAL{C0} - #PERCENT";
+                chartSales.Series[0].ToolTip = "#LEGENDTEXT: #VAL{P0} - #PERCENT";
+                chartSales.ChartAreas[0].AxisY.LabelStyle.Format = "{#}%";
                 chartSales.Series[0].LegendToolTip = "#PERCENT";
 
-                chartSales.Series[0].LabelFormat = "{C0}";
+                chartSales.Series[0].LabelFormat = "{#}%";
                 chartSales.Series[0].IsValueShownAsLabel = true;
                 // Set series members names for the X and Y values 
                 chartSales.Series[0].XValueType = System.Web.UI.DataVisualization.Charting.ChartValueType.String;
 
                 // Set axis labels angle                
-                chartSales.ChartAreas["ChartArea1"].AxisX.LabelStyle.Angle = int.Parse(FontAngleList.SelectedItem.Text);
-                chartSales.ChartAreas["ChartArea1"].AxisX.LabelStyle.Angle = -90;
+                //chartSales.ChartAreas["ChartArea1"].AxisX.LabelStyle.Angle = int.Parse(FontAngleList.SelectedItem.Text);
+                chartSales.ChartAreas["ChartArea1"].AxisX.LabelStyle.Angle = -40;
                 // Set offset labels style
                 chartSales.AntiAliasing = System.Web.UI.DataVisualization.Charting.AntiAliasingStyles.All;
 
@@ -480,17 +594,24 @@ namespace www.aquarella.com.pe.Aquarella.Ventas
         protected void ddlCategoria_SelectedIndexChanged(object sender, EventArgs e)
         {
             buildGraph(0, 1);
+            CargarGrillaCategoria();
+
+        }
+
+        protected void CargarGrillaCategoria() {
+
             string strCategoria = ddlCategoria.SelectedValue;
-           
+
             DataTable dt = (DataTable)Session[_sesionCategoriaMarca];
-            DataTable dtMarca = dt.Clone(); 
+            DataTable dtMarca = dt.Clone();
 
             DataRow[] rows = dt.Select("Categoria ='" + strCategoria + "'");
 
             foreach (DataRow dr in rows)
                 dtMarca.ImportRow(dr);
-                      
-            if (ddlVerPor.SelectedValue == "U") {
+
+            if (ddlVerPor.SelectedValue == "U")
+            {
                 var Unidades =
                    from p in dtMarca.AsEnumerable()
                    group p by p.Field<string>("Marca") into g
@@ -501,12 +622,49 @@ namespace www.aquarella.com.pe.Aquarella.Ventas
             }
 
 
+            Session[_sesionCategoriaMarcaSelect] = dtMarca;
 
             gvSales2.DataSource = dtMarca;
             gvSales2.DataBind();
 
         }
 
+        protected void ddlLider_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            buildGraph(1, 1);
+            cargarGillaLider();
+
+        }
+
+
+        protected void cargarGillaLider() {
+
+            string strLider = ddlLider.SelectedValue;
+
+            DataTable dt = (DataTable)Session[_sesionListLiderCategoria];
+            DataTable dtCategoria = dt.Clone();
+
+            DataRow[] rows = dt.Select("NombreLider ='" + strLider + "'");
+
+            foreach (DataRow dr in rows)
+                dtCategoria.ImportRow(dr);
+
+            if (ddlLverPor.SelectedValue == "U")
+            {
+                var Unidades =
+                   from p in dtCategoria.AsEnumerable()
+                   group p by p.Field<string>("Categoria") into g
+                   select new { Categoria = g.Key, Prc = g.Sum(p => p.Field<decimal>("CantidadPrc")) };
+
+                dtCategoria = new DataTable();
+                dtCategoria = DataUtil.toDataTable(Unidades.ToList());
+            }
+            Session[_sesionLiderCategoriaSelect] = dtCategoria;
+
+            gvLiderCategoria.DataSource = dtCategoria;
+            gvLiderCategoria.DataBind();
+
+        }
         protected void comboBoxChartType_SelectedIndexChanged(object sender, EventArgs e)
         {
             buildGraph(0, 1);
@@ -516,7 +674,36 @@ namespace www.aquarella.com.pe.Aquarella.Ventas
         {
             buildGraph(0, 1);
         }
-      
+
+        protected void ddlLVerPor_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            buildGraph(1, 1);
+        }
+
+        protected void gvLiderCategoria_PageIndexChanging(object sender, GridViewPageEventArgs e)
+        {
+            gvLiderCategoria.PageIndex = e.NewPageIndex;
+
+            DataTable dt1 = new DataTable();
+
+            dt1 = (DataTable)Session[_sesionLiderCategoriaSelect];
+            gvLiderCategoria.DataSource = dt1;
+            gvLiderCategoria.DataBind();
+
+        }
+
+        protected void gvSales2_PageIndexChanging(object sender, GridViewPageEventArgs e)
+        {
+            gvSales2.PageIndex = e.NewPageIndex;
+
+            DataTable dt1 = new DataTable();
+
+            dt1 = (DataTable)Session[_sesionCategoriaMarcaSelect];
+            gvSales2.DataSource = dt1;
+            gvSales2.DataBind();
+
+        }
+
         #endregion
 
     }

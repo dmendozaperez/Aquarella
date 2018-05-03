@@ -283,40 +283,67 @@ namespace www.aquarella.com.pe.Aquarella.Ventas {
         protected global::System.Web.UI.WebControls.CheckBox CheckboxShow3D;
         
         /// <summary>
-        /// Control upFontAngle.
+        /// Control UpdatePanel3.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.UpdatePanel upFontAngle;
+        protected global::System.Web.UI.UpdatePanel UpdatePanel3;
         
         /// <summary>
-        /// Control FontAngleList.
+        /// Control ddlLverPor.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList FontAngleList;
+        protected global::System.Web.UI.WebControls.DropDownList ddlLverPor;
         
         /// <summary>
-        /// Control upTotSales1.
+        /// Control UpdatePanel6.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.UpdatePanel upTotSales1;
+        protected global::System.Web.UI.UpdatePanel UpdatePanel6;
         
         /// <summary>
-        /// Control lblTotSales1.
+        /// Control ddlLider.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblTotSales1;
+        protected global::System.Web.UI.WebControls.DropDownList ddlLider;
+        
+        /// <summary>
+        /// Control UpdatePanel4.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel UpdatePanel4;
+        
+        /// <summary>
+        /// Control gvLiderCategoria.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.GridView gvLiderCategoria;
+        
+        /// <summary>
+        /// Control UpdatePanelAnimationExtender2.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::AjaxControlToolkit.UpdatePanelAnimationExtender UpdatePanelAnimationExtender2;
         
         /// <summary>
         /// Control upaeBars.
@@ -452,14 +479,5 @@ namespace www.aquarella.com.pe.Aquarella.Ventas {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::AjaxControlToolkit.UpdatePanelAnimationExtender UpdatePanelAnimationExtender1;
-        
-        /// <summary>
-        /// Control chkGroupByWeek.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.CheckBox chkGroupByWeek;
     }
 }
