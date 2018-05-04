@@ -98,13 +98,13 @@
                 Total Pedido:
             </td>
             <td>
-                 <asp:TextBox id="txtPedido"  Enabled="false"    runat="server" />
+                 <asp:TextBox id="txtPedido"  Enabled="false"  text="casa"  runat="server" />
             </td>
             <td class="f12">
                Total Enviado:
             </td>
             <td>
-                    <asp:TextBox id="txtEnviado"   Enabled="false"  runat="server" />
+                    <asp:TextBox id="txtEnviado"  value="casa"  Enabled="false"  runat="server" />
             </td>
             
         </tr>

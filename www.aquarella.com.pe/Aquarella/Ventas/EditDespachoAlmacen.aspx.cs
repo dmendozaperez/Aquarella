@@ -126,6 +126,7 @@ namespace www.aquarella.com.pe.Aquarella.Ventas
                     _TotalEnviado = row["NroEnviados"].ToString();
                     txtPedido.Text = _TotalPedido;
                     txtEnviado.Text = _TotalEnviado;
+                    
                 }
             }
             else

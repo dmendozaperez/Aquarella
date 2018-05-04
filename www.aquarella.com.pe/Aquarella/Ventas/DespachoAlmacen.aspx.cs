@@ -124,10 +124,10 @@ namespace www.aquarella.com.pe.Aquarella.Ventas
             Session[_nameSessionData] = dsreturn.Tables[0]; 
             Session[_nameSessionDataLiq] = dsreturn.Tables[1];
 
-            if (dsreturn.Tables.Count > 0)
-            {
-                MergeRows(gvReturns, 2);
-            }
+            //if (dsreturn.Tables.Count > 0)
+            //{
+            //    MergeRows(gvReturns, 2);
+            //}
 
 
         }
@@ -430,6 +430,44 @@ namespace www.aquarella.com.pe.Aquarella.Ventas
             return StrlistLiquidacion;
 
         }
+
+        public void llenarGrilla()
+        {
+            DataSet ds = new DataSet();
+            string idLider = "449";
+            string Descripcion = TextBox1.Text;
+
+            ds = www.aquarella.com.pe.Bll.Ventas.DespachoAlmacen.getRotulo(idLider, Descripcion);
+            //Session[DSArticulos] = ds;
+            GridRotulos.DataSource = ds;
+            GridRotulos.DataBind();
+
+        }
+
+
+        protected void btnBuscar_Click(object sender, EventArgs e)
+        {
+            llenarGrilla();
+        }
+
+        protected void GridRotulos_RowCommand(object sender, GridViewCommandEventArgs e)
+        {
+            if (e.CommandName == "Seleccionar")
+            {
+                string sss = "";
+
+            }
+        }
+
+        protected void GridRotulos_PageIndexChanging(object sender, GridViewPageEventArgs e)
+        {
+            GridRotulos.PageIndex = e.NewPageIndex;
+            DataSet data = (DataSet)Session[_nameSessionData];
+            GridRotulos.DataSource = data.Tables[0];
+            GridRotulos.DataBind();
+
+        }
+
 
         private void MergeRows(GridView gv, int rowPivotLevel)
         {

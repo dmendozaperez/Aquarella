@@ -49,7 +49,7 @@
     Consulta de ventas de marca por categoría
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="ContentPlaceHolderPageDesc" runat="server">
-    Información de ventas .
+   
 </asp:Content>
 <asp:Content ID="Content4" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <asp:ScriptManager ID="ScriptManager1" runat="server" 
@@ -77,7 +77,7 @@
         <table width="100%" class="tablagris" cellpadding="4">
             <tr>
                 <td class="fsal f13" colspan="2">
-                    Formulario de consulta
+                    
                 </td>
             </tr>
             <tr>
@@ -134,11 +134,12 @@
                                                 Operator="DataTypeCheck" ErrorMessage="Dígite una fecha válida">*</asp:CompareValidator>
                                         </td>
                                     </tr>
+                                    
                                 </table>
                             </td>
                             <!---->
                             <td width="50%">
-                                <table cellpadding="0" cellspacing="0">
+                                <table  width="100%" cellpadding="0" cellspacing="0">
                                     <tr>
                                         <td class="f12" colspan="3">
                                             Fecha de cierre:
@@ -179,7 +180,61 @@
                                 </table>
                             </ td>
                         </tr>
+                          <tr>
+                            <td width="50%" align="left">
+                                <table  width="100%" cellpadding="1" cellspacing="1">
+                                    <tr>
+                                        <td width="73%" class="f12" >
+                                            </td>
+                                     
+                                        <td class="f12" colspan="3">
+                                            Total Monto (S/.):
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="style5">
+                                            
+                                        </td>
+                                         <td class="style1">
+                                             <asp:UpdatePanel ID="upPMonto" runat="server" UpdateMode="Conditional">
+                                                  <ContentTemplate>
+                                                    <asp:TextBox ID="txtMonto" text="" runat="server"></asp:TextBox>
+                                                  </ContentTemplate>
+                                                <Triggers>
+                                                    <asp:AsyncPostBackTrigger ControlID="btConsult" EventName="click" />
+                                                </Triggers>
+                                            </asp:UpdatePanel>
+                                            </td>
+                                    </tr>
+                                    
+                                </table>
+                            </td>
+                            <!---->
+                            <td width="50%">
+                                <table cellpadding="0" cellspacing="0">
+                                    <tr>
+                                        <td class="f12" colspan="3">
+                                           Total Unidades:
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                             <asp:UpdatePanel ID="UpdatePanel7" runat="server" UpdateMode="Conditional">
+                                                  <ContentTemplate>
+                                                        <asp:TextBox ID="txtTotalUnidades"    runat="server" ></asp:TextBox>  
+                                                </ContentTemplate>
+                                                <Triggers>
+                                                    <asp:AsyncPostBackTrigger ControlID="btConsult" EventName="click" />
+                                                </Triggers>
+                                            </asp:UpdatePanel>
+                                        </td>
+                                        
+                                    </tr>
+                                </table>
+                            </ td>
+                        </tr>
                     </table>
+                 
                 </td>
                 <td valign="middle">
                     <asp:Button ID="btConsult" runat="server" Text="Consultar" ValidationGroup="vsConsultForm"
@@ -199,6 +254,7 @@
                 </td>
             </tr>
         </table>
+
     </div>
     <!-- PANEL DE RESULTADOS -->
     <div style="margin: 10px auto 0 auto;">
