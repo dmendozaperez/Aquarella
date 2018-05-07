@@ -59,7 +59,7 @@ namespace www.aquarella.pe.Data.Control
                     }
                 }
             }
-            catch
+            catch(Exception ex)
             {
                 menu = null;
             }

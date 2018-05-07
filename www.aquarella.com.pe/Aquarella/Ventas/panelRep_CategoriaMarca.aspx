@@ -198,7 +198,7 @@
                                          <td class="style1">
                                              <asp:UpdatePanel ID="upPMonto" runat="server" UpdateMode="Conditional">
                                                   <ContentTemplate>
-                                                    <asp:TextBox ID="txtMonto" text="" runat="server"></asp:TextBox>
+                                                    <asp:TextBox ID="txtMonto" text="" ReadOnly  runat="server" ></asp:TextBox>
                                                   </ContentTemplate>
                                                 <Triggers>
                                                     <asp:AsyncPostBackTrigger ControlID="btConsult" EventName="click" />
@@ -221,7 +221,7 @@
                                         <td>
                                              <asp:UpdatePanel ID="UpdatePanel7" runat="server" UpdateMode="Conditional">
                                                   <ContentTemplate>
-                                                        <asp:TextBox ID="txtTotalUnidades"    runat="server" ></asp:TextBox>  
+                                                        <asp:TextBox ID="txtTotalUnidades"  ReadOnly runat="server" ></asp:TextBox>  
                                                 </ContentTemplate>
                                                 <Triggers>
                                                     <asp:AsyncPostBackTrigger ControlID="btConsult" EventName="click" />
