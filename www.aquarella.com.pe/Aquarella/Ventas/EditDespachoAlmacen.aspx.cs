@@ -194,7 +194,7 @@ namespace www.aquarella.com.pe.Aquarella.Ventas
             
             ((TextBox)(gvReturns.Rows[i].FindControl("txtAgencia"))).Enabled= false;
             ((TextBox)(gvReturns.Rows[i].FindControl("TxtDestino"))).Enabled = false;
-            ((TextBox)(gvReturns.Rows[i].FindControl("txtRotulo"))).Enabled = false;
+            //((TextBox)(gvReturns.Rows[i].FindControl("txtRotulo"))).Enabled = false;
             ((TextBox)(gvReturns.Rows[i].FindControl("TxtObservacion"))).Enabled = false;
             ((TextBox)(gvReturns.Rows[i].FindControl("TxtDetalle"))).Enabled = false;
             ((CheckBox)(gvReturns.Rows[i].FindControl("chkFlete"))).Enabled = false;

@@ -23,13 +23,18 @@
             }
         }
 
-        function AbrirPopup(idLider, Descripcion) {
+        function AbrirPopup(idLider, Descripcion, atendido) {
 
+            if (atendido!='S'){
             var options = 'location=1,status=1,scrollbars=1,width=800,height=500';
 
             var href = 'panelRotulo_App.aspx?LIDER_ID=' + idLider + '&DESCRIPCION=' + Descripcion;
 
             window.open(href, 'Proveedores', options);
+            } else {
+                alert('el Rotulo no puede ser cambiado.')
+        
+            }
         }
 
     </script>
@@ -201,7 +206,7 @@
                           
                                     <center>
                                      
-                                         <a href="#" onclick="AbrirPopup('<%# Eval("IdLider")%>','<%# Eval("NombreLider")%>')">
+                                         <a href="#" onclick="AbrirPopup('<%# Eval("IdLider")%>','<%# Eval("NombreLider")%>','<%# Eval("atendido")%>')">
                                             <asp:Image ID="Image1" ImageUrl="~/Design/images/Botones/editOrder.png" runat="server" />
                                         </a>
                                       
