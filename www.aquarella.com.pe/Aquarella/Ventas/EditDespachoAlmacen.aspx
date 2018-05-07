@@ -201,7 +201,7 @@
                           
                                     <center>
                                      
-                                         <a href="#" onclick="AbrirPopup('<%# Eval("IdLider")%>','<%# Eval("Desp_Descripcion")%>')">
+                                         <a href="#" onclick="AbrirPopup('<%# Eval("IdLider")%>','<%# Eval("NombreLider")%>')">
                                             <asp:Image ID="Image1" ImageUrl="~/Design/images/Botones/editOrder.png" runat="server" />
                                         </a>
                                       
