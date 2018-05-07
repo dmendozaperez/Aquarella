@@ -246,6 +246,16 @@ namespace Epson_Ticket
                                 tk.lineasGuio();
                                 tk.TextoCentro(_cod_hash);
                                 tk.lineasGuio();
+
+                                /*en esta linea ponemos el texto para ecommerce*/
+                                if (Ent_Global._canal_venta == "BA")
+                                {
+                                    String _nota_tk = dt.Rows[0]["nota_tk"].ToString();
+                                    tk.TextoIzquierda(_nota_tk);
+                                    tk.lineasGuio();
+                                }
+
+
                                 tk.TextoIzquierda(_nota);
                                 tk.lineasGuio();
                                 tk.TextoCentro("*** GRACIAS POR SU COMPRA ***");
