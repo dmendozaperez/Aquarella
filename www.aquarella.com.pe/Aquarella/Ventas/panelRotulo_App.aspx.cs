@@ -32,11 +32,14 @@ namespace www.aquarella.com.pe.Aquarella.Ventas
             else
                 _user = (Users)Session[Constants.NameSessionUser];
 
+            //_IdLider = "409";//Request.QueryString["LIDER_ID"];
+            //_Descripcion = "seleccionar";// Request.QueryString["DESCRIPCION"];
             _IdLider = Request.QueryString["LIDER_ID"];
             _Descripcion = Request.QueryString["DESCRIPCION"];
             TxtLider.Text = _Descripcion;
+            llenarGrilla();
 
-          
+
 
             if (!IsPostBack)
             {

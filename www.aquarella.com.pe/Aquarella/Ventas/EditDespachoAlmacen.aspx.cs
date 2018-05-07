@@ -367,7 +367,7 @@ namespace www.aquarella.com.pe.Aquarella.Ventas
             Response.End();
         }
 
-        protected void btGuardar_Click(object sender, EventArgs e)
+        protected void btGuardarEdit_Click(object sender, EventArgs e)
         {
             string strDataDetalle = "";
             string strDescripcion= TxtDescripcion.Text;
@@ -377,13 +377,15 @@ namespace www.aquarella.com.pe.Aquarella.Ventas
             for (int i = 0; i <= gvReturns.Rows.Count - 1; i++)
             {
                 
-                string strIdDetalle = ((HiddenField)(gvReturns.Rows[i].FindControl("hf_IdDetalle"))).Value;
-                string strRotulo = ((TextBox)(gvReturns.Rows[i].FindControl("txtRotulo"))).Text;
+                string strIdDetalle = ((HiddenField)(gvReturns.Rows[i].FindControl("hf_IdDetalle"))).Value;     
+                //string strRotulo = ((TextBox)(gvReturns.Rows[i].FindControl("txtRotulo"))).Text;
                 string strDestino = ((TextBox)(gvReturns.Rows[i].FindControl("TxtDestino"))).Text;
                 string strAgencia = ((TextBox)(gvReturns.Rows[i].FindControl("txtAgencia"))).Text;
-                string strIdLider = ((HiddenField)(gvReturns.Rows[i].FindControl("hf_IdLider"))).Value;  
-
+                string strIdLider = ((HiddenField)(gvReturns.Rows[i].FindControl("hf_IdLider"))).Value;
+                string strRotulo = Request.Form["Rotulo_" + strIdLider];
+              
                 string strObs = ((TextBox)(gvReturns.Rows[i].FindControl("TxtObservacion"))).Text;
+                
                 string strDetalle = ((TextBox)(gvReturns.Rows[i].FindControl("TxtDetalle"))).Text;
                 string strMcaFlete = "N";
                 CheckBox ckFlete = ((CheckBox)(gvReturns.Rows[i].FindControl("chkFlete")));

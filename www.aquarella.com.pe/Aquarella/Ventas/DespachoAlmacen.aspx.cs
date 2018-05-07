@@ -293,6 +293,9 @@ namespace www.aquarella.com.pe.Aquarella.Ventas
 
         protected void btGuardar_Click(object sender, EventArgs e)
         {
+
+          
+
             string strDataDetalle = "";
             string strLiqLiderDespacho = "";
             int intIdDespacho = Convert.ToInt32(_iddespacho);
@@ -310,7 +313,8 @@ namespace www.aquarella.com.pe.Aquarella.Ventas
 
                     string strIdLider = ((HiddenField)(gvReturns.Rows[i].FindControl("hf_IdLider"))).Value;
                     string strLider = ((HiddenField)(gvReturns.Rows[i].FindControl("hf_Lider"))).Value;
-                    string strRotulo = ((TextBox)(gvReturns.Rows[i].FindControl("txtRotulo"))).Text;
+                    //string strRotulo = ((TextBox)(gvReturns.Rows[i].FindControl("txtRotulo"))).Text;
+                    string strRotulo = Request.Form["Rotulo_" + strIdLider]; 
                     string strPares = ((HiddenField)(gvReturns.Rows[i].FindControl("hf_Pares"))).Value;
                     string strDestino = ((TextBox)(gvReturns.Rows[i].FindControl("TxtDestino"))).Text;
                     string strAgencia = ((TextBox)(gvReturns.Rows[i].FindControl("txtAgencia"))).Text;

@@ -23,13 +23,16 @@
 
         }
 
-        function Actualizar() {
-           alert("casaaa")
+        function Actualizar(IdLider,Nombre, Documento) {
+           
+           //$("#409").val('nuevo rotulo');
+            //document.getElementById("408").value = "Tutorial Javascript";
+            var strRotulo = Nombre + " DNI:" + Documento;
           
-
-           document.getElementById("ContentPlaceHolder1_TxtDescripcion").value = 23423;
-                                    
-           alert("2") 
+           window.opener.$("[id*='Rotulo_" + IdLider + "']").val(strRotulo);
+           //document.getElementById("ContentPlaceHolder1_TxtDescripcion").value = 23423;
+            window.close();
+          
 
 
         }
@@ -45,7 +48,7 @@
                 <div class="ui-dialog-titlebar ui-widget-header ui-corner-all ui-helper-clearfix" style="font-size:10px">
                     <span class="ui-dialog-title" id="ui-dialog-title-dialog">
                         <br/>
-                        Agregar Articulos a la Promoción : "<asp:Label ID="lblTitulo" runat="server" Text="Label"></asp:Label>"
+                        Seleccion de Rotulo :
                         <br/>
                     </span>
 
@@ -74,7 +77,8 @@
                       </td>
                     <td style="vertical-align:middle">
                              <br/>
-                            <asp:TextBox ID="txtDescripcion" runat="server"  Width="390px" />
+                            <asp:TextBox ID="txtDescripcion" runat="server" AutoPostBack="true"  OnTextChanged="btnBuscar_Click" Width="390px"  />
+                   
                         </td>
                     </tr>
                     <tr>
@@ -88,9 +92,7 @@
                         </td>
                        
                     </tr>
-
-
-                    
+                                        
                     <tr>
                         
                         <td colspan="2" rowspan="2">
@@ -111,7 +113,7 @@
                                                             <asp:HiddenField ID="hf_documento" runat="server" Value='<%# Eval("Documento")%>' />
                                                       <%--  <asp:Button ID='eliminar' Text="Seleccionar" runat="server" CommandName="Seleccionar" CommandArgument='<%# Eval("Bas_Id") %>'
                                                             OnClientClick="Actualizar();" />--%>
-                                                        <a href="#" onclick="Actualizar()">
+                                                        <a href="#" onclick="Actualizar('<%# Eval("IdLider")%>','<%# Eval("Descripcion")%>','<%# Eval("Documento")%>')"">
                                                             <asp:Image ID="Image1" ImageUrl="~/Design/images/Botones/editOrder.png" runat="server" />
                                                         </a>
                                                     </ItemTemplate>
@@ -121,7 +123,7 @@
                                      </ContentTemplate>
                                   <Triggers>
                                     <asp:AsyncPostBackTrigger ControlID="btnBuscar" EventName="click" />
-
+                                         <asp:AsyncPostBackTrigger ControlID="txtDescripcion"  EventName="TextChanged"  />
                                 </Triggers>
                            </asp:UpdatePanel>
                         </td>

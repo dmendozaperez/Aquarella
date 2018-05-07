@@ -39,6 +39,29 @@
                 }]
                 });
             }
+
+        function AbrirPopup(idLider, Descripcion) {
+           
+            var options = 'location=1,status=1,scrollbars=1,width=600,height=500';
+          
+            var href='panelRotulo_App.aspx?LIDER_ID='+idLider+'&DESCRIPCION='+Descripcion;
+
+            window.open(href, 'Proveedores', options);
+        }
+
+        $(function () {
+
+            $('#btnOpenSupplierSearch').click(function () {
+                document.getElementById("409").value = "junior";
+                var porId = document.getElementById("409").value;
+                alert(porId)
+                var options = 'location=1,status=1,scrollbars=1,width=800,height=500';
+             
+                window.open('panelRotulo_App.aspx', 'Proveedores', options);
+
+            });
+
+        });
        
     </script>
     <style type="text/css">
@@ -220,11 +243,8 @@
                         HorizontalAlign="Center" />
                     <AlternatingRowStyle BackColor="White" />
                      <Columns>
-                        <%--<asp:BoundField DataField="asesor" HeaderText="Asesor" ItemStyle-Width="110px">
-                        <HeaderStyle HorizontalAlign="Left" />
-                        <ItemStyle HorizontalAlign="Left" />
-                        </asp:BoundField>--%>
-                         <asp:BoundField DataField="NombreLider" HeaderText="Lider" ItemStyle-Width="110px">
+             
+                        <asp:BoundField DataField="NombreLider" HeaderText="Lider" ItemStyle-Width="110px">
                         <HeaderStyle HorizontalAlign="Left" />
                         <ItemStyle HorizontalAlign="Left" />
                         </asp:BoundField>
@@ -237,28 +257,18 @@
                                      <asp:HiddenField ID="hf_Monto" runat="server" Value='<%# Eval("TotalVenta")%>' />
                                      <asp:HiddenField ID="hf_flete" runat="server" Value='<%# Eval("McaFlete")%>' />
                                   
-                                <asp:TextBox id="txtRotulo" Text='<%# Eval("Rotulo")%>' Enable="false" TextMode="multiline" Columns="10" Rows="5" runat="server" />
-                      
+                                 <textarea cols="10" rows="5" disabled  id='Rotulo_<%# Eval("Area_Id")%>' name='Rotulo_<%# Eval("Area_Id")%>'> <%# Eval("Rotulo")%></textarea>
                             </ItemTemplate>
                        </asp:TemplateField>
                           <asp:TemplateField HeaderText="" ItemStyle-HorizontalAlign="Center" ItemStyle-Width="10px">
                                 <ItemTemplate>
-                            <%--        <asp:ImageButton ID="imgedit" CommandArgument='<%# Eval("Area_Id")%>'
-                                        CommandName="EditOrder"  runat="server" ImageUrl="~/Design/images/Botones/b_edit_order.png"
-                                        Visible="true" ToolTip="Cargar para edición." BorderWidth="0" />--%>
+                          
                                     <center>
-                                        <%--<a class="iframe" href="panelRotulo_App.aspx?LIDER_ID=<%# Eval("Area_Id")%>&DESCRIPCION=<%# Eval("NombreLider")%>"
-                                         title="Adicionar un articulo a la promocion.">
-                                            <asp:Image ID="Image2" ImageUrl="~/Design/images/Botones/b_edit_order.png" runat="server" />
-                                        </a>
-
-                                         <a href="#" onclick="Actualizar2()">
+                                      
+                                         <a href="#" onclick="AbrirPopup('<%# Eval("Area_Id")%>','<%# Eval("NombreLider")%>')">
                                             <asp:Image ID="Image1" ImageUrl="~/Design/images/Botones/editOrder.png" runat="server" />
-                                        </a>--%>
-
-                                         <a href="#" onclick="updateFunction()">
-                                            <asp:Image ID="Image3" ImageUrl="~/Design/images/Botones/editOrder.png" runat="server" />
                                         </a>
+                                       
                                     </center>
 
                                 </ItemTemplate>
@@ -370,7 +380,7 @@
                       </td>
                     <td style="vertical-align:middle">
                              <br/>
-                            <asp:TextBox ID="TextBox1" runat="server"  Width="390px" />
+                            <asp:TextBox ID="TextBox1" runat="server"  OnTextChanged="btnBuscar_Click" Width="390px" />
                         </td>
                     </tr>
                     <tr>
@@ -414,7 +424,7 @@
                                      </ContentTemplate>
                                   <Triggers>
                                     <asp:AsyncPostBackTrigger ControlID="btnBuscar" EventName="click" />
-
+                                        <asp:AsyncPostBackTrigger ControlID="TextBox1"  EventName="TextChanged"  />
                                 </Triggers>
                            </asp:UpdatePanel>
                         </td>
