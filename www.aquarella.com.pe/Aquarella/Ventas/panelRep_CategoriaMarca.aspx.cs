@@ -19,7 +19,7 @@ namespace www.aquarella.com.pe.Aquarella.Ventas
         string _nameSessionData = "InfoSales", _nameSessionDataFiltered = "InfoSalesFilter", _sesionCategoriaMarca="CategoriaMarca", _sesionListLider = "ListaLideres", _sesionListLiderCategoria = "ListaLideresCategoria", _sesionLiderCategoriaSelect = "LiderCategoriaSelect", _sesionCategoriaMarcaSelect = "CategoriaMarcaSelect";
         DataSet _dsResult;
         SortDirection _sortDir;
-
+     
         #region < Inicio >
 
         /// <summary>
@@ -29,7 +29,8 @@ namespace www.aquarella.com.pe.Aquarella.Ventas
         /// <param name="e"></param>
         protected void Page_Load(object sender, EventArgs e)
         {
-            // Vencimiento de sesion
+           
+
             if (Session[Constants.NameSessionUser] == null) Utilities.logout(Page.Session, Page.Response);
             else
                 _user = (Users)Session[Constants.NameSessionUser];
@@ -50,6 +51,8 @@ namespace www.aquarella.com.pe.Aquarella.Ventas
 
               
             }
+                      
+         
         }
 
   
@@ -132,6 +135,16 @@ namespace www.aquarella.com.pe.Aquarella.Ventas
             Session[_sesionListLiderCategoria] = _dsResult.Tables[2];
             Session[_sesionCategoriaMarca] = _dsResult.Tables[3];
             gvSales.DataSource = _dsResult;
+
+            DataTable dtTotal = new DataTable();
+            dtTotal = _dsResult.Tables[5];
+            string totalMonto = dtTotal.Rows[0]["totalMonto"].ToString();
+            string totalCantidad = dtTotal.Rows[0]["totalCantidad"].ToString();
+
+            txtMonto.Text = totalMonto;
+            txtTotalUnidades.Text = totalCantidad;
+          
+
 
             //llenamos el combo de categoria
             var Categoria =
@@ -529,7 +542,7 @@ namespace www.aquarella.com.pe.Aquarella.Ventas
                 select new { category = g.Key, sales = g.Sum(p => p.Field<int>("Cantidad")) };
                                
                 // Set series and legend tooltips        
-                ChartPie.Series[0].ToolTip = "#LEGENDTEXT: #VAL{C0}";
+                ChartPie.Series[0].ToolTip = "#LEGENDTEXT: #VAL";
                 ChartPie.Series[0].LegendToolTip = "Participación: #PERCENT - Unidades: #VAL";/// Label ="#PERCENT{P1}"
 
                 ChartPie.Titles[0].Text = "Venta Global - Participación por categoría";

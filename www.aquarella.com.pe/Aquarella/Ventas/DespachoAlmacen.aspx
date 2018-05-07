@@ -22,6 +22,47 @@
                 $(".iframe2").colorbox({ width: "77%", height: "88%", iframe: true });
             }
         }
+
+            function updateFunction() {
+             
+                //$("#impFav_name").val();
+                //$("#impFun_Order").val();
+                //$("#impFuv_Desc").val();
+           <%--     $("#<%= DDPadre2.ClientID %> option[value='" + FUN_FATHER + "']").attr('selected', 'selected');--%>
+                $("#dialog").dialog({ width: 400, height: 230, modal: true, title: 'Editar ' , open: true });
+                $("#dialog").dialog({ buttons: [{
+                    text: "Actualizar Funcion",
+                    click: function () {
+                        if (Validacion())
+                            updateFunctionAjax(FUN_ID);
+                    }
+                }]
+                });
+            }
+
+        function AbrirPopup(idLider, Descripcion) {
+           
+            var options = 'location=1,status=1,scrollbars=1,width=600,height=500';
+          
+            var href='panelRotulo_App.aspx?LIDER_ID='+idLider+'&DESCRIPCION='+Descripcion;
+
+            window.open(href, 'Proveedores', options);
+        }
+
+        $(function () {
+
+            $('#btnOpenSupplierSearch').click(function () {
+                document.getElementById("409").value = "junior";
+                var porId = document.getElementById("409").value;
+                alert(porId)
+                var options = 'location=1,status=1,scrollbars=1,width=800,height=500';
+             
+                window.open('panelRotulo_App.aspx', 'Proveedores', options);
+
+            });
+
+        });
+       
     </script>
     <style type="text/css">
         .style1
@@ -193,20 +234,17 @@
                     ShowFooter="True" AllowPaging="false" PageSize="12"
                  SkinID="gridviewSkin" PagerStyle-HorizontalAlign="Left" Font-Size="Small" 
                       OnPageIndexChanging="gvReturns_PageIndexChanging" 
-                     
-                    CellPadding="4" ForeColor="#333333" GridLines="None" Width="1072px" 
+                       CellPadding="4" ForeColor="#333333" GridLines="None" Width="1072px" 
                     AutoGenerateColumns="False">
+
                     <FooterStyle BackColor="#507CD1" Font-Bold="True" ForeColor="White" />
                     <HeaderStyle BackColor="#507CD1" Font-Bold="True" ForeColor="White" />
                     <PagerStyle CssClass="GridViewBlue-tf" BackColor="#2461BF" ForeColor="White" 
                         HorizontalAlign="Center" />
                     <AlternatingRowStyle BackColor="White" />
                      <Columns>
-                        <asp:BoundField DataField="asesor" HeaderText="Asesor" ItemStyle-Width="110px">
-                        <HeaderStyle HorizontalAlign="Left" />
-                        <ItemStyle HorizontalAlign="Left" />
-                        </asp:BoundField>
-                         <asp:BoundField DataField="NombreLider" HeaderText="Lider" ItemStyle-Width="110px">
+             
+                        <asp:BoundField DataField="NombreLider" HeaderText="Lider" ItemStyle-Width="110px">
                         <HeaderStyle HorizontalAlign="Left" />
                         <ItemStyle HorizontalAlign="Left" />
                         </asp:BoundField>
@@ -219,9 +257,23 @@
                                      <asp:HiddenField ID="hf_Monto" runat="server" Value='<%# Eval("TotalVenta")%>' />
                                      <asp:HiddenField ID="hf_flete" runat="server" Value='<%# Eval("McaFlete")%>' />
                                   
-                                <asp:TextBox id="txtRotulo" Text='<%# Eval("Rotulo")%>'  TextMode="multiline" Columns="10" Rows="5" runat="server" />
+                                 <textarea cols="10" rows="5" disabled  id='Rotulo_<%# Eval("Area_Id")%>' name='Rotulo_<%# Eval("Area_Id")%>'> <%# Eval("Rotulo")%></textarea>
                             </ItemTemplate>
                        </asp:TemplateField>
+                          <asp:TemplateField HeaderText="" ItemStyle-HorizontalAlign="Center" ItemStyle-Width="10px">
+                                <ItemTemplate>
+                          
+                                    <center>
+                                      
+                                         <a href="#" onclick="AbrirPopup('<%# Eval("Area_Id")%>','<%# Eval("NombreLider")%>')">
+                                            <asp:Image ID="Image1" ImageUrl="~/Design/images/Botones/editOrder.png" runat="server" />
+                                        </a>
+                                       
+                                    </center>
+
+                                </ItemTemplate>
+                                <ItemStyle HorizontalAlign="Center" />
+                            </asp:TemplateField>
                          <asp:BoundField DataField="TotalPares" HeaderText="Pares" ItemStyle-Width="50px">
                         <HeaderStyle HorizontalAlign="Center" />
                         <ItemStyle HorizontalAlign="Center" />
@@ -303,6 +355,98 @@
                 </td>
             </tr>
         </table>         
+    </div>
+    <div id="dialog" title="Ingrese Pan de Accion" style="display:none;" >
+         <table>
+                    
+                 <tr>
+                    <td style="color:White;background-color:#2191c0;font-weight:bold;width:200px;text-align:center"  >
+                       <label for="DDMarca" class="f12">
+                            *Lider:
+                        </label>
+                     </td>
+                     <td style="vertical-align:middle">
+                         <br/>
+                        <asp:TextBox ID="TxtLider" Enabled="false" runat="server"  Width="390px" />
+                    </td>
+                  
+                </tr>
+                    
+
+                  <tr>
+                    <td style="color:White;background-color:#2191c0;font-weight:bold;width:200px;text-align:center"  > 
+                       <label for="dwArticulo" class="f12">
+                            *Promotor:</label>
+                      </td>
+                    <td style="vertical-align:middle">
+                             <br/>
+                            <asp:TextBox ID="TextBox1" runat="server"  OnTextChanged="btnBuscar_Click" Width="390px" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                          
+                          
+                        </td>
+                       <td style="text-align:right">
+                          
+                           <asp:Button ID="btnBuscar" runat="server" Text="Buscar" OnClick="btnBuscar_Click" />
+                        </td>
+                       
+                    </tr>
+                                 
+                    <tr>                        
+                        <td colspan="2" rowspan="2">
+                             <asp:UpdatePanel ID="UpdatePanel1" runat="server">
+                                    <ContentTemplate>
+                                        <asp:GridView ID="GridRotulos" runat="server" SkinID="gridviewSkin" AutoGenerateColumns="false"
+                                            Width="100%" OnRowCommand="GridRotulos_RowCommand"  OnPageIndexChanging="GridRotulos_PageIndexChanging">
+                                            <EmptyDataTemplate>
+                                                No hay Promotores asociados.
+                                            </EmptyDataTemplate>
+                                            <Columns>
+                                                <asp:BoundField DataField="Bas_Id"  ItemStyle-HorizontalAlign="center" HeaderText="Codigo"></asp:BoundField>
+                                                 <asp:BoundField DataField="Descripcion" HeaderText="Promotor"></asp:BoundField>
+                                  
+                                                <asp:TemplateField>
+                                                    <ItemTemplate>
+                                                            <asp:HiddenField ID="hf_descripcion" runat="server" Value='<%# Eval("Descripcion")%>' />
+                                                            <asp:HiddenField ID="hf_documento" runat="server" Value='<%# Eval("Documento")%>' />
+                                                      <%--  <asp:Button ID='eliminar' Text="Seleccionar" runat="server" CommandName="Seleccionar" CommandArgument='<%# Eval("Bas_Id") %>'
+                                                            OnClientClick="Actualizar();" />--%>
+                                                        <a href="#" onclick="Actualizar()">
+                                                            <asp:Image ID="Image1" ImageUrl="~/Design/images/Botones/editOrder.png" runat="server" />
+                                                        </a>
+                                                    </ItemTemplate>
+                                                </asp:TemplateField>
+                                            </Columns>
+                                        </asp:GridView>
+                                     </ContentTemplate>
+                                  <Triggers>
+                                    <asp:AsyncPostBackTrigger ControlID="btnBuscar" EventName="click" />
+                                        <asp:AsyncPostBackTrigger ControlID="TextBox1"  EventName="TextChanged"  />
+                                </Triggers>
+                           </asp:UpdatePanel>
+                        </td>
+                        
+                    </tr>
+                    <tr>
+                        <td>
+                            &nbsp;
+                        </td>
+                        <td>
+                            &nbsp;
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            &nbsp;
+                        </td>
+                        <td>
+                            &nbsp;
+                        </td>
+                    </tr>
+                </table>
     </div>
 </asp:Content>
 

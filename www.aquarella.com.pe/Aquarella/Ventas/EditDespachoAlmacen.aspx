@@ -22,6 +22,16 @@
                 $(".iframe2").colorbox({ width: "77%", height: "88%", iframe: true });
             }
         }
+
+        function AbrirPopup(idLider, Descripcion) {
+
+            var options = 'location=1,status=1,scrollbars=1,width=800,height=500';
+
+            var href = 'panelRotulo_App.aspx?LIDER_ID=' + idLider + '&DESCRIPCION=' + Descripcion;
+
+            window.open(href, 'Proveedores', options);
+        }
+
     </script>
     <style type="text/css">
         .style1
@@ -69,6 +79,7 @@
             </td>
             <td>
                     <asp:TextBox id="txtDocumento"   Enabled="false"  runat="server" />
+
             </td>
             <td class="f12">
                 Descripcion:
@@ -98,13 +109,13 @@
                 Total Pedido:
             </td>
             <td>
-                 <asp:TextBox id="txtPedido"  Enabled="false"    runat="server" />
+                 <asp:TextBox id="txtPedido"  Enabled="false"  text="casa"  runat="server" />
             </td>
             <td class="f12">
                Total Enviado:
             </td>
             <td>
-                    <asp:TextBox id="txtEnviado"   Enabled="false"  runat="server" />
+                    <asp:TextBox id="txtEnviado"  value="casa"  Enabled="false"  runat="server" />
             </td>
             
         </tr>
@@ -121,7 +132,7 @@
                 <td align="right">
                   
                      <asp:Button ID="btGuardar" runat="server" Text="Guardar Cambios"  
-                        OnClick="btGuardar_Click" /> 
+                        OnClick="btGuardarEdit_Click" /> 
                 </td>
                 <td align="right" style="width:20px">
                        <asp:ImageButton ID="ibExportToExcel" ImageUrl="~/Design/images/Botones/b_toExcel.png"
@@ -180,9 +191,25 @@
                                     <asp:HiddenField ID="hf_Atendido" runat="server" Value='<%# Eval("atendido")%>' />
                                      <asp:HiddenField ID="hf_IdEstado" runat="server" Value='<%# Eval("IdEstado")%>' />
                                     <asp:HiddenField ID="hf_flete" runat="server" Value='<%# Eval("McaFlete")%>' />
-                                    <asp:TextBox id="txtRotulo" Text='<%# Eval("Rotulo")%>'  TextMode="multiline" Columns="10" Rows="5" runat="server" />
+                                 
+                                <textarea cols="10" rows="5" readonly  id='Rotulo_<%# Eval("IdLider")%>' name='Rotulo_<%# Eval("IdLider")%>'> <%# Eval("Rotulo")%></textarea>
+                                
                             </ItemTemplate>
                        </asp:TemplateField>
+                          <asp:TemplateField HeaderText="" ItemStyle-HorizontalAlign="Center" ItemStyle-Width="10px">
+                                <ItemTemplate>
+                          
+                                    <center>
+                                     
+                                         <a href="#" onclick="AbrirPopup('<%# Eval("IdLider")%>','<%# Eval("Desp_Descripcion")%>')">
+                                            <asp:Image ID="Image1" ImageUrl="~/Design/images/Botones/editOrder.png" runat="server" />
+                                        </a>
+                                      
+                                    </center>
+
+                                </ItemTemplate>
+                                <ItemStyle HorizontalAlign="Center" />
+                            </asp:TemplateField>
                          <asp:BoundField DataField="TotalPares" HeaderText="Pares" ItemStyle-Width="50px">
                         <HeaderStyle HorizontalAlign="Center" />
                         <ItemStyle HorizontalAlign="Center" />

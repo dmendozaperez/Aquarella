@@ -34,6 +34,31 @@ namespace www.aquarella.com.pe.Bll.Ventas
             catch (Exception e) { throw new Exception(e.Message, e.InnerException); }
         }
 
+        public static DataSet getRotulo(string idLider, string descripcion)
+        {
+
+            string sqlquery = "USP_Despacho_listarRotulo";
+            SqlConnection cn = null;
+            SqlCommand cmd = null;
+            SqlDataAdapter da = null;
+            DataSet ds = null;
+            try
+            {
+                cn = new SqlConnection(Conexion.myconexion());
+                cmd = new SqlCommand(sqlquery, cn);
+                cmd.CommandTimeout = 0;
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@idLider", idLider);
+                cmd.Parameters.AddWithValue("@Descripcion", descripcion);
+
+                da = new SqlDataAdapter(cmd);
+                ds = new DataSet();
+                da.Fill(ds);
+                return ds;
+            }
+            catch (Exception e) { throw new Exception(e.Message, e.InnerException); }
+        }
+
         public static DataSet getLiquidacionDespacho(DateTime _date_start, DateTime _date_end)
         {
 

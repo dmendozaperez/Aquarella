@@ -255,6 +255,7 @@
     <Content Include="Aquarella\Ventas\getventasemanal.aspx" />
     <Content Include="Aquarella\Ventas\panelcomisionlider_xdoc.aspx" />
     <Content Include="Aquarella\Ventas\panelInvReports.aspx" />
+    <Content Include="Aquarella\Ventas\panelRotulo_App.aspx" />
     <Content Include="Aquarella\Ventas\panelReturns.aspx" />
     <Content Include="Aquarella\Ventas\panelRep_CategoriaMarca.aspx" />
     <Content Include="Aquarella\Ventas\panelSalesByMajCat.aspx" />
@@ -1467,6 +1468,13 @@
     </Compile>
     <Compile Include="Aquarella\Ventas\panelInvReports.aspx.designer.cs">
       <DependentUpon>panelInvReports.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Aquarella\Ventas\panelRotulo_App.aspx.cs">
+      <DependentUpon>panelRotulo_App.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Aquarella\Ventas\panelRotulo_App.aspx.designer.cs">
+      <DependentUpon>panelRotulo_App.aspx</DependentUpon>
     </Compile>
     <Compile Include="Aquarella\Ventas\panelReturns.aspx.cs">
       <DependentUpon>panelReturns.aspx</DependentUpon>
