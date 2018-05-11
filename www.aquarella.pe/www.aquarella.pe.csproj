@@ -168,6 +168,7 @@
     <Compile Include="Controllers\MenuController.cs" />
     <Compile Include="Controllers\PermisosController.cs" />
     <Compile Include="Controllers\PersonalController.cs" />
+    <Compile Include="Controllers\PromocionController.cs" />
     <Compile Include="Controllers\RolesController.cs" />
     <Compile Include="Data\Cliente\Lider.cs" />
     <Compile Include="Data\Cliente\Personal.cs" />
@@ -180,6 +181,7 @@
     <Compile Include="Data\Control\Roles.cs" />
     <Compile Include="Data\Control\Usuario.cs" />
     <Compile Include="Data\Maestros\DataBasico.cs" />
+    <Compile Include="Data\Maestros\Promocion.cs" />
     <Compile Include="Data\Util\Conexion.cs" />
     <Compile Include="Data\Util\Cryptographic.cs" />
     <Compile Include="Global.asax.cs">
@@ -1029,6 +1031,12 @@
     <Content Include="Views\Personal\Index.cshtml" />
     <Content Include="Views\Personal\ListaPersonal.cshtml" />
     <Content Include="Views\Personal\Edit.cshtml" />
+    <Content Include="Views\Promocion\Aplicacion.cshtml" />
+    <Content Include="Views\Promocion\Edit.cshtml" />
+    <Content Include="Views\Promocion\Index.cshtml" />
+    <Content Include="Views\Promocion\ListaAplFun.cshtml" />
+    <Content Include="Views\Promocion\ListaPromocion.cshtml" />
+    <Content Include="Views\Promocion\Nuevo.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -1053,7 +1061,7 @@
     <VisualStudio>
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
         <WebProjectProperties>
-          <UseIIS>True</UseIIS>
+          <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>52655</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>

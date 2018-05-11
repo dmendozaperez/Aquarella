@@ -79,6 +79,12 @@
                              <td class="f12">
                                  Fecha de Cierre</td>
                              <td>
+                            </td>
+                             <td>
+                            </td>
+                             <td class="f12">
+                                 Num-Doc</td>
+                             <td>
                                  &nbsp;</td>
                              <td>
                                  &nbsp;</td>
@@ -139,6 +145,19 @@
                                      Operator="GreaterThanEqual" SetFocusOnError="true" Type="Date" 
                                      ValidationGroup="vsConsultForm">*</asp:CompareValidator>
                             </td>
+                             
+                            <td>
+                                <asp:UpdatePanel ID="UpdatePanel1" runat="server">
+	                                <ContentTemplate>
+	                                   <asp:TextBox ID="txtNroDoc" runat="server"></asp:TextBox>
+	                                </ContentTemplate>
+                                </asp:UpdatePanel>
+                            </td>
+                             <td>
+                                 
+                            </td>
+                             <td> 
+                             </td>
                         </tr>
                     </table>
                 </td>
@@ -146,7 +165,7 @@
                     <asp:Button ID="btConsult" runat="server" Text="Consultar" ValidationGroup="vsConsultForm"
                         CausesValidation="true" OnClick="btConsult_Click"  />
                 </td>
-                <td align="left" style="border-left: solid 1px silver;">
+                <td align="left" style="border-left: solid 1px silver;width:50px">
                     <asp:ImageButton ID="ibExportToExcel" ImageUrl="~/Design/images/Botones/b_toExcel.png"
                         onmouseover="this.style.background='green';" onmouseout="this.style.background=''"
                         runat="server" Height="25px" Width="24px" 

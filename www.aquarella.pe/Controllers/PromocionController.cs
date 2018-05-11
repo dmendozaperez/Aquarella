@@ -5,15 +5,17 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using www.aquarella.pe.bll.util;
+using www.aquarella.pe.Data.Maestros;
 using www.aquarella.pe.Data.Control;
 
 namespace www.aquarella.pe.Controllers
 {
-    public class FuncionController : Controller
+    public class PromocionController : Controller
     {
         // GET: Funcion
-        private Funcion funcion = new Funcion();
-        private string _session_listfuncion_private = "session_listfun_private";
+        private Promocion promocion = new Promocion();
+        private string _session_listpromocion_private = "session_listProm_private";
+        private string _session_listfuncion_private = "";
         // GET: Funcion
         [Authorize]
         public ActionResult Index()
@@ -153,11 +155,11 @@ namespace www.aquarella.pe.Controllers
         {
             return PartialView(lista());
         }
-        public List<Funcion> lista()
+        public List<ent_Promocion> lista()
         {
-            List<Funcion> listfuncion = funcion.get_lista(true);
-            Session[_session_listfuncion_private] = listfuncion;
-            return listfuncion;
+            List<ent_Promocion> listPromocion = promocion.get_lista();
+            Session[_session_listpromocion_private] = listPromocion;
+            return listPromocion;
         }
         public List<FuncionAplicacion> lista_fun_apl(Decimal id)
         {
