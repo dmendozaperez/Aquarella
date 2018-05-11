@@ -1140,10 +1140,13 @@ namespace www.aquarella.com.pe.bll
                 VCadFc += "\r\n";
             }
 
-            VCadFc += Alineacion("I", 25, ("VUELTO|||").Length,"VUELTO|||");
-            VCadFc += Alineacion("C", 3, (0.ToString(_strDec, _myCIintl).Replace("0.00", "|")).Length, 0.ToString(_strDec, _myCIintl).Replace("0.00", "|"));
-            VCadFc += Alineacion("D", 11, (_monto_vue.ToString("#0.00")).Length, _monto_vue.ToString("#0.00"));
-            VCadFc += "\r\n";
+            if (_monto_efe > 0 || _monto_tar > 0)
+            {
+                VCadFc += Alineacion("I", 25, ("VUELTO|||").Length, "VUELTO|||");
+                VCadFc += Alineacion("C", 3, (0.ToString(_strDec, _myCIintl).Replace("0.00", "|")).Length, 0.ToString(_strDec, _myCIintl).Replace("0.00", "|"));
+                VCadFc += Alineacion("D", 11, (_monto_vue.ToString("#0.00")).Length, _monto_vue.ToString("#0.00"));
+                VCadFc += "\r\n";
+            }
 
             VCadFc += "\r\n";
             VCadFc += "\r\n";
