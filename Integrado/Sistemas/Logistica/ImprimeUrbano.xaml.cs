@@ -40,6 +40,12 @@ namespace Integrado.Sistemas.Logistica
             await Task.Run(() => genera_etiqueta.imp_etiqueta(_venid));
         }
 
+        private async void btnimprimir2_Click(object sender, RoutedEventArgs e)
+        {
+            string _venid = txtnumero.Text.Replace("-", "");
+            GenerarEtiqueta genera_etiqueta = new GenerarEtiqueta();
+            await Task.Run(() => genera_etiqueta.imp_etiqueta2(_venid));
+        }
     }
 
 }

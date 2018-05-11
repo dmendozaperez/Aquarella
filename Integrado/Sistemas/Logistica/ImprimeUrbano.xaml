@@ -10,7 +10,7 @@
         ResizeMode="CanMinimize"
         Icon="/Integrado;component/Design/Icono/sistema_ico.ico"                      
         Title="[Duplicado de Guia Urbano]" EnableDWMDropShadow="True" 
-        WindowStartupLocation="CenterScreen"  Height="300" Width="400" Loaded="MetroWindow_Loaded">
+        WindowStartupLocation="CenterScreen"  Height="300" Width="500" Loaded="MetroWindow_Loaded">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
@@ -19,13 +19,15 @@
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="53*"/>
-            <ColumnDefinition Width="144*"/>
+            <ColumnDefinition Width="104*"/>
+            <ColumnDefinition Width="104*"/>
         </Grid.ColumnDefinitions>
 
-        <Label Content="Imprimir Guia Urbano" HorizontalAlignment="Center" Foreground="#FF5252D8"  VerticalAlignment="Center" FontSize="18" FontWeight="Bold" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Margin="99,13"/>
+        <Label Content="Imprimir Guia Urbano" HorizontalAlignment="Center" Foreground="#FF5252D8"  VerticalAlignment="Center" FontSize="18" FontWeight="Bold" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" Margin="99,13"/>
 
-        <Grid Grid.Row="1" Grid.ColumnSpan="2">
+        <Grid Grid.Row="1" Grid.ColumnSpan="3">
             <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
@@ -52,15 +54,41 @@
                     <Image Grid.Column="0"  Source="/Integrado;component/Design/Images/impresora.png"/>
                 </Grid>
             </Button>
-            <Label Content="Imprimir" Grid.Column="1" FontWeight="Bold" FontSize="13" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,50,0,0" ></Label>
+            <Label Content="Imprimir 101.6x101.6" Grid.Column="1" FontWeight="Bold" FontSize="12" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,50,0,0" ></Label>
+            
+            <Button x:Name="btnimprimir2" Grid.Column="2" Height="100"  Width="120"  Cursor="Hand" Background="White" BorderBrush="White" Click="btnimprimir2_Click">
+                <Button.ToolTip>
+                    <ToolTip>
+                        <StackPanel>
+                            <TextBlock FontWeight="Bold" TextAlignment="Left" ><Run Text="Duplicado de Guia Urbano"/></TextBlock>
+                            <TextBlock><Run Text="Imprimir Guia de Remision."/></TextBlock>
+                            <TextBlock><Run Text="No lo presione hasta estar seguro."/></TextBlock>
+                        </StackPanel>
+                    </ToolTip>
+                </Button.ToolTip>
+                <Button.Effect>
+                    <dx:LineRevealTransitionEffect/>
+                </Button.Effect>
+                <Grid Width="110">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Image Grid.Column="0"  Source="/Integrado;component/Design/Images/impresora.png"/>
+                </Grid>
+            </Button>
+            <Label Content="Imprimir 101.6x25" Grid.Column="2" FontWeight="Bold" FontSize="12" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,50,0,0" ></Label>
+
+            
+
         </Grid>
-        <Grid Grid.Row="2" Grid.ColumnSpan="2">
+        
+        <Grid Grid.Row="2" Grid.ColumnSpan="3">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"></ColumnDefinition>
             </Grid.ColumnDefinitions>
             <Label Name="lblmensaje" Content="" VerticalAlignment="Center" Foreground="Maroon" FontSize="12"></Label>
         </Grid>
-        <dxga:LinearGaugeControl Grid.Row="0" Background="#FFECEAE2"  HorizontalAlignment="Left"  Grid.Column="0"  VerticalAlignment="Top" Height="4" Margin="0,53,0,0" Width="394" Grid.ColumnSpan="2"/>
-        <dxga:LinearGaugeControl Grid.Row="2" Background="#FFECEAE2"  HorizontalAlignment="Left"  Grid.Column="0"  VerticalAlignment="Top" Height="4" Margin="0,5,0,0" Width="394" Grid.ColumnSpan="2"/>
+        <dxga:LinearGaugeControl Grid.Row="0" Background="#FFECEAE2"  HorizontalAlignment="Left"  Grid.Column="0"  VerticalAlignment="Top" Height="4" Margin="0,53,0,0" Width="494" Grid.ColumnSpan="3"/>
+        <dxga:LinearGaugeControl Grid.Row="2" Background="#FFECEAE2"  HorizontalAlignment="Left"  Grid.Column="0"  VerticalAlignment="Top" Height="4" Margin="0,5,0,0" Width="484" Grid.ColumnSpan="3"/>
     </Grid>
 </Controls:MetroWindow>
