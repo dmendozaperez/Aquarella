@@ -55,7 +55,7 @@ namespace Integrado.Urbano
 
                 // *** 2018-04-27
                 // Generar Código ZPL
-                /*StringBuilder strb = new StringBuilder();
+                StringBuilder strb = new StringBuilder();
                 strb.Append("^XA\n");                       // - Inic. Etiqueta
                 strb.Append("^CI27\n");                     // - Imprimir Caracteres Latinos
                 strb.Append("^JMA\n");                      // - Resolución: A=8d/mm, B=8d/mm 
@@ -88,8 +88,41 @@ namespace Integrado.Urbano
                 strb.Append("^PQ2^FS\n");
                 strb.Append("^XZ\n");
                 return strb.ToString();
-                */
+                
 
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+
+        private string str_etiqueta2(string ven_id)
+        {
+            try
+            {
+                Dat_Urbano dat_etiqueta = new Dat_Urbano();
+                Ent_Etiqueta etiqueta = dat_etiqueta.get_etiqueta(ven_id);
+
+                if (etiqueta.strNroGuia.Length == 0)
+                    return "";
+
+                string strNroGuia = etiqueta.strNroGuia;
+                //GuiaUrbano oGuia = guiaUrbano;
+
+                // Generar Formato de Información
+                string cliente = etiqueta.cliente; ;//RemoverDiacriticos(oGuia.nom_cliente);
+                string empresa = etiqueta.empresa;//RemoverDiacriticos(oGuia.nom_empresa);
+                string nro_pedido = etiqueta.nro_pedido; //oGuia.nro_o_compra;
+                string direccion = etiqueta.direccion;//RemoverDiacriticos(oGuia.dir_entrega + " " + oGuia.nro_via + " " + oGuia.nro_int);
+                string referencia = etiqueta.referencia;//; RemoverDiacriticos(oGuia.ref_direc);
+                string ubigeo = etiqueta.ubigeo;// RemoverDiacriticos(GenerarNombreUbigeo(oGuia.ubi_direc) + oGuia.ubi_direc);
+                string cod_refer = etiqueta.cod_refer;
+
+               
                 StringBuilder strb = new StringBuilder();
                 strb.Append("^XA\n");                       // - Inic. Etiqueta
                 strb.Append("^CI27\n");                     // - Imprimir Caracteres Latinos
@@ -107,7 +140,7 @@ namespace Integrado.Urbano
                 strb.Append("^FO500,015^BCN,62,Y,N,N^FD" + strNroGuia + "^FS\n");
                 strb.Append("^XZ\n");
                 return strb.ToString();
-                
+
 
 
             }
@@ -117,6 +150,7 @@ namespace Integrado.Urbano
                 throw;
             }
         }
+
 
         public  void imp_etiqueta(string ven_id)
         {
@@ -135,6 +169,26 @@ namespace Integrado.Urbano
             catch (Exception)
             {
                                     
+            }
+        }
+
+        public void imp_etiqueta2(string ven_id)
+        {
+            try
+            {
+                string strGuia = str_etiqueta2(ven_id);
+                if (strGuia.Length == 0)
+                    return;
+
+                PrintDocument doc = new PrintDocument();
+                doc.PrinterSettings = new PrinterSettings();
+                //doc.PrinterSettings.PrinterName = ConfigurationManager.AppSettings["Impresora"].ToString();
+                // Impresión de Comandos
+                RawPrinterHelper.SendStringToPrinter(Ent_Global._impresora_etiquetas, strGuia);
+            }
+            catch (Exception)
+            {
+
             }
         }
 
