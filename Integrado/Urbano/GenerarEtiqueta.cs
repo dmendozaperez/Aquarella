@@ -132,17 +132,15 @@ namespace Integrado.Urbano
                 strb.Append("^BY3,,70^FS\n");               // - Ancho y Alto de Código de Barras
                 strb.Append("^BY2,,20^FS\n");               // - Ancho y Alto de Código de Barras
                 strb.Append("^LH 0,20\n");                  // - Set Coordenada Inicial
-                strb.Append("^FO090,105^A0,030,020^FB280,2,0,C,0^FD" + cliente.ToUpper() + "^FS\n");
-                strb.Append("^FO090,155^A0,030,020^FB280,1,0,C,0^FDPEDIDO: " + nro_pedido + "^FS\n");
-                strb.Append("^FO110,015^BCN,62,Y,N,N^FD" + strNroGuia + "^FS\n");
-                strb.Append("^FO480,105^A0,030,020^FB280,2,0,C,0^FD" + cliente.ToUpper() + "^FS\n");
-                strb.Append("^FO480,155^A0,030,020^FB280,1,0,C,0^FDPEDIDO: " + nro_pedido + "^FS\n");
-                strb.Append("^FO500,015^BCN,62,Y,N,N^FD" + strNroGuia + "^FS\n");
+                strb.Append("^FO040,105^A0,030,020^FD" + cliente.ToUpper().Substring(0, 29) + "^FS\n");
+                strb.Append("^FO040,135^A0,030,020^FDPEDIDO: " + nro_pedido + "^FS\n");
+                strb.Append("^FO040,015^BCN,62,Y,N,N^FD" + strNroGuia + "^FS\n");
+                strb.Append("^FO460,105^A0,030,020^^FD" + cliente.ToUpper().Substring(0, 29) + "^FS\n");
+                strb.Append("^FO460,135^A0,030,020^FDPEDIDO: " + nro_pedido + "^FS\n");
+                strb.Append("^FO460,015^BCN,62,Y,N,N^FD" + strNroGuia + "^FS\n");
+                strb.Append("^PQ3^FS\n"); // Imprimir Doble Copia de Etiqueta
                 strb.Append("^XZ\n");
                 return strb.ToString();
-
-
-
             }
             catch (Exception)
             {
