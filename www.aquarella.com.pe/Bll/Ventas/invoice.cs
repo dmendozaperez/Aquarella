@@ -573,6 +573,10 @@ namespace www.aquarella.com.pe.bll
         }
         private static DataSet getallinvoice(string invoice_no,Int32 pvt_id=1)
         {
+            string prefijo = invoice_no.Substring(1, 3);
+            if (prefijo == "031")
+                pvt_id = 3;
+
             string sqlquery = "USP_Leer_Venta_Imprimir";
             SqlConnection cn = null;
             SqlCommand cmd = null;
@@ -647,7 +651,7 @@ namespace www.aquarella.com.pe.bll
             return dt;
         }
 
-        public static DataTable get_ventadetcn(DateTime fecini, DateTime fecfin,string conid)
+        public static DataTable get_ventadetcn(DateTime fecini, DateTime fecfin,string conid, string nroDoc)
         {
             DataTable dt = null;
             string sqlquery = "USP_ConsultaVentaDetCN";
@@ -662,6 +666,7 @@ namespace www.aquarella.com.pe.bll
                         cmd.Parameters.AddWithValue("@fecha_ini", fecini);
                         cmd.Parameters.AddWithValue("@fecha_fin", fecfin);
                         cmd.Parameters.AddWithValue("@con_id", conid);
+                        cmd.Parameters.AddWithValue("@nro_Doc", nroDoc);
 
                         using (SqlDataAdapter da = new SqlDataAdapter(cmd))
                         {
@@ -672,7 +677,7 @@ namespace www.aquarella.com.pe.bll
                     }
                 }
             }
-            catch
+            catch(Exception ex)
             {
                 dt = null;
             }
@@ -786,6 +791,8 @@ namespace www.aquarella.com.pe.bll
                         decimal _percepcionp = Convert.ToDecimal(dt_venta.Rows[0]["Ven_PercepcionP"].ToString());
                         double _percepcionm = Convert.ToDouble(dt_venta.Rows[0]["Ven_PercepcionM"].ToString());
                         String _estadook = dt_venta.Rows[0]["EstadoOk"].ToString();
+                        
+
                         for (Int32 i = 0; i < dt_venta.Rows.Count; ++i)
                         {
 
@@ -808,7 +815,9 @@ namespace www.aquarella.com.pe.bll
                             Double.Parse(_igv_monto.ToString()), Double.Parse((dDiscount - 0).ToString()), "*** GRACIAS POR SU COMPRA ***",
                             "Facturacion " + "0" + " por Res. Dian ",
                             "1" + " De " + "" + " Del", "Pref " + "" + "-" + "" + " Al Pref " + "" + "-" + "",
-                            _tipodoc, _percepcionm, _percepcionp, _estadook,ref VCadFc);
+                            _tipodoc, _percepcionm, _percepcionp, _estadook, dsInvoice,ref VCadFc);
+
+                        PrintReceiptPayment(dsInvoice, "*** GRACIAS POR SU COMPRA ***", ref VCadFc);
 
                     }
                 }
@@ -960,10 +969,11 @@ namespace www.aquarella.com.pe.bll
                 VCadFc += "\r\n";
             }
         }
-        public static void PrintReceiptFooter(double subTotal, decimal varIGV, double tax, double discount, string footerText, string resolucion, string resolucion1, string resolucion2, string varDocumentTypeID, double percepcion, decimal porcpercepcion, string estadotk, ref string VCadFc)
+        public static void PrintReceiptFooter(double subTotal, decimal varIGV, double tax, double discount, string footerText, string resolucion, string resolucion1, string resolucion2, string varDocumentTypeID, double percepcion, decimal porcpercepcion, string estadotk,DataSet dsInvoice, ref string VCadFc)
         {
 
             string offSetString = new string(' ', (_recLineChars / 2) - 14);
+
 
             offSetString = offSetString.Trim().PadLeft((_recLineChars / 2) - 14, '|');
 
@@ -1019,21 +1029,40 @@ namespace www.aquarella.com.pe.bll
             VCadFc += Alineacion("D", 11, (((subTotal - discount) + mtoigv).ToString("#0.00")).Length, ((subTotal - discount) + mtoigv).ToString("#0.00"));
 
             //condiciones para el formato de tickets
+            DataTable dt_venta = dsInvoice.Tables[0];
+            Decimal _monto_nc = Convert.ToDecimal(dt_venta.Rows[0]["monto_nc"]);
 
             if (estadotk == "1")
             {
-                //el valor 1 si es que el tickets es normal 
+                 //el valor 1 si es que el tickets es normal 
+                
                 VCadFc += "\r\n";
-                VCadFc += Alineacion("I", VAnchoTicket, (offSetString + new string('-', (_recLineChars / 3))).Length, offSetString + new string('-', (_recLineChars / 3)));
-                VCadFc += "\r\n";
-                VCadFc += Alineacion("I", 25, (offSetString + "PERCEPCION|" + porcpercepcion + "%|||").Length, offSetString + "PERCEPCION|" + porcpercepcion + "%|||");
-                VCadFc += Alineacion("C", 3, (0.ToString(_strDec, _myCIintl).Replace("0.00", "|")).Length, 0.ToString(_strDec, _myCIintl).Replace("0.00", "|"));
-                VCadFc += Alineacion("D", 11, ((percepcion).ToString("#0.00")).Length, (percepcion).ToString("#0.00"));
+                if (percepcion > 0) { 
+                    VCadFc += Alineacion("I", VAnchoTicket, (offSetString + new string('-', (_recLineChars / 3))).Length, offSetString + new string('-', (_recLineChars / 3)));
+                    VCadFc += "\r\n";
+                    VCadFc += Alineacion("I", 25, (offSetString + "PERCEPCION|" + porcpercepcion + "%|||").Length, offSetString + "PERCEPCION|" + porcpercepcion + "%|||");
+                    VCadFc += Alineacion("C", 3, (0.ToString(_strDec, _myCIintl).Replace("0.00", "|")).Length, 0.ToString(_strDec, _myCIintl).Replace("0.00", "|"));
+                    VCadFc += Alineacion("D", 11, ((percepcion).ToString("#0.00")).Length, (percepcion).ToString("#0.00"));
+                }
+
+                if (_monto_nc > 0) {
+
+                    VCadFc += "\r\n";
+                    VCadFc += Alineacion("I", VAnchoTicket, (offSetString + new string('-', (_recLineChars / 3))).Length, offSetString + new string('-', (_recLineChars / 3)));
+                    VCadFc += "\r\n";
+                    VCadFc += Alineacion("I", 25, (offSetString + "DESC NC|" + porcpercepcion + "%|||").Length, offSetString + "DESC NC (-)|");
+                    VCadFc += Alineacion("C", 3, (0.ToString(_strDec, _myCIintl).Replace("0.00", "|")).Length, 0.ToString(_strDec, _myCIintl).Replace("0.00", "|"));
+                    VCadFc += Alineacion("D", 11, ((_monto_nc).ToString("#0.00")).Length, (_monto_nc).ToString("#0.00"));
+              
+                }
+
                 VCadFc += "\r\n";
                 VCadFc += Alineacion("I", VAnchoTicket, (offSetString + new string('-', (_recLineChars / 3))).Length, offSetString + new string('-', (_recLineChars / 3)));
                 VCadFc += "\r\n";
                 VCadFc += Alineacion("I", 25, (offSetString + "TOTAL A PAGAR|||").Length, offSetString + "TOTAL A PAGAR|||");
                 VCadFc += Alineacion("C", 3, (0.ToString(_strDec, _myCIintl).Replace("0.00", "|")).Length, 0.ToString(_strDec, _myCIintl).Replace("0.00", "|"));
+                totalpagar = totalpagar - Convert.ToDouble(_monto_nc);
+
                 VCadFc += Alineacion("D", 11, ((totalpagar).ToString("#0.00")).Length, (totalpagar).ToString("#0.00"));
 
 
@@ -1041,33 +1070,128 @@ namespace www.aquarella.com.pe.bll
             if (estadotk == "2")
             {
                 VCadFc += "\r\n";
-                VCadFc += Alineacion("I", VAnchoTicket, (offSetString + new string('-', (_recLineChars / 3))).Length, offSetString + new string('-', (_recLineChars / 3)));
+            
                 //el valor 2 si es que el tickets es que la nota d ecredito es mayor a la venta
 
 
                 string espaciof = "||**";
 
                 string vNotapercepcion = "(**) Este valor es referencial. Su valor real se consignara en su comprobante de percepcion respectivo.";
+                if (percepcion > 0)
+                {
+                    VCadFc += Alineacion("I", VAnchoTicket, (offSetString + new string('-', (_recLineChars / 3))).Length, offSetString + new string('-', (_recLineChars / 3)));
+                    VCadFc += "\r\n";
+                    VCadFc += Alineacion("I", 25, (offSetString + espaciof + "PERCEPCION|" + porcpercepcion + "%|||").Length, offSetString + espaciof + "PERCEPCION|" + porcpercepcion + "%|||");
+                    VCadFc += Alineacion("C", 3, (0.ToString(_strDec, _myCIintl).Replace("0.00", "|")).Length, 0.ToString(_strDec, _myCIintl).Replace("0.00", "|"));
+                    VCadFc += Alineacion("D", 11, ((percepcion).ToString("#0.00")).Length, (percepcion).ToString("#0.00"));
+                }
 
-                VCadFc += "\r\n";
-                VCadFc += Alineacion("I", 25, (offSetString + espaciof + "PERCEPCION|" + porcpercepcion + "%|||").Length, offSetString + espaciof + "PERCEPCION|" + porcpercepcion + "%|||");
-                VCadFc += Alineacion("C", 3, (0.ToString(_strDec, _myCIintl).Replace("0.00", "|")).Length, 0.ToString(_strDec, _myCIintl).Replace("0.00", "|"));
-                VCadFc += Alineacion("D", 11, ((percepcion).ToString("#0.00")).Length, (percepcion).ToString("#0.00"));
+                if(_monto_nc > 0) {
+
+                    VCadFc += "\r\n";
+                    VCadFc += Alineacion("I", VAnchoTicket, (offSetString + new string('-', (_recLineChars / 3))).Length, offSetString + new string('-', (_recLineChars / 3)));
+                    VCadFc += "\r\n";
+                    VCadFc += Alineacion("I", 25, (offSetString + "DESC NC|" + porcpercepcion + "%|||").Length, offSetString + "DESC  NC (-)|");
+                    VCadFc += Alineacion("C", 3, (0.ToString(_strDec, _myCIintl).Replace("0.00", "|")).Length, 0.ToString(_strDec, _myCIintl).Replace("0.00", "|"));
+                    VCadFc += Alineacion("D", 11, ((_monto_nc).ToString("#0.00")).Length, (_monto_nc).ToString("#0.00"));
+                 
+                }
                 VCadFc += "\r\n";
                 VCadFc += Alineacion("I", VAnchoTicket, (offSetString + new string('-', (_recLineChars / 3))).Length, offSetString + new string('-', (_recLineChars / 3)));
                 VCadFc += "\r\n";
                 VCadFc += Alineacion("I", 25, (offSetString + "TOTAL A PAGAR|||").Length, offSetString + "TOTAL A PAGAR|||");
                 VCadFc += Alineacion("C", 3, (0.ToString(_strDec, _myCIintl).Replace("0.00", "|")).Length, 0.ToString(_strDec, _myCIintl).Replace("0.00", "|"));
+                totalpagar = totalpagar - Convert.ToDouble(_monto_nc);
                 VCadFc += Alineacion("D", 11, ((totalpagar).ToString("#0.00")).Length, (totalpagar).ToString("#0.00"));
                 VCadFc += "\r\n";
                 VCadFc += "\r\n";
                 VCadFc += Alineacion("C", VAnchoTicket, (vNotapercepcion).Length, vNotapercepcion);
             }
             VCadFc += "\r\n";
+            //VCadFc += "\r\n";
+            //VCadFc += Alineacion("C", VAnchoTicket, (footerText).Length, footerText);
+            //VCadFc += "\r\n";
+        }
+
+        public static void PrintReceiptPayment(DataSet dsInvoice,string footerText, ref string VCadFc)
+        {
+            DataTable dt_venta = dsInvoice.Tables[0];
+
+            Decimal _monto_efe = Convert.ToDecimal(dt_venta.Rows[0]["montoefe"]);
+            Decimal _monto_tar = Convert.ToDecimal(dt_venta.Rows[0]["montotar"]);
+            Decimal _monto_vue = Convert.ToDecimal(dt_venta.Rows[0]["montovuel"]);
+
+            string offSetString = new string(' ', (_recLineChars / 2) - 14);
+
+            offSetString = offSetString.Trim().PadLeft((_recLineChars / 2) - 14, '|');
+
+            VCadFc += "\r\n";
+            VCadFc += Alineacion("I", VAnchoTicket, new string('=', _recLineChars).Length, new string('=', _recLineChars));
+
+            //VCadFc += Alineacion("I", 11, "Codigo".Length, "Codigo");
+            //VCadFc += Alineacion("I", 14, " Descr.".Length, " Descr.");
+            //VCadFc += Alineacion("C", 5, "Cnt".Length, "Cnt");
+            //VCadFc += Alineacion("D", 9, "Precio".Length, "Precio");
+
+            //double varDsctoTax = 0;
+            if (_monto_efe > 0) 
+            {
+                VCadFc += "\r\n";
+                VCadFc += Alineacion("I", 25, ( "EFECTIVO|||").Length,"EFECTIVO|||");
+             
+                VCadFc += Alineacion("C", 3, (0.ToString(_strDec, _myCIintl).Replace("0.00", "|")).Length, 0.ToString(_strDec, _myCIintl).Replace("0.00", "|"));
+                VCadFc += Alineacion("D", 11, (_monto_efe.ToString("#0.00")).Length, _monto_efe.ToString("#0.00"));
+                VCadFc += "\r\n";
+            }
+
+            if (_monto_tar > 0)
+            {
+                DataTable dttarjeta = dsInvoice.Tables[1];
+                string nom_tarjeta="";
+                string num_tarjeta="";
+                if (dttarjeta != null)
+                {
+                    if (dttarjeta.Rows.Count > 0)
+                    {
+                        for (Int32 i = 0; i < dttarjeta.Rows.Count; ++i)
+                        {
+                            nom_tarjeta = (dttarjeta.Rows[i]["bin_des"].ToString()).Substring(0, 22)+" ";
+                            num_tarjeta = dttarjeta.Rows[i]["num_tar"].ToString();
+                       }
+                    }
+                }
+
+                VCadFc += "\r\n";
+                VCadFc += Alineacion("I", VAnchoTicket, ("TARJETA|||").Length, "TARJETA|||");
+                VCadFc += "\r\n";
+
+                VCadFc += Alineacion("I", 20, 20, nom_tarjeta);
+                VCadFc += Alineacion("D", 16, num_tarjeta.Length, num_tarjeta);
+                VCadFc += "\r\n";
+
+                VCadFc += Alineacion("I", 25, (offSetString + "                      |||").Length, offSetString + "                      |||");
+                VCadFc += Alineacion("C", 3, (0.ToString(_strDec, _myCIintl).Replace("0.00", "|")).Length, 0.ToString(_strDec, _myCIintl).Replace("0.00", "|"));
+                VCadFc += Alineacion("D", 11, (_monto_tar.ToString("#0.00")).Length, _monto_tar.ToString("#0.00"));
+                VCadFc += "\r\n";
+            }
+
+            if (_monto_efe > 0 || _monto_tar > 0)
+            {
+                VCadFc += Alineacion("I", 25, ("VUELTO|||").Length, "VUELTO|||");
+                VCadFc += Alineacion("C", 3, (0.ToString(_strDec, _myCIintl).Replace("0.00", "|")).Length, 0.ToString(_strDec, _myCIintl).Replace("0.00", "|"));
+                VCadFc += Alineacion("D", 11, (_monto_vue.ToString("#0.00")).Length, _monto_vue.ToString("#0.00"));
+                VCadFc += "\r\n";
+            }
+
+            VCadFc += "\r\n";
             VCadFc += "\r\n";
             VCadFc += Alineacion("C", VAnchoTicket, (footerText).Length, footerText);
             VCadFc += "\r\n";
+
         }
+
+
+
         public static void PrintTextLine_ZoneSubTot(string text)
         {
 

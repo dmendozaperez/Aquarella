@@ -83,41 +83,54 @@ namespace www.aquarella.pe.Data.Control
         {
             string sqlquery = "[USP_Leer_Funcion_Sistema]";
             List<Funcion> list = null;
+            Boolean valida = false;
             try
             {
                 using (SqlConnection cn = new SqlConnection(Conexion.conexion_sql))
                 {
                     if (cn.State == 0) cn.Open();
-                    using (SqlCommand cmd = new SqlCommand(sqlquery, cn))
+                    using (SqlCommand cmd = new SqlCommand("pruebaNuevo", cn))
                     {
-                        cmd.CommandTimeout = 0;
-                        cmd.CommandType = CommandType.StoredProcedure;
-                        SqlDataReader dr = cmd.ExecuteReader();
-
-                        if (dr.HasRows)
-                        {
-                            list = new List<Funcion>();
-                            Funcion fun = new Funcion();
-                            if (!listar)
-                            {                                 
-                                fun.fun_id = "0";
-                                fun.fun_nombre = "(Vacio)";
-                                list.Add(fun);
-                            }
-
-                            while (dr.Read())
-                            {
-                                fun = new Funcion();
-                                fun.fun_id = dr["Fun_Id"].ToString();
-                                fun.fun_nombre= dr["Fun_Nombre"].ToString();
-                                fun.fun_descripcion= dr["Fun_Descripcion"].ToString();
-                                fun.fun_orden= dr["Fun_Orden"].ToString();
-                                fun.fun_padre = dr["Fun_Padre"].ToString();
-                                list.Add(fun);
-                            }
-                        }
+                        cmd.CommandTimeout = 0; cmd.CommandType = CommandType.StoredProcedure;
+                      
+                        cmd.ExecuteNonQuery();
+                        valida = true;
                     }
                 }
+
+                //using (SqlConnection cn = new SqlConnection(Conexion.conexion_sql))
+                //{
+                //    if (cn.State == 0) cn.Open();
+                //    using (SqlCommand cmd = new SqlCommand(sqlquery, cn))
+                //    {
+                //        cmd.CommandTimeout = 0;
+                //        cmd.CommandType = CommandType.StoredProcedure;
+                //        SqlDataReader dr = cmd.ExecuteReader();
+
+                //        if (dr.HasRows)
+                //        {
+                //            list = new List<Funcion>();
+                //            Funcion fun = new Funcion();
+                //            if (!listar)
+                //            {                                 
+                //                fun.fun_id = "0";
+                //                fun.fun_nombre = "(Vacio)";
+                //                list.Add(fun);
+                //            }
+
+                //            while (dr.Read())
+                //            {
+                //                fun = new Funcion();
+                //                fun.fun_id = dr["Fun_Id"].ToString();
+                //                fun.fun_nombre= dr["Fun_Nombre"].ToString();
+                //                fun.fun_descripcion= dr["Fun_Descripcion"].ToString();
+                //                fun.fun_orden= dr["Fun_Orden"].ToString();
+                //                fun.fun_padre = dr["Fun_Padre"].ToString();
+                //                list.Add(fun);
+                //            }
+                //        }
+                //    }
+                //}
             }
             catch(Exception exc)
             {

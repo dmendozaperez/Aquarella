@@ -39,8 +39,9 @@ namespace www.aquarella.com.pe.Aquarella.Ventas
             {
                 DateTime _fecha_ini = Convert.ToDateTime(txtDateStart.Text);
                 DateTime _fecha_fin = Convert.ToDateTime(txtDateEnd.Text);
+                string _strDoc = txtNroDoc.Text;
                 string _concepto =dwconcepto.SelectedValue;               
-                DataTable dt = invoice.get_ventadetcn(_fecha_ini, _fecha_fin, _concepto);
+                DataTable dt = invoice.get_ventadetcn(_fecha_ini, _fecha_fin, _concepto, _strDoc);
                 Session[_nameSessDatavenazonaconsulta] = dt;
                 gvReturns.DataSource = dt;
                 gvReturns.DataBind();
