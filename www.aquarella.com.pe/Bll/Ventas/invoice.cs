@@ -1069,23 +1069,16 @@ namespace www.aquarella.com.pe.bll
             }
             if (estadotk == "2")
             {
-                VCadFc += "\r\n";
-            
                 //el valor 2 si es que el tickets es que la nota d ecredito es mayor a la venta
+                VCadFc += "\r\n";
 
-
+                if (Convert.ToDouble(_monto_nc) > totalpagar)
+                    _monto_nc = Convert.ToDecimal(totalpagar);
+                    
                 string espaciof = "||**";
 
                 string vNotapercepcion = "(**) Este valor es referencial. Su valor real se consignara en su comprobante de percepcion respectivo.";
-                if (percepcion > 0)
-                {
-                    VCadFc += Alineacion("I", VAnchoTicket, (offSetString + new string('-', (_recLineChars / 3))).Length, offSetString + new string('-', (_recLineChars / 3)));
-                    VCadFc += "\r\n";
-                    VCadFc += Alineacion("I", 25, (offSetString + espaciof + "PERCEPCION|" + porcpercepcion + "%|||").Length, offSetString + espaciof + "PERCEPCION|" + porcpercepcion + "%|||");
-                    VCadFc += Alineacion("C", 3, (0.ToString(_strDec, _myCIintl).Replace("0.00", "|")).Length, 0.ToString(_strDec, _myCIintl).Replace("0.00", "|"));
-                    VCadFc += Alineacion("D", 11, ((percepcion).ToString("#0.00")).Length, (percepcion).ToString("#0.00"));
-                }
-
+            
                 if(_monto_nc > 0) {
 
                     VCadFc += "\r\n";
@@ -1096,12 +1089,24 @@ namespace www.aquarella.com.pe.bll
                     VCadFc += Alineacion("D", 11, ((_monto_nc).ToString("#0.00")).Length, (_monto_nc).ToString("#0.00"));
                  
                 }
+
+                if (percepcion > 0)
+                {
+                    VCadFc += "\r\n";
+                    VCadFc += Alineacion("I", VAnchoTicket, (offSetString + new string('-', (_recLineChars / 3))).Length, offSetString + new string('-', (_recLineChars / 3)));
+                    VCadFc += "\r\n";
+                    VCadFc += Alineacion("I", 25, (offSetString + espaciof + "PERCEPCION|" + porcpercepcion + "%|||").Length, offSetString + espaciof + "PERCEPCION|" + porcpercepcion + "%|||");
+                    VCadFc += Alineacion("C", 3, (0.ToString(_strDec, _myCIintl).Replace("0.00", "|")).Length, 0.ToString(_strDec, _myCIintl).Replace("0.00", "|"));
+                    VCadFc += Alineacion("D", 11, ((percepcion).ToString("#0.00")).Length, (percepcion).ToString("#0.00"));
+                }
                 VCadFc += "\r\n";
                 VCadFc += Alineacion("I", VAnchoTicket, (offSetString + new string('-', (_recLineChars / 3))).Length, offSetString + new string('-', (_recLineChars / 3)));
                 VCadFc += "\r\n";
                 VCadFc += Alineacion("I", 25, (offSetString + "TOTAL A PAGAR|||").Length, offSetString + "TOTAL A PAGAR|||");
                 VCadFc += Alineacion("C", 3, (0.ToString(_strDec, _myCIintl).Replace("0.00", "|")).Length, 0.ToString(_strDec, _myCIintl).Replace("0.00", "|"));
+    
                 totalpagar = totalpagar - Convert.ToDouble(_monto_nc);
+
                 VCadFc += Alineacion("D", 11, ((totalpagar).ToString("#0.00")).Length, (totalpagar).ToString("#0.00"));
                 VCadFc += "\r\n";
                 VCadFc += "\r\n";
@@ -1120,6 +1125,7 @@ namespace www.aquarella.com.pe.bll
             Decimal _monto_efe = Convert.ToDecimal(dt_venta.Rows[0]["montoefe"]);
             Decimal _monto_tar = Convert.ToDecimal(dt_venta.Rows[0]["montotar"]);
             Decimal _monto_vue = Convert.ToDecimal(dt_venta.Rows[0]["montovuel"]);
+            string _NC_ref = (dt_venta.Rows[0]["referencia_nc"]).ToString();
 
             string offSetString = new string(' ', (_recLineChars / 2) - 14);
 
@@ -1181,6 +1187,14 @@ namespace www.aquarella.com.pe.bll
                 VCadFc += Alineacion("C", 3, (0.ToString(_strDec, _myCIintl).Replace("0.00", "|")).Length, 0.ToString(_strDec, _myCIintl).Replace("0.00", "|"));
                 VCadFc += Alineacion("D", 11, (_monto_vue.ToString("#0.00")).Length, _monto_vue.ToString("#0.00"));
                 VCadFc += "\r\n";
+            }
+
+            if (_NC_ref!="") {
+                VCadFc += "\r\n";
+                 VCadFc += Alineacion("C", VAnchoTicket, (_NC_ref).Length, _NC_ref);
+                VCadFc += "\r\n";
+                VCadFc += Alineacion("I", VAnchoTicket, new string('=', _recLineChars).Length, new string('=', _recLineChars));
+                
             }
 
             VCadFc += "\r\n";
