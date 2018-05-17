@@ -1994,6 +1994,14 @@ namespace www.aquarella.com.pe.Aquarella.Logistica
                 return;
             }
 
+            if (h_numTipPago.Value == varPagoxMuestra)
+            {
+                script += "closeDialogLoadPedido()";
+                System.Web.UI.ScriptManager.RegisterStartupScript(upMsg, Page.GetType(), "CloseDialog", script, true);
+                msnMessage.LoadMessage("No se puede guardar un pedido borrador cuando se paga por Muestra: " + DateTime.Now, UserControl.ucMessage.MessageType.Information);
+                return;
+            }
+
             if (h_numTipPago.Value == varIdOperacionPOS)
             {
                 script += "closeDialogLoadPedido()";

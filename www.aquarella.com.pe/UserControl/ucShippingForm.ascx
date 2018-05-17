@@ -431,6 +431,12 @@
             else {
                 $('#dialog-confirm-edit').dialog('option', 'title', 'Vamos a Modificar su Liquidación ¿continuamos?');
                 $("#dialog-confirm-edit").dialog("open");
+
+                if (valor == "008") {
+                    strMuestra = ', con forma de pago POR MUESTRA'
+                }
+
+                document.getElementById('popupy').innerHTML = 'Modificaremos su liquidación ' + strMuestra + ' ; ¿desea continuar?'
             }
         }
     }
@@ -580,7 +586,9 @@
 <div id="dialog-confirm-edit" style="display: none;">
     <p>
         <span class="ui-icon ui-icon-alert" style="float: left; margin: 0 7px 20px 0;"></span>
-        Modificaremos su liquidación; ¿desea continuar?</p>
+       <div id="popupy">  Modificaremos su liquidación; ¿desea continuar?</div></p>
+
+
 </div>
 <!-- DIALOG WAIT -->
 <div id="dialog-wait" style="display: none;" title="Procesando..">
