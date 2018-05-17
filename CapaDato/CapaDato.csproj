@@ -51,6 +51,7 @@
     <Compile Include="Bll\Util\Dat_FormaPago.cs" />
     <Compile Include="Bll\Util\Dat_Menu.cs" />
     <Compile Include="Bll\Util\Dat_Tarjeta.cs" />
+    <Compile Include="Bll\Venta\Dat_FE.cs" />
     <Compile Include="Bll\Venta\Dat_NotaCredito.cs" />
     <Compile Include="Bll\Venta\Dat_Venta.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

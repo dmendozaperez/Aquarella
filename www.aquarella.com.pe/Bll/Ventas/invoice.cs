@@ -1109,8 +1109,8 @@ namespace www.aquarella.com.pe.bll
 
                 VCadFc += Alineacion("D", 11, ((totalpagar).ToString("#0.00")).Length, (totalpagar).ToString("#0.00"));
                 VCadFc += "\r\n";
-                VCadFc += "\r\n";
-                VCadFc += Alineacion("C", VAnchoTicket, (vNotapercepcion).Length, vNotapercepcion);
+                //VCadFc += "\r\n";
+                //VCadFc += Alineacion("C", VAnchoTicket, (vNotapercepcion).Length, vNotapercepcion);
             }
             VCadFc += "\r\n";
             //VCadFc += "\r\n";

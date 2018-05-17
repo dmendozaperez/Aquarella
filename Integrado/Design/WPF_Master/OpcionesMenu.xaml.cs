@@ -25,6 +25,9 @@ using Integrado.Sistemas.Ventas;
 using CapaDato.Bll.Util;
 using Integrado.Urbano;
 using Integrado.Prestashop;
+using CapaEntidad.Bll.Venta;
+using CapaDato.Bll.Venta;
+using Integrado.Bll;
 
 namespace Integrado.Design.WPF_Master
 {
@@ -91,7 +94,7 @@ namespace Integrado.Design.WPF_Master
             if (Ent_Global._canal_venta != "AQ")
             {
                 dispatcherTimerE.Tick += new EventHandler(dispatcherTimerE_Tick);
-                dispatcherTimerE.Interval = new TimeSpan(0, 0, 1);
+                dispatcherTimerE.Interval = new TimeSpan(0, 0, 20);
                 dispatcherTimerE.Start();
 
                 /*PROCESO PARA URBANO HACIA PRESTASHOP*/
@@ -118,14 +121,47 @@ namespace Integrado.Design.WPF_Master
         private void dispatcherTimerE_Tick(object sender, EventArgs e)
         {
             #region<ACTUALIZAR EL ESTADO DE PRESTASHOP>
-                //UpdaEstado updpresta = new UpdaEstado();
-                //updpresta.updateestadofac_presta();
+            //UpdaEstado updpresta = new UpdaEstado();
+            //updpresta.updateestadofac_presta();
             #endregion
 
             #region<ENVIO DATA URBANO>
-                //EnviaPedido envia = new EnviaPedido();
-                //envia.sendUrbano();
+            //EnviaPedido envia = new EnviaPedido();
+            //envia.sendUrbano();
             //envia.send();
+            #endregion
+            #region<FACTURACION ELECTRONICA>
+            Dat_FE dat_fe = new Dat_FE();
+            List<Ent_FE> listarFE = dat_fe.get_doc_fe_error();
+
+            if (listarFE!=null)
+            {
+                foreach(var fila in listarFE)
+                {
+                    string cod_hash = "";string _error = "";
+                    Facturacion_Electronica.ejecutar_factura_electronica(fila.tipo, fila.numero,ref cod_hash,ref _error);
+
+                    if (_error.Length==0)
+                    {
+                        if (fila.tipo=="B")
+                        { 
+                            Dat_Venta.insertar_codigo_hash(fila.numero, cod_hash, "V");
+                        }
+                        else
+                        {
+                            Dat_Venta.insertar_codigo_hash(fila.not_id, cod_hash, "N");
+                        }
+                    }
+                    else
+                    {
+                        dat_fe.update_error_FE(_error);
+                    }
+
+
+                }
+                Bll.Basico._enviar_webservice_xml();
+            }
+
             #endregion
         }
         private void dispatcherTimer_Tick(object sender, EventArgs e)

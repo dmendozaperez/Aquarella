@@ -133,9 +133,12 @@ namespace Integrado.Prestashop
 
 
         /*************************/
-      	/*PRODUCCION*/
-	    public static string BaseUrl = "http://bata.com.pe/tienda/api/";
-    	public static string Account = "7UAQDKE187QTB3JT14NLQ3V3XSB6R7HR";
+        /*PRODUCCION*/
+        //public static string BaseUrl = "http://bata.com.pe/tienda/api/";
+        //public static string Account = "7UAQDKE187QTB3JT14NLQ3V3XSB6R7HR";
+
+        public static string BaseUrl = "http://138.197.73.71/tienda/api/";
+        public static string Account = "7UAQDKE187QTB3JT14NLQ3V3XSB6R7HR";
 
         /****************/
         public static string Password = "";
