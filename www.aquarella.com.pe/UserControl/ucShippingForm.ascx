@@ -418,6 +418,15 @@
             if (hdestado.val() == "0") {
                 $('#dialog-confirm').dialog('option', 'title', 'Vamos a generar su nueva Liquidación ¿continuamos?');
                 $("#dialog-confirm").dialog("open");
+                var strMuestra = "";
+                var valor = $("[id$='h_numTipPago']").val();
+
+                if (valor == "008") {
+                    strMuestra = ', con forma de pago POR MUESTRA'                  
+                }
+
+                document.getElementById('popupx').innerHTML = 'Generaremos su liquidación ' + strMuestra + ' ; ¿desea continuar?'
+                
             }
             else {
                 $('#dialog-confirm-edit').dialog('option', 'title', 'Vamos a Modificar su Liquidación ¿continuamos?');
@@ -559,7 +568,7 @@
 <div id="dialog-confirm" style="display: none;">
     <p>
         <span class="ui-icon ui-icon-alert" style="float: left; margin: 0 7px 20px 0;"></span>
-        Generaremos su liquidación; ¿desea continuar?</p>
+       <div id="popupx"> Generaremos su liquidación ; ¿desea continuar?</div></p>
 </div>
 <!-- DIALOG CONFIRM -->
 <div id="dialog-confirm-pedido" style="display: none;">
