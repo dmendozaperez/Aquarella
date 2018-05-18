@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="iso-8859-1"?>
-<Mapa xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Nombre="FACTURA_BOLETA_STD110" IdTipoMapa="1" TipoArchivo="1" IdEsquema="1" Activo="true">
+<Mapa xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Nombre="FACTURA_BOLETA_STD30_V3.0.2" IdTipoMapa="1" TipoArchivo="1" IdEsquema="1" Activo="true">
   <ParsingData>
     <Texto AnchoFijo="false" IgnorarEspacios="true" CharAperturaCampo="" CharCierreCampo="">
       <Registros>
@@ -175,7 +175,7 @@
                 <string>CAMPO ADICIONAL DE 100 CARACTERES DE RELLENO------------CAMPO ADICIONAL DE 100 CARACTERES DE RELLENO</string>
               </Valor>
             </Campo>
-            <Campo Prefijo="UNB" Nombre="UNB034" Visible="true">
+            <Campo Prefijo="UNB" Nombre="CAMPO_ADICIONAL" Visible="true">
               <Valor>
                 <string>CAMPO ADICIONAL DE 100 CARACTERES DE RELLENO------------CAMPO ADICIONAL DE 100 CARACTERES DE RELLENO</string>
               </Valor>
@@ -235,6 +235,11 @@
                 <string>454848.85</string>
               </Valor>
             </Campo>
+            <Campo Prefijo="UNB" Nombre="TOTAL_ANTICIPOS" Visible="true">
+              <Valor>
+                <string>454848.85</string>
+              </Valor>
+            </Campo>
             <Campo Prefijo="UNB" Nombre="RECEPTOR_RUC" Visible="true">
               <Valor>
                 <string>8569</string>
@@ -244,7 +249,7 @@
           <Longitud xsi:nil="true" />
           <Ejemplo />
         </Registro>
-        <Registro Prefijo="NOT" Nombre="Notas" Separador="," CharAperturaCampo="" CharCierreCampo="" MinOccurs="0" MaxOccurs="2147483647" PrefijoPadre="UNB" EsItem="false">
+        <Registro Prefijo="NOT" Nombre="Notas" Separador="," CharAperturaCampo="" CharCierreCampo="" MinOccurs="0" MaxOccurs="999" PrefijoPadre="UNB" EsItem="false">
           <Campos>
             <Campo Prefijo="NOT" Nombre="ID_REGISTRO" Visible="true">
               <Valor>
@@ -268,7 +273,7 @@
           <Longitud xsi:nil="true" />
           <Ejemplo />
         </Registro>
-        <Registro Prefijo="LEY" Nombre="Leyendas" Separador="," CharAperturaCampo="" CharCierreCampo="" MinOccurs="0" MaxOccurs="2147483647" PrefijoPadre="UNB" EsItem="false">
+        <Registro Prefijo="LEY" Nombre="Leyendas" Separador="," CharAperturaCampo="" CharCierreCampo="" MinOccurs="0" MaxOccurs="999" PrefijoPadre="UNB" EsItem="false">
           <Campos>
             <Campo Prefijo="LEY" Nombre="ID_REGISTRO" Visible="true">
               <Valor>
@@ -286,16 +291,16 @@
             </Campo>
             <Campo Prefijo="LEY" Nombre="LEYENDA" Visible="true">
               <Valor>
-                <string>LEYENDA NRO 1 - áéíóú</string>
-                <string>LEYENDA NRO 2 - ñÑüÜ</string>
-                <string>LEYENDA NRO 3 - ÁÉÍÓÚ</string>
+                <string>LEYENDA NRO 1 - Ã¡Ã©Ã­Ã³Ãº</string>
+                <string>LEYENDA NRO 2 - Ã±Ã‘Ã¼Ãœ</string>
+                <string>LEYENDA NRO 3 - ÃÃ‰ÃÃ“Ãš</string>
               </Valor>
             </Campo>
           </Campos>
           <Longitud xsi:nil="true" />
           <Ejemplo />
         </Registro>
-        <Registro Prefijo="REM" Nombre="Guías de remisión" Separador="," CharAperturaCampo="" CharCierreCampo="" MinOccurs="0" MaxOccurs="2147483647" PrefijoPadre="UNB" EsItem="false">
+        <Registro Prefijo="REM" Nombre="GuÃ­as de remisiÃ³n" Separador="," CharAperturaCampo="" CharCierreCampo="" MinOccurs="0" MaxOccurs="999" PrefijoPadre="UNB" EsItem="false">
           <Campos>
             <Campo Prefijo="REM" Nombre="ID_REGISTRO" Visible="true">
               <Valor>
@@ -325,7 +330,7 @@
           <Longitud xsi:nil="true" />
           <Ejemplo />
         </Registro>
-        <Registro Prefijo="REF" Nombre="Documentos de referencia" Separador="," CharAperturaCampo="" CharCierreCampo="" MinOccurs="0" MaxOccurs="2147483647" PrefijoPadre="UNB" EsItem="false">
+        <Registro Prefijo="REF" Nombre="Documentos de referencia" Separador="," CharAperturaCampo="" CharCierreCampo="" MinOccurs="0" MaxOccurs="999" PrefijoPadre="UNB" EsItem="false">
           <Campos>
             <Campo Prefijo="REF" Nombre="ID_REGISTRO" Visible="true">
               <Valor>
@@ -359,7 +364,7 @@
           <Longitud xsi:nil="true" />
           <Ejemplo />
         </Registro>
-        <Registro Prefijo="DES" Nombre="Descuentos y cargos" Separador="," CharAperturaCampo="" CharCierreCampo="" MinOccurs="0" MaxOccurs="2147483647" PrefijoPadre="UNB" EsItem="false">
+        <Registro Prefijo="DES" Nombre="Descuentos y cargos" Separador="," CharAperturaCampo="" CharCierreCampo="" MinOccurs="0" MaxOccurs="999" PrefijoPadre="UNB" EsItem="false">
           <Campos>
             <Campo Prefijo="DES" Nombre="ID_REGISTRO" Visible="true">
               <Valor>
@@ -387,10 +392,10 @@
             </Campo>
             <Campo Prefijo="DES" Nombre="DESCRIPCION_MOTIVO" Visible="true">
               <Valor>
-                <string>Descripción DESCUENTO 01 del motivo para la aplicación del descuento o cargo</string>
-                <string>Descripción CARGO 02 del motivo para la aplicación del descuento o cargo</string>
-                <string>Descripción CARGO 02 del motivo para la aplicación del descuento o cargo</string>
-                <string>Descripción CARGO 02 del motivo para la aplicación del descuento o cargo</string>
+                <string>DescripciÃ³n DESCUENTO 01 del motivo para la aplicaciÃ³n del descuento o cargo</string>
+                <string>DescripciÃ³n CARGO 02 del motivo para la aplicaciÃ³n del descuento o cargo</string>
+                <string>DescripciÃ³n CARGO 02 del motivo para la aplicaciÃ³n del descuento o cargo</string>
+                <string>DescripciÃ³n CARGO 02 del motivo para la aplicaciÃ³n del descuento o cargo</string>
               </Valor>
             </Campo>
             <Campo Prefijo="DES" Nombre="IMPORTE_DESCUENTO" Visible="true">
@@ -413,7 +418,7 @@
           <Longitud xsi:nil="true" />
           <Ejemplo />
         </Registro>
-        <Registro Prefijo="IMP" Nombre="Impuestos" Separador="," CharAperturaCampo="" CharCierreCampo="" MinOccurs="1" MaxOccurs="2147483647" PrefijoPadre="UNB" EsItem="false">
+        <Registro Prefijo="IMP" Nombre="Impuestos" Separador="," CharAperturaCampo="" CharCierreCampo="" MinOccurs="1" MaxOccurs="999" PrefijoPadre="UNB" EsItem="false">
           <Campos>
             <Campo Prefijo="IMP" Nombre="ID_REGISTRO" Visible="true">
               <Valor>
@@ -455,7 +460,7 @@
           <Longitud xsi:nil="true" />
           <Ejemplo />
         </Registro>
-        <Registro Prefijo="TRI" Nombre="Otros conceptos tributarios" Separador="," CharAperturaCampo="" CharCierreCampo="" MinOccurs="0" MaxOccurs="2147483647" PrefijoPadre="UNB" EsItem="false">
+        <Registro Prefijo="TRI" Nombre="Otros conceptos tributarios" Separador="," CharAperturaCampo="" CharCierreCampo="" MinOccurs="0" MaxOccurs="999" PrefijoPadre="UNB" EsItem="false">
           <Campos>
             <Campo Prefijo="TRI" Nombre="ID_REGISTRO" Visible="true">
               <Valor>
@@ -497,7 +502,7 @@
           <Longitud xsi:nil="true" />
           <Ejemplo />
         </Registro>
-        <Registro Prefijo="ITE" Nombre="Items" Separador="," CharAperturaCampo="" CharCierreCampo="" MinOccurs="1" MaxOccurs="2147483647" PrefijoPadre="UNB" EsItem="true">
+        <Registro Prefijo="ITE" Nombre="Items" Separador="," CharAperturaCampo="" CharCierreCampo="" MinOccurs="1" MaxOccurs="999" PrefijoPadre="UNB" EsItem="true">
           <Campos>
             <Campo Prefijo="ITE" Nombre="ID_REGISTRO" Visible="true">
               <Valor>
@@ -541,10 +546,10 @@
             </Campo>
             <Campo Prefijo="ITE" Nombre="DESCRIPCION_1" Visible="true">
               <Valor>
-                <string>Descripción 01 &amp;+-=)(/&amp;%$·"&lt;&gt;*| del bien vendido o cedido en uso</string>
-                <string>Descripción 02 detallada del bien vendido o cedido en uso</string>
-                <string>Descripción 03 detallada del bien vendido o cedido en uso</string>
-                <string>Descripción 04 detallada del bien vendido o cedido en uso</string>
+                <string>DescripciÃ³n 01 &amp;+-=)(/&amp;%$Â·"&lt;&gt;*| del bien vendido o cedido en uso</string>
+                <string>DescripciÃ³n 02 detallada del bien vendido o cedido en uso</string>
+                <string>DescripciÃ³n 03 detallada del bien vendido o cedido en uso</string>
+                <string>DescripciÃ³n 04 detallada del bien vendido o cedido en uso</string>
               </Valor>
             </Campo>
             <Campo Prefijo="ITE" Nombre="VALOR_UNITARIO" Visible="true">
@@ -583,7 +588,7 @@
           <Longitud xsi:nil="true" />
           <Ejemplo />
         </Registro>
-        <Registro Prefijo="IDE" Nombre="Item descuentos" Separador="," CharAperturaCampo="" CharCierreCampo="" MinOccurs="0" MaxOccurs="2147483647" PrefijoPadre="ITE" EsItem="false">
+        <Registro Prefijo="IDE" Nombre="Item descuentos" Separador="," CharAperturaCampo="" CharCierreCampo="" MinOccurs="0" MaxOccurs="999" PrefijoPadre="ITE" EsItem="false">
           <Campos>
             <Campo Prefijo="IDE" Nombre="ID_REGISTRO" Visible="true">
               <Valor>
@@ -605,8 +610,8 @@
             </Campo>
             <Campo Prefijo="IDE" Nombre="DESCRIPCION_DESCUENTO" Visible="true">
               <Valor>
-                <string>Descripción del motivo para la aplicación del descuento o cargo</string>
-                <string>Descripción del motivo para la aplicación del descuento o cargo</string>
+                <string>DescripciÃ³n del motivo para la aplicaciÃ³n del descuento o cargo</string>
+                <string>DescripciÃ³n del motivo para la aplicaciÃ³n del descuento o cargo</string>
               </Valor>
             </Campo>
             <Campo Prefijo="IDE" Nombre="IMPORTE_FINAL" Visible="true">
@@ -625,7 +630,7 @@
           <Longitud xsi:nil="true" />
           <Ejemplo />
         </Registro>
-        <Registro Prefijo="IIM" Nombre="Item impuestos" Separador="," CharAperturaCampo="" CharCierreCampo="" MinOccurs="0" MaxOccurs="2147483647" PrefijoPadre="ITE" EsItem="false">
+        <Registro Prefijo="IIM" Nombre="Item impuestos" Separador="," CharAperturaCampo="" CharCierreCampo="" MinOccurs="0" MaxOccurs="999" PrefijoPadre="ITE" EsItem="false">
           <Campos>
             <Campo Prefijo="IIM" Nombre="ID_REGISTRO" Visible="true">
               <Valor>
@@ -765,7 +770,7 @@
             </Campo>
             <Campo Prefijo="TRA" Nombre="DIRECCION_PUNTO_PARTIDA" Visible="true">
               <Valor>
-                <string>AV. ATOCONGO NRO. 2440  - áéíóú</string>
+                <string>AV. ATOCONGO NRO. 2440  - Ã¡Ã©Ã­Ã³Ãº</string>
               </Valor>
             </Campo>
             <Campo Prefijo="TRA" Nombre="URBANIZACION_PUNTO_PARTIDA" Visible="true">
@@ -800,7 +805,7 @@
             </Campo>
             <Campo Prefijo="TRA" Nombre="DIRECCION_PUNTO_LLEGADA" Visible="true">
               <Valor>
-                <string>AV. JIMENEZ NRO. 2330  - áéíóú</string>
+                <string>AV. JIMENEZ NRO. 2330  - Ã¡Ã©Ã­Ã³Ãº</string>
               </Valor>
             </Campo>
             <Campo Prefijo="TRA" Nombre="URBANIZACION_PUNTO_LLEGADA" Visible="true">
@@ -863,11 +868,26 @@
                 <string>EDUARDO AGREDO</string>
               </Valor>
             </Campo>
+            <Campo Prefijo="TRA" Nombre="CODIGO_MODALIDAD_TRANSPORTE" Visible="true">
+              <Valor>
+                <string>1O</string>
+              </Valor>
+            </Campo>
+            <Campo Prefijo="TRA" Nombre="TOTAL_PESO_BRUTO" Visible="true">
+              <Valor>
+                <string>123456789012345,12</string>
+              </Valor>
+            </Campo>
+            <Campo Prefijo="TRA" Nombre="CODIGO_UNIDAD_MEDIDA" Visible="true">
+              <Valor>
+                <string>COD</string>
+              </Valor>
+            </Campo>
           </Campos>
           <Longitud xsi:nil="true" />
           <Ejemplo />
         </Registro>
-        <Registro Prefijo="ANT" Nombre="Anticipos" Separador="," CharAperturaCampo="" CharCierreCampo="" MinOccurs="0" MaxOccurs="2147483647" PrefijoPadre="UNB" EsItem="false">
+        <Registro Prefijo="ANT" Nombre="Anticipos" Separador="," CharAperturaCampo="" CharCierreCampo="" MinOccurs="0" MaxOccurs="999" PrefijoPadre="UNB" EsItem="false">
           <Campos>
             <Campo Prefijo="ANT" Nombre="ID_REGISTRO" Visible="true">
               <Valor>
@@ -889,9 +909,222 @@
                 <string>SERIE Y CORRELALATIVO ANTICIPO</string>
               </Valor>
             </Campo>
+            <Campo Prefijo="ANT" Nombre="TIPO_IDENTIFICACION_EMISOR" Visible="true">
+              <Valor>
+                <string>1</string>
+              </Valor>
+            </Campo>
+            <Campo Prefijo="ANT" Nombre="RUC_EMISOR_ANTICIPO" Visible="true">
+              <Valor>
+                <string>20164548985</string>
+              </Valor>
+            </Campo>
           </Campos>
           <Longitud xsi:nil="true" />
           <Ejemplo />
+        </Registro>
+        <Registro Prefijo="ADI" Nombre="InformaciÃ³n Adicional" Separador="," CharAperturaCampo="" CharCierreCampo="" MinOccurs="0" MaxOccurs="1" PrefijoPadre="UNB" EsItem="false">
+          <Campos>
+            <Campo Prefijo="ADI" Nombre="ID_REGISTRO" Visible="true">
+              <Valor>
+                <string>ADI</string>
+              </Valor>
+            </Campo>
+            <Campo Prefijo="ADI" Nombre="NUMERO_PLACA_VEHICULO" Visible="true">
+              <Valor>
+                <string>ADI</string>
+              </Valor>
+            </Campo>
+            <Campo Prefijo="ADI" Nombre="CODIGO_UBIGEO" Visible="true">
+              <Valor>
+                <string>ANT</string>
+              </Valor>
+            </Campo>
+            <Campo Prefijo="ADI" Nombre="DIRECCION_DETALLADA" Visible="true">
+              <Valor>
+                <string>ADI</string>
+              </Valor>
+            </Campo>
+            <Campo Prefijo="ADI" Nombre="URBANIZACION" Visible="true">
+              <Valor>
+                <string>ADI</string>
+              </Valor>
+            </Campo>
+            <Campo Prefijo="ADI" Nombre="PROVINCIA" Visible="true">
+              <Valor>
+                <string>ADI</string>
+              </Valor>
+            </Campo>
+            <Campo Prefijo="ADI" Nombre="DEPARTAMENTO" Visible="true">
+              <Valor>
+                <string>ADI</string>
+              </Valor>
+            </Campo>
+            <Campo Prefijo="ADI" Nombre="DISTRITO" Visible="true">
+              <Valor>
+                <string>ADI</string>
+              </Valor>
+            </Campo>
+            <Campo Prefijo="ADI" Nombre="CODIGO_PAIS" Visible="true">
+              <Valor>
+                <string>ADI</string>
+              </Valor>
+            </Campo>
+            <Campo Prefijo="ADI" Nombre="CODIGO_UBIGEO_RECEPTOR" Visible="true">
+              <Valor>
+                <string>ADI</string>
+              </Valor>
+            </Campo>
+            <Campo Prefijo="ADI" Nombre="DIRECCION_DETALLADA_RECEPTOR" Visible="true">
+              <Valor>
+                <string>ADI</string>
+              </Valor>
+            </Campo>
+            <Campo Prefijo="ADI" Nombre="URBANIZACION_RECEPTOR" Visible="true">
+              <Valor>
+                <string>ADI</string>
+              </Valor>
+            </Campo>
+            <Campo Prefijo="ADI" Nombre="PROVINCIA_RECEPTOR" Visible="true">
+              <Valor>
+                <string>ADI</string>
+              </Valor>
+            </Campo>
+            <Campo Prefijo="ADI" Nombre="DEPARTAMENTO_RECEPTOR" Visible="true">
+              <Valor>
+                <string>ADI</string>
+              </Valor>
+            </Campo>
+            <Campo Prefijo="ADI" Nombre="DISTRITO_RECEPTOR" Visible="true">
+              <Valor>
+                <string>ADI</string>
+              </Valor>
+            </Campo>
+            <Campo Prefijo="ADI" Nombre="CODIGO_PAIS_RECEPTOR" Visible="true">
+              <Valor>
+                <string>ADI</string>
+              </Valor>
+            </Campo>
+          </Campos>
+        </Registro>
+        <Registro Prefijo="DTR" Nombre="InformaciÃ³n Adicional para Detracciones" Separador="," CharAperturaCampo="" CharCierreCampo="" MinOccurs="0" MaxOccurs="1" PrefijoPadre="UNB" EsItem="false">
+          <Campos>
+            <Campo Prefijo="DTR" Nombre="ID_REGISTRO" Visible="true">
+              <Valor>
+                <string>DTR</string>
+              </Valor>
+            </Campo>
+            <Campo Prefijo="DTR" Nombre="DESCRIPCION_VIAJE" Visible="true">
+              <Valor>
+                <string>DTR</string>
+              </Valor>
+            </Campo>
+            <Campo Prefijo="DTR" Nombre="MATRICULA_EMBARCACION" Visible="true">
+              <Valor>
+                <string>DTR</string>
+              </Valor>
+            </Campo>
+            <Campo Prefijo="DTR" Nombre="NOMBRE_EMBARCACION" Visible="true">
+              <Valor>
+                <string>DTR</string>
+              </Valor>
+            </Campo>
+            <Campo Prefijo="DTR" Nombre="DESCRIPCION_ESPECIE_VENDIDA" Visible="true">
+              <Valor>
+                <string>DTR</string>
+              </Valor>
+            </Campo>
+            <Campo Prefijo="DTR" Nombre="LUGAR_DESCARGA" Visible="true">
+              <Valor>
+                <string>DTR</string>
+              </Valor>
+            </Campo>
+            <Campo Prefijo="DTR" Nombre="FECHA_DESCARGA" Visible="true">
+              <Valor>
+                <string>DTR</string>
+              </Valor>
+            </Campo>
+            <Campo Prefijo="DTR" Nombre="MONTO_REFRENCIAL" Visible="true">
+              <Valor>
+                <string>DTR</string>
+              </Valor>
+            </Campo>
+            <Campo Prefijo="DTR" Nombre="MONEDA_MONTO_REFERENCIAL" Visible="true">
+              <Valor>
+                <string>DTR</string>
+              </Valor>
+            </Campo>
+            <Campo Prefijo="DTR" Nombre="MONTO_REFERENCIAL_PRELIMINAR_VIAJE" Visible="true">
+              <Valor>
+                <string>DTR</string>
+              </Valor>
+            </Campo>
+            <Campo Prefijo="DTR" Nombre="MONEDA_MONTO_REFERENCIAL_PRELIMINAR_VIAJE" Visible="true">
+              <Valor>
+                <string>DTR</string>
+              </Valor>
+            </Campo>
+            <Campo Prefijo="DTR" Nombre="INDICA_FACTOR_RETORNO_VIAJE" Visible="true">
+              <Valor>
+                <string>DTR</string>
+              </Valor>
+            </Campo>
+            <Campo Prefijo="DTR" Nombre="PUNTO_ORIGEN_VIAJE" Visible="true">
+              <Valor>
+                <string>DTR</string>
+              </Valor>
+            </Campo>
+            <Campo Prefijo="DTR" Nombre="PUNTO_DESTINO_VIAJE" Visible="true">
+              <Valor>
+                <string>DTR</string>
+              </Valor>
+            </Campo>
+            <Campo Prefijo="DTR" Nombre="CARGA_EFECTIVA_TN_POR_VEHICULO" Visible="true">
+              <Valor>
+                <string>DTR</string>
+              </Valor>
+            </Campo>
+            <Campo Prefijo="DTR" Nombre="UNIDAD_MEDIDA_CARGA_EFECTIVA_TN_POR_VEHICULO" Visible="true">
+              <Valor>
+                <string>DTR</string>
+              </Valor>
+            </Campo>
+            <Campo Prefijo="DTR" Nombre="MONTO_REFERENCIAL_POR_VEHICULO" Visible="true">
+              <Valor>
+                <string>DTR</string>
+              </Valor>
+            </Campo>
+            <Campo Prefijo="DTR" Nombre="MONEDA_MONTO_REFERENCIAL_POR_VEHICULO" Visible="true">
+              <Valor>
+                <string>DTR</string>
+              </Valor>
+            </Campo>
+            <Campo Prefijo="DTR" Nombre="CONFIGURACION_VEHICULAR" Visible="true">
+              <Valor>
+                <string>DTR</string>
+              </Valor>
+            </Campo>
+            <Campo Prefijo="DTR" Nombre="CARGA_UTIL_TN_VEHICULO_EN_VIAJE" Visible="true">
+              <Valor>
+                <string>DTR</string>
+              </Valor>
+            </Campo>
+            <Campo Prefijo="DTR" Nombre="UNIDAD_MEDIDA_CARGA_UTIL_VEHICULO_EN_VIAJE" Visible="true">
+              <Valor>
+                <string>DTR</string>
+              </Valor>
+            </Campo>
+            <Campo Prefijo="DTR" Nombre="MONTO_REFERENCIAL_TM_VIAJE" Visible="true">
+              <Valor>
+                <string>DTR</string>
+              </Valor>
+            </Campo>
+            <Campo Prefijo="DTR" Nombre="MONEDA_MONTO_REFERENCIAL_TM_VIAJE" Visible="true">
+              <Valor>
+                <string>DTR</string>
+              </Valor>
+            </Campo>
+          </Campos>
         </Registro>
         <Registro Prefijo="USUARIO" Nombre="Campos del Usuario" CharAperturaCampo="" CharCierreCampo="" MinOccurs="1" MaxOccurs="1" PrefijoPadre="" EsItem="false">
           <Campos>
@@ -924,38 +1157,38 @@
         <string>UNB+PROCESAMIENTO+2.0+1.0+01+01+F001-1+2014-02-03+PEN+20505779291+6+Cementos Lima (Peru) S.A.A - EDUARDO+AGREDO GUTIERREZ+LI1501+AV. ATOCONGO NRO. 2440+URB. JOSE GALVEZ - VILLA+DEPARTAMENTO LIMA+PROVINCIA DE LIMA+CERCADO CALLAO+PE+20505779290+6+NESTLE PERU+DESCRIPCION DEL PAIS+3525.00+634.50+4159.50+142212121212.89+4159.50+999999999+PXP-A001+eduardo.agredo@carvajal.com+0+CAMPO ADICIONAL DE 100 CARACTERES DE RELLENO------------CAMPO ADICIONAL DE 100 CARACTERES DE RELLENO+CAMPO ADICIONAL DE 100 CARACTERES DE RELLENO------------CAMPO ADICIONAL DE 100 CARACTERES DE RELLENO+OCPE00001+SUNAT-12345678998+2013-12-31+142212121212.89+IMP01+1+2005+99.99+20505779291+20505779291+20505779291+20505779291+20505779291+20505779291+20505779291+20505779291+20505779291+20505779291+20505779291+20505779291+99+3001+5500.55</string>
         <string>NOT,1000,NOTA 1 ALFANUMERICO DE 100 CARACTERES DE RELLENO</string>
         <string>NOT,1000,NOTA 2 ALFANUMERICO DE 200 CARACTERES DE RELLENO</string>
-        <string>LEY,1000,LEYENDA NRO 1 - áéíóú</string>
-        <string>LEY,1000,LEYENDA NRO 2 - ñÑüÜ</string>
-        <string>LEY,1000,LEYENDA NRO 3 - ÁÉÍÓÚ</string>
+        <string>LEY,1000,LEYENDA NRO 1 - Ã¡Ã©Ã­Ã³Ãº</string>
+        <string>LEY,1000,LEYENDA NRO 2 - Ã±Ã‘Ã¼Ãœ</string>
+        <string>LEY,1000,LEYENDA NRO 3 - ÃÃ‰ÃÃ“Ãš</string>
         <string>REM,123456,09,2013-07-30</string>
         <string>REM,654321,09,2013-07-30</string>
         <string>REF,123456,09,2013-07-30</string>
         <string>REF,123457,09,2013-07-30</string>
         <string>REF,123458,09,2013-07-30</string>
-        <string>DES,DES,59,Descripción DESCUENTO 01 del motivo para la aplicación del descuento o cargo,10,99.99</string>
-        <string>DES,CAR,68,Descripción CARGO 02 del motivo para la aplicación del descuento o cargo,20,99.99</string>
-        <string>DES,CAR,73,Descripción CARGO 02 del motivo para la aplicación del descuento o cargo,20,10.00</string>
-        <string>DES,CAR,75,Descripción CARGO 02 del motivo para la aplicación del descuento o cargo,20,20.00</string>
+        <string>DES,DES,59,DescripciÃ³n DESCUENTO 01 del motivo para la aplicaciÃ³n del descuento o cargo,10,99.99</string>
+        <string>DES,CAR,68,DescripciÃ³n CARGO 02 del motivo para la aplicaciÃ³n del descuento o cargo,20,99.99</string>
+        <string>DES,CAR,73,DescripciÃ³n CARGO 02 del motivo para la aplicaciÃ³n del descuento o cargo,20,10.00</string>
+        <string>DES,CAR,75,DescripciÃ³n CARGO 02 del motivo para la aplicaciÃ³n del descuento o cargo,20,20.00</string>
         <string>IMP,1000.00,1001.00,1002,IGV,VAT</string>
         <string>IMP,2000.00,2001.00,2002,ISC,VAT</string>
         <string>TRI,1001,1000.00,1.50,12.2,15.6</string>
         <string>TRI,1002,2000.00,2.50,11.1,14.3</string>
-        <string>ITE,01,04,15.00,37.50,Descripción 01 &amp;+-=)(/&amp;%$·"&lt;&gt;*| del bien vendido o cedido en uso,5.35,20505779291,01,5.35</string>
-        <string>IDE,DES,72,Descripción del motivo para la aplicación del descuento o cargo,15,90.99</string>
+        <string>ITE,01,04,15.00,37.50,DescripciÃ³n 01 &amp;+-=)(/&amp;%$Â·"&lt;&gt;*| del bien vendido o cedido en uso,5.35,20505779291,01,5.35</string>
+        <string>IDE,DES,72,DescripciÃ³n del motivo para la aplicaciÃ³n del descuento o cargo,15,90.99</string>
         <string>IIM,10.00,1.00,10.00,10.18,12,10,1000,IGV,VAT</string>
         <string>IIM,20.00,2.00,20.00,20.18,13,20,2000,ISC,EXC</string>
         <string>IIM,30.00,3.00,30.00,30.18,14,30,9999,OTROS,OTH</string>
-        <string>ITE,01,1G,30.00,38.50,Descripción 02 detallada del bien vendido o cedido en uso,6.36,20505779292,01,6.36</string>
+        <string>ITE,01,1G,30.00,38.50,DescripciÃ³n 02 detallada del bien vendido o cedido en uso,6.36,20505779292,01,6.36</string>
         <string>IIM,30.00,3.00,30.00,30.18,14,30,9999,OTROS,OTH</string>
         <string>IIM,10.00,1.00,10.00,10.18,13,20,1000,IGV,VAT</string>
-        <string>ITE,02,11,45.00,75.00,Descripción 03 detallada del bien vendido o cedido en uso,7.37,20505779293,01,7.37</string>
-        <string>IDE,CAR,75,Descripción del motivo para la aplicación del descuento o cargo,15,1.11</string>
+        <string>ITE,02,11,45.00,75.00,DescripciÃ³n 03 detallada del bien vendido o cedido en uso,7.37,20505779293,01,7.37</string>
+        <string>IDE,CAR,75,DescripciÃ³n del motivo para la aplicaciÃ³n del descuento o cargo,15,1.11</string>
         <string>IIM,20.00,2.00,20.00,20.18,13,20,2000,ISC,EXC</string>
         <string>IIM,20.00,2.00,20.00,20.18,14,30,2000,IGV,VAT</string>
-        <string>ITE,02,DZN,60.00,155.00,Descripción 04 detallada del bien vendido o cedido en uso,8.38,20505779294,01,8.38</string>
+        <string>ITE,02,DZN,60.00,155.00,DescripciÃ³n 04 detallada del bien vendido o cedido en uso,8.38,20505779294,01,8.38</string>
         <string>IIM,30.00,3.00,30.00,30.18,14,30,9999,OTROS,OTH</string>
         <string>IIM,30.00,3.00,30.00,30.18,14,30,9999,OTROS,OTH</string>
-        <string>TRA,10101,AV. ATOCONGO NRO. 2440  - áéíóú,URB. JOSE GALVEZ - VILLA,PROVINCIA DE LIMA,DEPARTAMENTO LIMA,CERCADO CALLAO,PE,10101,AV. JIMENEZ NRO. 2330  - áéíóú,URB. JUAN JOSE - VILLA,PROVINCIA DE LIMA,DEPARTAMENTO LIMA,CERCADO CALLAO,PE,ABCDE12345,1234567890,CHEVROLET,1234567890,12345678901,CC,EDUARDO AGREDO</string>
+        <string>TRA,10101,AV. ATOCONGO NRO. 2440  - Ã¡Ã©Ã­Ã³Ãº,URB. JOSE GALVEZ - VILLA,PROVINCIA DE LIMA,DEPARTAMENTO LIMA,CERCADO CALLAO,PE,10101,AV. JIMENEZ NRO. 2330  - Ã¡Ã©Ã­Ã³Ãº,URB. JUAN JOSE - VILLA,PROVINCIA DE LIMA,DEPARTAMENTO LIMA,CERCADO CALLAO,PE,ABCDE12345,1234567890,CHEVROLET,1234567890,12345678901,CC,EDUARDO AGREDO</string>
         <string>ANT,35000.50,01,SERIE_CORRELATIVO0001</string>
       </FileContentsEjemplo>
     </Texto>
@@ -1116,6 +1349,12 @@
         <CampoID Prefijo="TRI" Nombre="BASE_IMPONIBLE" />
       </InFields>
       <OutField Prefijo="OTROS_CONCEPTOS_TRIBUTARIOS" Nombre="VALOR_REFERENCIAL_MONTO" />
+    </Mapeo>
+    <Mapeo>
+      <InFields>
+        <CampoID Prefijo="TRI" Nombre="PORCENTAJE_DETRACCION" />
+      </InFields>
+      <OutField Prefijo="OTROS_CONCEPTOS_TRIBUTARIOS" Nombre="PORCENTAJE_DETRACCION" />
     </Mapeo>
     <Mapeo>
       <InFields>
@@ -1427,6 +1666,12 @@
       <InFields>
         <CampoID Prefijo="UNB" Nombre="MONEDA" />
       </InFields>
+      <OutField Prefijo="FOOTER" Nombre="TOTAL_ANTICIPO_MONEDA" />
+    </Mapeo>
+    <Mapeo>
+      <InFields>
+        <CampoID Prefijo="UNB" Nombre="MONEDA" />
+      </InFields>
       <OutField Prefijo="ITEM_IMPUESTOS" Nombre="SUBTOTAL_MONEDA" />
     </Mapeo>
     <Mapeo>
@@ -1458,6 +1703,12 @@
         <CampoID Prefijo="UNB" Nombre="CANTIDAD_COPIAS" />
       </InFields>
       <OutField Prefijo="HEADER" Nombre="CANTIDAD_COPIAS" />
+    </Mapeo>
+    <Mapeo>
+      <InFields>
+        <CampoID Prefijo="UNB" Nombre="CAMPO_ADICIONAL" />
+      </InFields>
+      <OutField Prefijo="HEADER" Nombre="CAMPO_ADICIONAL" />
     </Mapeo>
     <Mapeo>
       <InFields>
@@ -1587,6 +1838,24 @@
     </Mapeo>
     <Mapeo>
       <InFields>
+        <CampoID Prefijo="TRA" Nombre="CODIGO_MODALIDAD_TRANSPORTE" />
+      </InFields>
+      <OutField Prefijo="TRASLADO_BIENES" Nombre="CODIGO_MODALIDAD_TRANSPORTE" />
+    </Mapeo>
+    <Mapeo>
+      <InFields>
+        <CampoID Prefijo="TRA" Nombre="TOTAL_PESO_BRUTO" />
+      </InFields>
+      <OutField Prefijo="TRASLADO_BIENES" Nombre="TOTAL_PESO_BRUTO" />
+    </Mapeo>
+    <Mapeo>
+      <InFields>
+        <CampoID Prefijo="TRA" Nombre="CODIGO_UNIDAD_MEDIDA" />
+      </InFields>
+      <OutField Prefijo="TRASLADO_BIENES" Nombre="CODIGO_UNIDAD_MEDIDA" />
+    </Mapeo>
+    <Mapeo>
+      <InFields>
         <CampoID Prefijo="TRA" Nombre="COD_UBIGEO_PUNTO_LLEGADA" />
       </InFields>
       <OutField Prefijo="TRASLADO_BIENES" Nombre="COD_UBIGEO_PUNTO_LLEGADA" />
@@ -1596,18 +1865,6 @@
         <CampoID Prefijo="UNB" Nombre="NRO_RESOLUCION_SUNAT" />
       </InFields>
       <OutField Prefijo="HEADER" Nombre="NRO_RESOLUCION_SUNAT" />
-    </Mapeo>
-    <Mapeo>
-      <InFields>
-        <CampoID Prefijo="UNB" Nombre="ID_TOTAL_DESCUENTOS" />
-      </InFields>
-      <OutField Prefijo="HEADER" Nombre="ID_TOTAL_DESCUENTOS" />
-    </Mapeo>
-    <Mapeo>
-      <InFields>
-        <CampoID Prefijo="UNB" Nombre="VALOR_TOTAL_DESCUENTOS" />
-      </InFields>
-      <OutField Prefijo="HEADER" Nombre="VALOR_TOTAL_DESCUENTOS" />
     </Mapeo>
     <Mapeo>
       <InFields>
@@ -1631,7 +1888,7 @@
       <InFields>
         <CampoID Prefijo="UNB" Nombre="TOTAL_IMPUESTOS" />
       </InFields>
-      <OutField Prefijo="FOOTER" Nombre="TOTAL_IMPUESTOS" />
+      <OutField Prefijo="HEADER" Nombre="TOTAL_IMPUESTOS" />
     </Mapeo>
     <Mapeo>
       <InFields>
@@ -1674,6 +1931,12 @@
         <CampoID Prefijo="DES" Nombre="PORCENTAJE_DESCUENTO" />
       </InFields>
       <OutField Prefijo="DESCUENTOS_CARGOS" Nombre="PORCENTAJE" />
+    </Mapeo>
+    <Mapeo>
+      <InFields>
+        <CampoID Prefijo="IDE" Nombre="INDICADOR" />
+      </InFields>
+      <OutField Prefijo="ITEM_DESCUENTOS_CARGOS" Nombre="INDICADOR" />
     </Mapeo>
     <Mapeo>
       <InFields>
@@ -1725,6 +1988,12 @@
     </Mapeo>
     <Mapeo>
       <InFields>
+        <CampoID Prefijo="UNB" Nombre="MONEDA" />
+      </InFields>
+      <OutField Prefijo="ANTICIPOS" Nombre="VALOR_ANTICIPO_MONEDA" />
+    </Mapeo>
+    <Mapeo>
+      <InFields>
         <CampoID Prefijo="ANT" Nombre="TIPO_DOCUMENTO_ANTICIPO" />
       </InFields>
       <OutField Prefijo="ANTICIPOS" Nombre="TIPO_DOCUMENTO_ANTICIPO" />
@@ -1734,6 +2003,258 @@
         <CampoID Prefijo="ANT" Nombre="SERIE_CORRELATIVO_ANTICIPO" />
       </InFields>
       <OutField Prefijo="ANTICIPOS" Nombre="SERIE_CORRELATIVO_ANTICIPO" />
+    </Mapeo>
+    <Mapeo>
+      <InFields>
+        <CampoID Prefijo="ANT" Nombre="TIPO_IDENTIFICACION_EMISOR" />
+      </InFields>
+      <OutField Prefijo="ANTICIPOS" Nombre="TIPO_IDENTIFICACION_EMISOR" />
+    </Mapeo>
+    <Mapeo>
+      <InFields>
+        <CampoID Prefijo="ANT" Nombre="RUC_EMISOR_ANTICIPO" />
+      </InFields>
+      <OutField Prefijo="ANTICIPOS" Nombre="RUC_EMISOR_ANTICIPO" />
+    </Mapeo>
+    <Mapeo>
+      <InFields>
+        <CampoID Prefijo="UNB" Nombre="TOTAL_ANTICIPOS" />
+      </InFields>
+      <OutField Prefijo="FOOTER" Nombre="TOTAL_ANTICIPOS" />
+    </Mapeo>
+	<Mapeo>
+      <InFields>
+        <CampoID Prefijo="UNB" Nombre="MONEDA" />
+      </InFields>
+      <OutField Prefijo="FOOTER" Nombre="TOTAL_ANTICIPOS_MONEDA" />
+    </Mapeo>
+    <Mapeo>
+      <InFields>
+        <CampoID Prefijo="ITE" Nombre="NUMERO_DE_ORDEN" />
+      </InFields>
+      <OutField Prefijo="ITEMS" Nombre="NUMERO" />
+    </Mapeo>
+    <Mapeo>
+      <InFields>
+        <CampoID Prefijo="ADI" Nombre="NUMERO_PLACA_VEHICULO" />
+      </InFields>
+      <OutField Prefijo="INFORMACION_ADICIONAL" Nombre="NUMERO_PLACA_VEHICULO" />
+    </Mapeo>
+    <Mapeo>
+      <InFields>
+        <CampoID Prefijo="ADI" Nombre="CODIGO_UBIGEO" />
+      </InFields>
+      <OutField Prefijo="INFORMACION_ADICIONAL" Nombre="CODIGO_UBIGEO" />
+    </Mapeo>
+    <Mapeo>
+      <InFields>
+        <CampoID Prefijo="ADI" Nombre="DIRECCION_DETALLADA" />
+      </InFields>
+      <OutField Prefijo="INFORMACION_ADICIONAL" Nombre="DIRECCION_DETALLADA" />
+    </Mapeo>
+    <Mapeo>
+      <InFields>
+        <CampoID Prefijo="ADI" Nombre="URBANIZACION" />
+      </InFields>
+      <OutField Prefijo="INFORMACION_ADICIONAL" Nombre="URBANIZACION" />
+    </Mapeo>
+    <Mapeo>
+      <InFields>
+        <CampoID Prefijo="ADI" Nombre="PROVINCIA" />
+      </InFields>
+      <OutField Prefijo="INFORMACION_ADICIONAL" Nombre="PROVINCIA" />
+    </Mapeo>
+    <Mapeo>
+      <InFields>
+        <CampoID Prefijo="ADI" Nombre="DEPARTAMENTO" />
+      </InFields>
+      <OutField Prefijo="INFORMACION_ADICIONAL" Nombre="DEPARTAMENTO" />
+    </Mapeo>
+    <Mapeo>
+      <InFields>
+        <CampoID Prefijo="ADI" Nombre="DISTRITO" />
+      </InFields>
+      <OutField Prefijo="INFORMACION_ADICIONAL" Nombre="DISTRITO" />
+    </Mapeo>
+    <Mapeo>
+      <InFields>
+        <CampoID Prefijo="ADI" Nombre="CODIGO_PAIS" />
+      </InFields>
+      <OutField Prefijo="INFORMACION_ADICIONAL" Nombre="CODIGO_PAIS" />
+    </Mapeo>
+    <Mapeo>
+      <InFields>
+        <CampoID Prefijo="ADI" Nombre="CODIGO_UBIGEO_RECEPTOR" />
+      </InFields>
+      <OutField Prefijo="INFORMACION_ADICIONAL" Nombre="CODIGO_UBIGEO_RECEPTOR" />
+    </Mapeo>
+    <Mapeo>
+      <InFields>
+        <CampoID Prefijo="ADI" Nombre="DIRECCION_DETALLADA_RECEPTOR" />
+      </InFields>
+      <OutField Prefijo="INFORMACION_ADICIONAL" Nombre="DIRECCION_DETALLADA_RECEPTOR" />
+    </Mapeo>
+    <Mapeo>
+      <InFields>
+        <CampoID Prefijo="ADI" Nombre="URBANIZACION_RECEPTOR" />
+      </InFields>
+      <OutField Prefijo="INFORMACION_ADICIONAL" Nombre="URBANIZACION_RECEPTOR" />
+    </Mapeo>
+    <Mapeo>
+      <InFields>
+        <CampoID Prefijo="ADI" Nombre="PROVINCIA_RECEPTOR" />
+      </InFields>
+      <OutField Prefijo="INFORMACION_ADICIONAL" Nombre="PROVINCIA_RECEPTOR" />
+    </Mapeo>
+    <Mapeo>
+      <InFields>
+        <CampoID Prefijo="ADI" Nombre="DEPARTAMENTO_RECEPTOR" />
+      </InFields>
+      <OutField Prefijo="INFORMACION_ADICIONAL" Nombre="DEPARTAMENTO_RECEPTOR" />
+    </Mapeo>
+    <Mapeo>
+      <InFields>
+        <CampoID Prefijo="ADI" Nombre="DISTRITO_RECEPTOR" />
+      </InFields>
+      <OutField Prefijo="INFORMACION_ADICIONAL" Nombre="DISTRITO_RECEPTOR" />
+    </Mapeo>
+    <Mapeo>
+      <InFields>
+        <CampoID Prefijo="ADI" Nombre="CODIGO_PAIS_RECEPTOR" />
+      </InFields>
+      <OutField Prefijo="INFORMACION_ADICIONAL" Nombre="CODIGO_PAIS_RECEPTOR" />
+    </Mapeo>
+    <Mapeo>
+      <InFields>
+        <CampoID Prefijo="DTR" Nombre="DESCRIPCION_VIAJE" />
+      </InFields>
+      <OutField Prefijo="DETRACCIONES" Nombre="DESCRIPCION_VIAJE" />
+    </Mapeo>
+    <Mapeo>
+      <InFields>
+        <CampoID Prefijo="DTR" Nombre="MATRICULA_EMBARCACION" />
+      </InFields>
+      <OutField Prefijo="INFORMACION_ADICIONAL_DETRACCIONES" Nombre="MATRICULA_EMBARCACION" />
+    </Mapeo>
+    <Mapeo>
+      <InFields>
+        <CampoID Prefijo="DTR" Nombre="NOMBRE_EMBARCACION" />
+      </InFields>
+      <OutField Prefijo="INFORMACION_ADICIONAL_DETRACCIONES" Nombre="NOMBRE_EMBARCACION" />
+    </Mapeo>
+    <Mapeo>
+      <InFields>
+        <CampoID Prefijo="DTR" Nombre="DESCRIPCION_ESPECIE_VENDIDA" />
+      </InFields>
+      <OutField Prefijo="INFORMACION_ADICIONAL_DETRACCIONES" Nombre="DESCRIPCION_ESPECIE_VENDIDA" />
+    </Mapeo>
+    <Mapeo>
+      <InFields>
+        <CampoID Prefijo="DTR" Nombre="LUGAR_DESCARGA" />
+      </InFields>
+      <OutField Prefijo="INFORMACION_ADICIONAL_DETRACCIONES" Nombre="LUGAR_DESCARGA" />
+    </Mapeo>
+    <Mapeo>
+      <InFields>
+        <CampoID Prefijo="DTR" Nombre="FECHA_DESCARGA" />
+      </InFields>
+      <OutField Prefijo="INFORMACION_ADICIONAL_DETRACCIONES" Nombre="FECHA_DESCARGA" />
+    </Mapeo>
+    <Mapeo>
+      <InFields>
+        <CampoID Prefijo="DTR" Nombre="MONTO_REFRENCIAL" />
+      </InFields>
+      <OutField Prefijo="INFORMACION_ADICIONAL_DETRACCIONES" Nombre="MONTO_REFRENCIAL" />
+    </Mapeo>
+    <Mapeo>
+      <InFields>
+        <CampoID Prefijo="DTR" Nombre="MONEDA_MONTO_REFERENCIAL" />
+      </InFields>
+      <OutField Prefijo="INFORMACION_ADICIONAL_DETRACCIONES" Nombre="MONEDA_MONTO_REFERENCIAL" />
+    </Mapeo>
+    <Mapeo>
+      <InFields>
+        <CampoID Prefijo="DTR" Nombre="MONTO_REFERENCIAL_PRELIMINAR_VIAJE" />
+      </InFields>
+      <OutField Prefijo="INFORMACION_ADICIONAL_DETRACCIONES" Nombre="MONTO_REFERENCIAL_PRELIMINAR_VIAJE" />
+    </Mapeo>
+    <Mapeo>
+      <InFields>
+        <CampoID Prefijo="DTR" Nombre="MONEDA_MONTO_REFERENCIAL_PRELIMINAR_VIAJE" />
+      </InFields>
+      <OutField Prefijo="INFORMACION_ADICIONAL_DETRACCIONES" Nombre="MONEDA_MONTO_REFERENCIAL_PRELIMINAR_VIAJE" />
+    </Mapeo>
+    <Mapeo>
+      <InFields>
+        <CampoID Prefijo="DTR" Nombre="INDICA_FACTOR_RETORNO_VIAJE" />
+      </InFields>
+      <OutField Prefijo="INFORMACION_ADICIONAL_DETRACCIONES" Nombre="INDICA_FACTOR_RETORNO_VIAJE" />
+    </Mapeo>
+    <Mapeo>
+      <InFields>
+        <CampoID Prefijo="DTR" Nombre="PUNTO_ORIGEN_VIAJE" />
+      </InFields>
+      <OutField Prefijo="INFORMACION_ADICIONAL_DETRACCIONES" Nombre="PUNTO_ORIGEN_VIAJE" />
+    </Mapeo>
+    <Mapeo>
+      <InFields>
+        <CampoID Prefijo="DTR" Nombre="PUNTO_DESTINO_VIAJE" />
+      </InFields>
+      <OutField Prefijo="INFORMACION_ADICIONAL_DETRACCIONES" Nombre="PUNTO_DESTINO_VIAJE" />
+    </Mapeo>
+    <Mapeo>
+      <InFields>
+        <CampoID Prefijo="DTR" Nombre="CARGA_EFECTIVA_TN_POR_VEHICULO" />
+      </InFields>
+      <OutField Prefijo="INFORMACION_ADICIONAL_DETRACCIONES" Nombre="CARGA_EFECTIVA_TN_POR_VEHICULO" />
+    </Mapeo>
+    <Mapeo>
+      <InFields>
+        <CampoID Prefijo="DTR" Nombre="UNIDAD_MEDIDA_CARGA_EFECTIVA_TN_POR_VEHICULO" />
+      </InFields>
+      <OutField Prefijo="INFORMACION_ADICIONAL_DETRACCIONES" Nombre="UNIDAD_MEDIDA_CARGA_EFECTIVA_TN_POR_VEHICULO" />
+    </Mapeo>
+    <Mapeo>
+      <InFields>
+        <CampoID Prefijo="DTR" Nombre="MONTO_REFERENCIAL_POR_VEHICULO" />
+      </InFields>
+      <OutField Prefijo="INFORMACION_ADICIONAL_DETRACCIONES" Nombre="MONTO_REFERENCIAL_POR_VEHICULO" />
+    </Mapeo>
+    <Mapeo>
+      <InFields>
+        <CampoID Prefijo="DTR" Nombre="MONEDA_MONTO_REFERENCIAL_POR_VEHICULO" />
+      </InFields>
+      <OutField Prefijo="INFORMACION_ADICIONAL_DETRACCIONES" Nombre="MONEDA_MONTO_REFERENCIAL_POR_VEHICULO" />
+    </Mapeo>
+    <Mapeo>
+      <InFields>
+        <CampoID Prefijo="DTR" Nombre="CONFIGURACION_VEHICULAR" />
+      </InFields>
+      <OutField Prefijo="INFORMACION_ADICIONAL_DETRACCIONES" Nombre="CONFIGURACION_VEHICULAR" />
+    </Mapeo>
+    <Mapeo>
+      <InFields>
+        <CampoID Prefijo="DTR" Nombre="CARGA_UTIL_TN_VEHICULO_EN_VIAJE" />
+      </InFields>
+      <OutField Prefijo="INFORMACION_ADICIONAL_DETRACCIONES" Nombre="CARGA_UTIL_TN_VEHICULO_EN_VIAJE" />
+    </Mapeo>
+    <Mapeo>
+      <InFields>
+        <CampoID Prefijo="DTR" Nombre="UNIDAD_MEDIDA_CARGA_UTIL_VEHICULO_EN_VIAJE" />
+      </InFields>
+      <OutField Prefijo="INFORMACION_ADICIONAL_DETRACCIONES" Nombre="UNIDAD_MEDIDA_CARGA_UTIL_VEHICULO_EN_VIAJE" />
+    </Mapeo>
+    <Mapeo>
+      <InFields>
+        <CampoID Prefijo="DTR" Nombre="MONTO_REFERENCIAL_TM_VIAJE" />
+      </InFields>
+      <OutField Prefijo="INFORMACION_ADICIONAL_DETRACCIONES" Nombre="MONTO_REFERENCIAL_TM_VIAJE" />
+    </Mapeo>
+    <Mapeo>
+      <InFields>
+        <CampoID Prefijo="DTR" Nombre="MONEDA_MONTO_REFERENCIAL_TM_VIAJE" />
+      </InFields>
+      <OutField Prefijo="INFORMACION_ADICIONAL_DETRACCIONES" Nombre="MONEDA_MONTO_REFERENCIAL_TM_VIAJE" />
     </Mapeo>
   </Mapeos>
   <PreprocessJS>

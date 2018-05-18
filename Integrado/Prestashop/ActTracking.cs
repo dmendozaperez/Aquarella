@@ -14,8 +14,6 @@ namespace Integrado.Prestashop
 {
     public class ActTracking
     {
-        
-
 
         public string[] ActualizaTrackin(string orden, string tracking)//0=error 1=ok
         {
@@ -127,6 +125,10 @@ namespace Integrado.Prestashop
 
     public class UpdaEstado
     {
+        //-- Modificado por : Henry Morales - 17/05/2018
+        //-- Se cambio la forma de conexión, para obtener datos desde la BD ECOMMERCE
+        private static Conexion oConexionWS = new Conexion();
+        private static DataTable datosWS = oConexionWS.getConexionWSPresta();
         /*DESARROLLO*/
         //public static string BaseUrl = "http://181.177.242.172/bata/api/";
         //public static string Account = "7UAQDKE187QTB3JT14NLQ3V3XSB6R7HR";
@@ -137,11 +139,15 @@ namespace Integrado.Prestashop
         //public static string BaseUrl = "http://bata.com.pe/tienda/api/";
         //public static string Account = "7UAQDKE187QTB3JT14NLQ3V3XSB6R7HR";
 
-        public static string BaseUrl = "http://138.197.73.71/tienda/api/";
-        public static string Account = "7UAQDKE187QTB3JT14NLQ3V3XSB6R7HR";
+        public static string BaseUrl = datosWS.Rows[0]["Url"].ToString().Trim();
+        public static string Account = datosWS.Rows[0]["Usuario"].ToString().Trim();
+
+        //public static string BaseUrl = "http://138.197.73.71/tienda/api/";
+        //public static string Account = "7UAQDKE187QTB3JT14NLQ3V3XSB6R7HR";
 
         /****************/
-        public static string Password = "";
+        public static string Password = datosWS.Rows[0]["Contrasena"].ToString().Trim();
+        //public static string Password = "";
 
 
         public static OrderFactory of = new OrderFactory(BaseUrl, Account, Password);

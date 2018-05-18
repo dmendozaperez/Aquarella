@@ -98,6 +98,7 @@ namespace CapaDato.Bll.Venta
             }
             return _error;
         }
+        
         public static DataTable dt_consulta_venta(Boolean _tipo, DateTime _fecha_ini, DateTime _fecha_fin, string _doc)
         {
             string sqlquery = "USP_Consultar_Documento_Anular";
@@ -410,6 +411,41 @@ namespace CapaDato.Bll.Venta
             }
         }
         #endregion
+
+
+        #region<REGION FUNCIONES PARA E-COMMERCE>
+        /// <summary>
+        /// Función que Actualiza el estado de envío a Almacen, para que vuelva a enviarlo como anulado
+        /// </summary>
+        /// <param name="_tipo">determina si es BO o FA</param>
+        /// <param name="_ven_id">código que identifica el documento</param>
+        /// <returns></returns>
+        public static string _act_estado_anular_venta(string _tipo, string _ven_id)
+        {
+            string sqlquery = "USP_ActualizaVentas_PS";
+            SqlConnection cn = null;
+            SqlCommand cmd = null;
+            string _error = "";
+            try
+            {
+                cn = new SqlConnection(Ent_Conexion.conexion);
+                if (cn.State == 0) cn.Open();
+                cmd = new SqlCommand(sqlquery, cn);
+                cmd.CommandTimeout = 0;
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@id", _ven_id);
+                cmd.Parameters.AddWithValue("@estado", "");
+                cmd.Parameters.AddWithValue("@tipo", _tipo);
+                cmd.ExecuteNonQuery();
+            }
+            catch (Exception exc)
+            {
+                _error = exc.Message;
+            }
+            return _error;
+        }
+        #endregion
+
         #region <FACTURACION ELECTRONICA>
         public static string _leer_formato_electronico(string _tipo_doc, string _num_doc, ref string _error)
         {

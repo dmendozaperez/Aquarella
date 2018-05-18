@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="iso-8859-1"?>
-<Mapa xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Nombre="NOTAS_STD110" IdTipoMapa="1" TipoArchivo="1" IdEsquema="2" Activo="true">
+<Mapa xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Nombre="NOTAS_STD30_V3.0.0" IdTipoMapa="1" TipoArchivo="1" IdEsquema="2" Activo="true">
   <ParsingData>
     <Texto AnchoFijo="false" IgnorarEspacios="true" CharAperturaCampo="" CharCierreCampo="">
       <Registros>
@@ -160,7 +160,7 @@
                 <string>MOTIVO DE LA BAJA</string>
               </Valor>
             </Campo>
-            <Campo Prefijo="UNB" Nombre="UNB031" Visible="true">
+            <Campo Prefijo="UNB" Nombre="CAMPO_ADICIONAL" Visible="true">
               <Valor>
                 <string>CAMPO ADICIONAL</string>
               </Valor>
@@ -200,6 +200,11 @@
                 <string>4159.50</string>
               </Valor>
             </Campo>
+            <Campo Prefijo="UNB" Nombre="TOTAL_ANTICIPOS" Visible="true">
+              <Valor>
+                <string>4159.50</string>
+              </Valor>
+            </Campo>
             <Campo Prefijo="UNB" Nombre="RECEPTOR_RUC" Visible="true">
               <Valor>
                 <string>8569</string>
@@ -209,7 +214,7 @@
           <Longitud xsi:nil="true" />
           <Ejemplo />
         </Registro>
-        <Registro Prefijo="NOT" Nombre="Notas" Separador="," CharAperturaCampo="" CharCierreCampo="" MinOccurs="0" MaxOccurs="2147483647" PrefijoPadre="UNB" EsItem="false">
+        <Registro Prefijo="NOT" Nombre="Notas" Separador="," CharAperturaCampo="" CharCierreCampo="" MinOccurs="0" MaxOccurs="999" PrefijoPadre="UNB" EsItem="false">
           <Campos>
             <Campo Prefijo="NOT" Nombre="ID_REGISTRO" Visible="true">
               <Valor>
@@ -230,7 +235,7 @@
           <Longitud xsi:nil="true" />
           <Ejemplo />
         </Registro>
-        <Registro Prefijo="MOT" Nombre="Motivos" Separador="," CharAperturaCampo="" CharCierreCampo="" MinOccurs="1" MaxOccurs="2147483647" PrefijoPadre="UNB" EsItem="false">
+		<Registro Prefijo="MOT" Nombre="Motivos" Separador="," CharAperturaCampo="" CharCierreCampo="" MinOccurs="1" MaxOccurs="1" PrefijoPadre="UNB" EsItem="false">
           <Campos>
             <Campo Prefijo="MOT" Nombre="ID_REGISTRO" Visible="true">
               <Valor>
@@ -255,8 +260,8 @@
           </Campos>
           <Longitud xsi:nil="true" />
           <Ejemplo />
-        </Registro>
-        <Registro Prefijo="REM" Nombre="Guías de remisión" Separador="," CharAperturaCampo="" CharCierreCampo="" MinOccurs="0" MaxOccurs="2147483647" PrefijoPadre="UNB" EsItem="false">
+        </Registro>      
+        <Registro Prefijo="REM" Nombre="Guías de remisión" Separador="," CharAperturaCampo="" CharCierreCampo="" MinOccurs="0" MaxOccurs="999" PrefijoPadre="UNB" EsItem="false">
           <Campos>
             <Campo Prefijo="REM" Nombre="ID_REGISTRO" Visible="true">
               <Valor>
@@ -277,7 +282,7 @@
           <Longitud xsi:nil="true" />
           <Ejemplo />
         </Registro>
-        <Registro Prefijo="REF" Nombre="Documentos de referencia adicional" Separador="," CharAperturaCampo="" CharCierreCampo="" MinOccurs="0" MaxOccurs="2147483647" PrefijoPadre="UNB" EsItem="false">
+        <Registro Prefijo="REF" Nombre="Documentos de referencia adicional" Separador="," CharAperturaCampo="" CharCierreCampo="" MinOccurs="0" MaxOccurs="999" PrefijoPadre="UNB" EsItem="false">
           <Campos>
             <Campo Prefijo="REF" Nombre="ID_REGISTRO" Visible="true">
               <Valor>
@@ -298,7 +303,7 @@
           <Longitud xsi:nil="true" />
           <Ejemplo />
         </Registro>
-        <Registro Prefijo="DOC" Nombre="Documentos de referencia" Separador="," CharAperturaCampo="" CharCierreCampo="" MinOccurs="1" MaxOccurs="2147483647" PrefijoPadre="UNB" EsItem="false">
+        <Registro Prefijo="DOC" Nombre="Documentos de referencia" Separador="," CharAperturaCampo="" CharCierreCampo="" MinOccurs="1" MaxOccurs="999" PrefijoPadre="UNB" EsItem="false">
           <Campos>
             <Campo Prefijo="DOC" Nombre="ID_REGISTRO" Visible="true">
               <Valor>
@@ -329,7 +334,7 @@
           <Longitud xsi:nil="true" />
           <Ejemplo />
         </Registro>
-        <Registro Prefijo="DES" Nombre="Descuentos y cargos" Separador="," CharAperturaCampo="" CharCierreCampo="" MinOccurs="0" MaxOccurs="2147483647" PrefijoPadre="UNB" EsItem="false">
+        <Registro Prefijo="DES" Nombre="Descuentos y cargos" Separador="," CharAperturaCampo="" CharCierreCampo="" MinOccurs="0" MaxOccurs="999" PrefijoPadre="UNB" EsItem="false">
           <Campos>
             <Campo Prefijo="DES" Nombre="ID_REGISTRO" Visible="true">
               <Valor>
@@ -365,7 +370,7 @@
           <Longitud xsi:nil="true" />
           <Ejemplo />
         </Registro>
-        <Registro Prefijo="IMP" Nombre="Impuestos" Separador="," CharAperturaCampo="" CharCierreCampo="" MinOccurs="1" MaxOccurs="2147483647" PrefijoPadre="UNB" EsItem="false">
+        <Registro Prefijo="IMP" Nombre="Impuestos" Separador="," CharAperturaCampo="" CharCierreCampo="" MinOccurs="1" MaxOccurs="999" PrefijoPadre="UNB" EsItem="false">
           <Campos>
             <Campo Prefijo="IMP" Nombre="ID_REGISTRO" Visible="true">
               <Valor>
@@ -401,7 +406,7 @@
           <Longitud xsi:nil="true" />
           <Ejemplo />
         </Registro>
-        <Registro Prefijo="TRI" Nombre="Otros conceptos tributarios" Separador="," CharAperturaCampo="" CharCierreCampo="" MinOccurs="0" MaxOccurs="2147483647" PrefijoPadre="UNB" EsItem="false">
+        <Registro Prefijo="TRI" Nombre="Otros conceptos tributarios" Separador="," CharAperturaCampo="" CharCierreCampo="" MinOccurs="0" MaxOccurs="999" PrefijoPadre="UNB" EsItem="false">
           <Campos>
             <Campo Prefijo="TRI" Nombre="ID_REGISTRO" Visible="true">
               <Valor>
@@ -427,7 +432,7 @@
           <Longitud xsi:nil="true" />
           <Ejemplo />
         </Registro>
-        <Registro Prefijo="ITE" Nombre="Items" Separador="," CharAperturaCampo="" CharCierreCampo="" MinOccurs="1" MaxOccurs="2147483647" PrefijoPadre="UNB" EsItem="true">
+        <Registro Prefijo="ITE" Nombre="Items" Separador="," CharAperturaCampo="" CharCierreCampo="" MinOccurs="1" MaxOccurs="999" PrefijoPadre="UNB" EsItem="true">
           <Campos>
             <Campo Prefijo="ITE" Nombre="ID_REGISTRO" Visible="true">
               <Valor>
@@ -488,7 +493,7 @@
           <Longitud xsi:nil="true" />
           <Ejemplo />
         </Registro>
-        <Registro Prefijo="IDE" Nombre="Items descuentos" Separador="," CharAperturaCampo="" CharCierreCampo="" MinOccurs="0" MaxOccurs="2147483647" PrefijoPadre="ITE" EsItem="false">
+        <Registro Prefijo="IDE" Nombre="Items descuentos" Separador="," CharAperturaCampo="" CharCierreCampo="" MinOccurs="0" MaxOccurs="999" PrefijoPadre="ITE" EsItem="false">
           <Campos>
             <Campo Prefijo="IDE" Nombre="ID_REGISTRO" Visible="true">
               <Valor>
@@ -534,7 +539,7 @@
           <Longitud xsi:nil="true" />
           <Ejemplo />
         </Registro>
-        <Registro Prefijo="IIM" Nombre="Items impuestos" Separador="," CharAperturaCampo="" CharCierreCampo="" MinOccurs="0" MaxOccurs="2147483647" PrefijoPadre="ITE" EsItem="false">
+        <Registro Prefijo="IIM" Nombre="Items impuestos" Separador="," CharAperturaCampo="" CharCierreCampo="" MinOccurs="0" MaxOccurs="999" PrefijoPadre="ITE" EsItem="false">
           <Campos>
             <Campo Prefijo="IIM" Nombre="ID_REGISTRO" Visible="true">
               <Valor>
@@ -745,6 +750,12 @@
     </Mapeo>
     <Mapeo>
       <InFields>
+        <CampoID Prefijo="UNB" Nombre="CAMPO_ADICIONAL" />
+      </InFields>
+      <OutField Prefijo="HEADER" Nombre="CAMPO_ADICIONAL" />
+    </Mapeo>
+    <Mapeo>
+      <InFields>
         <CampoID Prefijo="UNB" Nombre="CODIGO_MONEDA" />
       </InFields>
       <OutField Prefijo="FOOTER" Nombre="CODIGO_MONEDA" />
@@ -786,7 +797,6 @@
       </InFields>
       <OutField Prefijo="OTROS_CONCEPTOS_TRIBUTARIOS" Nombre="MONTO" />
     </Mapeo>
-    <!-- Modificado 12-03-2015, Ivan Ortiz-->
     <Mapeo>
       <InFields>
         <CampoID Prefijo="UNB" Nombre="CODIGO_MONEDA" />
@@ -972,6 +982,12 @@
     </Mapeo>
     <Mapeo>
       <InFields>
+        <CampoID Prefijo="DOC" Nombre="DESCRIPCION" />
+      </InFields>
+      <OutField Prefijo="DOCUMENTO_RELACIONADO" Nombre="DESCRIPCION" />
+    </Mapeo>
+    <Mapeo>
+      <InFields>
         <CampoID Prefijo="IMP" Nombre="IMPORTE" />
       </InFields>
       <OutField Prefijo="TOTAL_OTROS_TRIBUTOS" Nombre="TOTAL" />
@@ -1086,6 +1102,18 @@
     </Mapeo>
     <Mapeo>
       <InFields>
+        <CampoID Prefijo="UNB" Nombre="TOTAL_ANTICIPOS" />
+      </InFields>
+      <OutField Prefijo="HEADER" Nombre="TOTAL_ANTICIPOS" />
+    </Mapeo>
+    <Mapeo>
+      <InFields>
+        <CampoID Prefijo="UNB" Nombre="CODIGO_MONEDA" />
+      </InFields>
+      <OutField Prefijo="HEADER" Nombre="TOTAL_ANTICIPOS_MONEDA" />
+    </Mapeo>
+    <Mapeo>
+      <InFields>
         <CampoID Prefijo="UNB" Nombre="CODIGO_MONEDA" />
       </InFields>
       <OutField Prefijo="HEADER" Nombre="MONEDA" />
@@ -1095,6 +1123,18 @@
         <CampoID Prefijo="MOT" Nombre="CODIGO_MOTIVO" />
       </InFields>
       <OutField Prefijo="HEADER" Nombre="TIPO_NOTA" />
+    </Mapeo>
+    <Mapeo>
+      <InFields>
+        <CampoID Prefijo="UNB" Nombre="TOTAL_IMPUESTOS" />
+      </InFields>
+      <OutField Prefijo="HEADER" Nombre="TOTAL_IMPUESTOS" />
+    </Mapeo>
+    <Mapeo>
+      <InFields>
+        <CampoID Prefijo="UNB" Nombre="TOTAL_DESCUENTOS" />
+      </InFields>
+      <OutField Prefijo="HEADER" Nombre="TOTAL_DESCUENTOS" />
     </Mapeo>
     <Mapeo>
       <InFields>
@@ -1176,6 +1216,12 @@
     </Mapeo>
     <Mapeo>
       <InFields>
+        <CampoID Prefijo="IDE" Nombre="TIPO" />
+      </InFields>
+      <OutField Prefijo="ITEM_DESCUENTOS_CARGOS" Nombre="INDICADOR" />
+    </Mapeo>
+    <Mapeo>
+      <InFields>
         <CampoID Prefijo="ITE" Nombre="DESCRIPCION_1" />
       </InFields>
       <OutField Prefijo="ITEMS" Nombre="DESCRIPCION" />
@@ -1198,16 +1244,23 @@
       </InFields>
       <OutField Prefijo="HEADER" Nombre="RECEPTOR_RUC" />
     </Mapeo>
+    <!--Adicionado: 26 junio 2015, Ivan Ortiz-->
+    <Mapeo>
+      <InFields>
+        <CampoID Prefijo="MOT" Nombre="NUMERO_DOCUMENTO" />
+      </InFields>
+      <OutField Prefijo="HEADER" Nombre="CDP_AFECTADO_NOTA" />
+    </Mapeo>
   </Mapeos>
   <PreprocessJS>
-    var l=origen.split('\r\n');
-    var c=l[0].split('+');
-    c[0]='VOID';
-    l[0]=c.join(
-    '+');
-    l[1] = l[1] + '+' + c[2];
-    var x=l.join('\r\n');
+    var lineas = origen.split('\r\n');
 
-    x;
+    var unb1 = lineas[0].split('+');
+    unb1[0] = 'VOID';
+    lineas[0] = unb1.join('+');
+    lineas[1] = lineas[1] + '+' + unb1[2];
+
+    var salida = lineas.join('\r\n');
+    salida;
   </PreprocessJS>
 </Mapa>

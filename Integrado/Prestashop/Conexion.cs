@@ -89,5 +89,35 @@ namespace Integrado.Prestashop
 
             return mysql;
         }
+
+        /// <summary>
+        /// método que obtiene los datos para la conexión al WebService de PrestaShop
+        /// </summary>
+        /// <returns>WebService Conexion - PrestaShop / URL - usuario - contrasena</returns>
+        public DataTable getConexionWSPresta()
+        {
+            DataTable result = new DataTable();
+
+            using (SqlConnection con = getConexionLog())//Conexión Principal
+            {
+                try
+                {
+                    con.Open();
+                    SqlDataAdapter da = new SqlDataAdapter("USP_Obtiene_DatosConexion", con);
+                    da.SelectCommand.CommandType = CommandType.StoredProcedure;
+                    da.SelectCommand.Parameters.Add("@Id", SqlDbType.VarChar).Value = "09";
+
+                    da.Fill(result);
+                    con.Close();
+                    
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+            }
+
+            return result;
+        }
     }
 }
