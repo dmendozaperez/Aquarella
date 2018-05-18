@@ -44,7 +44,7 @@ namespace www.aquarella.com.pe.Aquarella.Logistica
             _nSArtSiz = "_nSArtSiz", _nameSessionShipTo = "ShippingInfoObj", _nameSessionCustomer = "nameSessionCustomer",
             _nSCatalog = "_nSCatalog", _nsDtlArticle = "_nsDtlArticle", _nSOrderUrl = "_nSorderUrl", _estadoliqui = "_estadoliqui",_pagocredito="pagocredito", _nropedido = "_nropedido", _idliquidacion = "_idliquidacion",_valor_subtotal="_valor_subtotal",
             _number = ConfigurationManager.AppSettings["kNumber"], _currency = ConfigurationManager.AppSettings["kCurrency"],
-            varIdOperacionPOS = ConfigurationManager.AppSettings["ID_Num_Tarjeta_POS"];
+            varIdOperacionPOS = ConfigurationManager.AppSettings["ID_Num_Tarjeta_POS"], varPagoxMuestra = "008";
 
 
         string _formParent = "panelOrdersCustomer.aspx";
@@ -397,10 +397,12 @@ namespace www.aquarella.com.pe.Aquarella.Logistica
         {
             try
             {
-                Coordinator cust = (Coordinator)HttpContext.Current.Session[_nameSessionCustomer];
+
+                    Coordinator cust = (Coordinator)HttpContext.Current.Session[_nameSessionCustomer];
                 string co = cust._co;
 
                 List<Articles_Sizes> artSizes = new List<Articles_Sizes>();
+                
                 Order_Dtl newLineOrder = new Order_Dtl();
                 List<Order_Dtl> order = new List<Order_Dtl>();
 
@@ -443,7 +445,7 @@ namespace www.aquarella.com.pe.Aquarella.Logistica
         /// <param name="qty"></param>
         /// <returns></returns>
         [WebMethod()]
-        public static List<Order_Dtl> addArticle(string size, int qty, string varTipoPago)
+        public static List<Order_Dtl> addArticle(string size, int qty, string varTipoPago)//, string tipoPago)
         {
             // Nueva linea de pedido
             Order_Dtl newLineOrder = ((List<Order_Dtl>)HttpContext.Current.Session[_nSNewOrdrLine]).FirstOrDefault();
@@ -451,15 +453,16 @@ namespace www.aquarella.com.pe.Aquarella.Logistica
             //
             newLineOrder._size = size;
 
-            return addArticle(newLineOrder, qty, varTipoPago);
+            return addArticle(newLineOrder, qty, varTipoPago);//, tipoPago);
         }
 
-        public static List<Order_Dtl> addArticle(Order_Dtl newLine, int qty, string varTipoPago)
+        public static List<Order_Dtl> addArticle(Order_Dtl newLine, int qty, string varTipoPago)//, string tipopago)
         {
             decimal commPercent;
             //decimal ofertporcentaje;
             //decimal ofertamaxpares;
             Coordinator cust = (Coordinator)HttpContext.Current.Session[_nameSessionCustomer];
+
 
             cust._vartipopago = varTipoPago;
 
@@ -477,6 +480,8 @@ namespace www.aquarella.com.pe.Aquarella.Logistica
             {
                 commPercent = 0;
             }
+
+
             //este quiere decir que tiene oferta
             //if (newLine._ofe_id!=0)
             //{
@@ -1515,9 +1520,9 @@ namespace www.aquarella.com.pe.Aquarella.Logistica
                 newLineO._dsctoValeDesc = newLineO._dsctoVale.ToString(_currency);
                 newLineO._dsctoMsg = dr["div_message"].ToString();
             }
-            
-            //return addArticle(newLineO, unit , string varTipoPago);
+
             return addArticle(newLineO, unit, varIdOperacionPOS);
+
         }
 
 
@@ -1553,8 +1558,10 @@ namespace www.aquarella.com.pe.Aquarella.Logistica
             //ahora vemos es es que tiene una nota de cedito como forma de pago
 
             Boolean _pago_credito = false;
+            string strTipoPago = h_numTipPago.Value;
 
-            
+
+
 
             if (h_numTipPago.Value == "007") _pago_credito = true;
 
@@ -1863,6 +1870,14 @@ namespace www.aquarella.com.pe.Aquarella.Logistica
                 return;
             }
 
+            if (h_numTipPago.Value == varPagoxMuestra)
+            {
+                script += "closeDialogLoadPedido()";
+                System.Web.UI.ScriptManager.RegisterStartupScript(upMsg, Page.GetType(), "CloseDialog", script, true);
+                msnMessage.LoadMessage("No se puede guardar un pedido borrador cuando se paga por Muestra: " + DateTime.Now, UserControl.ucMessage.MessageType.Information);
+                return;
+            }
+
             if (h_numTipPago.Value == varIdOperacionPOS)
             {                
                 script += "closeDialogLoadPedido()";
@@ -1928,7 +1943,7 @@ namespace www.aquarella.com.pe.Aquarella.Logistica
                 {
                     Boolean aplica_percepcion = Convert.ToBoolean(Session["aplica_percepcion_cliente"]);
 
-                    if (aplica_percepcion)
+                    if (aplica_percepcion)// && h_numTipPago.Value!="008")
                     { 
                     //verifcar el esta percepcion es cero porque viene de unos articulos sin percepcion si nno es cierto entonces
                     //vemos que esta percepcion no sea cero y pasamos a error
@@ -1976,6 +1991,14 @@ namespace www.aquarella.com.pe.Aquarella.Logistica
                 script += "closeDialogLoadPedido()";
                 System.Web.UI.ScriptManager.RegisterStartupScript(upMsg, Page.GetType(), "CloseDialog", script, true);
                 msnMessage.LoadMessage("No se guardo el pedido, porque en el detalle hay articulo sin percepcion  ", UserControl.ucMessage.MessageType.Information);
+                return;
+            }
+
+            if (h_numTipPago.Value == varPagoxMuestra)
+            {
+                script += "closeDialogLoadPedido()";
+                System.Web.UI.ScriptManager.RegisterStartupScript(upMsg, Page.GetType(), "CloseDialog", script, true);
+                msnMessage.LoadMessage("No se puede guardar un pedido borrador cuando se paga por Muestra: " + DateTime.Now, UserControl.ucMessage.MessageType.Information);
                 return;
             }
 
@@ -2108,6 +2131,7 @@ namespace www.aquarella.com.pe.Aquarella.Logistica
         {
             // Generar liquidación.
             string[] noOrder;
+            string strTipoPago = h_numTipPago.Value;
             decimal comision_customer;
             decimal mtopercepcion;
             string estadoliquid = (string)HttpContext.Current.Session[_estadoliqui];
@@ -2158,8 +2182,13 @@ namespace www.aquarella.com.pe.Aquarella.Logistica
 
             if (string.IsNullOrEmpty(estadoliquid))
             {
+                decimal total= 0;
+                //cuando tipo de pago es por muestras
+                if (strTipoPago == "008") {
+                    total = Convert.ToDecimal(txtValue.Text);
+                }
 
-                noOrder = Liquidations_Hdr.Gua_Mod_Liquidacion(user._bas_id, cust._idCust, string.Empty, comision_customer, 0, string.Empty, string.Empty, order, mtopercepcion, 1, hdNoOrder.Value, "", 0, 0, "", "", 0, dtpago, _pago_credito, cust._percepcion, orderLines_Temp);
+                noOrder = Liquidations_Hdr.Gua_Mod_Liquidacion(user._bas_id, cust._idCust, string.Empty, comision_customer, 0, string.Empty, string.Empty, order, mtopercepcion, 1, hdNoOrder.Value, "", 0, 0, "", "", total, dtpago, _pago_credito, cust._percepcion, orderLines_Temp, strTipoPago);
 
                 //noOrder = Liquidations_Hdr.liquidation(user._usv_co, ordersChain, shipping, typeLiq, _varPercepcion);
             }

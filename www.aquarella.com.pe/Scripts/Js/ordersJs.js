@@ -71,7 +71,7 @@ $(document).ready(function () {
     $varTipoPago = $('#h_numTipPago');
     $el.data('oldVal', $el.val());
     $el.focus();
-
+    
     validanc("0");
 
 
@@ -451,6 +451,11 @@ function Loadforma(msg) {
         $("#btncr").hide();
         $('#lbltnc').html('(-) Nota de Credito:');
     }
+
+
+    var strTipoPago = $("[id$='h_numTipPago']").val();
+    $dwpago.val(strTipoPago);
+  
     
         
 }
@@ -480,8 +485,10 @@ function showcredito(msg) {
 function addArticle(size, qty, TipoPago) {
     //Ajax
     $msgeGlobal = 'El artículo ha sido adicionado a su pedido.';
+    //var strtipoPago = $dwpago.val();
+    //$("[id$='h_numTipPago']").val(strtipoPago);
     var urlMethod = "ordersForm.aspx/addArticle";
-    var jsonData = '{size:"' + size + '", qty:' + qty + ' , varTipoPago:"' + TipoPago + '"}';
+    var jsonData = '{size:"' + size + '", qty:' + qty + ' , varTipoPago:"' + TipoPago + '"}';//,tipoPago:"' + strtipoPago + '"}';
     SendAjax(urlMethod, jsonData, renderTableInit);  //addArticlesTable);   
     cleanForm();
     /*en esta opcion vamos a ver si hay ofertas*/
