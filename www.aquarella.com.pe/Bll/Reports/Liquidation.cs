@@ -62,10 +62,12 @@ namespace www.aquarella.com.pe.bll.Reports
         public string _ncredito { get; set; }
         public DateTime _fecha { get; set; }
         public decimal _totalcredito { get; set; }
-
+                
         //total op
 
         public decimal _totalop { get; set; }
+
+        public string _Opg { get; set; }
 
         public Liquidation(string wavId, string wavDes, string wavAdd, string wavPhone, string wavUbication, string cusId,
         string cusDoc, string cusName, string cusAdd, string cusPhone, string cusCellPhone, string cusMail, string cusUbication,
@@ -73,7 +75,7 @@ namespace www.aquarella.com.pe.bll.Reports
             decimal liqTaxValue, decimal liqHandling, string artCode, string artBrand, string artColor, string artName,
             string artSize, decimal artQty, decimal artPrice, decimal artComm, decimal artDiss, decimal liqpercepcion,
             decimal liqporcpercepcion, decimal mtoncredito, string ncredito, DateTime fecha, decimal totalcredito, string idliquidacion,
-            decimal totalop,decimal descuento)
+            decimal totalop,decimal descuento, string Opg = "")
         {
             _wavId = wavId;
             _wavDes = wavDes;
@@ -119,6 +121,7 @@ namespace www.aquarella.com.pe.bll.Reports
             _totalop = totalop;
             _descuento = descuento;
             _artDiss = descuento;
+            _Opg = Opg;
 
         }
 

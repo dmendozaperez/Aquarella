@@ -105,6 +105,20 @@
   // Impresion de totales
   function showTotals(msg) {
       var val = msg.d;
+      var valorOpg = val._subTotalOPG;
+      var valorOpgMon = parseFloat(valorOpg);
+      $('#lblOpg').html(val._subTotalOPG);
+      $("input[id$='txtValue']").val(val._mtopercepcion).val();
+      if (valorOpgMon > 0) {
+          document.getElementById("divopg").style.display = ""; 
+          document.getElementById("lblopgEt").style.display = "";
+          $("input[id$='txtValue']").val(val._subTotalOPG).val();
+      } else {
+          document.getElementById("divopg").style.display = "none";
+          document.getElementById("lblopgEt").style.display = "none";
+
+      }
+
       $('#lblTotQty').html(val._qtys);
       $('#lblGrandTotal').html(val._grandTotalDesc);
       $('#lblSubTotal').html(val._subTotalDesc);
@@ -112,7 +126,7 @@
       $('#lblpercepcion').html(val._percepciondesc);
       $('#lblmtopercepcion').html(val._mtopercepciondesc);
       $('#lblnc').html(val._mtoncreditodesc);
-      $("input[id$='txtValue']").val(val._mtopercepcion).val();
+    
 
       //$subTotal.text(val._subTotalDesc);
   }
@@ -491,6 +505,18 @@
                                         <td align="right" style="padding-right: 5px;">
                                             <label id="lblTotQty">
                                             </label>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td><div id="lblopgEt" >
+                                           Operacion Gratuita:
+                                            </div>
+                                        </td>
+                                        <td align="right" style="padding-right: 5px;">
+                                           <div id="divopg" >
+                                            <label id="lblOpg">
+                                            </label>
+                                            </div>
                                         </td>
                                     </tr>
                                     <tr>

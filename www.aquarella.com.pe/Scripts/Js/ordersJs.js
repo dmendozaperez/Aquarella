@@ -108,10 +108,10 @@ $(document).ready(function () {
     $dwpago.change(function () {
         //
         var formaid = $('#dwpago :selected').val();
+        $("[id$='h_numTipPago']").val(formaid);
         var formaname = $('#dwpago :selected').text();
         allFields.removeClass("ui-state-error");
         getpago(formaid, formaname);
-        $("[id$='h_numTipPago']").val(formaid);
         updateitemsforma();
     });
     function getpago(idpago, formapago) {
@@ -532,6 +532,8 @@ function updateItemQtys(code, size, qty) {
 
 // Calculo de totales
 function getTotals() {
+ 
+
     //Ajax
     var urlMethod = "ordersForm.aspx/getTotals";
     var jsonData = '{}';
@@ -615,6 +617,9 @@ function showpromoesta(msg){
 
 function showTotals(msg) {
     var val = msg.d;
+
+    alert(val._subTotalDesc)
+    
     $('#lblTotQty').html(val._qtys);
     $('#lblGrandTotal').html(val._grandTotalDesc);
     $('#lblSubTotal').html(val._subTotalDesc);

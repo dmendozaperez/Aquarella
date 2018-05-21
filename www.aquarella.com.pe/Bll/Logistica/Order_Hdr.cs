@@ -16,6 +16,7 @@ namespace www.aquarella.com.pe.bll
 
         public int _qtys { get; set; }
         public decimal _subTotal { get; set; }
+        public decimal _subTotalOPG { get; set; }
         public string _subTotalDesc { get; set; }
         public decimal _taxes { get; set; }
         public string _taxesDesc { get; set; }
