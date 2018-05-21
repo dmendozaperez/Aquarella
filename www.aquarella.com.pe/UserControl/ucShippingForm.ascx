@@ -422,7 +422,7 @@
                 var valor = $("[id$='h_numTipPago']").val();
 
                 if (valor == "008") {
-                    strMuestra = ', con forma de pago POR MUESTRA'                  
+                    strMuestra = ', con forma de pago POR MUESTRA de MERCADERIA'                  
                 }
 
                 document.getElementById('popupx').innerHTML = 'Generaremos su liquidación ' + strMuestra + ' ; ¿desea continuar?'
@@ -433,7 +433,7 @@
                 $("#dialog-confirm-edit").dialog("open");
 
                 if (valor == "008") {
-                    strMuestra = ', con forma de pago POR MUESTRA'
+                    strMuestra = ', con forma de pago POR  MUESTRA de MERCADERIA'
                 }
 
                 document.getElementById('popupy').innerHTML = 'Modificaremos su liquidación ' + strMuestra + ' ; ¿desea continuar?'
