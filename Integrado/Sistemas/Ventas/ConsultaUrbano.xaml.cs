@@ -194,7 +194,7 @@ namespace Integrado.Sistemas.Ventas
                         if (resultetiq == MessageDialogResult.Affirmative)
                         {
                             GenerarEtiqueta genera_etiqueta = new GenerarEtiqueta();
-                            await Task.Run(() => genera_etiqueta.imp_etiqueta(_venid));
+                            await Task.Run(() => genera_etiqueta.imp_etiqueta2(_venid));
                         }
                         // Actualizar
                         consultar();

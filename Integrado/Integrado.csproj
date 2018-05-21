@@ -378,7 +378,9 @@
     </Compile>
     <Content Include="Certificado\CDBATA.pfx" />
     <None Include="Integrado_TemporaryKey.pfx" />
-    <None Include="packages.config" />
+    <None Include="packages.config">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Properties\app.manifest" />
     <None Include="Service References\ServiceBata\ws_bata1.disco" />
     <None Include="Service References\ServiceBata\Integrado.ServiceBata.ws_control_errorResponse.datasource">

@@ -152,7 +152,7 @@
     <Reference Include="System.Web.Services" />
     <Reference Include="System.EnterpriseServices" />
     <Reference Include="UBL20">
-      <HintPath>D:\dllAquarela\UBL20.dll</HintPath>
+      <HintPath>..\UBL20.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>

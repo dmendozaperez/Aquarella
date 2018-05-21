@@ -18,7 +18,7 @@ namespace CapaDato.Bll.Ecommerce
                                              Boolean _pago_credito = false, Decimal _porc_percepcion = 0,
                                              List<Order_Dtl_Temp> order_dtl_temp = null, decimal _Liq_Pst_Id = 0, string _Liq_Pst_Ref = "",
                                              Decimal _CostoE = 0, Cliente cl = null, Pagos pag = null,DateTime? _ped_fecha=null,decimal _liq_tot_cigv=0,
-                                             string _ped_ubigeo_ent="",string _ped_dir_ent="",string _ped_ref_ent="",Decimal _det_peso=0)
+                                             string _ped_ubigeo_ent="",string _ped_dir_ent="",string _ped_ref_ent="", string _ped_nom_ent = "", string _ped_tel_ent = "", Decimal _det_peso=0)
         {
             string[] resultDoc = new string[2];
             string sqlquery = "USP_Insertar_Modifica_Liquidacion";
@@ -104,6 +104,10 @@ namespace CapaDato.Bll.Ecommerce
                 cmd.Parameters.AddWithValue("@liq_Ubigeo_ent", _ped_ubigeo_ent);
                 cmd.Parameters.AddWithValue("@liq_dir_ent", _ped_dir_ent);
                 cmd.Parameters.AddWithValue("@liq_dir_ref", _ped_ref_ent);
+                // Modificado por : Henry Morales - 21/05/2018
+                // Se agergaron los campos de nombre y telefono de referencia de entrega
+                cmd.Parameters.AddWithValue("@liq_nom_ref", _ped_nom_ent);
+                cmd.Parameters.AddWithValue("@liq_tel_ref", _ped_tel_ent);
                 cmd.Parameters.AddWithValue("@liq_pes_tot", _det_peso);
    
                 /*ingreso de clientes*/

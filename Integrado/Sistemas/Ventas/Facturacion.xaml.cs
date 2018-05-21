@@ -569,7 +569,7 @@ namespace Integrado.Sistemas.Ventas
                                     /*FALTA PONER LA VALIDACION DE LA ETIQUETA*/
                                     //resultetiq
                                     GenerarEtiqueta genera_etiqueta = new GenerarEtiqueta();
-                                    await Task.Run(() => genera_etiqueta.imp_etiqueta(grabar_numerodoc));
+                                    await Task.Run(() => genera_etiqueta.imp_etiqueta2(grabar_numerodoc));
                                 }
                                 else
                                 {
