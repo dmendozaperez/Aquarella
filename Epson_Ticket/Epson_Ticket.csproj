@@ -33,9 +33,8 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Carvajal.FEPE.PreSC, Version=2.2.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>bin\Debug\Carvajal.FEPE.PreSC.dll</HintPath>
+    <Reference Include="Carvajal.FEPE.PreSC">
+      <HintPath>..\Carvajal.FEPE.PreSC.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />

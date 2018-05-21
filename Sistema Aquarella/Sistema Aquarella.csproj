@@ -77,9 +77,8 @@
     <Reference Include="Carvajal.FEPE.PreSC">
       <HintPath>..\Carvajal.FEPE.PreSC.dll</HintPath>
     </Reference>
-    <Reference Include="exalib, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\EXALIB ACT\exalib.dll</HintPath>
+    <Reference Include="exalib">
+      <HintPath>..\exalib.dll</HintPath>
     </Reference>
     <Reference Include="FlashControlV71, Version=1.0.3187.32366, Culture=neutral, PublicKeyToken=692fbea5521e1304" />
     <Reference Include="System" />
@@ -97,7 +96,7 @@
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="UBL20">
-      <HintPath>bin\UBL20.dll</HintPath>
+      <HintPath>..\UBL20.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -171,6 +170,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
+    <None Include="Certificado\CDBATA.pfx" />
     <None Include="Service References\ServiceBata\Sistema_Aquarella.ServiceBata.ws_control_errorResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
@@ -219,7 +219,6 @@
       <DesignTime>True</DesignTime>
     </Compile>
     <None Include="app.config" />
-    <Content Include="Certificado\CDBATA.pfx" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -258,16 +257,6 @@
     <Service Include="{C0C07587-41A7-46C8-8FBD-3F9C8EBE2DDC}" />
   </ItemGroup>
   <ItemGroup>
-    <PublishFile Include="Certificado\CDBATA.pfx">
-      <Visible>False</Visible>
-      <Group>
-      </Group>
-      <TargetPath>
-      </TargetPath>
-      <PublishState>Include</PublishState>
-      <IncludeHash>True</IncludeHash>
-      <FileType>File</FileType>
-    </PublishFile>
     <PublishFile Include="Esquemas\FACTURA_BOLETA.xml">
       <Visible>False</Visible>
       <Group>

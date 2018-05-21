@@ -322,12 +322,21 @@ namespace Integrado.Sistemas.Ventas
                     var ProgressAlert = await this.ShowProgressAsync(Ent_Msg.msgcargando, "Anulando Documento N°:" + _not_id);  //show message
                     ProgressAlert.SetIndeterminate(); //Infinite   
 
-                    string _error_venta = await Task.Run(() => Dat_Venta._anular_venta(_not_id.ToString()));
+                string _error_venta = await Task.Run(() => Dat_Venta._anular_venta(_not_id.ToString()));
                 //show info
-                   
 
-                    //string _error_venta =Dat_Venta._anular_venta(_not_id.ToString());
-                    string _codigo_hashn = "";
+                #region<REGION EXCLUSIVA PARA E-COMMERCE>
+                if (Ent_Global._canal_venta == "BA")
+                {
+                    string _tipo_doc = "";
+                    if(_tipo == "Factura") { _tipo_doc = "FA"; }
+                    if(_tipo == "Boleta") { _tipo_doc = "BO"; }
+                    string _error_act_venta = await Task.Run(() => Dat_Venta._act_estado_anular_venta(_tipo_doc.ToString(), _not_id.ToString()));
+                }
+                #endregion
+
+                //string _error_venta =Dat_Venta._anular_venta(_not_id.ToString());
+                string _codigo_hashn = "";
 
                     if (_error_venta.Length==0)
                        {                            

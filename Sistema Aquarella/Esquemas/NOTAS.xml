@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="iso-8859-1" ?>
-<!--Title: Esquema de Notas de Crédito y Notas de DébitoVersion: 1.0Date: 2014-05-07-->
+<!--
+Title: Esquema de Notas de Crédito y Notas de Débito
+Version: 3.0.0
+Date: 2015-09-11
+-->
 <ArrayOfCampoSUNAT xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <CampoSUNAT Id="100" Seccion="HEADER" Condicion="M" Format="n1" SUNAT_format="bool" Campo="ES_BAJA" Valor="*">
     <Grupo>0</Grupo>
@@ -77,6 +81,11 @@
     <Grupo>7</Grupo>
     <Descripcion>Serie y número de documento afectado</Descripcion>
   </CampoSUNAT>
+  <!--Adicionado: 26 junio 2015, Ivan Ortiz-->
+  <CampoSUNAT Id="1650" Seccion="HEADER" Condicion="M" Format="an..13" SUNAT_format="" Campo="CDP_AFECTADO_NOTA" Valor="*">
+    <Grupo>7</Grupo>
+    <Descripcion>Serie y número de documento afectado</Descripcion>
+  </CampoSUNAT>
   <CampoSUNAT Id="1660" Seccion="HEADER" Condicion="M" Format="an..250" SUNAT_format="" Campo="MOTIVO" Valor="*">
     <Grupo>11</Grupo>
     <Descripcion>Motivo o Sustento</Descripcion>
@@ -101,7 +110,7 @@
     <Grupo>10</Grupo>
     <Descripcion>Lista separada por punto y comas de emails del adquiriente</Descripcion>
   </CampoSUNAT>
-  <CampoSUNAT Id="2020" Seccion="HEADER" Condicion="C" Format="an..100" SUNAT_format="" Campo="CODIGO_PLANTILLA" Valor="*">
+  <CampoSUNAT Id="2020" Seccion="HEADER" Condicion="M" Format="an..10" SUNAT_format="" Campo="CODIGO_PLANTILLA" Valor="*">
     <Grupo>10</Grupo>
     <Descripcion>Codigo de la plantilla PDF para el documento</Descripcion>
   </CampoSUNAT>
@@ -121,6 +130,14 @@
     <Grupo>10</Grupo>
     <Descripcion>Valor total descuentos</Descripcion>
   </CampoSUNAT>
+  <CampoSUNAT Id="2041" Seccion="HEADER" Condicion="C" Format="an..18" SUNAT_format="n(15,2)" Campo="TOTAL_ANTICIPOS" Valor="*">
+    <Grupo>10</Grupo>
+    <Descripcion>Total Anticipos</Descripcion>
+  </CampoSUNAT>
+  <CampoSUNAT Id="2042" Seccion="HEADER" Condicion="C" Format="an..3" SUNAT_format="" Campo="TOTAL_ANTICIPOS_MONEDA" Valor="*">
+    <Grupo>10</Grupo>
+    <Descripcion>Total Anticipos Moneda</Descripcion>
+  </CampoSUNAT>
   <CampoSUNAT Id="2045" Seccion="HEADER" Condicion="C" Format="an..3" SUNAT_format="" Campo="MONEDA" Valor="*">
     <Grupo>1</Grupo>
     <Descripcion>Tipo Moneda en la cual se emite el documento</Descripcion>
@@ -136,6 +153,18 @@
   <CampoSUNAT Id="2060" Seccion="HEADER" Condicion="M" Format="an..25" SUNAT_format="" Campo="NRO_RESOLUCION_SUNAT" Valor="*">
     <Grupo>10</Grupo>
     <Descripcion>Número de la resolución emitida por la SUNAT para el emisor</Descripcion>
+  </CampoSUNAT>
+  <CampoSUNAT Id="2061" Seccion="HEADER" Condicion="C" Format="an..100" SUNAT_format="" Campo="CAMPO_ADICIONAL" Valor="*">
+    <Grupo>10</Grupo>
+    <Descripcion>Campo Adicional</Descripcion>
+  </CampoSUNAT>
+  <CampoSUNAT Id="2062" Seccion="HEADER" Condicion="C" Format="an..15" SUNAT_format="n(12,2)" Campo="TOTAL_IMPUESTOS" Valor="#">
+    <Grupo>10</Grupo>
+    <Descripcion>Total Impuestos</Descripcion>
+  </CampoSUNAT>
+  <CampoSUNAT Id="2063" Seccion="HEADER" Condicion="C" Format="an..15" SUNAT_format="n(12,2)" Campo="TOTAL_DESCUENTOS" Valor="#">
+    <Grupo>10</Grupo>
+    <Descripcion>Sumatoria descuentos por item más descuento global</Descripcion>
   </CampoSUNAT>
   <CampoSUNAT Id="2100" Seccion="ITEMS" Condicion="C" Format="an..3" SUNAT_format="" Campo="UNIDAD_MEDIDA" Valor="#">
     <Grupo>12</Grupo>
@@ -309,7 +338,7 @@
     <Grupo>23</Grupo>
     <Descripcion>Atributo Moneda</Descripcion>
   </CampoSUNAT>
-  <CampoSUNAT Id="6100" Seccion="ITEMS" Condicion="M" Format="n..5" SUNAT_format="" Campo="NUMERO" Valor="1">
+  <CampoSUNAT Id="6100" Seccion="ITEMS" Condicion="M" Format="n..3" SUNAT_format="" Campo="NUMERO" Valor="1">
     <Grupo>34</Grupo>
     <Descripcion>Número de orden del Ítem</Descripcion>
   </CampoSUNAT>
@@ -334,7 +363,7 @@
     <Grupo />
     <Descripcion>Descuentos o Cargos por Item</Descripcion>
   </CampoSUNAT>
-  <CampoSUNAT Id="6550" Seccion="ITEM_DESCUENTOS_CARGOS" Condicion="C" Format="an..2" SUNAT_format="" Campo="INDICADOR" Valor="*">
+  <CampoSUNAT Id="6550" Seccion="ITEM_DESCUENTOS_CARGOS" Condicion="C" Format="an..3" SUNAT_format="" Campo="INDICADOR" Valor="*">
     <Grupo />
     <Descripcion>Indicador de Descuento/Cargo por Item</Descripcion>
   </CampoSUNAT>
@@ -663,6 +692,10 @@
   <CampoSUNAT Id="13600" Seccion="DOCUMENTO_RELACIONADO" Condicion="C" Format="an10" SUNAT_format="YYYY-MM-DD" Campo="FECHA" Valor="*">
     <Grupo>31</Grupo>
     <Descripcion>Fecha del documento de referencia</Descripcion>
+  </CampoSUNAT>
+  <CampoSUNAT Id="13601" Seccion="DOCUMENTO_RELACIONADO" Condicion="C" Format="an..100" SUNAT_format="" Campo="DESCRIPCION" Valor="*">
+    <Grupo>31</Grupo>
+    <Descripcion>Descripcion del documento de referencia</Descripcion>
   </CampoSUNAT>
   <CampoSUNAT Id="13700" Seccion="FOOTER" Condicion="C" Format="0..n" SUNAT_format="" Campo="LEYENDAS" Valor="/">
     <Grupo>31</Grupo>
