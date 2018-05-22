@@ -91,6 +91,10 @@ namespace Integrado.Design.WPF_Master
             DispatcherTimer dispatcherTimerE = new DispatcherTimer();
             DispatcherTimer dispatcherTimerU = new DispatcherTimer();
 
+            /* Reporte de Listado de Pedidos Pendientes */
+            btnrep.Visibility = Visibility.Hidden;
+            lblrep.Visibility = Visibility.Hidden;
+
             if (Ent_Global._canal_venta != "AQ")
             {
                 dispatcherTimerE.Tick += new EventHandler(dispatcherTimerE_Tick);
@@ -101,6 +105,10 @@ namespace Integrado.Design.WPF_Master
                 dispatcherTimerU.Tick += new EventHandler(dispatcherTimerU_Tick);
                 dispatcherTimerU.Interval = new TimeSpan(0, 3, 0);
                 dispatcherTimerU.Start();
+
+                /* Reporte de Listado de Pedidos Pendientes */
+                btnrep.Visibility = Visibility.Visible;
+                lblrep.Visibility = Visibility.Visible;
 
             }
 
@@ -455,6 +463,12 @@ namespace Integrado.Design.WPF_Master
                 frm.Owner = this;
                 frm.Show();
             }
+        }
+        private void btnrep_Click(object sender, RoutedEventArgs e)
+        {
+                ConsultaPedido frm = new ConsultaPedido();
+                frm.Show();
+                this.Close();
         }
 
         private async void btnnc_Click(object sender, RoutedEventArgs e)
