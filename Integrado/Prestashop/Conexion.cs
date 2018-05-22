@@ -1,4 +1,5 @@
-﻿using MySql.Data.MySqlClient;
+﻿using CapaEntidad.Bll.Util;
+using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -20,7 +21,7 @@ namespace Integrado.Prestashop
         /// <returns></returns>
         public SqlConnection getConexionLog()
         {
-            SqlConnection sqllog = new SqlConnection("Data Source=ehjhj;Initial Catalog=fgfg;Integrated Security=False;User ID=ecommerce;Password=Bata2018.*@=?++;Connect Timeout=15;Encrypt=False;TrustServerCertificate=True;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
+            SqlConnection sqllog = new SqlConnection(Ent_Conexion.conexion);//"Data Source=ehjhj;Initial Catalog=fgfg;Integrated Security=False;User ID=ecommerce;Password=Bata2018.*@=?++;Connect Timeout=15;Encrypt=False;TrustServerCertificate=True;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
             return sqllog;
         }
 
