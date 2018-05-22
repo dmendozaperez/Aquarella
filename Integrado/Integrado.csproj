@@ -192,6 +192,12 @@
     <Compile Include="Prestashop\Conexion.cs" />
     <Compile Include="Prestashop\LeerPedidos.cs" />
     <Compile Include="Prestashop\TraerPedidos.cs" />
+    <Compile Include="Reportes\liquidationReport.cs">
+      <DependentUpon>liquidationReport.rpt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <SubType>Component</SubType>
+      <DesignTime>True</DesignTime>
+    </Compile>
     <Compile Include="Reportes\ReportGuiaRem.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -203,6 +209,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
+    <Compile Include="Sistemas\Control\Liquidation.cs" />
     <Compile Include="Sistemas\Logistica\DuplicaGuia.xaml.cs">
       <DependentUpon>DuplicaGuia.xaml</DependentUpon>
     </Compile>
@@ -212,6 +219,9 @@
     <Compile Include="Sistemas\Logistica\PanelPedidos.xaml.cs">
       <DependentUpon>PanelPedidos.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Sistemas\Logistica\Reporte_Liquidacion.xaml.cs">
+      <DependentUpon>Reporte_Liquidacion.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Sistemas\Logistica\Reporte_Guia_Remision.xaml.cs">
       <DependentUpon>Reporte_Guia_Remision.xaml</DependentUpon>
     </Compile>
@@ -220,6 +230,9 @@
     </Compile>
     <Compile Include="Sistemas\Ventas\ConsultaCierre.xaml.cs">
       <DependentUpon>ConsultaCierre.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Sistemas\Ventas\ConsultaPedidos.xaml.cs">
+      <DependentUpon>ConsultaPedidos.xaml</DependentUpon>
     </Compile>
     <Compile Include="Sistemas\Ventas\ConsultaFactura.xaml.cs">
       <DependentUpon>ConsultaFactura.xaml</DependentUpon>
@@ -297,6 +310,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Sistemas\Logistica\Reporte_Liquidacion.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Sistemas\Logistica\Reporte_Guia_Remision.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -308,6 +325,10 @@
     <Page Include="Sistemas\Ventas\ConsultaCierre.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Sistemas\Ventas\ConsultaPedidos.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Sistemas\Ventas\ConsultaFactura.xaml">
       <SubType>Designer</SubType>
@@ -390,6 +411,10 @@
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\liquidationReport.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>liquidationReport.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Reportes\ReportGuiaRem.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
@@ -510,9 +535,7 @@
   <ItemGroup>
     <Resource Include="Design\Images\duplicadoFactura.png" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Sistemas\Control\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Resource Include="Design\Images\bt_pack_order.png" />
   </ItemGroup>
@@ -547,6 +570,8 @@
     <Resource Include="Design\Images\BataLogo.png" />
     <Resource Include="Design\Images\imprimir-urbano.png" />
     <Resource Include="Design\Images\reenviar-urbano.png" />
+    <Resource Include="Design\Images\lista.png" />
+    <Resource Include="Design\Images\Ecommerce.png" />
     <Content Include="Esquemas\FACTURA_BOLETA.xml" />
     <Content Include="Esquemas\NOTAS.xml" />
   </ItemGroup>

@@ -1,0 +1,22 @@
+﻿<Controls:MetroWindow
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Integrado.Sistemas.Logistica"
+        xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"                      
+        xmlns:Viewer="clr-namespace:SAPBusinessObjects.WPF.Viewer;assembly=SAPBusinessObjects.WPF.Viewer" x:Class="Integrado.Sistemas.Logistica.Reporte_Liquidacion"                      
+        ResizeMode="CanMinimize"
+        Icon="/Integrado;component/Design/Icono/sistema_ico.ico"
+        Title="[Guia de Remision]" EnableDWMDropShadow="True"         
+         Height="600" Width="1000" Loaded="MetroWindow_Loaded">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Viewer:CrystalReportsViewer Grid.Column="0" Grid.Row="0" Width="997" Name="crReportInvoiceLiquidacion"   HorizontalAlignment="Center" Margin="-3,0,0,0" />
+    </Grid>
+</Controls:MetroWindow>

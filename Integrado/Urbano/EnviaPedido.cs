@@ -56,7 +56,7 @@ namespace Integrado.Urbano
                                                ubi_direc = Convert.ToString(item["ubi_direc"].ToString()),
                                                ref_direc = Convert.ToString(item["ref_direc"].ToString()),
                                                peso_total = Convert.ToDecimal(item["peso_total"].ToString()),
-                                               cant_total = Convert.ToDecimal(item["tot_cant"].ToString()),
+                                               //cant_total = Convert.ToDecimal(item["tot_cant"].ToString()),
 
                                            }
                                        into G
@@ -77,7 +77,7 @@ namespace Integrado.Urbano
                                                ubi_direc = G.Key.ubi_direc,
                                                ref_direc = G.Key.ref_direc,
                                                peso_total = G.Key.peso_total,
-                                               cant_total = G.Key.cant_total,
+                                               //cant_total = G.Key.cant_total,
                                            };
                        
 
@@ -109,8 +109,8 @@ namespace Integrado.Urbano
                             guiaUrbano.ubi_direc = key.ubi_direc;//Ubigeo dirección entrega
                             guiaUrbano.ref_direc = key.ref_direc;//Referencia dirección entrega
                             guiaUrbano.peso_total = key.peso_total.ToString(); //Peso total, 0.3g por defecto para cada par
-                            guiaUrbano.pieza_total = key.cant_total.ToString(); //Cantidad total, No se considera el Envío
-                            //guiaUrbano.pieza_total = "3";//# de bultos
+                            //guiaUrbano.pieza_total = key.cant_total.ToString(); //Cantidad total, No se considera el Envío
+                            guiaUrbano.pieza_total = "1";//# de bultos
                             #endregion
 
 
@@ -192,7 +192,7 @@ namespace Integrado.Urbano
                             //Llamando al webservice de Urbano
                             using (WebClient client = new WebClient())
                             {
-                                client.Headers.Add("Content-type", "application/x-www-form-urlencoded");
+                                /*client.Headers.Add("Content-type", "application/x-www-form-urlencoded");
                                 client.Headers.Add("user", acceso.usuario);
                                 client.Headers.Add("pass", acceso.password);
 
@@ -202,7 +202,7 @@ namespace Integrado.Urbano
 
 
                                 //en este paso envia si es que urbano recibio los datos con exito
-                                post_data = post;
+                                post_data = post;*/
                                 //if (post.error=="1")
                                // {
                                //     if (post.guia.Trim().Length>0)
