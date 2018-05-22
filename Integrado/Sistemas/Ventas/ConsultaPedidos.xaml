@@ -447,7 +447,7 @@
                                             </DataGridTemplateColumn.CellTemplate>
                                         </DataGridTemplateColumn>-->
 
-                            <DataGridTemplateColumn Header="Reimprimir">
+                            <DataGridTemplateColumn Header="Imprimir">
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
                                         <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
