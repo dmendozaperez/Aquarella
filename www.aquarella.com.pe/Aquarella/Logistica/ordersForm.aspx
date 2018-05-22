@@ -717,7 +717,7 @@
         <!-- SHIPPING FORM -->
         <AQControl:AddItemsForm runat="server" Visible="true" ID="AddItemsForm" />
     </div>
-    <asp:HiddenField ID="h_numTipPago"   Value="0" runat="server" />
+    <asp:HiddenField ID="h_numTipPago"   Value="005" runat="server" />
     <asp:HiddenField ID="h_numConfigPagoPOS"  Value="0" runat="server" />
             <asp:HiddenField ID="hdCreditValue" Value="0" runat="server" />
     <div id="dialog-NC" title="Seleccione Nota de Credito" style="text-align:center">

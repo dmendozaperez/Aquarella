@@ -67,15 +67,6 @@ namespace www.aquarella.com.pe.Aquarella.Ventas {
         protected global::System.Web.UI.WebControls.TextBox txtDateStart;
         
         /// <summary>
-        /// Control calendar.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::AjaxControlToolkit.CalendarExtender calendar;
-        
-        /// <summary>
         /// Control imgCalendar.
         /// </summary>
         /// <remarks>
