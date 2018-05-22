@@ -38,6 +38,8 @@ namespace www.aquarella.com.pe.Aquarella.Ventas
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            //fecha de inicio para el manejo de acumulados
+           
             // Vencimiento de sesion
             _iddespacho = this.Request.Params["IdDespacho"] != null ? ((object)this.Request.Params["IdDespacho"]).ToString() : string.Empty;
             _strDescripcion = this.Request.Params["Descripcion"] != null ? ((object)this.Request.Params["Descripcion"]).ToString() : string.Empty;
@@ -60,8 +62,8 @@ namespace www.aquarella.com.pe.Aquarella.Ventas
 
             if (!IsPostBack)
             {
-
-                txtDateStart.Text = DateTime.Today.ToString("dd/MM/yyyy");
+                txtDateStart.Text = "19/05/2018";
+                //txtDateStart.Text = DateTime.Today.ToString("dd/MM/yyyy");
                 txtDateEnd.Text = DateTime.Today.ToString("dd/MM/yyyy");
 
                 formUsuario();

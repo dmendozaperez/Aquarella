@@ -452,7 +452,6 @@ function Loadforma(msg) {
         $('#lbltnc').html('(-) Nota de Credito:');
     }
 
-
     var strTipoPago = $("[id$='h_numTipPago']").val();
     $dwpago.val(strTipoPago);
   

@@ -124,10 +124,10 @@
                             <td>
                                 <asp:UpdatePanel ID="upStartDate" runat="server">
                                     <ContentTemplate>
-                                        <asp:TextBox ID="txtDateStart" runat="server"  AccessKey="f"></asp:TextBox>
-                                        <ajaxToolkit:CalendarExtender ID="calendar" runat="server" Animated="true" 
+                                        <asp:TextBox ID="txtDateStart" runat="server" ReadOnly="true"  AccessKey="f"></asp:TextBox>
+                                     <%--   <ajaxToolkit:CalendarExtender ID="calendar" runat="server" Animated="true" 
                                             FirstDayOfWeek="Monday" Format="dd/MM/yyyy" PopupButtonID="imgCalendar" 
-                                            TargetControlID="txtDateStart" />
+                                            TargetControlID="txtDateStart" />--%>
                                     </ContentTemplate>
                                 </asp:UpdatePanel>
                             </td>
