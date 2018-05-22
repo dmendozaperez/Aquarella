@@ -521,6 +521,7 @@ namespace www.aquarella.com.pe.Aquarella.Logistica
                         resultLine._commissionPctg = 0m;
                         resultLine._commissionDesc = "0.00";
                         resultLine._commission = 0;
+                        newLine._dscto = 0;
                         //num = 0;
                     }
                     //  resultLine._dsctoDesc = newLine._commission.ToString(_currency);
@@ -550,6 +551,7 @@ namespace www.aquarella.com.pe.Aquarella.Logistica
                     newLine._commissionPctg = 0m;
                     newLine._commissionDesc = "0.00";
                     newLine._commission = 0;
+                    newLine._dscto = 0;
                     //num2 = 0;
                 }
 
@@ -577,8 +579,10 @@ namespace www.aquarella.com.pe.Aquarella.Logistica
             List<Order_Dtl> orderLines = (List<Order_Dtl>)(((object)HttpContext.Current.Session[_nSOrder]) != null ? (object)HttpContext.Current.Session[_nSOrder] : new List<Order_Dtl>()); ;
             try
             {
+                Coordinator cust = (Coordinator)HttpContext.Current.Session[_nameSessionCustomer];
+                string varTipoPago = cust._vartipopago;
 
-                if (orderLines!=null)
+                if (orderLines!=null && varTipoPago != varPagoxMuestra)
                 {
 
                     /*formatear las promociones*/

@@ -131,8 +131,15 @@ namespace Integrado.Sistemas.Logistica
 
                 dg1.AutoGenerateColumns = false;
                 dt = Dat_Liquidacion.liquidacionXfacturar();
-
                 dg1.ItemsSource = dt.DefaultView;
+                //modificacion Junior M. para Visualizar las operaciones Gratuitas
+
+                if (Ent_Global._canal_venta != "AQ")
+                {
+                    dg1.Columns[13].Visibility = Visibility.Collapsed;
+                }
+
+                //fin modificacion Junior 
 
                 //grillaformato(dg1);
                 totales(dt);
