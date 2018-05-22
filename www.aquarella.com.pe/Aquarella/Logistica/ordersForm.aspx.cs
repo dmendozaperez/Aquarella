@@ -120,6 +120,9 @@ namespace www.aquarella.com.pe.Aquarella.Logistica
 
 
                 h_numTipPago.Value = (string)(Session["idpago"]);
+                if (h_numTipPago.Value == "")
+                    h_numTipPago.Value = "005";
+
                 LblPago.Text = (string)(Session["nombrepago"]);
 
 
@@ -518,7 +521,7 @@ namespace www.aquarella.com.pe.Aquarella.Logistica
                         resultLine._commissionPctg = 0m;
                         resultLine._commissionDesc = "0.00";
                         resultLine._commission = 0;
-                      //num = 0;
+                        //num = 0;
                     }
                     //  resultLine._dsctoDesc = newLine._commission.ToString(_currency);
                     //resultLine._commissionigv = Math.Round((((resultLine._priceigv * newQty) - (resultLine._dscto * newQty)) * commPercent) * resultLine._comm, 2, MidpointRounding.AwayFromZero);
@@ -804,17 +807,20 @@ namespace www.aquarella.com.pe.Aquarella.Logistica
                     resultLine._commissionigv = (((resultLine._priceigv * qty) /*- (resultLine._dscto * qty)*/) * commPercent) * resultLine._comm;
                     resultLine._commissionPctg = commPercent;
                     resultLine._commissionDesc = resultLine._commission.ToString(_currency);
-
+               
                     if (cust._vartipopago == "008")
                     {
                         resultLine._commissionPctg = 0m;
                         resultLine._commissionDesc = "0.00";
                         resultLine._commission = 0;
-                        //num = 0;
+                        resultLine._dscto = 0;
+                        resultLine._dsctoDesc = "0.00";
+
+
                     }
 
                     resultLine._lineTotal = Math.Round((resultLine._price * qty) - (resultLine._dscto * qty) - resultLine._commission,2,MidpointRounding.AwayFromZero);
-                    resultLine._lineTotDesc = ((resultLine._price * qty) - (resultLine._dscto * qty) - resultLine._commission).ToString(_currency);
+                    resultLine._lineTotDesc = (((resultLine._price * qty) - (resultLine._dscto * qty) - resultLine._commission)).ToString(_currency);
                     //resultLine._lineTotDesc = ((resultLine._priceigv * qty) - (resultLine._dscto * qty) - resultLine._commissionigv).ToString(_currency);
 
                     // Update
@@ -2240,15 +2246,15 @@ namespace www.aquarella.com.pe.Aquarella.Logistica
                 //vpagonc += dTx._value;
             }
 
-
+            decimal total = 0;
+            //cuando tipo de pago es por muestras (operacion Gratuita)
+            if (strTipoPago == "008")
+            {
+                total = Convert.ToDecimal(txtValue.Text);
+            }
 
             if (string.IsNullOrEmpty(estadoliquid))
-            {
-                decimal total= 0;
-                //cuando tipo de pago es por muestras
-                if (strTipoPago == "008") {
-                    total = Convert.ToDecimal(txtValue.Text);
-                }
+            {                
 
                 noOrder = Liquidations_Hdr.Gua_Mod_Liquidacion(user._bas_id, cust._idCust, string.Empty, comision_customer, 0, string.Empty, string.Empty, order, mtopercepcion, 1, hdNoOrder.Value, "", 0, 0, "", "", total, dtpago, _pago_credito, cust._percepcion, orderLines_Temp, strTipoPago);
 
@@ -2261,7 +2267,7 @@ namespace www.aquarella.com.pe.Aquarella.Logistica
                 string varNumVoucher = txtNoVoucher.Text.Trim();
                 decimal varMonto = Convert.ToDecimal(txtValue.Text);
                 string vpedido = this.Session[_nropedido].ToString();
-                noOrder = Liquidations_Hdr.Gua_Mod_Liquidacion(user._bas_id, cust._idCust, string.Empty, comision_customer, 0, string.Empty, string.Empty, order, mtopercepcion, 2, vpedido, _liq, 0, 0, "", "", 0, dtpago, _pago_credito, cust._percepcion, orderLines_Temp);
+                noOrder = Liquidations_Hdr.Gua_Mod_Liquidacion(user._bas_id, cust._idCust, string.Empty, comision_customer, 0, string.Empty, string.Empty, order, mtopercepcion, 2, vpedido, _liq, 0, 0, "", "", total, dtpago, _pago_credito, cust._percepcion, orderLines_Temp, strTipoPago);
                 //noOrder = Liquidations_Hdr.modyliquidation(user._usv_co, ordersChain, shipping, typeLiq, _varPercepcion, pagospos, varNumTarjeta, varNumVoucher, varMonto, user._usn_userid, h_numConfigPagoPOS.Value, listDoc);
             }
 

@@ -43,11 +43,16 @@ namespace Epson_Ticket
                                 #region<VARIABLES DE EMPRESA TICKETS>
 
                                 decimal _costo_envio = 0;
-
-                                if (Ent_Global._canal_venta== "BA")
+                                string _OPG = "";
+                                if (Ent_Global._canal_venta == "BA")
                                 {
                                     _costo_envio = Convert.ToDecimal(dt.Rows[0]["ven_costo_e"]);
                                 }
+                                else {
+                                    _OPG = dt.Rows[0]["OPG"].ToString();
+
+                                }
+
 
                                 string _marca_emp = dt.Rows[0]["Alm_Descripcion"].ToString();
                                 string _direccion_emp = dt.Rows[0]["Alm_Direccion"].ToString();
@@ -157,7 +162,18 @@ namespace Epson_Ticket
                                 decimal totalpagar = ((dSubtotal - descuento) + Convert.ToDecimal(mtoigv)) + _percepcionm;
 
                                 tk.lineasGuio();
-                                tk.AgregarFooter("     " + TruncateAt("SUB-TOTAL".ToString().PadRight(16), 16) + TruncateAt("S/".ToString().PadRight(3), 3) + TruncateAt(dSubtotal.ToString("#0.00").PadLeft(14), 14));
+
+                                if ((Ent_Global._canal_venta == "AQ") && _OPG == "1")
+                                {
+                                    tk.AgregarFooter("     " + TruncateAt("Op. Gratuita".ToString().PadRight(16), 16) + TruncateAt("S/".ToString().PadRight(3), 3) + TruncateAt(dSubtotal.ToString("#0.00").PadLeft(14), 14));
+                                    dSubtotal = 0;
+                                    tk.AgregarFooter("     " + TruncateAt("SUB-TOTAL".ToString().PadRight(16), 16) + TruncateAt("S/".ToString().PadRight(3), 3) + TruncateAt(dSubtotal.ToString("#0.00").PadLeft(14), 14));
+                                }
+                                else {
+                                    tk.AgregarFooter("     " + TruncateAt("SUB-TOTAL".ToString().PadRight(16), 16) + TruncateAt("S/".ToString().PadRight(3), 3) + TruncateAt(dSubtotal.ToString("#0.00").PadLeft(14), 14));
+                                }
+
+                                
                                 tk.AgregarFooter("     " + TruncateAt("DESCUENTO(-)".ToString().PadRight(16), 16) + TruncateAt("S/".ToString().PadRight(3), 3) + TruncateAt(descuento.ToString("#0.00").PadLeft(14), 14));
 
                                 //if (Ent_Global._canal_venta == "BA")
@@ -283,7 +299,7 @@ namespace Epson_Ticket
                                 Image im = byteArrayToImage(codigo_qr);
                                 Bitmap bmp = new Bitmap(im, new Size(100, 100));
                                 tk.HeaderImage = bmp;
-                                tk.PrintQR(_impresora);
+                                //tk.PrintQR(_impresora);
                               
                                 if (!CrearTicket._esta_imp)
                                 {
@@ -490,7 +506,7 @@ namespace Epson_Ticket
                 #endregion
                 return "ok";
             }
-            catch
+            catch(Exception ex)
             {
                 return null;
             }
