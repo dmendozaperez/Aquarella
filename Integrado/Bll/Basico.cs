@@ -163,11 +163,7 @@ namespace Integrado.Bll
             string _ruta_copy = _xml + "\\copy";
             try
             {
-                //Boolean valida_envio = true;
-                if (Ent_Global._canal_venta == "AQ") if (Ent_Conexion._Base_Datos != "BdAquarella") return; ;
-                if (Ent_Global._canal_venta == "BA") if (Ent_Conexion._Base_Datos != "BD_ECOMMERCE") return;
-
-                //return;
+                return;
                 if (!Directory.Exists(@_ruta_copy))
                 {
                     Directory.CreateDirectory(@_ruta_copy);

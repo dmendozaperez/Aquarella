@@ -389,24 +389,6 @@
                 </Button>
                 <Label Content="Consulta Facturas y Boletas" Grid.Row="1" Grid.Column="0" HorizontalAlignment="Center" Margin="0,0,-100,0" VerticalAlignment="Top"/>
                 <Label Content="ALMACEN HIGUERETA" Visibility="Hidden" Grid.Row="1" Grid.Column="0" FontSize="28" FontWeight="Bold" TextElement.FontStretch="Expanded"  Foreground="Maroon" HorizontalAlignment="Center" HorizontalContentAlignment="Center" Width="450"  Margin="0,-110,-720,0" VerticalAlignment="Top"/>
-                <Button x:Name="btnrep" Grid.Row="0" Grid.Column="1" Width="120" Height="100" Cursor="Hand" Margin="0,0,-250,-50"  VerticalAlignment="Bottom" HorizontalAlignment="Center" Click="btnrep_Click" >
-                    <Button.ToolTip>
-                        <ToolTip>
-                            <StackPanel>
-                                <TextBlock FontWeight="Bold" TextAlignment="Left" ><Run Text="Reporte de Pedidos"/></TextBlock>
-                                <TextBlock><Run Text="Reporte de Pedidos a Despachar."/></TextBlock>
-                                <TextBlock><Run Text="No lo presione hasta estar seguro de ingresar al Reporte."/></TextBlock>
-                            </StackPanel>
-                        </ToolTip>
-                    </Button.ToolTip>
-                    <Grid Width="110">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*"/>
-                        </Grid.ColumnDefinitions>
-                        <Image Grid.Column="0"  Source="/Integrado;component/Design/Images/lista.png"/>
-                    </Grid>
-                </Button>
-                <Label  x:Name="lblrep" Content="Reporte de Pedidos" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Center" Margin="188,0,176,36" VerticalAlignment="Bottom" Grid.ColumnSpan="2"/>
                 <Button x:Name="btnconnc" Grid.Row="0" Grid.Column="3" Width="120" Height="100" Cursor="Hand" Margin="-80,0,0,0"  VerticalAlignment="Bottom" HorizontalAlignment="Center" Click="btnconnc_Click" >
                     <Button.ToolTip>
                         <ToolTip>
