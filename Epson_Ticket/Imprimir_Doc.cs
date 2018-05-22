@@ -299,8 +299,8 @@ namespace Epson_Ticket
                                 Image im = byteArrayToImage(codigo_qr);
                                 Bitmap bmp = new Bitmap(im, new Size(100, 100));
                                 tk.HeaderImage = bmp;
-                                //tk.PrintQR(_impresora);
-                              
+                                tk.PrintQR(_impresora);
+
                                 if (!CrearTicket._esta_imp)
                                 {
                                     return null;
