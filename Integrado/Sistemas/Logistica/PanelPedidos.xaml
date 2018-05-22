@@ -475,7 +475,6 @@
                                         <DataGridTextColumn Binding="{Binding ubicacion}" ClipboardContentBinding="{x:Null}" Header="Ubicación"  />
                                         <DataGridTextColumn Binding="{Binding tra_gui_no}" ClipboardContentBinding="{x:Null}" Header="Guia"  />
                                         <DataGridTextColumn Binding="{Binding tra_descripcion}" ClipboardContentBinding="{x:Null}" Header="Transportadora"  />
-                                        <DataGridTextColumn Binding="{Binding OpGratuito}" ClipboardContentBinding="{x:Null}" Header="Op. Gratuita"  />
                                         <DataGridTemplateColumn Header="">
                                             <DataGridTemplateColumn.CellTemplate>
                                                 <DataTemplate>
@@ -518,6 +517,7 @@
                                                 </DataTemplate>
                                             </DataGridTemplateColumn.CellTemplate>
                                         </DataGridTemplateColumn>
+                                        <DataGridTextColumn Binding="{Binding OpGratuito}" ClipboardContentBinding="{x:Null}" Header="Muestra"  />
                                     </DataGrid.Columns>
                                 </DataGrid>
                             </Grid>

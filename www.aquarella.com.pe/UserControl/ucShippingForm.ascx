@@ -395,11 +395,14 @@
 </script>
 <script type="text/javascript" language="javascript">
     function setShipping(idBtRefresh) {
+        var strMuestra = "";
         var url = this.href;        
         chkbInfoShipp = $("input[id$='chkbInfoShipp']");
         btLiq = $("input[id$='btCreateLiquidation']");
         btCreateLiq = $("input[id$='btCreateLiq']");
         hdestado = $("input[id$='hdestado']");
+        var valor = $("[id$='h_numTipPago']").val();
+    
 
         if (chkbInfoShipp.is(':checked')) {
             txtName = $("input[id$='txtName']");
@@ -418,8 +421,8 @@
             if (hdestado.val() == "0") {
                 $('#dialog-confirm').dialog('option', 'title', 'Vamos a generar su nueva Liquidación ¿continuamos?');
                 $("#dialog-confirm").dialog("open");
-                var strMuestra = "";
-                var valor = $("[id$='h_numTipPago']").val();
+               
+              
 
                 if (valor == "008") {
                     strMuestra = ', con forma de pago POR MUESTRA de MERCADERIA'                  
