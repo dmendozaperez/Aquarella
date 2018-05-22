@@ -192,7 +192,7 @@ namespace Integrado.Urbano
                             //Llamando al webservice de Urbano
                             using (WebClient client = new WebClient())
                             {
-                                /*client.Headers.Add("Content-type", "application/x-www-form-urlencoded");
+                                client.Headers.Add("Content-type", "application/x-www-form-urlencoded");
                                 client.Headers.Add("user", acceso.usuario);
                                 client.Headers.Add("pass", acceso.password);
 
@@ -202,7 +202,7 @@ namespace Integrado.Urbano
 
 
                                 //en este paso envia si es que urbano recibio los datos con exito
-                                post_data = post;*/
+                                post_data = post;
                                 //if (post.error=="1")
                                // {
                                //     if (post.guia.Trim().Length>0)
