@@ -36,6 +36,8 @@ namespace Integrado.Urbano
                                            group item by
                                            new
                                            {
+                                               // Modificado por : Henry Morales - 21/05/2018
+                                               // Se cambiaron los nombres y telefonos, para ser tomados los de referencia entrega
                                                cod_rastreo = Convert.ToString(item["cod_rastreo"]),
                                                fech_emi_vent = Convert.ToString(item["fech_emi_vent"].ToString()),
                                                nro_guia_trans = Convert.ToString(item["nro_guia_trans"]),
@@ -43,15 +45,19 @@ namespace Integrado.Urbano
                                                cod_empresa = Convert.ToString(item["cod_empresa"].ToString()),
                                                nom_empresa = Convert.ToString(item["nom_empresa"].ToString()),                                           
                                                cod_cliente = Convert.ToString(item["cod_cliente"]),
-                                               nom_cliente = Convert.ToString(item["nom_cliente"]),
-                                               nro_telf = Convert.ToString(item["nro_telf"]),
-                                               nro_telf_mobil = Convert.ToString(item["nro_telf_mobil"]),
+                                               nom_cliente = Convert.ToString(item["ref_nombre"]),
+                                               //nom_cliente = Convert.ToString(item["nom_cliente"]),
+                                               nro_telf = Convert.ToString(item["ref_telef"]).Split('/')[0],
+                                               //nro_telf = Convert.ToString(item["nro_telf"]),
+                                               nro_telf_mobil = Convert.ToString(item["ref_telef"]).Split('/')[1],
+                                               //nro_telf_mobil = Convert.ToString(item["nro_telf_mobil"]),
                                                correo_elec = Convert.ToString(item["correo_elec"].ToString()),
                                                dir_entrega = Convert.ToString(item["dir_entrega"].ToString()),
                                                ubi_direc = Convert.ToString(item["ubi_direc"].ToString()),
                                                ref_direc = Convert.ToString(item["ref_direc"].ToString()),
                                                peso_total = Convert.ToDecimal(item["peso_total"].ToString()),
-                                              
+                                               cant_total = Convert.ToDecimal(item["tot_cant"].ToString()),
+
                                            }
                                        into G
                                            select new
@@ -71,6 +77,7 @@ namespace Integrado.Urbano
                                                ubi_direc = G.Key.ubi_direc,
                                                ref_direc = G.Key.ref_direc,
                                                peso_total = G.Key.peso_total,
+                                               cant_total = G.Key.cant_total,
                                            };
                        
 
@@ -102,7 +109,8 @@ namespace Integrado.Urbano
                             guiaUrbano.ubi_direc = key.ubi_direc;//Ubigeo dirección entrega
                             guiaUrbano.ref_direc = key.ref_direc;//Referencia dirección entrega
                             guiaUrbano.peso_total = key.peso_total.ToString(); //Peso total, 0.3g por defecto para cada par
-                            guiaUrbano.pieza_total = "3";//# de bultos
+                            guiaUrbano.pieza_total = key.cant_total.ToString(); //Cantidad total, No se considera el Envío
+                            //guiaUrbano.pieza_total = "3";//# de bultos
                             #endregion
 
 

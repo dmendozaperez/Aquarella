@@ -351,6 +351,10 @@ namespace Integrado.Prestashop
                                            ped_ubigeo_ent= item["ped_ubigeo_ent"].ToString(),
                                            ped_dir_ent = item["ped_dir_ent"].ToString(),
                                            ped_ref_ent = item["ped_ref_ent"].ToString(),
+                                           // Modificado por : Henry Morales - 21/05/2018
+                                           // Se agergaron los campos de nombre y telefono de referencia para la entrega
+                                           ped_nom_ent = item["ped_nom_ent"].ToString(),
+                                           ped_tel_ent = item["ped_tel_ent"].ToString(),
                                            //det_peso =Convert.ToDecimal(item["det_peso"]),
                                            ped_total_sigv = Convert.ToDecimal(item["ped_total_sigv"]),
                                            ped_total_cigv = Convert.ToDecimal(item["ped_total_cigv"]),
@@ -379,8 +383,12 @@ namespace Integrado.Prestashop
                                            ped_fecha = G.Key.ped_fecha,
                                            ped_ubigeo_ent=G.Key.ped_ubigeo_ent,
                                            ped_dir_ent = G.Key.ped_dir_ent,
-                                           ped_ref_ent=G.Key.ped_ref_ent,
-                                           cli_telf_mov=G.Key.cli_telf_mov,
+                                           ped_ref_ent = G.Key.ped_ref_ent,
+                                           // Modificado por : Henry Morales - 21/05/2018
+                                           // Se agergaron los campos de nombre y telefono de referencia para la entrega
+                                           ped_nom_ent = G.Key.ped_nom_ent,
+                                           ped_tel_ent = G.Key.ped_tel_ent,
+                                           cli_telf_mov =G.Key.cli_telf_mov,
                                            //det_peso=G.Key.det_peso,
                                            ped_total_sigv = G.Key.ped_total_sigv,
                                            ped_total_cigv = G.Key.ped_total_cigv,
@@ -510,9 +518,11 @@ namespace Integrado.Prestashop
                             decimal igv_monto = key.ped_dcto_cigv - key.ped_dcto_sigv;
                             //string[] pedido_update=
 
+                            // Modificado por : Henry Morales - 21/05/2018
+                            // Se agergaron los campos de nombre y telefono de referencia para la entrega ( key.ped_nom_ent ; key.ped_tel_ent)
                             string[] result= update_psth.Update_Pedido_Prestashop(Ent_Global._bas_id_codigo, 9219, "", 0, 0, "", "", items_det, 0, 1, "", "", 0, 0, "", "", 0, null,
                                               false, 0, null, key.pedido, key.ped_ref, key.ped_ship_sigv, cl, pg, key.ped_fecha, key.ped_total_cigv,key.ped_ubigeo_ent,
-                                              key.ped_dir_ent,key.ped_ref_ent, _tot_peso);
+                                              key.ped_dir_ent,key.ped_ref_ent, key.ped_nom_ent, key.ped_tel_ent, _tot_peso);
                             if (result[0].ToString()=="-1")
                             {
                                     _error += result[1].ToString();
