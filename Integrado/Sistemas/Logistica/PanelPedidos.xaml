@@ -517,7 +517,13 @@
                                                 </DataTemplate>
                                             </DataGridTemplateColumn.CellTemplate>
                                         </DataGridTemplateColumn>
-                                        <DataGridTextColumn Binding="{Binding OpGratuito}" ClipboardContentBinding="{x:Null}" Header="Muestra"  />
+                                        <DataGridTextColumn Binding="{Binding OpGratuito}" ClipboardContentBinding="{x:Null}" Header="Muestra" >
+                                            <DataGridTextColumn.ElementStyle>
+                                                <Style TargetType="TextBlock">
+                                                    <Setter Property="TextAlignment" Value="Center"></Setter>
+                                                </Style>
+                                            </DataGridTextColumn.ElementStyle>
+                                        </DataGridTextColumn>
                                     </DataGrid.Columns>
                                 </DataGrid>
                             </Grid>
