@@ -640,7 +640,111 @@ namespace CapaDato.Bll.Venta
             }
             return dt;
         }
+        public static DataTable dt_consulta_pedido(Boolean _tipo, DateTime _fecha_ini, DateTime _fecha_fin, string _doc)
+        {
+            string sqlquery = "USP_Consultar_Pedidos_Pendientes";
+            SqlConnection cn = null;
+            SqlCommand cmd = null;
+            SqlDataAdapter da = null;
+            DataTable dt = null;
+            try
+            {
+                cn = new SqlConnection(Ent_Conexion.conexion);
+                cmd = new SqlCommand(sqlquery, cn);
+                cmd.CommandTimeout = 0;
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@tipo", _tipo);
+                cmd.Parameters.AddWithValue("@fechaini", _fecha_ini);
+                cmd.Parameters.AddWithValue("@fechafin", _fecha_fin);
+                cmd.Parameters.AddWithValue("@doc", _doc);
+                da = new SqlDataAdapter(cmd);
+                dt = new DataTable();
+                da.Fill(dt);
+            }
+            catch
+            {
+                dt = null;
+            }
+            return dt;
+        }
+        public static Int32 valida_pedido(string _id)
+        {
+            string sqlquery = "USP_Valida_Pedido";
+            SqlConnection cn = null;
+            SqlCommand cmd = null;
+            try
+            {
+                cn = new SqlConnection(Ent_Conexion.conexion);
+                if (cn.State == 0) cn.Open();
+                cmd = new SqlCommand(sqlquery, cn);
+                cmd.CommandTimeout = 0;
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@id", _id);
+                cmd.Parameters.Add("@valida", SqlDbType.Int);
+                cmd.Parameters["@valida"].Direction = ParameterDirection.Output;
+                cmd.ExecuteNonQuery();
+                return Convert.ToInt32(cmd.Parameters["@valida"].Value.ToString());
+            }
+            catch
+            {
+                return 0;
+            }
+        }
+        /// <summary>
+        /// Consulta de liquidacion e informacion adicional
+        /// </summary>
+        /// <param name="_co"></param>
+        /// <param name="_noLiq"></param>
+        /// <returns></returns>
+        public static DataSet getLiquidationHdrInfo(string _noLiq)
+        {
+            string sqlquery = "USP_Leer_Liquidacion_Reporte_EC";
+            SqlConnection cn = null;
+            SqlCommand cmd = null;
+            SqlDataAdapter da = null;
+            DataSet ds = null;
+            try
+            {
 
+                cn = new SqlConnection(Ent_Conexion.conexion);
+                cmd = new SqlCommand(sqlquery, cn);
+                cmd.CommandTimeout = 0;
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@liq_id", _noLiq);
+                da = new SqlDataAdapter(cmd);
+                ds = new DataSet();
+                da.Fill(ds);
+                return ds;
+            }
+            catch (Exception e) { throw new Exception(e.Message, e.InnerException); }
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="_co"></param>
+        /// <param name="_noLiq"></param>
+        /// <returns></returns>
+        public static DataSet getDtlPicking(string _noLiq)
+        {
+            string sqlquery = "USP_Leer_Empaque_EC";
+            SqlConnection cn = null;
+            SqlCommand cmd = null;
+            SqlDataAdapter da = null;
+            DataSet ds = null;
+            try
+            {
+                cn = new SqlConnection(Ent_Conexion.conexion);
+                cmd = new SqlCommand(sqlquery, cn);
+                cmd.CommandTimeout = 0;
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@liq_id", _noLiq);
+                da = new SqlDataAdapter(cmd);
+                ds = new DataSet();
+                da.Fill(ds);
+                return ds;
+            }
+            catch (Exception e) { throw new Exception(e.Message, e.InnerException); }
+        }
         #endregion
 
     }

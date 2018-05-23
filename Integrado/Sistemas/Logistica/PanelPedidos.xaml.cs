@@ -134,10 +134,7 @@ namespace Integrado.Sistemas.Logistica
                 dg1.ItemsSource = dt.DefaultView;
                 //modificacion Junior M. para Visualizar las operaciones Gratuitas
 
-                if (Ent_Global._canal_venta != "AQ")
-                {
-                    dg1.Columns[13].Visibility = Visibility.Collapsed;
-                }
+               
 
                 //fin modificacion Junior 
 
@@ -223,6 +220,8 @@ namespace Integrado.Sistemas.Logistica
             LeerPedidos carga_data = null;
             try
             {
+                dg1.Columns[13].Visibility = Visibility.Collapsed;
+
                 carga_data = new LeerPedidos();
 
                 ProgressAlert = await this.ShowProgressAsync(Ent_Msg.msgcargando, "Espere un momento por favor, cargando pedidos");  //show message
