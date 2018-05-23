@@ -534,5 +534,6 @@
             <dxga:LinearGaugeControl Name="lin2" Background="#FFECEAE2" HorizontalAlignment="Left"  Grid.Row="1"  VerticalAlignment="Top" Height="1" Margin="544,290,0,0" Width="194"/>
 
         </Grid>
+	    
     </DockPanel>
 </Controls:MetroWindow>
