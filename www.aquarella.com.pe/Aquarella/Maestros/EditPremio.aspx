@@ -10,7 +10,7 @@
         $(document).ready(function () {
 
 
-            $(".iframe").colorbox({ width: "40%", height: "80%", iframe: true });
+            $(".iframe").colorbox({ width: "55%", height: "80%", iframe: true });
           });
 
         function pageLoad() {
