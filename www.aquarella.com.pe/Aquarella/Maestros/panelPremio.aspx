@@ -131,24 +131,26 @@
            
             });
 
-            TdArticulo += '<tr ' + colortr + '>'
-            TdArticulo += '<td style="text-align:center;width:100px' + colortd + '">'
-            TdArticulo += ArticuloIni
-            TdArticulo += '</td>'
-            TdArticulo += '<td style="width:200px' + colortd + '">'
-            TdArticulo += ' <table>'
-            TdArticulo += '<tr>'
-            TdArticulo += listTalla
-            TdArticulo += '</tr>'
-            TdArticulo += '<tr>'
-            TdArticulo += listCantidad
-            TdArticulo += '</tr>'
-            TdArticulo += ' </table>'
-            TdArticulo += '</td>'
-            TdArticulo += '<td style="text-align:center;width:100px' + colortd + '">'
-            TdArticulo += total
-            TdArticulo += '</td>'
-            TdArticulo += '</tr>'
+            if (total > 0) {
+                TdArticulo += '<tr ' + colortr + '>'
+                TdArticulo += '<td style="text-align:center;width:100px' + colortd + '">'
+                TdArticulo += ArticuloIni
+                TdArticulo += '</td>'
+                TdArticulo += '<td style="width:200px' + colortd + '">'
+                TdArticulo += ' <table>'
+                TdArticulo += '<tr>'
+                TdArticulo += listTalla
+                TdArticulo += '</tr>'
+                TdArticulo += '<tr>'
+                TdArticulo += listCantidad
+                TdArticulo += '</tr>'
+                TdArticulo += ' </table>'
+                TdArticulo += '</td>'
+                TdArticulo += '<td style="text-align:center;width:100px' + colortd + '">'
+                TdArticulo += total
+                TdArticulo += '</td>'
+                TdArticulo += '</tr>'
+            }
 
             var trHeader = '<tr style="color:White;background-color:#507CD1;font-weight:bold;">'
             trHeader += '<td style="text-align:center;width:100px">'
