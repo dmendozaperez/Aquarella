@@ -242,6 +242,9 @@
     <Content Include="Aquarella\Maestros\informationarticle.aspx" />
     <Content Include="Aquarella\Maestros\Lista_PreciosAQ.aspx" />
     <Content Include="Aquarella\Maestros\panelComisiones.aspx" />
+    <Content Include="Aquarella\Maestros\EditPremio.aspx" />
+    <Content Include="Aquarella\Maestros\panelPremio.aspx" />
+    <Content Include="Aquarella\Maestros\panelArticulo_App.aspx" />
     <Content Include="Aquarella\Maestros\panelProm_App.aspx" />
     <Content Include="Aquarella\Maestros\panelPromocion.aspx" />
     <Content Include="Aquarella\Maestros\updateprecioarticle.aspx" />
@@ -1372,6 +1375,27 @@
     <Compile Include="Aquarella\Maestros\panelComisiones.aspx.designer.cs">
       <DependentUpon>panelComisiones.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Aquarella\Maestros\EditPremio.aspx.cs">
+      <DependentUpon>EditPremio.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Aquarella\Maestros\EditPremio.aspx.designer.cs">
+      <DependentUpon>EditPremio.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Aquarella\Maestros\panelPremio.aspx.cs">
+      <DependentUpon>panelPremio.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Aquarella\Maestros\panelPremio.aspx.designer.cs">
+      <DependentUpon>panelPremio.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Aquarella\Maestros\panelArticulo_App.aspx.cs">
+      <DependentUpon>panelArticulo_App.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Aquarella\Maestros\panelArticulo_App.aspx.designer.cs">
+      <DependentUpon>panelArticulo_App.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Aquarella\Maestros\panelProm_App.aspx.cs">
       <DependentUpon>panelProm_App.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -1684,6 +1708,7 @@
     <Compile Include="Bll\Maestros\Departments.cs" />
     <Compile Include="Bll\Maestros\Employees.cs" />
     <Compile Include="Bll\Maestros\Comision.cs" />
+    <Compile Include="Bll\Maestros\Premio.cs" />
     <Compile Include="Bll\Maestros\Promocion.cs" />
     <Compile Include="Bll\Reports\LiqNcSubinforme.cs" />
     <Compile Include="Bll\Reports\Liquidation.cs" />
