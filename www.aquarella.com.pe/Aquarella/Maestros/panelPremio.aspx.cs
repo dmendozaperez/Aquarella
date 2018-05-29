@@ -16,11 +16,8 @@ namespace www.aquarella.com.pe.Aquarella.Maestros
     public partial class panelPremio : System.Web.UI.Page
     {
         private static Users _user;
-
-        private bool respuesta;
-      
-
-        string DSPromociones = "DataSetPremio";
+               
+        string DSPremios = "DataSetPremio";
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -31,7 +28,7 @@ namespace www.aquarella.com.pe.Aquarella.Maestros
 
             if (!IsPostBack)
             {
-                Session.Remove(DSPromociones);
+                Session.Remove(DSPremios);
 
                 fill();
             }
@@ -42,13 +39,13 @@ namespace www.aquarella.com.pe.Aquarella.Maestros
             DataSet data = Premio.GetAllPremiosDS();
            gridPremios.DataSource = data.Tables[0];
             gridPremios.DataBind();
-            Session[DSPromociones] = data.Tables[0]; ;
+            Session[DSPremios] = data.Tables[0]; ;
         }
              
         protected void gridPremios_PageIndexChanging(object sender, GridViewPageEventArgs e)
         {
             gridPremios.PageIndex = e.NewPageIndex;
-            DataSet data = (DataSet)Session[DSPromociones];
+            DataSet data = (DataSet)Session[DSPremios];
             gridPremios.DataSource = data.Tables[0];
             gridPremios.DataBind();
 
@@ -92,22 +89,5 @@ namespace www.aquarella.com.pe.Aquarella.Maestros
 
         }
                 
-
-        [WebMethod()]
-        public static string ajaxUpdatePromocion(int promo_id, string Ofe_Descripcion, string Ofe_MaxPares, string Ofe_Porc, string FechaIni, string FechaFin)
-        {
-
-            Int16 idUser = Convert.ToInt16(_user._usn_userid);
-
-            bool respuesta = Promocion.updatePromocion(promo_id, Ofe_Descripcion, Ofe_MaxPares, Ofe_Porc, FechaIni, FechaFin, idUser);
-
-            if (respuesta)
-            {
-                return "1";
-       
-            }
-            else
-                return "-1";
-        }
     }
 }

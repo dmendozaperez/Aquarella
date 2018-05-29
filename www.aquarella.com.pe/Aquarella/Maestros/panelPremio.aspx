@@ -9,7 +9,6 @@
     <script type="text/javascript">
         $(document).ready(function () {
 
-
             $(".iframe").colorbox({ width: "40%", height: "80%", iframe: true });
             
         });
@@ -17,30 +16,8 @@
         function pageLoad() {
             var isAsyncPostback = Sys.WebForms.PageRequestManager.getInstance().get_isInAsyncPostBack();
             
-
-
         }
-
-        function numbersonly(e) {
-            var unicode = e.charCode ? e.charCode : e.keyCode
-            if (unicode != 8 && unicode != 44) {
-                if (unicode < 48 || unicode > 57) //if not a number
-                { return false } //disable key press    
-            }
-        }
-
-        function updatePremio(Ofe_Id, Ofe_Descripcion, Ofe_MaxPares, Ofe_Porc, FechaIni, FechaFin,estadoId) {
-            removeFieldsErrors();
-
-            document.getElementById('dialog').innerHTML = '<p>hola</p>';
-     
-            $("#dialog").dialog({ width: 400, height: 400, modal: true, title: 'Editar Promocion', open: true });
-            
-            $("#dialog").dialog();
-
-       
-        }
-
+        
         function ListarArticulo(stridPremio,Descripcion) {
             //Ajax
          
@@ -170,53 +147,9 @@
             $("#dialog").dialog({ width: 400, height: 400, modal: true, title: 'Lista de Articulos', open: true });
 
             $("#dialog").dialog();
-
   
         }
 
-     
-
-        function updatePromocionAjax(Ofe_Id) {
-
-            var descripcion = $("#ContentPlaceHolder1_txtDesPromo").val();
-            var par = $("#ContentPlaceHolder1_txtparProm").val();
-            var porc = $("#ContentPlaceHolder1_txtporcPromo").val();
-
-            if (descripcion == "" || par == "" || porc == "") {
-                alert("Ingresar datos requeridos (*).")
-            } else { 
-
-
-                $.ajax({
-                    type: "POST",
-                    data: "{  'promo_id': '" + Ofe_Id + "','Ofe_Descripcion': '" + $("#ContentPlaceHolder1_txtDesPromo").val() + "','Ofe_MaxPares': '" + $("#ContentPlaceHolder1_txtparProm").val() + "','Ofe_Porc': '" + $("#ContentPlaceHolder1_txtporcPromo").val() + "','FechaIni': '" + $("#ContentPlaceHolder1_txtiniPromo").val() + "','FechaFin': '" + $("#ContentPlaceHolder1_txtfinPromo").val() + "'}",
-                    url: "panelPromocion.aspx/ajaxUpdatePromocion",
-                    contentType: "application/json; charset=utf-8",
-                    dataType: "json",
-                    success: function (result) {
-                        if (result.d == new String("1")) {
-                            $('#dialog').dialog("close");
-                        }
-                        else {
-                            alert("Ocurrio un error durante la acutalizacion");
-                        }
-                    },
-                    error: function (result) { alert("A ocurrido un error y no se han realizado los cambios, verifique que su sesión no haya expirado, e intente de nuevo." + result); }
-                });
-
-                window.location.href = "panelPromocion.aspx"
-            
-            }
-
-           
-        }
-
-        function removeFieldsErrors() {
-            $("#validateTips").text("");
-            $("#impFav_name").removeClass("ui-state-error");
-        }
-
-      
         function pageLoad() {
             var isAsyncPostback = Sys.WebForms.PageRequestManager.getInstance().get_isInAsyncPostBack();
             if (isAsyncPostback) {
