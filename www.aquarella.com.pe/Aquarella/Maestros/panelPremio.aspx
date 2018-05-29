@@ -96,7 +96,7 @@
                 
                 if (articulo != ArticuloIni && ini > 1) {
                     TdArticulo += '<tr ' + colortr + '>'
-                    TdArticulo += '<td style="width:100px' + colortd + '">'
+                    TdArticulo += '<td style="text-align:center;width:100px' + colortd + '">'
                     TdArticulo += ArticuloIni
                     TdArticulo += '</td>'
                     TdArticulo += '<td style="width:200px' + colortd + '">'
@@ -132,7 +132,7 @@
             });
 
             TdArticulo += '<tr ' + colortr + '>'
-            TdArticulo += '<td style="width:100px' + colortd + '">'
+            TdArticulo += '<td style="text-align:center;width:100px' + colortd + '">'
             TdArticulo += ArticuloIni
             TdArticulo += '</td>'
             TdArticulo += '<td style="width:200px' + colortd + '">'
@@ -155,7 +155,7 @@
             trHeader +=  'Articulo'
             trHeader += '</td>'
             trHeader += '<td style="text-align:center;width:200px">'
-            trHeader += 'Tallas Cantidades'
+            trHeader += 'Tallas - Cantidades'
             trHeader += '</td>'
             trHeader += '<td style="width:100px;text-align:center;">'
             trHeader += 'Total'
