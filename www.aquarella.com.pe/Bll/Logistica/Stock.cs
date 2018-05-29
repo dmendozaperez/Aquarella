@@ -332,7 +332,7 @@ namespace www.aquarella.com.pe.bll
         }
         public static DataSet getstockcategoria(string _idcategoria,string _temporada)
         {
-            string sqlquery = "USP_LeerStk_CateDet2";
+            string sqlquery = "USP_LeerStk_CateDet";
             SqlConnection cn = null;
             SqlCommand cmd = null;
             SqlDataAdapter da = null;

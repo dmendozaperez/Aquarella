@@ -37,7 +37,7 @@ namespace www.aquarella.com.pe.Aquarella.Maestros
                 Session.Remove(DSArticuloPremio);
 
                 CargarArticulosPremio();
-                initGrid(TxtItem.Text.Trim());
+                initGrid("csdfraesdf141222");
             }
         }
 
@@ -193,6 +193,7 @@ namespace www.aquarella.com.pe.Aquarella.Maestros
 
         protected void btConsult_Click(object sender, EventArgs e)
         {
+            this.msnMessage.Visible = false;
             initGrid(TxtItem.Text.Trim());
 
         }
@@ -217,6 +218,7 @@ namespace www.aquarella.com.pe.Aquarella.Maestros
             string strIdPremio = _idpremio;
             string strDataDetalle = "";
             string listExistentes = "";
+            string strErrorCantidad = "";
 
             DataSet data = (DataSet)Session[DSArticuloPremio];
             DataTable dt = data.Tables[0];
@@ -225,16 +227,24 @@ namespace www.aquarella.com.pe.Aquarella.Maestros
 
             for (int i = 0; i <= gvStock.Rows.Count - 1; i++)
             {
+               
                 CheckBox ckSelect = ((CheckBox)(gvStock.Rows[i].FindControl("chkSelec")));
 
                 if (ckSelect.Checked)
                 {
                     ckSelect.Checked = false;
+                    int cantStk = 0;
+                    int cant = 0;
                     string str_ArtId = ((HiddenField)(gvStock.Rows[i].FindControl("hf_ArtId"))).Value;
                     string str_Talla = ((HiddenField)(gvStock.Rows[i].FindControl("hf_Talla"))).Value;
-                    string str_Cantidad = ((HiddenField)(gvStock.Rows[i].FindControl("hf_Cantidad"))).Value;
+                    string str_Cantidad_Stock = ((HiddenField)(gvStock.Rows[i].FindControl("hf_Cantidad"))).Value;
+                    string str_Cantidad = ((TextBox)(gvStock.Rows[i].FindControl("txtCantidad"))).Text;
                     string str_Precio = ((HiddenField)(gvStock.Rows[i].FindControl("hf_Precio"))).Value;
-                                     
+                    cantStk = Convert.ToInt32(str_Cantidad_Stock);
+                    cant = Convert.ToInt32(str_Cantidad);
+                                    
+                     
+                                    
                     DataRow[] _filas = dt.Select("Referencia='" + str_ArtId + "' and Talla='" + str_Talla + "'", "precio asc");
 
                     if (_filas.Length > 0)
@@ -244,26 +254,41 @@ namespace www.aquarella.com.pe.Aquarella.Maestros
                         listExistentes += "(Referencia:" + _articulo + "- Talla:" + _talla + "),";
                     }
                     else {
-                        strDataDetalle += "<row  ";
-                        strDataDetalle += " Codigo=¿" + str_ArtId + "¿ ";
-                        strDataDetalle += " Talla=¿" + str_Talla + "¿ ";
-                        strDataDetalle += " Cantidad=¿" + str_Cantidad + "¿ ";
-                        strDataDetalle += " Precio=¿" + str_Precio + "¿ ";
-                        strDataDetalle += "/>";
 
+                        if (cant <= 0 || cant > cantStk)
+                        {
+                            strErrorCantidad += "(Referencia:" + str_ArtId + "- Talla:" + str_Talla + "),";
+                        }
+                        else
+                        {
+                            strDataDetalle += "<row  ";
+                            strDataDetalle += " Codigo=¿" + str_ArtId + "¿ ";
+                            strDataDetalle += " Talla=¿" + str_Talla + "¿ ";
+                            strDataDetalle += " Cantidad=¿" + str_Cantidad + "¿ ";
+                            strDataDetalle += " Precio=¿" + str_Precio + "¿ ";
+                            strDataDetalle += "/>";
+                        }
                     }
+
                 }
 
             }
 
             if (listExistentes != "") {
-                listExistentes = "No se agregaron articulos con tallas ya asociados al premio:" + listExistentes.TrimEnd(',')+"."; ;
+                listExistentes = "No se agregaron articulos con tallas ya asociados al premio:" + listExistentes.TrimEnd(',')+"."; 
             }
 
 
             if (strDataDetalle == "")
             {
-                this.msnMessage.LoadMessage("Error : Debe elegir al menos un elemento de la lista o Articulos no asociados."+ listExistentes, ucMessage.MessageType.Error);
+                if (strErrorCantidad != "")
+                {
+                    this.msnMessage.LoadMessage("Error : Debe ingresar cantidades validas (menor o igual al stock)." + strErrorCantidad.TrimEnd(',') + ".", ucMessage.MessageType.Error);
+                }
+                else
+                {
+                    this.msnMessage.LoadMessage("Error : Debe elegir al menos un elemento de la lista." + listExistentes, ucMessage.MessageType.Error);
+                }
             }
             else
             {
@@ -282,7 +307,8 @@ namespace www.aquarella.com.pe.Aquarella.Maestros
             }
 
             CargarArticulosPremio();
-            initGrid(TxtItem.Text.Trim());
+            if(TxtItem.Text.Trim()!="")
+                initGrid(TxtItem.Text.Trim());
 
         }
 

@@ -123,10 +123,7 @@
                             OnRowCreated="gvStock_RowCreated"
                             OnPageIndexChanging="gvStock_PageIndexChanging"
                             PageSize="8">
-                            <EmptyDataTemplate>
-                                    <span style="color: Maroon;align-content:center">Lo Sentimos Pero del Artículo que Busca no Se Encontraron
-                                        Existencias en el Stock.</span>
-                              </EmptyDataTemplate>
+                            
                                 <Columns>
                                     <asp:TemplateField HeaderText="Foto" ItemStyle-HorizontalAlign="Center" ItemStyle-VerticalAlign="Middle">
                                         <ItemTemplate>
@@ -139,7 +136,7 @@
                                      <asp:BoundField DataField="Cantidad" HeaderText="Stock" ItemStyle-HorizontalAlign="center"  />
                                        <asp:TemplateField HeaderText="Cantidad" SortExpression="pin_employee" ItemStyle-HorizontalAlign="Center" ItemStyle-Width="50px">
                                         <ItemTemplate>
-                                              <asp:TextBox id="txtCantidad"  Style="width:50px;font-size:12px" Columns="2" type="number" MaxLength="3"  Text='<%# Eval("Cantidad")%>'  runat="server" />
+                                              <asp:TextBox id="txtCantidad"   Style="width:50px;font-size:12px" Columns="2" type="number" MaxLength="3"  Text='<%# Eval("Cantidad")%>'  runat="server" />
                                         </ItemTemplate>
                                     </asp:TemplateField> 
                                    <asp:TemplateField HeaderText="Agregar" SortExpression="pin_employee" ItemStyle-HorizontalAlign="Center" ItemStyle-Width="110px">
