@@ -301,11 +301,11 @@ namespace www.aquarella.com.pe.Aquarella.Logistica
                     {
                         DataTable dt = new DataTable();
                         dt = Getdt(FilePath, Extension, val_dwTipArc, ref nfilas);
-                                        
+
                         DataSet dsreturn = www.aquarella.com.pe.bll.Stock.getstockcategoriaExcel(dt);
                         dtExcel = dsreturn.Tables[0];
                         Session[_nameSessionData] = dtExcel;
-                        
+
                     }
                     else
                     {
@@ -323,7 +323,20 @@ namespace www.aquarella.com.pe.Aquarella.Logistica
                     MergeRows(gvReturns, 1);
 
                 }
+                else {
+                    msnMessage.LoadMessage("Debe seleccionar un de archivo.", UserControl.ucMessage.MessageType.Error);
+                    DataTable dt = new DataTable();
+                    dt = (DataTable)Session[_nameSessionData];
+                    Pivot pvt = new Pivot(dt);
+                    string[] fila = { "Categoria", "Codigo", "Descripcion", "tempo", "stock", "foto" };
+                    string[] col = { "talla" };
+                    gvReturns.DataSource = pvt.PivotData("Cantidad", AggregateFunction.Sum, fila, col);
+                    gvReturns.DataBind();
+                    fijarcolumna();
+                    MergeRows(gvReturns, 1);
+
                 }
+            }
                     catch (Exception ex)
             {
           
