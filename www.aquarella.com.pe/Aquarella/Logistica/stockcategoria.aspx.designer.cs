@@ -85,13 +85,22 @@ namespace www.aquarella.com.pe.Aquarella.Logistica {
         protected global::System.Web.UI.WebControls.ImageButton ibExportToExcel;
         
         /// <summary>
-        /// Control btConsult.
+        /// Control FileUpload1.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btConsult;
+        protected global::System.Web.UI.WebControls.FileUpload FileUpload1;
+        
+        /// <summary>
+        /// Control btnUpload.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnUpload;
         
         /// <summary>
         /// Control upGrid.

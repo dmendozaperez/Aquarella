@@ -15,6 +15,8 @@ using www.aquarella.com.pe.bll.Ventas;
 using System.IO;
 
 using System.Text;
+using System.Configuration;
+using System.Data.OleDb;
 //using Bata.Aquarella.Pe.BLL.Ventas;
 //using Bata.Aquarella.Bll;
 namespace www.aquarella.com.pe.Aquarella.Logistica
@@ -79,6 +81,7 @@ namespace www.aquarella.com.pe.Aquarella.Logistica
         }
         private void sbconsulta(string valor)
         {
+            this.msnMessage.Visible = false;
             string _tempo = dwtemporada.SelectedValue;
 
             DataSet dsreturn = www.aquarella.com.pe.bll.Stock.getstockcategoria(valor,_tempo);
@@ -116,11 +119,7 @@ namespace www.aquarella.com.pe.Aquarella.Logistica
            // var grid=gvReturns.view
            // gvReturns.HeaderRow.AccessKey
         }
-        protected void btConsult_Click(object sender, EventArgs e)
-        {
-
-        }
-
+       
         protected void gvReturns_PageIndexChanging(object sender, GridViewPageEventArgs e)
         {
             gvReturns.PageIndex = e.NewPageIndex;
@@ -276,7 +275,188 @@ namespace www.aquarella.com.pe.Aquarella.Logistica
             string vidcategoria = dwcategoria.SelectedValue;
             sbconsulta(vidcategoria);
         }
-                
+
+        protected void btnUpload_Click(object sender, EventArgs e)
+        {
+            int rpta;
+            this.msnMessage.Visible = false;
+            try
+            {
+                if (FileUpload1.HasFile)
+                {
+
+                    string FileName = Path.GetFileName(FileUpload1.PostedFile.FileName);
+                    string Extension = Path.GetExtension(FileUpload1.PostedFile.FileName);
+                    string FolderPath = ConfigurationManager.AppSettings["FolderPath"];
+
+                    Random r = new Random();
+                    int varAleatorio = r.Next(0, 999);
+                    string FilePath = Server.MapPath(FolderPath + FileName + varAleatorio);
+                    FileUpload1.SaveAs(FilePath);
+                    int val_dwTipArc = 1;
+                    rpta = validarArchivo(FilePath, Extension, val_dwTipArc);
+                    Int32 nfilas = 0;
+                    DataTable dtExcel = new DataTable();
+                    if (rpta == 1)
+                    {
+                        DataTable dt = new DataTable();
+                        dt = Getdt(FilePath, Extension, val_dwTipArc, ref nfilas);
+                                        
+                        DataSet dsreturn = www.aquarella.com.pe.bll.Stock.getstockcategoriaExcel(dt);
+                        dtExcel = dsreturn.Tables[0];
+                        Session[_nameSessionData] = dtExcel;
+                        
+                    }
+                    else
+                    {
+                        msnMessage.LoadMessage("Debe seleccionar un tipo de archivo correcto.", UserControl.ucMessage.MessageType.Error);
+                        dtExcel = (DataTable)Session[_nameSessionData];
+                    }
+
+                    File.Delete(FilePath);
+                    Pivot pvt = new Pivot(dtExcel);
+                    string[] fila = { "Categoria", "Codigo", "Descripcion", "tempo", "stock", "foto" };
+                    string[] col = { "talla" };
+                    gvReturns.DataSource = pvt.PivotData("Cantidad", AggregateFunction.Sum, fila, col);
+                    gvReturns.DataBind();
+                    fijarcolumna();
+                    MergeRows(gvReturns, 1);
+
+                }
+                }
+                    catch (Exception ex)
+            {
+          
+                string msg;
+                msg = ex.Message;
+
+                msnMessage.LoadMessage("Ocurrio un error: " + ex.Message, UserControl.ucMessage.MessageType.Error);
+
+            }
+       }
+
+        public static int validarArchivo(string FilePath, string Extension, int val_dwTipArc)
+        {
+            int rpta = 0;
+            string conStr = "";
+            switch (Extension)
+            {
+                case ".xls": //Excel 97-03
+                    conStr = ConfigurationManager.ConnectionStrings["Excel03ConString"]
+                             .ConnectionString;
+                    break;
+
+                case ".xlsx": //Excel 07
+                    conStr = ConfigurationManager.ConnectionStrings["Excel07ConString"]
+                              .ConnectionString;
+                    break;
+            }
+
+            if (conStr != "")
+            {
+                conStr = String.Format(conStr, FilePath, "A4:F5", true);
+                OleDbConnection connExcel = new OleDbConnection(conStr);
+                OleDbCommand cmdExcel = new OleDbCommand();
+                OleDbDataAdapter oda = new OleDbDataAdapter();
+                DataTable dt = new DataTable();
+                DataTable dt_Complete = new DataTable();
+                cmdExcel.Connection = connExcel;
+                //Get the name of First Sheet
+                connExcel.Open();
+
+                DataTable dtExcelSchema;
+                dtExcelSchema = connExcel.GetOleDbSchemaTable(OleDbSchemaGuid.Tables, null);
+                string SheetName = dtExcelSchema.Rows[0]["TABLE_NAME"].ToString();
+                connExcel.Close();
+
+                connExcel.Open();
+                if (val_dwTipArc == 1)
+                {
+                    cmdExcel.CommandText = "SELECT count(*) AS articulo  From [" + SheetName + "]";
+                }
+
+
+                oda.SelectCommand = cmdExcel;
+                oda.Fill(dt);
+
+                int a = 0;
+                foreach (DataRow dr in dt.Rows) //.Tables[0].Rows)
+                {
+                    a = System.Convert.ToInt32(dr["articulo"]);
+                    if (val_dwTipArc == 1)
+                    {
+                        if (a > 0)
+                        {
+                            rpta = 1;
+                            break;
+                        }
+                    }
+                    else
+                    {
+                        if (a > 0)
+                        {
+                            rpta = 1;
+                            break;
+                        }
+                    }
+                }
+
+                connExcel.Close();
+            }
+            return rpta;
+        }
+
+        private DataTable Getdt(string FilePath, string Extension, int val_dwTipArc, ref Int32 filas)
+        {
+            string conStr = "";
+            DataTable dt = new DataTable();
+            dt.Columns.Add("articulo", typeof(string));
+            
+            switch (Extension)
+            {
+                case ".xls": //Excel 97-03
+                    conStr = ConfigurationManager.ConnectionStrings["Excel03ConString"]
+                             .ConnectionString;
+                    break;
+
+                case ".xlsx": //Excel 07
+                    conStr = ConfigurationManager.ConnectionStrings["Excel07ConString"]
+                              .ConnectionString;
+                    break;
+            }
+          
+            conStr = String.Format(conStr, FilePath, "A4:F5", true);
+            OleDbConnection connExcel = new OleDbConnection(conStr);
+            OleDbCommand cmdExcel = new OleDbCommand();
+            OleDbDataAdapter oda = new OleDbDataAdapter();
+          
+
+            DataTable dt_Complete = new DataTable();
+            cmdExcel.Connection = connExcel;
+            //Get the name of First Sheet
+            connExcel.Open();
+
+            DataTable dtExcelSchema;
+            dtExcelSchema = connExcel.GetOleDbSchemaTable(OleDbSchemaGuid.Tables, null);
+            string SheetName = dtExcelSchema.Rows[0]["TABLE_NAME"].ToString();
+            connExcel.Close();
+
+            //Read Data from First Sheet
+            connExcel.Open();
+
+            if (val_dwTipArc == 1)
+            {
+                cmdExcel.CommandText = "SELECT [articulo] From [" + SheetName + "]";
+            }
+          
+            oda.SelectCommand = cmdExcel;
+            oda.Fill(dt);
+            connExcel.Close();
+                        
+            return dt;
+
+        }
+
 
         private void ExportarExcel()
         {

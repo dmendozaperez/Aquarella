@@ -353,6 +353,28 @@ namespace www.aquarella.com.pe.bll
             catch (Exception e) { throw new Exception(e.Message, e.InnerException); }
         }
 
+        public static DataSet getstockcategoriaExcel(DataTable dt)
+        {
+            string sqlquery = "USP_LeerStk_Excel";
+            SqlConnection cn = null;
+            SqlCommand cmd = null;
+            SqlDataAdapter da = null;
+            DataSet ds = null;
+            try
+            {
+                cn = new SqlConnection(Conexion.myconexion());
+                cmd = new SqlCommand(sqlquery, cn);
+                cmd.CommandTimeout = 0;
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@tabla_Articulo", dt);
+                da = new SqlDataAdapter(cmd);
+                ds = new DataSet();
+                da.Fill(ds);
+                return ds;
+            }
+            catch (Exception e) { throw new Exception(e.Message, e.InnerException); }
+        }
+
         #endregion
 
     }

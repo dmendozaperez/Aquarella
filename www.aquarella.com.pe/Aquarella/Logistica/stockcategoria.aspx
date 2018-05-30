@@ -42,6 +42,10 @@ StylesheetTheme="SiteTheme" CodeBehind="stockcategoria.aspx.cs" Inherits="www.aq
         {
             width: 153px;
         }
+         .style8
+        {
+            width: 110px;
+        }
         .auto-style1 {
             width: 157px;
         }
@@ -52,7 +56,7 @@ StylesheetTheme="SiteTheme" CodeBehind="stockcategoria.aspx.cs" Inherits="www.aq
             width: 368%;
         }
         .auto-style4 {
-            width: 92%;
+            width: 100%;
         }
     </style>
 </asp:Content>
@@ -87,14 +91,14 @@ StylesheetTheme="SiteTheme" CodeBehind="stockcategoria.aspx.cs" Inherits="www.aq
     <!-- -->
     <table style="width:100%;">
         <tr>
-            <td class="auto-style1">
+            <td style="width:100%;">
     <asp:Panel ID="pnlDwCustomers" Visible="false" runat="server" Width="848px">
-        <div style="margin: 10px auto 0 auto;">
-            <table class="tablagris" cellpadding="4">
+        
+            <table  style="width:1200px;" cellpadding="4">
                 <tr>
                     
                            
-                                <td class="style7">
+                                <td class="style8">
                                     Seleccione una categoria </td>
                                 <td>
                                     <table class="auto-style4">
@@ -128,6 +132,15 @@ StylesheetTheme="SiteTheme" CodeBehind="stockcategoria.aspx.cs" Inherits="www.aq
                                                     ToolTip="Exportar Panel de Resultados a Excel." Width="24px" />
                                                 
                                             </td>
+                                            <td  valign="middle" class="style2" >
+                                                Adjuntar archivo: (Unicamente extensión .XLSX)</td>
+                                            <td valign="middle" class="style8">
+                                                <asp:FileUpload ID="FileUpload1" runat="server" />
+                                            </td>
+                                            <td valign="middle" class="style2">
+                                                <asp:Button ID="btnUpload" runat="server" OnClick="btnUpload_Click" 
+                                                Text="Cargar Archivo" />
+                                            </td>
                                             
                                         </tr>
                                     </table>
@@ -137,14 +150,10 @@ StylesheetTheme="SiteTheme" CodeBehind="stockcategoria.aspx.cs" Inherits="www.aq
                   
                 </tr>
             </table>
-        </div>
+      
     </asp:Panel>
             </td>
-            <td align="left"  >
-                       <br />
-                       <asp:Button ID="btConsult" style="visibility:hidden" runat="server" Text="Consultar" ValidatioGroup="vsConsultForm"
-                        CausesValidation="true" OnClick="btConsult_Click" /> 
-                </td>
+      
         </tr>
     </table>
     <br />
@@ -165,7 +174,7 @@ StylesheetTheme="SiteTheme" CodeBehind="stockcategoria.aspx.cs" Inherits="www.aq
                                             <asp:Label ID="lblPhotoArticle" runat="server">
                                             </asp:Label>
                                         </ItemTemplate>
-                                    </asp:TemplateField>
+                         </asp:TemplateField>
                     </Columns>
                     <FooterStyle BackColor="White" ForeColor="#000066" Wrap="True" />
                     <PagerStyle BackColor="White" ForeColor="#000066" HorizontalAlign="Left" />
@@ -178,8 +187,9 @@ StylesheetTheme="SiteTheme" CodeBehind="stockcategoria.aspx.cs" Inherits="www.aq
                 </asp:GridView>
             </ContentTemplate>
             <Triggers>
-                <asp:AsyncPostBackTrigger ControlID="btConsult" EventName="click" />
+          
                 <asp:AsyncPostBackTrigger ControlID="gvReturns" EventName="PageIndexChanging" />
+
                 <asp:AsyncPostBackTrigger ControlID="dwcategoria" 
                     EventName="SelectedIndexChanged" />
                 <asp:AsyncPostBackTrigger ControlID="dwtemporada" EventName="SelectedIndexChanged" />
