@@ -153,7 +153,7 @@ namespace Integrado.Urbano
                             guiaEncoded += "%22nro_guia_trans%22%3A%22" + guiaUrbano.nro_guia_trans + "%22%2C";
                             guiaEncoded += "%22nro_factura%22%3A%22" + guiaUrbano.nro_factura + "%22%2C";
                             guiaEncoded += "%22cod_empresa%22%3A%22" + guiaUrbano.cod_empresa + "%22%2C";
-                            guiaEncoded += "%22nom_empresa%22%3A%22" + HttpUtility.UrlEncode(guiaUrbano.nom_empresa) + "%22%2C";
+                            //guiaEncoded += "%22nom_empresa%22%3A%22" + HttpUtility.UrlEncode(guiaUrbano.nom_empresa) + "%22%2C";
                             guiaEncoded += "%22cod_cliente%22%3A%22" + guiaUrbano.cod_cliente + "%22%2C";
                             guiaEncoded += "%22nom_cliente%22%3A%22" + HttpUtility.UrlEncode(guiaUrbano.nom_cliente) + "%22%2C";
                             guiaEncoded += "%22nro_telf%22%3A%22" + guiaUrbano.nro_telf + "%22%2C";

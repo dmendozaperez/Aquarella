@@ -8,7 +8,7 @@
         xmlns:Viewer="clr-namespace:SAPBusinessObjects.WPF.Viewer;assembly=SAPBusinessObjects.WPF.Viewer" x:Class="Integrado.Sistemas.Logistica.Reporte_Liquidacion"                      
         ResizeMode="CanMinimize"
         Icon="/Integrado;component/Design/Icono/sistema_ico.ico"
-        Title="[Guia de Remision]" EnableDWMDropShadow="True"         
+        Title="[Reporte de Liquidación]" EnableDWMDropShadow="True"         
          Height="600" Width="1000" Loaded="MetroWindow_Loaded">
     <Grid>
         <Grid.ColumnDefinitions>
