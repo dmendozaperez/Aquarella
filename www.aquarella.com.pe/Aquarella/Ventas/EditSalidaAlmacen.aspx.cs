@@ -106,8 +106,11 @@ namespace www.aquarella.com.pe.Aquarella.Ventas
                 {
                     string _TotalPedido = row["NroPedidos"].ToString();
                     string _TotalEnviado = row["NroEnviados"].ToString();
+                    string _TotalMonto = row["MontoTotal"].ToString();
+
                     txtPedido.Text = _TotalPedido;
                     txtEnviado.Text = _TotalEnviado;
+                    txtMonto.Text = _TotalMonto;
                 }
 
             }
@@ -284,16 +287,24 @@ namespace www.aquarella.com.pe.Aquarella.Ventas
             string nrodoc = txtDocumento.Text;
             string est = txtEstado.Text;
             string fec = TextFecha.Text;
+            string strTotalPedido = txtPedido.Text;
+            string strTotalEnviado = txtEnviado.Text;
+            string strTotalMonto = txtMonto.Text;
 
             string strTable = "<table <Table border='1' bgColor='#ffffff' " +
             "borderColor='#000000' cellSpacing='2' cellPadding='2' " +
             "style='font-size:10.0pt; font-family:Calibri; background:white;'>";
-            strTable += "<tr height=38 ><td height=38  bgcolor='#969696' width='38'>Nro. Documento </ td ><td width='400' >" + nrodoc + "</ td > ";
-            strTable += "<td height=38  bgcolor='#969696' width='38'>Descripción</ td ><td width='400' >" + desc + "</ td > </tr>";
-            strTable += "<tr height=38 ><td height=38  bgcolor='#969696' width='38'>Fec. Creación. </ td ><td width='400' align='left' >" + fec + "</ td > ";
-            strTable += "<td height=38  bgcolor='#969696' width='38'>Estado </ td ><td width='400' >" + est + "</ td ></tr>";
-            strTable += "</table>";
+            strTable += "<tr height=38 ><td height=38  bgcolor='#969696' width='38'>Nro. Documento </ td ><td width='400' align='left' >" + nrodoc + "</ td > ";
+            strTable += "<td height=38  bgcolor='#969696' width='38'>Fec. Creación. </ td ><td width='400' align='left' colspan='2' >" + fec + "</ td > </tr>";
+            strTable += "<tr height=38 ><td height=38  bgcolor='#969696' width='38'>Total Monto. </ td ><td width='400' align='left' >" + strTotalMonto + "</ td > ";
+            strTable += "<td height=38  bgcolor='#969696' width='38'>Estado </ td ><td width='400' align='left' colspan='2' >" + est + "</ td ></tr>";
+            strTable += "<tr height=38 ><td height=38  bgcolor='#969696' width='38'>Total Pedido. </ td ><td width='400' align='left' >" + strTotalPedido + "</ td > ";
+            strTable += "<td height=38  bgcolor='#969696' width='38'>Total Enviado </ td ><td width='400' align='left' colspan='2' >" + strTotalEnviado + "</ td ></tr>";
 
+            strTable += "<tr height=38 ><td height=38  bgcolor='#969696' width='38'>Descripción </ td ><td colspan='4' align='left' >" + desc + "</ td > ";
+            strTable += "</tr>";
+
+            strTable += "</table>";
 
             inicio = "<div> " + strTable +
             "<table <Table border='1' bgColor='#ffffff' " +

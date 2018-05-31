@@ -124,6 +124,20 @@
             </td>
             
         </tr>
+            <tr>
+             <td class="f12">
+               Total Monto:
+            </td>
+            <td>
+                 <asp:TextBox id="txtMonto"  Enabled="false"    runat="server" />
+            </td>
+            <td class="f12">
+             
+            </td>
+            <td>
+                   
+            </td>
+            </tr>
         </table>
         <table width="100%" class="tablagris" cellpadding="4">
             <tr>
