@@ -191,6 +191,7 @@
             this.lbl1.Size = new System.Drawing.Size(48, 13);
             this.lbl1.TabIndex = 8;
             this.lbl1.Text = "Almacén";
+            this.lbl1.Click += new System.EventHandler(this.lbl1_Click);
             // 
             // Importar_Stock
             // 

@@ -319,5 +319,10 @@ namespace Sistema_AQLocal
         {
 
         }
+
+        private void lbl1_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
