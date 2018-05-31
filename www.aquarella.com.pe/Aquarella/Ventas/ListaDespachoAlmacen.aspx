@@ -204,6 +204,7 @@
                                 AutoGenerateColumns="False"  Font-Size="8" AllowPaging="True" AllowSorting="True" CellPadding="3"
                                  ShowHeaderWhenEmpty="True" BackColor="White" BorderColor="#CCCCCC" BorderStyle="Solid" BorderWidth="1px" 
                                 OnRowCommand="gvReturns_RowCommand" 
+                                 OnPageIndexChanging="gvReturns_PageIndexChanging" 
                                  PageSize="8" 
                             
 

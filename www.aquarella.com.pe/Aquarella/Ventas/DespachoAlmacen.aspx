@@ -183,8 +183,12 @@
                        <asp:Button ID="btConsult" runat="server" Text="Buscar" ValidatioGroup="vsConsultForm"
                         CausesValidation="true" OnClick="btConsult_Click" /> 
                 </td>
-                <td align="left">
-                   
+                <td align="right" style="width:20px">
+                       <asp:ImageButton ID="ibExportToExcel" ImageUrl="~/Design/images/Botones/b_toExcel.png"
+                        onmouseover="this.style.background='green';" onmouseout="this.style.background=''"
+                        runat="server" Height="25px" Width="24px" 
+                        ToolTip="Exportar Panel de Resultados a Excel." 
+                        onclick="ibExportToExcel_Click" /> 
                  </td>
                 <td align="left">
                    
@@ -243,7 +247,10 @@
                         HorizontalAlign="Center" />
                     <AlternatingRowStyle BackColor="White" />
                      <Columns>
-             
+                         <asp:BoundField DataField="asesor" HeaderText="Asesor" ItemStyle-Width="110px">
+                         <HeaderStyle HorizontalAlign="Left" />
+                        <ItemStyle HorizontalAlign="Left" />
+                        </asp:BoundField>
                         <asp:BoundField DataField="NombreLider" HeaderText="Lider" ItemStyle-Width="110px">
                         <HeaderStyle HorizontalAlign="Left" />
                         <ItemStyle HorizontalAlign="Left" />

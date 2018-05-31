@@ -203,6 +203,7 @@
                             <asp:GridView ID="gvReturns" runat="server" Width="98%" SkinID="gridviewSkin"
                                 AutoGenerateColumns="False"  Font-Size="8" AllowPaging="True" AllowSorting="True" CellPadding="3"
                                  ShowHeaderWhenEmpty="True" BackColor="White" BorderColor="#CCCCCC" BorderStyle="Solid" BorderWidth="1px" 
+                                OnPageIndexChanging="gvReturns_PageIndexChanging" 
                                 OnRowCommand="gvReturns_RowCommand" 
                                  PageSize="8">
                             
