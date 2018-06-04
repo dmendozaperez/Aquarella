@@ -207,6 +207,14 @@
                                                         <asp:Label ID="lbldestino" runat="server" Text="Label"></asp:Label>
                                                     </td>
                                                 </tr>
+                                                <tr>
+                                                    <td>
+                                                        Premio :
+                                                    </td>
+                                                    <td>
+                                                        <asp:Label ID="lblPremio" runat="server" Text="Label"></asp:Label>
+                                                    </td>
+                                                </tr>
                                             </table>
                                         </td>
                                     </tr>

@@ -219,8 +219,8 @@
                                         <b style="font-size: medium">Forma de Pago</b></td>
              <td>
                                                 &nbsp;</td>
-             <td>
-                 &nbsp;</td>
+             <td class="fsal f13" style="text-align:right;padding-right:25em">
+                                        <b style="font-size: medium">Premio</b></td>
          </tr>
          <tr>
              <td class="style9">
@@ -229,12 +229,16 @@
                                                     <option></option>
                                                 </select></td>
              <td>
-                                                <asp:Panel ID="pnprueba" runat="server" Style="display: none;">
-                                                    <asp:Label ID="Label1" runat="server" Text="estado de prueba"></asp:Label>
-                                                </asp:Panel>
+                  &nbsp;
              </td>
-             <td>
-                 &nbsp;</td>
+                                               
+             <td style=" text-align:right;padding-right:25em; font-weight: bold;" class="style6"
+                                           >
+                <b style="color: #000000; font-size: medium;">
+                <label id="lblPremio">
+                </label>
+                </b>
+                </td>
          </tr>
      </table>
     <asp:ScriptManager ID="ScriptManager1" runat="server" AsyncPostBackTimeout="999999">

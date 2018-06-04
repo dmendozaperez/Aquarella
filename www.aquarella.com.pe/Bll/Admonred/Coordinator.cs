@@ -27,6 +27,8 @@ namespace www.aquarella.com.pe.bll
 
         public string _nombrecompleto { get; set; }
 
+        public string _premio { get; set; }
+
         public Boolean _aplica_percepcion { get; set; }
         /// <summary>
         /// Nombre de conexion a bd

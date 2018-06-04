@@ -87,8 +87,8 @@ namespace www.aquarella.com.pe.Aquarella.Ventas
         {
 
             string strIdDespacho = _iddespacho;
-            string Descripcion = TxtDescripcion.Text;
-            Response.Redirect("DespachoAlmacen.aspx?IdDespacho=" + strIdDespacho + "&Descripcion=" + Descripcion);
+            string Codigo = txtDocumento.Text;
+            Response.Redirect("DespachoAlmacen.aspx?IdDespacho=" + strIdDespacho + "&Descripcion=" + Codigo);
         }
 
         private void MergeRows(GridView gv, int rowPivotLevel)

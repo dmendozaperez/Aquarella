@@ -146,10 +146,13 @@ namespace www.aquarella.com.pe.bll
         /// </summary>
         public int _units { get; set; }
 
+        public string _premio { get; set; }
+        public string _premId { get; set; }
+
         /// <summary>
         /// Nombre de conexion a bd
         /// </summary>
-        
+
 
         #endregion
 
@@ -315,5 +318,9 @@ namespace www.aquarella.com.pe.bll
         /// cantidad del producto
         /// </summary>
         public Decimal cantidad { get; set; }
+
+        public string  premio { get; set; } 
+
+        public string premId { get; set; }
     }
 }
