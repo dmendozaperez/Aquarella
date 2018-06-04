@@ -121,9 +121,12 @@ namespace Integrado.Urbano
                 string referencia = etiqueta.referencia;//; RemoverDiacriticos(oGuia.ref_direc);
                 string ubigeo = etiqueta.ubigeo;// RemoverDiacriticos(GenerarNombreUbigeo(oGuia.ubi_direc) + oGuia.ubi_direc);
                 string cod_refer = etiqueta.cod_refer;
+                string telefonos = etiqueta.telefono;
 
-               //-- Modificado por  : Henry Morales - 17/05/2018
-               //-- Asunto          : Se modifico para que muestre el código Alfanumérico en lugar del número
+                direccion = direccion + ubigeo;
+
+                //-- Modificado por  : Henry Morales - 17/05/2018
+                //-- Asunto          : Se modifico para que muestre el código Alfanumérico en lugar del número
                 StringBuilder strb = new StringBuilder();
                 strb.Append("^XA\n");                       // - Inic. Etiqueta
                 strb.Append("^CI27\n");                     // - Imprimir Caracteres Latinos
@@ -132,15 +135,140 @@ namespace Integrado.Urbano
                 strb.Append("^FWN\n");                      // - Sin Rotar
                 strb.Append("^BY2,,20^FS\n");               // - Ancho y Alto de Código de Barras
                 strb.Append("^LH 0,20\n");                  // - Set Coordenada Inicial
+                //strb.Append("^FO040,105^A0,030,020^FD" + cliente.ToUpper() + "^FS\n");
+                //strb.Append("^FO040,135^A0,030,020^FDPEDIDO: " + cod_refer + "^FS\n");
+                ////strb.Append("^FO040,135^A0,030,020^FDPEDIDO: " + nro_pedido + "^FS\n");
+                //strb.Append("^FO040,015^BCN,62,Y,N,N^FD" + strNroGuia + "^FS\n");
+                //strb.Append("^FO460,105^A0,030,020^^FD" + cliente.ToUpper() + "^FS\n");
+                //strb.Append("^FO460,135^A0,030,020^FDPEDIDO: " + cod_refer + "^FS\n");
+                ////strb.Append("^FO460,135^A0,030,020^FDPEDIDO: " + nro_pedido + "^FS\n");
+                //strb.Append("^FO460,015^BCN,62,Y,N,N^FD" + strNroGuia + "^FS\n");
+                ////strb.Append("^PQ3^FS\n"); // Imprimir Triple Copia de Etiqueta
+                
+                /////////// agregado 04/06/2018 - HMorales
+                /////////1ra Impresión///////////
                 strb.Append("^FO040,105^A0,030,020^FD" + cliente.ToUpper() + "^FS\n");
                 strb.Append("^FO040,135^A0,030,020^FDPEDIDO: " + cod_refer + "^FS\n");
-                //strb.Append("^FO040,135^A0,030,020^FDPEDIDO: " + nro_pedido + "^FS\n");
+                strb.Append("^FO040,165^A0,030,020^FDTELEF.: " + telefonos + "^FS\n");
+                // DIRECCION
+                if (direccion.Length <= 30)
+                {
+                    strb.Append("^FO040,195^A0,030,020^FDDIREC.: " + direccion + "^FS\n");
+                }
+                else
+                {
+                    strb.Append("^FO040,195^A0,030,020^FDDIREC.: " + direccion.Substring(0, 30) + "^FS\n");
+                    if (direccion.Length > 60)
+                    {
+                        strb.Append("^FO040,225^A0,030,020^FD" + "".PadLeft(12) + direccion.Substring(30, 30) + "^FS\n");
+
+                        if (direccion.Length > 90)
+                        {
+                            strb.Append("^FO040,255^A0,030,020^FD" + "".PadLeft(12) + direccion.Substring(60, 30) + "^FS\n");
+
+                            if (direccion.Length > 120)
+                            {
+                                strb.Append("^FO040,285^A0,030,020^FD" + "".PadLeft(12) + direccion.Substring(90, 30) + "^FS\n");
+                            }
+                            else
+                            {
+                                strb.Append("^FO040,285^A0,030,020^FD" + "".PadLeft(12) + direccion.Substring(90, direccion.Length - 90) + "^FS\n");
+                            }
+                        }
+                        else
+                        {
+                            strb.Append("^FO040,255^A0,030,020^FD" + "".PadLeft(12) + direccion.Substring(60, direccion.Length - 60) + "^FS\n");
+                        }
+                    }
+                    else
+                    {
+                        strb.Append("^FO040,225^A0,030,020^FD" + "".PadLeft(12) + direccion.Substring(30, direccion.Length - 30) + "^FS\n");
+                    }
+                }
+                // REFERENCIA
+                if (referencia.Length > 30)
+                {
+                    strb.Append("^FO040,315^A0,030,020^FDREFER.: " + referencia.Substring(0, 30) + "^FS\n");
+                }
+                else
+                {
+                    strb.Append("^FO040,315^A0,030,020^FDREFER.: " + referencia + "^FS\n");
+                }
+                if (referencia.Length > 30)
+                {
+                    if (referencia.Length > 60)
+                    {
+                        strb.Append("^FO040,345^A0,030,020^FD" + "".PadLeft(12) + referencia.Substring(30, 30) + "^FS\n");
+                    }
+                    else
+                    {
+                        strb.Append("^FO040,345^A0,030,020^FD" + "".PadLeft(12) + referencia.Substring(30, referencia.Length - 30) + "^FS\n");
+                    }
+                }
                 strb.Append("^FO040,015^BCN,62,Y,N,N^FD" + strNroGuia + "^FS\n");
+                /////////////////////////////////
+                /////////2da Impresión///////////
+                /////////////////////////////////
                 strb.Append("^FO460,105^A0,030,020^^FD" + cliente.ToUpper() + "^FS\n");
                 strb.Append("^FO460,135^A0,030,020^FDPEDIDO: " + cod_refer + "^FS\n");
-                //strb.Append("^FO460,135^A0,030,020^FDPEDIDO: " + nro_pedido + "^FS\n");
+                strb.Append("^FO460,165^A0,030,020^FDTELEF.: " + telefonos + "^FS\n");
+                // DIRECCION
+                if (direccion.Length <= 30)
+                {
+                    strb.Append("^FO460,195^A0,030,020^FDDIREC.: " + direccion + "^FS\n");
+                }
+                else
+                {
+                    strb.Append("^FO460,195^A0,030,020^FDDIREC.: " + direccion.Substring(0, 30) + "^FS\n");
+                    if (direccion.Length > 60)
+                    {
+                        strb.Append("^FO460,225^A0,030,020^FD" + "".PadLeft(12) + direccion.Substring(30, 30) + "^FS\n");
+
+                        if (direccion.Length > 90)
+                        {
+                            strb.Append("^FO460,255^A0,030,020^FD" + "".PadLeft(12) + direccion.Substring(60, 30) + "^FS\n");
+
+                            if (direccion.Length > 120)
+                            {
+                                strb.Append("^FO460,285^A0,030,020^FD" + "".PadLeft(12) + direccion.Substring(90, 30) + "^FS\n");
+                            }
+                            else
+                            {
+                                strb.Append("^FO460,285^A0,030,020^FD" + "".PadLeft(12) + direccion.Substring(90, direccion.Length - 90) + "^FS\n");
+                            }
+                        }
+                        else
+                        {
+                            strb.Append("^FO460,255^A0,030,020^FD" + "".PadLeft(12) + direccion.Substring(60, direccion.Length - 60) + "^FS\n");
+                        }
+                    }
+                    else
+                    {
+                        strb.Append("^FO460,225^A0,030,020^FD" + "".PadLeft(12) + direccion.Substring(30, direccion.Length - 30) + "^FS\n");
+                    }
+                }
+                // REFERENCIA
+                if (referencia.Length > 30)
+                {
+                    strb.Append("^FO460,315^A0,030,020^FDREFER.: " + referencia.Substring(0, 30) + "^FS\n");
+                }
+                else
+                {
+                    strb.Append("^FO460,315^A0,030,020^FDREFER.: " + referencia + "^FS\n");
+                }
+                if (referencia.Length > 30)
+                {
+                    if (referencia.Length > 60)
+                    {
+                        strb.Append("^FO460,345^A0,030,020^FD" + "".PadLeft(12) + referencia.Substring(30, 30) + "^FS\n");
+                    }
+                    else
+                    {
+                        strb.Append("^FO460,345^A0,030,020^FD" + "".PadLeft(12) + referencia.Substring(30, referencia.Length - 30) + "^FS\n");
+                    }
+                }
                 strb.Append("^FO460,015^BCN,62,Y,N,N^FD" + strNroGuia + "^FS\n");
-                //strb.Append("^PQ3^FS\n"); // Imprimir Triple Copia de Etiqueta
+                /////////// agregado 04/06/2018 - HMorales
                 strb.Append("^XZ\n");
                 return strb.ToString();
             }
