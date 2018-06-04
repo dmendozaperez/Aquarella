@@ -115,6 +115,35 @@ namespace Sistema_AQLocal
         }
 
 
+        public static DataTable _articulo_regmedida_stk(DataTable dtrg)
+        {
+            DataTable dt = null;
+            string sqlquery = "USP_LeerArticulos_CodRgMed";
+            try
+            {
+                using (SqlConnection cn = new SqlConnection(Conexion.conexion_local))
+                {
+                    using (SqlCommand cmd = new SqlCommand(sqlquery, cn))
+                    {
+                        cmd.CommandTimeout = 0;
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        cmd.Parameters.AddWithValue("@tmparticulo", dtrg);
+                        using (SqlDataAdapter da = new SqlDataAdapter(cmd))
+                        {
+                            dt = new DataTable();
+                            da.Fill(dt);
+                        }
+                    }
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            return dt;
+        }
+
         public static string _importar_stk_bata(string _alm_id, DataTable dt_stk)
         {
             string sqlquery = "USP_Cuadrar_Stock_Aquarella";
@@ -507,7 +536,7 @@ namespace Sistema_AQLocal
                 //return null;
 
                 ruta = @"N:\sistemas\comun\";
-               // ruta = @"D:\STKAQ\";
+                //ruta = @"D:\STKAQ\";
                 //string strConnDbase = @"Provider = Microsoft.Jet.OLEDB.4.0" +
                 //                       ";Data Source = " + ruta +
                 //                       ";Extended Properties = dBASE IV" +
@@ -714,11 +743,11 @@ namespace Sistema_AQLocal
             try
             {
                 DataTable dt_stk = genera_Stocks(ref _error, ref _codigoalmacen);
-               
 
-                
 
-            
+
+                dt_stk = _articulo_regmedida_stk(dt_stk);
+
                 //ConvertReglaTalla(ref dt_stk);
 
                 if (_error.Length == 0)

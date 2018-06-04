@@ -94,8 +94,10 @@ namespace www.aquarella.com.pe.Aquarella.Logistica
                 _percepcion = Convert.ToDecimal(dRow["Con_Fig_Percepcion"]),
                 _email = dRow["bas_correo"].ToString(),
                 _nombrecompleto = dRow["nombrecompleto"].ToString(),
+                _premio = dRow["Premio"].ToString(),
                 _aplica_percepcion =Convert.ToBoolean(dRow["aplica_percepcion"].ToString())
             };
+                        
             Session[_nameSessionCustomer] = cust;
            
             //*************************************
@@ -424,7 +426,8 @@ namespace www.aquarella.com.pe.Aquarella.Logistica
 
                 order.Add(newLineOrder);
 
-                HttpContext.Current.Session[_nSNewOrdrLine] = order;
+                HttpContext.Current.Session[_nSNewOrdrLine] = order;                              
+              
 
                 return order;
             }
@@ -447,6 +450,85 @@ namespace www.aquarella.com.pe.Aquarella.Logistica
         /// <param name="size"></param>
         /// <param name="qty"></param>
         /// <returns></returns>
+        /// 
+
+        [WebMethod()]
+        public static List<Order_Dtl_Temp> verificarPremio()
+        {
+            List<Order_Dtl_Temp> ListArtPremio = new List<Order_Dtl_Temp>();
+
+            List<Order_Dtl> orderLines = (List<Order_Dtl>)(((object)HttpContext.Current.Session[_nSOrder]) != null ? (object)HttpContext.Current.Session[_nSOrder] : new List<Order_Dtl>()); 
+            Order_Dtl resultLine;
+                resultLine =  orderLines.Where(x => x._premio.Equals("S")).FirstOrDefault();
+            try
+            {
+              
+
+                
+                Coordinator cust = (Coordinator)HttpContext.Current.Session[_nameSessionCustomer];
+                string premio = cust._premio;
+                if (orderLines != null && premio !="" && resultLine==null)
+                {
+                    string strtable = "";
+                    for (Int32 c = 0; c < orderLines.Count; ++c)
+                    {
+                        //verificar las promociones
+                        //if (orderLines[c]._ofe_id != 0)
+                        //{
+                        strtable += "<row  ";
+                        strtable += " codigo=¿" + orderLines[c]._code + "¿ ";
+                        strtable += " talla=¿" + orderLines[c]._size + "¿ ";
+                        strtable += "/>";                        
+                        
+                        //}
+                    }
+
+                    DataSet dsArt = Article.getArticlePremio(cust._idCust, strtable);
+
+                  
+
+                    ListArtPremio = (from DataRow dr in dsArt.Tables[0].Rows
+                            select new Order_Dtl_Temp()
+                            {                                                                
+                                articulo = dr["PremArt_ArtId"].ToString(),
+                                cantidad = 1,
+                                talla = dr["PremArt_Talla"].ToString(),
+                                premio = "S",
+                                premId = dr["PreCli_PreID"].ToString(),
+                                
+
+                            }).ToList();
+
+
+
+                }
+
+            }
+            catch(Exception ex){
+
+            }
+            return ListArtPremio;
+        }
+
+        [WebMethod()]
+        public static List<Order_Dtl> deletePremio()
+        {
+            // Lista de pedido
+            List<Order_Dtl> order = (List<Order_Dtl>)HttpContext.Current.Session[_nSOrder];
+            
+            if (order != null) {
+
+                Order_Dtl resultLine;
+                resultLine = order.Where(x => x._premio.Equals("S")).FirstOrDefault();
+              
+                if (order.Count == 1 && resultLine != null)
+                    order.Remove(resultLine);
+
+                HttpContext.Current.Session[_nSOrder] = order;
+            }
+            return order;
+        }
+
         [WebMethod()]
         public static List<Order_Dtl> addArticle(string size, int qty, string varTipoPago)//, string tipoPago)
         {
@@ -455,8 +537,23 @@ namespace www.aquarella.com.pe.Aquarella.Logistica
 
             //
             newLineOrder._size = size;
+            newLineOrder._premio = "N";
 
             return addArticle(newLineOrder, qty, varTipoPago);//, tipoPago);
+        }
+
+
+        [WebMethod()]
+        public static List<Order_Dtl> addArticlePremio(string size, string code, int qty, string PremId, string varTipoPago)//, string tipoPago)
+        {
+            List<Order_Dtl> list = getArticle(code);
+            // Nueva linea de pedido
+            Order_Dtl newLineOrder = ((List<Order_Dtl>)HttpContext.Current.Session[_nSNewOrdrLine]).FirstOrDefault();
+            newLineOrder._premio = "S";
+            newLineOrder._premId = PremId;
+            newLineOrder._size = size;
+
+            return addArticlePremio(newLineOrder, qty, varTipoPago);//, tipoPago);
         }
 
         public static List<Order_Dtl> addArticle(Order_Dtl newLine, int qty, string varTipoPago)//, string tipopago)
@@ -501,7 +598,7 @@ namespace www.aquarella.com.pe.Aquarella.Logistica
             Order_Dtl resultLine;
 
             if (orderLines != null)
-                resultLine = orderLines.Where(x => x._code.Equals(newLine._code) && x._size.Equals(newLine._size)).FirstOrDefault();
+                resultLine = orderLines.Where(x => x._code.Equals(newLine._code) && x._size.Equals(newLine._size) && x._premio.Equals(newLine._premio)).FirstOrDefault();
             else
                 resultLine = new Order_Dtl();
 
@@ -515,13 +612,13 @@ namespace www.aquarella.com.pe.Aquarella.Logistica
                     resultLine._commissionPctg = commPercent;
                     resultLine._commissionDesc = resultLine._commission.ToString(_currency);
                     int num = 1;
-
-                    if (varTipoPago == "008")
+                  
+                    if (varTipoPago == "008" || resultLine._premio=="S")
                     {
                         resultLine._commissionPctg = 0m;
                         resultLine._commissionDesc = "0.00";
                         resultLine._commission = 0;
-                        newLine._dscto = 0;
+                        resultLine._dscto = 0;
                         //num = 0;
                     }
                     //  resultLine._dsctoDesc = newLine._commission.ToString(_currency);
@@ -529,7 +626,16 @@ namespace www.aquarella.com.pe.Aquarella.Logistica
                     //resultLine._commissionigvDesc = resultLine._commissionigv.ToString(_currency);
                     resultLine._lineTotal = Math.Round((resultLine._price * newQty) - (resultLine._dscto * newQty) - resultLine._commission, 2, MidpointRounding.AwayFromZero);
                     resultLine._lineTotDesc = (num*((resultLine._price * newQty) - (resultLine._dscto * newQty) - resultLine._commission)).ToString(_currency);
-                   // resultLine._lineTotDesc = ((resultLine._priceigv * newQty) - (resultLine._dscto * newQty) - resultLine._commissionigv).ToString(_currency);
+                    // resultLine._lineTotDesc = ((resultLine._priceigv * newQty) - (resultLine._dscto * newQty) - resultLine._commissionigv).ToString(_currency);
+                    if (resultLine._premio == "S")
+                    {
+                        resultLine._price = 0m;
+                        resultLine._lineTotal = 0m;
+                        resultLine._lineTotDesc = "0.00";
+                        resultLine._priceDesc = "0.00";
+                        resultLine._priceigvDesc = "0.00";
+
+                    }
                     orderLines.Add(resultLine);
                 }
             }
@@ -546,7 +652,7 @@ namespace www.aquarella.com.pe.Aquarella.Logistica
 
                 //newLine._dsctoDesc = (((newLine._price * qty) - newLine._commission)*((newLine._ofe_porc/100))).ToString(_currency);
                 int num2 = 1;
-                if (varTipoPago == "008")
+                if (varTipoPago == "008" || newLine._premio == "S")
                 {
                     newLine._commissionPctg = 0m;
                     newLine._commissionDesc = "0.00";
@@ -558,9 +664,74 @@ namespace www.aquarella.com.pe.Aquarella.Logistica
                 newLine._lineTotal = Math.Round((newLine._price * qty) - (newLine._dscto * qty) - newLine._commission, 2, MidpointRounding.AwayFromZero);
                 newLine._lineTotDesc = (num2*((newLine._price * qty) - (newLine._dscto * qty) - newLine._commission)).ToString(_currency);
                 //newLine._lineTotDesc = ((newLine._priceigv * qty) - (newLine._dscto * qty) - newLine._commissionigv).ToString(_currency);
+
+                if (newLine._premio == "S")
+                {
+                    newLine._price = 0m;
+                    newLine._lineTotal = 0m;
+                    newLine._lineTotDesc = "0.00";
+                    newLine._priceDesc = "0.00";
+                    newLine._priceigvDesc = "0.00";
+
+                }
                 orderLines.Add(newLine);
             }
 
+            return orderLines;
+        }
+
+        public static List<Order_Dtl> addArticlePremio(Order_Dtl newLine, int qty, string varTipoPago)//, string tipopago)
+        {
+            decimal commPercent;
+            //decimal ofertporcentaje;
+            //decimal ofertamaxpares;
+            Coordinator cust = (Coordinator)HttpContext.Current.Session[_nameSessionCustomer];
+
+
+            cust._vartipopago = varTipoPago;
+
+            if (varTipoPago == varIdOperacionPOS)
+            {
+                commPercent = cust._commission_POS_visaUnica / 100;
+            }
+            else
+            {
+                commPercent = cust._commission / 100;
+            }
+
+
+            if (newLine._ap_percepcion == "0")
+            {
+                commPercent = 0;
+            }
+            
+            List<Order_Dtl> orderLines = (List<Order_Dtl>)(((object)HttpContext.Current.Session[_nSOrder]) != null ? (object)HttpContext.Current.Session[_nSOrder] : new List<Order_Dtl>()); ;
+
+                newLine._qty = qty;
+                newLine._commission = Math.Round((((newLine._price * qty) - (newLine._dscto * qty)) * commPercent) * newLine._comm, 2, MidpointRounding.AwayFromZero);
+                newLine._commissionDesc = newLine._commission.ToString(_currency);
+                //newLine._commissionigv = Math.Round((((newLine._priceigv * qty) - (newLine._dscto * qty)) * commPercent) * newLine._comm, 2, MidpointRounding.AwayFromZero);
+                //newLine._commissionigvDesc = newLine._commissionigv.ToString(_currency);
+                newLine._commissionPctg = commPercent;
+            
+                newLine._commissionPctg = 0m;
+                newLine._commissionDesc = "0.00";
+                newLine._commission = 0;
+                newLine._dscto = 0;
+                   
+                newLine._lineTotal = Math.Round((newLine._price * qty) - (newLine._dscto * qty) - newLine._commission, 2, MidpointRounding.AwayFromZero);
+                newLine._lineTotDesc = (1 * ((newLine._price * qty) - (newLine._dscto * qty) - newLine._commission)).ToString(_currency);
+                //newLine._lineTotDesc = ((newLine._priceigv * qty) - (newLine._dscto * qty) - newLine._commissionigv).ToString(_currency);
+
+                newLine._price = 0m;
+                newLine._lineTotal = 0m;
+                newLine._lineTotDesc = "0.00";
+                newLine._priceDesc = "0.00";
+                newLine._priceigvDesc = "0.00";
+            
+                orderLines.Add(newLine);
+
+            HttpContext.Current.Session[_nSOrder] = orderLines;
             return orderLines;
         }
 
@@ -572,6 +743,35 @@ namespace www.aquarella.com.pe.Aquarella.Logistica
         /// <param name="qty"></param>
         /// <returns></returns>
         /// 
+
+        [WebMethod()]
+        public static List<Order_Dtl> fupdateitemPremio()
+        {
+            List<Order_Dtl> orderLines = (List<Order_Dtl>)(((object)HttpContext.Current.Session[_nSOrder]) != null ? (object)HttpContext.Current.Session[_nSOrder] : new List<Order_Dtl>()); ;
+            try
+            {
+                Order_Dtl resultLine;
+                resultLine = orderLines.Where(x => x._premio.Equals("S")).FirstOrDefault();
+
+                if (resultLine != null)
+                {                    
+                    orderLines.Where(x => x._premio.Equals("S")).FirstOrDefault()._commission = 0;
+                    orderLines.Where(x => x._premio.Equals("S")).FirstOrDefault()._commissionigv = 0;
+                    orderLines.Where(x => x._premio.Equals("S")).FirstOrDefault()._commissionPctg = 0;
+                    orderLines.Where(x => x._premio.Equals("S")).FirstOrDefault()._price = 0;
+                    orderLines.Where(x => x._premio.Equals("S")).FirstOrDefault()._priceigv = 0;
+                    orderLines.Where(x => x._premio.Equals("S")).FirstOrDefault()._commissionDesc = "0";
+                    orderLines.Where(x => x._premio.Equals("S")).FirstOrDefault()._lineTotal = 0;
+                    orderLines.Where(x => x._premio.Equals("S")).FirstOrDefault()._lineTotDesc = "=";
+
+                }
+                HttpContext.Current.Session[_nSOrder] = orderLines;         
+
+            }
+            catch { }
+            return (List<Order_Dtl>)HttpContext.Current.Session[_nSOrder];
+
+        }
 
         [WebMethod()]
         public static List<Order_Dtl> fupdateitemoferta()
@@ -800,44 +1000,46 @@ namespace www.aquarella.com.pe.Aquarella.Logistica
                 Order_Dtl resultLine;
 
                 if (orderLines != null)
-                    resultLine = orderLines.Where(x => x._code.Equals(code) && x._size.Equals(size)).FirstOrDefault();
+                    resultLine = orderLines.Where(x => x._code.Equals(code) && x._size.Equals(size) && x._premio.Equals("N")).FirstOrDefault();
                 else
                     resultLine = new Order_Dtl();
 
                 if (resultLine != null)
                 {
-                    // Nuevos calculos
-                    resultLine._commission = Math.Round((((resultLine._price * qty) /*- (resultLine._dscto * qty)*/) * commPercent) * resultLine._comm,2,MidpointRounding.AwayFromZero);
-                    resultLine._commissionigv = (((resultLine._priceigv * qty) /*- (resultLine._dscto * qty)*/) * commPercent) * resultLine._comm;
-                    resultLine._commissionPctg = commPercent;
-                    resultLine._commissionDesc = resultLine._commission.ToString(_currency);
+                    
+                        // Nuevos calculos
+                        resultLine._commission = Math.Round((((resultLine._price * qty) /*- (resultLine._dscto * qty)*/) * commPercent) * resultLine._comm,2,MidpointRounding.AwayFromZero);
+                        resultLine._commissionigv = (((resultLine._priceigv * qty) /*- (resultLine._dscto * qty)*/) * commPercent) * resultLine._comm;
+                        resultLine._commissionPctg = commPercent;
+                        resultLine._commissionDesc = resultLine._commission.ToString(_currency);
                
-                    if (cust._vartipopago == "008")
-                    {
-                        resultLine._commissionPctg = 0m;
-                        resultLine._commissionDesc = "0.00";
-                        resultLine._commission = 0;
-                        resultLine._dscto = 0;
-                        resultLine._dsctoDesc = "0.00";
+                        if (cust._vartipopago == "008")
+                        {
+                            resultLine._commissionPctg = 0m;
+                            resultLine._commissionDesc = "0.00";
+                            resultLine._commission = 0;
+                            resultLine._dscto = 0;
+                            resultLine._dsctoDesc = "0.00";
 
 
-                    }
+                        }
 
-                    resultLine._lineTotal = Math.Round((resultLine._price * qty) - (resultLine._dscto * qty) - resultLine._commission,2,MidpointRounding.AwayFromZero);
-                    resultLine._lineTotDesc = (((resultLine._price * qty) - (resultLine._dscto * qty) - resultLine._commission)).ToString(_currency);
-                    //resultLine._lineTotDesc = ((resultLine._priceigv * qty) - (resultLine._dscto * qty) - resultLine._commissionigv).ToString(_currency);
+                        resultLine._lineTotal = Math.Round((resultLine._price * qty) - (resultLine._dscto * qty) - resultLine._commission,2,MidpointRounding.AwayFromZero);
+                        resultLine._lineTotDesc = (((resultLine._price * qty) - (resultLine._dscto * qty) - resultLine._commission)).ToString(_currency);
+                        //resultLine._lineTotDesc = ((resultLine._priceigv * qty) - (resultLine._dscto * qty) - resultLine._commissionigv).ToString(_currency);
 
-                    // Update
-                    orderLines.Where(x => x._code.Equals(code) && x._size.Equals(size)).FirstOrDefault()._qty = qty;
-                    orderLines.Where(x => x._code.Equals(code) && x._size.Equals(size)).FirstOrDefault()._commission = resultLine._commission;
-                    orderLines.Where(x => x._code.Equals(code) && x._size.Equals(size)).FirstOrDefault()._commissionigv = resultLine._commissionigv;
-                    orderLines.Where(x => x._code.Equals(code) && x._size.Equals(size)).FirstOrDefault()._commissionPctg = resultLine._commissionPctg;
-                    orderLines.Where(x => x._code.Equals(code) && x._size.Equals(size)).FirstOrDefault()._commissionDesc = resultLine._commission.ToString(_currency);
-                    //orderLines.Where(x => x._code.Equals(code) && x._size.Equals(size)).FirstOrDefault()._commissionigvDesc = resultLine._commissionigv.ToString(_currency);
-                    orderLines.Where(x => x._code.Equals(code) && x._size.Equals(size)).FirstOrDefault()._lineTotal = resultLine._lineTotal;
-                    orderLines.Where(x => x._code.Equals(code) && x._size.Equals(size)).FirstOrDefault()._lineTotDesc = resultLine._lineTotDesc;
+                        // Update
+                        orderLines.Where(x => x._code.Equals(code) && x._size.Equals(size)).FirstOrDefault()._qty = qty;
+                        orderLines.Where(x => x._code.Equals(code) && x._size.Equals(size)).FirstOrDefault()._commission = resultLine._commission;
+                        orderLines.Where(x => x._code.Equals(code) && x._size.Equals(size)).FirstOrDefault()._commissionigv = resultLine._commissionigv;
+                        orderLines.Where(x => x._code.Equals(code) && x._size.Equals(size)).FirstOrDefault()._commissionPctg = resultLine._commissionPctg;
+                        orderLines.Where(x => x._code.Equals(code) && x._size.Equals(size)).FirstOrDefault()._commissionDesc = resultLine._commission.ToString(_currency);
+                        //orderLines.Where(x => x._code.Equals(code) && x._size.Equals(size)).FirstOrDefault()._commissionigvDesc = resultLine._commissionigv.ToString(_currency);
+                        orderLines.Where(x => x._code.Equals(code) && x._size.Equals(size)).FirstOrDefault()._lineTotal = resultLine._lineTotal;
+                        orderLines.Where(x => x._code.Equals(code) && x._size.Equals(size)).FirstOrDefault()._lineTotDesc = resultLine._lineTotDesc;
 
-                    HttpContext.Current.Session[_nSOrder] = orderLines;
+                        HttpContext.Current.Session[_nSOrder] = orderLines;
+                    
                 }
             }
             catch { }
@@ -858,7 +1060,7 @@ namespace www.aquarella.com.pe.Aquarella.Logistica
             List<Order_Dtl> order = (List<Order_Dtl>)HttpContext.Current.Session[_nSOrder];
 
             //
-            Order_Dtl resultLine = order.Where(x => x._code.Equals(code) && x._size.Equals(size)).FirstOrDefault();
+            Order_Dtl resultLine = order.Where(x => x._code.Equals(code) && x._size.Equals(size)&& x._premio.Equals("N")).FirstOrDefault();
 
             // Delete line
             if (resultLine != null)
@@ -1189,7 +1391,8 @@ namespace www.aquarella.com.pe.Aquarella.Logistica
                 orderHdr = new Order_Hdr
                 {
                     _namecompleto = cust._nombrecompleto,
-                    _estadoliqui=_vestadoliquid,
+                    _premio = cust._premio,
+                    _estadoliqui =_vestadoliquid,
                     _estadoboton=_vestadoboton
                 };
             }
@@ -3162,6 +3365,8 @@ namespace www.aquarella.com.pe.Aquarella.Logistica
                         Order_Dtl_Temp item = new Order_Dtl_Temp();
                         item.items = item_temp;
                         item.articulo = fila._code;
+                        item.premio = fila._premio;
+                        item.premId = fila._premId;
                         item.talla = fila._size;
                         item.cantidad = fila._qty;
 

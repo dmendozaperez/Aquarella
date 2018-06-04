@@ -739,6 +739,7 @@ namespace www.aquarella.com.pe.bll
                 dt.Columns.Add("Ped_Det_OfertaP", typeof(decimal));
                 dt.Columns.Add("Ped_Det_OfertaM", typeof(decimal));
                 dt.Columns.Add("Ped_Det_OfeID", typeof(decimal));
+                dt.Columns.Add("Ped_Det_PremID", typeof(Int32)); 
 
                 int i = 1;
                 // Recorrer todas las lineas adicionAQUARELLAs al detalle
@@ -747,7 +748,7 @@ namespace www.aquarella.com.pe.bll
                 {
                     foreach (Order_Dtl item in _itemsDetail)
                     {
-                        dt.Rows.Add(_ped_id, i, item._code, item._size, item._qty, 0, item._price, item._commissionPctg, Math.Round(item._commission,2,MidpointRounding.AwayFromZero),item._ofe_porc,item._dscto,item._ofe_id);
+                        dt.Rows.Add(_ped_id, i, item._code, item._size, item._qty, 0, item._price, item._commissionPctg, Math.Round(item._commission,2,MidpointRounding.AwayFromZero),item._ofe_porc,item._dscto,item._ofe_id,Convert.ToInt32(item._premId));
                         i++;
                     }
                 }

@@ -274,6 +274,8 @@ function valFieldsAddItem() {
     if (bValid) {
         //ddArticle($dwSizes.val(), $qty.val(), $('select[id$=ddlTipoPago] :selected').val());
         addArticle($dwSizes.val(), $qty.val(), $("[id$='h_numTipPago']").val());
+        /*Verificamos para agregar premio*/
+        VerificarPremio();
     }
 }
 
@@ -314,6 +316,12 @@ function showLoad(isShow, mges, showAdded) {
         }, 1000);
     }
 }
+function fupdateitemPremio() {
+    var urlMethod = "ordersForm.aspx/fupdateitemPremio";
+    var jsonData = '{}';
+    SendAjax(urlMethod, jsonData, renderTableInit);
+}
+
 function fupdateitemoferta() {
     var urlMethod = "ordersForm.aspx/fupdateitemoferta";
     var jsonData = '{}';
@@ -491,8 +499,52 @@ function addArticle(size, qty, TipoPago) {
     SendAjax(urlMethod, jsonData, renderTableInit);  //addArticlesTable);   
     cleanForm();
     /*en esta opcion vamos a ver si hay ofertas*/
-    fupdateitemoferta();
+    fupdateitemoferta();0
     /**********/
+}
+
+//4. Adiciona un articulo PREMIO al detalle de pedido
+function addArticlePremio(codigo, size, qty, TipoPago, premId) {
+    //Ajax
+    $msgeGlobal = 'El artículo ha sido adicionado a su pedido.';
+    //var strtipoPago = $dwpago.val();
+    //$("[id$='h_numTipPago']").val(strtipoPago);
+    var urlMethod = "ordersForm.aspx/addArticlePremio";
+    var jsonData = '{size:"' + size + '",  code:' + codigo + ' , qty:' + qty + ' , PremId:"' + premId + '", varTipoPago:"' + TipoPago + '"}';//,tipoPago:"' + strtipoPago + '"}';
+    SendAjax(urlMethod, jsonData, renderTableInit);  //addArticlesTable);   
+    cleanForm();
+    /*en esta opcion vamos a ver si hay ofertas*/
+    //fupdateitemPremio(); 
+    /**********/
+}
+function VerificarPremio() {
+    
+    var urlMethod = "ordersForm.aspx/verificarPremio";
+    var jsonData = '{}';
+    SendAjax(urlMethod, jsonData, invocarAddArticulo);
+
+}
+
+function invocarAddArticulo(msg) {
+        
+    var Premtalla = "";
+    var premId = "";
+    var strcodigo = "";
+    var strtalla = "";
+    $.each(msg.d, function (key, val) {
+
+        strcodigo = val.articulo;
+        strtalla = val.talla;
+        premId = val.premId;
+        return false;
+    });
+
+    if (premId != "") {
+        //getArticle(strcodigo);
+        addArticlePremio(strcodigo, strtalla, '1', $("[id$='h_numTipPago']").val(), premId);
+        cleanForm();
+    }
+
 }
 
 //Eliminar un item adicionado
@@ -503,246 +555,262 @@ function deleteArticle(code, size) {
     var jsonData = '{code:"' + code + '", size:"' + size + '"}';
     SendAjax(urlMethod, jsonData, renderTableInit);  //addArticlesTable);
     cleanForm();
+    deletePremio();
     /*en esta opcion vamos a refrescar*/
     fupdateitemoferta();
 }
 
-// Consultar el detalle de pedido
-function getOrderDtl() {
-    //Ajax
-    $msgeGlobal = 'Cargando su pedido.';
-    var urlMethod = "ordersForm.aspx/getOrderDtl";
+function deletePremio() {
+    $msgeGlobal = 'El artículo ha sido ELIMINADO de su pedido.';
+    var urlMethod = "ordersForm.aspx/deletePremio";
     var jsonData = '{}';
     SendAjax(urlMethod, jsonData, renderTableInit);  //addArticlesTable);
-}
-
-// Actualizar cantidades de un item adicionado al pedido
-function updateItemQtys(code, size, qty) {
-    //Ajax
-    $msgeGlobal = 'Actualizando.';
-    var urlMethod = "ordersForm.aspx/updateItem";
-    var jsonData = '{code:"' + code + '", size:"' + size + '", qty:' + qty + '}';
-    SendAjax(urlMethod, jsonData, renderTableInit);
-
     cleanForm();
-    /*en esta opcion vamos a refrescar*/
-    fupdateitemoferta();
 }
 
-// Calculo de totales
-function getTotals() {
+    // Consultar el detalle de pedido
+    function getOrderDtl() {
+        //Ajax
+        $msgeGlobal = 'Cargando su pedido.';
+        var urlMethod = "ordersForm.aspx/getOrderDtl";
+        var jsonData = '{}';
+        SendAjax(urlMethod, jsonData, renderTableInit);  //addArticlesTable);
+    }
+
+    // Actualizar cantidades de un item adicionado al pedido
+    function updateItemQtys(code, size, qty) {
+        //Ajax
+        $msgeGlobal = 'Actualizando.';
+        var urlMethod = "ordersForm.aspx/updateItem";
+        var jsonData = '{code:"' + code + '", size:"' + size + '", qty:' + qty + '}';
+        SendAjax(urlMethod, jsonData, renderTableInit);
+
+        cleanForm();
+        /*en esta opcion vamos a refrescar*/
+        fupdateitemoferta();
+    }
+
+    // Calculo de totales
+    function getTotals() {
  
 
-    //Ajax
-    var urlMethod = "ordersForm.aspx/getTotals";
-    var jsonData = '{}';
-    SendAjax(urlMethod, jsonData, showTotals);
-}
-
-//pintar promotor y estado
-function getproestado() {
-    //Ajax
-    var urlMethod = "ordersForm.aspx/get_promotorestado";
-    var jsonData = '{}';
-    SendAjax(urlMethod, jsonData, showpromoesta); 
-}
-
-// Consulta de stock disponible de un item adicionado al pedido
-function getStockArticleNoDialog(art, artSize, artQty, ctrlImgStock) {
-    //Ajax
-    var urlMethod = "ordersForm.aspx/getItemIconStock";
-    var jsonData = "{ article: '" + art + "', size : '" + artSize + "',qty : " + artQty + ",ctrlImgStock:'" + ctrlImgStock + "'}";
-    SendAjax(urlMethod, jsonData, iconStock);
-}
-
-// Consulta y muestra informacion del stock de un articulo en un dialog
-function getStockArticle(art, artSize, artQty, ctrlImgStock) {
-    //Ajax
-    var urlMethod = "ordersForm.aspx/getArticleStock";
-    var jsonData = "{ article: '" + art + "', size : '" + artSize + "',qty : " + artQty + ",ctrlImgStock:'" + ctrlImgStock + "'}";
-    $("#dialog-InfoStock").dialog({ width: 700,
-        height: 450,
-        title: 'Información de Stock disponible y artículos sugeridos',
-        modal: true,
-        position: 'center',
-        open: function (event, ui) {
-            // Loading.. image
-            $("#content_div").html('<img src="../../Design/images/ajax_loader_face.gif" />');
-            SendAjax(urlMethod, jsonData, infoStock);
-        },
-        buttons: {
-            "Aceptar": function () {
-                $(this).dialog("close");
-            }
-        }
-    });
-}
-
-// 
-function infoStock(msg) {
-    var val = msg.d;
-    $("#content_div").html(val._tableHtml);
-    // Scale Object Image
-    $("#imgArtDesc").cjObjectScaler({
-        method: "fit",
-        fade: 550
-    });
-    $("#" + val._ctrlImgStock).attr("src", val._iconStock);
-}
-
-function iconStock(msg) {
-    var val = msg.d;
-    $("#" + val._ctrlImgStock).attr("src", val._iconStock);
-}
-
-// Impresion de estado
-function showpromoesta(msg){
-    var val = msg.d;
-    $('#lblpromotor').html(val._namecompleto);
-    $('#lblestado').html(val._estadoliqui);
-
-    if (val._estadoboton > 0) {
-        $('[id$=btSaveExit]').attr('disabled', 'true');
-        $('[id$=btSave]').attr('disabled', 'true');
-        $("#btCreateLiquidation").hide();
-        $("#btsaveorderexit").attr("disabled", "disabled");
-        $("#btsaveorder").attr("disabled", "disabled");
+        //Ajax
+        var urlMethod = "ordersForm.aspx/getTotals";
+        var jsonData = '{}';
+        SendAjax(urlMethod, jsonData, showTotals);
     }
-    else {
-        $("#btmodiliquidacion").hide();
+
+    //pintar promotor y estado
+    function getproestado() {
+        //Ajax
+        var urlMethod = "ordersForm.aspx/get_promotorestado";
+        var jsonData = '{}';
+        SendAjax(urlMethod, jsonData, showpromoesta); 
     }
-}
 
+    // Consulta de stock disponible de un item adicionado al pedido
+    function getStockArticleNoDialog(art, artSize, artQty, ctrlImgStock) {
+        //Ajax
+        var urlMethod = "ordersForm.aspx/getItemIconStock";
+        var jsonData = "{ article: '" + art + "', size : '" + artSize + "',qty : " + artQty + ",ctrlImgStock:'" + ctrlImgStock + "'}";
+        SendAjax(urlMethod, jsonData, iconStock);
+    }
 
-function showTotals(msg) {
-    var val = msg.d;
-
-    alert(val._subTotalDesc)
-    
-    $('#lblTotQty').html(val._qtys);
-    $('#lblGrandTotal').html(val._grandTotalDesc);
-    $('#lblSubTotal').html(val._subTotalDesc);
-    $('#lblTaxes').html(val._taxesDesc);
-    $('#lblpercepcion').html(val._percepciondesc);
-    $('#lblmtopercepcion').html(val._mtopercepciondesc);
-    $('#lblnc').html(val._mtoncreditodesc);
-    $("input[id$='txtValue']").val(val._mtopercepcion).val();
-    //$subTotal.text(val._subTotalDesc);
-}
-
-// Impresion de informacion de articulo
-function showArticle(msg) {
-    $.each(msg.d, function (key, val) {
-        var idRow = "row_" + i;
-        $art.html(val._artName);
-        $brand.html(val._brand);
-        $color.html(val._color);
-        $majC.html(val._majorCat + '> ' + val._cat);
-        if (val._originDesc != null && val._originDesc != '')
-            $origin.html('*' + val._originDesc);
-        else
-            $origin.html('');
-        $price.html(val._priceDesc);
-        //$price.html(val._priceigvDesc);
-        // Dissccounts
-        if (val._dscto > 0) {
-            //
-            if (val._dsctoPerc > 0) {
-                //
-                $descDesc.html('Descuento:');
-                $descDescVal.html((val._dsctoPerc * 100).toString() + '%');
+    // Consulta y muestra informacion del stock de un articulo en un dialog
+    function getStockArticle(art, artSize, artQty, ctrlImgStock) {
+        //Ajax
+        var urlMethod = "ordersForm.aspx/getArticleStock";
+        var jsonData = "{ article: '" + art + "', size : '" + artSize + "',qty : " + artQty + ",ctrlImgStock:'" + ctrlImgStock + "'}";
+        $("#dialog-InfoStock").dialog({ width: 700,
+            height: 450,
+            title: 'Información de Stock disponible y artículos sugeridos',
+            modal: true,
+            position: 'center',
+            open: function (event, ui) {
+                // Loading.. image
+                $("#content_div").html('<img src="../../Design/images/ajax_loader_face.gif" />');
+                SendAjax(urlMethod, jsonData, infoStock);
+            },
+            buttons: {
+                "Aceptar": function () {
+                    $(this).dialog("close");
+                }
             }
-            else {
-                $descDesc.html('Ahora:');
-                $descDescVal.html(val._dsctoValeDesc);
-                $price.css('text-decoration', 'line-through');
-            }
-        }
-        var src = val._uriPhoto; ///$photo.attr("src").match(/[^\.]+/) + val._uriPhoto;     
-
-        var srcBrand = val._brandImg;
-        $photo.error(function () {
-            if (srcBrand != '')
-                $photo.attr("src", srcBrand);
-        }).attr("src", src);
-
-        // Scale Image
-//        $photo.cjObjectScaler({
-//            method: "fit",
-//            fade: 550
-//        });
-
-    });
-    // Ajax for sizes
-    getArticleSizes();
-}
-
-//comprobacion de url
-
-
-
-
-// Creacion de un select con las tallas del articulo
-function loadDwSizes(msg) {
-    var dwitems = '';
-    $dwSizes.html('');
-    dwitems += "<option value=''>Seleccione la talla</option>";
-    $.each(msg.d, function (key, val) {
-        dwitems += "<option value='"
-                + val._size
-                + "'>"
-                + val._size_des
-                + "</option>";
-    });
-    afterLoad();
-    $dwSizes.html(dwitems);
-    $dwSizes.focus();
-    showLoad(false, '', false);
-}
-
-// GRID
-//
-function buildGrid() {
-    SendAjax('ordersForm.aspx/getOrderDtl', '', renderTable);
-}
-
-function renderTableInit(msg) {
-    $("#list4").jqGrid('clearGridData');
-    $.each(msg.d, function (key, val) {
-        var idImg = "imgStock_" + i;
-        var imgCellSt = '<img id="' + idImg + '" src="../../Design/images/Botones/b_info.png" onclick=\'javascript:getStockArticle("' + val._code + '","' + val._size + '",' + val._qty + ',"' + idImg + '")\'/>';
-        var imgCellDel = '<img src="../../Design/images/Botones/delete_off.png" onclick=\'javascript:deleteRow("' + i + '","' + val._code + '","' + val._size + '")\' style="padding:0 3px 0 3px;"/>';
-        jQuery("#list4").jqGrid('addRowData', i + 1, { _code: val._code,
-            _artName: val._artName,
-            _brand: val._brand,
-            _color: val._color,
-            _size: val._size,
-            _qty: val._qty,
-            _priceDesc: val._priceDesc,
-            _commissionDesc: val._commissionDesc,
-            _dsctoDesc: val._dsctoDesc,
-            _lineTotDesc: val._lineTotDesc,
-            _imgSt: imgCellSt,
-            _imgDel: imgCellDel
         });
-        getStockArticleNoDialog(val._code, val._size, val._qty, idImg);
-        i = i + 1;
-    });
+    }
 
-    getTotals();
-}
+    // 
+    function infoStock(msg) {
+        var val = msg.d;
+        $("#content_div").html(val._tableHtml);
+        // Scale Object Image
+        $("#imgArtDesc").cjObjectScaler({
+            method: "fit",
+            fade: 550
+        });
+        $("#" + val._ctrlImgStock).attr("src", val._iconStock);
+    }
 
-function renderTable(msg) {
-    var i = 1;
-    /*Habilita la edicion del campo de cantidades a nivel local, y luego pasa por Ajax */
-    var lastSel,
-            onclickSubmitLocal = function (options, postdata) {
-                var $this = $(this), grid_p = this.p,
-            idname = grid_p.prmNames.id,
-            grid_id = this.id,
-            id_in_postdata = grid_id + "_id",
-            rowid = postdata[id_in_postdata],
-            addMode = rowid === "_empty"; /*
+    function iconStock(msg) {
+        var val = msg.d;
+        $("#" + val._ctrlImgStock).attr("src", val._iconStock);
+    }
+
+    // Impresion de estado
+    function showpromoesta(msg){
+        var val = msg.d;
+        $('#lblpromotor').html(val._namecompleto);
+        $('#lblestado').html(val._estadoliqui);
+        $('#lblPremio').html(val._premio);
+
+        if (val._estadoboton > 0) {
+            $('[id$=btSaveExit]').attr('disabled', 'true');
+            $('[id$=btSave]').attr('disabled', 'true');
+            $("#btCreateLiquidation").hide();
+            $("#btsaveorderexit").attr("disabled", "disabled");
+            $("#btsaveorder").attr("disabled", "disabled");
+        }
+        else {
+            $("#btmodiliquidacion").hide();
+        }
+    }
+
+
+    function showTotals(msg) {
+        var val = msg.d;
+
+        alert(val._subTotalDesc)
+    
+        $('#lblTotQty').html(val._qtys);
+        $('#lblGrandTotal').html(val._grandTotalDesc);
+        $('#lblSubTotal').html(val._subTotalDesc);
+        $('#lblTaxes').html(val._taxesDesc);
+        $('#lblpercepcion').html(val._percepciondesc);
+        $('#lblmtopercepcion').html(val._mtopercepciondesc);
+        $('#lblnc').html(val._mtoncreditodesc);
+        $("input[id$='txtValue']").val(val._mtopercepcion).val();
+        //$subTotal.text(val._subTotalDesc);
+    }
+
+    // Impresion de informacion de articulo
+    function showArticle(msg) {
+        $.each(msg.d, function (key, val) {
+            var idRow = "row_" + i;
+            $art.html(val._artName);
+            $brand.html(val._brand);
+            $color.html(val._color);
+            $majC.html(val._majorCat + '> ' + val._cat);
+            if (val._originDesc != null && val._originDesc != '')
+                $origin.html('*' + val._originDesc);
+            else
+                $origin.html('');
+            $price.html(val._priceDesc);
+            //$price.html(val._priceigvDesc);
+            // Dissccounts
+            if (val._dscto > 0) {
+                //
+                if (val._dsctoPerc > 0) {
+                    //
+                    $descDesc.html('Descuento:');
+                    $descDescVal.html((val._dsctoPerc * 100).toString() + '%');
+                }
+                else {
+                    $descDesc.html('Ahora:');
+                    $descDescVal.html(val._dsctoValeDesc);
+                    $price.css('text-decoration', 'line-through');
+                }
+            }
+            var src = val._uriPhoto; ///$photo.attr("src").match(/[^\.]+/) + val._uriPhoto;     
+
+            var srcBrand = val._brandImg;
+            $photo.error(function () {
+                if (srcBrand != '')
+                    $photo.attr("src", srcBrand);
+            }).attr("src", src);
+
+            // Scale Image
+            //        $photo.cjObjectScaler({
+            //            method: "fit",
+            //            fade: 550
+            //        });
+
+        });
+        // Ajax for sizes
+        getArticleSizes();
+    }
+
+    //comprobacion de url
+
+
+
+
+    // Creacion de un select con las tallas del articulo
+    function loadDwSizes(msg) {
+        var dwitems = '';
+        $dwSizes.html('');
+        dwitems += "<option value=''>Seleccione la talla</option>";
+        $.each(msg.d, function (key, val) {
+            dwitems += "<option value='"
+                    + val._size
+                    + "'>"
+                    + val._size_des
+                    + "</option>";
+        });
+        afterLoad();
+        $dwSizes.html(dwitems);
+        $dwSizes.focus();
+        showLoad(false, '', false);
+    }
+
+    // GRID
+    //
+    function buildGrid() {
+        SendAjax('ordersForm.aspx/getOrderDtl', '', renderTable);
+    }
+
+    function renderTableInit(msg) {
+        $("#list4").jqGrid('clearGridData');
+        $.each(msg.d, function (key, val) {
+            var idImg = "imgStock_" + i;
+            var imgCellSt = '<img id="' + idImg + '" src="../../Design/images/Botones/b_info.png" onclick=\'javascript:getStockArticle("' + val._code + '","' + val._size + '",' + val._qty + ',"' + idImg + '")\'/>';
+            var imgCellDel = '<img src="../../Design/images/Botones/delete_off.png" onclick=\'javascript:deleteRow("' + i + '","' + val._code + '","' + val._size + '")\' style="padding:0 3px 0 3px;"/>';
+            if (val._premio == "S") {
+                console.log('hola')
+                imgCellDel = '';
+            }
+
+            jQuery("#list4").jqGrid('addRowData', i + 1, { _code: val._code,
+                _artName: val._artName,
+                _brand: val._brand,
+                _color: val._color,
+                _size: val._size,
+                _qty: val._qty,
+                _priceDesc: val._priceDesc,
+                _commissionDesc: val._commissionDesc,
+                _dsctoDesc: val._dsctoDesc,
+                _lineTotDesc: val._lineTotDesc,
+                _imgSt: imgCellSt,
+                _imgDel: imgCellDel,
+                _premio: val._premio
+            });
+            getStockArticleNoDialog(val._code, val._size, val._qty, idImg);
+            i = i + 1;
+        });
+
+        getTotals();
+    }
+
+    function renderTable(msg) {
+        var i = 1;
+        /*Habilita la edicion del campo de cantidades a nivel local, y luego pasa por Ajax */
+        var lastSel,
+                onclickSubmitLocal = function (options, postdata) {
+                    var $this = $(this), grid_p = this.p,
+                idname = grid_p.prmNames.id,
+                grid_id = this.id,
+                id_in_postdata = grid_id + "_id",
+                rowid = postdata[id_in_postdata],
+                addMode = rowid === "_empty"; /*
             oldValueOfSortColumn,
             new_id,
             tr_par_id,
@@ -750,62 +818,102 @@ function renderTable(msg) {
             cmName,
             iCol,
             cm;*/
-                $this.jqGrid("setRowData", rowid, postdata);
-                updateItemQtys(postdata._code, postdata._size, parseInt(postdata._qty));
-                if ((addMode && options.closeAfterAdd) || (!addMode && options.closeAfterEdit)) {
-                    // close the edit/add dialog
-                    $.jgrid.hideModal("#editmod" + grid_id, {
-                        gb: "#gbox_" + grid_id,
-                        jqm: options.jqModal,
-                        onClose: options.onClose
-                    });
-                }
-                options.processing = true;
-                return {};
-            },
-            editSettings = {
-                //recreateForm: true,
-                jqModal: false,
-                reloadAfterSubmit: false,
-                closeOnEscape: true,
-                savekey: [true, 13],
-                closeAfterEdit: true,
-                onclickSubmit: onclickSubmitLocal
-            };
+                    $this.jqGrid("setRowData", rowid, postdata);
+                    updateItemQtys(postdata._code, postdata._size, parseInt(postdata._qty));
+                    if ((addMode && options.closeAfterAdd) || (!addMode && options.closeAfterEdit)) {
+                        // close the edit/add dialog
+                        $.jgrid.hideModal("#editmod" + grid_id, {
+                            gb: "#gbox_" + grid_id,
+                            jqm: options.jqModal,
+                            onClose: options.onClose
+                        });
+                    }
+                    options.processing = true;
+                    return {};
+                },
+                editSettings = {
+                    //recreateForm: true,
+                    jqModal: false,
+                    reloadAfterSubmit: false,
+                    closeOnEscape: true,
+                    savekey: [true, 13],
+                    closeAfterEdit: true,
+                    onclickSubmit: onclickSubmitLocal
+                };
 
-    // Definicion de Grilla
-    jQuery("#list4").jqGrid({
-        datatype: "local", //'JSON'
-        colNames: ['Referencia', 'Articulo', 'Marca', 'Color', 'Talla', 'Cantidades', 'Precio', 'Comisión', 'Descuento', 'Total Linea', '', ''],
-        colModel: [
-   		        { name: '_code', index: '_code', width: 90, editoptions: { readonly: true }, editable: true },
-   		        { name: '_artName', index: '_artName', width: 90, editoptions: { readonly: true }, editable: true },
-   		        { name: '_brand', index: '_brand', width: 100, editoptions: { readonly: true }, editable: true },
-   		        { name: '_color', index: '_color', width: 80, align: "right", editoptions: { readonly: true }, editable: true },
-   		        { name: '_size', index: '_size', width: 50, align: "right", sorttype: "float", editoptions: { readonly: true }, editable: true },
-   		        { name: '_qty', index: '_qty', width: 80, align: "center", sorttype: "float", editable: true, editrules: { number: true, required: true} },
-                { name: '_priceDesc', index: '_priceDesc', width: 80, align: "right" },
-                { name: '_commissionDesc', index: '_commissionDesc', width: 80, align: "right" },
-                { name: '_dsctoDesc', index: '_dsctoDesc', width: 80, align: "right" },
-                { name: '_lineTotDesc', index: '_lineTotDesc', width: 80, align: "right" },
-                { name: '_imgSt', index: '_imgSt', align: "center", width: 30 },
-                { name: '_imgDel', index: '_imgDel', align: "center", width: 30 }
-   	            ],
-        rowNum: 20,
-        pager: '#pager2',
-        //rowList: [10, 20, 30]
-        rownumbers: true,
-        gridview: true,
-        forceFit: true,
-        sortname: '_code',
-        viewrecords: true,
-        sortorder: "desc",
-        autowidth: true,
-        height: 250,
-        caption: "Items Adicionados Al Pedido Borrador",
-        editurl: 'clientArray',
-        cellsubmit: 'clientArray',
-        ondblClickRow: function (rowid, ri, ci) {
+        // Definicion de Grilla
+        jQuery("#list4").jqGrid({
+            datatype: "local", //'JSON'
+            colNames: ['Referencia', 'Articulo', 'Marca', 'Color', 'Talla', 'Cantidades', 'Precio', 'Comisión', 'Descuento', 'Total Linea', '', ''],
+            colModel: [
+                    { name: '_code', index: '_code', width: 90, editoptions: { readonly: true }, editable: true },
+                    { name: '_artName', index: '_artName', width: 90, editoptions: { readonly: true }, editable: true },
+                    { name: '_brand', index: '_brand', width: 100, editoptions: { readonly: true }, editable: true },
+                    { name: '_color', index: '_color', width: 80, align: "right", editoptions: { readonly: true }, editable: true },
+                    { name: '_size', index: '_size', width: 50, align: "right", sorttype: "float", editoptions: { readonly: true }, editable: true },
+                    { name: '_qty', index: '_qty', width: 80, align: "center", sorttype: "float", editable: true, editrules: { number: true, required: true} },
+                    { name: '_priceDesc', index: '_priceDesc', width: 80, align: "right" },
+                    { name: '_commissionDesc', index: '_commissionDesc', width: 80, align: "right" },
+                    { name: '_dsctoDesc', index: '_dsctoDesc', width: 80, align: "right" },
+                    { name: '_lineTotDesc', index: '_lineTotDesc', width: 80, align: "right" },
+                    { name: '_imgSt', index: '_imgSt', align: "center", width: 30 },
+                    { name: '_imgDel', index: '_imgDel', align: "center", width: 30 }
+            ],
+            rowNum: 20,
+            pager: '#pager2',
+            //rowList: [10, 20, 30]
+            rownumbers: true,
+            gridview: true,
+            forceFit: true,
+            sortname: '_code',
+            viewrecords: true,
+            sortorder: "desc",
+            autowidth: true,
+            height: 250,
+            caption: "Items Adicionados Al Pedido Borrador",
+            editurl: 'clientArray',
+            cellsubmit: 'clientArray',
+            ondblClickRow: function (rowid, ri, ci) {
+                var $this = $(this), p = this.p;
+                if (p.selrow !== rowid) {
+                    // prevent the row from be unselected on double-click
+                    // the implementation is for "multiselect:false" which we use,
+                    // but one can easy modify the code for "multiselect:true"
+                    $this.jqGrid('setSelection', rowid);
+                }
+                $this.jqGrid('editGridRow', rowid, editSettings);
+            },
+            onSelectRow: function (id) {
+                if (id && id !== lastSel) {
+                    // cancel editing of the previous selected row if it was in editing state.
+                    // jqGrid hold intern savedRow array inside of jqGrid object,
+                    // so it is safe to call restoreRow method with any id parameter
+                    // if jqGrid not in editing state
+                    if (typeof lastSel !== "undefined") {
+                        $(this).jqGrid('restoreRow', lastSel);
+                    }
+                    lastSel = id;
+                }
+            }
+            // In line Edit: presenta problemas por eso se inactiva
+            /*
+            //cellEdit: true,
+            afterSaveCell: function (rowid, name, val, iRow, iCol) {
+            if (name == '_qty') {
+            var qtyVal = jQuery("#celltbl").jqGrid('getCell', rowid, iCol + 1);
+            var row = jQuery("#list4").getRowData(rowid);
+            updateItemQtys(row._code, row._size, parseInt(val));
+            //jQuery("#celltbl").jqGrid('setRowData', rowid, { total: parseFloat(val) + parseFloat(taxval) });
+            }
+            }*/
+            // json object
+            //datastr: msg.d
+        });
+        jQuery("#list4").jqGrid('navGrid', '#pager2', { edit: true, add: false, del: false }, editSettings);
+
+        // Keyboard response
+        // Bind the navigation and set the onEnter event
+        jQuery("#list4").jqGrid('bindKeys', { "onEnter": function (rowid, ri, ci) {
             var $this = $(this), p = this.p;
             if (p.selrow !== rowid) {
                 // prevent the row from be unselected on double-click
@@ -814,79 +922,39 @@ function renderTable(msg) {
                 $this.jqGrid('setSelection', rowid);
             }
             $this.jqGrid('editGridRow', rowid, editSettings);
-        },
-        onSelectRow: function (id) {
-            if (id && id !== lastSel) {
-                // cancel editing of the previous selected row if it was in editing state.
-                // jqGrid hold intern savedRow array inside of jqGrid object,
-                // so it is safe to call restoreRow method with any id parameter
-                // if jqGrid not in editing state
-                if (typeof lastSel !== "undefined") {
-                    $(this).jqGrid('restoreRow', lastSel);
-                }
-                lastSel = id;
-            }
         }
-        // In line Edit: presenta problemas por eso se inactiva
-        /*
-        //cellEdit: true,
-        afterSaveCell: function (rowid, name, val, iRow, iCol) {
-        if (name == '_qty') {
-        var qtyVal = jQuery("#celltbl").jqGrid('getCell', rowid, iCol + 1);
-        var row = jQuery("#list4").getRowData(rowid);
-        updateItemQtys(row._code, row._size, parseInt(val));
-        //jQuery("#celltbl").jqGrid('setRowData', rowid, { total: parseFloat(val) + parseFloat(taxval) });
-        }
-        }*/
-        // json object
-        //datastr: msg.d
-    });
-    jQuery("#list4").jqGrid('navGrid', '#pager2', { edit: true, add: false, del: false }, editSettings);
-
-    // Keyboard response
-    // Bind the navigation and set the onEnter event
-    jQuery("#list4").jqGrid('bindKeys', { "onEnter": function (rowid, ri, ci) {
-        var $this = $(this), p = this.p;
-        if (p.selrow !== rowid) {
-            // prevent the row from be unselected on double-click
-            // the implementation is for "multiselect:false" which we use,
-            // but one can easy modify the code for "multiselect:true"
-            $this.jqGrid('setSelection', rowid);
-        }
-        $this.jqGrid('editGridRow', rowid, editSettings);
-    }
-    });
-
-    jQuery("#list4").jqGrid('setGroupHeaders', { useColSpanStyle: false,
-        groupHeaders: [{ startColumnName: '_code', numberOfColumns: 6, titleText: '<em>Información Item</em>' },
-            { startColumnName: '_priceDesc', numberOfColumns: 4, titleText: '<em>Precios y totales</em>'}]
-    });
-
-
-    $.each(msg.d, function (key, val) {
-        var idImg = "imgStock_" + i;
-        var imgCellSt = '<img id="' + idImg + '" alt="Consulta de disponibilidad de item" src="../../Design/images/Botones/b_info.png" onclick=\'javascript:getStockArticle("' + val._code + '","' + val._size + '",' + val._qty + ',"' + idImg + '")\'/>';
-        var imgCellDel = '<img alt="Eliminar item del pedido" src="../../Design/images/Botones/delete_off.png" onclick=\'javascript:deleteRow("' + i + '","' + val._code + '","' + val._size + '")\' style="padding:0 3px 0 3px;"/>';
-
-        jQuery("#list4").jqGrid('addRowData', i + 1, { _code: val._code,
-            _artName: val._artName,
-            _brand: val._brand,
-            _color: val._color,
-            _size: val._size,
-            _qty: val._qty,
-            _priceDesc: val._priceDesc,
-            _commissionDesc: val._commissionDesc,
-            _dsctoDesc: val._dsctoDesc,
-            _lineTotDesc: val._lineTotDesc,
-            _imgSt: imgCellSt,
-            _imgDel: imgCellDel
         });
-        getStockArticleNoDialog(val._code, val._size, val._qty, idImg);
-        i = i + 1;
-    });
 
-    afterLoad();
-    showLoad(false, '', false);
+        jQuery("#list4").jqGrid('setGroupHeaders', { useColSpanStyle: false,
+            groupHeaders: [{ startColumnName: '_code', numberOfColumns: 6, titleText: '<em>Información Item</em>' },
+                { startColumnName: '_priceDesc', numberOfColumns: 4, titleText: '<em>Precios y totales</em>'}]
+        });
 
-    getTotals();
-}
+
+        $.each(msg.d, function (key, val) {
+            var idImg = "imgStock_" + i;
+            var imgCellSt = '<img id="' + idImg + '" alt="Consulta de disponibilidad de item" src="../../Design/images/Botones/b_info.png" onclick=\'javascript:getStockArticle("' + val._code + '","' + val._size + '",' + val._qty + ',"' + idImg + '")\'/>';
+            var imgCellDel = '<img alt="Eliminar item del pedido" src="../../Design/images/Botones/delete_off.png" onclick=\'javascript:deleteRow("' + i + '","' + val._code + '","' + val._size + '")\' style="padding:0 3px 0 3px;"/>';
+
+            jQuery("#list4").jqGrid('addRowData', i + 1, { _code: val._code,
+                _artName: val._artName,
+                _brand: val._brand,
+                _color: val._color,
+                _size: val._size,
+                _qty: val._qty,
+                _priceDesc: val._priceDesc,
+                _commissionDesc: val._commissionDesc,
+                _dsctoDesc: val._dsctoDesc,
+                _lineTotDesc: val._lineTotDesc,
+                _imgSt: imgCellSt,
+                _imgDel: imgCellDel
+            });
+            getStockArticleNoDialog(val._code, val._size, val._qty, idImg);
+            i = i + 1;
+        });
+
+        afterLoad();
+        showLoad(false, '', false);
+
+        getTotals();
+    }

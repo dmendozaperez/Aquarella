@@ -136,7 +136,7 @@ namespace www.aquarella.com.pe.Aquarella.Logistica
 
             pnlCustInfo.Visible = true;
             DataRow dRow = dsCustomer.Tables[0].Rows[0];
-
+            
             Session["aplica_percepcion_cliente"] = Convert.ToBoolean(dRow["aplica_percepcion"].ToString());
 
             Coordinator cust = new Coordinator
@@ -190,6 +190,10 @@ namespace www.aquarella.com.pe.Aquarella.Logistica
             lblLogistica.Text = dRow["Are_Descripcion"].ToString();// +", " + dRow["arv_description"].ToString();
 
             lblasesor.Text = dRow["asesor"].ToString();
+
+            lblPremio.Text = "Sin premio";
+
+            lblPremio.Text = dRow["Premio"].ToString();
         }
 
 

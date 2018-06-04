@@ -37,6 +37,8 @@ namespace www.aquarella.com.pe.bll
 
         public string _estadocredito { get; set; }
 
+        public string _premio { get; set; }
+
         /// <summary>
         /// Nombre de conexion a bd
         /// </summary>
@@ -78,6 +80,7 @@ namespace www.aquarella.com.pe.bll
                 dt.Columns.Add("Ped_Det_OfertaP", typeof(Decimal));
                 dt.Columns.Add("Ped_Det_OfertaM", typeof(Decimal));
                 dt.Columns.Add("Ped_Det_OfeID", typeof(Decimal));
+                dt.Columns.Add("Ped_Det_PremID", typeof(Int32));
                 //,Ped_Det_OfertaM,Ped_Det_OfeID
 
 
@@ -86,7 +89,7 @@ namespace www.aquarella.com.pe.bll
                 // Recorrer todas las lineas adicionAQUARELLAs al detalle
                 foreach (Order_Dtl item in _itemsDetail)
                 {
-                    dt.Rows.Add(_ped_id, i, item._code, item._size, item._qty, 0,item._price, item._commissionPctg, item._commission,item._ofe_porc,item._dscto,item._ofe_id);
+                    dt.Rows.Add(_ped_id, i, item._code, item._size, item._qty, 0,item._price, item._commissionPctg, item._commission,item._ofe_porc,item._dscto,item._ofe_id, Convert.ToInt32(item._premId));
                     i++;
                 }
 
