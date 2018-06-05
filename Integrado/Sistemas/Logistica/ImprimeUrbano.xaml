@@ -76,7 +76,7 @@
                     <Image Grid.Column="0"  Source="/Integrado;component/Design/Images/impresora.png"/>
                 </Grid>
             </Button>
-            <Label Content="Imprimir 101.6x25" Grid.Column="2" FontWeight="Bold" FontSize="12" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,50,0,0" ></Label>
+            <Label Content="Imprimir 101.6x50" Grid.Column="2" FontWeight="Bold" FontSize="12" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,50,0,0" ></Label>
 
             
 
