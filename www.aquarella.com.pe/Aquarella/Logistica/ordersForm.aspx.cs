@@ -32,7 +32,6 @@ namespace www.aquarella.com.pe.Aquarella.Logistica
         string _nameFileCrystalReport = "liquidationReport.rpt";
 
         private ReportDocument _liqObjReport;
-
         //#endregion
 
 
@@ -272,6 +271,8 @@ namespace www.aquarella.com.pe.Aquarella.Logistica
             // Lista de pedido
             List<Order_Dtl> order = new List<Order_Dtl>();
             DataTable dtOrderDtl = new DataTable();
+            Coordinator custupd = (Coordinator)HttpContext.Current.Session[_nameSessionCustomer];
+
             if (string.IsNullOrEmpty(estadoliq))
             {
                 dtOrderDtl = Order_Dtl.getDtlOrder(noOrder);
@@ -306,12 +307,24 @@ namespace www.aquarella.com.pe.Aquarella.Logistica
                     //_priceigv = Convert.ToDecimal(dr["PRV_PRICE_IGV"]),
                     //_priceigvDesc = Convert.ToDecimal(dr["PRV_PRICE_IGV"]).ToString(_currency),
                     _comm = Convert.ToInt16(dr["Ped_Por_Com"]),
-                    _ap_percepcion = dr["Ped_Por_Perc"].ToString()
+                    _premio = dr["Premio"].ToString(),
+                    _premId = dr["PremioId"].ToString(),
+                    _ap_percepcion = dr["Ped_Por_Perc"].ToString(),
+                    _premioDesc = dr["Regalo"].ToString()
                 };
-                loadOrderDtl(ref order, newLine , cust._commission);                
+                                              
+                loadOrderDtl(ref order, newLine , cust._commission);
                 //
                 //addArticle(dr["odv_size"].ToString(), Convert.ToInt16(dr["odn_order_qty"]));
+
+                if (dr["Regalo"].ToString() != "") {
+                    custupd._premio = dr["Regalo"].ToString();
+
+                }
+                
             }
+
+            HttpContext.Current.Session[_nameSessionCustomer] = cust;
             HttpContext.Current.Session[_nSOrder] = order;
             string script = string.Empty;
             /*script += "getOrderDtl()";
@@ -451,7 +464,7 @@ namespace www.aquarella.com.pe.Aquarella.Logistica
         /// <param name="qty"></param>
         /// <returns></returns>
         /// 
-
+        //consulta si el cliente a tienes premios para el mes en curso
         [WebMethod()]
         public static List<Order_Dtl_Temp> verificarPremio()
         {
@@ -459,7 +472,8 @@ namespace www.aquarella.com.pe.Aquarella.Logistica
 
             List<Order_Dtl> orderLines = (List<Order_Dtl>)(((object)HttpContext.Current.Session[_nSOrder]) != null ? (object)HttpContext.Current.Session[_nSOrder] : new List<Order_Dtl>()); 
             Order_Dtl resultLine;
-                resultLine =  orderLines.Where(x => x._premio.Equals("S")).FirstOrDefault();
+            resultLine =  orderLines.Where(x => x._premio.Equals("S")).FirstOrDefault();
+
             try
             {
               
@@ -471,38 +485,28 @@ namespace www.aquarella.com.pe.Aquarella.Logistica
                 {
                     string strtable = "";
                     for (Int32 c = 0; c < orderLines.Count; ++c)
-                    {
-                        //verificar las promociones
-                        //if (orderLines[c]._ofe_id != 0)
-                        //{
+                    {                       
                         strtable += "<row  ";
                         strtable += " codigo=¿" + orderLines[c]._code + "¿ ";
                         strtable += " talla=¿" + orderLines[c]._size + "¿ ";
                         strtable += "/>";                        
-                        
-                        //}
+                       
                     }
 
                     DataSet dsArt = Article.getArticlePremio(cust._idCust, strtable);
 
-                  
-
                     ListArtPremio = (from DataRow dr in dsArt.Tables[0].Rows
-                            select new Order_Dtl_Temp()
-                            {                                                                
-                                articulo = dr["PremArt_ArtId"].ToString(),
-                                cantidad = 1,
-                                talla = dr["PremArt_Talla"].ToString(),
-                                premio = "S",
-                                premId = dr["PreCli_PreID"].ToString(),
+                        select new Order_Dtl_Temp()
+                        {                                                                
+                            articulo = dr["PremArt_ArtId"].ToString(),
+                            cantidad = 1,
+                            talla = dr["PremArt_Talla"].ToString(),
+                            premio = "S",
+                            premId = dr["PreCli_PreID"].ToString(),
                                 
 
-                            }).ToList();
-
-
-
-                }
-
+                        }).ToList();
+                    }
             }
             catch(Exception ex){
 
@@ -683,10 +687,8 @@ namespace www.aquarella.com.pe.Aquarella.Logistica
         public static List<Order_Dtl> addArticlePremio(Order_Dtl newLine, int qty, string varTipoPago)//, string tipopago)
         {
             decimal commPercent;
-            //decimal ofertporcentaje;
-            //decimal ofertamaxpares;
+       
             Coordinator cust = (Coordinator)HttpContext.Current.Session[_nameSessionCustomer];
-
 
             cust._vartipopago = varTipoPago;
 
@@ -1029,14 +1031,14 @@ namespace www.aquarella.com.pe.Aquarella.Logistica
                         //resultLine._lineTotDesc = ((resultLine._priceigv * qty) - (resultLine._dscto * qty) - resultLine._commissionigv).ToString(_currency);
 
                         // Update
-                        orderLines.Where(x => x._code.Equals(code) && x._size.Equals(size)).FirstOrDefault()._qty = qty;
-                        orderLines.Where(x => x._code.Equals(code) && x._size.Equals(size)).FirstOrDefault()._commission = resultLine._commission;
-                        orderLines.Where(x => x._code.Equals(code) && x._size.Equals(size)).FirstOrDefault()._commissionigv = resultLine._commissionigv;
-                        orderLines.Where(x => x._code.Equals(code) && x._size.Equals(size)).FirstOrDefault()._commissionPctg = resultLine._commissionPctg;
-                        orderLines.Where(x => x._code.Equals(code) && x._size.Equals(size)).FirstOrDefault()._commissionDesc = resultLine._commission.ToString(_currency);
+                        orderLines.Where(x => x._code.Equals(code) && x._size.Equals(size) && x._premio.Equals("N")).FirstOrDefault()._qty = qty;
+                        orderLines.Where(x => x._code.Equals(code) && x._size.Equals(size) && x._premio.Equals("N")).FirstOrDefault()._commission = resultLine._commission;
+                        orderLines.Where(x => x._code.Equals(code) && x._size.Equals(size) && x._premio.Equals("N")).FirstOrDefault()._commissionigv = resultLine._commissionigv;
+                        orderLines.Where(x => x._code.Equals(code) && x._size.Equals(size) && x._premio.Equals("N")).FirstOrDefault()._commissionPctg = resultLine._commissionPctg;
+                        orderLines.Where(x => x._code.Equals(code) && x._size.Equals(size) && x._premio.Equals("N")).FirstOrDefault()._commissionDesc = resultLine._commission.ToString(_currency);
                         //orderLines.Where(x => x._code.Equals(code) && x._size.Equals(size)).FirstOrDefault()._commissionigvDesc = resultLine._commissionigv.ToString(_currency);
-                        orderLines.Where(x => x._code.Equals(code) && x._size.Equals(size)).FirstOrDefault()._lineTotal = resultLine._lineTotal;
-                        orderLines.Where(x => x._code.Equals(code) && x._size.Equals(size)).FirstOrDefault()._lineTotDesc = resultLine._lineTotDesc;
+                        orderLines.Where(x => x._code.Equals(code) && x._size.Equals(size) && x._premio.Equals("N")).FirstOrDefault()._lineTotal = resultLine._lineTotal;
+                        orderLines.Where(x => x._code.Equals(code) && x._size.Equals(size) && x._premio.Equals("N")).FirstOrDefault()._lineTotDesc = resultLine._lineTotDesc;
 
                         HttpContext.Current.Session[_nSOrder] = orderLines;
                     
