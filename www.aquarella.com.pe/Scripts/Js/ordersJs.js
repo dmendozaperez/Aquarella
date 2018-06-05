@@ -937,6 +937,10 @@ function deletePremio() {
             var imgCellSt = '<img id="' + idImg + '" alt="Consulta de disponibilidad de item" src="../../Design/images/Botones/b_info.png" onclick=\'javascript:getStockArticle("' + val._code + '","' + val._size + '",' + val._qty + ',"' + idImg + '")\'/>';
             var imgCellDel = '<img alt="Eliminar item del pedido" src="../../Design/images/Botones/delete_off.png" onclick=\'javascript:deleteRow("' + i + '","' + val._code + '","' + val._size + '")\' style="padding:0 3px 0 3px;"/>';
 
+            if (val._premio == "S") {
+                imgCellDel = '';
+            }
+
             jQuery("#list4").jqGrid('addRowData', i + 1, { _code: val._code,
                 _artName: val._artName,
                 _brand: val._brand,
