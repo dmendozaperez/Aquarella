@@ -675,19 +675,19 @@ function deletePremio() {
     }
 
 
-    function showTotals(msg) {
-        var val = msg.d;
+    //function showTotals(msg) {
+    //    var val = msg.d;
     
-        $('#lblTotQty').html(val._qtys);
-        $('#lblGrandTotal').html(val._grandTotalDesc);
-        $('#lblSubTotal').html(val._subTotalDesc);
-        $('#lblTaxes').html(val._taxesDesc);
-        $('#lblpercepcion').html(val._percepciondesc);
-        $('#lblmtopercepcion').html(val._mtopercepciondesc);
-        $('#lblnc').html(val._mtoncreditodesc);
-        $("input[id$='txtValue']").val(val._mtopercepcion).val();
-        //$subTotal.text(val._subTotalDesc);
-    }
+    //    $('#lblTotQty').html(val._qtys);
+    //    $('#lblGrandTotal').html(val._grandTotalDesc);
+    //    $('#lblSubTotal').html(val._subTotalDesc);
+    //    $('#lblTaxes').html(val._taxesDesc);
+    //    $('#lblpercepcion').html(val._percepciondesc);
+    //    $('#lblmtopercepcion').html(val._mtopercepciondesc);
+    //    $('#lblnc').html(val._mtoncreditodesc);
+    //    $("input[id$='txtValue']").val(val._mtopercepcion).val();
+    //    //$subTotal.text(val._subTotalDesc);
+    //}
 
     // Impresion de informacion de articulo
     function showArticle(msg) {

@@ -104,12 +104,16 @@
   }
   // Impresion de totales
   function showTotals(msg) {
+     
       var val = msg.d;
-      var valorOpg = val._subTotalOPG;
-      var valorOpgMon = parseFloat(valorOpg);
-      $('#lblOpg').html(val._subTotalOPG);
+      var valorOpgMon = parseFloat(val._subTotalOPG);
+      $('#lblOpg').html(val._subTotalOPGDesc);
       $("input[id$='txtValue']").val(val._mtopercepcion).val();
+      console.log(valorOpgMon)
       if (valorOpgMon > 0) {
+          console.log('entro')
+          console.log(valorOpgMon)
+          console.log(val._subTotalOPGDesc)
           document.getElementById("divopg").style.display = ""; 
           document.getElementById("lblopgEt").style.display = "";
           $("input[id$='txtValue']").val(val._subTotalOPG).val();
