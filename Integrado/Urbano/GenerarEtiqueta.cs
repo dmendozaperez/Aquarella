@@ -123,7 +123,7 @@ namespace Integrado.Urbano
                 string cod_refer = etiqueta.cod_refer;
                 string telefonos = etiqueta.telefono;
 
-                direccion = direccion + ubigeo;
+                direccion = direccion + " - " + ubigeo;
 
                 //-- Modificado por  : Henry Morales - 17/05/2018
                 //-- Asunto          : Se modifico para que muestre el código Alfanumérico en lugar del número
@@ -145,67 +145,68 @@ namespace Integrado.Urbano
                 //strb.Append("^FO460,015^BCN,62,Y,N,N^FD" + strNroGuia + "^FS\n");
                 ////strb.Append("^PQ3^FS\n"); // Imprimir Triple Copia de Etiqueta
                 
-                /////////// agregado 04/06/2018 - HMorales
+                /// agregado 04/06/2018 - Henry Morales
+                /// Se ajusta para agregarle datos en la impresión; se modificó el primer margen
                 /////////1ra Impresión///////////
-                strb.Append("^FO040,105^A0,030,020^FD" + cliente.ToUpper() + "^FS\n");
-                strb.Append("^FO040,135^A0,030,020^FDPEDIDO: " + cod_refer + "^FS\n");
-                strb.Append("^FO040,165^A0,030,020^FDTELEF.: " + telefonos + "^FS\n");
+                strb.Append("^FO030,105^A0,030,020^FD" + cliente.ToUpper() + "^FS\n");
+                strb.Append("^FO030,135^A0,030,020^FDPEDIDO: " + cod_refer + "^FS\n");
+                strb.Append("^FO030,165^A0,030,020^FDTELEF.: " + telefonos + "^FS\n");
                 // DIRECCION
                 if (direccion.Length <= 30)
                 {
-                    strb.Append("^FO040,195^A0,030,020^FDDIREC.: " + direccion + "^FS\n");
+                    strb.Append("^FO030,195^A0,030,020^FDDIREC.: " + direccion + "^FS\n");
                 }
                 else
                 {
-                    strb.Append("^FO040,195^A0,030,020^FDDIREC.: " + direccion.Substring(0, 30) + "^FS\n");
+                    strb.Append("^FO030,195^A0,030,020^FDDIREC.: " + direccion.Substring(0, 30) + "^FS\n");
                     if (direccion.Length > 60)
                     {
-                        strb.Append("^FO040,225^A0,030,020^FD" + "".PadLeft(12) + direccion.Substring(30, 30) + "^FS\n");
+                        strb.Append("^FO030,225^A0,030,020^FD" + "".PadLeft(12) + direccion.Substring(30, 30) + "^FS\n");
 
                         if (direccion.Length > 90)
                         {
-                            strb.Append("^FO040,255^A0,030,020^FD" + "".PadLeft(12) + direccion.Substring(60, 30) + "^FS\n");
+                            strb.Append("^FO030,255^A0,030,020^FD" + "".PadLeft(12) + direccion.Substring(60, 30) + "^FS\n");
 
                             if (direccion.Length > 120)
                             {
-                                strb.Append("^FO040,285^A0,030,020^FD" + "".PadLeft(12) + direccion.Substring(90, 30) + "^FS\n");
+                                strb.Append("^FO030,285^A0,030,020^FD" + "".PadLeft(12) + direccion.Substring(90, 30) + "^FS\n");
                             }
                             else
                             {
-                                strb.Append("^FO040,285^A0,030,020^FD" + "".PadLeft(12) + direccion.Substring(90, direccion.Length - 90) + "^FS\n");
+                                strb.Append("^FO030,285^A0,030,020^FD" + "".PadLeft(12) + direccion.Substring(90, direccion.Length - 90) + "^FS\n");
                             }
                         }
                         else
                         {
-                            strb.Append("^FO040,255^A0,030,020^FD" + "".PadLeft(12) + direccion.Substring(60, direccion.Length - 60) + "^FS\n");
+                            strb.Append("^FO030,255^A0,030,020^FD" + "".PadLeft(12) + direccion.Substring(60, direccion.Length - 60) + "^FS\n");
                         }
                     }
                     else
                     {
-                        strb.Append("^FO040,225^A0,030,020^FD" + "".PadLeft(12) + direccion.Substring(30, direccion.Length - 30) + "^FS\n");
+                        strb.Append("^FO030,225^A0,030,020^FD" + "".PadLeft(12) + direccion.Substring(30, direccion.Length - 30) + "^FS\n");
                     }
                 }
                 // REFERENCIA
                 if (referencia.Length > 30)
                 {
-                    strb.Append("^FO040,315^A0,030,020^FDREFER.: " + referencia.Substring(0, 30) + "^FS\n");
+                    strb.Append("^FO030,315^A0,030,020^FDREFER.: " + referencia.Substring(0, 30) + "^FS\n");
                 }
                 else
                 {
-                    strb.Append("^FO040,315^A0,030,020^FDREFER.: " + referencia + "^FS\n");
+                    strb.Append("^FO030,315^A0,030,020^FDREFER.: " + referencia + "^FS\n");
                 }
                 if (referencia.Length > 30)
                 {
                     if (referencia.Length > 60)
                     {
-                        strb.Append("^FO040,345^A0,030,020^FD" + "".PadLeft(12) + referencia.Substring(30, 30) + "^FS\n");
+                        strb.Append("^FO030,345^A0,030,020^FD" + "".PadLeft(12) + referencia.Substring(30, 30) + "^FS\n");
                     }
                     else
                     {
-                        strb.Append("^FO040,345^A0,030,020^FD" + "".PadLeft(12) + referencia.Substring(30, referencia.Length - 30) + "^FS\n");
+                        strb.Append("^FO030,345^A0,030,020^FD" + "".PadLeft(12) + referencia.Substring(30, referencia.Length - 30) + "^FS\n");
                     }
                 }
-                strb.Append("^FO040,015^BCN,62,Y,N,N^FD" + strNroGuia + "^FS\n");
+                strb.Append("^FO030,015^BCN,62,Y,N,N^FD" + strNroGuia + "^FS\n");
                 /////////////////////////////////
                 /////////2da Impresión///////////
                 /////////////////////////////////
@@ -268,7 +269,7 @@ namespace Integrado.Urbano
                     }
                 }
                 strb.Append("^FO460,015^BCN,62,Y,N,N^FD" + strNroGuia + "^FS\n");
-                /////////// agregado 04/06/2018 - HMorales
+                /// agregado 04/06/2018 - Henry Morales
                 strb.Append("^XZ\n");
                 return strb.ToString();
             }
