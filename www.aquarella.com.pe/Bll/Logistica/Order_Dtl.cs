@@ -147,6 +147,8 @@ namespace www.aquarella.com.pe.bll
         public int _units { get; set; }
 
         public string _premio { get; set; }
+
+        public string _premioDesc { get; set; }
         public string _premId { get; set; }
 
         /// <summary>

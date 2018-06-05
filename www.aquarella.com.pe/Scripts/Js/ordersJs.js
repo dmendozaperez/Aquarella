@@ -579,6 +579,7 @@ function deletePremio() {
 
     // Actualizar cantidades de un item adicionado al pedido
     function updateItemQtys(code, size, qty) {
+     
         //Ajax
         $msgeGlobal = 'Actualizando.';
         var urlMethod = "ordersForm.aspx/updateItem";
@@ -592,9 +593,7 @@ function deletePremio() {
 
     // Calculo de totales
     function getTotals() {
- 
-
-        //Ajax
+         //Ajax
         var urlMethod = "ordersForm.aspx/getTotals";
         var jsonData = '{}';
         SendAjax(urlMethod, jsonData, showTotals);
@@ -678,8 +677,6 @@ function deletePremio() {
 
     function showTotals(msg) {
         var val = msg.d;
-
-        alert(val._subTotalDesc)
     
         $('#lblTotQty').html(val._qtys);
         $('#lblGrandTotal').html(val._grandTotalDesc);
@@ -738,12 +735,7 @@ function deletePremio() {
         // Ajax for sizes
         getArticleSizes();
     }
-
-    //comprobacion de url
-
-
-
-
+ 
     // Creacion de un select con las tallas del articulo
     function loadDwSizes(msg) {
         var dwitems = '';
@@ -775,7 +767,7 @@ function deletePremio() {
             var imgCellSt = '<img id="' + idImg + '" src="../../Design/images/Botones/b_info.png" onclick=\'javascript:getStockArticle("' + val._code + '","' + val._size + '",' + val._qty + ',"' + idImg + '")\'/>';
             var imgCellDel = '<img src="../../Design/images/Botones/delete_off.png" onclick=\'javascript:deleteRow("' + i + '","' + val._code + '","' + val._size + '")\' style="padding:0 3px 0 3px;"/>';
             if (val._premio == "S") {
-                console.log('hola')
+               
                 imgCellDel = '';
             }
 
@@ -802,31 +794,37 @@ function deletePremio() {
 
     function renderTable(msg) {
         var i = 1;
+      
         /*Habilita la edicion del campo de cantidades a nivel local, y luego pasa por Ajax */
         var lastSel,
                 onclickSubmitLocal = function (options, postdata) {
-                    var $this = $(this), grid_p = this.p,
+            
+                var $this = $(this), grid_p = this.p,
                 idname = grid_p.prmNames.id,
                 grid_id = this.id,
                 id_in_postdata = grid_id + "_id",
                 rowid = postdata[id_in_postdata],
-                addMode = rowid === "_empty"; /*
-            oldValueOfSortColumn,
-            new_id,
-            tr_par_id,
-            colModel = grid_p.colModel,
-            cmName,
-            iCol,
-            cm;*/
-                    $this.jqGrid("setRowData", rowid, postdata);
-                    updateItemQtys(postdata._code, postdata._size, parseInt(postdata._qty));
+                addMode = rowid === "_empty";
+               /*oldValueOfSortColumn,
+                new_id,
+                tr_par_id,
+                colModel = grid_p.colModel,
+                cmName,
+                iCol,
+                cm;*/ 
+                $this.jqGrid("setRowData", rowid, postdata);
+                    
+                 updateItemQtys(postdata._code, postdata._size, parseInt(postdata._qty));
+                  
                     if ((addMode && options.closeAfterAdd) || (!addMode && options.closeAfterEdit)) {
                         // close the edit/add dialog
-                        $.jgrid.hideModal("#editmod" + grid_id, {
-                            gb: "#gbox_" + grid_id,
-                            jqm: options.jqModal,
-                            onClose: options.onClose
-                        });
+                     
+                            $.jgrid.hideModal("#editmod" + grid_id, {
+                                gb: "#gbox_" + grid_id,
+                                jqm: options.jqModal,
+                                onClose: options.onClose
+                            });
+
                     }
                     options.processing = true;
                     return {};
@@ -881,7 +879,9 @@ function deletePremio() {
                     // but one can easy modify the code for "multiselect:true"
                     $this.jqGrid('setSelection', rowid);
                 }
+              
                 $this.jqGrid('editGridRow', rowid, editSettings);
+               
             },
             onSelectRow: function (id) {
                 if (id && id !== lastSel) {
@@ -921,6 +921,7 @@ function deletePremio() {
                 // but one can easy modify the code for "multiselect:true"
                 $this.jqGrid('setSelection', rowid);
             }
+            
             $this.jqGrid('editGridRow', rowid, editSettings);
         }
         });
@@ -942,6 +943,7 @@ function deletePremio() {
                 _color: val._color,
                 _size: val._size,
                 _qty: val._qty,
+                _premio: val._premio,
                 _priceDesc: val._priceDesc,
                 _commissionDesc: val._commissionDesc,
                 _dsctoDesc: val._dsctoDesc,
@@ -950,6 +952,11 @@ function deletePremio() {
                 _imgDel: imgCellDel
             });
             getStockArticleNoDialog(val._code, val._size, val._qty, idImg);
+
+            if (val._premio == "S") {
+                $('#lblPremio').html(val._premioDesc);
+            }
+            
             i = i + 1;
         });
 
@@ -957,4 +964,6 @@ function deletePremio() {
         showLoad(false, '', false);
 
         getTotals();
+
+        
     }

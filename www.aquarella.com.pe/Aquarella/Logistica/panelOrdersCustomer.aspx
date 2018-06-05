@@ -212,7 +212,7 @@
                                                         Premio :
                                                     </td>
                                                     <td>
-                                                        <asp:Label ID="lblPremio" runat="server" Text="Label"></asp:Label>
+                                                        <asp:Label ID="lblPremio" Font-Size="14" ForeColor="#DD4B39" runat="server" Text="Label"></asp:Label>
                                                     </td>
                                                 </tr>
                                             </table>
