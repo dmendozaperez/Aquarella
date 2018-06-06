@@ -33,8 +33,7 @@ namespace www.aquarella.com.pe.Aquarella.Logistica
 
         private ReportDocument _liqObjReport;
         //#endregion
-
-
+        
         Coordinator _cust;
         string _nameList = "ListDocTx";
         List<Documents_Trans> _lstDocTx;
@@ -625,6 +624,7 @@ namespace www.aquarella.com.pe.Aquarella.Logistica
                     // resultLine._lineTotDesc = ((resultLine._priceigv * newQty) - (resultLine._dscto * newQty) - resultLine._commissionigv).ToString(_currency);
                     if (varTipoPago == "008")
                     {
+                        resultLine._lineTotal = (resultLine._price * newQty);
                         resultLine._commissionPctg = 0m;
                         resultLine._commissionDesc = (0).ToString(_currency);
                         resultLine._commission = 0;
@@ -658,6 +658,7 @@ namespace www.aquarella.com.pe.Aquarella.Logistica
 
                 if (varTipoPago == "008")
                 {
+                    newLine._lineTotal = (newLine._price * qty);
                     newLine._commissionPctg = 0m;
                     newLine._commissionDesc = (0).ToString(_currency);
                     newLine._commission = 0;
@@ -1009,6 +1010,7 @@ namespace www.aquarella.com.pe.Aquarella.Logistica
                     //resultLine._lineTotDesc = ((resultLine._priceigv * qty) - (resultLine._dscto * qty) - resultLine._commissionigv).ToString(_currency);
                         if (cust._vartipopago == "008")
                         {
+                        resultLine._lineTotal = (resultLine._price * qty);
                             resultLine._commissionPctg = 0m;
                             resultLine._commissionDesc = (0).ToString(_currency);
                             resultLine._commission = 0;

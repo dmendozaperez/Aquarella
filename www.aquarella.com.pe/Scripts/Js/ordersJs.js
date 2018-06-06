@@ -638,7 +638,6 @@ function deletePremio() {
         });
     }
 
-    // 
     function infoStock(msg) {
         var val = msg.d;
         $("#content_div").html(val._tableHtml);
@@ -661,6 +660,10 @@ function deletePremio() {
         $('#lblpromotor').html(val._namecompleto);
         $('#lblestado').html(val._estadoliqui);
         $('#lblPremio').html(val._premio);
+        if (val._premio=="")
+            document.getElementById("etqPremio").style.display = "none";
+        else
+            document.getElementById("etqPremio").style.display = "";
 
         if (val._estadoboton > 0) {
             $('[id$=btSaveExit]').attr('disabled', 'true');

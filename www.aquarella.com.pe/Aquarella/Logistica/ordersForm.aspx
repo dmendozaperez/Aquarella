@@ -223,8 +223,8 @@
                                         <b style="font-size: medium">Forma de Pago</b></td>
              <td>
                                                 &nbsp;</td>
-             <td class="fsal f13" style="text-align:right;padding-right:25em">
-                                        <b style="font-size: medium">Premio</b></td>
+             <td class="fsal f13" style="text-align:right;padding-right:25em"><div id="etqPremio" style="display:none">
+                <b style="font-size: medium">Premio</b></div></td>
          </tr>
          <tr>
              <td class="style9">
