@@ -598,79 +598,91 @@ namespace www.aquarella.com.pe.Aquarella.Logistica
             // Lista de pedido
             List<Order_Dtl> orderLines = (List<Order_Dtl>)(((object)HttpContext.Current.Session[_nSOrder]) != null ? (object)HttpContext.Current.Session[_nSOrder] : new List<Order_Dtl>()); ;
 
+            //verificamos que no exista un premio en la lista
+            string codArt = newLine._code;
+            string tallArt = newLine._size;
+
+            Order_Dtl resultLinePrem = orderLines.Where(x => x._code.Equals(codArt) && x._premio.Equals("S")).FirstOrDefault();
+
+            //fin de verificacion
+
+
             Order_Dtl resultLine;
+            if (resultLinePrem != null) {              
+           
 
-            if (orderLines != null)
-                resultLine = orderLines.Where(x => x._code.Equals(newLine._code) && x._size.Equals(newLine._size) && x._premio.Equals(newLine._premio)).FirstOrDefault();
-            else
-                resultLine = new Order_Dtl();
+                if (orderLines != null)
+                    resultLine = orderLines.Where(x => x._code.Equals(newLine._code) && x._size.Equals(newLine._size) && x._premio.Equals(newLine._premio)).FirstOrDefault();
+                else
+                    resultLine = new Order_Dtl();
 
-            if (resultLine != null)
-            {
-                if (orderLines.Remove(resultLine))
+                if (resultLine != null)
                 {
-                    newQty = resultLine._qty + qty;
-                    resultLine._qty = newQty;
-                    resultLine._commission = Math.Round((((resultLine._price * newQty) - (resultLine._dscto * newQty)) * commPercent) * resultLine._comm, 2, MidpointRounding.AwayFromZero);
-                    resultLine._commissionPctg = commPercent;
-                    resultLine._commissionDesc = resultLine._commission.ToString(_currency);
-                    int num = 1;
+                    if (orderLines.Remove(resultLine))
+                    {
+                        newQty = resultLine._qty + qty;
+                        resultLine._qty = newQty;
+                        resultLine._commission = Math.Round((((resultLine._price * newQty) - (resultLine._dscto * newQty)) * commPercent) * resultLine._comm, 2, MidpointRounding.AwayFromZero);
+                        resultLine._commissionPctg = commPercent;
+                        resultLine._commissionDesc = resultLine._commission.ToString(_currency);
+                        int num = 1;
                                      
-                    //  resultLine._dsctoDesc = newLine._commission.ToString(_currency);
-                    //resultLine._commissionigv = Math.Round((((resultLine._priceigv * newQty) - (resultLine._dscto * newQty)) * commPercent) * resultLine._comm, 2, MidpointRounding.AwayFromZero);
-                    //resultLine._commissionigvDesc = resultLine._commissionigv.ToString(_currency);
-                    resultLine._lineTotal = Math.Round((resultLine._price * newQty) - (resultLine._dscto * newQty) - resultLine._commission, 2, MidpointRounding.AwayFromZero);
-                    resultLine._lineTotDesc = (num*((resultLine._price * newQty) - (resultLine._dscto * newQty) - resultLine._commission)).ToString(_currency);
-                    // resultLine._lineTotDesc = ((resultLine._priceigv * newQty) - (resultLine._dscto * newQty) - resultLine._commissionigv).ToString(_currency);
+                        //  resultLine._dsctoDesc = newLine._commission.ToString(_currency);
+                        //resultLine._commissionigv = Math.Round((((resultLine._priceigv * newQty) - (resultLine._dscto * newQty)) * commPercent) * resultLine._comm, 2, MidpointRounding.AwayFromZero);
+                        //resultLine._commissionigvDesc = resultLine._commissionigv.ToString(_currency);
+                        resultLine._lineTotal = Math.Round((resultLine._price * newQty) - (resultLine._dscto * newQty) - resultLine._commission, 2, MidpointRounding.AwayFromZero);
+                        resultLine._lineTotDesc = (num*((resultLine._price * newQty) - (resultLine._dscto * newQty) - resultLine._commission)).ToString(_currency);
+                        // resultLine._lineTotDesc = ((resultLine._priceigv * newQty) - (resultLine._dscto * newQty) - resultLine._commissionigv).ToString(_currency);
+                        if (varTipoPago == "008")
+                        {
+                            resultLine._lineTotal = (resultLine._price * newQty);
+                            resultLine._commissionPctg = 0m;
+                            resultLine._commissionDesc = (0).ToString(_currency);
+                            resultLine._commission = 0;
+                            resultLine._dscto = 0;
+                            //resultLine._lineTotal = 0m;
+                            resultLine._lineTotDesc = (0).ToString(_currency);
+
+                            resultLine._priceigvDesc = (0).ToString(_currency);
+
+                        }
+                        orderLines.Add(resultLine);
+                    }
+                }
+                else
+                {
+                    newLine._qty = qty;  
+                    newLine._commission =  Math.Round((((newLine._price * qty) - (newLine._dscto * qty)) * commPercent) * newLine._comm,2,MidpointRounding.AwayFromZero);
+                    newLine._commissionDesc = newLine._commission.ToString(_currency);
+                    //newLine._commissionigv = Math.Round((((newLine._priceigv * qty) - (newLine._dscto * qty)) * commPercent) * newLine._comm, 2, MidpointRounding.AwayFromZero);
+                    //newLine._commissionigvDesc = newLine._commissionigv.ToString(_currency);
+                    newLine._commissionPctg = commPercent;
+
+                    //newLine._dscto =Math.Round (((newLine._price * qty) - newLine._commission) * ((newLine._ofe_porc / 100)));
+
+                    //newLine._dsctoDesc = (((newLine._price * qty) - newLine._commission)*((newLine._ofe_porc/100))).ToString(_currency);
+                    int num2 = 1;
+               
+                    newLine._lineTotal = Math.Round((newLine._price * qty) - (newLine._dscto * qty) - newLine._commission, 2, MidpointRounding.AwayFromZero);
+                    newLine._lineTotDesc = (num2*((newLine._price * qty) - (newLine._dscto * qty) - newLine._commission)).ToString(_currency);
+                    //newLine._lineTotDesc = ((newLine._priceigv * qty) - (newLine._dscto * qty) - newLine._commissionigv).ToString(_currency);
+
                     if (varTipoPago == "008")
                     {
-                        resultLine._lineTotal = (resultLine._price * newQty);
-                        resultLine._commissionPctg = 0m;
-                        resultLine._commissionDesc = (0).ToString(_currency);
-                        resultLine._commission = 0;
-                        resultLine._dscto = 0;
-                        //resultLine._lineTotal = 0m;
-                        resultLine._lineTotDesc = (0).ToString(_currency);
-
-                        resultLine._priceigvDesc = (0).ToString(_currency);
+                        newLine._lineTotal = (newLine._price * qty);
+                        newLine._commissionPctg = 0m;
+                        newLine._commissionDesc = (0).ToString(_currency);
+                        newLine._commission = 0;
+                        newLine._dscto = 0;
+                        //newLine._lineTotal = 0m;
+                        newLine._lineTotDesc = (0).ToString(_currency);
+                        newLine._priceigvDesc = (0).ToString(_currency);
 
                     }
-                    orderLines.Add(resultLine);
+                    orderLines.Add(newLine);
                 }
+
             }
-            else
-            {
-                newLine._qty = qty;  
-                newLine._commission =  Math.Round((((newLine._price * qty) - (newLine._dscto * qty)) * commPercent) * newLine._comm,2,MidpointRounding.AwayFromZero);
-                newLine._commissionDesc = newLine._commission.ToString(_currency);
-                //newLine._commissionigv = Math.Round((((newLine._priceigv * qty) - (newLine._dscto * qty)) * commPercent) * newLine._comm, 2, MidpointRounding.AwayFromZero);
-                //newLine._commissionigvDesc = newLine._commissionigv.ToString(_currency);
-                newLine._commissionPctg = commPercent;
-
-                //newLine._dscto =Math.Round (((newLine._price * qty) - newLine._commission) * ((newLine._ofe_porc / 100)));
-
-                //newLine._dsctoDesc = (((newLine._price * qty) - newLine._commission)*((newLine._ofe_porc/100))).ToString(_currency);
-                int num2 = 1;
-               
-                newLine._lineTotal = Math.Round((newLine._price * qty) - (newLine._dscto * qty) - newLine._commission, 2, MidpointRounding.AwayFromZero);
-                newLine._lineTotDesc = (num2*((newLine._price * qty) - (newLine._dscto * qty) - newLine._commission)).ToString(_currency);
-                //newLine._lineTotDesc = ((newLine._priceigv * qty) - (newLine._dscto * qty) - newLine._commissionigv).ToString(_currency);
-
-                if (varTipoPago == "008")
-                {
-                    newLine._lineTotal = (newLine._price * qty);
-                    newLine._commissionPctg = 0m;
-                    newLine._commissionDesc = (0).ToString(_currency);
-                    newLine._commission = 0;
-                    newLine._dscto = 0;
-                    //newLine._lineTotal = 0m;
-                    newLine._lineTotDesc = (0).ToString(_currency);
-                    newLine._priceigvDesc = (0).ToString(_currency);
-
-                }
-                orderLines.Add(newLine);
-            }
-
             return orderLines;
         }
 
@@ -1051,7 +1063,6 @@ namespace www.aquarella.com.pe.Aquarella.Logistica
             // Lista de pedido
             List<Order_Dtl> order = (List<Order_Dtl>)HttpContext.Current.Session[_nSOrder];
 
-            //
             Order_Dtl resultLine = order.Where(x => x._code.Equals(code) && x._size.Equals(size)&& x._premio.Equals("N")).FirstOrDefault();
 
             // Delete line
