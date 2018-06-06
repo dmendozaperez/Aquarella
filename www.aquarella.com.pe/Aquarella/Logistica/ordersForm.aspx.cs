@@ -608,7 +608,7 @@ namespace www.aquarella.com.pe.Aquarella.Logistica
 
 
             Order_Dtl resultLine;
-            if (resultLinePrem != null) {              
+            if (resultLinePrem == null) {              
            
 
                 if (orderLines != null)
