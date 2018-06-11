@@ -16,6 +16,7 @@ using System.Web.UI;
 using System.Collections;
 using CrystalDecisions.CrystalReports.Engine;
 using www.aquarella.com.pe.Bll.Util;
+using www.aquarella.com.pe.bll.Ventas;
 //using www.aquarella.com.pe.bll.
 //using Bata.Aquarella.BLL.Logistica;
 
@@ -425,6 +426,24 @@ namespace www.aquarella.com.pe.Aquarella.Logistica
 
                 DataSet dsArt = Article.getArticle(code.Replace("-", string.Empty).Trim(),cust._idCust);
 
+                decimal new_precio_oferta_conigv = 0;
+                decimal new_precio_oferta_sinigv = 0;
+                getpromocion_especial(code.Replace("-", string.Empty).Trim(),ref new_precio_oferta_conigv,ref  new_precio_oferta_sinigv);
+
+                if  (new_precio_oferta_conigv > 0)
+                {
+                    if (dsArt!=null)
+                    {
+                        if (dsArt.Tables.Count>0)
+                        {
+                            dsArt.Tables[0].Rows[0]["art_pre_sin_igv"] = new_precio_oferta_sinigv;
+                            dsArt.Tables[0].Rows[0]["art_pre_con_igv"] = new_precio_oferta_conigv;
+                            dsArt.Tables[0].Rows[0]["afec_percepcion"] = 1;
+                        }
+                    }
+                    //decimal new_precio_oferta_sinigv=new_precio_oferta_conigv*
+                }
+
                 if (dsArt == null || dsArt.Tables[0].Rows.Count == 0)
                     throw new Exception("El artículo digitado es inexistente.");
 
@@ -444,6 +463,33 @@ namespace www.aquarella.com.pe.Aquarella.Logistica
                 return order;
             }
             catch (Exception e) { throw new Exception(e.Message, e.InnerException); }
+        }
+        private static void  getpromocion_especial(string _art_promo, ref decimal precio_out_con_igv, ref decimal precio_out_sin_igv)
+        {
+            
+            try
+            {
+                List<Order_Dtl> order = (List<Order_Dtl>)(((object)HttpContext.Current.Session[_nSOrder]) != null ? (object)HttpContext.Current.Session[_nSOrder] : new List<Order_Dtl>());
+
+                if (order != null)
+                {
+                    DataTable dt_of = new DataTable();
+                    dt_of.Columns.Add("cod_artic", typeof(string));
+                    dt_of.Columns.Add("precio_artic", typeof(decimal));
+                    foreach (var item in order)
+                    {
+                        dt_of.Rows.Add(item._code, item._price);
+                    }
+                    if (dt_of.Rows.Count>0)
+                        www.aquarella.com.pe.bll.Ventas.Facturacion._return_precio_promo(_art_promo, dt_of,ref precio_out_con_igv,ref precio_out_sin_igv);
+                }
+            }
+            catch (Exception)
+            {
+                precio_out_con_igv = 0;
+                precio_out_sin_igv = 0;
+            }
+           
         }
 
         /// <summary>
@@ -1995,7 +2041,33 @@ namespace www.aquarella.com.pe.Aquarella.Logistica
                 
                 return;
             }
+
+            #region<VALIDACION DE PROMOCIONNES ESPECIALES>
             
+            List<Order_Dtl> order = (List<Order_Dtl>)HttpContext.Current.Session[_nSOrder];
+            if (order!=null)
+            {
+                DataTable dt = new DataTable();
+                dt.Columns.Add("cod_artic", typeof(string));
+                dt.Columns.Add("precio", typeof(decimal));
+                dt.Columns.Add("cantidad", typeof(decimal));
+                Int32 i = 1;
+                foreach (Order_Dtl item in order)
+                {
+                    dt.Rows.Add(item._code,item._price ,item._qty);
+                    i++;            
+                }
+                if (Facturacion._return_valida_promo_exists(dt))
+                {
+                    msnMessage.LoadMessage("No se genero la liquidacion, por favor revise las condicion de uso en la promocion utilizada", UserControl.ucMessage.MessageType.Error);
+                    string script = string.Empty;
+                    script += "closeDialogLoad()";
+                    System.Web.UI.ScriptManager.RegisterStartupScript(upMsg, Page.GetType(), "CloseDialog", script, true);
+
+                    return;
+                }
+            }
+            #endregion
             Users user = (Users)Session[Constants.NameSessionUser];
             string typeLiq = string.Empty;
             

@@ -47,9 +47,11 @@ namespace Epson_Ticket
                                 if (Ent_Global._canal_venta == "BA")
                                 {
                                     _costo_envio = Convert.ToDecimal(dt.Rows[0]["ven_costo_e"]);
+                                    _OPG = "N";
                                 }
                                 else {
                                     _OPG = dt.Rows[0]["OPG"].ToString();
+                                    if (_OPG == "2") _OPG = "N";
 
                                 }
 
@@ -134,8 +136,31 @@ namespace Epson_Ticket
                                     decimal _cantidad = Convert.ToInt32(dt.Rows[i]["Ven_Det_Cantidad"]);
                                     Decimal _articulo_total = Convert.ToDecimal(dt.Rows[i]["articulo_total"].ToString());
                                     decimal _comision = Convert.ToDecimal(dt.Rows[i]["Ven_Det_ComisionM"].ToString());
-                                    string _codigo_descripcion = TruncateAt(_iarticulo.PadRight(10), 10) +
-                                    TruncateAt(_articulonombre.PadRight(9), 10) + TruncateAt(_talla.PadLeft(4), 4) + TruncateAt(_cantidad.ToString("#0").PadLeft(5), 5) + TruncateAt(_articulo_total.ToString("#0.00").PadLeft(9), 9);
+
+                                    //string _codigo_descripcion = TruncateAt(_iarticulo.PadRight(10), 10) +
+                                    //TruncateAt(_articulonombre.PadRight(9), 10) + TruncateAt(_talla.PadLeft(4), 4) + TruncateAt(_cantidad.ToString("#0").PadLeft(5), 5) + TruncateAt(((_OPG == "1")?0: _articulo_total).ToString("#0.00").PadLeft(9), 9);
+
+                                    string _codigo_descripcion = "";/* TruncateAt(_iarticulo.PadRight(10), 10) +
+                                    TruncateAt(_articulonombre.PadRight(9), 10) + TruncateAt(_talla.PadLeft(4), 4) + TruncateAt(_cantidad.ToString("#0").PadLeft(5), 5) + TruncateAt(((_OPG == "1") ? 0 : _articulo_total).ToString("#0.00").PadLeft(9), 9);*/
+
+                                    switch (_OPG)
+                                    { 
+                                        /*muestra*/
+                                        case "1":
+                                             _codigo_descripcion = TruncateAt(_iarticulo.PadRight(10), 10) +
+                                    TruncateAt(_articulonombre.PadRight(9), 10) + TruncateAt(_talla.PadLeft(4), 4) + TruncateAt(_cantidad.ToString("#0").PadLeft(5), 5) + TruncateAt((0).ToString("#0.00").PadLeft(9), 9);
+                                            break;
+                                        /*regalos*/
+                                        case "2":
+                                             _codigo_descripcion = TruncateAt(_iarticulo.PadRight(10), 10) +
+                                    TruncateAt(_articulonombre.PadRight(9), 10) + TruncateAt(_talla.PadLeft(4), 4) + TruncateAt(_cantidad.ToString("#0").PadLeft(5), 5) + TruncateAt(((_OPG == "1") ? 0 : _articulo_total).ToString("#0.00").PadLeft(9), 9);
+                                            break;
+                                        /*ninguna*/
+                                        case "N":
+                                            _codigo_descripcion = TruncateAt(_iarticulo.PadRight(10), 10) +
+                                    TruncateAt(_articulonombre.PadRight(9), 10) + TruncateAt(_talla.PadLeft(4), 4) + TruncateAt(_cantidad.ToString("#0").PadLeft(5), 5) + TruncateAt((_articulo_total).ToString("#0.00").PadLeft(9), 9);
+                                            break;
+                                    }
                                     tk.AgregarItems(_codigo_descripcion);
                                     tk.AgregarItems(_des_largo);
                                     dSubtotal += _articulo_total;
@@ -163,11 +188,23 @@ namespace Epson_Ticket
 
                                 tk.lineasGuio();
 
-                                if ((Ent_Global._canal_venta == "AQ") && _OPG == "1")
+                                if (Ent_Global._canal_venta == "AQ")
                                 {
-                                    tk.AgregarFooter("     " + TruncateAt("Op. Gratuita".ToString().PadRight(16), 16) + TruncateAt("S/".ToString().PadRight(3), 3) + TruncateAt(dSubtotal.ToString("#0.00").PadLeft(14), 14));
-                                    dSubtotal = 0;
-                                    tk.AgregarFooter("     " + TruncateAt("SUB-TOTAL".ToString().PadRight(16), 16) + TruncateAt("S/".ToString().PadRight(3), 3) + TruncateAt(dSubtotal.ToString("#0.00").PadLeft(14), 14));
+                                    switch(_OPG)
+                                    {
+                                        case "1":
+                                            tk.AgregarFooter("     " + TruncateAt("OP. GRATUITA".ToString().PadRight(16), 16) + TruncateAt("S/".ToString().PadRight(3), 3) + TruncateAt(dSubtotal.ToString("#0.00").PadLeft(14), 14));
+                                            dSubtotal = 0;
+                                            tk.AgregarFooter("     " + TruncateAt("SUB-TOTAL".ToString().PadRight(16), 16) + TruncateAt("S/".ToString().PadRight(3), 3) + TruncateAt(dSubtotal.ToString("#0.00").PadLeft(14), 14));
+                                            break;
+                                        case "2":
+                                            break;
+                                        case "N":                                            
+                                            tk.AgregarFooter("     " + TruncateAt("SUB-TOTAL".ToString().PadRight(16), 16) + TruncateAt("S/".ToString().PadRight(3), 3) + TruncateAt(dSubtotal.ToString("#0.00").PadLeft(14), 14));
+                                            break;
+                                    }
+
+                                    
                                 }
                                 else {
                                     tk.AgregarFooter("     " + TruncateAt("SUB-TOTAL".ToString().PadRight(16), 16) + TruncateAt("S/".ToString().PadRight(3), 3) + TruncateAt(dSubtotal.ToString("#0.00").PadLeft(14), 14));
@@ -326,6 +363,19 @@ namespace Epson_Ticket
                             if (dt.Rows.Count > 0)
                             {
                                 #region<VARIABLES DE EMPRESA TICKETS>
+
+                                string _OPG = "";
+                                if (Ent_Global._canal_venta == "AQ")
+                                {
+                                    _OPG = dt.Rows[0]["OPG"].ToString();
+
+                                    if (_OPG == "2") _OPG = "N";
+                                }
+                                else
+                                {
+                                    _OPG = "N";
+                                }
+
                                 string _marca_emp = dt.Rows[0]["Alm_Descripcion"].ToString();
                                 string _direccion_emp = dt.Rows[0]["Alm_Direccion"].ToString();
                                 string _Telefono_emp = dt.Rows[0]["Alm_Telefono"].ToString();
@@ -388,8 +438,25 @@ namespace Epson_Ticket
                                     decimal _cantidad = Convert.ToInt32(dt.Rows[i]["Not_Det_Cantidad"]);
                                     Decimal _articulo_total = Convert.ToDecimal(dt.Rows[i]["articulo_total"].ToString());
                                     decimal _comision = Convert.ToDecimal(dt.Rows[i]["Not_Det_ComisionM"].ToString());
-                                    string _codigo_descripcion = TruncateAt(_iarticulo.PadRight(10), 10) +
-                                    TruncateAt(_articulonombre.PadRight(9), 10) + TruncateAt(_talla.PadLeft(4), 4) + TruncateAt(_cantidad.ToString("#0").PadLeft(5), 5) + TruncateAt(_articulo_total.ToString("#0.00").PadLeft(9), 9);
+                                    string _codigo_descripcion = "";/* TruncateAt(_iarticulo.PadRight(10), 10) +
+                                    TruncateAt(_articulonombre.PadRight(9), 10) + TruncateAt(_talla.PadLeft(4), 4) + TruncateAt(_cantidad.ToString("#0").PadLeft(5), 5) + TruncateAt(((_OPG == "1")?0:_articulo_total).ToString("#0.00").PadLeft(9), 9);*/
+
+                                    switch(_OPG)
+                                    {
+                                        case "1":
+                                            _codigo_descripcion = TruncateAt(_iarticulo.PadRight(10), 10) +
+                                    TruncateAt(_articulonombre.PadRight(9), 10) + TruncateAt(_talla.PadLeft(4), 4) + TruncateAt(_cantidad.ToString("#0").PadLeft(5), 5) + TruncateAt((0).ToString("#0.00").PadLeft(9), 9);
+                                            break;
+                                        case "2":
+                                            _codigo_descripcion = TruncateAt(_iarticulo.PadRight(10), 10) +
+                                    TruncateAt(_articulonombre.PadRight(9), 10) + TruncateAt(_talla.PadLeft(4), 4) + TruncateAt(_cantidad.ToString("#0").PadLeft(5), 5) + TruncateAt(((_OPG == "1") ? 0 : _articulo_total).ToString("#0.00").PadLeft(9), 9);
+                                            break;
+                                        case "N":
+                                            _codigo_descripcion = TruncateAt(_iarticulo.PadRight(10), 10) +
+                                    TruncateAt(_articulonombre.PadRight(9), 10) + TruncateAt(_talla.PadLeft(4), 4) + TruncateAt(_cantidad.ToString("#0").PadLeft(5), 5) + TruncateAt((_articulo_total).ToString("#0.00").PadLeft(9), 9);
+                                            break;
+                                    }
+
                                     tk.AgregarItems(_codigo_descripcion);
                                     tk.AgregarItems(_des_largo);
                                     dSubtotal += _articulo_total;
@@ -404,14 +471,48 @@ namespace Epson_Ticket
                                 decimal totalpagar = ((dSubtotal - descuento) + Convert.ToDecimal(mtoigv));
 
                                 tk.lineasGuio();
-                                tk.AgregarFooter("     " + TruncateAt("SUB-TOTAL".ToString().PadRight(16), 16) + TruncateAt("S/".ToString().PadRight(3), 3) + TruncateAt(dSubtotal.ToString("#0.00").PadLeft(14), 14));
+
+                                switch(_OPG)
+                                {
+                                    case "1":
+                                        tk.AgregarFooter("     " + TruncateAt("OP. GRATUITA".ToString().PadRight(16), 16) + TruncateAt("S/".ToString().PadRight(3), 3) + TruncateAt(dSubtotal.ToString("#0.00").PadLeft(14), 14));
+                                        tk.AgregarFooter("     " + TruncateAt("SUB-TOTAL".ToString().PadRight(16), 16) + TruncateAt("S/".ToString().PadRight(3), 3) + TruncateAt(0.ToString("#0.00").PadLeft(14), 14));
+                                        break;
+                                    case "2":
+                                        break;
+                                    case "N":
+                                        tk.AgregarFooter("     " + TruncateAt("SUB-TOTAL".ToString().PadRight(16), 16) + TruncateAt("S/".ToString().PadRight(3), 3) + TruncateAt(dSubtotal.ToString("#0.00").PadLeft(14), 14));
+                                        break;
+                                }
+
+                                //if (_OPG == "1")
+                                //{
+                                //    tk.AgregarFooter("     " + TruncateAt("OP. GRATUITA".ToString().PadRight(16), 16) + TruncateAt("S/".ToString().PadRight(3), 3) + TruncateAt(dSubtotal.ToString("#0.00").PadLeft(14), 14));
+                                //    tk.AgregarFooter("     " + TruncateAt("SUB-TOTAL".ToString().PadRight(16), 16) + TruncateAt("S/".ToString().PadRight(3), 3) + TruncateAt(0.ToString("#0.00").PadLeft(14), 14));
+                                //}
+                                //else
+                                //{ 
+                                //    tk.AgregarFooter("     " + TruncateAt("SUB-TOTAL".ToString().PadRight(16), 16) + TruncateAt("S/".ToString().PadRight(3), 3) + TruncateAt(dSubtotal.ToString("#0.00").PadLeft(14), 14));
+                                //}
                                 tk.AgregarFooter("     " + TruncateAt("DESCUENTO(-)".ToString().PadRight(16), 16) + TruncateAt("S/".ToString().PadRight(3), 3) + TruncateAt(descuento.ToString("#0.00").PadLeft(14), 14));
                                 tk.AgregarFooter("     " + TruncateAt("IGV " + porcigv + "%".ToString().PadRight(16), 16) + TruncateAt("S/".ToString().PadRight(3), 3) + TruncateAt(mtoigv.ToString("#0.00").PadLeft(14), 14));
                                 tk.AgregarFooter("     " + TruncateAt("------------".ToString().PadRight(14), 14));
 
                                 if (_estadook != "2")
                                 {
-                                    tk.AgregarFooter("     " + TruncateAt("TOTAL".ToString().PadRight(16), 16) + TruncateAt("S/".ToString().PadRight(3), 3) + TruncateAt(((dSubtotal - descuento) + Convert.ToDecimal(mtoigv)).ToString("#0.00").PadLeft(14), 14));
+                                    switch (_OPG)
+                                    {
+                                        case "1":
+                                            tk.AgregarFooter("     " + TruncateAt("TOTAL".ToString().PadRight(16), 16) + TruncateAt("S/".ToString().PadRight(3), 3) + TruncateAt(0.ToString("#0.00").PadLeft(14), 14));
+                                            break;
+                                        case "2":
+                                            break;
+                                        case "N":
+                                            tk.AgregarFooter("     " + TruncateAt("TOTAL".ToString().PadRight(16), 16) + TruncateAt("S/".ToString().PadRight(3), 3) + TruncateAt(((dSubtotal - descuento) + Convert.ToDecimal(mtoigv)).ToString("#0.00").PadLeft(14), 14));
+                                            break;
+                                    }
+
+
                                 }
 
                                 if (_estadook == "1")
@@ -450,7 +551,21 @@ namespace Epson_Ticket
 
                                 tk.lineasGuio();
                                 tk.TextoIzquierda("FIRMA:");
-                                tk.AgregarFooter(TruncateAt("EFECTIVO:".ToString().PadRight(21), 21) + TruncateAt("S/".ToString().PadRight(3), 3) + TruncateAt(((dSubtotal - descuento) + Convert.ToDecimal(mtoigv)).ToString("#0.00").PadLeft(14), 14));
+
+                                switch(_OPG)
+                                {
+                                    case "1":
+                                        tk.AgregarFooter(TruncateAt("EFECTIVO:".ToString().PadRight(21), 21) + TruncateAt("S/".ToString().PadRight(3), 3) + TruncateAt(0.ToString("#0.00").PadLeft(14), 14));
+                                        break;
+                                    case "2":
+                                        break;
+                                    case "N":
+                                        tk.AgregarFooter(TruncateAt("EFECTIVO:".ToString().PadRight(21), 21) + TruncateAt("S/".ToString().PadRight(3), 3) + TruncateAt(((dSubtotal - descuento) + Convert.ToDecimal(mtoigv)).ToString("#0.00").PadLeft(14), 14));
+                                        break;
+                                }
+
+                               
+
                                 tk.lineasGuio();
                                 tk.TextoIzquierda("REFERENCIA DE N/C: " + _referencia_nc);
                                 tk.lineasGuio();

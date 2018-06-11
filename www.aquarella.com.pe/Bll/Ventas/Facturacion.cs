@@ -31,6 +31,88 @@ namespace www.aquarella.com.pe.bll.Ventas
         /// <param name="_pointOfSale"></param>
         /// <returns></returns>
         /// 
+        public static Boolean _return_valida_promo_exists(DataTable dt)
+        {
+            Boolean valida = false;
+            string sqlquery = "USP_ValidaUpdLiq_Oferta";
+            try
+            {
+                using (SqlConnection cn = new SqlConnection(Conexion.myconexion()))
+                {
+                    try
+                    {
+                        if (cn.State == 0) cn.Open();
+                        using (SqlCommand cmd = new SqlCommand(sqlquery, cn))
+                        {
+                            cmd.CommandTimeout = 0;
+                            cmd.CommandType = CommandType.StoredProcedure;
+                            cmd.Parameters.AddWithValue("@tmp_articulo", dt);
+                            cmd.Parameters.Add("@valida", SqlDbType.Bit);
+                            cmd.Parameters["@valida"].Direction = ParameterDirection.Output;
+                            cmd.ExecuteNonQuery();
+                            valida =Convert.ToBoolean(cmd.Parameters["@valida"].Value);
+                        }
+                    }
+                    catch (Exception)
+                    {
+                        valida = false;
+                    }
+                    if (cn != null)
+                        if (cn.State == ConnectionState.Open) cn.Close();
+
+                }
+            }
+            catch (Exception)
+            {
+                valida = false;                
+            }
+            return valida;
+        }
+        public static void _return_precio_promo(string art_id,DataTable dt,ref decimal precio_out_con_igv,ref decimal precio_out_sin_igv)
+        {
+           
+            string sqlquery = "USP_ValidaOfertaEspecial";
+            try
+            {
+                using (SqlConnection cn = new SqlConnection(Conexion.myconexion()))
+                {                    
+                    try
+                    {
+                        if (cn.State == 0) cn.Open();
+                        using (SqlCommand cmd = new SqlCommand(sqlquery, cn))
+                        {
+                            cmd.CommandTimeout = 0;
+                            cmd.CommandType = CommandType.StoredProcedure;
+                            cmd.Parameters.AddWithValue("@art_id_oferta", art_id);
+                            cmd.Parameters.AddWithValue("@tmp_articulo", dt);
+                            cmd.Parameters.Add("@precio_out_con_igv", SqlDbType.Money);
+                            cmd.Parameters["@precio_out_con_igv"].Direction = ParameterDirection.Output;
+
+                            cmd.Parameters.Add("@precio_out_sin_igv", SqlDbType.Money);
+                            cmd.Parameters["@precio_out_sin_igv"].Direction = ParameterDirection.Output;
+
+                            cmd.ExecuteNonQuery();
+                            precio_out_con_igv = Convert.ToDecimal(cmd.Parameters["@precio_out_con_igv"].Value);
+                            precio_out_sin_igv = Convert.ToDecimal(cmd.Parameters["@precio_out_sin_igv"].Value);
+                        }
+
+                    }
+                    catch (Exception)
+                    {
+                        precio_out_con_igv = 0;
+                        precio_out_sin_igv = 0;
+                    }
+                    if (cn != null)
+                        if (cn.State == ConnectionState.Open) cn.Close();
+                }
+            }
+            catch (Exception)
+            {
+
+                precio_out_con_igv = 0;
+                precio_out_sin_igv = 0;
+            }         
+        }
         public static DataTable _Consulta_Lider_N(DateTime _fechaini,DateTime _fechafin)
         {
             string sqlquery = "USP_Consulta_Venta_LiderN";
