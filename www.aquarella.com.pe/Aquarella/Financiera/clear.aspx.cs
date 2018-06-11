@@ -22,6 +22,7 @@ namespace www.aquarella.com.pe.Aquarella.Financiera
         List<Documents_Trans> _lstDocTx;
 
         string _nameList = "ListDocTx";
+        public static string _nameSessionCustomer = "nameSessionCustomer", _nSNewOrdrLine = "_nSNewOrdrLine", _nSArtSiz = "_nSArtSiz",_currency = ConfigurationManager.AppSettings["kCurrency"];
 
         #region < Eventos del Load >
 
@@ -125,6 +126,7 @@ namespace www.aquarella.com.pe.Aquarella.Financiera
 
             if (!IsPostBack)
             {
+           
                 Session["_list_liq"] = string.Empty;
                 Session[_nameList] = new List<Documents_Trans>();
 
@@ -201,7 +203,7 @@ namespace www.aquarella.com.pe.Aquarella.Financiera
             msnMessage.HideMessage();
             // Nuevo cliente seleccionado
             string selCust = ((DropDownList)sender).SelectedValue;
-
+            
             Session[_nameList] = new List<Documents_Trans>();
             _lstDocTx = getListFromSes();
 
@@ -212,6 +214,45 @@ namespace www.aquarella.com.pe.Aquarella.Financiera
                 setCreditValueCust(_user._usv_co, Convert.ToDecimal(selCust));
                 refreshGrid();
             }
+        }
+
+        public Coordinator cargarDatosCustomer(string strBasId) {
+
+            Coordinator cust = new Coordinator();
+
+            if (strBasId != "")
+            {
+                DataSet _ds_refrescar = Coordinator.getCoordinatorByPk(Convert.ToDecimal(strBasId));
+                DataRow dRow = _ds_refrescar.Tables[0].Rows[0];
+
+                Session["aplica_percepcion_cliente"] = Convert.ToBoolean(dRow["aplica_percepcion"].ToString());
+
+                Coordinator custIt = new Coordinator
+                {
+                    //_co = dRow["cov_co"].ToString(),
+                    _commission = Convert.ToDecimal(dRow["Con_Fig_PorcDesc"]),
+                    _idCust = Convert.ToDecimal(dRow["bas_id"]),
+                    //_idWare = dRow["cov_warehouseid"].ToString(),
+                    _taxRate = Convert.ToDecimal(dRow["Con_Fig_Igv"]),
+                    _commission_POS_visaUnica = Convert.ToDecimal(dRow["Con_Fig_PorcDescPos"]),
+                    _percepcion = Convert.ToDecimal(dRow["Con_Fig_Percepcion"]),
+                    _email = dRow["bas_correo"].ToString(),
+                    _nombrecompleto = dRow["nombrecompleto"].ToString(),
+                    _premio = dRow["Premio"].ToString(),
+                    _ppremio = dRow["PPremio"].ToString(),
+                    _pTalla = dRow["PTalla"].ToString(),
+                    _pPremID = dRow["PremId"].ToString(),
+                    _pMonto = Convert.ToDecimal(dRow["Pmonto"]),
+                    _pCantidad = Convert.ToInt32(dRow["PCantidad"]),
+                    _aplica_percepcion = Convert.ToBoolean(dRow["aplica_percepcion"].ToString())
+                };
+
+                cust = custIt;
+
+
+            }
+
+            return cust;
         }
 
         protected void setCreditValueCust(string co, decimal cust)
@@ -469,6 +510,21 @@ namespace www.aquarella.com.pe.Aquarella.Financiera
                     //
                     if (!string.IsNullOrEmpty(clear))
                     {
+
+                        //inicio emision de premio
+                        string bas_id = dwCustomers.SelectedValue;
+                        if (bas_id != "")
+                        {
+                            Coordinator cust = cargarDatosCustomer(bas_id);
+                            decimal montoMinimo = cust._pMonto;
+                            if (cust._ppremio != ""&& monto_liq>= montoMinimo)
+                            {
+                                Boolean b = www.aquarella.com.pe.Aquarella.Logistica.ordersForm.getArticlePremio(cust, _user);
+                            }
+                            
+                        }
+                        //fin emision de premio     
+
                         msnMessage.LoadMessage("El cruce de información fue grabado correctamente, su pedido sera enviado  marcación y posterior facturación; número del cruce: " + clear, UserControl.ucMessage.MessageType.Information);
 
                         //procedimiento envio de correo  al usuario admin
@@ -529,12 +585,7 @@ namespace www.aquarella.com.pe.Aquarella.Financiera
                 msnMessage.LoadMessage("Por favor, debe seleccionar los documentos que formaran el cruce financiero.", UserControl.ucMessage.MessageType.Error);
         }
 
-        #region < List Generic >
-
-        /// <summary>
-        /// Cargar objetos en lista generica
-        /// </summary>
-        /// <param name="e"></param>
+       
         protected void setListDocTx(GridViewRowEventArgs e)
         {
             _lstDocTx = getListFromSes();
@@ -581,12 +632,10 @@ namespace www.aquarella.com.pe.Aquarella.Financiera
 
                 Session[_nameList] = _lstDocTx;
             }
-            catch
+            catch(Exception ex)
             { }
         }
 
-        #endregion
-        
         #region < Data Sources >
 
         /// <summary>
@@ -616,8 +665,7 @@ namespace www.aquarella.com.pe.Aquarella.Financiera
         {
             /// Deido a que la funcion es estatica se deben crear referencias para podre hacer llamados a algunos metodos
             System.Web.SessionState.HttpSessionState sessions = HttpContext.Current.Session;
-
-            //
+            
             List<Documents_Trans> lstDocTx = (List<Documents_Trans>)sessions["ListDocTx"];
 
             string list_liq = string.Empty;

@@ -28,6 +28,12 @@ namespace www.aquarella.com.pe.bll
         public string _nombrecompleto { get; set; }
 
         public string _premio { get; set; }
+        public string _ppremio { get; set; }
+        public string _pTalla { get; set; }
+        public Int32 _pCantidad { get; set; }
+        public Decimal _pMonto { get; set; }
+
+        public string _pPremID { get; set; }
 
         public Boolean _aplica_percepcion { get; set; }
         /// <summary>
