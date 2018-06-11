@@ -524,10 +524,7 @@ namespace Integrado.Sistemas.Ventas
                             //MessageBox.Show("ERROR EN LA GENERACION POR FAVOR CONSULTE CON SISTEMAS..==>> TIPO DE ERROR (" + _error + ")", Ent_Msg.msginfomacion,MessageBoxButton.OK,MessageBoxImage.Error);
                             return;
                         }
-
-
-                        //
-
+                        
                         if (_error.Length > 0)
                         {
                             await ProgressAlert.CloseAsync();

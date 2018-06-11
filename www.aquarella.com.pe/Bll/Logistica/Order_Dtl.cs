@@ -217,6 +217,57 @@ namespace www.aquarella.com.pe.bll
             return order;
         }
 
+        public static Order_Dtl getNewLineOrderPremio(DataTable dtArt)
+        {
+            Order_Dtl order = new Order_Dtl();
+
+            string currency = System.Configuration.ConfigurationManager.AppSettings["kCurrency"];
+
+            if (dtArt == null || dtArt.Rows.Count == 0)
+                return null;
+
+            DataRow dr = dtArt.Rows[0];
+
+            order = new Order_Dtl
+            {
+                _code = dr["Art_Id"].ToString(),
+                _artName = dr["Art_Descripcion"].ToString(),
+                _brand = dr["Mar_Descripcion"].ToString(),
+                //_brandImg = dr["brv_image"].ToString(),
+                _color = dr["Col_Descripcion"].ToString(),
+                _majorCat = dr["Cat_Pri_Descripcion"].ToString(),
+                _cat = dr["Cat_Descripcion"].ToString(),
+                _subcat = dr["Sca_Descripcion"].ToString(),
+                //_origin = dr["arv_origin"].ToString(),
+                //_originDesc = dr["arv_origin"].ToString().Equals(Constants.IdOriginImported) ? "Artículo importado" : "Artículo nacional",
+                _comm = (int)Convert.ToInt16(dr["Art_Comision"]),
+                _uriPhoto = dr["Art_Foto"].ToString(),
+                _price = Convert.ToDecimal(dr["Art_Costo"]),
+                _priceDesc = Convert.ToDecimal(dr["Art_Costo"]).ToString(currency),
+                _dsctoDesc = order._dscto.ToString(currency),
+                _priceigv = Convert.ToDecimal(dr["Art_Costo"]),
+                _priceigvDesc = Convert.ToDecimal(dr["Art_Costo"]).ToString(currency),
+                _ap_percepcion = dr["Afec_Percepcion"].ToString(),
+                _ofe_id = Convert.ToDecimal(dr["Ofe_Id"]),
+                _ofe_maxpares = Convert.ToDecimal(dr["Ofe_MaxPares"]),
+                _ofe_porc = Convert.ToDecimal(dr["Ofe_Porc"])
+            };
+
+            //if (dtDisscArt == null || dtDisscArt.Rows.Count == 0)
+            //    return order;
+
+            //dr = dtDisscArt.Rows[0];
+
+            //order._dscto = Convert.ToDecimal(dr["valdiscount"]);
+            //order._dsctoDesc = order._dscto.ToString(currency);
+            //order._dsctoPerc = Convert.ToDecimal(dr["porcentaje"]);
+            //order._dsctoVale = order._price - order._dscto;
+            //order._dsctoValeDesc = order._dsctoVale.ToString(currency);
+            //order._dsctoMsg = dr["div_message"].ToString();
+
+            return order;
+        }
+
         public static Order_Dtl getNewLineOrder(DataRow dr)
         {
             Order_Dtl order = new Order_Dtl();

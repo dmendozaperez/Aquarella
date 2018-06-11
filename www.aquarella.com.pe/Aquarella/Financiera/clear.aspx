@@ -55,7 +55,7 @@
             <table width="100%" class="tablagris" cellpadding="4">
                 <tr>
                     <td class="fsal f13" colspan="2">
-                        Selección de promotor
+                        Selección de promotor 
                     </td>
                 </tr>
                 <tr>

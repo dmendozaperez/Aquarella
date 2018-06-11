@@ -209,7 +209,7 @@
                                                 </tr>
                                                 <tr>
                                                     <td>
-                                                        Premio :
+                                                        Premio por ganar :
                                                     </td>
                                                     <td>
                                                         <asp:Label ID="lblPremio" Font-Size="14" ForeColor="#DD4B39" runat="server" Text="Label"></asp:Label>
