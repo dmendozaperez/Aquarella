@@ -61,7 +61,7 @@ namespace Integrado.Design.WPF_Master
         {
             Mouse.OverrideCursor = Cursors.Wait;
             _server = "www.aquarellaperu.com.pe";
-            _base_datos = "BdAquarellaDes4";
+            _base_datos = "BdAquarellaDes5";
             _user = "sa";
             _password = "Bata2013";
 
