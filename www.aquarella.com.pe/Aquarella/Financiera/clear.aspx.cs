@@ -215,46 +215,7 @@ namespace www.aquarella.com.pe.Aquarella.Financiera
                 refreshGrid();
             }
         }
-
-        public Coordinator cargarDatosCustomer(string strBasId) {
-
-            Coordinator cust = new Coordinator();
-
-            if (strBasId != "")
-            {
-                DataSet _ds_refrescar = Coordinator.getCoordinatorByPk(Convert.ToDecimal(strBasId));
-                DataRow dRow = _ds_refrescar.Tables[0].Rows[0];
-
-                Session["aplica_percepcion_cliente"] = Convert.ToBoolean(dRow["aplica_percepcion"].ToString());
-
-                Coordinator custIt = new Coordinator
-                {
-                    //_co = dRow["cov_co"].ToString(),
-                    _commission = Convert.ToDecimal(dRow["Con_Fig_PorcDesc"]),
-                    _idCust = Convert.ToDecimal(dRow["bas_id"]),
-                    //_idWare = dRow["cov_warehouseid"].ToString(),
-                    _taxRate = Convert.ToDecimal(dRow["Con_Fig_Igv"]),
-                    _commission_POS_visaUnica = Convert.ToDecimal(dRow["Con_Fig_PorcDescPos"]),
-                    _percepcion = Convert.ToDecimal(dRow["Con_Fig_Percepcion"]),
-                    _email = dRow["bas_correo"].ToString(),
-                    _nombrecompleto = dRow["nombrecompleto"].ToString(),
-                    _premio = dRow["Premio"].ToString(),
-                    _ppremio = dRow["PPremio"].ToString(),
-                    _pTalla = dRow["PTalla"].ToString(),
-                    _pPremID = dRow["PremId"].ToString(),
-                    _pMonto = Convert.ToDecimal(dRow["Pmonto"]),
-                    _pCantidad = Convert.ToInt32(dRow["PCantidad"]),
-                    _aplica_percepcion = Convert.ToBoolean(dRow["aplica_percepcion"].ToString())
-                };
-
-                cust = custIt;
-
-
-            }
-
-            return cust;
-        }
-
+        
         protected void setCreditValueCust(string co, decimal cust)
         {
             //,
@@ -510,20 +471,7 @@ namespace www.aquarella.com.pe.Aquarella.Financiera
                     //
                     if (!string.IsNullOrEmpty(clear))
                     {
-
-                        //inicio emision de premio
-                        string bas_id = dwCustomers.SelectedValue;
-                        if (bas_id != "")
-                        {
-                            Coordinator cust = cargarDatosCustomer(bas_id);
-                            decimal montoMinimo = cust._pMonto;
-                            if (cust._ppremio != ""&& monto_liq>= montoMinimo)
-                            {
-                                Boolean b = www.aquarella.com.pe.Aquarella.Logistica.ordersForm.getArticlePremio(cust, _user);
-                            }
-                            
-                        }
-                        //fin emision de premio     
+                         
 
                         msnMessage.LoadMessage("El cruce de información fue grabado correctamente, su pedido sera enviado  marcación y posterior facturación; número del cruce: " + clear, UserControl.ucMessage.MessageType.Information);
 
