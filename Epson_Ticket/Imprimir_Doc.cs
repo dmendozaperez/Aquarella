@@ -144,9 +144,10 @@ namespace Epson_Ticket
                                     TruncateAt(_articulonombre.PadRight(9), 10) + TruncateAt(_talla.PadLeft(4), 4) + TruncateAt(_cantidad.ToString("#0").PadLeft(5), 5) + TruncateAt(((_OPG == "1") ? 0 : _articulo_total).ToString("#0.00").PadLeft(9), 9);*/
 
                                     switch (_OPG)
-                                    { 
+                                    {
                                         /*muestra*/
                                         case "1":
+                                        case "3":
                                              _codigo_descripcion = TruncateAt(_iarticulo.PadRight(10), 10) +
                                     TruncateAt(_articulonombre.PadRight(9), 10) + TruncateAt(_talla.PadLeft(4), 4) + TruncateAt(_cantidad.ToString("#0").PadLeft(5), 5) + TruncateAt((0).ToString("#0.00").PadLeft(9), 9);
                                             break;
@@ -193,6 +194,7 @@ namespace Epson_Ticket
                                     switch(_OPG)
                                     {
                                         case "1":
+                                        case "3":
                                             tk.AgregarFooter("     " + TruncateAt("OP. GRATUITA".ToString().PadRight(16), 16) + TruncateAt("S/".ToString().PadRight(3), 3) + TruncateAt(dSubtotal.ToString("#0.00").PadLeft(14), 14));
                                             dSubtotal = 0;
                                             tk.AgregarFooter("     " + TruncateAt("SUB-TOTAL".ToString().PadRight(16), 16) + TruncateAt("S/".ToString().PadRight(3), 3) + TruncateAt(dSubtotal.ToString("#0.00").PadLeft(14), 14));
