@@ -464,16 +464,21 @@ namespace www.aquarella.com.pe.Aquarella.Financiera
 
 
                     clear = Clear.setPreClear(listLiq, dtpagos);
-                        
+                                        
                     // en este caso vamos hacer un update a la nota de credito de financiera de document_trans
                     //Clear.sbupdateclearncredito(listLiq, clear);
 
                     //
                     if (!string.IsNullOrEmpty(clear))
                     {
-                         
+                        string[] prems = clear.Split('|');
+                        string strpremio = prems[1].ToString();
+                        string strmensaje = "";
 
-                        msnMessage.LoadMessage("El cruce de información fue grabado correctamente, su pedido sera enviado  marcación y posterior facturación; número del cruce: " + clear, UserControl.ucMessage.MessageType.Information);
+                        if (strpremio == "S")
+                            strmensaje = ".Usted ha ganado un premio.";
+
+                        msnMessage.LoadMessage("El cruce de información fue grabado correctamente, su pedido sera enviado  marcación y posterior facturación; número del cruce: " + prems[0].ToString() + strmensaje, UserControl.ucMessage.MessageType.Information);
 
                         //procedimiento envio de correo  al usuario admin
 

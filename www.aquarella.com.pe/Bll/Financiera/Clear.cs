@@ -204,9 +204,10 @@ namespace www.aquarella.com.pe.bll
                 cmd.CommandTimeout = 0;
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.Parameters.AddWithValue("@liq_id", _list_liquidations);
-                cmd.Parameters.AddWithValue("@gru_id_devolver", DbType.String);
+                //cmd.Parameters.AddWithValue("@gru_id_devolver", DbType.String);
                 cmd.Parameters.AddWithValue("@Tmp_Pago", dt);
-                cmd.Parameters["@gru_id_devolver"].Direction = ParameterDirection.Output;
+                //cmd.Parameters["@gru_id_devolver"].Direction = ParameterDirection.Output;
+                cmd.Parameters.Add("@gru_id_devolver", SqlDbType.VarChar, 20).Direction = ParameterDirection.Output;
                 cmd.ExecuteNonQuery();
 
                 clearId =Convert.ToString(cmd.Parameters["@gru_id_devolver"].Value);

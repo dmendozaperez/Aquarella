@@ -60,8 +60,9 @@ namespace Integrado.Design.WPF_Master
         private void btnaquarella_Click(object sender, RoutedEventArgs e)
         {
             Mouse.OverrideCursor = Cursors.Wait;
-            _server = "www.aquarellaperu.com.pe";
-            _base_datos = "BdAquarellaDes5";
+            //_server = "www.aquarellaperu.com.pe";
+            _server = "10.10.10.206";
+            _base_datos = "BdAquarellaDes4";
             _user = "sa";
             _password = "Bata2013";
 
