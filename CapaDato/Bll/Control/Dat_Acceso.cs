@@ -72,7 +72,7 @@ namespace CapaDato.Bll.Control
                     }
                 }
             }
-            catch
+            catch(Exception ex)
             {
                 _valida = false;
             }
