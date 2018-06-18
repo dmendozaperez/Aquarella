@@ -275,7 +275,7 @@ function valFieldsAddItem() {
         //ddArticle($dwSizes.val(), $qty.val(), $('select[id$=ddlTipoPago] :selected').val());
         addArticle($dwSizes.val(), $qty.val(), $("[id$='h_numTipPago']").val());
         /*Verificamos para agregar premio*/
-        VerificarPremio();
+        ////VerificarPremio();
     }
 }
 
@@ -410,6 +410,7 @@ function initPage() {
 //1. Consulta articulo y carga informacion y tallas
 function getArticle(code) {
     //Ajax
+    var tipoPago = $("[id$='h_numTipPago']").val()
     whileLoad();
     showLoad(true, 'Cargando información de articulo..', false);
     var urlMethod = "ordersForm.aspx/getArticle";

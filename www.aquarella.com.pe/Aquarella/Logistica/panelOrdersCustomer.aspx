@@ -250,6 +250,7 @@
                     <li><a href="#fragment-4"><span>Historial de Consignaciones</span></a></li>
                     <li><a href="#fragment-5"><span>Nota de Credito (Saldos)</span></a></li>
                     <li><a href="#fragment-6"><span>Historial de Ventas (Higuereta)</span></a></li>
+                    <%--<li><a href="#fragment-7"><span>Flete</span></a></li>--%>
                 </ul>
                 <!-- PEDIDOS EN BORRADOR -->
                 <div id="fragment-1" style="min-height: 200px;">
@@ -668,6 +669,7 @@
                         </Triggers>
                     </asp:UpdatePanel>
                 </div>
+               
             </div>
         </div>
     </div>

@@ -436,9 +436,30 @@ namespace www.aquarella.com.pe.Aquarella.Logistica
                     {
                         if (dsArt.Tables.Count>0)
                         {
+
                             dsArt.Tables[0].Rows[0]["art_pre_sin_igv"] = new_precio_oferta_sinigv;
                             dsArt.Tables[0].Rows[0]["art_pre_con_igv"] = new_precio_oferta_conigv;
                             dsArt.Tables[0].Rows[0]["afec_percepcion"] = 1;
+                        }
+                    }
+                    //decimal new_precio_oferta_sinigv=new_precio_oferta_conigv*
+                }               
+
+                string TipoPago = cust._vartipopago ;
+
+                if (TipoPago == "008")
+                {
+                    if (dsArt != null)
+                    {
+                        if (dsArt.Tables.Count > 0)
+                        {
+                            var strPre = dsArt.Tables[0].Rows[0]["art_pre_sin_igv"].ToString();
+                            if (strPre == "")
+                            {
+                                dsArt.Tables[0].Rows[0]["art_pre_sin_igv"] = 0;
+                                dsArt.Tables[0].Rows[0]["art_pre_con_igv"] = 0;
+                                dsArt.Tables[0].Rows[0]["afec_percepcion"] = 1;
+                            }
                         }
                     }
                     //decimal new_precio_oferta_sinigv=new_precio_oferta_conigv*
@@ -457,9 +478,7 @@ namespace www.aquarella.com.pe.Aquarella.Logistica
 
                 order.Add(newLineOrder);
 
-                HttpContext.Current.Session[_nSNewOrdrLine] = order;                              
-              
-
+                HttpContext.Current.Session[_nSNewOrdrLine] = order;   
                 return order;
             }
             catch (Exception e) { throw new Exception(e.Message, e.InnerException); }

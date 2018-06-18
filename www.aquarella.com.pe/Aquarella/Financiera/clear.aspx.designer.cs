@@ -137,5 +137,14 @@ namespace www.aquarella.com.pe.Aquarella.Financiera {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btCreateClear;
+        
+        /// <summary>
+        /// Control PopupBox.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Literal PopupBox;
     }
 }

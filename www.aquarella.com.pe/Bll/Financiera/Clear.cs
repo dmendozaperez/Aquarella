@@ -227,6 +227,44 @@ namespace www.aquarella.com.pe.bll
             catch (Exception e) { throw new Exception(e.Message, e.InnerException); }
         }
 
+        public static string setCrearLiquidacionPremio(int basId, int premioId)
+        {
+            //return "";
+            string strLiqui = string.Empty;
+            string sqlquery = "USP_Generar_LiquidacionPremio";
+            SqlConnection cn = null;
+            SqlCommand cmd = null;
+            try
+            {
+                cn = new SqlConnection(Conexion.myconexion());
+                if (cn.State == 0) cn.Open();
+                cmd = new SqlCommand(sqlquery, cn);
+                cmd.CommandTimeout = 0;
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@bas_id", basId);
+                //cmd.Parameters.AddWithValue("@gru_id_devolver", DbType.String);
+                cmd.Parameters.AddWithValue("@tipoRegalo", premioId);
+                //cmd.Parameters["@gru_id_devolver"].Direction = ParameterDirection.Output;
+                cmd.Parameters.Add("@gru_id_devolver", SqlDbType.VarChar, 20).Direction = ParameterDirection.Output;
+                cmd.ExecuteNonQuery();
+
+                strLiqui = Convert.ToString(cmd.Parameters["@gru_id_devolver"].Value);
+                return strLiqui;
+
+                //Database db = DatabaseFactory.CreateDatabase(_conn);
+                ////                
+                //string sqlCommand = "financiera.sp_pre_clear";
+                ////
+                //DbCommand dbCommandWrapper = db.GetStoredProcCommand(sqlCommand, _company, _list_liquidations, _list_documentrans, clearId);
+                ////
+                //db.ExecuteNonQuery(dbCommandWrapper);
+                //clearId = db.GetParameterValue(dbCommandWrapper, "p_clv_clear_id").ToString();
+
+                //return clearId;
+            }
+            catch (Exception e) { throw new Exception(e.Message, e.InnerException); }
+        }
+
         public static void setpagocredito(string _liquidacion)
         {
             //try
