@@ -69,6 +69,9 @@ namespace www.aquarella.com.pe.Aquarella.Logistica
                     this.formForEmployee();
                 }
 
+                //txtDateStart.Text = DateTime.Today.ToString("dd/MM/yyyy");
+                //txtDateEnd.Text = DateTime.Today.ToString("dd/MM/yyyy");
+
                 //if (_user._usv_employee)
                 //    this.formForEmployee();
                 //else if (_user._usv_customer)
@@ -232,12 +235,14 @@ namespace www.aquarella.com.pe.Aquarella.Logistica
 
                 gvventa.DataSourceID = odsventa.ID;
                 gvventa.DataBind();
+                
             }
             catch(Exception exc)
             {
                 return;
             }
         }
+              
 
         /// <summary>
         /// Cambio en la seleccion de cliente
@@ -257,10 +262,14 @@ namespace www.aquarella.com.pe.Aquarella.Logistica
                 this.paintInfoCustomer(Coordinator.getCoordinatorByPk(Convert.ToDecimal(selectedCustomer)));
                 // Cargar pedidos en borrador, liquidaciones y devoluciones
                 getOrdLiqAnsRet( Convert.ToDecimal(selectedCustomer));
+
+
                 
             }
             else
                 Session[_nameSessionCustomer] = new Coordinator();
+
+            //ConsultaFlete();
         }
 
         #region < Eventos sobre GridView >
@@ -899,6 +908,65 @@ namespace www.aquarella.com.pe.Aquarella.Logistica
             imageButton2.Attributes.Add("onclick", "javascript:return confirm('¿Esta seguro de Anular el pedido borrador N° : -" + DataBinder.Eval(e.Row.DataItem, "ped_id") + "- ?')");
         }
 
-     
+        //protected void btConsult_Click(object sender, EventArgs e)
+        //{
+
+        //    ConsultaFlete();
+        //}
+
+        //protected void ConsultaFlete()
+        //{
+        //    decimal idCustomer = Convert.ToDecimal(dwCustomers.SelectedValue);
+        //    DataSet dsResultLiq = Coordinator.getOrdLiqLider(Convert.ToDateTime(txtDateStart.Text), Convert.ToDateTime(txtDateEnd.Text),idCustomer);
+        //    gvLiquiFlete.DataSource = dsResultLiq.Tables[0];
+        //    gvLiquiFlete.DataBind();
+        //}
+
+        //protected void btGuardar_Click(object sender, EventArgs e)
+        //{
+            
+        //    string strDataDetalle = "";
+           
+                       
+        //    for (int i = 0; i <= gvLiquiFlete.Rows.Count - 1; i++)
+        //    {
+        //        CheckBox ckSelect = ((CheckBox)(gvReturns.Rows[i].FindControl("chkSelec")));
+                
+        //        if (ckSelect.Checked)
+        //        {
+
+        //            string strIdliq = ((HiddenField)(gvReturns.Rows[i].FindControl("hf_Liq_Id"))).Value;
+                  
+        //            strDataDetalle += "<row  ";
+        //            strDataDetalle += " IdLiquidacion =¿" + strIdliq + "¿ ";
+        //            strDataDetalle += "/>";
+                                        
+        //        }
+
+        //    }
+
+
+        //    if (strDataDetalle != "")
+        //    {
+        //        //DataSet dsreturn = www.aquarella.com.pe.Bll.Ventas.DespachoAlmacen.InsertarDespacho(_user._bas_id, intIdDespacho, strDataDetalle, strLiqLiderDespacho, Descripcion);
+        //        DataTable dtResult = new DataTable();
+        //        //dtResult = dsreturn.Tables[0];
+
+        //        //foreach (DataRow row in dtResult.Rows)
+        //        //{
+        //        //_iddespacho = row["DESPACHO_ID"].ToString();
+
+        //        //}
+              
+               
+        //    }
+        //    else
+        //    {
+        //        this.msnMessage.LoadMessage("Error : Debe elegir al menos un elemento de la lista.", ucMessage.MessageType.Error);
+        //    }
+
+        //}
+
+
     }
 }

@@ -136,6 +136,68 @@ namespace www.aquarella.com.pe.bll
             catch (Exception e) { throw new Exception(e.Message, e.InnerException); }
         }
 
+        public static DataSet getOrdLiqLider(DateTime date_ini, DateTime date_fin, decimal _idCust)
+        {
+            string sqlquery = "USP_Leer_Liquidacion_Lider";
+            SqlConnection cn = null;
+            SqlCommand cmd = null;
+            SqlDataAdapter da = null;
+            DataSet ds = null;
+            try
+            {
+
+                cn = new SqlConnection(Conexion.myconexion());
+                cmd = new SqlCommand(sqlquery, cn);
+                cmd.CommandTimeout = 0;
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@bas_id", _idCust);
+                cmd.Parameters.AddWithValue("@fecha_inicio", date_ini);
+                cmd.Parameters.AddWithValue("@fecha_final", date_fin);
+                da = new SqlDataAdapter(cmd);
+                ds = new DataSet();
+                da.Fill(ds);
+                return ds;
+            }
+            catch (Exception e) { throw new Exception(e.Message, e.InnerException); }
+        }
+
+        public static string setPreCrucePago(string _list_liquidations, DataTable dt)
+        {
+            //return "";
+            string clearId = string.Empty;
+            string sqlquery = "USP_Pre_Cruce_Pago";
+            SqlConnection cn = null;
+            SqlCommand cmd = null;
+            try
+            {
+                cn = new SqlConnection(Conexion.myconexion());
+                if (cn.State == 0) cn.Open();
+                cmd = new SqlCommand(sqlquery, cn);
+                cmd.CommandTimeout = 0;
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@liq_id", _list_liquidations);
+                cmd.Parameters.AddWithValue("@gru_id_devolver", DbType.String);
+                cmd.Parameters.AddWithValue("@Tmp_Pago", dt);
+                cmd.Parameters["@gru_id_devolver"].Direction = ParameterDirection.Output;
+                cmd.ExecuteNonQuery();
+
+                clearId = Convert.ToString(cmd.Parameters["@gru_id_devolver"].Value);
+                return clearId;
+
+                //Database db = DatabaseFactory.CreateDatabase(_conn);
+                ////                
+                //string sqlCommand = "financiera.sp_pre_clear";
+                ////
+                //DbCommand dbCommandWrapper = db.GetStoredProcCommand(sqlCommand, _company, _list_liquidations, _list_documentrans, clearId);
+                ////
+                //db.ExecuteNonQuery(dbCommandWrapper);
+                //clearId = db.GetParameterValue(dbCommandWrapper, "p_clv_clear_id").ToString();
+
+                //return clearId;
+            }
+            catch (Exception e) { throw new Exception(e.Message, e.InnerException); }
+        }
+
         /// <summary>
         /// Crear un nuevo cliente
         /// </summary>

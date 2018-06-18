@@ -1,8 +1,28 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Design/Site.Master" AutoEventWireup="true"
     StylesheetTheme="SiteTheme" CodeBehind="clear.aspx.cs" Inherits="www.aquarella.com.pe.Aquarella.Financiera.clear" %>
 
-<asp:Content ID="Content1" ContentPlaceHolderID="headCPH" runat="server">    
-    <script type="text/javascript" language="javascript">
+<asp:Content ID="Content1" ContentPlaceHolderID="headCPH" runat="server">  
+       <script type="text/javascript" language="javascript">
+           //$(document).ready(function () {
+           //    $("#dialog-confirm").dialog({
+           //        autoOpen: false,
+           //        resizable: false,
+           //        width: 400,
+           //        height: 160,
+           //        modal: true,
+           //        buttons: {
+           //            "Continuar": function () {
+           //                $(this).dialog("close");
+           //                alert("1")                                                      
+           //            },
+           //            "Cancelar": function () {
+           //                $(this).dialog("close");
+           //                alert("2")
+           //            }
+           //        }
+           //    });
+
+           //})
         // Habilitar el thickbox despues de una llamAQUARELLA asincrona por el ajax
         function pageLoad() {
             var isAsyncPostback = Sys.WebForms.PageRequestManager.getInstance().get_isInAsyncPostBack();
@@ -10,6 +30,102 @@
                 $("input:submit,button").button();
             }
         }
+
+        function ConfirmacionPremio(IdPremio, IdPromotor) {
+
+            $("#dialog-confirm").dialog({
+                autoOpen: false,
+                resizable: false,
+                width: 400,
+                height: 160,
+                modal: true,
+                buttons: {
+                    "Continuar": function () {
+                        $(this).dialog("close");
+                        liquidarPremio(IdPremio, IdPromotor);
+                    },
+                    "Cancelar": function () {
+                        $(this).dialog("close");
+                      
+                    }
+                }
+            });
+
+            $("#dialog-confirm").dialog({ modal: true, closeOnEscape: false, closeText: 'hide', resizable: false, width: 400 });
+            $('#dialog-confirm').dialog('option', 'title', 'Generacion de premio.');
+            $("#dialog-confirm").dialog("open");
+            document.getElementById('popupx').innerHTML = 'Usted ha ganado un premio; ¿desea generar el premio ? '
+        }
+           
+       
+        function ConfirmacionLiquiPremio(IdPremio, IdPromotor) {
+                       
+            var seleccion = confirm("Usted ha ganado un premio, desea generar el premio ?");
+            if (seleccion)
+                liquidarPremio(IdPremio, IdPromotor);
+            
+        }
+
+        function liquidarPremio(IdPremio, IdPromotor) {
+            //Ajax
+          
+            //var strtipoPago = $dwpago.val();
+            //$("[id$='h_numTipPago']").val(strtipoPago);
+            var urlMethod = "clear.aspx/GenerarLiquidacionPremio";
+            var jsonData = '{strPremId:"' + IdPremio + '", strBasId:"' + IdPromotor + '"}';//,tipoPago:"' + strtipoPago + '"}';
+            SendAjax(urlMethod, jsonData, mostrarLiquidacion);  //addArticlesTable);   
+            /*en esta opcion vamos a ver si hay ofertas*/
+            //fupdateitemPremio(); 
+            /**********/
+        }
+        function mostrarLiquidacion(msg) {
+        
+            var strLiquidacion = msg.d;
+         
+            $("#dialog-confirm").dialog({
+                autoOpen: false,
+                resizable: false,
+                width: 400,
+                height: 160,
+                modal: true,
+                buttons: {
+                    
+                    "Cerrar": function () {
+                        $(this).dialog("close");
+                    }
+                }
+            });
+
+            $("#dialog-confirm").dialog({ modal: true, closeOnEscape: false, closeText: 'hide', resizable: false, width: 400 });
+            $('#dialog-confirm').dialog('option', 'title', 'Premio Generado');
+            $("#dialog-confirm").dialog("open");
+            document.getElementById('popupx').innerHTML = 'el premio se a generado en el pedido :' + strLiquidacion
+
+
+        }
+
+        function SendAjax(urlMethod, jsonData, returnFunction) {
+            $.ajax({
+                type: "POST",
+                contentType: "application/json; charset=utf-8",
+                url: urlMethod,
+                data: jsonData,
+                dataType: "json",
+                //async: true,
+                success: function (msg) {
+                    // 
+                    if (msg != null) {
+                        returnFunction(msg);
+                    }
+                },
+                error: function (xhr, status, error) {
+                    // Boil the ASP.NET AJAX error down to JSON.
+                    var err = eval("(" + xhr.responseText + ")");
+                    onAjaxError(err.Message);
+                }
+            });
+        }
+
     </script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolderTitle" runat="server">
@@ -159,4 +275,14 @@
             </tr>
         </table>
     </div>
+    <asp:Literal ID="PopupBox" runat="server"></asp:Literal>
+    <div id="dialog-confirm" style="display: none;">
+    <p>
+        <span class="ui-icon ui-icon-alert" style="float: left; margin: 0 7px 20px 0;"></span>
+       <div id="popupx"></div>
+
+    </p>
+    </div>
+    <!-- DIALOG CONFIRM -->
+  
 </asp:Content>
