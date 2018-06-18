@@ -46,7 +46,7 @@
                     },
                     "Cancelar": function () {
                         $(this).dialog("close");
-                        alert("2")
+                      
                     }
                 }
             });
@@ -82,7 +82,25 @@
         
             var strLiquidacion = msg.d;
          
-            alert("se genero el premio en el pedido : '" + strLiquidacion+"'.");
+            $("#dialog-confirm").dialog({
+                autoOpen: false,
+                resizable: false,
+                width: 400,
+                height: 160,
+                modal: true,
+                buttons: {
+                    
+                    "Cerrar": function () {
+                        $(this).dialog("close");
+                    }
+                }
+            });
+
+            $("#dialog-confirm").dialog({ modal: true, closeOnEscape: false, closeText: 'hide', resizable: false, width: 400 });
+            $('#dialog-confirm').dialog('option', 'title', 'Premio Generado');
+            $("#dialog-confirm").dialog("open");
+            document.getElementById('popupx').innerHTML = 'el premio se a generado en el pedido :' + strLiquidacion
+
 
         }
 
