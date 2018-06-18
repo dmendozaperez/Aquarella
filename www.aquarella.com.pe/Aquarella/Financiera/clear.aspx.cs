@@ -130,7 +130,7 @@ namespace www.aquarella.com.pe.Aquarella.Financiera
                 Session["_list_liq"] = string.Empty;
                 Session[_nameList] = new List<Documents_Trans>();
 
-                //
+               
                 ((BoundField)(gvClear.Columns[3])).DataFormatString = "{0:" + ConfigurationManager.AppSettings["kCurrency"] + "}";
 
                 if ((_user._usu_tip_id == "02"))
@@ -478,8 +478,7 @@ namespace www.aquarella.com.pe.Aquarella.Financiera
                         msnMessage.LoadMessage("El cruce de información fue grabado correctamente, su pedido sera enviado  marcación y posterior facturación; número del cruce: " + prems[0].ToString() + strmensaje, UserControl.ucMessage.MessageType.Information);
 
                         if (strpremio != "N" && strpremio != "0")
-                            ScriptManager.RegisterStartupScript(this, typeof(Page), "invocarfuncion", "ConfirmacionLiquiPremio("+ strpremio + ", " + strIdPromotor + "); ", true);
-
+                            ScriptManager.RegisterStartupScript(this, typeof(Page), "invocarfuncion", "ConfirmacionPremio(" + strpremio + ", " + strIdPromotor + "); ", true);
 
                         //procedimiento envio de correo  al usuario admin
 

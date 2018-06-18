@@ -3,6 +3,26 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="headCPH" runat="server">  
        <script type="text/javascript" language="javascript">
+           //$(document).ready(function () {
+           //    $("#dialog-confirm").dialog({
+           //        autoOpen: false,
+           //        resizable: false,
+           //        width: 400,
+           //        height: 160,
+           //        modal: true,
+           //        buttons: {
+           //            "Continuar": function () {
+           //                $(this).dialog("close");
+           //                alert("1")                                                      
+           //            },
+           //            "Cancelar": function () {
+           //                $(this).dialog("close");
+           //                alert("2")
+           //            }
+           //        }
+           //    });
+
+           //})
         // Habilitar el thickbox despues de una llamAQUARELLA asincrona por el ajax
         function pageLoad() {
             var isAsyncPostback = Sys.WebForms.PageRequestManager.getInstance().get_isInAsyncPostBack();
@@ -11,7 +31,33 @@
             }
         }
 
+        function ConfirmacionPremio(IdPremio, IdPromotor) {
 
+            $("#dialog-confirm").dialog({
+                autoOpen: false,
+                resizable: false,
+                width: 400,
+                height: 160,
+                modal: true,
+                buttons: {
+                    "Continuar": function () {
+                        $(this).dialog("close");
+                        liquidarPremio(IdPremio, IdPromotor);
+                    },
+                    "Cancelar": function () {
+                        $(this).dialog("close");
+                        alert("2")
+                    }
+                }
+            });
+
+            $("#dialog-confirm").dialog({ modal: true, closeOnEscape: false, closeText: 'hide', resizable: false, width: 400 });
+            $('#dialog-confirm').dialog('option', 'title', 'Generacion de premio.');
+            $("#dialog-confirm").dialog("open");
+            document.getElementById('popupx').innerHTML = 'Usted ha ganado un premio; ¿desea generar el premio ? '
+        }
+           
+       
         function ConfirmacionLiquiPremio(IdPremio, IdPromotor) {
                        
             var seleccion = confirm("Usted ha ganado un premio, desea generar el premio ?");
@@ -215,7 +261,9 @@
     <div id="dialog-confirm" style="display: none;">
     <p>
         <span class="ui-icon ui-icon-alert" style="float: left; margin: 0 7px 20px 0;"></span>
-       <div id="popupx"> Generaremos su liquidación ; ¿desea continuar?</div></p>
+       <div id="popupx"></div>
+
+    </p>
     </div>
     <!-- DIALOG CONFIRM -->
   
