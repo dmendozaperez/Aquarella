@@ -15,7 +15,7 @@
     <WarningLevel>4</WarningLevel>
     <TargetFrameworkProfile />
     <IsWebBootstrapper>true</IsWebBootstrapper>
-    <PublishUrl>\\ecommerce.bgr.pe\wwwroot\AppEC\</PublishUrl>
+    <PublishUrl>\\10.10.10.206\wwwroot\Aquarella\Windows_WPF\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Web</InstallFrom>
     <UpdateEnabled>true</UpdateEnabled>
@@ -25,13 +25,13 @@
     <UpdatePeriodically>false</UpdatePeriodically>
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
-    <InstallUrl>http://ecommerce.bgr.pe/AppEC/</InstallUrl>
+    <InstallUrl>http://www.catalogo.aquarellaperu.com.pe/windows_wpf/</InstallUrl>
     <ProductName>Sistema Facturacion</ProductName>
     <PublisherName>Bata Peru</PublisherName>
     <SuiteName>%28Corporacion Bata%29</SuiteName>
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <WebPage>publish.htm</WebPage>
-    <ApplicationRevision>85</ApplicationRevision>
+    <ApplicationRevision>51</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>true</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
@@ -200,6 +200,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ReportGuiaRem.rpt</DependentUpon>
       <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Service References\FEBata\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
     <Compile Include="Service References\ServiceBata\Reference.cs">
       <AutoGen>True</AutoGen>
@@ -383,11 +388,57 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
     <Content Include="Certificado\CDBATA.pfx" />
+    <None Include="Service References\FEBata\Integrado.FEBata.AddDocInfoResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\FEBata\Integrado.FEBata.CargaInformeBajasResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\FEBata\Integrado.FEBata.ConsultaInformeReversionesResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\FEBata\Integrado.FEBata.GenInformeReversionesResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\FEBata\Integrado.FEBata.InformeResBoletasDiarioResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\FEBata\Integrado.FEBata.listarAdjuntosRecibidosResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\FEBata\Integrado.FEBata.OnlineARCResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\FEBata\Integrado.FEBata.OnlineConsultaEstadoResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\FEBata\Integrado.FEBata.OnlineEventosResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\FEBata\Integrado.FEBata.OnlineGenerationResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\FEBata\Integrado.FEBata.OnlineRecoveryRecListResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\FEBata\Integrado.FEBata.OnlineRecoveryRecResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\FEBata\Integrado.FEBata.OnlineRecoveryResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\FEBata\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Service References\FEBata\configuration.svcinfo" />
+    <None Include="Service References\FEBata\configuration91.svcinfo" />
     <None Include="Integrado_TemporaryKey.pfx" />
     <None Include="packages.config">
       <SubType>Designer</SubType>
     </None>
     <None Include="Properties\app.manifest" />
+    <None Include="Service References\FEBata\Online.wsdl" />
     <None Include="Service References\ServiceBata\ws_bata1.disco" />
     <None Include="Service References\ServiceBata\Integrado.ServiceBata.ws_control_errorResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
@@ -812,6 +863,7 @@
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <ItemGroup>
+    <WCFMetadataStorage Include="Service References\FEBata\" />
     <WCFMetadataStorage Include="Service References\ServiceBata\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

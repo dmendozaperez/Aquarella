@@ -476,6 +476,37 @@ namespace CapaDato.Bll.Venta
             return _formato_doc;
         }
         #endregion
+        public static string _leer_formato_electronico_PAPERLESS(string _tipo_doc, string _num_doc, ref string _error)
+        {
+            string _formato_doc = "";
+            string sqlquery = "[USP_Leer_Formato_Electronico_Paperless]";
+            SqlConnection cn = null;
+            SqlCommand cmd = null;
+            try
+            {
+                cn = new SqlConnection(Ent_Conexion.conexion);
+                if (cn.State == 0) cn.Open();
+                cmd = new SqlCommand(sqlquery, cn);
+                cmd.CommandTimeout = 0;
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@tip", _tipo_doc);
+                cmd.Parameters.AddWithValue("@doc_id", _num_doc);
+                cmd.Parameters.Add("@formato_txt", SqlDbType.NVarChar, -1);
+                cmd.Parameters["@formato_txt"].Direction = ParameterDirection.Output;
+                cmd.ExecuteNonQuery();
+                _formato_doc = cmd.Parameters["@formato_txt"].Value.ToString();
+            }
+            catch (Exception exc)
+            {
+                _formato_doc = "";
+                _error = exc.Message;
+            }
+            if (cn.State == ConnectionState.Open) cn.Close();
+            return _formato_doc;
+        }
+        #region<FACTURACION ELECTRONICA PAPERLESS>
+
+        #endregion
 
         #region<REGION DE FACTURACION DIRECTA>
 

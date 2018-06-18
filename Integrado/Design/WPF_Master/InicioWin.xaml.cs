@@ -19,6 +19,7 @@ using CapaDato.Bll.Control;
 using System.IO;
 using Epson_Ticket;
 using MahApps.Metro;
+using System.Xml.Linq;
 //using Epson_QR;
 //using System.IO;
 //using Epson_Ticket;
@@ -61,13 +62,52 @@ namespace Integrado.Design.WPF_Master
         {
             Mouse.OverrideCursor = Cursors.Wait;
             _server = "www.aquarellaperu.com.pe";
-            _base_datos = "BdAquarellaDes4";
+            _base_datos = "BdAquarella";
             _user = "sa";
             _password = "Bata2013";
 
             Boolean ini_mod = false;
             Ent_Global._canal_venta = "AQ";
             inicia_modulo(_server, _base_datos, _user, _password,ref ini_mod);
+
+
+            //#region<REGION DE PRUEBA DE FACTURACION ELECTRONICA PAPERLESS>
+            //string _error = "";
+            //string _formato_doc = CapaDato.Bll.Venta.Dat_Venta._leer_formato_electronico_PAPERLESS("N", "6073", ref _error);
+            //FEBata.OnlinePortTypeClient gen_fe = new FEBata.OnlinePortTypeClient();
+            //string ruc_empresa = "20101951872"; string ws_login = "admin_ws"; string ws_pass = "abc123"; Int32 tipofoliacion = 1;
+
+            ///*0 = ID asignado
+            //1 = URL del XML
+            //2 = URL del PDF
+            //3 = Estado en la SUNAT
+            //4 = Folio Asignado(Serie - Correlativo)
+            //5 = Bytes del PDF en Base64
+            //6 = PDF417(Cadena de texto a imprimir en el PDF 417)
+            //7 = HASH(Cadena de texto)*/
+
+            //string consulta = gen_fe.OnlineGeneration(ruc_empresa, ws_login, ws_pass, _formato_doc, tipofoliacion, 2);
+
+            //consulta = consulta.Replace("&", "amp;");
+
+            //var doc = XDocument.Parse(consulta);
+            //var result = from factura in doc.Descendants("Respuesta")
+            //             select new
+            //             {
+            //                 Codigo = factura.Element("Codigo").Value,
+            //                 Mensaje = factura.Element("Mensaje").Value.Replace("amp;", "&"),
+            //             };
+
+            //foreach (var item in result)
+            //{
+
+            //    string url = item.Mensaje;
+            //}
+
+
+
+            //return;
+            //#endregion
 
             if (ini_mod) _referenciar_Base_Datos("AQ");
             Mouse.OverrideCursor = null;
