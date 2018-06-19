@@ -201,7 +201,8 @@
                     <asp:BoundField DataField="Id" HeaderText="Id" ItemStyle-HorizontalAlign="center"  />
                     <asp:BoundField DataField="Descripcion" HeaderText="Descripcion" />
                     <asp:BoundField DataField="Monto" DataFormatString="{0:C}"   ItemStyle-HorizontalAlign="center" HeaderText="Monto Min." />
-
+                    <asp:BoundField DataField="stock" HeaderText="Stock" ItemStyle-HorizontalAlign="center"  />
+                     <asp:BoundField DataField="stockIngresado" HeaderText="stock Ingresado" ItemStyle-HorizontalAlign="center"  />
                         <asp:TemplateField HeaderText="ver Articulos">
                         <ItemTemplate>
                             <center>
