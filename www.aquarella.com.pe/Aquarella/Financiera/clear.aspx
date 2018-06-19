@@ -31,7 +31,7 @@
             }
         }
 
-        function ConfirmacionPremio(IdPremio, IdPromotor) {
+        function ConfirmacionPremio(IdPremio, IdPromotor, regalo) {
 
             $("#dialog-confirm").dialog({
                 autoOpen: false,
@@ -54,7 +54,7 @@
             $("#dialog-confirm").dialog({ modal: true, closeOnEscape: false, closeText: 'hide', resizable: false, width: 400 });
             $('#dialog-confirm').dialog('option', 'title', 'Generacion de premio.');
             $("#dialog-confirm").dialog("open");
-            document.getElementById('popupx').innerHTML = 'Usted ha ganado un premio; ¿desea generar el premio ? '
+            document.getElementById('popupx').innerHTML = 'Usted ha ganado un premio: <b>' + regalo + ' </b> <br/><br/> ¿desea generar el premio ? '
         }
            
        
@@ -99,7 +99,7 @@
             $("#dialog-confirm").dialog({ modal: true, closeOnEscape: false, closeText: 'hide', resizable: false, width: 400 });
             $('#dialog-confirm').dialog('option', 'title', 'Premio Generado');
             $("#dialog-confirm").dialog("open");
-            document.getElementById('popupx').innerHTML = 'el premio se a generado en el pedido :' + strLiquidacion
+            document.getElementById('popupx').innerHTML = 'El premio se generó en el pedido :' + strLiquidacion
 
 
         }
