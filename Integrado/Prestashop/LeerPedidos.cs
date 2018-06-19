@@ -328,17 +328,57 @@ namespace Integrado.Prestashop
 
         }
 
+        /// <summary>
+        /// Se usa para obtener los registros de Pagos de los Pedidos
+        /// </summary>
+        /// <returns></returns>
+        public DataTable PrepararPedidos_Pagos()
+        {
+            DataTable Prestashop = new DataTable();
+
+            try
+            {
+                MySqlConnection mysql;
+                Conexion oConexionMySql = new Conexion();
+                mysql = oConexionMySql.getConexionMySQL();
+                mysql.Open();
+                MySqlCommand cmd = new MySqlCommand();
+
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Connection = mysql;
+                cmd.CommandText = "USP_LISTA_PEDIDOS_PAGOS";
+
+                //asignar paramentros
+                cmd.Parameters.AddWithValue("estado", 2);
+
+                MySqlDataAdapter MySqlData = new MySqlDataAdapter(cmd);
+                MySqlData.Fill(Prestashop);
+
+            }
+            catch (Exception)
+            {
+                Prestashop = null;
+                throw;
+            }
+            return Prestashop;
+
+        }
+
         public string ImportaDataPrestaShop()
         {
             string _error = "";
             DataTable dtpedidos = null;
+            DataTable dtpedidospag = null;
             try
             {
                 dtpedidos = PrepararPedidos();
+                dtpedidospag = PrepararPedidos_Pagos();
 
-                if (dtpedidos!=null)
+                if (dtpedidos!=null && dtpedidospag != null)
                 {
                     Dat_PrestaShop update_psth = new Dat_PrestaShop();
+                    
+
                     /*agrupamos los pedidos*/
                     var grupo_pedido = from item in dtpedidos.AsEnumerable()
                                            //where item.Field<string>("ped_id") == "73" //|| item.Field<Int32>("ped_id") ==40
@@ -370,10 +410,12 @@ namespace Integrado.Prestashop
                                            cli_dni = item["cli_dni"].ToString(),
                                            cli_ubigeo = item["cli_ubigeo"].ToString(),
                                            ped_ship_sigv = Convert.ToDecimal(item["ped_ship_sigv"]),
-                                           pag_metodo = item["pag_metodo"].ToString(),
+                                           // Modificado por : Henry Morales - 19/06/2018
+                                           // Se modificó para tomar los pagos en diferentes formas de pago (DataTable dtpedidospag)
+                                           /*pag_metodo = item["pag_metodo"].ToString(),
                                            pag_nro_trans = item["pag_nro_trans"].ToString(),
                                            pag_fecha = Convert.ToDateTime(item["pag_fecha"]),
-                                           pag_monto = Convert.ToDecimal(item["pag_monto"]),
+                                           pag_monto = Convert.ToDecimal(item["pag_monto"]),*/
                                        }
                                        into G
                                        select new
@@ -403,12 +445,14 @@ namespace Integrado.Prestashop
                                            cli_dni = G.Key.cli_dni,
                                            cli_ubigeo = G.Key.cli_ubigeo,
                                            ped_ship_sigv = G.Key.ped_ship_sigv,
-                                           pag_metodo = G.Key.pag_metodo,
+                                           // Modificado por : Henry Morales - 19/06/2018
+                                           // Se modificó para tomar los pagos en diferentes formas de pago (DataTable dtpedidospag)
+                                           /*pag_metodo = G.Key.pag_metodo,
                                            pag_nro_trans = G.Key.pag_nro_trans,
                                            pag_fecha = G.Key.pag_fecha,
-                                           pag_monto = G.Key.pag_monto
+                                           pag_monto = G.Key.pag_monto*/
                                        };
-
+                    
 
                     /*recorremos los pedidos para agregar al pedido*/
                     foreach (var key in grupo_pedido)
@@ -493,36 +537,52 @@ namespace Integrado.Prestashop
 
                             #endregion
 
+
                             /*si esta lleno el list entonces agregamos el pedido en este ,metodo*/
                             if (items_det.Count > 0)
-                        {
-                            /*datos del cliente*/
-                            Cliente cl = new Cliente();
-                            cl.cli_nombres = key.cli_nombres;
-                            cl.cli_apellidos = key.cli_apellidos;
-                            cl.cli_email = key.cli_email;
-                            cl.cli_ubigeo = key.cli_ubigeo;
-                            cl.cli_direc = key.cli_direc;
-                            cl.cli_telf = key.cli_telef;
-                            cl.cli_telf_mov = key.cli_telf_mov;
-                            cl.cli_dni = key.cli_dni;
-                            /*********************/
-                            /*metodo de pago*/
-                            Pagos pg = new Pagos();
-                            pg.pag_metodo = key.pag_metodo;
-                            pg.pag_nro_trans = key.pag_nro_trans;
-                            pg.pag_fecha = key.pag_fecha;
-                            pg.pag_monto = key.pag_monto;
-                            /**/
+                            {
+                                /*datos del cliente*/
+                                Cliente cl = new Cliente();
+                                cl.cli_nombres = key.cli_nombres;
+                                cl.cli_apellidos = key.cli_apellidos;
+                                cl.cli_email = key.cli_email;
+                                cl.cli_ubigeo = key.cli_ubigeo;
+                                cl.cli_direc = key.cli_direc;
+                                cl.cli_telf = key.cli_telef;
+                                cl.cli_telf_mov = key.cli_telf_mov;
+                                cl.cli_dni = key.cli_dni;
+                                /*********************/
+                                /*metodo de pago*/
+                                Pagos pg = new Pagos();
+                                // Modificado por : Henry Morales - 19/06/2018
+                                // Se modificó para tomar los pagos en diferentes formas de pago (DataTable dtpedidospag)
+                                /*pg.pag_metodo = key.pag_metodo;
+                                pg.pag_nro_trans = key.pag_nro_trans;
+                                pg.pag_fecha = key.pag_fecha;
+                                pg.pag_monto = key.pag_monto;*/
+                                DataTable pago_ped = new DataTable();
+                                pago_ped = dtpedidospag.Clone();
+                                pago_ped.Clear();
 
-                            decimal igv_monto = key.ped_dcto_cigv - key.ped_dcto_sigv;
-                            //string[] pedido_update=
+                                foreach (DataRow row in dtpedidospag.Rows)
+                                {
+                                    if(row["ped_id"].ToString() == key.pedido.ToString())
+                                    {
+                                        pago_ped.ImportRow(row);
+                                    }
+                                }
+                                /**/
 
-                            // Modificado por : Henry Morales - 21/05/2018
-                            // Se agergaron los campos de nombre y telefono de referencia para la entrega ( key.ped_nom_ent ; key.ped_tel_ent)
-                            string[] result= update_psth.Update_Pedido_Prestashop(Ent_Global._bas_id_codigo, 9219, "", 0, 0, "", "", items_det, 0, 1, "", "", 0, 0, "", "", 0, null,
+                                decimal igv_monto = key.ped_dcto_cigv - key.ped_dcto_sigv;
+                                //string[] pedido_update=
+
+                                // Modificado por : Henry Morales - 19/06/2018
+                                // Se agergo la tabla dtpedidospag, para enviar la información de diferentes formas de pago
+                                // Modificado por : Henry Morales - 21/05/2018
+                                // Se agergaron los campos de nombre y telefono de referencia para la entrega ( key.ped_nom_ent ; key.ped_tel_ent)
+                                string[] result= update_psth.Update_Pedido_Prestashop(Ent_Global._bas_id_codigo, 9219, "", 0, 0, "", "", items_det, 0, 1, "", "", 0, 0, "", "", 0, null,
                                               false, 0, null, key.pedido, key.ped_ref, key.ped_ship_sigv, cl, pg, key.ped_fecha, key.ped_total_cigv,key.ped_ubigeo_ent,
-                                              key.ped_dir_ent,key.ped_ref_ent, key.ped_nom_ent, key.ped_tel_ent, _tot_peso);
+                                              key.ped_dir_ent,key.ped_ref_ent, key.ped_nom_ent, key.ped_tel_ent, _tot_peso, pago_ped);
                             if (result[0].ToString()=="-1")
                             {
                                     _error += result[1].ToString();

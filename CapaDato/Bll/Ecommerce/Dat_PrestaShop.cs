@@ -18,7 +18,7 @@ namespace CapaDato.Bll.Ecommerce
                                              Boolean _pago_credito = false, Decimal _porc_percepcion = 0,
                                              List<Order_Dtl_Temp> order_dtl_temp = null, decimal _Liq_Pst_Id = 0, string _Liq_Pst_Ref = "",
                                              Decimal _CostoE = 0, Cliente cl = null, Pagos pag = null,DateTime? _ped_fecha=null,decimal _liq_tot_cigv=0,
-                                             string _ped_ubigeo_ent="",string _ped_dir_ent="",string _ped_ref_ent="", string _ped_nom_ent = "", string _ped_tel_ent = "", Decimal _det_peso=0)
+                                             string _ped_ubigeo_ent="",string _ped_dir_ent="",string _ped_ref_ent="", string _ped_nom_ent = "", string _ped_tel_ent = "", Decimal _det_peso=0, DataTable pagos = null)
         {
             string[] resultDoc = new string[2];
             string sqlquery = "USP_Insertar_Modifica_Liquidacion";
@@ -123,10 +123,14 @@ namespace CapaDato.Bll.Ecommerce
 
                 /****************************/
                 /*METODO DE PAGOS*/
+                // Modificado por : Henry Morales - 19/06/2018
+                // Se agregó para mandar los diversos pagos hechos en la liquidación
+                cmd.Parameters.AddWithValue("@Detalle_Pago_ps", pagos);
+                /*cmd.Parameters.AddWithValue("@pag_metodo", pag.pag_metodo);
                 cmd.Parameters.AddWithValue("@pag_metodo", pag.pag_metodo);
                 cmd.Parameters.AddWithValue("@pag_nro_trans", pag.pag_nro_trans);
                 cmd.Parameters.AddWithValue("@pag_fecha", pag.pag_fecha);
-                cmd.Parameters.AddWithValue("@pag_monto", pag.pag_monto);
+                cmd.Parameters.AddWithValue("@pag_monto", pag.pag_monto);*/
 
                 /******************/
 
