@@ -352,7 +352,7 @@
                                 <DropShadowEffect/>
                             </ComboBox.Effect>
                         </ComboBox>
-                        <dxe:ComboBoxEdit  Name="dwclientex" ValidateOnTextInput="False"  Width="370" Height="28" Grid.Row="0" Cursor="Hand" Grid.Column="2" FontSize="14" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Center"  KeyDown="dwclientex_KeyDown" SelectedIndexChanged="dwclientex_SelectedIndexChanged"  PreviewKeyDown="dwclientex_PreviewKeyDown" AutoComplete="True"/>
+                        <dxe:ComboBoxEdit  Name="dwclientex" ValidateOnTextInput="False"  Width="370" Height="28" Grid.Row="0" Cursor="Hand" Grid.Column="2" FontSize="14" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Center"  SelectedIndexChanged="dwclientex_SelectedIndexChanged"  PreviewKeyDown="dwclientex_PreviewKeyDown" AutoComplete="True"/>
                         <Label Content="Nro.Documento:" Margin="0,0,0,0" FontSize="12"  VerticalAlignment="Center" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Left"  />
                         <Label x:Name="lbldocumento" Content="31003920" Margin="0,0,0,0" FontSize="12"  VerticalAlignment="Center" Grid.Row="1" Grid.Column="2" HorizontalAlignment="Left" FontWeight="Bold"  />
                         <Label Content="Dirección:" Margin="0,0,0,0" FontSize="12"  VerticalAlignment="Center" Grid.Row="2" Grid.Column="1" HorizontalAlignment="Left"  />
@@ -405,7 +405,7 @@
 									Margin="-30,0,10,0" HorizontalAlignment="Center"  Grid.ColumnSpan="2" Grid.Column="1"/>
                             </Grid>
                         </Button>
-                        <Label Content="ESTADO DE NOTA DE CREDITO" FontSize="14" FontWeight="Bold" Grid.Column="4" HorizontalAlignment="Right" Grid.Row="0"/>
+                        <Label Content="ESTADO DE NOTA DE CREDITO 2" FontSize="14" FontWeight="Bold" Grid.Column="4" HorizontalAlignment="Right" Grid.Row="0"/>
                         <ComboBox x:Name="dwestado" Foreground="Red" Grid.Column="5" Grid.Row="0" Width="250" Height="25" FontSize="16" Cursor="Hand" FontWeight="Bold" HorizontalAlignment="Left" SelectionChanged="dwestado_SelectionChanged"/>
                         <Label x:Name="lblinfo" Content="&gt;No hay datos para generar la nota de credito" Grid.Column="4" Grid.Row="1" HorizontalAlignment="Left" FontWeight="Bold" Foreground="#FF0068FF" FontStretch="Expanded"/>
                     </Grid>

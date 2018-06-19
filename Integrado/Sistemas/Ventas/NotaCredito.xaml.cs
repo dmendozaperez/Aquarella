@@ -1070,38 +1070,43 @@ namespace Integrado.Sistemas.Ventas
 
         private void dwclientex_SelectedIndexChanged(object sender, RoutedEventArgs e)
         {
-            //try
-            //{
-            //    //if (!(dwcliente.Focused)) return;
-            //    String coordinatorSelect = dwclientex.SelectedItemValue.ToString();
-            //    Mouse.OverrideCursor = Cursors.Wait;
-            //    /// Verificar que sea una selección valida
-            //    if (coordinatorSelect != "-1")
-            //    {
-            //        /// Obtener Informacion del coordinador
-            //        DataTable dtable = new DataTable();
-            //        dtable = Dat_NotaCredito.getCoordinatorByPk(Convert.ToDecimal(coordinatorSelect)).Tables[0];
-            //        /// Llamar la funcion que imprimira la informacion del coordinador
-            //        this.paintInfoUser(dtable);
+            try
+            {
+                //if (!(dwcliente.Focused)) return;
+                String coordinatorSelect = dwclientex.EditValue.ToString();
+                //String coordinatorSelect = dwclientex.SelectedItemValue.ToString();
+                Mouse.OverrideCursor = Cursors.Wait;
+                /// Verificar que sea una selección valida
+                if (coordinatorSelect != "-1")
+                {
+                    /// Obtener Informacion del coordinador
+                    DataTable dtable = new DataTable();
+                    dtable = Dat_NotaCredito.getCoordinatorByPk(Convert.ToDecimal(coordinatorSelect)).Tables[0];
+                    /// Llamar la funcion que imprimira la informacion del coordinador
+                    this.paintInfoUser(dtable);
 
-            //        /// Consultar saldos y montos en pedidos del cliente
-            //        //this.ordersCustomer(Documents_Trans.getBalanceCoordById(_user._usv_co, coordinatorSelect).Tables[0]);
+                    /// Consultar saldos y montos en pedidos del cliente
+                    //this.ordersCustomer(Documents_Trans.getBalanceCoordById(_user._usv_co, coordinatorSelect).Tables[0]);
 
-            //        /// Cargar el id del coordinador seleccionado
-            //        /// 
-            //        _cliente_id = coordinatorSelect;
+                    /// Cargar el id del coordinador seleccionado
+                    /// 
+                    _cliente_id = coordinatorSelect;
 
 
 
-            //        ///
-            //        this.cleanForm();
+                    ///
+                    this.cleanForm();
+                    _key_combo = true;
+                    txtfactura.Focus();
+                    _key_combo = false;
 
-            //    }
-            //}
-            //catch
-            //{
-            //}
-            //Mouse.OverrideCursor = null;
+
+                }
+            }
+            catch
+            {
+            }
+            Mouse.OverrideCursor = null;
         }
 
         private void dwclientex_PreviewKeyDown(object sender, KeyEventArgs e)
