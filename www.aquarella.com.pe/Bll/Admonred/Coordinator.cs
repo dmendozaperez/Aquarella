@@ -15,6 +15,7 @@ namespace www.aquarella.com.pe.bll
 
         public string _co { get; set; }
         public decimal _idCust { get; set; }
+        public string  _usuTipo { get; set; }
         public decimal _commission { get; set; }
         public string _idWare { get; set; }
         public decimal _taxRate { get; set; }
@@ -138,7 +139,7 @@ namespace www.aquarella.com.pe.bll
 
         public static DataSet getOrdLiqLider(DateTime date_ini, DateTime date_fin, decimal _idCust)
         {
-            string sqlquery = "USP_Leer_Liquidacion_Lider";
+            string sqlquery = "USP_Leer_Liquidacion_Flete";
             SqlConnection cn = null;
             SqlCommand cmd = null;
             SqlDataAdapter da = null;
@@ -161,6 +162,47 @@ namespace www.aquarella.com.pe.bll
             catch (Exception e) { throw new Exception(e.Message, e.InnerException); }
         }
 
+
+        public static string setCrearLiquidacionFlete(int usuId, decimal basId, string strListLiq, decimal monto)
+        {
+            //return "";
+            string strLiqui = string.Empty;
+            string sqlquery = "USP_Generar_Liquidacion_Flete";
+            SqlConnection cn = null;
+            SqlCommand cmd = null;
+            try
+            {
+                cn = new SqlConnection(Conexion.myconexion());
+                if (cn.State == 0) cn.Open();
+                cmd = new SqlCommand(sqlquery, cn);
+                cmd.CommandTimeout = 0;
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@usu_Id", usuId);
+                cmd.Parameters.AddWithValue("@bas_id", basId);
+                cmd.Parameters.AddWithValue("@strListLiqui", strListLiq);
+                cmd.Parameters.AddWithValue("@fMonto", monto);
+                cmd.Parameters.Add("@gru_id_devolver", SqlDbType.VarChar, 20).Direction = ParameterDirection.Output;
+                cmd.ExecuteNonQuery();
+
+                strLiqui = Convert.ToString(cmd.Parameters["@gru_id_devolver"].Value);
+                return strLiqui;
+
+                //Database db = DatabaseFactory.CreateDatabase(_conn);
+                ////                
+                //string sqlCommand = "financiera.sp_pre_clear";
+                ////
+                //DbCommand dbCommandWrapper = db.GetStoredProcCommand(sqlCommand, _company, _list_liquidations, _list_documentrans, clearId);
+                ////
+                //db.ExecuteNonQuery(dbCommandWrapper);
+                //clearId = db.GetParameterValue(dbCommandWrapper, "p_clv_clear_id").ToString();
+
+                //return clearId;
+            }
+            catch (Exception e) {
+                //throw new Exception(e.Message, e.InnerException);
+                return strLiqui = "";
+            }
+        }
         public static string setPreCrucePago(string _list_liquidations, DataTable dt)
         {
             //return "";

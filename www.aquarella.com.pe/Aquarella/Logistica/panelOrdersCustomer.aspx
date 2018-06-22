@@ -27,6 +27,93 @@
             }
         }
 
+        function mostrarLiquidacion(strLiquidacion) {                     
+            $("[id$='txtFlete']").val('');
+
+            $("#dialog-confirm2").dialog({
+                autoOpen: false,
+                resizable: false,
+                width: 400,
+                height: 160,
+                modal: true,
+                buttons: {
+                    "Cerrar": function () {
+                        $(this).dialog("close");
+                    }
+                    
+                }
+            });
+
+            $("#dialog-confirm2").dialog({ modal: true, closeOnEscape: false, closeText: 'hide', resizable: false, width: 400 });
+            $('#dialog-confirm2').dialog('option', 'title', 'Liquidación del flete');
+            $("#dialog-confirm2").dialog("open");
+            document.getElementById('popupx2').innerHTML = 'El flete se generó en en el pedido :' + strLiquidacion
+        }
+               
+
+        function SelectCheckbox(spanChk) {
+            // Added as ASPX uses SPAN for checkbox
+            var oItem = spanChk.children;
+            var theBox = (spanChk.type == "checkbox") ?
+                spanChk : spanChk.children.item[0];
+            xState = theBox.checked;
+            elm = theBox.form.elements;
+
+            for (i = 0; i < elm.length; i++)
+                if (elm[i].type == "checkbox" &&
+			  elm[i].id != theBox.id) {
+                    //elm[i].click();
+                    if (elm[i].checked != xState)
+                        elm[i].click();
+                    //elm[i].checked=xState;
+                }
+        }
+
+        function ocultarTab() {
+            $('[href="#fragment-7"]').closest('li').hide();
+        }
+
+         function CalcularTotal() {
+             var sum = 0;
+             var i = 0;
+             var Grid_Table = document.getElementById('<%= gvLiquiFlete.ClientID %>');
+
+              $("#<%=gvLiquiFlete.ClientID%> :checkbox").each(function() {
+                    i += 1
+                  if (this.checked){
+                  
+                      $('#<%=gvLiquiFlete.ClientID%> tbody tr:eq(' + i + ')').each(function () {
+                                                
+                             var coltotal = $("td:eq(9)", this).html();
+                         
+                            if (coltotal != undefined) {
+                   
+                                var totaldesc = coltotal.replace('S/', '')
+                                var valor = parseFloat(totaldesc);
+                                sum += valor;
+                   
+                            }
+               
+                        });
+                  }
+              });
+             var valor = Math.round(sum*100)/100
+
+             $("[id$='txtMontoSelec']").val(valor);
+         }
+
+        function CalcularTotalChk() {
+            var sum = 0;
+
+            $('input:checkbox[name=chkValor]:checked').each(function () {
+          
+                var valor = parseFloat($(this).val());               
+                sum += valor;
+            })
+            $("[id$='txtMontoSelec']").val(sum);
+    
+        } 
+
         function SelectAllCheckboxes(spanChk) {
             // Added as ASPX uses SPAN for checkbox
             var oItem = spanChk.children;
@@ -43,6 +130,24 @@
                         elm[i].click();
                     //elm[i].checked=xState;
                 }
+        }
+
+        function numbersonly(e) {
+            var unicode = e.charCode ? e.charCode : e.keyCode
+
+            var valor = ($("[id$='txtFlete']").val()).trim()
+            var n = valor.indexOf(".")
+
+            if ((n >= 0 && unicode == 46) || (valor == "" && unicode == 46))
+                return false
+
+            if (unicode == 44)
+                return false
+
+            if (unicode != 8 && unicode != 44 && unicode != 46) {
+                if (unicode < 48 || unicode > 57) //if not a number
+                { return false } //disable key press    
+            }
         }
     </script>
     <script type="text/javascript" language="javascript">
@@ -250,7 +355,7 @@
                     <li><a href="#fragment-4"><span>Historial de Consignaciones</span></a></li>
                     <li><a href="#fragment-5"><span>Nota de Credito (Saldos)</span></a></li>
                     <li><a href="#fragment-6"><span>Historial de Ventas (Higuereta)</span></a></li>
-                    <%--<li><a href="#fragment-7"><span>Flete</span></a></li>--%>
+                    <li><a href="#fragment-7"><span>Liquidacion Flete</span></a></li>
                 </ul>
                 <!-- PEDIDOS EN BORRADOR -->
                 <div id="fragment-1" style="min-height: 200px;">
@@ -336,6 +441,7 @@
                         </ContentTemplate>
                         <Triggers>
                             <asp:AsyncPostBackTrigger ControlID="dwCustomers" EventName="SelectedIndexChanged" />
+                            
                         </Triggers>
                     </asp:UpdatePanel>
                 </div>
@@ -446,6 +552,7 @@
                         </ContentTemplate>
                         <Triggers>
                             <asp:AsyncPostBackTrigger ControlID="dwCustomers" EventName="SelectedIndexChanged" />
+                             <asp:AsyncPostBackTrigger ControlID="btGuardar" EventName="click" />
                         </Triggers>
                     </asp:UpdatePanel>
                 </div>
@@ -670,6 +777,216 @@
                     </asp:UpdatePanel>
                 </div>
                
+                <div id="fragment-7" style="min-height: 200px;">
+                   
+                    <table width="100%" class="tablagris" cellpadding="4">
+               
+                        <tr>
+                            <td>
+                                <table width="100%" cellpadding="1" cellspacing="1">
+                                    <tr>
+                                        <td class="auto-style1">
+                                                             
+                                        </td>
+                                        <td class="auto-style2">
+                                   
+                                        </td>
+                                         <td style="text-align:right">
+                                            <table>
+                                                <tr>
+                                                    <td class="f12">
+                                                        Fecha Desde</td>
+                                                     <td>
+                                                    </td>
+                                                     <td>
+                                                    </td>
+                                                     <td class="f12">
+                                                         Fecha Hasta</td>
+                                                     <td>
+                                                         &nbsp;</td>
+                                                     <td>
+                                                         &nbsp;</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <asp:UpdatePanel ID="upStartDate" runat="server">
+                                                            <ContentTemplate>
+                                                                <asp:TextBox ID="txtDateStart" runat="server" AccessKey="f"></asp:TextBox>
+                                                                <ajaxToolkit:CalendarExtender ID="calendar" runat="server" Animated="true" 
+                                                                    FirstDayOfWeek="Monday" Format="dd/MM/yyyy" PopupButtonID="imgCalendar" 
+                                                                    TargetControlID="txtDateStart" />
+                                                            </ContentTemplate>
+                                                        </asp:UpdatePanel>
+                                                    </td>
+                                                     <td>
+                                                                    <asp:Image ID="imgCalendar" runat="server" ImageUrl="~/Design/images/Botones/b_calendar_ico.gif"
+                                                                        onmouseover="this.style.background='red';" onmouseout="this.style.background=''"
+                                                                        Style="cursor: pointer;" />
+                                                    </td>
+                                                     <td>
+                                                                    <asp:RequiredFieldValidator ValidationGroup="vsConsultForm" ID="rfvDateStart" runat="server"
+                                                                        ToolTip="Fecha de inicio" CssClass="error_asterisck" ErrorMessage="Dígite fecha inicial"
+                                                                        Display="Dynamic" SetFocusOnError="true" ControlToValidate="txtDateStart">*</asp:RequiredFieldValidator>
+                                                                    <asp:CompareValidator ID="cvDateStart" runat="server" ValidationGroup="vsConsultForm"
+                                                                        Type="Date" SetFocusOnError="true" CssClass="error_asterisck" ControlToValidate="txtDateStart"
+                                                                        Operator="DataTypeCheck" ErrorMessage="Dígite una fecha válida">*</asp:CompareValidator>
+                                                    </td>
+                                                     <td>
+                                                         <asp:UpdatePanel ID="upEndDate" runat="server">
+                                                             <ContentTemplate>
+                                                                 <asp:TextBox ID="txtDateEnd" runat="server" AccessKey="f"></asp:TextBox>
+                                                                 <ajaxToolkit:CalendarExtender ID="CalendarExtender1" runat="server" 
+                                                                     Animated="true" FirstDayOfWeek="Monday" Format="dd/MM/yyyy" 
+                                                                     PopupButtonID="imgCalendarDe" TargetControlID="txtDateEnd" />
+                                                             </ContentTemplate>
+                                                         </asp:UpdatePanel>
+                                                    </td>
+                                                     <td>
+                                                         <asp:Image ID="imgCalendarDe" runat="server" 
+                                                             ImageUrl="~/Design/images/Botones/b_calendar_ico.gif" 
+                                                             onmouseout="this.style.background=''" 
+                                                             onmouseover="this.style.background='red';" Style="cursor: pointer;" />
+                                                    </td>
+                                                     <td>
+                                                         <asp:RequiredFieldValidator ID="rfvDateEnd" runat="server" 
+                                                             ControlToValidate="txtDateEnd" CssClass="error_asterisck" Display="Dynamic" 
+                                                             ErrorMessage="Dígite fecha final*" SetFocusOnError="true" ToolTip="Fecha final" 
+                                                             ValidationGroup="vsConsultForm">*</asp:RequiredFieldValidator>
+                                                         <asp:CompareValidator ID="cvDateEnd" runat="server" 
+                                                             ControlToValidate="txtDateEnd" CssClass="error_asterisck" 
+                                                             ErrorMessage="Dígite una fecha final válida" Operator="DataTypeCheck" 
+                                                             SetFocusOnError="true" Type="Date" ValidationGroup="vsConsultForm">*</asp:CompareValidator>
+                                                         <asp:CompareValidator ID="cvDateStartDateEnd" runat="server" 
+                                                             ControlToCompare="txtDateStart" ControlToValidate="txtDateEnd" 
+                                                             CssClass="error_asterisck" 
+                                                             ErrorMessage="Dígite una fecha final superior a la fecha inicial" 
+                                                             Operator="GreaterThanEqual" SetFocusOnError="true" Type="Date" 
+                                                             ValidationGroup="vsConsultForm">*</asp:CompareValidator>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </td>
+                                
+                                        <td>
+                                            <asp:Button ID="btConsult" runat="server" Text="Buscar" OnClick="btConsult_Click" />
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                   </table>
+                      <div style="overflow-x: hidden; overflow-y:auto; height: 378px;">
+                        <asp:UpdatePanel ID="UpdatePanel2" runat="server" UpdateMode="Conditional">
+                            <ContentTemplate>
+                                <asp:GridView ID="gvLiquiFlete" runat="server" Width="100%" SkinID="gridviewSkin"
+                                    AutoGenerateColumns="False"                                
+                                  AllowSorting="True" ShowFooter="True" AllowPaging="false" PageSize="12"
+                                PagerStyle-HorizontalAlign="Left" Font-Size="Small" 
+                                
+                                   CellPadding="4" ForeColor="#333333" GridLines="None" >
+                                    <EmptyDataTemplate>
+                                        No existen liquidaciones que mostrar.
+                                    </EmptyDataTemplate>
+                                    <Columns>
+                                    
+                                        <asp:BoundField DataField="Liq_Id" SortExpression="Liq_Id"
+                                            HeaderText="Pedido" ItemStyle-HorizontalAlign="Center">
+                                            <ItemStyle HorizontalAlign="Center" />
+                                        </asp:BoundField>                 
+                                        <asp:BoundField DataField="Fecha" SortExpression="Liq_FechaIng" HeaderText="Fecha" />
+                                        <asp:BoundField DataField="Liq_Det_Cantidad" HeaderText="Pares" SortExpression="Liq_Det_Cantidad" ItemStyle-HorizontalAlign="Center">
+                                            <ItemStyle HorizontalAlign="Center" />
+                                        </asp:BoundField>
+                                        <asp:BoundField DataField="Est_Descripcion" SortExpression="Est_Descripcion" HeaderText="Estado" />
+                                        <asp:BoundField DataField="descuento" SortExpression="descuento" HeaderText="Descuento"
+                                            DataFormatString="{0:C}" ItemStyle-HorizontalAlign="Right" Visible="False">
+                                            <ItemStyle HorizontalAlign="Right" />
+                                        </asp:BoundField>
+                                        <asp:BoundField DataField="Liq_Det_Comision" HeaderText="Ganancia" SortExpression="ganancia"
+                                            DataFormatString="{0:C}" ItemStyle-HorizontalAlign="Right">
+                                            <ItemStyle HorizontalAlign="Right" />
+                                        </asp:BoundField>
+                                        <asp:BoundField DataField="SubTotal" DataFormatString="{0:C}" SortExpression="SubTotal"
+                                            HeaderText="Sub-Total" ItemStyle-HorizontalAlign="Right">
+                                            <ItemStyle HorizontalAlign="Right" />
+                                        </asp:BoundField>
+                                        <asp:BoundField DataField="PagoNcSf" DataFormatString="{0:C}" 
+                                            HeaderText="N.C y/o S.F">
+                                        <ItemStyle HorizontalAlign="Right" />
+                                        </asp:BoundField>
+                                        <asp:BoundField DataField="total" DataFormatString="{0:C}" HeaderText="Total">
+                                        <ItemStyle HorizontalAlign="Right" />
+                                        </asp:BoundField>
+                                        <asp:BoundField DataField="percepcion" DataFormatString="{0:C}" 
+                                            HeaderText="Percepcion">
+                                        <ItemStyle HorizontalAlign="Right" />
+                                        </asp:BoundField>
+                                        <asp:BoundField DataField="tpagar" DataFormatString="{0:C}" 
+                                            HeaderText="T.Pagar">
+                                        <ItemStyle HorizontalAlign="Right" />
+                                        </asp:BoundField>
+                                        <asp:TemplateField HeaderText="Liq" ItemStyle-HorizontalAlign="Center">
+                                            <ItemTemplate>
+                                                 <asp:HiddenField ID="hf_Liq_Id" runat="server" Value='<%# Eval("Liq_Id")%>' />
+                                                <asp:HiddenField ID="hf_monto" runat="server" Value='<%# Eval("tpagar")%>' />
+                                                <a class='iframe' href='panelLiqReports.aspx?noliq=<%#Eval("Liq_Id")%>'
+                                                    title="Historial De Liquidaciones (LIQ. NO.<%# Eval("Liq_Id")%> ) / Click En La <b>X</b> Para Cerrar (Esquina Inferior Derecha del Marco)">
+                                                    <img src="../../Design/images/b_print.png" border="0" alt="Ver/Imprimir Liquidación No.<%# Eval("Liq_Id")%>" /></a>
+                                            </ItemTemplate>
+                                            <ItemStyle HorizontalAlign="Center" />
+                                        </asp:TemplateField>
+                                   
+                                         <asp:TemplateField HeaderText="Agregar" SortExpression="pin_employee" ItemStyle-HorizontalAlign="Center" ItemStyle-Width="110px">
+                                            <ItemTemplate>
+                                                 <%--<input name="chkValor" type="checkbox" class="checkbox" onclick="javascript: CalcularTotalChk(this);" id="tamanoAjo_0" value='<%# Eval("tpagar")%>' />--%>
+                                               <asp:CheckBox id="chkSelec" Checked="True" runat="server" onclick="javascript: CalcularTotal(this);" value='<%# Eval("tpagar")%>'  AutoPostBack="false"/>
+                                            </ItemTemplate>
+                                       </asp:TemplateField>
+                                    </Columns>
+                                    <RowStyle BorderColor="#DEDFDE" BorderWidth="1px" BorderStyle="Solid" />
+                                </asp:GridView>
+                         
+                            </ContentTemplate>
+                            <Triggers>
+                                <asp:AsyncPostBackTrigger ControlID="dwCustomers" EventName="SelectedIndexChanged" />
+                                <asp:AsyncPostBackTrigger ControlID="btConsult" EventName="click" />
+                                    <asp:AsyncPostBackTrigger ControlID="btGuardar" EventName="click" />
+                            </Triggers>
+                        </asp:UpdatePanel>
+                </div>
+                    <div  style="margin: 0 0 0 70%;">
+                        <table>
+                            <tr>
+                                <td class="f8">
+                                   Total Seleccionado:
+                                </td>  
+                                <td>
+                                    <asp:TextBox id="txtMontoSelec"   style="text-align:right" Enabled="false"  runat="server" />                                  
+                                </td>
+            
+                            </tr>
+                            <tr>
+                                 <td class="f8">
+                                   Monto Flete:
+                                </td>
+                                <td>
+                                     <asp:TextBox id="txtFlete" style="text-align:right"  onkeypress="return numbersonly(event);"  runat="server" />
+                                </td>
+                          </tr>
+                            <tr>
+                                 <td class="f8">
+                                  
+                                </td>
+                                <td align="center">
+                                    <asp:Button ID="btGuardar" runat="server"  Text="Liquidar Flete" 
+                                        CausesValidation="true" OnClick="btGuardarFlete_Click" /> 
+                                </td>
+                          </tr>
+                    </table>                         
+
+                    </div>
+
+                </div>
             </div>
         </div>
     </div>
@@ -696,4 +1013,11 @@
     <AQControl:ShippingForm runat="server" Visible="true" ID="ShippForm" />
     <asp:HiddenField ID="h_numTipPago"   Value="0" runat="server" />
     <asp:HiddenField ID="h_numConfigPagoPOS"  Value="0" runat="server" />
+    <div id="dialog-confirm2" style="display: none;">
+    <p>
+        <span class="ui-icon ui-icon-alert" style="float: left; margin: 0 7px 20px 0;"></span>
+       <div id="popupx2"></div>
+
+    </p>
+    </div>
 </asp:Content>

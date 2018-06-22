@@ -69,9 +69,12 @@ namespace www.aquarella.com.pe.Aquarella.Logistica
                     this.formForEmployee();
                 }
 
-                //txtDateStart.Text = DateTime.Today.ToString("dd/MM/yyyy");
-                //txtDateEnd.Text = DateTime.Today.ToString("dd/MM/yyyy");
-
+                if (_user._usu_tip_id != "04" && _user._usu_tip_id != "09")
+                    ScriptManager.RegisterStartupScript(this, typeof(Page), "invocarfuncion", "ocultarTab(); ", true);
+               
+                txtDateStart.Text = DateTime.Today.ToString("dd/MM/yyyy");
+                txtDateEnd.Text = DateTime.Today.ToString("dd/MM/yyyy");
+                               
                 //if (_user._usv_employee)
                 //    this.formForEmployee();
                 //else if (_user._usv_customer)
@@ -153,6 +156,7 @@ namespace www.aquarella.com.pe.Aquarella.Logistica
                 _percepcion = Convert.ToDecimal(dRow["Con_Fig_Percepcion"]),
                 _email = dRow["bas_correo"].ToString(),
                 _nombrecompleto = dRow["nombrecompleto"].ToString(),
+                _usuTipo = dRow["Bas_Per_Tip_Id"].ToString(),
                 _aplica_percepcion =Convert.ToBoolean(dRow["aplica_percepcion"].ToString())
             };
             Session[_nameSessionCustomer] = cust;
@@ -263,13 +267,14 @@ namespace www.aquarella.com.pe.Aquarella.Logistica
                 // Cargar pedidos en borrador, liquidaciones y devoluciones
                 getOrdLiqAnsRet( Convert.ToDecimal(selectedCustomer));
 
+                ConsultaFlete();
 
-                
+
             }
             else
                 Session[_nameSessionCustomer] = new Coordinator();
 
-            //ConsultaFlete();
+            
         }
 
         #region < Eventos sobre GridView >
@@ -908,64 +913,131 @@ namespace www.aquarella.com.pe.Aquarella.Logistica
             imageButton2.Attributes.Add("onclick", "javascript:return confirm('¿Esta seguro de Anular el pedido borrador N° : -" + DataBinder.Eval(e.Row.DataItem, "ped_id") + "- ?')");
         }
 
-        //protected void btConsult_Click(object sender, EventArgs e)
-        //{
+        protected void btConsult_Click(object sender, EventArgs e)
+        {
 
-        //    ConsultaFlete();
-        //}
+            ConsultaFlete();
+        }
 
-        //protected void ConsultaFlete()
-        //{
-        //    decimal idCustomer = Convert.ToDecimal(dwCustomers.SelectedValue);
-        //    DataSet dsResultLiq = Coordinator.getOrdLiqLider(Convert.ToDateTime(txtDateStart.Text), Convert.ToDateTime(txtDateEnd.Text),idCustomer);
-        //    gvLiquiFlete.DataSource = dsResultLiq.Tables[0];
-        //    gvLiquiFlete.DataBind();
-        //}
+        protected string  GenerarLiquidacionFlete(string strListLiq)
+        {
+            _user = (Users)Session[Constants.NameSessionUser];
 
-        //protected void btGuardar_Click(object sender, EventArgs e)
-        //{
-            
-        //    string strDataDetalle = "";
+            string strLiquiId = "";
+            int usuId = _user._bas_id;
+            decimal basId = Convert.ToDecimal(dwCustomers.SelectedValue);
+            decimal monto = Convert.ToDecimal(txtFlete.Text);
+          
+            strLiquiId = Coordinator.setCrearLiquidacionFlete(usuId, basId, strListLiq, monto);
+           //cargarflete
            
-                       
-        //    for (int i = 0; i <= gvLiquiFlete.Rows.Count - 1; i++)
-        //    {
-        //        CheckBox ckSelect = ((CheckBox)(gvReturns.Rows[i].FindControl("chkSelec")));
-                
-        //        if (ckSelect.Checked)
-        //        {
-
-        //            string strIdliq = ((HiddenField)(gvReturns.Rows[i].FindControl("hf_Liq_Id"))).Value;
-                  
-        //            strDataDetalle += "<row  ";
-        //            strDataDetalle += " IdLiquidacion =¿" + strIdliq + "¿ ";
-        //            strDataDetalle += "/>";
-                                        
-        //        }
-
-        //    }
+            return strLiquiId;
+        }
 
 
-        //    if (strDataDetalle != "")
-        //    {
-        //        //DataSet dsreturn = www.aquarella.com.pe.Bll.Ventas.DespachoAlmacen.InsertarDespacho(_user._bas_id, intIdDespacho, strDataDetalle, strLiqLiderDespacho, Descripcion);
-        //        DataTable dtResult = new DataTable();
-        //        //dtResult = dsreturn.Tables[0];
+        protected void ConsultaFlete()
+        {
+            _user = (Users)Session[Constants.NameSessionUser];
+         
+            if (_user._usu_tip_id == "04" || _user._usu_tip_id == "09")
+            { 
+                decimal idCustomer = Convert.ToDecimal(dwCustomers.SelectedValue);
+                DataSet dsResultLiq = Coordinator.getOrdLiqLider(Convert.ToDateTime(txtDateStart.Text), Convert.ToDateTime(txtDateEnd.Text), idCustomer);
+                gvLiquiFlete.DataSource = dsResultLiq.Tables[0];
+                gvLiquiFlete.DataBind();
+                ScriptManager.RegisterStartupScript(this, typeof(Page), "invocarfuncion", "CalcularTotal(); ", true);
+            }
+        }
 
-        //        //foreach (DataRow row in dtResult.Rows)
-        //        //{
-        //        //_iddespacho = row["DESPACHO_ID"].ToString();
+        protected void btGuardarFlete_Click(object sender, EventArgs e)
+        {
 
-        //        //}
-              
-               
-        //    }
-        //    else
-        //    {
-        //        this.msnMessage.LoadMessage("Error : Debe elegir al menos un elemento de la lista.", ucMessage.MessageType.Error);
-        //    }
+            string strDataDetalle = "";
+            msnMessage.HideMessage();
 
-        //}
+            for (int i = 0; i <= gvLiquiFlete.Rows.Count - 1; i++)
+            {
+                CheckBox ckSelect = ((CheckBox)(gvLiquiFlete.Rows[i].FindControl("chkSelec")));
+
+                if (ckSelect.Checked)
+                {
+
+                    string strIdliq = ((HiddenField)(gvLiquiFlete.Rows[i].FindControl("hf_Liq_Id"))).Value;
+
+                    strDataDetalle += "<row  ";
+                    //strDataDetalle += " IdLider=¿" + strIdLider + "¿ ";
+                    strDataDetalle += " IdLiquidacion =¿" + strIdliq + "¿ ";
+                    strDataDetalle += " IdFlete=¿xxyy¿ ";
+                    strDataDetalle += "/>";
+
+                }
+
+            }
+
+            if (strDataDetalle != "")
+            {
+                string strmonto = txtFlete.Text;
+                decimal monto = 0;
+
+                if (strmonto == "")
+                    strmonto = "0";
+
+                 monto = Convert.ToDecimal(strmonto);
+
+                if (monto > 0)
+                {
+                    string strliquidacion = GenerarLiquidacionFlete(strDataDetalle);
+
+                    if (strliquidacion != "")
+                    {                        
+                        ScriptManager.RegisterStartupScript(this, typeof(Page), "invocarfuncion", "mostrarLiquidacion('" + strliquidacion + "'); ", true);
+                        decimal idCustomer = Convert.ToDecimal(dwCustomers.SelectedValue);
+                        getOrdLiqAnsRet(idCustomer);
+                        ConsultaFlete();
+                    }
+                    else
+                        this.msnMessage.LoadMessage("Error : Hubo un error en la generación del flete.", ucMessage.MessageType.Error);
+
+                }
+                else
+                    this.msnMessage.LoadMessage("Error : El monto de flete debe ser mayor a cero.", ucMessage.MessageType.Error);
+
+            }
+            else
+            {
+                this.msnMessage.LoadMessage("Error : Debe elegir al menos un elemento de la lista.", ucMessage.MessageType.Error);
+            }
+
+        }
+
+        protected void OnCheckedChangedMethod(object sender, EventArgs e)
+        {
+            Decimal monto = 0;
+
+            for (int i = 0; i <= gvLiquiFlete.Rows.Count - 1; i++)
+            {
+                CheckBox ckSelect = ((CheckBox)(gvLiquiFlete.Rows[i].FindControl("chkSelec")));
+
+                if (ckSelect.Checked)
+                {
+                    monto += Convert.ToDecimal(((HiddenField)(gvLiquiFlete.Rows[i].FindControl("hf_Liq_Id"))).Value);
+                }
+
+            }
+
+            txtMontoSelec.Text = monto.ToString();
+            txtFlete.Text = monto.ToString();
+        }
+        
+        [WebMethod()]
+        public static string getTotals()
+        {
+            Decimal monto = 0;
+            string stroMonto = "";
+
+            return stroMonto;
+
+        }
 
 
     }

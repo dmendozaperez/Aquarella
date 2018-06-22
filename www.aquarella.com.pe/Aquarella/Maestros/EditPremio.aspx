@@ -16,7 +16,35 @@
         function pageLoad() {
             var isAsyncPostback = Sys.WebForms.PageRequestManager.getInstance().get_isInAsyncPostBack();
         }
-              
+        
+        function CalcularTotal() {
+             var sum = 0;
+             var i = 0;
+             var Grid_Table = document.getElementById('<%= gvStock.ClientID %>');
+
+              $("#<%=gvStock.ClientID%> :checkbox").each(function() {
+                    i += 1
+                  if (this.checked){
+                  
+                      $('#<%=gvStock.ClientID%> tbody tr:eq(' + i + ')').each(function () {
+                                                
+                             var coltotal = $("td:eq(4)", this).html();
+                             alert(coltotal)
+                            //if (coltotal != undefined) {
+                   
+                            //    var totaldesc = coltotal.replace('S/', '')
+                            //    var valor = parseFloat(totaldesc);
+                            //    sum += valor;
+                   
+                            //}
+               
+                        });
+                  }
+              });
+             //var valor = Math.round(sum*100)/100
+
+             //$("[id$='txtMontoSelec']").val(valor);
+         }
         function pageLoad() {
             var isAsyncPostback = Sys.WebForms.PageRequestManager.getInstance().get_isInAsyncPostBack();
             if (isAsyncPostback) {
@@ -145,7 +173,7 @@
                                             <asp:HiddenField ID="hf_Talla" runat="server" Value='<%# Eval("Talla")%>' />
                                             <asp:HiddenField ID="hf_Cantidad" runat="server" Value='<%# Eval("Cantidad")%>' />
                                              <asp:HiddenField ID="hf_Precio" runat="server" Value='<%# Eval("Precio")%>' />
-                                           <asp:CheckBox id="chkSelec" runat="server"  AutoPostBack="false"/>
+                                           <asp:CheckBox id="chkSelec"  runat="server"  AutoPostBack="false"/>
                                         </ItemTemplate>
                                    </asp:TemplateField>
                                 </Columns>
