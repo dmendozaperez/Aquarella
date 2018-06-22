@@ -262,12 +262,13 @@ namespace Integrado.Sistemas.Ventas
                     ProgressAlert.SetIndeterminate(); //Infinite   
                     string _error_venta = await Task.Run(() => Dat_NotaCredito._anular_ncredito(_not_id, Ent_Global._bas_id_codigo));
                 //string _error_venta =Dat_NotaCredito._anular_ncredito(_not_id, Ent_Global._bas_id_codigo);
-                    string _codigo_hashn = "";
-                    
+                    string _codigo_hashn = "";string _url_pdf = "";
+
+
                 if (_error_venta.Length==0)
                 {
 
-                    await Task.Run(() => Facturacion_Electronica.ejecutar_factura_electronica("N", _not_id.ToString(), ref _codigo_hashn, ref _error));                    
+                    await Task.Run(() => Facturacion_Electronica.ejecutar_factura_electronica("N", _not_id.ToString(), ref _codigo_hashn, ref _error,ref _url_pdf));                    
 
 
                     if (_error.Length == 0)
@@ -419,8 +420,8 @@ namespace Integrado.Sistemas.Ventas
                 {
                     ProgressAlert = await this.ShowProgressAsync(Ent_Msg.msgcargando, "Enviando a sunat la Nota de Credito...");
                     //string _codigo_hash = "";
-                    string _error = "";
-                    await Task.Run(() => Facturacion_Electronica.ejecutar_factura_electronica("N", _not_id_imp.ToString(), ref _codigo_hash, ref _error));
+                    string _error = "";String _url_pdf = "";
+                    await Task.Run(() => Facturacion_Electronica.ejecutar_factura_electronica("N", _not_id_imp.ToString(), ref _codigo_hash, ref _error,ref _url_pdf));
 
 
                     if (_error.Length > 0)
@@ -431,7 +432,7 @@ namespace Integrado.Sistemas.Ventas
                     }
 
                     //EN ESTE PASO VAMOS A GRABAR EL CODIGO HASH
-                    await Task.Run(() => Dat_Venta.insertar_codigo_hash(_not_id_imp.ToString(), _codigo_hash, "N"));
+                    await Task.Run(() => Dat_Venta.insertar_codigo_hash(_not_id_imp.ToString(), _codigo_hash, "N", _url_pdf));
 
 
                     //****enviar los xml al server

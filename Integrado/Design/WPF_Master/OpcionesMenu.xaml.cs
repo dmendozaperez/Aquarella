@@ -146,18 +146,18 @@ namespace Integrado.Design.WPF_Master
             {
                 foreach(var fila in listarFE)
                 {
-                    string cod_hash = "";string _error = "";
-                    Facturacion_Electronica.ejecutar_factura_electronica(fila.tipo, fila.numero,ref cod_hash,ref _error);
+                    string cod_hash = "";string _error = "";String _url_pdf = "";
+                    Facturacion_Electronica.ejecutar_factura_electronica(fila.tipo, fila.numero,ref cod_hash,ref _error,ref _url_pdf);
 
                     if (_error.Length==0)
                     {
                         if (fila.tipo=="B")
                         { 
-                            Dat_Venta.insertar_codigo_hash(fila.numero, cod_hash, "V");
+                            Dat_Venta.insertar_codigo_hash(fila.numero, cod_hash, "V", _url_pdf);
                         }
                         else
                         {
-                            Dat_Venta.insertar_codigo_hash(fila.not_id, cod_hash, "N");
+                            Dat_Venta.insertar_codigo_hash(fila.not_id, cod_hash, "N", _url_pdf);
                         }
                     }
                     else

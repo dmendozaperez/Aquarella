@@ -504,7 +504,12 @@ namespace Integrado.Sistemas.Ventas
                         //aca generamos el codigo hash
                         string _codigo_hash = "";
                         string _error = "";
-                        await Task.Run(() => Facturacion_Electronica.ejecutar_factura_electronica(Basico.Left(grabar_numerodoc, 1), grabar_numerodoc, ref _codigo_hash, ref _error));
+                        string _url_pdf = "";
+
+                        await Task.Run(() => Facturacion_Electronica.ejecutar_factura_electronica(Basico.Left(grabar_numerodoc, 1), grabar_numerodoc, ref _codigo_hash, ref _error,ref _url_pdf));
+
+                        //await Task.Run(() => Facturacion_Electronica.ejecutar_factura_electronica_ws (Basico.Left(grabar_numerodoc, 1), grabar_numerodoc, ref _codigo_hash, ref _error,ref _url_pdf));
+
                         //*************
 
 
@@ -514,7 +519,7 @@ namespace Integrado.Sistemas.Ventas
 
                         if (_codigo_hash.Length == 0 || _codigo_hash == null)
                         {
-                            await Task.Run(() => Facturacion_Electronica.ejecutar_factura_electronica(Basico.Left(grabar_numerodoc, 1), grabar_numerodoc, ref _codigo_hash, ref _error));
+                            await Task.Run(() => Facturacion_Electronica.ejecutar_factura_electronica(Basico.Left(grabar_numerodoc, 1), grabar_numerodoc, ref _codigo_hash, ref _error,ref _url_pdf));
                         }
                         if (_codigo_hash.Length == 0 || _codigo_hash == null)
                         {
@@ -534,7 +539,7 @@ namespace Integrado.Sistemas.Ventas
                         }
                         await Task.Run(() => Basico._enviar_webservice_xml());
                         //EN ESTE PASO VAMOS A GRABAR EL CODIGO HASH
-                        await Task.Run(() => Dat_Venta.insertar_codigo_hash(grabar_numerodoc, _codigo_hash, "V"));
+                        await Task.Run(() => Dat_Venta.insertar_codigo_hash(grabar_numerodoc, _codigo_hash, "V",_url_pdf));
                         ///
                         //byte[] img_qr = null;
                         string _genera_tk = await Task.Run(() => Imprimir_Doc.Generar_Impresion("F", grabar_numerodoc) /*Impresora_Epson.Config_Imp.GenerarTicketFact(grabar_numerodoc, 1, _codigo_hash)*/);

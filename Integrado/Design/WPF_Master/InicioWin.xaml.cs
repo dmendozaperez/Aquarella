@@ -20,6 +20,7 @@ using System.IO;
 using Epson_Ticket;
 using MahApps.Metro;
 using System.Xml.Linq;
+using CapaDato.Bll.Util;
 //using Epson_QR;
 //using System.IO;
 //using Epson_Ticket;
@@ -62,7 +63,7 @@ namespace Integrado.Design.WPF_Master
         {
             Mouse.OverrideCursor = Cursors.Wait;
             _server = "www.aquarellaperu.com.pe";
-            _base_datos = "BdAquarella";
+            _base_datos = "BdAquarellaDes2";
             _user = "sa";
             _password = "Bata2013";
 
@@ -73,7 +74,7 @@ namespace Integrado.Design.WPF_Master
 
             //#region<REGION DE PRUEBA DE FACTURACION ELECTRONICA PAPERLESS>
             //string _error = "";
-            //string _formato_doc = CapaDato.Bll.Venta.Dat_Venta._leer_formato_electronico_PAPERLESS("N", "6073", ref _error);
+            //string _formato_doc = CapaDato.Bll.Venta.Dat_Venta._leer_formato_electronico_PAPERLESS("B", "B03000032183", ref _error);
             //FEBata.OnlinePortTypeClient gen_fe = new FEBata.OnlinePortTypeClient();
             //string ruc_empresa = "20101951872"; string ws_login = "admin_ws"; string ws_pass = "abc123"; Int32 tipofoliacion = 1;
 
@@ -236,10 +237,14 @@ namespace Integrado.Design.WPF_Master
 
                 _ini = inicio_config;
                 if (!inicio_config)
-                {
-                    
+                {                    
                     //btnaquarella.IsEnabled = false;
                     lblconfig.Content = "!El Entorno del sistema no esta configurado correctamente ó la conexion esta cerrada";
+                }
+                else
+                {
+                    /*en este caso vamos a capturar los datos para la WS de paperless*/
+                    Dat_Basico.config_ws_fe();
                 }
             }
             catch (Exception)

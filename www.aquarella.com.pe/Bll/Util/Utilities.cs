@@ -90,7 +90,7 @@ namespace www.aquarella.com.pe.bll.Util
                               select x).CopyToDataTable();
                 return result;
             }
-            catch
+            catch(Exception exc)
             {
                 return new DataTable();
             }

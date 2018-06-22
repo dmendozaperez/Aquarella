@@ -336,11 +336,11 @@ namespace Integrado.Sistemas.Ventas
                 #endregion
 
                 //string _error_venta =Dat_Venta._anular_venta(_not_id.ToString());
-                string _codigo_hashn = "";
+                string _codigo_hashn = "";string _url_pdf = "";
 
                     if (_error_venta.Length==0)
                        {                            
-                            await Task.Run(() => Facturacion_Electronica.ejecutar_factura_electronica("F", _not_id.ToString(), ref _codigo_hashn, ref _error));
+                            await Task.Run(() => Facturacion_Electronica.ejecutar_factura_electronica("F", _not_id.ToString(), ref _codigo_hashn, ref _error, ref _url_pdf));
                             
                             if (_error.Length == 0)
                             {
