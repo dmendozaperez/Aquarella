@@ -22,28 +22,23 @@
              var i = 0;
              var Grid_Table = document.getElementById('<%= gvStock.ClientID %>');
 
+
               $("#<%=gvStock.ClientID%> :checkbox").each(function() {
                     i += 1
                   if (this.checked){
                   
                       $('#<%=gvStock.ClientID%> tbody tr:eq(' + i + ')').each(function () {
                                                 
-                             var coltotal = $("td:eq(4)", this).html();
-                             alert(coltotal)
-                            //if (coltotal != undefined) {
-                   
-                            //    var totaldesc = coltotal.replace('S/', '')
-                            //    var valor = parseFloat(totaldesc);
-                            //    sum += valor;
-                   
-                            //}
+                          var coltotal = parseInt($("td:eq(4)", this).find("input")[0].value);
+                          
+                          sum += coltotal;
                
                         });
                   }
               });
-             //var valor = Math.round(sum*100)/100
+             
 
-             //$("[id$='txtMontoSelec']").val(valor);
+            $("[id$='txtTotal']").val(sum);
          }
         function pageLoad() {
             var isAsyncPostback = Sys.WebForms.PageRequestManager.getInstance().get_isInAsyncPostBack();
@@ -146,7 +141,8 @@
                     <asp:UpdatePanel ID="upGrid" runat="server" UpdateMode="Conditional">
                         <ContentTemplate>
                             <asp:GridView ID="gvStock" runat="server" Width="50%" SkinID="gridviewSkin"
-                            AutoGenerateColumns="False"  Font-Size="8" AllowPaging="True" AllowSorting="True" CellPadding="3"
+                             ShowFooter="True"
+                                AutoGenerateColumns="False"  Font-Size="8" AllowPaging="True" AllowSorting="True" CellPadding="3"
                             ShowHeaderWhenEmpty="True" BackColor="White" BorderColor="#CCCCCC" BorderStyle="Solid" BorderWidth="1px" 
                             OnRowCreated="gvStock_RowCreated"
                             OnPageIndexChanging="gvStock_PageIndexChanging"
@@ -164,16 +160,21 @@
                                      <asp:BoundField DataField="Cantidad" HeaderText="Stock" ItemStyle-HorizontalAlign="center"  />
                                        <asp:TemplateField HeaderText="Cantidad" SortExpression="pin_employee" ItemStyle-HorizontalAlign="Center" ItemStyle-Width="50px">
                                         <ItemTemplate>
-                                              <asp:TextBox id="txtCantidad"   Style="width:50px;font-size:12px" Columns="2" type="number" MaxLength="3"  Text='<%# Eval("Cantidad")%>'  runat="server" />
+                                              <asp:TextBox id="txtCantidad" onchange="javascript: CalcularTotal( this );"   Style="width:50px;font-size:12px" Columns="2" type="number" MaxLength="3"  Text='<%# Eval("Cantidad")%>'  runat="server" />
                                         </ItemTemplate>
+                                        <FooterTemplate> Total:
+                                            <asp:TextBox id="txtTotal"   Enabled="false"  Style="width:50px;font-size:12px" Columns="2" type="number" MaxLength="3"  Text=''  runat="server" />
+
+                                        </FooterTemplate>
                                     </asp:TemplateField> 
+                                      
                                    <asp:TemplateField HeaderText="Agregar" SortExpression="pin_employee" ItemStyle-HorizontalAlign="Center" ItemStyle-Width="110px">
                                         <ItemTemplate>
                                             <asp:HiddenField ID="hf_ArtId" runat="server" Value='<%# Eval("Referencia")%>' />
                                             <asp:HiddenField ID="hf_Talla" runat="server" Value='<%# Eval("Talla")%>' />
                                             <asp:HiddenField ID="hf_Cantidad" runat="server" Value='<%# Eval("Cantidad")%>' />
                                              <asp:HiddenField ID="hf_Precio" runat="server" Value='<%# Eval("Precio")%>' />
-                                           <asp:CheckBox id="chkSelec"  runat="server"  AutoPostBack="false"/>
+                                           <asp:CheckBox id="chkSelec"  runat="server" onclick="javascript: CalcularTotal(this);" AutoPostBack="false"/>
                                         </ItemTemplate>
                                    </asp:TemplateField>
                                 </Columns>
@@ -197,7 +198,7 @@
                 </td>
                 <td style="text-align:center">
                     <asp:Button ID="btnAgregar" runat="server" Text="Agregar >>" OnClick="btAgregar_Click" />
-
+                                                
                 </td>
                   <td  valign="top">
                    <div>
@@ -255,7 +256,7 @@
                     </td>
             </tr>
                   <tr>
-                <td style="width:45%"></td>
+                <td style="width:45%;text-align:left"></td>
                 <td style="width:10%"><asp:Button ID="btnRegresarLista" runat="server" Text="Regresar al listado" OnClick="btListar_Click" /></td>
                 <td style="width:45%"></td>
             </tr>
