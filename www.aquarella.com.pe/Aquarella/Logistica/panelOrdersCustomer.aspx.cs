@@ -310,12 +310,15 @@ namespace www.aquarella.com.pe.Aquarella.Logistica
                     {
                         //
                         string noLiq = System.Web.UI.DataBinder.Eval(e.Row.DataItem, "Liq_Id").ToString();
+                        string opg = System.Web.UI.DataBinder.Eval(e.Row.DataItem, "Liq_Opg").ToString();
                         ///
                         ImageButton imgShowReportInvoice = (ImageButton)e.Row.FindControl("imgedit");
                         ImageButton imganular = (ImageButton)e.Row.FindControl("ibanular");
                         
                         ///
-                        imgShowReportInvoice.Visible = true;
+                        if(opg!="2")
+                            imgShowReportInvoice.Visible = true;
+
                         imganular.Visible = true;
                     }
                 }
