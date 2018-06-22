@@ -914,13 +914,14 @@ namespace Integrado.Sistemas.Ventas
                             ///      
                             string _codigo_hash = "";
                             string _error = "";
-                            await Task.Run(() => Facturacion_Electronica.ejecutar_factura_electronica("N", results[0].ToString(), ref _codigo_hash, ref _error));
+                            string _url_pdf = "";
+                            await Task.Run(() => Facturacion_Electronica.ejecutar_factura_electronica("N", results[0].ToString(), ref _codigo_hash, ref _error,ref _url_pdf));
                             //Facturacion_Electronica.ejecutar_factura_electronica_NC(results[0].ToString(), ref _codigo_hash);
 
                             
                             if (_codigo_hash.Length==0 || _codigo_hash==null)
                             {
-                                await Task.Run(() => Facturacion_Electronica.ejecutar_factura_electronica("N", results[0].ToString(), ref _codigo_hash, ref _error));
+                                await Task.Run(() => Facturacion_Electronica.ejecutar_factura_electronica("N", results[0].ToString(), ref _codigo_hash, ref _error,ref _url_pdf));
                             }
                             if (_codigo_hash.Length == 0 || _codigo_hash == null)
                             {
@@ -953,7 +954,7 @@ namespace Integrado.Sistemas.Ventas
                             }
 
                             //EN ESTE PASO VAMOS A GRABAR EL CODIGO HASH
-                            await Task.Run(() => Dat_Venta.insertar_codigo_hash(results[0].ToString(), _codigo_hash, "N"));
+                            await Task.Run(() => Dat_Venta.insertar_codigo_hash(results[0].ToString(), _codigo_hash, "N", _url_pdf));
 
 
                             //****enviar los xml al server

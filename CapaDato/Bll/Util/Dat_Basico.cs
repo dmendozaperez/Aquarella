@@ -147,5 +147,60 @@ namespace CapaDato.Bll.Util
 
             }
         }
+
+        #region<METODO ESTATICA PARA LA FACTURACION ELECTRONICA>
+        /// <summary>
+        /// configuracion de la facturacion electronica paperless
+        /// </summary>
+        public static void config_ws_fe()
+        {
+            string sqlquery = "USP_LeerConfig_FE";
+            try
+            {
+                using (SqlConnection cn = new SqlConnection(Ent_Conexion.conexion))
+                {
+                    try
+                    {
+                        if (cn.State == 0) cn.Open();
+                        using (SqlCommand cmd = new SqlCommand(sqlquery, cn))
+                        {
+                            cmd.CommandTimeout = 0;
+                            cmd.CommandType = CommandType.StoredProcedure;
+                            cmd.Parameters.Add("@ws_ruc", SqlDbType.VarChar, 20);
+                            cmd.Parameters.Add("@ws_login", SqlDbType.VarChar, 20);
+                            cmd.Parameters.Add("@ws_password", SqlDbType.VarChar, 20);
+                            cmd.Parameters.Add("@pr_factura", SqlDbType.VarChar, 1);
+
+                            cmd.Parameters["@ws_ruc"].Direction = ParameterDirection.Output;
+                            cmd.Parameters["@ws_login"].Direction = ParameterDirection.Output;
+                            cmd.Parameters["@ws_password"].Direction = ParameterDirection.Output;
+                            cmd.Parameters["@pr_factura"].Direction = ParameterDirection.Output;
+
+                            cmd.ExecuteNonQuery();
+
+                            Ent_Global._ws_ruc = cmd.Parameters["@ws_ruc"].Value.ToString();
+                            Ent_Global._ws_login = cmd.Parameters["@ws_login"].Value.ToString();
+                            Ent_Global._ws_password = cmd.Parameters["@ws_password"].Value.ToString();
+                            Ent_Global.pr_facturador = cmd.Parameters["@pr_factura"].Value.ToString();
+                        }
+
+                    }
+                    catch(Exception exc)
+                    {
+
+                        
+                    }
+                    if (cn != null)
+                        if (cn.State == ConnectionState.Open) cn.Close();
+                }
+            }
+            catch
+            {
+
+                
+            }
+        }
+
+        #endregion
     }
 }

@@ -300,8 +300,8 @@
                         <SelectParameters>
                             <asp:Parameter Name="dtObj" Type="Object" />
                             <asp:Parameter DefaultValue="0" Name="posTable" Type="Int32" />
-                            <asp:Parameter DefaultValue="lhv_liquidation_no" Name="f1" Type="String" />
-                            <asp:Parameter DefaultValue="name" Name="f2" Type="String" />
+                            <asp:Parameter DefaultValue="Liq_Id" Name="f1" Type="String" />
+                            <asp:Parameter DefaultValue="nombres" Name="f2" Type="String" />
                             <asp:Parameter DefaultValue="pin_employee" Name="f3" Type="String" />
                             <asp:ControlParameter ControlID="txtFilter" DefaultValue="" Name="fieldValue1" PropertyName="Text"
                                 Type="String" />
@@ -309,7 +309,7 @@
                                 Type="String" />
                             <asp:ControlParameter ControlID="txtFilter" Name="fieldValue3" PropertyName="Text"
                                 Type="String" />
-                            <asp:Parameter DefaultValue="lhv_liquidation_no" Name="fieldOrder" Type="String" />
+                            <asp:Parameter DefaultValue="Liq_Id" Name="fieldOrder" Type="String" />
                         </SelectParameters>
                     </asp:ObjectDataSource>
                 </div>

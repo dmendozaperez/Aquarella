@@ -174,7 +174,7 @@ namespace CapaDato.Bll.Venta
                 return 0;
             }
         }
-        public static void insertar_codigo_hash(string _ven_id, string _hash, string _estado)
+        public static void insertar_codigo_hash(string _ven_id, string _hash, string _estado,string url_pdf)
         {
             string sqlquery = "USP_Insertar_Codigo_Hash";
             SqlConnection cn = null;
@@ -189,6 +189,7 @@ namespace CapaDato.Bll.Venta
                 cmd.Parameters.AddWithValue("@ven_id", _ven_id);
                 cmd.Parameters.AddWithValue("@codigo_hash", _hash);
                 cmd.Parameters.AddWithValue("@Estado", _estado);
+                cmd.Parameters.AddWithValue("@url_pdf", url_pdf);
                 cmd.ExecuteNonQuery();
             }
             catch

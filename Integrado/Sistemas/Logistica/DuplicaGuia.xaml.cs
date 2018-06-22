@@ -40,6 +40,7 @@ namespace Integrado.Sistemas.Logistica
 
             //string _codigo_hash = "";
             //string _error = "";
+            //string _pdf_url = "";
             //var bolfac = txtnumero.Text.Trim().ToString().Select(a => a.ToString().Contains('B') || a.ToString().Contains('F')).ToList();
 
             //string tipo = "N";
@@ -50,7 +51,8 @@ namespace Integrado.Sistemas.Logistica
             //}
 
 
-            ////#region<VENTA DE LA FACTURACION ELECTRONICA>
+            //#region<VENTA DE LA FACTURACION ELECTRONICA>
+            //Bll.Facturacion_Electronica.ejecutar_factura_electronica(tipo, num, ref _codigo_hash, ref _error, ref _pdf_url);
             //Bll.Facturacion_Electronica.ejecutar_factura_electronica(tipo, num, ref _codigo_hash, ref _error);
             //Dat_Venta.insertar_codigo_hash(num, _codigo_hash, "V");
             //Bll.Basico._enviar_webservice_xml();

@@ -44,5 +44,14 @@ namespace CapaEntidad.Bll.Util
 
         #endregion
 
+        #region<VARIABLES PARA CONFIG FACTURACION ELECTRONICA PAPERLESS>
+        public static string _ws_ruc { get; set; }
+        public static string _ws_login { get; set; }
+        public static string _ws_password { get; set; }
+
+        public static string pr_facturador { get; set; }
+
+        #endregion
+
     }
 }
