@@ -988,7 +988,7 @@ namespace www.aquarella.com.pe.Aquarella.Logistica
                  monto = Convert.ToDecimal(strmonto);
 
                 if (monto > 0)
-                {
+                {                 
                     string strliquidacion = GenerarLiquidacionFlete(strDataDetalle);
 
                     if (strliquidacion != "")
@@ -1008,7 +1008,9 @@ namespace www.aquarella.com.pe.Aquarella.Logistica
             }
             else
             {
-                this.msnMessage.LoadMessage("Error : Debe elegir al menos un elemento de la lista.", ucMessage.MessageType.Error);
+                msnMessage.LoadMessage("Error : Debe elegir al menos un elemento de la lista.", UserControl.ucMessage.MessageType.Error);
+                ScriptManager.RegisterStartupScript(this, typeof(Page), "invocarfuncion", "mostrarMensaje('Error : Debe elegir al menos un elemento de la lista.'); ", true);
+
             }
 
         }
