@@ -88,7 +88,7 @@
                          
                             if (coltotal != undefined) {
                    
-                                var totaldesc = coltotal.replace('S/', '')
+                                var totaldesc = coltotal.replace('S/.', '')
                                 var valor = parseFloat(totaldesc);
                                 sum += valor;
                    
