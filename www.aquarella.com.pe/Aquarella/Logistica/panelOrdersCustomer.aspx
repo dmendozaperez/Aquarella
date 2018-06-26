@@ -27,7 +27,10 @@
             }
         }
 
-        function mostrarLiquidacion(strLiquidacion) {                     
+        function mostrarLiquidacion(strLiquidacion) {
+                   
+            $("#dialog-loadFlete").dialog("close");
+
             $("[id$='txtFlete']").val('');
 
             $("#dialog-confirm2").dialog({
@@ -48,6 +51,25 @@
             $('#dialog-confirm2').dialog('option', 'title', 'Liquidación del flete');
             $("#dialog-confirm2").dialog("open");
             document.getElementById('popupx2').innerHTML = 'El flete se generó en en el pedido :' + strLiquidacion
+        }
+
+        function mostrarProceso() {
+
+            var valor = parseFloat($("[id$='txtFlete']").val());
+            if ($("[id$='txtFlete']").val() != "") {
+                if (valor > 0)
+                    $("#dialog-loadFlete").dialog().dialog("widget").find(".ui-dialog-titlebar-close").hide();
+                else
+                    alert("monto del flete debe ser mayor a cero")
+            } else {
+                
+                alert("Debe ingresar un monto del flete")
+            }
+        }
+
+        function mostrarMensaje(mensaje) {
+            $("#dialog-loadFlete").dialog("close");
+            alert(mensaje);
         }
                
 
@@ -88,7 +110,8 @@
                          
                             if (coltotal != undefined) {
                    
-                                var totaldesc = coltotal.replace('S/.', '')
+                                var totaldesc = coltotal.replace('S/', '')
+                              
                                 var valor = parseFloat(totaldesc);
                                 sum += valor;
                    
@@ -957,20 +980,20 @@
                     <div  style="margin: 0 0 0 70%;">
                         <table>
                             <tr>
-                                <td class="f8">
-                                   Total Seleccionado:
+                                <td class="f12">
+                                   Total Seleccionados:
                                 </td>  
                                 <td>
-                                    <asp:TextBox id="txtMontoSelec"   style="text-align:right" Enabled="false"  runat="server" />                                  
+                                    <asp:TextBox id="txtMontoSelec"   style="text-align:right;width:150px" Enabled="false"  runat="server" />                                  
                                 </td>
             
                             </tr>
                             <tr>
-                                 <td class="f8">
-                                   Monto Flete:
+                                 <td style="border-top: 1px solid silver; font-weight: bold;" class="f12">
+                                   Monto Flete (Inc.IGV):
                                 </td>
-                                <td>
-                                     <asp:TextBox id="txtFlete" style="text-align:right"  onkeypress="return numbersonly(event);"  runat="server" />
+                                <td class="f10">
+                                     <asp:TextBox id="txtFlete" style="text-align:right;font-size:small;width:150px"  onkeypress="return numbersonly(event);"  runat="server" />
                                 </td>
                           </tr>
                             <tr>
@@ -978,7 +1001,8 @@
                                   
                                 </td>
                                 <td align="center">
-                                    <asp:Button ID="btGuardar" runat="server"  Text="Liquidar Flete" 
+                                    <br />
+                                    <asp:Button ID="btGuardar" runat="server"  Text="Liquidar Flete"  OnClientClick="mostrarProceso()"
                                         CausesValidation="true" OnClick="btGuardarFlete_Click" /> 
                                 </td>
                           </tr>
@@ -1019,5 +1043,12 @@
        <div id="popupx2"></div>
 
     </p>
+    </div>
+    <div id="dialog-loadFlete" style="display:none"   title="Procesando liquidación">
+        <p style="text-align: center">
+            <img src="../../Design/images/ajax-loader.gif" alt="Por Favor Espere; Cargando Información." />
+            <br />
+            Creando liquidación del flete ...
+            </p>
     </div>
 </asp:Content>

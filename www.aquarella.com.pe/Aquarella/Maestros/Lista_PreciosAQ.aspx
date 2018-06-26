@@ -74,6 +74,14 @@
                         <HeaderStyle HorizontalAlign="Left" />
                         <ItemStyle HorizontalAlign="Left" Width="300px" />
                         </asp:BoundField>
+                         <asp:BoundField DataField="Subcategoria" HeaderText="Sub Categoria">
+                        <HeaderStyle HorizontalAlign="Left" />
+                        <ItemStyle HorizontalAlign="Left" Width="300px" />
+                        </asp:BoundField>
+                         <asp:BoundField DataField="Marca" HeaderText="Marca">
+                        <HeaderStyle HorizontalAlign="Left" />
+                        <ItemStyle HorizontalAlign="Left" Width="300px" />
+                        </asp:BoundField>
                         <asp:BoundField DataField="idarticulo" HeaderText="Articulo">
                         <HeaderStyle HorizontalAlign="Left" />
                         <ItemStyle HorizontalAlign="Left" Width="100px" />
