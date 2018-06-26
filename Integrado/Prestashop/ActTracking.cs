@@ -1,5 +1,5 @@
-﻿using Bukimedia.PrestaSharp.Entities;
-using Bukimedia.PrestaSharp.Factories;
+﻿//using Bukimedia.PrestaSharp.Entities;
+//using Bukimedia.PrestaSharp.Factories;
 using CapaDato.Bll.Ecommerce;
 using MySql.Data.MySqlClient;
 using System;
@@ -154,7 +154,7 @@ namespace Integrado.Prestashop
         public static string Password = datosWS.Rows[0]["Contrasena"].ToString().Trim();
         //public static string Password = "";
 
-
+/*
         public static OrderFactory of = new OrderFactory(BaseUrl, Account, Password);
         public static CartFactory oc = new CartFactory(BaseUrl, Account, Password);
         public static OrderCarrierFactory OrderCarrierFactory = new OrderCarrierFactory(BaseUrl, Account, Password);
@@ -162,7 +162,7 @@ namespace Integrado.Prestashop
         public static ProductFactory pf = new ProductFactory(BaseUrl, Account, Password);
         public static OrderPaymentFactory opf = new OrderPaymentFactory(BaseUrl, Account, Password);
         public static OrderStateFactory osf = new OrderStateFactory(BaseUrl, Account, Password);
-
+*/
 
         /// <summary>
         /// Sets the cert policy.
