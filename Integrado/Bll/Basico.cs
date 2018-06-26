@@ -259,7 +259,7 @@ namespace Integrado.Bll
 
                     if (valida)
                     {
-                        action_presta.updestafac_prestashop(guia_presta);
+                        //action_presta.updestafac_prestashop(guia_presta);
 
                         /*enviamos urbano la guia*/
                         EnviaPedido envia = new EnviaPedido();
@@ -270,7 +270,8 @@ namespace Integrado.Bll
                             if (ent_urbano.error == "1")
                             {
                                 if (ent_urbano.guia.Trim().Length > 0)
-                                {                                   
+                                {
+                                    action_presta.updestafac_prestashop(guia_presta);
                                     data_urbano.update_guia(guia_presta, ent_urbano.guia);
                                     guia_urb = ent_urbano.guia;
                                     break;
@@ -283,7 +284,7 @@ namespace Integrado.Bll
                         ActTracking enviaguia_presta = new ActTracking();
                         string[] valida_prest = enviaguia_presta.ActualizaTrackin(guia_presta, guia_urb);
                         /*el valor 1 quiere decir que actualizo prestashop*/
-                        if (valida_prest[0] == "1")
+                        if (valida_prest[0] == "1" && guia_urb.ToString() != "")
                         {
                             data_urbano.updprestashopGuia(guia_presta, guia_urb);
                         }
