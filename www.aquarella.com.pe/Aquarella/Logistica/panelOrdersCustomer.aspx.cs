@@ -69,7 +69,7 @@ namespace www.aquarella.com.pe.Aquarella.Logistica
                     this.formForEmployee();
                 }
 
-                if (_user._usu_tip_id != "04" && _user._usu_tip_id != "09")
+                if (_user._usu_flete != "1")
                     ScriptManager.RegisterStartupScript(this, typeof(Page), "invocarfuncion", "ocultarTab(); ", true);
                
                 txtDateStart.Text = DateTime.Today.ToString("dd/MM/yyyy");
@@ -942,7 +942,7 @@ namespace www.aquarella.com.pe.Aquarella.Logistica
         {
             _user = (Users)Session[Constants.NameSessionUser];
          
-            if (_user._usu_tip_id == "04" || _user._usu_tip_id == "09")
+            if (_user._usu_flete == "1")
             { 
                 decimal idCustomer = Convert.ToDecimal(dwCustomers.SelectedValue);
                 DataSet dsResultLiq = Coordinator.getOrdLiqLider(Convert.ToDateTime(txtDateStart.Text), Convert.ToDateTime(txtDateEnd.Text), idCustomer);

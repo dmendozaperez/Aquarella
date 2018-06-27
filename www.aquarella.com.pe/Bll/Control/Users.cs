@@ -20,6 +20,8 @@ namespace www.aquarella.com.pe.bll
         public string _usu_tip_id { set; get; }
         public string _usu_tip_nombre { set; get; }
 
+        public string _usu_flete { set; get; }
+
         public string _asesor { set; get; }
 
         //*************************
