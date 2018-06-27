@@ -16,9 +16,10 @@
 
             $("#tabs").tabs();
             $(".iframe").colorbox({ width: "86%", height: "98%", iframe: true });
-        }); // FIN DOC READY
+        }); // FIN DOC READY lectura
 
         // Habilitar el thickbox despues de una llamAQUARELLA asincrona por el ajax
+        //nuevo
         function pageLoad() {
             var isAsyncPostback = Sys.WebForms.PageRequestManager.getInstance().get_isInAsyncPostBack();
             if (isAsyncPostback) {
@@ -30,7 +31,6 @@
         function mostrarLiquidacion(strLiquidacion) {
                    
             $("#dialog-loadFlete").dialog("close");
-
             $("[id$='txtFlete']").val('');
 
             $("#dialog-confirm2").dialog({
@@ -105,8 +105,8 @@
                   if (this.checked){
                   
                       $('#<%=gvLiquiFlete.ClientID%> tbody tr:eq(' + i + ')').each(function () {
-                                                
-                             var coltotal = $("td:eq(9)", this).html();
+                                               
+                          var coltotal = $("td:eq(10)", this).html();
                          
                             if (coltotal != undefined) {
                    
@@ -179,6 +179,9 @@
             $('html, body').animate({ scrollTop: '0px' }, 800);
         }
     </script>
+     <style type="text/css">
+        .ColumnaOculta {display:none;}
+    </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolderTitle" runat="server">
     Módulo de pedidos
@@ -512,7 +515,7 @@
                                     </asp:BoundField>
                                     <asp:BoundField DataField="total" DataFormatString="{0:C}" HeaderText="Total">
                                     <ItemStyle HorizontalAlign="Right" />
-                                    </asp:BoundField>
+                                    </asp:BoundField>                                   
                                     <asp:BoundField DataField="percepcion" DataFormatString="{0:C}" 
                                         HeaderText="Percepcion">
                                     <ItemStyle HorizontalAlign="Right" />
@@ -948,6 +951,9 @@
                                             HeaderText="T.Pagar">
                                         <ItemStyle HorizontalAlign="Right" />
                                         </asp:BoundField>
+                                          <asp:BoundField DataField="tpagar"  ItemStyle-CssClass="ColumnaOculta" HeaderStyle-CssClass="ColumnaOculta"
+                                            HeaderText="T.Pagar">                                        
+                                        </asp:BoundField>
                                         <asp:TemplateField HeaderText="Liq" ItemStyle-HorizontalAlign="Center">
                                             <ItemTemplate>
                                                  <asp:HiddenField ID="hf_Liq_Id" runat="server" Value='<%# Eval("Liq_Id")%>' />
@@ -1044,11 +1050,11 @@
 
     </p>
     </div>
-    <div id="dialog-loadFlete" style="display:none"   title="Procesando liquidación">
+    <div id="dialog-loadFlete" style="display:none"    title="Procesando liquidación">
         <p style="text-align: center">
             <img src="../../Design/images/ajax-loader.gif" alt="Por Favor Espere; Cargando Información." />
             <br />
-            Creando liquidación del flete ...
+            Creando liquidación del flete...
             </p>
     </div>
 </asp:Content>
