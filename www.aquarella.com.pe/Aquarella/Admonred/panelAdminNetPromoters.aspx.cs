@@ -139,13 +139,15 @@ namespace www.aquarella.com.pe.Aquarella.Admonred
                     string OldArea = dr["bas_are_id"].ToString();
                     string OldStatus = dr["bas_est_id"].ToString();
 
-                    Coordinator.updateCoord(idCust, newArea,  newStatus);
+                    string respuesta = Coordinator.updateCoord(idCust, newArea,  newStatus);
                     //
                     // Async 
                     //Log_Transaction.registerUserInfo(_user, _user._usv_username + "Update Customer id:" + idCust + " TypeO/N:" + oldTypeCustomer + "/" + newTypeCustomer + " WareO/N:" + oldWare + "/" + newWare +
                     //" AreaO/N:" + OldArea + "/" + newArea + " StatusO/N:" + OldStatus + "/" + newStatus);
-
-                    this.msnMessage.LoadMessage("Cliente actualizado correctamente.", ucMessage.MessageType.Information);
+                    if(respuesta=="1")
+                        this.msnMessage.LoadMessage("Cliente actualizado correctamente.", ucMessage.MessageType.Information);
+                    else
+                        this.msnMessage.LoadMessage("El lider no debe tener promotores asociados. ", ucMessage.MessageType.Error);
                 }
                 catch (Exception ex)
                 {

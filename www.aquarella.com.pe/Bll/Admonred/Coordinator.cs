@@ -807,23 +807,31 @@ namespace www.aquarella.com.pe.bll
         /// <param name="_status">New Status</param>
         /// <returns></returns>
         public static string updateCoord(string _customerId, string _area, string _status)
-        {
+        {            
+
+            string strRtp = "";
             string sqlquery = "USP_Modificar_Promotor_EstLid";
             SqlConnection cn = null;
             SqlCommand cmd = null;
+            SqlDataAdapter da = null;
+            DataSet ds = null;
             try
             {
-
                 cn = new SqlConnection(Conexion.myconexion());
-                if (cn.State == 0) cn.Open();
                 cmd = new SqlCommand(sqlquery, cn);
                 cmd.CommandTimeout = 0;
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.Parameters.AddWithValue("@bas_id", _customerId);
-                cmd.Parameters.AddWithValue("@bas_est_id",_status);
+                cmd.Parameters.AddWithValue("@bas_est_id", _status);
                 cmd.Parameters.AddWithValue("@bas_are_id", _area);
-                cmd.ExecuteNonQuery();                                
-                return "1";
+                da = new SqlDataAdapter(cmd);
+                ds = new DataSet();
+                da.Fill(ds);
+
+                strRtp= ds.Tables[0].Rows[0][0].ToString();
+
+                return strRtp;
+
             }
             catch (Exception e) { throw new Exception(e.Message, e.InnerException); }
         }
