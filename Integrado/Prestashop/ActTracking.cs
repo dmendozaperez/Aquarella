@@ -1,5 +1,5 @@
-﻿using Bukimedia.PrestaSharp.Entities;
-using Bukimedia.PrestaSharp.Factories;
+﻿//using Bukimedia.PrestaSharp.Entities;
+//using Bukimedia.PrestaSharp.Factories;
 using CapaDato.Bll.Ecommerce;
 using MySql.Data.MySqlClient;
 using System;
@@ -9,6 +9,10 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+
+using System.Security.Cryptography.X509Certificates;
+using System.Net.Security;
+using System.Net;
 
 namespace Integrado.Prestashop
 {
@@ -74,6 +78,7 @@ namespace Integrado.Prestashop
             }
             return ejecuto;
         }
+
 
         /// <summary>
         /// actualizar la guia de urbano a prestashop
@@ -149,7 +154,7 @@ namespace Integrado.Prestashop
         public static string Password = datosWS.Rows[0]["Contrasena"].ToString().Trim();
         //public static string Password = "";
 
-
+/*
         public static OrderFactory of = new OrderFactory(BaseUrl, Account, Password);
         public static CartFactory oc = new CartFactory(BaseUrl, Account, Password);
         public static OrderCarrierFactory OrderCarrierFactory = new OrderCarrierFactory(BaseUrl, Account, Password);
@@ -157,6 +162,87 @@ namespace Integrado.Prestashop
         public static ProductFactory pf = new ProductFactory(BaseUrl, Account, Password);
         public static OrderPaymentFactory opf = new OrderPaymentFactory(BaseUrl, Account, Password);
         public static OrderStateFactory osf = new OrderStateFactory(BaseUrl, Account, Password);
+*/
+
+        /// <summary>
+        /// Sets the cert policy.
+        /// </summary>
+        public static void SetCertificatePolicy()
+        {
+            ServicePointManager.ServerCertificateValidationCallback
+                       += RemoteCertificateValidate;
+        }
+
+        
+        /// <summary>
+        /// Remotes the certificate validate.
+        /// </summary>
+        private static bool RemoteCertificateValidate(object sender, X509Certificate cert, X509Chain chain, SslPolicyErrors error)
+        {
+            // trust any certificate!!!
+            //System.Console.WriteLine("Warning, trust any certificate");
+            return true;
+        }
+        
+        public string[] ActualizaEstadoPS(string orden, int estado)//0=error 1=ok
+        {
+            //SqlConnection sql;
+            //Conexion oConexion = new Conexion();
+
+            MySqlConnection mysql;
+            Conexion oConexionMySql = new Conexion();
+            string[] ejecuto;
+            string result = "";
+
+            using (MySqlCommand cmd = new MySqlCommand())
+            {
+                try
+                {
+                    //abrir la conexion
+                    mysql = oConexionMySql.getConexionMySQL();
+                    mysql.Open();
+
+                    // setear parametros del command
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Connection = mysql;
+                    cmd.CommandText = "USP_ActualizaEstadoPS";
+
+                    //asignar paramentros
+                    cmd.Parameters.AddWithValue("ref_order", orden);
+                    cmd.Parameters.AddWithValue("estado", estado);
+
+                    //ejecutar el query
+                    MySqlDataReader dr = cmd.ExecuteReader(CommandBehavior.CloseConnection);
+
+                    while (dr.Read())
+                    {
+                        result = Convert.ToString(dr["error"]);
+                    }
+                    //mysql.Close();
+                }
+                catch (Exception ex)
+                {
+                    //mysql.Close();
+                    ejecuto = new string[] { "0", ex.Message };
+                    return ejecuto;
+                } // end try
+
+                if (mysql != null)
+                    if (mysql.State == ConnectionState.Open) mysql.Close();
+
+            } // end using
+
+            // Evalua el resultado obtenido
+            if (result == "1")
+            {
+                ejecuto = new string[] { result, "Ejecución OK." };
+            }
+            else
+            {
+                ejecuto = new string[] { result, "Error al ejecutar SP." };
+            }
+            return ejecuto;
+        }
 
         /// <summary>
         /// Procedimiento de Pedido: Actualizar Nro de Guia por Prestashop WebService
@@ -170,17 +256,22 @@ namespace Integrado.Prestashop
             try
             {
                 // Actualizar Nro Guia - Order Carrier
-                Dictionary<string, string> dtn = new Dictionary<string, string>();
+                string[] actualiza;
+                actualiza = ActualizaEstadoPS(reference,18);
+                /*Dictionary<string, string> dtn = new Dictionary<string, string>();
                 dtn.Add("reference", reference);
-
+                SetCertificatePolicy();
                 OrderFactory of = new OrderFactory(BaseUrl, Account, Password);
                 order orden = of.GetByFilter(dtn, null, null).FirstOrDefault();
 
                 // Actualizar Estado
                 orden.current_state = 18;
                 of.Update(orden);
-
-                result = true;
+                */
+                if (actualiza[0] == "1")
+                {
+                    result = true;
+                }
             }
             catch (Exception exc)
             {
