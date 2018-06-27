@@ -43,8 +43,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "www.aquarella.pe", "www.aqu
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Epson_QR", "Epson_QR\Epson_QR.csproj", "{A3DEE9AC-6017-412F-AD6A-DE0294AD887B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WSPrestashop", "WSPrestashop\WSPrestashop.csproj", "{D0E8ABA3-BBDA-46F4-9DDA-14C1395D8BB7}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -174,12 +172,6 @@ Global
 		{A3DEE9AC-6017-412F-AD6A-DE0294AD887B}.DebugLocal|Any CPU.Build.0 = Debug|Any CPU
 		{A3DEE9AC-6017-412F-AD6A-DE0294AD887B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A3DEE9AC-6017-412F-AD6A-DE0294AD887B}.Release|Any CPU.Build.0 = Release|Any CPU
-		{D0E8ABA3-BBDA-46F4-9DDA-14C1395D8BB7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{D0E8ABA3-BBDA-46F4-9DDA-14C1395D8BB7}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{D0E8ABA3-BBDA-46F4-9DDA-14C1395D8BB7}.DebugLocal|Any CPU.ActiveCfg = Debug|Any CPU
-		{D0E8ABA3-BBDA-46F4-9DDA-14C1395D8BB7}.DebugLocal|Any CPU.Build.0 = Debug|Any CPU
-		{D0E8ABA3-BBDA-46F4-9DDA-14C1395D8BB7}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{D0E8ABA3-BBDA-46F4-9DDA-14C1395D8BB7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
