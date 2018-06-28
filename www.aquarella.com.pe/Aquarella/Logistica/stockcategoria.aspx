@@ -5,6 +5,14 @@ StylesheetTheme="SiteTheme" CodeBehind="stockcategoria.aspx.cs" Inherits="www.aq
    <script type="text/javascript" src="../../Scripts/ColorBox/jquery.colorbox.js"></script>
     <link href="../../Scripts/ColorBox/colorbox.css" rel="stylesheet" type="text/css" />
     <script type="text/javascript">
+        function mostrardescarga() {          
+            $("#dialog-Descarga").dialog().dialog("widget").find(".ui-dialog-titlebar-close").hide();
+            alert(1)
+        }
+
+        function ocultarDescarga() {
+            $("#dialog-Descarga").dialog("close");
+        }
 
         function pageLoad() {
             var isAsyncPostback = Sys.WebForms.PageRequestManager.getInstance().get_isInAsyncPostBack();
@@ -195,4 +203,12 @@ StylesheetTheme="SiteTheme" CodeBehind="stockcategoria.aspx.cs" Inherits="www.aq
                 <asp:AsyncPostBackTrigger ControlID="dwtemporada" EventName="SelectedIndexChanged" />
             </Triggers>
         </asp:UpdatePanel>
+    <AQControl:ShippingForm runat="server" Visible="true" ID="ShippForm" />
+    <div id="dialog-Descarga" style="display:none"    title="Procesando descarga">
+        <p style="text-align: center">
+            <img src="../../Design/images/ajax-loader.gif" alt="Por Favor Espere; Cargando Información." />
+            <br />
+            Descargando Archivo...
+            </p>
+    </div>
 </asp:Content>

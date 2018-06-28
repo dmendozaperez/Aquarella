@@ -14,9 +14,13 @@ using System.Data;
 using www.aquarella.com.pe.bll.Ventas;
 using System.IO;
 
+
 using System.Text;
 using System.Configuration;
 using System.Data.OleDb;
+
+using System.Runtime.Serialization;
+using System.Runtime.Serialization.Formatters.Binary;
 //using Bata.Aquarella.Pe.BLL.Ventas;
 //using Bata.Aquarella.Bll;
 namespace www.aquarella.com.pe.Aquarella.Logistica
@@ -471,7 +475,53 @@ namespace www.aquarella.com.pe.Aquarella.Logistica
         }
 
 
-        private void ExportarExcel()
+        public void ExportarExcel()
+        {
+
+            ScriptManager.RegisterStartupScript(this, typeof(Page), "invocarfuncion", "mostrardescarga(); ", true);
+            DataTable dt = new DataTable();
+
+            DataTable dt1 = (DataTable)Session[_nameSessionData];
+            Pivot pvt = new Pivot((DataTable)Session[_nameSessionData]);
+            string[] fila = { "Categoria", "Codigo", "foto", "Descripcion", "tempo", "stock" };
+            string[] col = { "talla" };
+
+            StringBuilder sb = new StringBuilder();
+            StringWriter sw = new StringWriter(sb);
+            HtmlTextWriter htw = new HtmlTextWriter(sw);
+
+            dt = pvt.PivotData("Cantidad", AggregateFunction.Sum, fila, col);
+
+            string attachment = "attachment; filename=stockdetallado.xls";
+            Response.ClearContent();
+            Response.AddHeader("content-disposition", attachment);
+            Response.ContentType = "application/ms-excel";
+            StringWriter stw = new StringWriter();
+            HtmlTextWriter htextw = new HtmlTextWriter(stw);
+            GridView gvexport = new GridView();
+            gvexport.DataSource = dt;
+            gvexport.DataBind();
+            gvexport.RenderControl(htextw);
+
+            string cadena = stw.ToString();
+
+            string iniImagen = "<img WIDTH = '34' HEIGHT = '34' alt = 'Logo_FR'  style = 'margin: 50px 50px 50px 50px; vertical-align:middle;' src = 'http";
+            string finImagen = ".jpg' />";
+
+            cadena = cadena.Replace("http", iniImagen);
+            cadena = cadena.Replace(".jpg", finImagen);
+            cadena = cadena.Replace("<tr", "<tr height = 40");
+            cadena = cadena.Replace("<td", "<td height = 40");
+            cadena = cadena.Replace("foto", "&nbsp;&nbsp;&nbsp;&nbsp;Foto&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;");
+
+            ScriptManager.RegisterStartupScript(this, typeof(Page), "invocarfuncion", "ocultarDescarga(); ", true);
+
+            Response.Write(cadena);
+            Response.End();
+
+        }
+
+        private void ExportarExcelBK()
         {
             DataTable dt = new DataTable();
 
