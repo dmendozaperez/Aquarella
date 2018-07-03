@@ -1,5 +1,5 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Design/Site.Master" AutoEventWireup="true"
-    CodeBehind="LoginForm.aspx.cs" Inherits="www.aquarella.com.pe.Aquarella.Control.LoginForm" %>
+    CodeBehind="recoveryPassword.aspx.cs" Inherits="www.aquarella.com.pe.Aquarella.Control.recoveryPassword" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="headCPH" runat="server">
     <!-- Require EasyJQuery After JQuery -->
@@ -7,7 +7,7 @@
     <script src="../../Scripts/Js/logInJs.js" type="text/javascript"></script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolderTitle" runat="server">
-    Inicio de sesión en el sistema
+    Recuperacion de Contraseña.
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="ContentPlaceHolderPageDesc" runat="server">
     Ingrese el nombre de usuario y contraseña para iniciar sesión en el Sistema.&nbsp;
@@ -80,7 +80,7 @@
                                         </tr>
                                         <tr>
                                             <td colspan="2" align="center">
-                                               <asp:HyperLink ID="hlinkrecovery"  NavigateUrl="~/..Aquarella/Control/recoveryPassword.aspx"  Target="_new"  runat="server">¿Ha olvidado la contraseña?</asp:HyperLink>
+                                                <asp:HyperLink ID="hlinkrecovery" NavigateUrl="~/Aquarella/Control/recoveryPassword.aspx" runat="server">¿Ha olvidado la contraseña?</asp:HyperLink>
                                             </td>
                                         </tr>
                                         <tr>

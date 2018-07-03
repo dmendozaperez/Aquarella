@@ -447,23 +447,23 @@ namespace www.aquarella.com.pe.Aquarella.Logistica
 
                 string TipoPago = cust._vartipopago ;
 
-                if (TipoPago == "008")
-                {
-                    if (dsArt != null)
-                    {
-                        if (dsArt.Tables.Count > 0)
-                        {
-                            var strPre = dsArt.Tables[0].Rows[0]["art_pre_sin_igv"].ToString();
-                            if (strPre == "")
-                            {
-                                dsArt.Tables[0].Rows[0]["art_pre_sin_igv"] = 0;
-                                dsArt.Tables[0].Rows[0]["art_pre_con_igv"] = 0;
-                                dsArt.Tables[0].Rows[0]["afec_percepcion"] = 1;
-                            }
-                        }
-                    }
-                    //decimal new_precio_oferta_sinigv=new_precio_oferta_conigv*
-                }
+                //if (TipoPago == "008")
+                //{
+                //    if (dsArt != null)
+                //    {
+                //        if (dsArt.Tables.Count > 0)
+                //        {
+                //            var strPre = dsArt.Tables[0].Rows[0]["art_pre_sin_igv"].ToString();
+                //            if (strPre == "")
+                //            {
+                //                dsArt.Tables[0].Rows[0]["art_pre_sin_igv"] = 0;
+                //                dsArt.Tables[0].Rows[0]["art_pre_con_igv"] = 0;
+                //                dsArt.Tables[0].Rows[0]["afec_percepcion"] = 1;
+                //            }
+                //        }
+                //    }
+                //    //decimal new_precio_oferta_sinigv=new_precio_oferta_conigv*
+                //}
 
                 if (dsArt == null || dsArt.Tables[0].Rows.Count == 0)
                     throw new Exception("El artículo digitado es inexistente.");
