@@ -117,7 +117,7 @@ namespace www.aquarella.com.pe.Aquarella.Financiera
             //GridViewExportUtil.Export(nameFile + ".xls", gvReturns);
 
             DataTable dt = (DataTable)Session[_nameSessionData];
-            GridViewExportUtil.ExportarExcel(dt, "", "2", "OPeracionesGratuitas");
+            GridViewExportUtil.ExportarExcel(dt, "", "2,4", "OPeracionesGratuitas");
 
        }
 
