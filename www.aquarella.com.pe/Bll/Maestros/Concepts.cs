@@ -69,5 +69,29 @@ namespace www.aquarella.com.pe.bll.Maestros
             }
             catch (Exception e) { throw new Exception(e.Message, e.InnerException); }
         }
+
+        public static DataSet getconceptoGratuito()
+        {
+            string sqlquery = "USP_Leer_Lista_Concepto_Gratuito";
+            SqlConnection cn = null;
+            SqlCommand cmd = null;
+            SqlDataAdapter da = null;
+            DataSet ds = null;
+            try
+            {
+                cn = new SqlConnection(Conexion.myconexion());
+                cmd = new SqlCommand(sqlquery, cn);
+                cmd.CommandTimeout = 0;
+                cmd.CommandType = CommandType.StoredProcedure;
+                da = new SqlDataAdapter(cmd);
+                ds = new DataSet();
+                da.Fill(ds);
+                return ds;
+
+            }
+            catch (Exception e) { throw new Exception(e.Message, e.InnerException); }
+        }
+
+
     }
 }

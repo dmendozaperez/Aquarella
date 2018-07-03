@@ -124,6 +124,7 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>C:\Users\Junior Mallqui\Desktop\CRYSTAL DLL\CrystalDecisions.Web.dll</HintPath>
     </Reference>
+    <Reference Include="DevExpress.Data.v15.1, Version=15.1.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="Jayrock">
       <HintPath>..\Jayrock.dll</HintPath>
     </Reference>
@@ -205,6 +206,7 @@
     <Content Include="Aquarella\Financiera\paymentsUpd.aspx" />
     <Content Include="Aquarella\Financiera\paymentsUpdFec.aspx" />
     <Content Include="Aquarella\Financiera\reportventasemanafz.aspx" />
+    <Content Include="Aquarella\Financiera\reportOpg.aspx" />
     <Content Include="Aquarella\Financiera\Saldo_Cliente.aspx" />
     <Content Include="Aquarella\Financiera\validateBank.aspx" />
     <Content Include="Aquarella\Financiera\verifyCredito.aspx" />
@@ -1097,6 +1099,13 @@
     </Compile>
     <Compile Include="Aquarella\Financiera\reportventasemanafz.aspx.designer.cs">
       <DependentUpon>reportventasemanafz.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Aquarella\Financiera\reportOpg.aspx.cs">
+      <DependentUpon>reportOpg.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Aquarella\Financiera\reportOpg.aspx.designer.cs">
+      <DependentUpon>reportOpg.aspx</DependentUpon>
     </Compile>
     <Compile Include="Aquarella\Financiera\Saldo_Cliente.aspx.cs">
       <DependentUpon>Saldo_Cliente.aspx</DependentUpon>

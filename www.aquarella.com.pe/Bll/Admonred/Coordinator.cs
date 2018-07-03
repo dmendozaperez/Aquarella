@@ -163,6 +163,32 @@ namespace www.aquarella.com.pe.bll
         }
 
 
+        public static DataSet getOrdLiqOpgGratuitas(DateTime date_ini, DateTime date_fin, string _strTipo)
+        {
+            string sqlquery = "USP_Leer_Liquidacion_Gratuita";
+            SqlConnection cn = null;
+            SqlCommand cmd = null;
+            SqlDataAdapter da = null;
+            DataSet ds = null;
+            try
+            {
+
+                cn = new SqlConnection(Conexion.myconexion());
+                cmd = new SqlCommand(sqlquery, cn);
+                cmd.CommandTimeout = 0;
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@tipo", _strTipo);
+                cmd.Parameters.AddWithValue("@fecha_inicio", date_ini);
+                cmd.Parameters.AddWithValue("@fecha_final", date_fin);
+                da = new SqlDataAdapter(cmd);
+                ds = new DataSet();
+                da.Fill(ds);
+                return ds;
+            }
+            catch (Exception e) { throw new Exception(e.Message, e.InnerException); }
+        }
+
+
         public static string setCrearLiquidacionFlete(int usuId, decimal basId, string strListLiq, decimal monto)
         {
             //return "";

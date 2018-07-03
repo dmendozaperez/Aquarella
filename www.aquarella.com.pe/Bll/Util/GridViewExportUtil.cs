@@ -6,6 +6,7 @@ using System.Web.UI.WebControls;
 using System.Web.UI;
 using System.IO;
 using System.Data;
+using System.Text;
 
 namespace www.aquarella.com.pe.bll.Util
 {
@@ -120,6 +121,91 @@ namespace www.aquarella.com.pe.bll.Util
                     HttpContext.Current.Response.End();
                 }
             }
+        }
+
+        public static void ExportarExcel(DataTable dt, string ColumnasOcultas, string ColumnasTexto, string NombreArchivo)
+        {
+
+            StringBuilder sb = new StringBuilder();
+            StringWriter sw = new StringWriter(sb);
+            HtmlTextWriter htw = new HtmlTextWriter(sw);
+            String style = style = @"<style> .textmode { mso-number-format:\@; } </script> ";
+            Page page = new Page();
+            String inicio;
+            ColumnasOcultas = ',' + ColumnasOcultas + ",";
+            ColumnasTexto = ',' + ColumnasTexto + ",";
+
+            Style stylePrueba = new Style();
+            stylePrueba.Width = Unit.Pixel(200);
+            string strRows = "";
+            string strRowsHead = "";
+            strRowsHead = strRowsHead + "<tr height=38 >";
+            for (int i = 0; i < dt.Columns.Count; i++)
+            {
+                bool ocultar = false;
+                string comp = "," + i.ToString() + ",";
+
+                if (ColumnasOcultas != ",,")
+                {
+                    ocultar = ColumnasOcultas.Contains(comp);
+                }
+
+                if (!ocultar)
+                    strRowsHead = strRowsHead + "<td height=38  bgcolor='#969696' width='38'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" + dt.Columns[i].ColumnName + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</ td > ";
+            }
+
+            strRowsHead = strRowsHead + "</tr>";
+
+            foreach (DataRow row in dt.Rows)
+            {
+                strRows = strRows + "<tr height='38' >";
+                for (int i = 0; i < dt.Columns.Count; i++)
+                {
+                    bool ocultar = false;
+                    string comp = "," + i.ToString() + ",";
+                    string strClass = "";
+
+                    if (ColumnasTexto != ",,")
+                    {
+
+                        if (ColumnasTexto.Contains(comp))
+                            strClass = " class='textmode'";
+                    }
+
+                    if (ColumnasOcultas != ",,")
+                    {
+
+                        ocultar = ColumnasOcultas.Contains(comp);
+
+                    }
+
+                    if (!ocultar)
+                        strRows = strRows + "<td width='400' " + strClass + " >" + row[i].ToString() + "</ td > ";
+                }
+
+                strRows = strRows + "</tr>";
+            }
+
+            inicio = "<div> " +
+                    "<table <Table border='1' bgColor='#ffffff' " +
+                    "borderColor='#000000' cellSpacing='2' cellPadding='2' " +
+                    "style='font-size:10.0pt; font-family:Calibri; background:white;'>" +
+                    strRowsHead +
+                     strRows +
+                    "</table>" +
+                    "</div>";
+
+            sb.Append(inicio);
+
+            HttpContext.Current.Response.Clear();
+            HttpContext.Current.Response.Buffer = true;
+            HttpContext.Current.Response.ContentType = "application/vnd.ms-excel";
+            HttpContext.Current.Response.AddHeader("Content-Disposition", "attachment;filename=" + NombreArchivo + ".xls");
+            HttpContext.Current.Response.Charset = "UTF-8";
+            HttpContext.Current.Response.ContentEncoding = Encoding.Default;
+            HttpContext.Current.Response.Write(style);
+            HttpContext.Current.Response.Write(sb.ToString());
+            HttpContext.Current.Response.End();
         }
 
 
