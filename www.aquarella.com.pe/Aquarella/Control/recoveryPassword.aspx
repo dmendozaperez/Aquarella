@@ -16,17 +16,10 @@
 <asp:Content ID="Content4" ContentPlaceHolderID="ContentPlaceHolder1" runat="server"> 
      <asp:ScriptManager ID="ScriptManager1" runat="server">
     </asp:ScriptManager>
-     <asp:UpdateProgress ID="UpdateProgress1" runat="server">
-        <ProgressTemplate>
-            <center>
-                <div style="position: absolute; left: 0; background: #f5f5f5; filter: alpha(opacity=85);
-                    opacity: 0.85; font-family: Georgia; text-align: center; width: 100%; font-size: medium;">
-                    <img src="../../Design/images/ajax-loader.gif" alt="Por Favor Espere; Cargando Información." />
-                    Cargando información...
-                </div>
-            </center>
-        </ProgressTemplate>
-    </asp:UpdateProgress>   
+    <asp:UpdatePanel ID="upPanelMsg" runat="server" UpdateMode="Conditional">
+        <ContentTemplate>
+            <AQControl:Message runat="server" Visible="false" ID="msnMessage"></AQControl:Message>
+         
     <table width="100%" cellpadding="4" cellspacing="4">
         <tr>
             <td align="center">
@@ -89,4 +82,21 @@
             </td>
         </tr>
     </table>
+            </ContentTemplate>
+        <Triggers>
+            <asp:AsyncPostBackTrigger ControlID="LoginButton" EventName="click" />
+           
+        </Triggers>
+    </asp:UpdatePanel>
+     <asp:UpdateProgress ID="UpdateProgress1" runat="server" AssociatedUpdatePanelID="upPanelMsg">
+        <ProgressTemplate>
+            <center>
+                <div style="position: absolute; left: 0; background: #f5f5f5; filter: alpha(opacity=85);
+                    opacity: 0.85; font-family: Georgia; text-align: center; width: 100%; font-size: medium;">
+                    <img src="../../Design/images/ajax-loader.gif" alt="Por Favor Espere; Enviando correo Electronico." />
+                    Enviando correo Electronico...
+                </div>
+            </center>
+        </ProgressTemplate>
+    </asp:UpdateProgress>  
 </asp:Content>

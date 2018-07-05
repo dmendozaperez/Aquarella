@@ -22,13 +22,22 @@ namespace www.aquarella.com.pe.Aquarella.Control {
         protected global::System.Web.UI.ScriptManager ScriptManager1;
         
         /// <summary>
-        /// Control UpdateProgress1.
+        /// Control upPanelMsg.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.UpdateProgress UpdateProgress1;
+        protected global::System.Web.UI.UpdatePanel upPanelMsg;
+        
+        /// <summary>
+        /// Control msnMessage.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::www.aquarella.com.pe.UserControl.ucMessage msnMessage;
         
         /// <summary>
         /// Control UserNameLabel.
@@ -83,5 +92,14 @@ namespace www.aquarella.com.pe.Aquarella.Control {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button LoginButton;
+        
+        /// <summary>
+        /// Control UpdateProgress1.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.UpdateProgress UpdateProgress1;
     }
 }
