@@ -11,6 +11,7 @@ using www.aquarella.com.pe.bll;
 using www.aquarella.com.pe.bll.Util;
 using www.aquarella.com.pe.bll.Control;
 using System.Linq;
+using System.Web.UI.WebControls;
 
 namespace www.aquarella.com.pe.Aquarella.Control
 {
@@ -20,7 +21,11 @@ namespace www.aquarella.com.pe.Aquarella.Control
 
         protected void Page_Load(object sender, EventArgs e)
         {
-         
+            TreeView treeMenu = new TreeView();
+            treeMenu = (TreeView)this.Master.FindControl("MenuPrin");
+            treeMenu.Visible = false;
+            
+
         }
         
         private  string GetUserIPAddress()
