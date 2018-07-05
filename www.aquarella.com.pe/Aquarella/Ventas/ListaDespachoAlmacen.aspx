@@ -182,6 +182,13 @@
                                 <td>
                                     <asp:Button ID="btConsult" runat="server" Text="Buscar" OnClick="btConsult_Click" />
                                 </td>
+                                <td>
+                                    <asp:ImageButton ID="ibExportToExcel" ImageUrl="~/Design/images/Botones/b_toExcel.png"
+                        onmouseover="this.style.background='green';" onmouseout="this.style.background=''"
+                        runat="server" Height="25px" Width="24px" 
+                        ToolTip="Exportar Panel de Resultados a Excel." 
+                        onclick="ibExportToExcel_Click" /> 
+                                </td>
                             </tr>
                         </table>
                     </td>
@@ -224,10 +231,15 @@
                                     <HeaderStyle HorizontalAlign="Left" />
                                     <ItemStyle HorizontalAlign="Left" />
                                     </asp:BoundField>
+                                    <asp:BoundField DataField="TotalParesEnviado" HeaderText="Pares Enviados" ItemStyle-Width="50px">
+                                        <HeaderStyle HorizontalAlign="Center" />
+                                        <ItemStyle HorizontalAlign="Center" />
+                                     </asp:BoundField>
                                      <asp:BoundField DataField="estado" HeaderText="Estado" >
                                     <HeaderStyle HorizontalAlign="Left" />
                                     <ItemStyle HorizontalAlign="Left" />
                                     </asp:BoundField>
+                                     
                                        <asp:TemplateField HeaderText="Edit." ItemStyle-HorizontalAlign="Center">
                                         <ItemTemplate>
                                             <asp:ImageButton ID="imgedit" CommandArgument='<%# Eval("Desp_id")%>'
