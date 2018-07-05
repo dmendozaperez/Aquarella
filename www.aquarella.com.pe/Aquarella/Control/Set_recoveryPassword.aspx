@@ -11,8 +11,8 @@
     Recuperacion de Contraseña.
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="ContentPlaceHolderPageDesc" runat="server">
-    Ingrese el nombre de usuario.&nbsp;
-    El Sistema le enviara un correo electronico para la generación de una nueva contraseña.
+   Realice el cambio de la clave de acceso a su cuenta, recuerde que la clave debe
+    de poseer mas de 8 caracteres alfanumericos.
 </asp:Content>
 <asp:Content ID="Content4" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">    
     <table width="100%" cellpadding="4" cellspacing="4">
@@ -27,7 +27,7 @@
                                         <tr>
                                             <td colspan="3" align="left" style="color: White; background-color: #333; font-weight: bold;">
                                                 <h2>
-                                                    Recuperación de contraseña</h2>
+                                                    Recuperación de contraseña:</h2>
                                             </td>
                                         </tr>
                                         <tr>
