@@ -6,6 +6,13 @@
         $(document).ready(function () {
             $("input:text").width('200px');
         });
+
+         function borrarCampos() {
+            
+             $("[id$='txtPassRenew']").val('');
+             $("[id$='txtPassNew']").val('');
+             $("[id$='txtPassAnterior']").val('');
+         }
     </script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolderTitle" runat="server">
@@ -28,7 +35,7 @@
         </ContentTemplate>
         <Triggers>
             <asp:AsyncPostBackTrigger ControlID="btSave" EventName="click" />
-            <asp:AsyncPostBackTrigger ControlID="btReset" EventName="click" />
+           
         </Triggers>
     </asp:UpdatePanel>
     <asp:UpdateProgress ID="UpdateProgress1" runat="server">
@@ -133,7 +140,7 @@
                 <table cellspacing="0" cellpadding="0" width="100%" border="0">
                     <tr>
                         <td align="center">
-                            <asp:Button ID="btReset" runat="server" Text="Restablecer campos" />
+                             <button id="btnsave" onclick="borrarCampos()">Limpiar Campos</button>
                         </td>
                         <td align="center">
                             <asp:Button ID="btSave" runat="server" Text="(G)uardar cambios" ValidationGroup="valerror"

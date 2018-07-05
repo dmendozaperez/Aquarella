@@ -11,24 +11,16 @@ using www.aquarella.com.pe.bll;
 using www.aquarella.com.pe.bll.Util;
 using www.aquarella.com.pe.bll.Control;
 using System.Linq;
-using System.Web.UI.WebControls;
 
 namespace www.aquarella.com.pe.Aquarella.Control
 {
-    public partial class recoveryPassword : System.Web.UI.Page
+    public partial class Set_recoveryPassword : System.Web.UI.Page
     {
         public static string _nSlogTx = "_nSlogTx";
-        Users _user;
+
         protected void Page_Load(object sender, EventArgs e)
         {
-            
-            if (!IsPostBack)
-            {
-                FormsAuthentication.SignOut();
-                TreeView treeMenu = new TreeView();
-            treeMenu = (TreeView)this.Master.FindControl("MenuPrin");
-            treeMenu.Visible = false;
-            }
+         
         }
         
         private  string GetUserIPAddress()
@@ -78,16 +70,26 @@ namespace www.aquarella.com.pe.Aquarella.Control
             }
         }
         
-        protected void btEnviar_Click(object sender, EventArgs e)
+        protected void btEnviarPass_Click(object sender, EventArgs e)
         {
-            string nombre = UserName.Text;
-           
-            enviarCorreo(nombre);
+            string pass1 = Password.Text.Trim();
+            string pass2 = Password2.Text.Trim();
+            string codigo = Codigo.Text;
+
+            if (pass1 == pass2)
+            {
+                pass1 = Cryptographic.encrypt(pass1);
+                enviarPassword(pass1, codigo);
+            }
+            else
+                FailureText.Text = "las contraseñas no coinciden.";
+
+
         }
 
-        private void enviarCorreo(string userName)
+        private void enviarPassword(string passwrod, string codigo)
         {
-            DataTable dtEnvio = Users.enviaCorreo_Password(userName,"");
+            DataTable dtEnvio = Users.recuperar_Password(passwrod, codigo);
             DataRow dr = dtEnvio.Rows[0];
             string Descripcion = "";
             string CodError = "";
@@ -100,11 +102,12 @@ namespace www.aquarella.com.pe.Aquarella.Control
 
             if (CodError != "0")
                 FailureText.Text = Descripcion;
-            else {
+            else
+            {
                 FailureText.Text = "";
                 sussesText.Text = Descripcion;
             }
-        }     
+        }
 
     }
 }

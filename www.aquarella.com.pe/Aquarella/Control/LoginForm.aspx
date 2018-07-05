@@ -80,7 +80,7 @@
                                         </tr>
                                         <tr>
                                             <td colspan="2" align="center">
-                                               <asp:HyperLink ID="hlinkrecovery"  NavigateUrl="~/..Aquarella/Control/recoveryPassword.aspx"  Target="_new"  runat="server">¿Ha olvidado la contraseña?</asp:HyperLink>
+                                               <asp:HyperLink ID="hlinkrecovery"  NavigateUrl="~/Aquarella/Control/recoveryPassword.aspx"  Target="_new"  runat="server">¿Ha olvidado la contraseña?</asp:HyperLink>
                                             </td>
                                         </tr>
                                         <tr>

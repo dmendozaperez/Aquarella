@@ -19,7 +19,8 @@ namespace www.aquarella.com.pe.Aquarella.Control
         public static string _nSlogTx = "_nSlogTx";
 
         protected void Page_Load(object sender, EventArgs e)
-        {
+        {           
+
             LoginUser.Focus();
         }
 
@@ -80,9 +81,9 @@ namespace www.aquarella.com.pe.Aquarella.Control
             try
             {
 
-               
-                    //obtine el nombre del usuario que desea autenticarse
-                    string name = LoginUser.UserName;
+                
+                //obtine el nombre del usuario que desea autenticarse
+                string name = LoginUser.UserName;
                     //Obtine el password
                     string password = LoginUser.Password;
                     //obtiene si el usuario desea o no almacenar una cookie
@@ -92,7 +93,7 @@ namespace www.aquarella.com.pe.Aquarella.Control
 
                     if (user != null)
                     {
-                        if (user._usu_est_id.Equals(Constants.IdStatusActive))
+                        if (user._usu_est_id.Equals(Constants.IdStatusActive) && user._usv_status != Constants.IdStatusPasswordExpiration)
                         {
                             //Desencripta la contraseña del usuario
                             string passUser = Cryptographic.decrypt(user._usu_contraseña);
@@ -128,7 +129,7 @@ namespace www.aquarella.com.pe.Aquarella.Control
                         else if (user._usv_status.Equals(Constants.IdStatusPasswordExpiration))
                         {
                              //Desencripta la contraseña del usuario
-                            string passUser = Cryptographic.decrypt(user._usv_password);
+                            string passUser = Cryptographic.decrypt(user._usu_contraseña);
                             //valida la contraseña contraseña que ingreso contra lad del usuario
                             if (password.Equals(passUser))
                             {
@@ -137,7 +138,8 @@ namespace www.aquarella.com.pe.Aquarella.Control
                                 loadMenu(user._bas_id);
                                 FormsAuthentication.SetAuthCookie(user._usn_userid.ToString(), checkcookie);
                                 Server.Transfer("changePassword.aspx?expiration=1");
-                            }
+                           
+                        }
                             else
                             {
                                 InvalidCredentialsLog.insertInvalidCredentialsLog(user._usv_co, name, password, "F", "F", Request.UserHostAddress);
@@ -153,8 +155,10 @@ namespace www.aquarella.com.pe.Aquarella.Control
                         System.Diagnostics.Trace.WriteLine("[ValidateUser] La validacion del usuario fallo.");
 
             }
-            catch 
-            { }
+            catch(Exception ex)
+            {
+
+            }
         }
 
 
@@ -261,7 +265,7 @@ namespace www.aquarella.com.pe.Aquarella.Control
                 //_usv_customer = isCustomer,
                 //_usv_answer = dr["usv_answer"].ToString(),
                 //_usv_question = dr["usv_question"].ToString(),
-                //_usv_status = dr["usv_status"].ToString(),
+                _usv_status = dr["usu_expired"].ToString(),
                 //_usv_username = dr["usv_username"].ToString(),
                 //_usv_name = dr["name"].ToString(),
                 _usd_creation = System.DateTime.Parse(dr["usu_fecha_cre"].ToString()),

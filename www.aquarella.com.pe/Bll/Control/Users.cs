@@ -207,6 +207,60 @@ namespace www.aquarella.com.pe.bll
             return dt;            
         }
 
+        public static DataTable enviaCorreo_Password(string _usv_username, string documento)
+        {
+            DataTable dt = null;
+            SqlConnection cn = null;
+            SqlCommand cmd = null;
+            SqlDataAdapter da = null;
+            string sqlcommand = "USP_Envia_CorreoRecuperaPassword";
+            try
+            {
+                cn = new SqlConnection(Conexion.myconexion());
+                cmd = new SqlCommand(sqlcommand, cn);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.CommandTimeout = 0;
+                cmd.Parameters.AddWithValue("@nombreUsuario", _usv_username);
+                cmd.Parameters.AddWithValue("@numeroDocumento", documento);
+                da = new SqlDataAdapter(cmd);
+                dt = new DataTable();
+                da.Fill(dt);
+            }
+            catch (Exception)
+            {
+                dt = null;
+            }
+            return dt;
+        }
+
+        public static DataTable recuperar_Password(string password, string codigo)
+        {
+            DataTable dt = null;
+            SqlConnection cn = null;
+            SqlCommand cmd = null;
+            SqlDataAdapter da = null;
+            string sqlcommand = "USP_RecuperaPassword";
+            try
+            {
+                cn = new SqlConnection(Conexion.myconexion());
+                cmd = new SqlCommand(sqlcommand, cn);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.CommandTimeout = 0;
+                cmd.Parameters.AddWithValue("@password", password);
+                cmd.Parameters.AddWithValue("@codigo", codigo);
+                da = new SqlDataAdapter(cmd);
+                dt = new DataTable();
+                da.Fill(dt);
+            }
+            catch (Exception)
+            {
+                dt = null;
+            }
+            return dt;
+        }
+
+
+
         /// <summary>
         /// Crear usuario para un nuevo cliente
         /// </summary>

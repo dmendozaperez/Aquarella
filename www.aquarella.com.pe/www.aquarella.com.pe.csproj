@@ -181,6 +181,7 @@
     <Content Include="Aquarella\Control\Catalogo.aspx" />
     <Content Include="Aquarella\Control\Catalogo_Config.aspx" />
     <Content Include="Aquarella\Control\changePassword.aspx" />
+    <Content Include="Aquarella\Control\Set_recoveryPassword.aspx" />
     <Content Include="Aquarella\Control\recoveryPassword.aspx" />
     <Content Include="Aquarella\Control\LoginForm.aspx" />
     <Content Include="Aquarella\Control\panelApplication.aspx" />
@@ -925,6 +926,13 @@
     </Compile>
     <Compile Include="Aquarella\Control\changePassword.aspx.designer.cs">
       <DependentUpon>changePassword.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Aquarella\Control\Set_recoveryPassword.aspx.cs">
+      <DependentUpon>Set_recoveryPassword.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Aquarella\Control\Set_recoveryPassword.aspx.designer.cs">
+      <DependentUpon>Set_recoveryPassword.aspx</DependentUpon>
     </Compile>
     <Compile Include="Aquarella\Control\recoveryPassword.aspx.cs">
       <DependentUpon>recoveryPassword.aspx</DependentUpon>
