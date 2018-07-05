@@ -225,6 +225,7 @@
                                 <asp:BoundField DataField="Referencia" HeaderText="Referencia" ItemStyle-HorizontalAlign="center"  />
                                 <asp:BoundField DataField="Talla" HeaderText="Talla" ItemStyle-HorizontalAlign="center"  />
                                 <asp:BoundField DataField="Cantidad" HeaderText="Cantidad" ItemStyle-HorizontalAlign="center"  />
+                                 <asp:BoundField DataField="Entregado" HeaderText="Entregado" ItemStyle-HorizontalAlign="center"  />
                                  <asp:BoundField DataField="stock" HeaderText="Stock" ItemStyle-HorizontalAlign="center"  />
                                   <asp:TemplateField HeaderText="Eliminar" ItemStyle-HorizontalAlign="Center">
                                         <ItemTemplate>
