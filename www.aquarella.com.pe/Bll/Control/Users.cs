@@ -63,6 +63,7 @@ namespace www.aquarella.com.pe.bll
         /// Estado del usuario
         /// </summary>
         public string _usv_status { set; get; }
+        public string _usv_flg_Expired { set; get; }
         /// <summary>
         /// Fecha ultimo acceso
         /// </summary>

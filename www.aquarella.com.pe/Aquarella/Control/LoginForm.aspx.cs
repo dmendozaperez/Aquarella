@@ -11,6 +11,7 @@ using www.aquarella.com.pe.bll;
 using www.aquarella.com.pe.bll.Util;
 using www.aquarella.com.pe.bll.Control;
 using System.Linq;
+using System.Web.UI.WebControls;
 
 namespace www.aquarella.com.pe.Aquarella.Control
 {
@@ -19,8 +20,10 @@ namespace www.aquarella.com.pe.Aquarella.Control
         public static string _nSlogTx = "_nSlogTx";
 
         protected void Page_Load(object sender, EventArgs e)
-        {           
-
+        {
+            TreeView treeMenu = new TreeView();
+            treeMenu = (TreeView)this.Master.FindControl("MenuPrin");
+            treeMenu.Visible = false;
             LoginUser.Focus();
         }
 
@@ -93,7 +96,15 @@ namespace www.aquarella.com.pe.Aquarella.Control
 
                     if (user != null)
                     {
-                        if (user._usu_est_id.Equals(Constants.IdStatusActive) && user._usv_status != Constants.IdStatusPasswordExpiration)
+                    bool ValIngreso = true;
+
+                    if (user._usv_flg_Expired == "A") {
+                        if (user._usv_status == Constants.IdStatusPasswordExpiration)
+                            ValIngreso = false;
+                    }
+
+
+                        if (user._usu_est_id.Equals(Constants.IdStatusActive) && ValIngreso)
                         {
                             //Desencripta la contraseña del usuario
                             string passUser = Cryptographic.decrypt(user._usu_contraseña);
@@ -126,7 +137,7 @@ namespace www.aquarella.com.pe.Aquarella.Control
                                 System.Diagnostics.Trace.WriteLine("[ValidateUser] Usuario y/o contraseña invalidos.");
                             } 
                         }
-                        else if (user._usv_status.Equals(Constants.IdStatusPasswordExpiration))
+                        else if (user._usv_status.Equals(Constants.IdStatusPasswordExpiration) && user._usv_flg_Expired == "A")
                         {
                              //Desencripta la contraseña del usuario
                             string passUser = Cryptographic.decrypt(user._usu_contraseña);
@@ -266,6 +277,7 @@ namespace www.aquarella.com.pe.Aquarella.Control
                 //_usv_answer = dr["usv_answer"].ToString(),
                 //_usv_question = dr["usv_question"].ToString(),
                 _usv_status = dr["usu_expired"].ToString(),
+                _usv_flg_Expired = dr["usu_flg_expired"].ToString(),
                 //_usv_username = dr["usv_username"].ToString(),
                 //_usv_name = dr["name"].ToString(),
                 _usd_creation = System.DateTime.Parse(dr["usu_fecha_cre"].ToString()),
