@@ -481,7 +481,15 @@ namespace www.aquarella.com.pe.Aquarella.Logistica
                 HttpContext.Current.Session[_nSNewOrdrLine] = order;   
                 return order;
             }
-            catch (Exception e) { throw new Exception(e.Message, e.InnerException); }
+            catch (Exception e) {
+                string mensaje = e.Message; 
+
+                    if(mensaje == "No se puede convertir un objeto DBNull en otros tipos.")
+                        mensaje ="Stock por ingresar";
+
+                throw new Exception(mensaje, e.InnerException);
+
+            }
         }
         private static void  getpromocion_especial(string _art_promo, ref decimal precio_out_con_igv, ref decimal precio_out_sin_igv)
         {
