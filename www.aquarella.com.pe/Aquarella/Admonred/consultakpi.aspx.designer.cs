@@ -193,6 +193,33 @@ namespace www.aquarella.com.pe.Aquarella.Admonred {
         protected global::System.Web.UI.WebControls.CompareValidator cvDateStartDateEnd;
         
         /// <summary>
+        /// Control rbt_A.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RadioButton rbt_A;
+        
+        /// <summary>
+        /// Control rbt_L.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RadioButton rbt_L;
+        
+        /// <summary>
+        /// Control rbt_G.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RadioButton rbt_G;
+        
+        /// <summary>
         /// Control btConsult.
         /// </summary>
         /// <remarks>

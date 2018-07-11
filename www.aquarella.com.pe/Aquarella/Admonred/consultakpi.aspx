@@ -3,7 +3,7 @@
     <style type="text/css">
         .style1
         {
-            width: 452px;
+            width: 802px;
         }
         .style2
         {
@@ -34,10 +34,7 @@
             width: 314px;
             height: 63px;
         }
-        .auto-style2 {
-            height: 63px;
-        }
-    </style>
+        </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolderTitle" runat="server">
     Consulta de Resultado KPI
@@ -177,6 +174,18 @@
                                      Operator="GreaterThanEqual" SetFocusOnError="true" Type="Date" 
                                      ValidationGroup="vsConsultForm">*</asp:CompareValidator>
                             </td>
+                            <td>
+                                 <fieldset style="width:500px">
+  <legend>Tipo de Vista:</legend>
+                                 <table>
+                                     <tr>
+                                        <td style="width:200px"><asp:RadioButton ID="rbt_A" GroupName="TipoReporte"  Text="Detallado por Asesor" AutoPostBack="true" OnCheckedChanged="onchange_Asesor" runat="server"/></td>
+                                         <td style="width:200px"><asp:RadioButton ID="rbt_L" GroupName="TipoReporte"  Text="Detallado por Lider" AutoPostBack="true" runat="server" OnCheckedChanged="onchange_lider"/></td>
+                                          <td style="width:200px"><asp:RadioButton ID="rbt_G" Checked="true" GroupName="TipoReporte"  Text="General" AutoPostBack="true" OnCheckedChanged="onchange_gral" runat="server"/></td> 
+                                      </tr>
+                                </table>
+</fieldset>
+                            </td>
                         </tr>
                     </table>
                 </td>
@@ -236,7 +245,7 @@
                  SkinID="gridviewSkin" PagerStyle-HorizontalAlign="Left" Font-Size="Small" 
                     CellPadding="4" ForeColor="#333333" GridLines="None" Width="1072px">
                     <FooterStyle BackColor="#507CD1" Font-Bold="True" ForeColor="White" />
-                    <HeaderStyle BackColor="#507CD1" Font-Bold="True" ForeColor="White" />
+                    <HeaderStyle BackColor="#507CD1" Width="200px" Font-Bold="True" ForeColor="White" />
                     <PagerStyle CssClass="GridViewBlue-tf" BackColor="#2461BF" ForeColor="White" 
                         HorizontalAlign="Center" />
                     <AlternatingRowStyle BackColor="White" />
@@ -244,10 +253,11 @@
                     <EmptyDataTemplate>
                         No existen registros para mostrar.
                     </EmptyDataTemplate>
-                    <RowStyle BackColor="#EFF3FB" />
+                    <RowStyle BackColor="#EFF3FB"  />
+                   
                     <SelectedRowStyle BackColor="#D1DDF1" Font-Bold="True" ForeColor="#333333" />
                     <SortedAscendingCellStyle BackColor="#F5F7FB" />
-                    <SortedAscendingHeaderStyle BackColor="#6D95E1" />
+                    <SortedAscendingHeaderStyle BackColor="#6D95E1" Width="200px" />
                     <SortedDescendingCellStyle BackColor="#E9EBEF" />
                     <SortedDescendingHeaderStyle BackColor="#4870BE" />
                 </asp:GridView>
@@ -262,6 +272,8 @@
             <SelectParameters>
                 <asp:Parameter Name="_area_id" Type="String" />
                 <asp:Parameter Name="_asesor" Type="String" ConvertEmptyStringToNull="false"/>
+                <asp:Parameter Name="_ase_lid" Type="String" />
+                 <asp:Parameter Name="_gral" Type="String" />
                 <asp:ControlParameter ControlID="txtDateStart" Name="_date_start" PropertyName="Text" Type="DateTime" />
                 <asp:ControlParameter ControlID="txtDateEnd" Name="_date_end" PropertyName="Text" Type="DateTime" />
             </SelectParameters>

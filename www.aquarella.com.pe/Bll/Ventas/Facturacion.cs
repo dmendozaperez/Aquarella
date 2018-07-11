@@ -1440,9 +1440,12 @@ namespace www.aquarella.com.pe.bll.Ventas
         }
 
 
-        public static DataSet getconsultaKPI(int _area_id, String _asesor, DateTime _date_start, DateTime _date_end)
+        public static DataSet getconsultaKPI(int _area_id, String _asesor, int _ase_lid, String _gral, DateTime _date_start, DateTime _date_end)
         {
             string sqlquery = "USP_ConsultaKPI";
+            if(_gral!="S")
+                sqlquery = "USP_ConsultaKPI_Detallado";
+
             SqlConnection cn = null;
             SqlCommand cmd = null;
             SqlDataAdapter da = null;
@@ -1457,6 +1460,10 @@ namespace www.aquarella.com.pe.bll.Ventas
                 cmd.Parameters.AddWithValue("@fechaini", _date_start);
                 cmd.Parameters.AddWithValue("@fechafin", _date_end);
                 cmd.Parameters.AddWithValue("@asesor", _asesor);
+
+                if (_gral != "S")
+                    cmd.Parameters.AddWithValue("@ase_lid", _ase_lid);
+
                 da = new SqlDataAdapter(cmd);
                 ds = new DataSet();
                 da.Fill(ds);

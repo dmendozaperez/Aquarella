@@ -70,7 +70,7 @@ namespace www.aquarella.com.pe.Aquarella.Logistica
                 }
 
                 if (_user._usu_flete != "1")
-                    ScriptManager.RegisterStartupScript(this, typeof(Page), "invocarfuncion", "ocultarTab(); ", true);
+                    ScriptManager.RegisterStartupScript(this, typeof(Page), "invocarfuncion", "ocultarTab();", true);
                
                 txtDateStart.Text = DateTime.Today.ToString("dd/MM/yyyy");
                 txtDateEnd.Text = DateTime.Today.ToString("dd/MM/yyyy");

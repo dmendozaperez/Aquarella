@@ -74,13 +74,62 @@ namespace www.aquarella.com.pe.Aquarella.Admonred
             gvReturns.DataSourceID = odsReturns.ID;
             gvReturns.DataBind();
         }
+
+
+        protected void onchange_lider(object sender, EventArgs e)
+        {
+            if (rbt_L.Checked)
+            {
+                dwasesor.SelectedValue = "";
+                dwasesor.Enabled = false;
+            }
+            else {
+                dwCustomers.Enabled = true;
+            }
+         
+        }
+
+        protected void onchange_Asesor(object sender, EventArgs e)
+        {
+            if (rbt_A.Checked)
+            {
+                dwCustomers.SelectedValue = "-1";
+                dwCustomers.Enabled = false;
+            }
+            else {
+                dwasesor.Enabled = true;
+            }
+                     
+        }
+
+        protected void onchange_gral(object sender, EventArgs e)
+        {
+            if (rbt_G.Checked)
+            {
+                dwCustomers.Enabled = true;
+                dwasesor.Enabled = true;
+            }
+
+        }
+
         private void formForEmployee()
         {
             try
             {
+                string gral = "N";
+                string ase_lid = "0";
+
+                if (rbt_G.Checked)
+                    gral = "S";
+
+                if (rbt_A.Checked)
+                    ase_lid = "1"; ;
+
 
                 odsReturns.SelectParameters[0].DefaultValue = dwCustomers.SelectedValue;
                 odsReturns.SelectParameters[1].DefaultValue =  (_user._asesor.Length>0)?_user._asesor:dwasesor.SelectedValue;
+                odsReturns.SelectParameters[2].DefaultValue = ase_lid;
+                odsReturns.SelectParameters[3].DefaultValue = gral;
             }
             catch
             {
@@ -89,8 +138,19 @@ namespace www.aquarella.com.pe.Aquarella.Admonred
         }
         protected void setParamsDataSource(string co, string idCust)
         {
+            string gral = "N";
+            string ase_lid = "0";
+
+            if (rbt_G.Checked)
+                gral = "S";
+
+            if (rbt_A.Checked)
+                ase_lid = "1"; ;
+
             odsReturns.SelectParameters[0].DefaultValue = idCust;
             odsReturns.SelectParameters[1].DefaultValue = (_user._asesor.Length > 0) ? _user._asesor : dwasesor.SelectedValue;
+            odsReturns.SelectParameters[2].DefaultValue = ase_lid;
+            odsReturns.SelectParameters[3].DefaultValue = gral;
         }
         protected void formForCustomer()
         {
