@@ -24,6 +24,7 @@ namespace www.aquarella.com.pe.Aquarella.Admonred
 
             if (!IsPostBack)
             {
+                //rbt_G.Checked = true;
                 cargarasesor();
                 cargarLider();
                 txtDateStart.Text = DateTime.Today.ToString("dd/MM/yyyy");

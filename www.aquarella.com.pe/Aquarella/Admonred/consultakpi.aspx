@@ -75,10 +75,19 @@
                                  <td class="f12" width="5%">
                                     Asesor:</td>
                                 <td class="auto-style1">
+                                    <asp:UpdatePanel ID="UpdatePanel1" runat="server">
+                                    <ContentTemplate>
                                     <asp:DropDownList ID="dwasesor" runat="server" AppendDataBoundItems="true"                                       
                                         ToolTip="Selecionar un asesor" Width="280px" style="cursor:pointer">
                                         <asp:ListItem Text=" -- Seleccionar a todos --" Value=""></asp:ListItem>
                                     </asp:DropDownList>
+                                        </ContentTemplate>
+                                    <Triggers>
+                                        <asp:AsyncPostBackTrigger ControlID="rbt_A" />
+                                          <asp:AsyncPostBackTrigger ControlID="rbt_G" />
+                                        <asp:AsyncPostBackTrigger ControlID="rbt_L" />
+                                    </Triggers>
+                                </asp:UpdatePanel>
                                 </td>                              
                             </tr>
 
@@ -86,12 +95,21 @@
                                 <td class="f12" width="5%">
                                     Lider:</td>
                                 <td>
+                                    <asp:UpdatePanel ID="UpdatePanel2" runat="server">
+                                    <ContentTemplate>
                                     <asp:DropDownList ID="dwCustomers" runat="server" AppendDataBoundItems="true" 
                                         DataTextField="are_descripcion" 
                                         DataValueField="are_id"
                                         ToolTip="Selecionar un lider" Width="280px" style="cursor:pointer">
                                         <asp:ListItem Text=" -- Seleccionar a todos --" Value="-1"></asp:ListItem>
                                     </asp:DropDownList>
+                                            </ContentTemplate>
+                                            <Triggers>
+                                            <asp:AsyncPostBackTrigger ControlID="rbt_A" />
+                                            <asp:AsyncPostBackTrigger ControlID="rbt_G" />
+                                            <asp:AsyncPostBackTrigger ControlID="rbt_L" />
+                                        </Triggers>
+                                    </asp:UpdatePanel>
                                 </td>
                             </tr>
                         </table>
@@ -190,7 +208,7 @@
 
                                         </td>
                                          <td style="width:200px"><asp:RadioButton ID="rbt_L" GroupName="TipoReporte"  Text="Detallado por Lider" AutoPostBack="true" runat="server" OnCheckedChanged="onchange_lider"/></td>
-                                          <td style="width:200px"><asp:RadioButton ID="rbt_G" Checked="true" GroupName="TipoReporte"  Text="General" AutoPostBack="true" OnCheckedChanged="onchange_gral" runat="server"/></td> 
+                                          <td style="width:200px"><asp:RadioButton ID="rbt_G" GroupName="TipoReporte"  Text="General" AutoPostBack="true" OnCheckedChanged="onchange_gral" runat="server"/></td> 
                                       </tr>
                                 </table>
                                         
@@ -296,7 +314,7 @@
                                             <Sequence>
                                                 <%-- Disable all the controls --%>
                                                 <Parallel duration="0">
-                                                    <EnableAction AnimationTarget="btConsult" Enabled="false" />  
+                                                    <EnableAction AnimationTarget="btConsult" Enabled="true" />  
                                                                                       
                                                 </Parallel>
                                             </Sequence>
