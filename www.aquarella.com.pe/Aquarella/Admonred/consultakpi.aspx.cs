@@ -58,6 +58,11 @@ namespace www.aquarella.com.pe.Aquarella.Admonred
         }
         protected void btConsult_Click(object sender, EventArgs e)
         {
+            Consultar();
+        }
+
+        protected void Consultar()
+        {
             //
             if ((_user._usu_tip_id == "01") || (_user._usu_tip_id == "03"))
             {
@@ -82,10 +87,10 @@ namespace www.aquarella.com.pe.Aquarella.Admonred
             {
                 dwasesor.SelectedValue = "";
                 dwasesor.Enabled = false;
-            }
-            else {
                 dwCustomers.Enabled = true;
+                //Consultar();
             }
+           
          
         }
 
@@ -95,10 +100,10 @@ namespace www.aquarella.com.pe.Aquarella.Admonred
             {
                 dwCustomers.SelectedValue = "-1";
                 dwCustomers.Enabled = false;
-            }
-            else {
                 dwasesor.Enabled = true;
+                //Consultar();
             }
+           
                      
         }
 
@@ -108,6 +113,7 @@ namespace www.aquarella.com.pe.Aquarella.Admonred
             {
                 dwCustomers.Enabled = true;
                 dwasesor.Enabled = true;
+                //Consultar();
             }
 
         }

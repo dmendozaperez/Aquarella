@@ -1,4 +1,5 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Design/Site.Master" AutoEventWireup="true" CodeBehind="consultakpi.aspx.cs" Inherits="www.aquarella.com.pe.Aquarella.Admonred.consultakpi" %>
+<% @ Register assembly="AjaxControlToolkit" namespace="AjaxControlToolkit" tagprefix="cc1" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="headCPH" runat="server">
     <style type="text/css">
         .style1
@@ -118,7 +119,7 @@
                              <td>
                                  &nbsp;</td>
                         </tr>
-                        <tr>
+                        <tr>                           
                             <td>
                                 <asp:UpdatePanel ID="upStartDate" runat="server">
                                     <ContentTemplate>
@@ -126,6 +127,7 @@
                                         <ajaxToolkit:CalendarExtender ID="calendar" runat="server" Animated="true" 
                                             FirstDayOfWeek="Monday" Format="dd/MM/yyyy" PopupButtonID="imgCalendar" 
                                             TargetControlID="txtDateStart" />
+                                     
                                     </ContentTemplate>
                                 </asp:UpdatePanel>
                             </td>
@@ -176,14 +178,22 @@
                             </td>
                             <td>
                                  <fieldset style="width:500px">
-  <legend>Tipo de Vista:</legend>
+                                   <legend>Tipo de Vista:</legend>
+                                                       
                                  <table>
                                      <tr>
-                                        <td style="width:200px"><asp:RadioButton ID="rbt_A" GroupName="TipoReporte"  Text="Detallado por Asesor" AutoPostBack="true" OnCheckedChanged="onchange_Asesor" runat="server"/></td>
+                                        <td style="width:200px">   
+                                            
+                           
+                                        <asp:RadioButton ID="rbt_A" GroupName="TipoReporte"  Text="Detallado por Asesor" AutoPostBack="true"   OnCheckedChanged="onchange_Asesor" runat="server"/>
+                                     
+
+                                        </td>
                                          <td style="width:200px"><asp:RadioButton ID="rbt_L" GroupName="TipoReporte"  Text="Detallado por Lider" AutoPostBack="true" runat="server" OnCheckedChanged="onchange_lider"/></td>
                                           <td style="width:200px"><asp:RadioButton ID="rbt_G" Checked="true" GroupName="TipoReporte"  Text="General" AutoPostBack="true" OnCheckedChanged="onchange_gral" runat="server"/></td> 
                                       </tr>
                                 </table>
+                                        
 </fieldset>
                             </td>
                         </tr>
@@ -265,6 +275,7 @@
             </ContentTemplate>
             <Triggers>
                 <asp:AsyncPostBackTrigger ControlID="btConsult" EventName="click" />
+               
             </Triggers>
         </asp:UpdatePanel>
         <asp:ObjectDataSource ID="odsReturns" runat="server" SelectMethod="getconsultaKPI"
@@ -285,7 +296,8 @@
                                             <Sequence>
                                                 <%-- Disable all the controls --%>
                                                 <Parallel duration="0">
-                                                    <EnableAction AnimationTarget="btConsult" Enabled="false" />                                                   
+                                                    <EnableAction AnimationTarget="btConsult" Enabled="false" />  
+                                                                                      
                                                 </Parallel>
                                             </Sequence>
                                         </OnUpdating>
@@ -294,6 +306,7 @@
                                                 <%-- Enable all the controls --%>
                                                 <Parallel duration="0">
                                                     <EnableAction AnimationTarget="btConsult" Enabled="true" />
+                                                   
                                                 </Parallel>
                                             </Sequence>
                                         </OnUpdated>
