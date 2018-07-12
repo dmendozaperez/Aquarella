@@ -1,6 +1,19 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Design/Site.Master" AutoEventWireup="true" CodeBehind="consultakpi.aspx.cs" Inherits="www.aquarella.com.pe.Aquarella.Admonred.consultakpi" %>
 <% @ Register assembly="AjaxControlToolkit" namespace="AjaxControlToolkit" tagprefix="cc1" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="headCPH" runat="server">
+    <script type="text/javascript">
+        var btncredito;
+         $(document).ready(function () {
+             marcar()
+         });
+
+         function marcar() {
+            var general = document.getElementById("<%=rbt_G.ClientID %>");
+             general.checked = true;
+         }
+        
+    </script>
+    
     <style type="text/css">
         .style1
         {
@@ -86,6 +99,7 @@
                                         <asp:AsyncPostBackTrigger ControlID="rbt_A" />
                                           <asp:AsyncPostBackTrigger ControlID="rbt_G" />
                                         <asp:AsyncPostBackTrigger ControlID="rbt_L" />
+                                        
                                     </Triggers>
                                 </asp:UpdatePanel>
                                 </td>                              
@@ -108,6 +122,7 @@
                                             <asp:AsyncPostBackTrigger ControlID="rbt_A" />
                                             <asp:AsyncPostBackTrigger ControlID="rbt_G" />
                                             <asp:AsyncPostBackTrigger ControlID="rbt_L" />
+                                                
                                         </Triggers>
                                     </asp:UpdatePanel>
                                 </td>
@@ -197,16 +212,10 @@
                             <td>
                                  <fieldset style="width:500px">
                                    <legend>Tipo de Vista:</legend>
-                                                       
+                                         
                                  <table>
                                      <tr>
-                                        <td style="width:200px">   
-                                            
-                           
-                                        <asp:RadioButton ID="rbt_A" GroupName="TipoReporte"  Text="Detallado por Asesor" AutoPostBack="true"   OnCheckedChanged="onchange_Asesor" runat="server"/>
-                                     
-
-                                        </td>
+                                        <td style="width:200px"><asp:RadioButton ID="rbt_A" GroupName="TipoReporte"  Text="Detallado por Asesor" AutoPostBack="true"   OnCheckedChanged="onchange_Asesor" runat="server"/></td>
                                          <td style="width:200px"><asp:RadioButton ID="rbt_L" GroupName="TipoReporte"  Text="Detallado por Lider" AutoPostBack="true" runat="server" OnCheckedChanged="onchange_lider"/></td>
                                           <td style="width:200px"><asp:RadioButton ID="rbt_G" GroupName="TipoReporte"  Text="General" AutoPostBack="true" OnCheckedChanged="onchange_gral" runat="server"/></td> 
                                       </tr>
