@@ -260,10 +260,13 @@ namespace Epson_Ticket
                                     tk.AgregarFooter("     " + TruncateAt("TOTAL".ToString().PadRight(16), 16) + TruncateAt("S/".ToString().PadRight(3), 3) + TruncateAt(_total_nc.ToString("#0.00").PadLeft(14), 14));
                                     if (_total_nc != 0)
                                     {
-                                        tk.AgregarFooter("     " + TruncateAt("------------".ToString().PadRight(14), 14));
-                                        tk.AgregarFooter("     " + TruncateAt("PERCEPCION " + _percepcionp + "%".ToString().PadRight(16), 16) + TruncateAt("S/".ToString().PadRight(3), 3) + TruncateAt(_percepcionm.ToString("#0.00").PadLeft(14), 14));
-                                        tk.AgregarFooter("     " + TruncateAt("------------".ToString().PadRight(14), 14));
-                                        tk.AgregarFooter("     " + TruncateAt("TOTAL A PAGAR".ToString().PadRight(16), 16) + TruncateAt("S/".ToString().PadRight(3), 3) + TruncateAt(_total_pagar_nc.ToString("#0.00").PadLeft(14), 14));
+                                        if (Ent_Global._canal_venta != "BA")
+                                        {
+                                            tk.AgregarFooter("     " + TruncateAt("------------".ToString().PadRight(14), 14));
+                                            tk.AgregarFooter("     " + TruncateAt("PERCEPCION " + _percepcionp + "%".ToString().PadRight(16), 16) + TruncateAt("S/".ToString().PadRight(3), 3) + TruncateAt(_percepcionm.ToString("#0.00").PadLeft(14), 14));
+                                            tk.AgregarFooter("     " + TruncateAt("------------".ToString().PadRight(14), 14));
+                                            tk.AgregarFooter("     " + TruncateAt("TOTAL A PAGAR".ToString().PadRight(16), 16) + TruncateAt("S/".ToString().PadRight(3), 3) + TruncateAt(_total_pagar_nc.ToString("#0.00").PadLeft(14), 14));
+                                        }
                                     }
                                     tk.lineasGuio();
                                     tk.TextoIzquierda(_referencia_nc);
