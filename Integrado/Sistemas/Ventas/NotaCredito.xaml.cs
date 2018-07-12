@@ -783,7 +783,9 @@ namespace Integrado.Sistemas.Ventas
 
                         Boolean valida_tot= Dat_NotaCredito.getvalidaNota_DevTot(ndoc, cantidad);
 
-                        if (!valida_tot)
+                        // Modificado por : Henry Morales - 12/07/2018
+                        // Se agergó validación para que solo Afecte cuando Seleccione Devolución Total
+                        if (!valida_tot && dwestado.SelectedValue.ToString()!="07")
                         {
                             lblinfo.Foreground = (Brush)new BrushConverter().ConvertFromString("#ee7749");// System.Drawing.ColorTranslator.FromHtml("#ee7749");
                             lblinfo.Content = " > Se tiene que realizar la devolucion en su totalidad.";
