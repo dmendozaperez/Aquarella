@@ -478,7 +478,7 @@ namespace www.aquarella.com.pe.Aquarella.Financiera
 
                         if (strpremio != "N" && strpremio != "0")
                         {
-                            string strIdLiquidacion = Clear.setCrearLiquidacionPremio(Convert.ToInt32(strpremio), Convert.ToInt32(strIdPromotor));
+                            string strIdLiquidacion = Clear.setCrearLiquidacionPremio(Convert.ToInt32(strIdPromotor), Convert.ToInt32(strpremio));
                            strmensajePremio = "(Premio generado en el pedido:" + strIdLiquidacion + ")";
                         }
 
