@@ -32,29 +32,29 @@
         }
 
         function ConfirmacionPremio(IdPremio, IdPromotor, regalo) {
-
-            $("#dialog-confirm").dialog({
-                autoOpen: false,
-                resizable: false,
-                width: 400,
-                height: 160,
-                modal: true,
-                buttons: {
-                    "Continuar": function () {
-                        $(this).dialog("close");
-                        liquidarPremio(IdPremio, IdPromotor);
-                    },
-                    "Cancelar": function () {
-                        $(this).dialog("close");
+            liquidarPremio(IdPremio, IdPromotor);
+            //$("#dialog-confirm").dialog({
+            //    autoOpen: false,
+            //    resizable: false,
+            //    width: 400,
+            //    height: 160,
+            //    modal: true,
+            //    buttons: {
+            //        "Continuar": function () {
+            //            $(this).dialog("close");
+            //            liquidarPremio(IdPremio, IdPromotor);
+            //        },
+            //        "Cancelar": function () {
+            //            $(this).dialog("close");
                       
-                    }
-                }
-            });
+            //        }
+            //    }
+            //});
 
-            $("#dialog-confirm").dialog({ modal: true, closeOnEscape: false, closeText: 'hide', resizable: false, width: 400 });
-            $('#dialog-confirm').dialog('option', 'title', 'Generacion de premio.');
-            $("#dialog-confirm").dialog("open");
-            document.getElementById('popupx').innerHTML = 'Usted ha ganado un premio: <b>' + regalo + ' </b> <br/><br/> ¿desea generar el premio ? '
+            //$("#dialog-confirm").dialog({ modal: true, closeOnEscape: false, closeText: 'hide', resizable: false, width: 400 });
+            //$('#dialog-confirm').dialog('option', 'title', 'Generacion de premio.');
+            //$("#dialog-confirm").dialog("open");
+            //document.getElementById('popupx').innerHTML = 'Usted ha ganado un premio: <b>' + regalo + ' </b> <br/><br/> ¿desea generar el premio ? '
         }
            
        

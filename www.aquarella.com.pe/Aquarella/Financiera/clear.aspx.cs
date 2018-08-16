@@ -474,14 +474,24 @@ namespace www.aquarella.com.pe.Aquarella.Financiera
                         string[] prems = clear.Split('|');
                         string strpremio = prems[1].ToString();
                         string strmensaje = "";
-                        
-                        msnMessage.LoadMessage("El cruce de información fue grabado correctamente, su pedido sera enviado  marcación y posterior facturación; número del cruce: " + prems[0].ToString() + strmensaje, UserControl.ucMessage.MessageType.Information);
+                        string strmensajePremio = "";
 
                         if (strpremio != "N" && strpremio != "0")
                         {
-                            string strregalo = prems[2].ToString();
-                            ScriptManager.RegisterStartupScript(this, typeof(Page), "invocarfuncion", "ConfirmacionPremio(" + strpremio + ", " + strIdPromotor + ",'" + strregalo + "'); ", true);
+                            string strIdLiquidacion = Clear.setCrearLiquidacionPremio(Convert.ToInt32(strIdPromotor), Convert.ToInt32(strpremio));
+                           strmensajePremio = "(Premio generado en el pedido:" + strIdLiquidacion + ")";
                         }
+
+                        msnMessage.LoadMessage("El cruce de información fue grabado correctamente " + strmensajePremio + ", su pedido sera enviado  marcación y posterior facturación; número del cruce: " + prems[0].ToString() + strmensaje, UserControl.ucMessage.MessageType.Information);
+
+                        //msnMessage.LoadMessage("El cruce de información fue grabado correctamente, su pedido sera enviado  marcación y posterior facturación; número del cruce: " + prems[0].ToString() + strmensaje, UserControl.ucMessage.MessageType.Information);
+
+                        //if (strpremio != "N" && strpremio != "0")
+                        //{
+                        //    string strregalo = prems[2].ToString();
+                        //    ScriptManager.RegisterStartupScript(this, typeof(Page), "invocarfuncion", "ConfirmacionPremio(" + strpremio + ", " + strIdPromotor + ",'" + strregalo + "'); ", true);
+                        //}
+
                         //procedimiento envio de correo  al usuario admin
 
                         //DataTable dt = Clear.fgetcorreoenvio();
