@@ -683,8 +683,8 @@ namespace Integrado.Sistemas.Ventas
             {
                 //dwcliente.SelectedValue = _cliente_id;
                 //_key_combo = true;
-                // txtfactura.Focus();
-                    //txtarticulo.Focus();
+                txtfactura.Focus();
+                //txtarticulo.Focus();
             }
         }
 
