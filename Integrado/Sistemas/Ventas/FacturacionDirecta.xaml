@@ -1013,7 +1013,7 @@
                                 </Grid.ColumnDefinitions>
                                 <Image  Grid.Column="0" Source="/Integrado;component/Design/Images/b_all_in_list.gif" Width="32" HorizontalAlignment="Left" />
                                 <TextBlock Text="Consultar stock de articulo" VerticalAlignment="Center" 
-									  Margin="30,6,-34,0" Grid.ColumnSpan="2" Height="22"/>
+									  Margin="30,2,-34,-4" Grid.ColumnSpan="2" Height="22" HorizontalAlignment="Left" Width="140"/>
                             </Grid>
                         </Button>
                     </Grid>
@@ -1086,6 +1086,13 @@
                                         </DataGridTemplateColumn>-->
                                         <DataGridTextColumn Header="Total Cants." Width="Auto" CellStyle="{StaticResource CenterAlignedCellStyleY}" Binding="{Binding total_pares}" TextBlock.Foreground="Maroon" IsReadOnly="True" />
                                         <DataGridTextColumn Binding="{Binding comision , StringFormat=\{0:C2\}}" ClipboardContentBinding="{x:Null}" Header="Comision">
+                                            <DataGridTextColumn.ElementStyle>
+                                                <Style TargetType="TextBlock">
+                                                    <Setter Property="TextAlignment" Value="Right"></Setter>
+                                                </Style>
+                                            </DataGridTextColumn.ElementStyle>
+                                        </DataGridTextColumn>
+                                        <DataGridTextColumn Binding="{Binding total_descto , StringFormat=\{0:C2\}}" ClipboardContentBinding="{x:Null}" Header="Descuento">
                                             <DataGridTextColumn.ElementStyle>
                                                 <Style TargetType="TextBlock">
                                                     <Setter Property="TextAlignment" Value="Right"></Setter>

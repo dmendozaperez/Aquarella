@@ -518,6 +518,9 @@ namespace CapaDato.Bll.Venta
         public string articulo_talla { get; set; }
         public string articulo_calidad { get; set; }
         public Decimal articulo_cantidad { get; set; }
+        public Decimal articulo_ofe_id { get; set; }
+        public Decimal articulo_ofe_MaxPares { get; set; }
+        public Decimal articulo_Ofe_Porce{ get; set; }
         public Decimal articulo_stock_cant { get; set; }
         public Decimal preciosinigv { get; set; }
         public decimal preciosigv { get; set; }
@@ -567,8 +570,11 @@ namespace CapaDato.Bll.Venta
                                     articulo_comi_bool =Convert.ToBoolean(dr["comision"]);
                                     articulo_precio_sinigv =Convert.ToDecimal(dr["preciosinigv"]);
                                     articulo_talla = dr["talla"].ToString();
-                                    articulo_cantidad =Convert.ToDecimal(dr["cantidad"]);
-                                    articulo_stock_cant = Convert.ToDecimal(dr["stock"]);
+                                    articulo_cantidad = Convert.ToDecimal(dr["cantidad"]);
+                                    articulo_ofe_id = Convert.ToDecimal(dr["Ofe_Id"]);
+                                    articulo_ofe_MaxPares = Convert.ToDecimal(dr["Ofe_MaxPares"]);
+                                    articulo_Ofe_Porce = Convert.ToDecimal(dr["cantidad"]);
+                                    articulo_stock_cant = Convert.ToDecimal(dr["Ofe_Porc"]);
                                     articulo_afec_percepcion= dr["Afec_Percepcion"].ToString();
                                     valida = true;
                                 }
@@ -593,6 +599,9 @@ namespace CapaDato.Bll.Venta
                                                                 foto= dfila["foto"],
                                                                 afec_percepcion= dfila["Afec_Percepcion"].ToString(),
                                                                 precio_igv= Convert.ToDecimal(dfila["preciosigv"]),
+                                                                articulo_ofe_id = Convert.ToDecimal(dfila["Ofe_Id"]),
+                                                                articulo_ofe_MaxPares = Convert.ToDecimal(dfila["Ofe_MaxPares"]),
+                                                                articulo_Ofe_Porce = Convert.ToDecimal(dfila["Ofe_Porc"]),
                                                             }).Distinct();
 
                                     foreach(var row in querydisarticulo)
@@ -619,6 +628,9 @@ namespace CapaDato.Bll.Venta
                                             preciosinigv=row.precio,
                                             preciosigv=row.precio_igv,
                                             articulo_foto =row.foto.ToString(),
+                                            articulo_ofe_id = row.articulo_ofe_id,
+                                            articulo_ofe_MaxPares = row.articulo_ofe_MaxPares,
+                                            articulo_Ofe_Porce = row.articulo_Ofe_Porce,
                                         }
                                         );
                                     }
@@ -825,18 +837,34 @@ namespace CapaDato.Bll.Venta
                 Tmp_PagoDirecto.Columns.Add("Monto",typeof(decimal));
                 /*****************************/
                 Int32 item_det = 0;
-                foreach(Ent_Venta vd in venta_det)
+                foreach (Ent_Venta vd in venta_det)
                 {
                     item_det += 1;
-                    string articulo = vd.articulo.ToString();decimal precio = vd.precio;
-                    string calidad = "1";Decimal oferta = 0;decimal OfertaP = 0;decimal OfeID = 0;
+                    string articulo = vd.articulo.ToString(); decimal precio = vd.precio;
+                    string calidad = "1"; Decimal oferta = 0; decimal OfertaP = 0; decimal OfeID = 0;
+                    Decimal OfeDescTotal = Convert.ToDecimal(vd.total_descto);
+                    Decimal nroItem = Convert.ToDecimal(vd.ofe_nroItem);
+                    int contItem = Convert.ToInt32(vd.ofe_nroItem);
+                    OfertaP = vd.ofe_porc;
+
+                    //if (OfertaP == 100) {
+                    //    contItem = contItem * 2;
+                    //    nroItem = nroItem * 2;
+                    //}
+
+                    OfeID = vd.ofe_id;
+                    if (OfeDescTotal > 0) { oferta = OfeDescTotal / nroItem; };                    
+
                     foreach (Ent_Venta_Talla vd_talla in vd.articulo_talla)
                     {
+                        if (contItem <= 0) { oferta = 0; };
+
                         string talla = vd_talla.talla;
                         decimal cantidad = vd_talla.cantidad;
                         decimal comision =Math.Round((cantidad * precio) * (_comisionp / 100),2,MidpointRounding.AwayFromZero);
 
                         Tmp_Venta_Detalle.Rows.Add(item_det,articulo,talla,cantidad,precio,comision,calidad,oferta,OfertaP,OfeID);
+                        contItem = contItem - 1;
                     }
                 }
 

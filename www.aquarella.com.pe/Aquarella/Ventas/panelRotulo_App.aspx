@@ -23,12 +23,14 @@
 
         }
 
-        function Actualizar(IdLider,Nombre, Documento) {
+        function Actualizar(IdLider,Nombre, Documento, Direccion, Destino, Telefono) {
            
            //$("#409").val('nuevo rotulo');
             //document.getElementById("408").value = "Tutorial Javascript";
             var strRotulo = Nombre + " DNI:" + Documento;
-          
+            var strRotuloCourier = Nombre + " DNI:" + Documento + " Dirección:" + Direccion + " Ubicación:" + Destino + " Teléfono:" + Telefono;
+            alert(strRotuloCourier)
+            window.opener.$("[id*='RotuloCourier_" + IdLider + "']").val(strRotuloCourier);
            window.opener.$("[id*='Rotulo_" + IdLider + "']").val(strRotulo);
            //document.getElementById("ContentPlaceHolder1_TxtDescripcion").value = 23423;
             window.close();
@@ -111,9 +113,12 @@
                                                     <ItemTemplate>
                                                             <asp:HiddenField ID="hf_descripcion" runat="server" Value='<%# Eval("Descripcion")%>' />
                                                             <asp:HiddenField ID="hf_documento" runat="server" Value='<%# Eval("Documento")%>' />
+                                                         <asp:HiddenField ID="hf_direccion" runat="server" Value='<%# Eval("Direccion")%>' />
+                                                         <asp:HiddenField ID="hf_destino" runat="server" Value='<%# Eval("Destino")%>' />
+                                                         <asp:HiddenField ID="hf_telefono" runat="server" Value='<%# Eval("Telefono")%>' />
                                                       <%--  <asp:Button ID='eliminar' Text="Seleccionar" runat="server" CommandName="Seleccionar" CommandArgument='<%# Eval("Bas_Id") %>'
                                                             OnClientClick="Actualizar();" />--%>
-                                                        <a href="#" onclick="Actualizar('<%# Eval("IdLider")%>','<%# Eval("Descripcion")%>','<%# Eval("Documento")%>')"">
+                                                        <a href="#" onclick="Actualizar('<%# Eval("IdLider")%>','<%# Eval("Descripcion")%>','<%# Eval("Documento")%>','<%# Eval("Direccion")%>','<%# Eval("Destino")%>','<%# Eval("Telefono")%>')"">
                                                             <asp:Image ID="Image1" ImageUrl="~/Design/images/Botones/editOrder.png" runat="server" />
                                                         </a>
                                                     </ItemTemplate>

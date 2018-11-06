@@ -63,7 +63,7 @@ namespace Integrado.Design.WPF_Master
         {
             Mouse.OverrideCursor = Cursors.Wait;
             _server = "www.aquarellaperu.com.pe";
-            _base_datos = "BdAquarella";
+            _base_datos = "BdAquarellaQA2";
             _user = "sa";
             _password = "Bata2013";
 
@@ -224,13 +224,13 @@ namespace Integrado.Design.WPF_Master
 
 
 
-                //string _entorno = "AQHIG1";
-                string _entorno = "";
+                string _entorno = "AQHIG1";
+                //string _entorno = "";
                 //Ent_Global._session_activa = true;
                 //Ent_Usuario user = new Ent_Usuario();           
                 //Ent_Global._usuario_var = "david";
-                if (Environment.GetEnvironmentVariable("aq") != null)
-                    _entorno = Environment.GetEnvironmentVariable("aq");
+                //if (Environment.GetEnvironmentVariable("aq") != null)
+                //_entorno = Environment.GetEnvironmentVariable("aq");
 
 
                 Boolean inicio_config = Dat_Acceso.getpunto_vta(_entorno);

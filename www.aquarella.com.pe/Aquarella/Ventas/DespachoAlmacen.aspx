@@ -263,7 +263,7 @@
                                      <asp:HiddenField ID="hf_Pares" runat="server" Value='<%# Eval("TotalPares")%>' />
                                      <asp:HiddenField ID="hf_Monto" runat="server" Value='<%# Eval("TotalVenta")%>' />
                                      <asp:HiddenField ID="hf_flete" runat="server" Value='<%# Eval("McaFlete")%>' />
-                                  
+                                 <textarea cols="10" rows="5"   style="display:none" id='RotuloCourier_<%# Eval("Area_Id")%>' name='Rotulo_<%# Eval("Area_Id")%>'> <%# Eval("Rotulo")%></textarea>
                                  <textarea cols="10" rows="5" disabled  id='Rotulo_<%# Eval("Area_Id")%>' name='Rotulo_<%# Eval("Area_Id")%>'> <%# Eval("Rotulo")%></textarea>
                             </ItemTemplate>
                        </asp:TemplateField>
@@ -295,11 +295,16 @@
                                 <asp:TextBox id="TxtDestino" Text='<%# Eval("Destino")%>' TextMode="multiline" MaxLength="500"  Columns="10" Rows="5" runat="server" />
                             </ItemTemplate>
                        </asp:TemplateField>
-                        <asp:BoundField DataField="TotalVenta" DataFormatString="{0:C}"  ItemStyle-Width="50px"
+                       <asp:TemplateField HeaderText="Courier" SortExpression="pin_courier" ItemStyle-HorizontalAlign="Center" ItemStyle-Width="110px">
+                            <ItemTemplate>
+                               <asp:CheckBox id="chkCourier" runat="server"  AutoPostBack="false"/>
+                            </ItemTemplate>
+                       </asp:TemplateField>
+                       <asp:BoundField DataField="TotalVenta" DataFormatString="{0:C}"  ItemStyle-Width="50px"
                             HeaderText="Monto">
                         <HeaderStyle HorizontalAlign="Right" />
                         <ItemStyle HorizontalAlign="Right" />
-                        </asp:BoundField>
+                      </asp:BoundField>
                          <asp:TemplateField HeaderText="Flete" SortExpression="pin_employee" ItemStyle-HorizontalAlign="Center" ItemStyle-Width="110px">
                             <ItemTemplate>
                                <asp:CheckBox id="chkFlete" runat="server"  AutoPostBack="false"/>

@@ -175,14 +175,14 @@
         <br />
         <asp:UpdatePanel ID="upGrid" runat="server" UpdateMode="Conditional">
             <ContentTemplate>
-                <div style="overflow-x: hidden; overflow-y:auto; height: 378px;">
+                <div style="overflow-x:auto; overflow-y:auto; height: 378px;">
                   <asp:GridView ID="gvReturns" runat="server" AllowSorting="True" 
                         ShowFooter="True" AllowPaging="false" PageSize="12"
                         SkinID="gridviewSkin" PagerStyle-HorizontalAlign="Left" Font-Size="Small" 
                         OnPageIndexChanging="gvReturns_PageIndexChanging" 
                           OnRowCommand="gvReturns_RowCommand"
                       OnRowDataBound="gvReturns_RowDataBound"  
-                        CellPadding="4" ForeColor="#333333" GridLines="None" Width="1072px" 
+                        CellPadding="4" ForeColor="#333333" GridLines="None" Width="1172px" 
                         AutoGenerateColumns="False">
                         <FooterStyle BackColor="#507CD1" Font-Bold="True" ForeColor="White" />
                         <HeaderStyle BackColor="#507CD1" Font-Bold="True" ForeColor="White" />
@@ -210,22 +210,20 @@
                                     <asp:HiddenField ID="hf_Atendido" runat="server" Value='<%# Eval("atendido")%>' />
                                      <asp:HiddenField ID="hf_IdEstado" runat="server" Value='<%# Eval("IdEstado")%>' />
                                     <asp:HiddenField ID="hf_flete" runat="server" Value='<%# Eval("McaFlete")%>' />
-                                 
+                                   <asp:HiddenField ID="hf_Courier" runat="server" Value='<%# Eval("McaCourier")%>' />
+                                  
+                                 <textarea cols="10" rows="5"  style="display:none"  id='RotuloCourier_<%# Eval("IdLider")%>' name='Rotulo_<%# Eval("IdLider")%>'> <%# Eval("RotuloCourier")%></textarea>
                                 <textarea cols="10" rows="5" readonly  id='Rotulo_<%# Eval("IdLider")%>' name='Rotulo_<%# Eval("IdLider")%>'> <%# Eval("Rotulo")%></textarea>
                                 
                             </ItemTemplate>
                        </asp:TemplateField>
                           <asp:TemplateField HeaderText="" ItemStyle-HorizontalAlign="Center" ItemStyle-Width="10px">
                                 <ItemTemplate>
-                          
                                     <center>
-                                     
-                                         <a href="#" onclick="AbrirPopup('<%# Eval("IdLider")%>','<%# Eval("NombreLider")%>','<%# Eval("atendido")%>')">
+                                        <a href="#" onclick="AbrirPopup('<%# Eval("IdLider")%>','<%# Eval("NombreLider")%>','<%# Eval("atendido")%>')">
                                             <asp:Image ID="Image1" ImageUrl="~/Design/images/Botones/editOrder.png" runat="server" />
                                         </a>
-                                      
                                     </center>
-
                                 </ItemTemplate>
                                 <ItemStyle HorizontalAlign="Center" />
                             </asp:TemplateField>
@@ -242,9 +240,14 @@
                                 <asp:TextBox id="txtAgencia" Text='<%# Eval("Agencia")%>' TextMode="multiline" MaxLength="500"  Columns="10"  Rows="5" runat="server" />
                             </ItemTemplate>
                        </asp:TemplateField>
-                         <asp:TemplateField HeaderText="Destino" SortExpression="pin_employee" ItemStyle-HorizontalAlign="Center" ItemStyle-Width="110px">
+                       <asp:TemplateField HeaderText="Destino" SortExpression="pin_employee" ItemStyle-HorizontalAlign="Center" ItemStyle-Width="110px">
+                           <ItemTemplate>
+                              <asp:TextBox id="TxtDestino" Text='<%# Eval("Destino")%>' TextMode="multiline" MaxLength="500"  Columns="10" Rows="5" runat="server" />
+                           </ItemTemplate>
+                       </asp:TemplateField>
+                         <asp:TemplateField HeaderText="Courier" SortExpression="pin_courier" ItemStyle-HorizontalAlign="Center" ItemStyle-Width="110px">
                             <ItemTemplate>
-                                <asp:TextBox id="TxtDestino" Text='<%# Eval("Destino")%>' TextMode="multiline" MaxLength="500"  Columns="10" Rows="5" runat="server" />
+                               <asp:CheckBox id="chkCourier" runat="server"  AutoPostBack="false"/>
                             </ItemTemplate>
                        </asp:TemplateField>
                         <asp:BoundField DataField="TotalVenta" DataFormatString="{0:C}"  ItemStyle-Width="50px"

@@ -316,13 +316,19 @@ namespace www.aquarella.com.pe.Aquarella.Ventas
                     string strIdLider = ((HiddenField)(gvReturns.Rows[i].FindControl("hf_IdLider"))).Value;
                     string strLider = ((HiddenField)(gvReturns.Rows[i].FindControl("hf_Lider"))).Value;
                     //string strRotulo = ((TextBox)(gvReturns.Rows[i].FindControl("txtRotulo"))).Text;
-                    string strRotulo = Request.Form["Rotulo_" + strIdLider]; 
+                    string strRotulo = Request.Form["Rotulo_" + strIdLider];
+                    string strRotuloCourier = Request.Form["RotuloCourier_" + strIdLider];
                     string strPares = ((HiddenField)(gvReturns.Rows[i].FindControl("hf_Pares"))).Value;
                     string strDestino = ((TextBox)(gvReturns.Rows[i].FindControl("TxtDestino"))).Text;
                     string strAgencia = ((TextBox)(gvReturns.Rows[i].FindControl("txtAgencia"))).Text;
                     string strMonto = ((HiddenField)(gvReturns.Rows[i].FindControl("hf_Monto"))).Value;
                     string strObs = ((TextBox)(gvReturns.Rows[i].FindControl("TxtObservacion"))).Text;
                     string strDetalle = ((TextBox)(gvReturns.Rows[i].FindControl("TxtDetalle"))).Text;
+                    string strMcaCourier = "N";
+                    CheckBox ckCourier = ((CheckBox)(gvReturns.Rows[i].FindControl("chkCourier")));
+                    if (ckCourier.Checked)
+                        strMcaCourier = "S";
+
                     string strMcaFlete = "N";
                     CheckBox ckFlete = ((CheckBox)(gvReturns.Rows[i].FindControl("chkFlete")));
                     if (ckFlete.Checked)
@@ -332,6 +338,8 @@ namespace www.aquarella.com.pe.Aquarella.Ventas
                     strDataDetalle += " IdLider=¿" + strIdLider + "¿ ";
                     strDataDetalle += " Lider=¿" + strLider + "¿ ";
                     strDataDetalle += " Rotulo=¿" + strRotulo + "¿ ";
+                    strDataDetalle += " RotuloCourier=¿" + strRotuloCourier + "¿ ";
+                    strDataDetalle += " McaCourier=¿" + strMcaCourier + "¿ ";
                     strDataDetalle += " Pares=¿" + strPares + "¿ ";
                     strDataDetalle += " Destino=¿" + strDestino + "¿ ";
                     strDataDetalle += " Agencia=¿" + strAgencia + "¿ ";
