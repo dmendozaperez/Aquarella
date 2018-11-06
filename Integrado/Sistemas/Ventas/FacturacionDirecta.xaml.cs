@@ -332,7 +332,7 @@ namespace Integrado.Sistemas.Ventas
 
                             }
 
-
+                            _TotalDes = Math.Round(_TotalDes, 2, MidpointRounding.AwayFromZero);
                             _total_linea = _total_linea - _TotalDes;
                         }
                         else {
@@ -402,7 +402,8 @@ namespace Integrado.Sistemas.Ventas
                     {
                    
                         _subtotal = (precio * _cant);
-                        _comi_monto =(afec_percepcion== "1") ? Math.Round((_subtotal * (Ent_Global._comision_porc / 100)), 2, MidpointRounding.AwayFromZero):0;
+                        //_comi_monto =(afec_percepcion== "1") ? Math.Round((_subtotal * (Ent_Global._comision_porc / 100)), 2, MidpointRounding.AwayFromZero):0;
+                        _comi_monto = (afec_percepcion == "1") ? Math.Round((_subtotal * (Ent_Global._comision_porc / 100)), 2, MidpointRounding.AwayFromZero) : 0;
                         venta_det_dt.Rows.Add(articulo, marca, color,foto, comi_bool, _comi_monto, precio, _talla, _cant, _stock, ofe_id, ofe_MaxPares, Ofe_Porce, afec_percepcion);
                     }
                     else
@@ -417,7 +418,8 @@ namespace Integrado.Sistemas.Ventas
                                  venta_det_dt.Rows[a]["cantidad"]=Convert.ToDecimal(venta_det_dt.Rows[a]["cantidad"])  + _cant;
                                
                                 _subtotal = (precio * Convert.ToDecimal(venta_det_dt.Rows[a]["cantidad"]));
-                                _comi_monto =(afec_percepcion == "1") ?Math.Round((_subtotal * (Ent_Global._comision_porc / 100)), 2, MidpointRounding.AwayFromZero):0;
+                                //_comi_monto =(afec_percepcion == "1") ?Math.Round((_subtotal * (Ent_Global._comision_porc / 100)), 2, MidpointRounding.AwayFromZero):0;
+                                _comi_monto = (afec_percepcion == "1") ? Math.Round((_subtotal * (Ent_Global._comision_porc / 100)), 2, MidpointRounding.AwayFromZero) : 0;
                                 venta_det_dt.Rows[a]["comision_monto"] = Convert.ToDecimal(_comi_monto);
                             }
                         }
