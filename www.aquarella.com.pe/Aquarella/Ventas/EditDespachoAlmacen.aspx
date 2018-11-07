@@ -111,16 +111,31 @@
         </tr>
             <tr>
             <td class="f12">
-                Total Pedido:
+                Pares Pedido:
             </td>
             <td>
                  <asp:TextBox id="txtPedido"  Enabled="false"  text="casa"  runat="server" />
             </td>
             <td class="f12">
-               Total Enviado:
+               Pares Enviado:
             </td>
             <td>
                     <asp:TextBox id="txtEnviado"  value="casa"  Enabled="false"  runat="server" />
+            </td>
+            
+        </tr>
+             <tr>
+            <td class="f12">
+                Catálogo Pedido:
+            </td>
+            <td>
+                 <asp:TextBox id="txtPedidoC"  Enabled="false"  text="casa"  runat="server" />
+            </td>
+            <td class="f12">
+               Catálogo Enviado:
+            </td>
+            <td>
+                    <asp:TextBox id="txtEnviadoC"  value="casa"  Enabled="false"  runat="server" />
             </td>
             
         </tr>
@@ -175,7 +190,7 @@
         <br />
         <asp:UpdatePanel ID="upGrid" runat="server" UpdateMode="Conditional">
             <ContentTemplate>
-                <div style="overflow-x:auto; overflow-y:auto; height: 378px;">
+                <div style="overflow-x:auto; overflow-y:auto; height: 378px;width:1170px">
                   <asp:GridView ID="gvReturns" runat="server" AllowSorting="True" 
                         ShowFooter="True" AllowPaging="false" PageSize="12"
                         SkinID="gridviewSkin" PagerStyle-HorizontalAlign="Left" Font-Size="Small" 
@@ -212,7 +227,6 @@
                                     <asp:HiddenField ID="hf_flete" runat="server" Value='<%# Eval("McaFlete")%>' />
                                    <asp:HiddenField ID="hf_Courier" runat="server" Value='<%# Eval("McaCourier")%>' />
                                   
-                                 <textarea cols="10" rows="5"  style="display:none"  id='RotuloCourier_<%# Eval("IdLider")%>' name='Rotulo_<%# Eval("IdLider")%>'> <%# Eval("RotuloCourier")%></textarea>
                                 <textarea cols="10" rows="5" readonly  id='Rotulo_<%# Eval("IdLider")%>' name='Rotulo_<%# Eval("IdLider")%>'> <%# Eval("Rotulo")%></textarea>
                                 
                             </ItemTemplate>
@@ -227,11 +241,29 @@
                                 </ItemTemplate>
                                 <ItemStyle HorizontalAlign="Center" />
                             </asp:TemplateField>
+                          <asp:TemplateField HeaderText="Rotulo Courier" SortExpression="pin_RotuloCourier" ItemStyle-HorizontalAlign="Center" ItemStyle-Width="110px">
+                            <ItemTemplate>
+                                <textarea cols="10" rows="5"  readonly id='RotuloCourier_<%# Eval("IdLider")%>' name='RotuloCourier_<%# Eval("IdLider")%>'> <%# Eval("Rotulo_Courier")%></textarea>
+                            </ItemTemplate>
+                       </asp:TemplateField>                         
+                       <asp:TemplateField HeaderText="Courier" SortExpression="pin_courier" ItemStyle-HorizontalAlign="Center" ItemStyle-Width="110px">
+                            <ItemTemplate>
+                               <asp:CheckBox id="chkCourier" runat="server"  AutoPostBack="false"/>
+                            </ItemTemplate>
+                       </asp:TemplateField>
                          <asp:BoundField DataField="TotalPares" HeaderText="Pares" ItemStyle-Width="50px">
                         <HeaderStyle HorizontalAlign="Center" />
                         <ItemStyle HorizontalAlign="Center" />
                         </asp:BoundField>
-                         <asp:BoundField DataField="TotalParesEnviado" HeaderText="Pares Enviados" ItemStyle-Width="50px">
+                           <asp:BoundField DataField="TotalParesEnviado" HeaderText="Pares Enviados" ItemStyle-Width="50px">
+                        <HeaderStyle HorizontalAlign="Center" />
+                        <ItemStyle HorizontalAlign="Center" />
+                        </asp:BoundField>
+                         <asp:BoundField DataField="TotalCatalogo" HeaderText="Catalogos" ItemStyle-Width="50px">
+                        <HeaderStyle HorizontalAlign="Center" />
+                        <ItemStyle HorizontalAlign="Center" />
+                        </asp:BoundField>
+                         <asp:BoundField DataField="TotalCatalogEnviado" HeaderText="Catalog. Enviados" ItemStyle-Width="50px">
                         <HeaderStyle HorizontalAlign="Center" />
                         <ItemStyle HorizontalAlign="Center" />
                         </asp:BoundField>
@@ -245,11 +277,7 @@
                               <asp:TextBox id="TxtDestino" Text='<%# Eval("Destino")%>' TextMode="multiline" MaxLength="500"  Columns="10" Rows="5" runat="server" />
                            </ItemTemplate>
                        </asp:TemplateField>
-                         <asp:TemplateField HeaderText="Courier" SortExpression="pin_courier" ItemStyle-HorizontalAlign="Center" ItemStyle-Width="110px">
-                            <ItemTemplate>
-                               <asp:CheckBox id="chkCourier" runat="server"  AutoPostBack="false"/>
-                            </ItemTemplate>
-                       </asp:TemplateField>
+                  
                         <asp:BoundField DataField="TotalVenta" DataFormatString="{0:C}"  ItemStyle-Width="50px"
                             HeaderText="Monto">
                         <HeaderStyle HorizontalAlign="Right" />

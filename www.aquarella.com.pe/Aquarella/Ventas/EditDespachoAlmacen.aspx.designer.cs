@@ -103,6 +103,24 @@ namespace www.aquarella.com.pe.Aquarella.Ventas {
         protected global::System.Web.UI.WebControls.TextBox txtEnviado;
         
         /// <summary>
+        /// Control txtPedidoC.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtPedidoC;
+        
+        /// <summary>
+        /// Control txtEnviadoC.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtEnviadoC;
+        
+        /// <summary>
         /// Control txtMonto.
         /// </summary>
         /// <remarks>

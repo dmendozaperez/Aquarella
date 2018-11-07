@@ -261,10 +261,10 @@
                                      <asp:HiddenField ID="hf_IdLider" runat="server" Value='<%# Eval("Area_Id")%>' />
                                      <asp:HiddenField ID="hf_Lider" runat="server" Value='<%# Eval("NombreLider")%>' />
                                      <asp:HiddenField ID="hf_Pares" runat="server" Value='<%# Eval("TotalPares")%>' />
+                                       <asp:HiddenField ID="hf_Catal" runat="server" Value='<%# Eval("TotalCatalogo")%>' />
                                      <asp:HiddenField ID="hf_Monto" runat="server" Value='<%# Eval("TotalVenta")%>' />
                                      <asp:HiddenField ID="hf_flete" runat="server" Value='<%# Eval("McaFlete")%>' />
-                                 <textarea cols="10" rows="5"   style="display:none" id='RotuloCourier_<%# Eval("Area_Id")%>' name='Rotulo_<%# Eval("Area_Id")%>'> <%# Eval("Rotulo")%></textarea>
-                                 <textarea cols="10" rows="5" disabled  id='Rotulo_<%# Eval("Area_Id")%>' name='Rotulo_<%# Eval("Area_Id")%>'> <%# Eval("Rotulo")%></textarea>
+                                <textarea cols="10" rows="5" disabled  id='Rotulo_<%# Eval("Area_Id")%>' name='Rotulo_<%# Eval("Area_Id")%>'> <%# Eval("Rotulo")%></textarea>
                             </ItemTemplate>
                        </asp:TemplateField>
                           <asp:TemplateField HeaderText="" ItemStyle-HorizontalAlign="Center" ItemStyle-Width="10px">
@@ -280,8 +280,22 @@
 
                                 </ItemTemplate>
                                 <ItemStyle HorizontalAlign="Center" />
-                            </asp:TemplateField>
-                         <asp:BoundField DataField="TotalPares" HeaderText="Pares" ItemStyle-Width="50px">
+                            </asp:TemplateField>                        
+                         <asp:TemplateField HeaderText="RotuloCourier" SortExpression="pin_RotuloCourier" ItemStyle-HorizontalAlign="Center" ItemStyle-Width="110px">
+                            <ItemTemplate>
+                                <textarea cols="10" rows="5"  disabled id='RotuloCourier_<%# Eval("Area_Id")%>' name='RotuloCourier_<%# Eval("Area_Id")%>'> <%# Eval("Rotulo_Courier")%></textarea>
+                            </ItemTemplate>
+                       </asp:TemplateField>                         
+                       <asp:TemplateField HeaderText="Courier" SortExpression="pin_courier" ItemStyle-HorizontalAlign="Center" ItemStyle-Width="110px">
+                            <ItemTemplate>
+                               <asp:CheckBox id="chkCourier" runat="server"  AutoPostBack="false"/>
+                            </ItemTemplate>
+                       </asp:TemplateField>
+                          <asp:BoundField DataField="TotalPares" HeaderText="Pares" ItemStyle-Width="50px">
+                        <HeaderStyle HorizontalAlign="Center" />
+                        <ItemStyle HorizontalAlign="Center" />
+                        </asp:BoundField>
+                          <asp:BoundField DataField="TotalCatalogo" HeaderText="Catalogos" ItemStyle-Width="50px">
                         <HeaderStyle HorizontalAlign="Center" />
                         <ItemStyle HorizontalAlign="Center" />
                         </asp:BoundField>
@@ -295,11 +309,7 @@
                                 <asp:TextBox id="TxtDestino" Text='<%# Eval("Destino")%>' TextMode="multiline" MaxLength="500"  Columns="10" Rows="5" runat="server" />
                             </ItemTemplate>
                        </asp:TemplateField>
-                       <asp:TemplateField HeaderText="Courier" SortExpression="pin_courier" ItemStyle-HorizontalAlign="Center" ItemStyle-Width="110px">
-                            <ItemTemplate>
-                               <asp:CheckBox id="chkCourier" runat="server"  AutoPostBack="false"/>
-                            </ItemTemplate>
-                       </asp:TemplateField>
+                          
                        <asp:BoundField DataField="TotalVenta" DataFormatString="{0:C}"  ItemStyle-Width="50px"
                             HeaderText="Monto">
                         <HeaderStyle HorizontalAlign="Right" />

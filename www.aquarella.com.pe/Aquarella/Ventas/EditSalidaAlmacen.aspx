@@ -23,32 +23,75 @@
             }
         }
 
-        function Inprimir(Rotulo, Destino, Agencia) {
+        function Inprimir(Rotulo, Destino, Agencia,RotuloCourier, mcaCourier) {
 
-            var arrayDeCadenas = Rotulo.split('DNI');
-            var nombre = arrayDeCadenas[0];
-            var Doc = arrayDeCadenas[1];
-            var mywindow = window.open('', '', 'height=400,width=600');
-            mywindow.document.write('<html><head><title>Rotulo</title>');
-            /*optional stylesheet*/ //mywindow.document.write('<link rel="stylesheet" href="main.css" type="text/css" />');
-            mywindow.document.write('</head><body >');
-            //String = + '<div> </'
-            mywindow.document.write('<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"');
-            mywindow.document.write('"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">');
-            mywindow.document.write('<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">');
-            mywindow.document.write('<head><title>My Title</title>');
-            mywindow.document.write('<style type="text/css">body{ margin:0px;');
-            mywindow.document.write('font-family:verdana,Arial;color:#000;');
-            mywindow.document.write('font-family:Verdana, Geneva, sans-serif; font-size:60px;}');
-            mywindow.document.write('a{color:#000;text-decoration:none;} </style>');
-            mywindow.document.write('</head><body onLoad="self.print()"><center>');
-            mywindow.document.write('<b>' + nombre + '</b><br>');
-            mywindow.document.write('<b>DNI' + Doc + '</b><br>');
-            mywindow.document.write('<b>Destino:' + Destino + '</b><br>');
-            mywindow.document.write('<b>Empresa: ' + Agencia + '</b>');
-            mywindow.document.write('</center></body></html>');
-       
-            mywindow.document.write('</body></html>');
+           
+            if (mcaCourier == 'N') {
+                var arrayDeCadenas = Rotulo.split('DNI');
+                var nombre = arrayDeCadenas[0];
+                              var Doc = arrayDeCadenas[1];
+                var mywindow = window.open('', '', 'height=400,width=600');
+                mywindow.document.write('<html><head><title>Rotulo</title>');
+                /*optional stylesheet*/ //mywindow.document.write('<link rel="stylesheet" href="main.css" type="text/css" />');
+                mywindow.document.write('</head><body >');
+                //String = + '<div> </'
+                mywindow.document.write('<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"');
+                mywindow.document.write('"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">');
+                mywindow.document.write('<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">');
+                mywindow.document.write('<head><title>My Title</title>');
+                mywindow.document.write('<style type="text/css">body{ margin:0px;');
+                mywindow.document.write('font-family:verdana,Arial;color:#000;');
+                mywindow.document.write('font-family:Verdana, Geneva, sans-serif; font-size:60px;}');
+                mywindow.document.write('a{color:#000;text-decoration:none;} </style>');
+                mywindow.document.write('</head><body onLoad="self.print()"><center>');
+                mywindow.document.write('<b>' + nombre + '</b><br>');
+                mywindow.document.write('<b>DNI' + Doc + '</b><br>');
+                mywindow.document.write('<b>Destino:' + Destino + '</b><br>');
+                mywindow.document.write('<b>Empresa: ' + Agencia + '</b>');
+                mywindow.document.write('</center></body></html>');
+                mywindow.document.write('</body></html>');
+            } else {
+
+                var arrayDeCadenas = RotuloCourier.split('DNI:');
+                var nombre = arrayDeCadenas[0];
+
+                var cadena1 = arrayDeCadenas[1];
+                var arrayDeCadenas1 = cadena1.split('Dirección:');
+                var Doc = arrayDeCadenas1[0];
+
+                var cadena2 = arrayDeCadenas1[1];
+                var arrayDeCadenas2 = cadena2.split('Ubicación:');
+                var direccion = arrayDeCadenas2[0];
+
+                var cadena3 = arrayDeCadenas2[1];
+                var arrayDeCadenas3 = cadena3.split('Teléfono:');
+                var ubicacion = arrayDeCadenas3[0];
+
+                var Telefono = arrayDeCadenas3[1];
+                
+
+                var mywindow = window.open('', '', 'height=400,width=600');
+                mywindow.document.write('<html><head><title>Rotulo</title>');
+                /*optional stylesheet*/ //mywindow.document.write('<link rel="stylesheet" href="main.css" type="text/css" />');
+                mywindow.document.write('</head><body >');
+                //String = + '<div> </'
+                mywindow.document.write('<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"');
+                mywindow.document.write('"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">');
+                mywindow.document.write('<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">');
+                mywindow.document.write('<head><title>My Title</title>');
+                mywindow.document.write('<style type="text/css">body{ margin:0px;');
+                mywindow.document.write('font-family:verdana,Arial;color:#000;');
+                mywindow.document.write('font-family:Verdana, Geneva, sans-serif; font-size:60px;}');
+                mywindow.document.write('a{color:#000;text-decoration:none;} </style>');
+                mywindow.document.write('</head><body onLoad="self.print()"><center>');
+                mywindow.document.write('<b>' + nombre + '</b><br>');
+                mywindow.document.write('<b>DNI:' + Doc + '</b><br>');
+                mywindow.document.write('<b>Dirección:' + direccion + '</b><br>');
+                mywindow.document.write('<b>Ubicación: ' + ubicacion + '</b><br>');
+                mywindow.document.write('<b>Telefono: ' + Telefono + '</b>');
+                mywindow.document.write('</center></body></html>');
+                mywindow.document.write('</body></html>');
+            }
 
             mywindow.print();
             //mywindow.close();
@@ -126,21 +169,37 @@
             </td>
             
         </tr>
-             <tr>
+         <tr>
             <td class="f12">
-                Total Pedido:
+                Pares Pedido:
             </td>
             <td>
-                 <asp:TextBox id="txtPedido"  Enabled="false"    runat="server" />
+                 <asp:TextBox id="txtPedido"  Enabled="false"  text="casa"  runat="server" />
             </td>
             <td class="f12">
-               Total Enviado:
+               Pares Enviado:
             </td>
             <td>
-                    <asp:TextBox id="txtEnviado"   Enabled="false"  runat="server" />
+                    <asp:TextBox id="txtEnviado"  value="casa"  Enabled="false"  runat="server" />
             </td>
             
         </tr>
+             <tr>
+            <td class="f12">
+                Catálogo Pedido:
+            </td>
+            <td>
+                 <asp:TextBox id="txtPedidoC"  Enabled="false"  text="casa"  runat="server" />
+            </td>
+            <td class="f12">
+               Catálogo Enviado:
+            </td>
+            <td>
+                    <asp:TextBox id="txtEnviadoC"  value="casa"  Enabled="false"  runat="server" />
+            </td>
+            
+        </tr>
+
              <tr>
              <td class="f12">
                Total Monto:
@@ -232,6 +291,10 @@
                         <HeaderStyle HorizontalAlign="Center" />
                         <ItemStyle HorizontalAlign="Center" />
                         </asp:BoundField>
+                           <asp:BoundField DataField="TotalCatalogo" HeaderText="Catalogos" ItemStyle-Width="50px">
+                        <HeaderStyle HorizontalAlign="Center" />
+                        <ItemStyle HorizontalAlign="Center" />
+                        </asp:BoundField>
                          
                          <asp:TemplateField HeaderText="Enviado" SortExpression="pin_employee" ItemStyle-HorizontalAlign="Center" ItemStyle-Width="50px">
                             <ItemTemplate>
@@ -245,6 +308,13 @@
                                 <asp:TextBox id="txtPares"  Style="width:50px;font-size:12px" Columns="2" type="number" MaxLength="3"  Text='<%# Eval("TotalParesEnviadoEdit")%>'  runat="server" />
                             </ItemTemplate>
                         </asp:TemplateField>
+
+                         <asp:TemplateField HeaderText="Catalog. Enviado" SortExpression="pin_employee" ItemStyle-HorizontalAlign="Center" ItemStyle-Width="50px">
+                            <ItemTemplate>                                
+                                <asp:TextBox id="txtCatalog"  Style="width:50px;font-size:12px" Columns="2" type="number" MaxLength="3"  Text='<%# Eval("TotalCatalogEnviadoEdit")%>'  runat="server" />
+                            </ItemTemplate>
+                        </asp:TemplateField>
+
 
                           <asp:BoundField DataField="Agencia" HeaderText="Agencia" ItemStyle-Width="100px">
                         <HeaderStyle HorizontalAlign="Left" />
@@ -262,8 +332,12 @@
                         <ItemStyle HorizontalAlign="Right" />
                         </asp:BoundField>
                        
-                           <asp:BoundField DataField="CobroFlete" ItemStyle-Width="50px"
-                            HeaderText="Flete">
+                        <asp:BoundField DataField="CobroFlete" ItemStyle-Width="50px" HeaderText="Flete">
+                        <HeaderStyle HorizontalAlign="center" />
+                        <ItemStyle HorizontalAlign="Center" />
+                        </asp:BoundField>
+
+                        <asp:BoundField DataField="Courier" ItemStyle-Width="50px" HeaderText="Courier">
                         <HeaderStyle HorizontalAlign="center" />
                         <ItemStyle HorizontalAlign="Center" />
                         </asp:BoundField>
@@ -282,7 +356,7 @@
              
                                     <center>
                                       
-                                         <a href="#" onclick="Inprimir('<%# Eval("Rotulo")%>','<%# Eval("Destino")%>','<%# Eval("Agencia")%>')">
+                                         <a href="#" onclick="Inprimir('<%# Eval("Rotulo")%>','<%# Eval("Destino")%>','<%# Eval("Agencia")%>','<%# Eval("Rotulo_Courier")%>','<%# Eval("McaCourier")%>')">
                                             <asp:Image ID="Image1" ImageUrl="~/Design/images/Botones/printer.png" runat="server" />
                                         </a>
                                       

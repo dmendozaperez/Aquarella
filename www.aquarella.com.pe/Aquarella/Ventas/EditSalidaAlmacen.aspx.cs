@@ -107,9 +107,14 @@ namespace www.aquarella.com.pe.Aquarella.Ventas
                     string _TotalPedido = row["NroPedidos"].ToString();
                     string _TotalEnviado = row["NroEnviados"].ToString();
                     string _TotalMonto = row["MontoTotal"].ToString();
+                    string _TotalCatalogPedido = row["CatalogPedidos"].ToString();
+                    string _TotalCatalogEnviado = row["CatalogEnviados"].ToString();
+
 
                     txtPedido.Text = _TotalPedido;
                     txtEnviado.Text = _TotalEnviado;
+                    txtPedidoC.Text = _TotalCatalogPedido;
+                    txtEnviadoC.Text = _TotalCatalogEnviado;
                     txtMonto.Text = _TotalMonto;
                 }
 
@@ -199,7 +204,7 @@ namespace www.aquarella.com.pe.Aquarella.Ventas
         {
             DataTable dt = (DataTable)Session[_nameSessionData];
 
-            ExportarExcel(dt, "0,1,2,3,14,15,16,17,18,19,20,21", "2", "Orden_Despacho");
+            ExportarExcel(dt, "0,1,2,3,19,20,21,22,23,24,25,26,27,28,29", "2", "Orden_Despacho");
 
         }
 
@@ -289,6 +294,8 @@ namespace www.aquarella.com.pe.Aquarella.Ventas
             string fec = TextFecha.Text;
             string strTotalPedido = txtPedido.Text;
             string strTotalEnviado = txtEnviado.Text;
+            string strTotalCataPedido = txtPedidoC.Text;
+            string strTotalCataEnviado = txtEnviadoC.Text;
             string strTotalMonto = txtMonto.Text;
 
             string strTable = "<table <Table border='1' bgColor='#ffffff' " +
@@ -298,8 +305,10 @@ namespace www.aquarella.com.pe.Aquarella.Ventas
             strTable += "<td height=38  bgcolor='#969696' width='38'>Fec. Creación. </ td ><td width='400' align='left' colspan='2' >" + fec + "</ td > </tr>";
             strTable += "<tr height=38 ><td height=38  bgcolor='#969696' width='38'>Total Monto. </ td ><td width='400' align='left' >" + strTotalMonto + "</ td > ";
             strTable += "<td height=38  bgcolor='#969696' width='38'>Estado </ td ><td width='400' align='left' colspan='2' >" + est + "</ td ></tr>";
-            strTable += "<tr height=38 ><td height=38  bgcolor='#969696' width='38'>Total Pedido. </ td ><td width='400' align='left' >" + strTotalPedido + "</ td > ";
-            strTable += "<td height=38  bgcolor='#969696' width='38'>Total Enviado </ td ><td width='400' align='left' colspan='2' >" + strTotalEnviado + "</ td ></tr>";
+            strTable += "<tr height=38 ><td height=38  bgcolor='#969696' width='38'>Pares Pedido. </ td ><td width='400' align='left' >" + strTotalPedido + "</ td > ";
+            strTable += "<td height=38  bgcolor='#969696' width='38'>Pares Enviado </ td ><td width='400' align='left' colspan='2' >" + strTotalEnviado + "</ td ></tr>";
+            strTable += "<tr height=38 ><td height=38  bgcolor='#969696' width='38'>Catalogo Pedido. </ td ><td width='400' align='left' >" + strTotalCataPedido + "</ td > ";
+            strTable += "<td height=38  bgcolor='#969696' width='38'>Catalogo Enviado </ td ><td width='400' align='left' colspan='2' >" + strTotalCataEnviado + "</ td ></tr>";
 
             strTable += "<tr height=38 ><td height=38  bgcolor='#969696' width='38'>Descripción </ td ><td colspan='4' align='left' >" + desc + "</ td > ";
             strTable += "</tr>";
@@ -328,7 +337,6 @@ namespace www.aquarella.com.pe.Aquarella.Ventas
             Response.End();
         }
 
-
         protected void btGuardar_Click(object sender, EventArgs e)
         {
             string strDataDetalle = "";
@@ -347,10 +355,12 @@ namespace www.aquarella.com.pe.Aquarella.Ventas
                 
                 string strIdDetalle = ((HiddenField)(gvReturns.Rows[i].FindControl("hf_IdDetalle"))).Value;
                 string strParesSalida = ((TextBox)(gvReturns.Rows[i].FindControl("txtPares"))).Text;
-                
+                string strCatalogoSalida = ((TextBox)(gvReturns.Rows[i].FindControl("txtCatalog"))).Text;
+
                 strDataDetalle += "<row  ";
                 strDataDetalle += " IdDetalle=¿" + strIdDetalle + "¿ ";
                 strDataDetalle += " ParesSalida=¿" + strParesSalida + "¿ ";
+                strDataDetalle += " CatalogSalida=¿" + strCatalogoSalida + "¿ ";
                 strDataDetalle += "/>";
 
             }

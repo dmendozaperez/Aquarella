@@ -35,6 +35,8 @@ namespace www.aquarella.com.pe.Aquarella.Ventas
         private string _iddespacho { get; set; }
         private string _TotalPedido { get; set; }
         private string _TotalEnviado { get; set; }
+        private string _TotalCatalogPedido { get; set; }
+        private string _TotalCatalogEnviado { get; set; }
 
         private string _TotalMonto { get; set; }
 
@@ -126,9 +128,13 @@ namespace www.aquarella.com.pe.Aquarella.Ventas
                 {
                     _TotalPedido = row["NroPedidos"].ToString();
                     _TotalEnviado = row["NroEnviados"].ToString();
+                    _TotalCatalogPedido = row["CatalogPedidos"].ToString();
+                    _TotalCatalogEnviado = row["CatalogEnviados"].ToString();
                     _TotalMonto = row["MontoTotal"].ToString();
                     txtPedido.Text = _TotalPedido;
                     txtEnviado.Text = _TotalEnviado;
+                    txtPedidoC.Text = _TotalCatalogPedido;
+                    txtEnviadoC.Text = _TotalCatalogEnviado;
                     txtMonto.Text = _TotalMonto;
 
 
@@ -164,6 +170,7 @@ namespace www.aquarella.com.pe.Aquarella.Ventas
             for (int i = 0; i <= gvReturns.Rows.Count - 1; i++)
             {
                 string strhf_flete = ((HiddenField)(gvReturns.Rows[i].FindControl("hf_flete"))).Value;
+                string strhf_courier = ((HiddenField)(gvReturns.Rows[i].FindControl("hf_Courier"))).Value;
                 strDescripcion = ((HiddenField)(gvReturns.Rows[i].FindControl("hf_Descripcion"))).Value;
                 strFecCreacion = ((HiddenField)(gvReturns.Rows[i].FindControl("hf_FecCrea"))).Value;
                 strEstado = ((HiddenField)(gvReturns.Rows[i].FindControl("hf_Estado"))).Value;
@@ -173,6 +180,9 @@ namespace www.aquarella.com.pe.Aquarella.Ventas
                             
                 if (strhf_flete.Equals("S"))
                     ((CheckBox)(gvReturns.Rows[i].FindControl("chkFlete"))).Checked = true;
+
+                if (strhf_courier.Equals("S"))
+                    ((CheckBox)(gvReturns.Rows[i].FindControl("chkCourier"))).Checked = true;
 
                 if (strIdEstado =="S" || strFlgAtendido =="S")
                 {
@@ -253,7 +263,7 @@ namespace www.aquarella.com.pe.Aquarella.Ventas
             DataTable dt = (DataTable)Session[_nameSessionData];
 
 
-            ExportarExcel(dt, "0,1,2,3,14,15,16,17,18,19,20,21", "2", "Orden_Despacho");
+            ExportarExcel(dt, "0,1,2,3,19,20,21,22,23,24,25,26,27,28,29", "2", "Orden_Despacho");
 
         }
                 
@@ -337,6 +347,8 @@ namespace www.aquarella.com.pe.Aquarella.Ventas
             string fec = TextFecha.Text;
             string strTotalPedido = txtPedido.Text;
             string strTotalEnviado = txtEnviado.Text;
+            string strTotalCataPedido = txtPedidoC.Text;
+            string strTotalCataEnviado = txtEnviadoC.Text;
             string strTotalMonto = txtMonto.Text;
 
             string strTable = "<table <Table border='1' bgColor='#ffffff' " +
@@ -346,8 +358,10 @@ namespace www.aquarella.com.pe.Aquarella.Ventas
             strTable += "<td height=38  bgcolor='#969696' width='38'>Fec. Creación. </ td ><td width='400' align='left' colspan='2' >" + fec + "</ td > </tr>";
             strTable += "<tr height=38 ><td height=38  bgcolor='#969696' width='38'>Total Monto. </ td ><td width='400' align='left' >" + strTotalMonto + "</ td > ";
             strTable += "<td height=38  bgcolor='#969696' width='38'>Estado </ td ><td width='400' align='left' colspan='2' >" + est + "</ td ></tr>";
-            strTable += "<tr height=38 ><td height=38  bgcolor='#969696' width='38'>Total Pedido. </ td ><td width='400' align='left' >" + strTotalPedido + "</ td > ";
-            strTable += "<td height=38  bgcolor='#969696' width='38'>Total Enviado </ td ><td width='400' align='left' colspan='2' >" + strTotalEnviado + "</ td ></tr>";
+            strTable += "<tr height=38 ><td height=38  bgcolor='#969696' width='38'>Pares Pedido. </ td ><td width='400' align='left' >" + strTotalPedido + "</ td > ";
+            strTable += "<td height=38  bgcolor='#969696' width='38'>Pares Enviado </ td ><td width='400' align='left' colspan='2' >" + strTotalEnviado + "</ td ></tr>";
+            strTable += "<tr height=38 ><td height=38  bgcolor='#969696' width='38'>Catalogo Pedido. </ td ><td width='400' align='left' >" + strTotalCataPedido + "</ td > ";
+            strTable += "<td height=38  bgcolor='#969696' width='38'>Catalogo Enviado </ td ><td width='400' align='left' colspan='2' >" + strTotalCataEnviado + "</ td ></tr>";
 
             strTable += "<tr height=38 ><td height=38  bgcolor='#969696' width='38'>Descripción </ td ><td colspan='4' align='left' >" + desc + "</ td > ";
             strTable += "</tr>";
@@ -392,10 +406,16 @@ namespace www.aquarella.com.pe.Aquarella.Ventas
                 string strAgencia = ((TextBox)(gvReturns.Rows[i].FindControl("txtAgencia"))).Text;
                 string strIdLider = ((HiddenField)(gvReturns.Rows[i].FindControl("hf_IdLider"))).Value;
                 string strRotulo = Request.Form["Rotulo_" + strIdLider];
-              
+                string strRotuloCourier = Request.Form["RotuloCourier_" + strIdLider];
+
                 string strObs = ((TextBox)(gvReturns.Rows[i].FindControl("TxtObservacion"))).Text;
-                
                 string strDetalle = ((TextBox)(gvReturns.Rows[i].FindControl("TxtDetalle"))).Text;
+
+                string strMcaCourier = "N";
+                CheckBox ckCourier = ((CheckBox)(gvReturns.Rows[i].FindControl("chkCourier")));
+                if (ckCourier.Checked)
+                    strMcaCourier = "S";
+
                 string strMcaFlete = "N";
                 CheckBox ckFlete = ((CheckBox)(gvReturns.Rows[i].FindControl("chkFlete")));
                 if (ckFlete.Checked)
@@ -405,6 +425,8 @@ namespace www.aquarella.com.pe.Aquarella.Ventas
                 strDataDetalle += " IdLider=¿" + strIdLider + "¿ ";
                 strDataDetalle += " IdDetalle=¿" + strIdDetalle + "¿ ";
                 strDataDetalle += " Rotulo=¿" + strRotulo + "¿ ";
+                strDataDetalle += " RotuloCourier=¿" + strRotuloCourier + "¿ ";
+                strDataDetalle += " McaCourier=¿" + strMcaCourier + "¿ ";
                 strDataDetalle += " Destino=¿" + strDestino + "¿ ";
                 strDataDetalle += " Agencia=¿" + strAgencia + "¿ ";
                  strDataDetalle += " Obs=¿" + strObs + "¿ ";

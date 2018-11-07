@@ -29,7 +29,7 @@
             //document.getElementById("408").value = "Tutorial Javascript";
             var strRotulo = Nombre + " DNI:" + Documento;
             var strRotuloCourier = Nombre + " DNI:" + Documento + " Dirección:" + Direccion + " Ubicación:" + Destino + " Teléfono:" + Telefono;
-            alert(strRotuloCourier)
+            //alert(strRotuloCourier)
             window.opener.$("[id*='RotuloCourier_" + IdLider + "']").val(strRotuloCourier);
            window.opener.$("[id*='Rotulo_" + IdLider + "']").val(strRotulo);
            //document.getElementById("ContentPlaceHolder1_TxtDescripcion").value = 23423;

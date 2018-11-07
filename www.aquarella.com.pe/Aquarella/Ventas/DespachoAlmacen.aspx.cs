@@ -319,6 +319,7 @@ namespace www.aquarella.com.pe.Aquarella.Ventas
                     string strRotulo = Request.Form["Rotulo_" + strIdLider];
                     string strRotuloCourier = Request.Form["RotuloCourier_" + strIdLider];
                     string strPares = ((HiddenField)(gvReturns.Rows[i].FindControl("hf_Pares"))).Value;
+                    string strCatalogo = ((HiddenField)(gvReturns.Rows[i].FindControl("hf_Catal"))).Value;
                     string strDestino = ((TextBox)(gvReturns.Rows[i].FindControl("TxtDestino"))).Text;
                     string strAgencia = ((TextBox)(gvReturns.Rows[i].FindControl("txtAgencia"))).Text;
                     string strMonto = ((HiddenField)(gvReturns.Rows[i].FindControl("hf_Monto"))).Value;
@@ -341,6 +342,7 @@ namespace www.aquarella.com.pe.Aquarella.Ventas
                     strDataDetalle += " RotuloCourier=¿" + strRotuloCourier + "¿ ";
                     strDataDetalle += " McaCourier=¿" + strMcaCourier + "¿ ";
                     strDataDetalle += " Pares=¿" + strPares + "¿ ";
+                    strDataDetalle += " Catalogo=¿" + strCatalogo + "¿ ";
                     strDataDetalle += " Destino=¿" + strDestino + "¿ ";
                     strDataDetalle += " Agencia=¿" + strAgencia + "¿ ";
                     strDataDetalle += " Monto=¿" + strMonto + "¿ ";
