@@ -186,7 +186,7 @@
         </tr>
              <tr>
             <td class="f12">
-                Catálogo Pedido:
+                Catálogo Facturado:
             </td>
             <td>
                  <asp:TextBox id="txtPedidoC"  Enabled="false"  text="casa"  runat="server" />
@@ -291,12 +291,7 @@
                         <HeaderStyle HorizontalAlign="Center" />
                         <ItemStyle HorizontalAlign="Center" />
                         </asp:BoundField>
-                           <asp:BoundField DataField="TotalCatalogo" HeaderText="Catalogos" ItemStyle-Width="50px">
-                        <HeaderStyle HorizontalAlign="Center" />
-                        <ItemStyle HorizontalAlign="Center" />
-                        </asp:BoundField>
-                         
-                         <asp:TemplateField HeaderText="Enviado" SortExpression="pin_employee" ItemStyle-HorizontalAlign="Center" ItemStyle-Width="50px">
+                          <asp:TemplateField HeaderText="Pares Enviados" SortExpression="pin_employee" ItemStyle-HorizontalAlign="Center" ItemStyle-Width="50px">
                             <ItemTemplate>
                                 <asp:HiddenField ID="hf_Descripcion" runat="server" Value='<%# Eval("Desp_Descripcion")%>' />
                                     <asp:HiddenField ID="hf_FecCrea" runat="server" Value='<%# Eval("Desp_FechaCre")%>' />
@@ -308,8 +303,14 @@
                                 <asp:TextBox id="txtPares"  Style="width:50px;font-size:12px" Columns="2" type="number" MaxLength="3"  Text='<%# Eval("TotalParesEnviadoEdit")%>'  runat="server" />
                             </ItemTemplate>
                         </asp:TemplateField>
+                           <asp:BoundField DataField="TotalCatalogo" HeaderText="Catalogos Faturados" ItemStyle-Width="50px">
+                        <HeaderStyle HorizontalAlign="Center" />
+                        <ItemStyle HorizontalAlign="Center" />
+                        </asp:BoundField>
+                         
+                        
 
-                         <asp:TemplateField HeaderText="Catalog. Enviado" SortExpression="pin_employee" ItemStyle-HorizontalAlign="Center" ItemStyle-Width="50px">
+                         <asp:TemplateField HeaderText="Catalog. Enviados" SortExpression="pin_employee" ItemStyle-HorizontalAlign="Center" ItemStyle-Width="50px">
                             <ItemTemplate>                                
                                 <asp:TextBox id="txtCatalog"  Style="width:50px;font-size:12px" Columns="2" type="number" MaxLength="3"  Text='<%# Eval("TotalCatalogEnviadoEdit")%>'  runat="server" />
                             </ItemTemplate>

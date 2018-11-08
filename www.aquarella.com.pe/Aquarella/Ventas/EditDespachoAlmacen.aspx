@@ -126,7 +126,7 @@
         </tr>
              <tr>
             <td class="f12">
-                Catálogo Pedido:
+                Catálogo Facturado:
             </td>
             <td>
                  <asp:TextBox id="txtPedidoC"  Enabled="false"  text="casa"  runat="server" />
@@ -259,11 +259,11 @@
                         <HeaderStyle HorizontalAlign="Center" />
                         <ItemStyle HorizontalAlign="Center" />
                         </asp:BoundField>
-                         <asp:BoundField DataField="TotalCatalogo" HeaderText="Catalogos" ItemStyle-Width="50px">
+                         <asp:BoundField DataField="TotalCatalogo" HeaderText="Catalogos Facturados" ItemStyle-Width="50px">
                         <HeaderStyle HorizontalAlign="Center" />
                         <ItemStyle HorizontalAlign="Center" />
                         </asp:BoundField>
-                         <asp:BoundField DataField="TotalCatalogEnviado" HeaderText="Catalog. Enviados" ItemStyle-Width="50px">
+                         <asp:BoundField DataField="TotalCatalogEnviado" HeaderText="Catalogos Enviados" ItemStyle-Width="50px">
                         <HeaderStyle HorizontalAlign="Center" />
                         <ItemStyle HorizontalAlign="Center" />
                         </asp:BoundField>
