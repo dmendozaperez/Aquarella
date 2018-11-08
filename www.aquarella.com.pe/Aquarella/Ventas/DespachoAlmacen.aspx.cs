@@ -187,7 +187,7 @@ namespace www.aquarella.com.pe.Aquarella.Ventas
         protected void ibExportToExcel_Click(object sender, ImageClickEventArgs e)
         {
             DataTable dt = (DataTable)Session[_nameSessionData];
-            ExportarExcel(dt, "1,9", "2", "Despacho_Pendiente");
+            ExportarExcel(dt, "1,11", "2", "Despacho_Pendiente");
 
         }
 
