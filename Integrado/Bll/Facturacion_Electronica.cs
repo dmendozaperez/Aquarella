@@ -63,9 +63,22 @@ namespace Integrado.Bll
                 /*ESTA CONDICION ES EL PROVEEDOR PAPERLESS*/
                 if (Ent_Global.pr_facturador == "P")
                 {
-                    _formato_doc = Dat_Venta._leer_formato_electronico_PAPERLESS(_tipo_doc, _num_doc, ref _error);
-                    string ruc_empresa = Ent_Global._ws_ruc; string ws_login = Ent_Global._ws_login; string ws_pass = Ent_Global._ws_password; Int32 tipofoliacion = 1;
 
+                    string return_numdoc = "";
+
+                    _formato_doc = Dat_Venta._leer_formato_electronico_PAPERLESS(_tipo_doc, _num_doc, ref _error,ref return_numdoc);
+                    string ruc_empresa = Ent_Global._ws_ruc; string ws_login = Ent_Global._ws_login; string ws_pass = Ent_Global._ws_password; Int32 tipofoliacion = 1;
+                    Int32 id_tipo_doc = 0;
+                    switch (_tipo_doc)
+                    {
+                        case "B":
+                        case "F":
+                            id_tipo_doc = (Basico.Left(_num_doc, 1) == "B" ? 3 : 1);
+                            break;
+                        case "N":
+                            id_tipo_doc = 7;
+                            break;
+                    }
                     ///*0 = ID asignado
                     //1 = URL del XML
                     //2 = URL del PDF
@@ -100,7 +113,7 @@ namespace Integrado.Bll
                             cod_hash = item.Mensaje;
 
                             /*SI LA GENERACION ES EXITOSA ENTONCES EXTRAEMOS EL PDF URL*/
-                            consulta = gen_fe.OnlineGeneration(ruc_empresa, ws_login, ws_pass, _formato_doc, tipofoliacion, 2);
+                            consulta = gen_fe.OnlineRecovery(ruc_empresa, ws_login, ws_pass, id_tipo_doc, return_numdoc, 2);
                             consulta = consulta.Replace("&", "amp;");
                             var docpdf = XDocument.Parse(consulta);
                             var resultpdf = from factura in docpdf.Descendants("Respuesta")
@@ -135,8 +148,8 @@ namespace Integrado.Bll
 
             try
             {
-
-                _formato_doc = Dat_Venta._leer_formato_electronico_PAPERLESS(_tipo_doc, _num_doc, ref _error);
+                string return_numdoc = "";
+                _formato_doc = Dat_Venta._leer_formato_electronico_PAPERLESS(_tipo_doc, _num_doc, ref _error,ref return_numdoc);
                 string ruc_empresa =Ent_Global._ws_ruc ; string ws_login = Ent_Global._ws_login; string ws_pass =Ent_Global._ws_password; Int32 tipofoliacion = 1;
 
                 ///*0 = ID asignado

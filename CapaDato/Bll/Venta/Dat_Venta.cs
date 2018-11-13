@@ -477,7 +477,7 @@ namespace CapaDato.Bll.Venta
             return _formato_doc;
         }
         #endregion
-        public static string _leer_formato_electronico_PAPERLESS(string _tipo_doc, string _num_doc, ref string _error)
+        public static string _leer_formato_electronico_PAPERLESS(string _tipo_doc, string _num_doc, ref string _error,ref string return_numdoc)
         {
             string _formato_doc = "";
             string sqlquery = "[USP_Leer_Formato_Electronico_Paperless]";
@@ -494,8 +494,14 @@ namespace CapaDato.Bll.Venta
                 cmd.Parameters.AddWithValue("@doc_id", _num_doc);
                 cmd.Parameters.Add("@formato_txt", SqlDbType.NVarChar, -1);
                 cmd.Parameters["@formato_txt"].Direction = ParameterDirection.Output;
+
+                cmd.Parameters.Add("@num_doc_return", SqlDbType.VarChar, 15);
+                cmd.Parameters["@num_doc_return"].Direction = ParameterDirection.Output;
+
+
                 cmd.ExecuteNonQuery();
                 _formato_doc = cmd.Parameters["@formato_txt"].Value.ToString();
+                return_numdoc= cmd.Parameters["@num_doc_return"].Value.ToString();
             }
             catch (Exception exc)
             {
