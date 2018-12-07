@@ -147,7 +147,7 @@ namespace Integrado.Design.WPF_Master
                 foreach(var fila in listarFE)
                 {
                     string cod_hash = "";string _error = "";String _url_pdf = "";
-                    Facturacion_Electronica.ejecutar_factura_electronica(fila.tipo, fila.numero,ref cod_hash,ref _error,ref _url_pdf);
+                    Facturacion_Electronica.ejecutar_factura_electronica(fila.tipo,(fila.tipo=="N")? fila.not_id: fila.numero,ref cod_hash,ref _error,ref _url_pdf);
 
                     if (_error.Length==0)
                     {
