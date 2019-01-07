@@ -260,10 +260,12 @@
                             </td>
                              <td class="auto-style5">
                                  <asp:Button ID="refresh" runat="server" onclick="refresh_Click" Text="Button" style="display:none" />
-                            </td>                            
+                            </td>   
                              <td >
-                                   <asp:Button ID="btgecor" runat="server" 
-                                     onclick="btgecor_Click" Text="(G)enerar Correlativos" style="display:none;"/>                                                               
+                                   <asp:Button ID="btgecor" runat="server"   onclick="btgecor_Click" Text="(G)enerar Correlativos" style="display:none;"/>                                                               
+                                 </td>                         
+                             <td >
+                                   <asp:Button ID="btgecorrMan" runat="server" onclick="autogenerar_correlativo_manual" Text="(G)enerar Correlativos Manual" />                                                               
                                  </td>
                         </tr>
                         </table>

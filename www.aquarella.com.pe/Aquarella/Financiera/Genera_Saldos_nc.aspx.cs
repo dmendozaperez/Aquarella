@@ -310,6 +310,8 @@ namespace www.aquarella.com.pe.Aquarella.Financiera
 
         }
 
+
+
         private void autogenerar_correlativo()
         {
             try
@@ -688,8 +690,59 @@ namespace www.aquarella.com.pe.Aquarella.Financiera
            return _error;
         }
 
-        
+        protected void autogenerar_correlativo_manual(object sender, EventArgs e)
+        {
+            if (!(Session[_nameSessionData] == null))
+            {
+                string serieFact = "";
+                string serieNota = "";
+                Int32 nroFact = 0;
+                Int32 nroNota = 0;
 
-     
+                try { 
+
+                DataTable dt = (DataTable)(Session[_nameSessionData]);
+                if (dt.Rows.Count > 0)
+                {
+                    for (Int32 i = 0; i < dt.Rows.Count; ++i)
+                    {
+
+                        TextBox vtxtseriefac = (TextBox)gvReturns.Rows[i].FindControl("txtseriefac");
+                        TextBox vtxtnumerofac = (TextBox)gvReturns.Rows[i].FindControl("txtnumerofac");
+
+                        TextBox vtxtserienc = (TextBox)gvReturns.Rows[i].FindControl("txtserienc");
+                        TextBox vtxtnumeronc = (TextBox)gvReturns.Rows[i].FindControl("txtnumeronc");
+
+                        if (i == 0)
+                        {
+                            serieFact = vtxtseriefac.Text;
+                            nroFact = Convert.ToInt32(vtxtnumerofac.Text);
+
+                            serieNota = vtxtserienc.Text;
+                            nroNota = Convert.ToInt32(vtxtnumeronc.Text);
+
+                            vtxtnumerofac.Text = nroFact.ToString().PadLeft(8, '0').ToString();
+                            vtxtnumeronc.Text = nroNota.ToString().PadLeft(8, '0').ToString();
+
+                        }
+                        else
+                        {
+                            vtxtseriefac.Text = serieFact;
+                            nroFact += 1;
+                            vtxtnumerofac.Text = nroFact.ToString().PadLeft(8, '0').ToString();
+
+                            vtxtserienc.Text = serieNota;
+                            nroNota += 1;
+                            vtxtnumeronc.Text = nroNota.ToString().PadLeft(8, '0').ToString();
+                        }
+
+                    }
+                }
+                }
+                catch (Exception ex)
+                {
+                }
+            }
+        }
     }
 }
