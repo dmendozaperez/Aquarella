@@ -267,6 +267,28 @@
                              <td >
                                    <asp:Button ID="btgecorrMan" runat="server" onclick="autogenerar_correlativo_manual" Text="(G)enerar Correlativos Manual" />                                                               
                                  </td>
+                            
+                            <td >
+                                   Fec.Nota Credito
+                                 </td>
+                              <td>
+                                 <%--<asp:TextBox ID="txtDateStart" runat="server" ></asp:TextBox>--%>
+                                   <asp:UpdatePanel ID="upStartDate2" runat="server">
+                                    <ContentTemplate>
+                                        <asp:TextBox ID="txtDateStart" runat="server"  AccessKey="f"></asp:TextBox>
+                                        <ajaxToolkit:CalendarExtender ID="calendar2" runat="server" Animated="true" 
+                                            FirstDayOfWeek="Monday" Format="dd/MM/yyyy" PopupButtonID="imgCalendarIni" 
+                                            TargetControlID="txtDateStart" />
+                                    </ContentTemplate>
+                                </asp:UpdatePanel>
+                                 
+                              </td>
+                            <td>
+                                                    <asp:Image ID="imgCalendarIni" runat="server" ImageUrl="~/Design/images/Botones/b_calendar_ico.gif"
+                                                        onmouseover="this.style.background='red';" onmouseout="this.style.background=''"
+                                                        Style="cursor: pointer;" />
+                                                </td>
+                           
                         </tr>
                         </table>
                 </td>

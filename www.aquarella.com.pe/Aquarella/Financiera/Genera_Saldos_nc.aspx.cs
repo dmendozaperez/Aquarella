@@ -696,12 +696,18 @@ namespace www.aquarella.com.pe.Aquarella.Financiera
             {
                 string serieFact = "";
                 string serieNota = "";
+
+                string fechaNota = "";
+                string fechaFact = "";
                 Int32 nroFact = 0;
                 Int32 nroNota = 0;
 
-                try { 
+                try {
 
-                DataTable dt = (DataTable)(Session[_nameSessionData]);
+                    
+                    string str = txtDateStart.Text;
+
+                    DataTable dt = (DataTable)(Session[_nameSessionData]);
                 if (dt.Rows.Count > 0)
                 {
                     for (Int32 i = 0; i < dt.Rows.Count; ++i)
@@ -713,30 +719,41 @@ namespace www.aquarella.com.pe.Aquarella.Financiera
                         TextBox vtxtserienc = (TextBox)gvReturns.Rows[i].FindControl("txtserienc");
                         TextBox vtxtnumeronc = (TextBox)gvReturns.Rows[i].FindControl("txtnumeronc");
 
-                        if (i == 0)
-                        {
-                            serieFact = vtxtseriefac.Text;
-                            nroFact = Convert.ToInt32(vtxtnumerofac.Text);
+                            TextBox vtxt_fecFac = (TextBox)gvReturns.Rows[i].FindControl("txtfecfac");
+                            TextBox vtxt_fecnc = (TextBox)gvReturns.Rows[i].FindControl("txtfecnc");
 
-                            serieNota = vtxtserienc.Text;
-                            nroNota = Convert.ToInt32(vtxtnumeronc.Text);
+                            if (i == 0)
+                            {
+                                serieFact = vtxtseriefac.Text;
+                                nroFact = Convert.ToInt32(vtxtnumerofac.Text);
 
-                            vtxtnumerofac.Text = nroFact.ToString().PadLeft(8, '0').ToString();
-                            vtxtnumeronc.Text = nroNota.ToString().PadLeft(8, '0').ToString();
+                                serieNota = vtxtserienc.Text;
+                                nroNota = Convert.ToInt32(vtxtnumeronc.Text);
+
+                                fechaFact = vtxt_fecFac.Text;
+                                fechaNota = vtxt_fecnc.Text;
+
+                                vtxtnumerofac.Text = nroFact.ToString().PadLeft(8, '0').ToString();
+                                vtxtnumeronc.Text = nroNota.ToString().PadLeft(8, '0').ToString();
+
+                            }
+                            else
+                            {
+                                vtxtseriefac.Text = serieFact;
+                                nroFact += 1;
+                                vtxtnumerofac.Text = nroFact.ToString().PadLeft(8, '0').ToString();
+
+                                vtxtserienc.Text = serieNota;
+                                nroNota += 1;
+                                vtxtnumeronc.Text = nroNota.ToString().PadLeft(8, '0').ToString();
+
+                               
+                                    vtxt_fecnc.Text = str;
+                            }
+
+                            vtxt_fecFac.Text = fechaFact;
 
                         }
-                        else
-                        {
-                            vtxtseriefac.Text = serieFact;
-                            nroFact += 1;
-                            vtxtnumerofac.Text = nroFact.ToString().PadLeft(8, '0').ToString();
-
-                            vtxtserienc.Text = serieNota;
-                            nroNota += 1;
-                            vtxtnumeronc.Text = nroNota.ToString().PadLeft(8, '0').ToString();
-                        }
-
-                    }
                 }
                 }
                 catch (Exception ex)

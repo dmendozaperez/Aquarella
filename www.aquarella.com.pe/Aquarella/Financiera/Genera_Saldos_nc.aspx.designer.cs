@@ -94,6 +94,42 @@ namespace www.aquarella.com.pe.Aquarella.Financiera {
         protected global::System.Web.UI.WebControls.Button btgecorrMan;
         
         /// <summary>
+        /// Control upStartDate2.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel upStartDate2;
+        
+        /// <summary>
+        /// Control txtDateStart.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtDateStart;
+        
+        /// <summary>
+        /// Control calendar2.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::AjaxControlToolkit.CalendarExtender calendar2;
+        
+        /// <summary>
+        /// Control imgCalendarIni.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Image imgCalendarIni;
+        
+        /// <summary>
         /// Control upGrid.
         /// </summary>
         /// <remarks>
