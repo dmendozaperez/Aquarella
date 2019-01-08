@@ -748,10 +748,10 @@ namespace www.aquarella.com.pe.Aquarella.Financiera
                                 vtxtnumeronc.Text = nroNota.ToString().PadLeft(8, '0').ToString();
 
                                
-                                    vtxt_fecnc.Text = str;
+                                 
                             }
+                            vtxt_fecnc.Text = str;
 
-                            vtxt_fecFac.Text = fechaFact;
 
                         }
                 }
