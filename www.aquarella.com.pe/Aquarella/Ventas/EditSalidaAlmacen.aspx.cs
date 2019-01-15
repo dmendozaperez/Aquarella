@@ -204,7 +204,8 @@ namespace www.aquarella.com.pe.Aquarella.Ventas
         {
             DataTable dt = (DataTable)Session[_nameSessionData];
 
-            ExportarExcel(dt, "0,1,2,3,19,20,21,22,23,24,25,26,27,28,29", "2", "Orden_Despacho");
+            //ExportarExcel(dt, "0,1,2,3,19,20,21,22,23,24,25,26,27,28,29", "2", "Orden_Despacho");
+            ExportarExcel(dt, "0,1,2,3,21,22,23,24,25,26,27,28,29,30,31", "2", "Orden_Despacho");
 
         }
 
@@ -356,11 +357,13 @@ namespace www.aquarella.com.pe.Aquarella.Ventas
                 string strIdDetalle = ((HiddenField)(gvReturns.Rows[i].FindControl("hf_IdDetalle"))).Value;
                 string strParesSalida = ((TextBox)(gvReturns.Rows[i].FindControl("txtPares"))).Text;
                 string strCatalogoSalida = ((TextBox)(gvReturns.Rows[i].FindControl("txtCatalog"))).Text;
+                string strPremioSalida = ((TextBox)(gvReturns.Rows[i].FindControl("txtPremio"))).Text;
 
                 strDataDetalle += "<row  ";
                 strDataDetalle += " IdDetalle=¿" + strIdDetalle + "¿ ";
                 strDataDetalle += " ParesSalida=¿" + strParesSalida + "¿ ";
                 strDataDetalle += " CatalogSalida=¿" + strCatalogoSalida + "¿ ";
+                strDataDetalle += " PremioSalida=¿" + strPremioSalida + "¿ ";
                 strDataDetalle += "/>";
 
             }

@@ -287,10 +287,35 @@
                         <HeaderStyle HorizontalAlign="Left" />
                         <ItemStyle HorizontalAlign="Left" />
                         </asp:BoundField>
+                        <asp:BoundField DataField="TotalCatalogo" HeaderText="Catalogos Faturados" ItemStyle-Width="50px">
+                        <HeaderStyle HorizontalAlign="Center" />
+                        <ItemStyle HorizontalAlign="Center" />
+                        </asp:BoundField>                         
+                        
+
+                         <asp:TemplateField HeaderText="Catalog. Enviados" SortExpression="pin_employee" ItemStyle-HorizontalAlign="Center" ItemStyle-Width="50px">
+                            <ItemTemplate>                                
+                                <asp:TextBox id="txtCatalog"  Style="width:50px;font-size:12px" Columns="2" type="number" MaxLength="3"  Text='<%# Eval("TotalCatalogEnviadoEdit")%>'  runat="server" />
+                            </ItemTemplate>
+                        </asp:TemplateField>
+
+                         <asp:BoundField DataField="TotalPremio" HeaderText="Premios" ItemStyle-Width="50px">
+                        <HeaderStyle HorizontalAlign="Center" />
+                        <ItemStyle HorizontalAlign="Center" />
+                        </asp:BoundField>                         
+                        
+
+                         <asp:TemplateField HeaderText="Premios Enviados" SortExpression="pin_employee" ItemStyle-HorizontalAlign="Center" ItemStyle-Width="50px">
+                            <ItemTemplate>                                
+                                <asp:TextBox id="txtPremio"  Style="width:50px;font-size:12px" Columns="2" type="number" MaxLength="3"  Text='<%# Eval("TotalPremioEnviadoEdit")%>'  runat="server" />
+                            </ItemTemplate>
+                        </asp:TemplateField>
+
                          <asp:BoundField DataField="TotalPares" HeaderText="Pares" ItemStyle-Width="50px">
                         <HeaderStyle HorizontalAlign="Center" />
                         <ItemStyle HorizontalAlign="Center" />
                         </asp:BoundField>
+
                           <asp:TemplateField HeaderText="Pares Enviados" SortExpression="pin_employee" ItemStyle-HorizontalAlign="Center" ItemStyle-Width="50px">
                             <ItemTemplate>
                                 <asp:HiddenField ID="hf_Descripcion" runat="server" Value='<%# Eval("Desp_Descripcion")%>' />
@@ -303,18 +328,7 @@
                                 <asp:TextBox id="txtPares"  Style="width:50px;font-size:12px" Columns="2" type="number" MaxLength="3"  Text='<%# Eval("TotalParesEnviadoEdit")%>'  runat="server" />
                             </ItemTemplate>
                         </asp:TemplateField>
-                           <asp:BoundField DataField="TotalCatalogo" HeaderText="Catalogos Faturados" ItemStyle-Width="50px">
-                        <HeaderStyle HorizontalAlign="Center" />
-                        <ItemStyle HorizontalAlign="Center" />
-                        </asp:BoundField>
-                         
-                        
-
-                         <asp:TemplateField HeaderText="Catalog. Enviados" SortExpression="pin_employee" ItemStyle-HorizontalAlign="Center" ItemStyle-Width="50px">
-                            <ItemTemplate>                                
-                                <asp:TextBox id="txtCatalog"  Style="width:50px;font-size:12px" Columns="2" type="number" MaxLength="3"  Text='<%# Eval("TotalCatalogEnviadoEdit")%>'  runat="server" />
-                            </ItemTemplate>
-                        </asp:TemplateField>
+                       
 
 
                           <asp:BoundField DataField="Agencia" HeaderText="Agencia" ItemStyle-Width="100px">

@@ -233,7 +233,7 @@
         <br />
         <asp:UpdatePanel ID="upGrid" runat="server" UpdateMode="Conditional">
             <ContentTemplate>
-                <div style="overflow-x: hidden; overflow-y:auto; height: 378px;">
+                <div style="overflow-x: auto; overflow-y:auto; height: 378px;">
                   <asp:GridView ID="gvReturns" runat="server" AllowSorting="True" 
                     ShowFooter="True" AllowPaging="false" PageSize="12"
                  SkinID="gridviewSkin" PagerStyle-HorizontalAlign="Left" Font-Size="Small" 
@@ -262,6 +262,7 @@
                                      <asp:HiddenField ID="hf_Lider" runat="server" Value='<%# Eval("NombreLider")%>' />
                                      <asp:HiddenField ID="hf_Pares" runat="server" Value='<%# Eval("TotalPares")%>' />
                                        <asp:HiddenField ID="hf_Catal" runat="server" Value='<%# Eval("TotalCatalogo")%>' />
+                                       <asp:HiddenField ID="hf_Premio" runat="server" Value='<%# Eval("TotalPremio")%>' />
                                      <asp:HiddenField ID="hf_Monto" runat="server" Value='<%# Eval("TotalVenta")%>' />
                                      <asp:HiddenField ID="hf_flete" runat="server" Value='<%# Eval("McaFlete")%>' />
                                 <textarea cols="10" rows="5" disabled  id='Rotulo_<%# Eval("Area_Id")%>' name='Rotulo_<%# Eval("Area_Id")%>'> <%# Eval("Rotulo")%></textarea>
@@ -291,15 +292,7 @@
                                <asp:CheckBox id="chkCourier" runat="server"  AutoPostBack="false"/>
                             </ItemTemplate>
                        </asp:TemplateField>
-                          <asp:BoundField DataField="TotalPares" HeaderText="Pares" ItemStyle-Width="50px">
-                        <HeaderStyle HorizontalAlign="Center" />
-                        <ItemStyle HorizontalAlign="Center" />
-                        </asp:BoundField>
-                          <asp:BoundField DataField="TotalCatalogo" HeaderText="Catalogos" ItemStyle-Width="50px">
-                        <HeaderStyle HorizontalAlign="Center" />
-                        <ItemStyle HorizontalAlign="Center" />
-                        </asp:BoundField>
-                        <asp:TemplateField HeaderText="Agencia" SortExpression="pin_employee" ItemStyle-HorizontalAlign="Center"  ItemStyle-Width="110px">
+                         <asp:TemplateField HeaderText="Agencia" SortExpression="pin_employee" ItemStyle-HorizontalAlign="Center"  ItemStyle-Width="110px">
                             <ItemTemplate>
                                 <asp:TextBox id="txtAgencia" Text='<%# Eval("Agencia")%>' TextMode="multiline" MaxLength="500"  Columns="10" Rows="5" runat="server" />
                             </ItemTemplate>
@@ -309,6 +302,18 @@
                                 <asp:TextBox id="TxtDestino" Text='<%# Eval("Destino")%>' TextMode="multiline" MaxLength="500"  Columns="10" Rows="5" runat="server" />
                             </ItemTemplate>
                        </asp:TemplateField>
+                          <asp:BoundField DataField="TotalPares" HeaderText="Pares" ItemStyle-Width="50px">
+                        <HeaderStyle HorizontalAlign="Center" />
+                        <ItemStyle HorizontalAlign="Center" />
+                        </asp:BoundField>
+                          <asp:BoundField DataField="TotalCatalogo" HeaderText="Catalogos" ItemStyle-Width="50px">
+                        <HeaderStyle HorizontalAlign="Center" />
+                        <ItemStyle HorizontalAlign="Center" />
+                        </asp:BoundField>
+                         <asp:BoundField DataField="TotalPremio" HeaderText="Premios" ItemStyle-Width="50px">
+                        <HeaderStyle HorizontalAlign="Center" />
+                        <ItemStyle HorizontalAlign="Center" />
+                        </asp:BoundField>                        
                           
                        <asp:BoundField DataField="TotalVenta" DataFormatString="{0:C}"  ItemStyle-Width="50px"
                             HeaderText="Monto">
