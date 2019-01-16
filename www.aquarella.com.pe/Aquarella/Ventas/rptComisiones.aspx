@@ -176,6 +176,10 @@ CodeBehind="rptComisiones.aspx.cs" Inherits="www.aquarella.com.pe.Aquarella.Vent
                         HorizontalAlign="Center" />
                     <AlternatingRowStyle BackColor="White" />
                      <Columns>
+                          <asp:BoundField DataField="Asesor" HeaderText="Asesor">
+                        <HeaderStyle HorizontalAlign="Left" />
+                        <ItemStyle HorizontalAlign="Left" />
+                        </asp:BoundField>
                         <asp:BoundField DataField="Lider" HeaderText="Lider">
                         <HeaderStyle HorizontalAlign="Left" />
                         <ItemStyle HorizontalAlign="Left" />
