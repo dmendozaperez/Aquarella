@@ -877,14 +877,16 @@ namespace www.aquarella.com.pe.Aquarella.Logistica
                     }
                     /********************/
 
-                    /*si es que tiee oferta entonces vamos a filtrar*/
-                    List<Order_Dtl> orderLinesOferta_filter = orderLines.Where(c => c._ofe_id != 0).ToList();
+                    /*si es que tiee oferta POR PORCENTAJE entonces vamos a filtrar*/
+                    List<Order_Dtl> orderLinesOferta_filter = orderLines.Where(c => c._ofe_id != 0 && c._ofe_Tipo=="N").ToList();
 
+                    List<Order_Dtl> orderLinesOferta_filterPack = orderLines.Where(c => c._ofe_id != 0 && c._ofe_Tipo == "P").ToList();
+                    /*si es que tiee oferta POR PORCENTAJE entonces vamos a filtrar*/
 
+                    /*INICIO DE LAS OFERTAS DESCUENTO POR PORCENTAJE*/
 
                     if (orderLinesOferta_filter.Count>0)
                     {
-
                         //var grupo_oferta = orderLines.GroupBy(c => c._ofe_id != 0).ToList();
                         var lista_gr = from item in orderLines where item._ofe_id!=0
                                      group item by 
@@ -1000,8 +1002,182 @@ namespace www.aquarella.com.pe.Aquarella.Logistica
                     }
 
                 }
-                   
-                    
+
+                    /*FIN DE LAS OFERTAS DESCUENTO POR PORCENTAJE*/
+
+                    /*INICIO DE LAS OFERTAS PRECIO POR PACK*/
+
+                    if (orderLinesOferta_filterPack.Count > 0)
+                    {
+
+                        //var grupo_oferta = orderLines.GroupBy(c => c._ofe_id != 0).ToList();
+                        var lista_gr = from item in orderLines
+                                       where item._ofe_id != 0
+                                       group item by
+                                       new
+                                       {
+                                           ofertaid = item._ofe_id,
+                                           ofemaxpar = item._ofe_maxpares,
+                                           _ofe_PrecioPack = item._ofe_PrecioPack,
+                                       } into g
+                                       select new
+                                       {
+                                           ofertaid = g.Key.ofertaid,
+                                           ofemaxpar = g.Key.ofemaxpar,
+                                           _ofe_PrecioPack = g.Key._ofe_PrecioPack,
+
+                                       };
+                        foreach (var it in lista_gr)
+                        {
+
+
+
+                            /*capturamos el maximo de pares y por descuento*/
+                            Decimal _max_pares = it.ofemaxpar;//  orderLinesOferta_filter[0]._ofe_maxpares;
+                            Decimal _por_desc = it._ofe_PrecioPack /* orderLinesOferta_filter[0]._ofe_porc/100*/;
+
+                            Decimal _ofe_PrecioPack = it._ofe_PrecioPack;
+
+
+                            Decimal _total = orderLinesOferta_filterPack.Where(r => r._ofe_id == it.ofertaid).Sum(x => x._qty);
+
+                            /*ahora capturado el total de pares le hacemos un for para */
+
+                            decimal _res = _total / _max_pares;
+                            /*para saber si es un entero es true si no es false decimal*/
+                            bool isInt = (int)_res == _res;
+
+                            DataTable dt = new DataTable();
+                            dt.Columns.Add("articulo", typeof(string));
+                            dt.Columns.Add("talla", typeof(string));
+                            dt.Columns.Add("precio", typeof(Decimal));
+                            dt.Columns.Add("cantidad", typeof(Decimal));
+                            dt.Columns.Add("porc_comision", typeof(Decimal));
+                            dt.Columns.Add("descuento", typeof(Decimal));
+                            dt.Columns.Add("oferta", typeof(string));
+
+
+                            foreach (var filas in orderLinesOferta_filterPack.Where(r => r._ofe_id == it.ofertaid).ToList())
+                            {
+                                for (Int32 c = 0; c < filas._qty; ++c)
+                                {
+                                    dt.Rows.Add(filas._code.ToString(),
+                                         filas._size.ToString(),
+                                         filas._price,
+                                         1,
+                                         filas._commissionPctg,
+                                         0, filas._ofe_id.ToString());
+
+
+                                }
+                            }
+
+                            if (!isInt)
+                                _res = Convert.ToInt32((_res) - Convert.ToDecimal(0.1));
+
+
+                            if (_res != 0)
+                            {
+                                DataRow[] _filas = dt.Select("len(articulo)>0 and oferta='" + it.ofertaid.ToString() + "'", "precio asc");
+                                if (_filas.Length > 0)
+                                {
+                                    if (_por_desc == 1)
+                                    {
+                                        _por_desc = 0.5M;
+                                        _res = 2;
+                                    }
+
+                                    Decimal _des_oferta = 0;
+                                    Decimal cantColec = 0;
+                                    Decimal montoColec = 0;
+                                    Decimal residuoCant = 0;
+                                    Decimal montoColecResiduo = 0;
+
+                                    int Colect = 0;
+                                    for (Int32 i = 0; i < _filas.Length; ++i)
+                                    {
+                                        Colect++;
+
+                                        string _articulo = _filas[i]["articulo"].ToString();
+                                        string _talla = _filas[i]["talla"].ToString();
+                                        Decimal _precio = Convert.ToDecimal(_filas[i]["precio"]);
+                                        Decimal _com_porc = Convert.ToDecimal(_filas[i]["porc_comision"]);
+                                        Decimal _cant = Convert.ToDecimal(_filas[i]["cantidad"]);
+                                        cantColec += _cant;
+
+                                        if (cantColec > _max_pares) {
+
+                                            decimal _tPremios = cantColec / _max_pares;
+                                            residuoCant = cantColec - (_max_pares * _tPremios);
+                                            _cant = _max_pares * _tPremios;
+                                            decimal _com_mon_res = Math.Round((_precio * residuoCant) * _com_porc, 2, MidpointRounding.AwayFromZero);
+                                            montoColecResiduo = (_precio * residuoCant) - _com_mon_res;
+                                        }                                      
+
+                                        decimal _com_mon = Math.Round((_precio * _cant) * _com_porc, 2, MidpointRounding.AwayFromZero);
+
+                                      
+                                        montoColec += (_precio* _cant) - _com_mon;
+
+                                        if (cantColec >= _max_pares) {
+
+                                            Decimal TotalDesc = montoColec - _ofe_PrecioPack;
+
+                                            for (Int32 j = 0; j < Colect; ++j)
+                                            {
+
+                                                Decimal _preciopk = Convert.ToDecimal(_filas[i - j]["precio"]);
+                                                Decimal _cantpk = Convert.ToDecimal(_filas[i - j]["cantidad"]);
+
+                                                if (_cantpk > _max_pares)
+                                                    _cantpk = _cant;
+
+                                                Decimal _com_porcpk = Convert.ToDecimal(_filas[i - j]["porc_comision"]);
+                                                decimal _com_monpk = Math.Round((_preciopk * _cantpk) * _com_porcpk, 2, MidpointRounding.AwayFromZero);
+                                                Decimal totallineapk = _preciopk - _com_monpk;
+                                                _des_oferta = Math.Round((totallineapk / montoColec) * TotalDesc, 2, MidpointRounding.AwayFromZero);
+
+                                                //Decimal descuento = Convert.ToDecimal(_filas[i - j]["descuento"]);
+                                                _filas[i-j]["descuento"] =  _des_oferta;
+                                            }
+
+                                            cantColec = 0;
+                                            montoColec = 0;
+                                            Colect = 0;
+
+                                        }
+                                       
+                                        
+                                    }
+
+                                    for (Int32 i = 0; i < orderLines.Count; ++i)
+                                    {
+                                        string _articulo = orderLines[i]._code.ToString();
+                                        string _talla = orderLines[i]._size.ToString();
+                                        string _oferta_id = orderLines[i]._ofe_id.ToString();
+                                        foreach (DataRow vfila in _filas)
+                                        {
+                                            if (_articulo == vfila["articulo"].ToString() && _talla == vfila["talla"].ToString() && _oferta_id == vfila["oferta"].ToString())
+                                            {
+                                                orderLines[i]._dscto += Convert.ToDecimal(vfila["descuento"]);
+                                                orderLines[i]._dsctoDesc = orderLines[i]._dscto.ToString(_currency);
+
+                                                orderLines[i]._lineTotal = Math.Round((orderLines[i]._qty * orderLines[i]._price) - (orderLines[i]._commission) - (orderLines[i]._dscto), 2, MidpointRounding.AwayFromZero);
+                                                orderLines[i]._lineTotDesc = orderLines[i]._lineTotal.ToString(_currency);
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+
+                    }
+
+
+                    /*FIN DE LAS OFERTAS PRECIO POR PACK*/
+
+
+
 
 
 
@@ -1013,7 +1189,7 @@ namespace www.aquarella.com.pe.Aquarella.Logistica
                     //{
 
                     //}
-                }   
+                }
 
             }
             catch { }

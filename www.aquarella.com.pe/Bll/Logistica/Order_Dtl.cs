@@ -137,6 +137,9 @@ namespace www.aquarella.com.pe.bll
 
         public string _ap_percepcion { get; set; }
 
+        public string _ofe_Tipo { get; set; }
+        public Decimal _ofe_PrecioPack { get; set; }
+
         public decimal _ofe_id { get; set; }
         public Decimal _ofe_maxpares { get; set; }
         public Decimal _ofe_porc { get; set; }
@@ -197,7 +200,9 @@ namespace www.aquarella.com.pe.bll
                 _priceigv = Convert.ToDecimal(dr["Art_Pre_Con_Igv"]),
                 _priceigvDesc = Convert.ToDecimal(dr["Art_Pre_Con_Igv"]).ToString(currency),
                 _ap_percepcion = dr["Afec_Percepcion"].ToString(),
-                _ofe_id=Convert.ToDecimal(dr["Ofe_Id"]),
+                _ofe_Tipo = dr["Ofe_tipo"].ToString(),
+                _ofe_PrecioPack = Convert.ToDecimal(dr["Ofe_ArtVenta"]),
+                _ofe_id =Convert.ToDecimal(dr["Ofe_Id"]),
                 _ofe_maxpares=Convert.ToDecimal(dr["Ofe_MaxPares"]),
                 _ofe_porc=Convert.ToDecimal(dr["Ofe_Porc"])
             };
