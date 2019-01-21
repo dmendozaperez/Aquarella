@@ -715,7 +715,9 @@ namespace www.aquarella.com.pe.bll
         public static string[] Gua_Mod_Liquidacion(decimal _usu, decimal _idCust, string _reference, decimal _discCommPctg,
                                                decimal _discCommValue, string _shipTo, string _specialInstr, List<Order_Dtl> _itemsDetail,
                                                decimal _varpercepcion, Int32 _estado, string _ped_id = "",string _liq="",Int32 _liq_dir=0,
-                                               Int32 _PagPos=0,string _PagoPostarjeta="",string _PagoNumConsignacion="",decimal _PagoTotal=0,DataTable dtpago=null,Boolean _pago_credito=false,Decimal _porc_percepcion=0,List<Order_Dtl_Temp> order_dtl_temp=null, string strTipoPago = "N")
+                                               Int32 _PagPos=0,string _PagoPostarjeta="",string _PagoNumConsignacion="",decimal _PagoTotal=0,
+                                               DataTable dtpago=null,Boolean _pago_credito=false,Decimal _porc_percepcion=0,List<Order_Dtl_Temp> 
+                                                order_dtl_temp=null, string strTipoPago = "N")
         {
             string[] resultDoc = new string[2];
             string sqlquery = "USP_Insertar_Modifica_Liquidacion";

@@ -297,7 +297,9 @@ namespace www.aquarella.com.pe.Aquarella.Logistica
                     _color = dr["Col_Descripcion"].ToString(),
                     _qty = Convert.ToInt16(dr["Ped_Det_Cantidad"]),
                     _price = Convert.ToDecimal(dr["Ped_Det_Precio"]),
-                    _priceDesc = Convert.ToDecimal(dr["Ped_Det_Precio"]).ToString(_currency),                    
+                    _priceDesc = Convert.ToDecimal(dr["Ped_Det_Precio"]).ToString(_currency),
+                    _ofe_Tipo = dr["Ofe_tipo"].ToString(),
+                    _ofe_PrecioPack = Convert.ToDecimal(dr["Ofe_ArtVenta"]),
                     _ofe_id =Convert.ToDecimal(dr["Ped_Det_OfeID"]),
                     _ofe_porc= Convert.ToDecimal(dr["Ped_Det_OfertaP"]),
                     _ofe_maxpares= Convert.ToDecimal(dr["Ofe_MaxPares"]),
@@ -329,6 +331,8 @@ namespace www.aquarella.com.pe.Aquarella.Logistica
             string script = string.Empty;
             /*script += "getOrderDtl()";
             System.Web.UI.ScriptManager.RegisterStartupScript(ScriptManager1, Page.GetType(), "click", script, true); */
+
+            fupdateitemoferta();
         }
 
         /// <summary>
@@ -1294,6 +1298,7 @@ namespace www.aquarella.com.pe.Aquarella.Logistica
                         HttpContext.Current.Session[_nSOrder] = orderLines;
                     
                 }
+
             }
             catch { }
 
