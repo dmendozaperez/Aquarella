@@ -140,6 +140,21 @@
             
         </tr>
             <tr>
+            <td class="f12">
+                Premio Pedido:
+            </td>
+            <td>
+                 <asp:TextBox id="txtPedidoP"  Enabled="false"  text="casa"  runat="server" />
+            </td>
+            <td class="f12">
+               Premio Enviado:
+            </td>
+            <td>
+                    <asp:TextBox id="txtEnviadoP"  value="casa"  Enabled="false"  runat="server" />
+            </td>
+            
+        </tr>
+            <tr>
              <td class="f12">
                Total Monto:
             </td>

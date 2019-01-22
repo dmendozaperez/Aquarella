@@ -110,11 +110,18 @@ namespace www.aquarella.com.pe.Aquarella.Ventas
                     string _TotalCatalogPedido = row["CatalogPedidos"].ToString();
                     string _TotalCatalogEnviado = row["CatalogEnviados"].ToString();
 
+                    string _TotalPremioPedido = row["NroPremio"].ToString();
+                    string _TotalPremioEnviado = row["PremioEnviados"].ToString();
+
 
                     txtPedido.Text = _TotalPedido;
                     txtEnviado.Text = _TotalEnviado;
                     txtPedidoC.Text = _TotalCatalogPedido;
                     txtEnviadoC.Text = _TotalCatalogEnviado;
+
+                    txtPedidoP.Text = _TotalPremioPedido;
+                    txtEnviadoP.Text = _TotalPremioEnviado;
+
                     txtMonto.Text = _TotalMonto;
                 }
 
@@ -158,7 +165,13 @@ namespace www.aquarella.com.pe.Aquarella.Ventas
             {
                 TextBox txtPares = (TextBox)(gvReturns.Rows[i].FindControl("txtPares"));
                 txtPares.Enabled = false;
-               
+
+                TextBox txtParesPremios = (TextBox)(gvReturns.Rows[i].FindControl("txtPremio"));
+                txtParesPremios.Enabled = false;
+
+                TextBox txtParesCatalogos = (TextBox)(gvReturns.Rows[i].FindControl("txtCatalog"));
+                txtParesCatalogos.Enabled = false;
+
             }       
 
         }
@@ -297,6 +310,8 @@ namespace www.aquarella.com.pe.Aquarella.Ventas
             string strTotalEnviado = txtEnviado.Text;
             string strTotalCataPedido = txtPedidoC.Text;
             string strTotalCataEnviado = txtEnviadoC.Text;
+            string strTotalPremioPedido = txtPedidoP.Text;
+            string strTotalPremioEnviado = txtEnviadoP.Text;
             string strTotalMonto = txtMonto.Text;
 
             string strTable = "<table <Table border='1' bgColor='#ffffff' " +
@@ -310,6 +325,10 @@ namespace www.aquarella.com.pe.Aquarella.Ventas
             strTable += "<td height=38  bgcolor='#969696' width='38'>Pares Enviado </ td ><td width='400' align='left' colspan='2' >" + strTotalEnviado + "</ td ></tr>";
             strTable += "<tr height=38 ><td height=38  bgcolor='#969696' width='38'>Catalogo Facturado </ td ><td width='400' align='left' >" + strTotalCataPedido + "</ td > ";
             strTable += "<td height=38  bgcolor='#969696' width='38'>Catalogo Enviado </ td ><td width='400' align='left' colspan='2' >" + strTotalCataEnviado + "</ td ></tr>";
+
+            strTable += "<tr height=38 ><td height=38  bgcolor='#969696' width='38'>Premio Pedido </ td ><td width='400' align='left' >" + strTotalPremioPedido + "</ td > ";
+            strTable += "<td height=38  bgcolor='#969696' width='38'>Premio Enviado </ td ><td width='400' align='left' colspan='2' >" + strTotalPremioEnviado + "</ td ></tr>";
+
 
             strTable += "<tr height=38 ><td height=38  bgcolor='#969696' width='38'>Descripción </ td ><td colspan='4' align='left' >" + desc + "</ td > ";
             strTable += "</tr>";

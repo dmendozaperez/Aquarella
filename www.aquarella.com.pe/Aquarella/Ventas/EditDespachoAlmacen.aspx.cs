@@ -38,6 +38,9 @@ namespace www.aquarella.com.pe.Aquarella.Ventas
         private string _TotalCatalogPedido { get; set; }
         private string _TotalCatalogEnviado { get; set; }
 
+        private string _TotalPremioPedido { get; set; }
+        private string _TotalPremioEnviado { get; set; }
+
         private string _TotalMonto { get; set; }
 
         private string _nombreSession = "ValoresventaxLider";
@@ -130,11 +133,20 @@ namespace www.aquarella.com.pe.Aquarella.Ventas
                     _TotalEnviado = row["NroEnviados"].ToString();
                     _TotalCatalogPedido = row["CatalogPedidos"].ToString();
                     _TotalCatalogEnviado = row["CatalogEnviados"].ToString();
+                    _TotalPremioPedido = row["NroPremio"].ToString();
+                    _TotalPremioEnviado = row["PremioEnviados"].ToString();
                     _TotalMonto = row["MontoTotal"].ToString();
+
                     txtPedido.Text = _TotalPedido;
                     txtEnviado.Text = _TotalEnviado;
+
                     txtPedidoC.Text = _TotalCatalogPedido;
                     txtEnviadoC.Text = _TotalCatalogEnviado;
+
+                    txtPedidoP.Text = _TotalPremioPedido;
+                    txtEnviadoP.Text = _TotalPremioEnviado;
+
+
                     txtMonto.Text = _TotalMonto;
 
 
@@ -213,9 +225,9 @@ namespace www.aquarella.com.pe.Aquarella.Ventas
             ((TextBox)(gvReturns.Rows[i].FindControl("TxtObservacion"))).Enabled = false;
             ((TextBox)(gvReturns.Rows[i].FindControl("TxtDetalle"))).Enabled = false;
             ((CheckBox)(gvReturns.Rows[i].FindControl("chkFlete"))).Enabled = false;
-            gvReturns.Rows[i].Cells[10].Visible = false;
-            gvReturns.HeaderRow.Cells[10].Visible = false;
-            gvReturns.FooterRow.Cells[10].Visible = false;
+            gvReturns.Rows[i].Cells[18].Visible = false;
+            gvReturns.HeaderRow.Cells[18].Visible = false;
+            gvReturns.FooterRow.Cells[18].Visible = false;
 
         }
 
@@ -349,6 +361,8 @@ namespace www.aquarella.com.pe.Aquarella.Ventas
             string strTotalEnviado = txtEnviado.Text;
             string strTotalCataPedido = txtPedidoC.Text;
             string strTotalCataEnviado = txtEnviadoC.Text;
+            string strTotalPremioPedido = txtPedidoP.Text;
+            string strTotalPremioEnviado = txtEnviadoP.Text;
             string strTotalMonto = txtMonto.Text;
 
             string strTable = "<table <Table border='1' bgColor='#ffffff' " +
@@ -362,6 +376,9 @@ namespace www.aquarella.com.pe.Aquarella.Ventas
             strTable += "<td height=38  bgcolor='#969696' width='38'>Pares Enviado </ td ><td width='400' align='left' colspan='2' >" + strTotalEnviado + "</ td ></tr>";
             strTable += "<tr height=38 ><td height=38  bgcolor='#969696' width='38'>Catalogo Facturado </ td ><td width='400' align='left' >" + strTotalCataPedido + "</ td > ";
             strTable += "<td height=38  bgcolor='#969696' width='38'>Catalogo Enviado </ td ><td width='400' align='left' colspan='2' >" + strTotalCataEnviado + "</ td ></tr>";
+
+            strTable += "<tr height=38 ><td height=38  bgcolor='#969696' width='38'>Premio Pedido </ td ><td width='400' align='left' >" + strTotalPremioPedido + "</ td > ";
+            strTable += "<td height=38  bgcolor='#969696' width='38'>Premio Enviado </ td ><td width='400' align='left' colspan='2' >" + strTotalPremioEnviado + "</ td ></tr>";
 
             strTable += "<tr height=38 ><td height=38  bgcolor='#969696' width='38'>Descripción </ td ><td colspan='4' align='left' >" + desc + "</ td > ";
             strTable += "</tr>";
