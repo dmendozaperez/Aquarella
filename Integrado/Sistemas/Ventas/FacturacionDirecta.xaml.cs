@@ -219,6 +219,8 @@ namespace Integrado.Sistemas.Ventas
             venta_det_dt.Columns.Add("ofe_id", typeof(decimal));
             venta_det_dt.Columns.Add("ofe_maxPares", typeof(decimal));
             venta_det_dt.Columns.Add("ofe_porc", typeof(decimal));
+            venta_det_dt.Columns.Add("ofe_tipo", typeof(string));
+            venta_det_dt.Columns.Add("ofe_venArt", typeof(decimal));
             venta_det_dt.Columns.Add("afec_percepcion", typeof(string));
         }
 
@@ -242,7 +244,11 @@ namespace Integrado.Sistemas.Ventas
                                            afec_percepcion= dfila["Afec_Percepcion"],
                                            ofe_id = dfila["ofe_id"],
                                            ofe_maxPares = dfila["ofe_maxPares"],
+                                           ofe_tipo = dfila["ofe_tipo"],
+                                           ofe_venArt = dfila["ofe_venArt"],
                                            ofe_porc = dfila["ofe_porc"],
+                                          
+
                                        }
                                        into g
                                        select new
@@ -254,7 +260,10 @@ namespace Integrado.Sistemas.Ventas
                                            afec_percepcion=g.Key.afec_percepcion,
                                            ofe_id = g.Key.ofe_id,
                                            ofe_maxPares = g.Key.ofe_maxPares,
+                                           ofe_tipo = g.Key.ofe_tipo,
+                                           ofe_venArt = g.Key.ofe_venArt,
                                            ofe_porc = g.Key.ofe_porc,
+                                         
                                            comisionmonto = g.Sum(com => com.Field<Decimal>("comision_monto")),
                                            precioavg = g.Average(avg => avg.Field<Decimal>("precio")),
                                                                                
@@ -284,13 +293,15 @@ namespace Integrado.Sistemas.Ventas
                     Decimal _total_pares = talla_arti.Sum(d => d.cantidad);
                     Decimal _total_linea = (_total_pares * row.precioavg) - row.comisionmonto;
                     Decimal _ofeId = Convert.ToDecimal(row.ofe_id);
-                                        
+
+                    string _ofeTipo = row.ofe_tipo.ToString();
+                    Decimal _ofe_venArt = Convert.ToDecimal(row.ofe_venArt);
                     Decimal _ofePar = Convert.ToDecimal(row.ofe_maxPares);
                     Decimal _ofePrc = Convert.ToDecimal(row.ofe_porc);
                     Decimal _TotalDes = Convert.ToDecimal("0.00");
                    
 
-                    if (_ofeId >0) {
+                    if (_ofeId >0 && _ofeTipo =="N") {
                   
                         Decimal Residuo = Convert.ToDecimal("0.00");
                        foreach (ent_oferta ent in listOfe)
@@ -347,6 +358,7 @@ namespace Integrado.Sistemas.Ventas
                         }
                     }
 
+                   
                     venta_det_list.Add(new Ent_Venta
                     {
                         articulo = row.articulo.ToString(),
@@ -359,6 +371,8 @@ namespace Integrado.Sistemas.Ventas
                         comision = row.comisionmonto,
                         total_linea = _total_linea,
                         afec_percepcion = row.afec_percepcion.ToString(),
+                        ofe_tipo = row.ofe_tipo.ToString(),
+                        ofe_venArt = Convert.ToDecimal(row.ofe_venArt),
                         ofe_id = Convert.ToDecimal(row.ofe_id),
                         ofe_maxPares = Convert.ToDecimal(row.ofe_maxPares),
                         ofe_porc = Convert.ToDecimal(row.ofe_porc),
@@ -366,14 +380,192 @@ namespace Integrado.Sistemas.Ventas
                         ofe_nroItem = nroDescuento,
 
                     }
+
+
+
+
                     );
                 }
+
+                List<Ent_Venta> orderLinesOferta_filterPack = venta_det_list.Where(c => c.ofe_id != 0 && c.ofe_tipo == "P").ToList();
+                if (orderLinesOferta_filterPack.Count > 0)
+                {
+
+                    //var grupo_oferta = orderLines.GroupBy(c => c._ofe_id != 0).ToList();
+                    var lista_gr = from item in venta_det_list
+                                   where item.ofe_id != 0
+                                   group item by
+                                   new
+                                   {
+                                       ofertaid = item.ofe_id,
+                                       ofemaxpar = item.ofe_maxPares,
+                                       _ofe_PrecioPack = item.ofe_venArt,
+                                   } into g
+                                   select new
+                                   {
+                                       ofertaid = g.Key.ofertaid,
+                                       ofemaxpar = g.Key.ofemaxpar,
+                                       _ofe_PrecioPack = g.Key._ofe_PrecioPack,
+
+                                   };
+                    foreach (var it in lista_gr)
+                    {
+
+
+
+                        /*capturamos el maximo de pares y por descuento*/
+                        Decimal _max_pares = it.ofemaxpar;//  orderLinesOferta_filter[0]._ofe_maxpares;
+                        Decimal _por_desc = it._ofe_PrecioPack /* orderLinesOferta_filter[0]._ofe_porc/100*/;
+
+                        Decimal _ofe_PrecioPack = it._ofe_PrecioPack;
+
+
+                        Decimal _total = orderLinesOferta_filterPack.Where(r => r.ofe_id == it.ofertaid).Sum(x => x.total_pares);
+
+                        /*ahora capturado el total de pares le hacemos un for para */
+
+                        decimal _res = _total / _max_pares;
+                        /*para saber si es un entero es true si no es false decimal*/
+                        bool isInt = (int)_res == _res;
+
+                        DataTable dt = new DataTable();
+                        dt.Columns.Add("articulo", typeof(string));
+                        dt.Columns.Add("talla", typeof(string));
+                        dt.Columns.Add("precio", typeof(Decimal));
+                        dt.Columns.Add("cantidad", typeof(Decimal));
+                        dt.Columns.Add("porc_comision", typeof(Decimal));
+                        dt.Columns.Add("descuento", typeof(Decimal));
+                        dt.Columns.Add("oferta", typeof(string));
+
+
+                        foreach (var filas in orderLinesOferta_filterPack.Where(r => r.ofe_id == it.ofertaid).ToList())
+                        {
+                            for (Int32 c = 0; c < filas.total_pares; ++c)
+                            {
+                                dt.Rows.Add(filas.articulo.ToString(),
+                                     filas.articulo_talla.ToString(),
+                                     filas.precio,
+                                     1,
+                                     Ent_Global._comision_porc,
+                                     0, filas.ofe_id.ToString());
+
+
+                            }
+                        }
+
+                        if (!isInt)
+                            _res = Convert.ToInt32((_res) - Convert.ToDecimal(0.1));
+
+
+                        if (_res != 0)
+                        {
+                            DataRow[] _filas = dt.Select("len(articulo)>0 and oferta='" + it.ofertaid.ToString() + "'", "precio asc");
+                            if (_filas.Length > 0)
+                            {
+                                if (_por_desc == 1)
+                                {
+                                    _por_desc = 0.5M;
+                                    _res = 2;
+                                }
+
+                                Decimal _des_oferta = 0;
+                                Decimal cantColec = 0;
+                                Decimal montoColec = 0;
+                                Decimal residuoCant = 0;
+                                Decimal montoColecResiduo = 0;
+
+                                int Colect = 0;
+                                for (Int32 i = 0; i < _filas.Length; ++i)
+                                {
+                                    Colect++;
+
+                                    string _articulo = _filas[i]["articulo"].ToString();
+                                    string _talla = _filas[i]["talla"].ToString();
+                                    Decimal _precio = Convert.ToDecimal(_filas[i]["precio"]);
+                                    Decimal _com_porc = Math.Round(Convert.ToDecimal(_filas[i]["porc_comision"])/100, 2, MidpointRounding.AwayFromZero);
+                                    Decimal _cant = Convert.ToDecimal(_filas[i]["cantidad"]);
+                                    cantColec += _cant;
+
+                                    if (cantColec > _max_pares)
+                                    {
+
+                                        decimal _tPremios = cantColec / _max_pares;
+                                        residuoCant = cantColec - (_max_pares * _tPremios);
+                                        _cant = _max_pares * _tPremios;
+                                        decimal _com_mon_res = Math.Round((_precio * residuoCant) * _com_porc, 2, MidpointRounding.AwayFromZero);
+                                        montoColecResiduo = (_precio * residuoCant) - _com_mon_res;
+                                    }
+
+                                    decimal _com_mon = Math.Round((_precio * _cant) * _com_porc, 2, MidpointRounding.AwayFromZero);
+
+
+                                    montoColec += (_precio * _cant) - _com_mon;
+
+                                    if (cantColec >= _max_pares)
+                                    {
+
+                                        Decimal TotalDesc = montoColec - _ofe_PrecioPack;
+
+                                        for (Int32 j = 0; j < Colect; ++j)
+                                        {
+
+                                            Decimal _preciopk = Convert.ToDecimal(_filas[i - j]["precio"]);
+                                            Decimal _cantpk = Convert.ToDecimal(_filas[i - j]["cantidad"]);
+
+                                            if (_cantpk > _max_pares)
+                                                _cantpk = _cant;
+
+                                            Decimal _com_porcpk = Math.Round(Convert.ToDecimal(_filas[i - j]["porc_comision"]) / 100, 2, MidpointRounding.AwayFromZero); 
+                                            decimal _com_monpk = Math.Round((_preciopk * _cantpk) * _com_porcpk, 2, MidpointRounding.AwayFromZero);
+                                            Decimal totallineapk = _preciopk - _com_monpk;
+                                            _des_oferta = Math.Round((totallineapk / montoColec) * TotalDesc, 2, MidpointRounding.AwayFromZero);
+
+                                            //Decimal descuento = Convert.ToDecimal(_filas[i - j]["descuento"]);
+                                            _filas[i - j]["descuento"] = _des_oferta;
+                                        }
+
+                                        cantColec = 0;
+                                        montoColec = 0;
+                                        Colect = 0;
+
+                                    }
+
+
+                                }
+
+                                for (Int32 i = 0; i < venta_det_list.Count; ++i)
+                                {
+                                    string _articulo = venta_det_list[i].articulo.ToString();
+                                    string _talla = venta_det_list[i].articulo_talla.ToString();
+                                    string _oferta_id = venta_det_list[i].ofe_id.ToString();
+                                    foreach (DataRow vfila in _filas)
+                                    {
+                                        if (_articulo == vfila["articulo"].ToString() && _talla == vfila["talla"].ToString() && _oferta_id == vfila["oferta"].ToString())
+                                        {
+                                            venta_det_list[i].total_descto += Convert.ToDecimal(vfila["descuento"]);
+
+                                            venta_det_list[i].total_linea = Math.Round((venta_det_list[i].total_pares * venta_det_list[i].precio) - (venta_det_list[i].comision) - (venta_det_list[i].total_descto), 2, MidpointRounding.AwayFromZero);
+                                           
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+
+                }
+
+
+                /*FIN DE LAS OFERTAS PRECIO POR PACK*/
+
+
+
             }
             calcular_totales();
             dg0.ItemsSource = venta_det_list;
         }
         private void agrega_items(string articulo, string marca, string color,string foto,Boolean comi_bool,string afec_percepcion, decimal precio,List<Ent_Venta_Talla> tallas_list,
-            Boolean _edit=false, decimal ofe_id = 0, decimal ofe_MaxPares=0, decimal Ofe_Porce=0)
+            Boolean _edit=false, decimal ofe_id = 0, decimal ofe_MaxPares=0, decimal Ofe_Porce=0,string ofe_Tipo="",  decimal ofe_artVenta = 0)
         {
             if (venta_det_dt != null)
             {
@@ -404,7 +596,7 @@ namespace Integrado.Sistemas.Ventas
                         _subtotal = (precio * _cant);
                         //_comi_monto =(afec_percepcion== "1") ? Math.Round((_subtotal * (Ent_Global._comision_porc / 100)), 2, MidpointRounding.AwayFromZero):0;
                         _comi_monto = (afec_percepcion == "1") ? Math.Round((_subtotal * (Ent_Global._comision_porc / 100)), 2, MidpointRounding.AwayFromZero) : 0;
-                        venta_det_dt.Rows.Add(articulo, marca, color,foto, comi_bool, _comi_monto, precio, _talla, _cant, _stock, ofe_id, ofe_MaxPares, Ofe_Porce, afec_percepcion);
+                        venta_det_dt.Rows.Add(articulo, marca, color,foto, comi_bool, _comi_monto, precio, _talla, _cant, _stock, ofe_id, ofe_MaxPares, Ofe_Porce, ofe_Tipo, ofe_artVenta, afec_percepcion);
                     }
                     else
                     {
@@ -707,6 +899,8 @@ namespace Integrado.Sistemas.Ventas
                                                   articulo_venta = c.articulo_venta,
                                                   articulo_marca = c.articulo_marca,
                                                   articulo_color = c.articulo_color,
+                                                  articulo_ofe_tipo = c.articulo_ofe_tipo,
+                                                  articulo_Ofe_ArtVenta = c.articulo_Ofe_ArtVenta,
                                                   articulo_ofe_id = c.articulo_ofe_id,
                                                   articulo_ofe_MaxPares = c.articulo_ofe_MaxPares,
                                                   articulo_Ofe_Porce = c.articulo_Ofe_Porce,
@@ -845,11 +1039,13 @@ namespace Integrado.Sistemas.Ventas
                         string fotoart = task.articulo_foto.ToString();
                         string afec_percepcion = task.articulo_afec_percepcion.ToString();
                         decimal preart = Convert.ToDecimal(task.preciosinigv);
+                        string ofe_Tipo = task.articulo_ofe_tipo;
+                        decimal ofe_artVenta = Convert.ToDecimal(task.articulo_Ofe_ArtVenta);
                         decimal ofe_id = Convert.ToDecimal(task.articulo_ofe_id);
                         decimal ofe_porc = Convert.ToDecimal(task.articulo_Ofe_Porce);
                         decimal ofe_maxPares = Convert.ToDecimal(task.articulo_ofe_MaxPares);
                         Boolean combool = task.articulo_comi_bool;
-                        agrega_items(codart, marart, colart,fotoart,combool, afec_percepcion, preart, agr_talla,false, ofe_id, ofe_maxPares, ofe_porc);
+                        agrega_items(codart, marart, colart,fotoart,combool, afec_percepcion, preart, agr_talla,false, ofe_id, ofe_maxPares, ofe_porc, ofe_Tipo, ofe_artVenta);
                         refreshgrilla();
                         this.ToggleFlyout(0, "");
 

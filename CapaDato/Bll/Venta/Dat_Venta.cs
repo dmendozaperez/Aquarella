@@ -524,6 +524,8 @@ namespace CapaDato.Bll.Venta
         public string articulo_talla { get; set; }
         public string articulo_calidad { get; set; }
         public Decimal articulo_cantidad { get; set; }
+        public string  articulo_ofe_tipo { get; set; }
+        public Decimal articulo_Ofe_ArtVenta { get; set; }
         public Decimal articulo_ofe_id { get; set; }
         public Decimal articulo_ofe_MaxPares { get; set; }
         public Decimal articulo_Ofe_Porce{ get; set; }
@@ -577,6 +579,8 @@ namespace CapaDato.Bll.Venta
                                     articulo_precio_sinigv =Convert.ToDecimal(dr["preciosinigv"]);
                                     articulo_talla = dr["talla"].ToString();
                                     articulo_cantidad = Convert.ToDecimal(dr["cantidad"]);
+                                    articulo_ofe_tipo = dr["Ofe_tipo"].ToString();
+                                    articulo_Ofe_ArtVenta = Convert.ToDecimal(dr["Ofe_ArtVenta"]);
                                     articulo_ofe_id = Convert.ToDecimal(dr["Ofe_Id"]);
                                     articulo_ofe_MaxPares = Convert.ToDecimal(dr["Ofe_MaxPares"]);
                                     articulo_Ofe_Porce = Convert.ToDecimal(dr["cantidad"]);
@@ -605,6 +609,8 @@ namespace CapaDato.Bll.Venta
                                                                 foto= dfila["foto"],
                                                                 afec_percepcion= dfila["Afec_Percepcion"].ToString(),
                                                                 precio_igv= Convert.ToDecimal(dfila["preciosigv"]),
+                                                                articulo_ofe_tipo = dfila["Ofe_tipo"].ToString(),
+                                                                articulo_Ofe_ArtVenta = Convert.ToDecimal(dfila["Ofe_ArtVenta"]),
                                                                 articulo_ofe_id = Convert.ToDecimal(dfila["Ofe_Id"]),
                                                                 articulo_ofe_MaxPares = Convert.ToDecimal(dfila["Ofe_MaxPares"]),
                                                                 articulo_Ofe_Porce = Convert.ToDecimal(dfila["Ofe_Porc"]),
@@ -634,6 +640,8 @@ namespace CapaDato.Bll.Venta
                                             preciosinigv=row.precio,
                                             preciosigv=row.precio_igv,
                                             articulo_foto =row.foto.ToString(),
+                                            articulo_ofe_tipo = row.articulo_ofe_tipo,
+                                            articulo_Ofe_ArtVenta = row.articulo_Ofe_ArtVenta,
                                             articulo_ofe_id = row.articulo_ofe_id,
                                             articulo_ofe_MaxPares = row.articulo_ofe_MaxPares,
                                             articulo_Ofe_Porce = row.articulo_Ofe_Porce,

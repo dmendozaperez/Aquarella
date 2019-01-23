@@ -15,6 +15,8 @@ namespace CapaEntidad.Bll.Venta
         public decimal porc_comision { get; set; }
         public decimal total_pares { get; set; }
         public decimal total_linea { get; set; }
+        public string ofe_tipo { get; set; }
+        public decimal ofe_venArt { get; set; }
         public decimal ofe_id { get; set; }
         public decimal ofe_maxPares { get; set; }
         public decimal ofe_porc { get; set; }
