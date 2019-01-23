@@ -920,11 +920,15 @@ namespace www.aquarella.com.pe.Aquarella.Logistica
 
                             Decimal _total = orderLinesOferta_filter.Where(r=>r._ofe_id==it.ofertaid).Sum(x => x._qty);
 
-                        /*ahora capturado el total de pares le hacemos un for para */
-
+                            /*ahora capturado el total de pares le hacemos un for para */
+                            
                         decimal _res = _total / _max_pares;
-                        /*para saber si es un entero es true si no es false decimal*/
-                        bool isInt = (int)_res == _res;
+                            //if (_max_pares == 1)
+                            //{
+                            //    _res = 1;
+                            //}
+                            /*para saber si es un entero es true si no es false decimal*/
+                            bool isInt = (int)_res == _res;
 
                         DataTable dt = new DataTable();
                         dt.Columns.Add("articulo", typeof(string));
@@ -975,11 +979,14 @@ namespace www.aquarella.com.pe.Aquarella.Logistica
                                     Decimal _com_porc = Convert.ToDecimal(_filas[i]["porc_comision"]);
                                     Decimal _cant= Convert.ToDecimal(_filas[i]["cantidad"]);
                                     decimal _com_mon =Math.Round((_precio * _cant) * _com_porc,2,MidpointRounding.AwayFromZero);
-                                    
-                                    if (i==0)
-                                     { 
-                                        _des_oferta =Math.Round(((_precio * _cant) - _com_mon) * (_por_desc),2,MidpointRounding.AwayFromZero);
-                                     }
+
+                                        if (i == 0 & _max_pares > 1)
+                                        {
+                                            _des_oferta = Math.Round(((_precio * _cant) - _com_mon) * (_por_desc), 2, MidpointRounding.AwayFromZero);
+                                        }
+                                        else {
+                                            _des_oferta = Math.Round(((_precio * _cant) - _com_mon) * (_por_desc), 2, MidpointRounding.AwayFromZero);
+                                        }
                                     
                                         _filas[i]["descuento"] = _des_oferta;
                                 }
