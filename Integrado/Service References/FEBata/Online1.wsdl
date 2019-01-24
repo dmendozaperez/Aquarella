@@ -105,7 +105,7 @@
             <xs:element minOccurs="0" name="tipoDoc" type="xs:int" />
             <xs:element minOccurs="0" name="folio" nillable="true" type="xs:string" />
             <xs:element minOccurs="0" name="estado" type="xs:int" />
-            <xs:element minOccurs="0" name="version" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="mensaje" nillable="true" type="xs:string" />
           </xs:sequence>
         </xs:complexType>
       </xs:element>
@@ -743,13 +743,13 @@
   </wsdl:binding>
   <wsdl:service name="Online">
     <wsdl:port name="OnlineSOAP11port_http" binding="ns0:OnlineSOAP11Binding">
-      <soap:address location="http://200.121.226.193:8080/axis2/services/Online" />
+      <soap:address location="http://200.121.128.110:8080/axis2/services/Online" />
     </wsdl:port>
     <wsdl:port name="OnlineSOAP12port_http" binding="ns0:OnlineSOAP12Binding">
-      <soap12:address location="http://200.121.226.193:8080/axis2/services/Online" />
+      <soap12:address location="http://200.121.128.110:8080/axis2/services/Online" />
     </wsdl:port>
     <wsdl:port name="OnlineHttpport" binding="ns0:OnlineHttpBinding">
-      <http:address location="http://200.121.226.193:8080/axis2/services/Online" />
+      <http:address location="http://200.121.128.110:8080/axis2/services/Online" />
     </wsdl:port>
   </wsdl:service>
 </wsdl:definitions>

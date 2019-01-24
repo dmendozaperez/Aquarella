@@ -7,7 +7,7 @@ namespace www.aquarella.com.pe.bll.Control
 {
     public class Conexion
     {
-        static string strconexion = ConfigurationManager.ConnectionStrings["MyConexionSql"].ConnectionString;
+        static string strconexion =Encripta.encryption.RijndaelDecryptString(ConfigurationManager.ConnectionStrings["MyConexionSql"].ConnectionString);
 
         public static string myconexion()
         {
