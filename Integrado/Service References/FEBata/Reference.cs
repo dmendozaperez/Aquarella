@@ -282,12 +282,12 @@ namespace Integrado.FEBata {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://ws.online.asp.core.paperless.cl", Order=7)]
         [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public string version;
+        public string mensaje;
         
         public OnlineARCRequest() {
         }
         
-        public OnlineARCRequest(string ruc, string login, string clave, string rucEmisor, int tipoDoc, string folio, int estado, string version) {
+        public OnlineARCRequest(string ruc, string login, string clave, string rucEmisor, int tipoDoc, string folio, int estado, string mensaje) {
             this.ruc = ruc;
             this.login = login;
             this.clave = clave;
@@ -295,7 +295,7 @@ namespace Integrado.FEBata {
             this.tipoDoc = tipoDoc;
             this.folio = folio;
             this.estado = estado;
-            this.version = version;
+            this.mensaje = mensaje;
         }
     }
     
@@ -993,7 +993,7 @@ namespace Integrado.FEBata {
             return base.Channel.OnlineARC(request);
         }
         
-        public string OnlineARC(string ruc, string login, string clave, string rucEmisor, int tipoDoc, string folio, int estado, string version) {
+        public string OnlineARC(string ruc, string login, string clave, string rucEmisor, int tipoDoc, string folio, int estado, string mensaje) {
             Integrado.FEBata.OnlineARCRequest inValue = new Integrado.FEBata.OnlineARCRequest();
             inValue.ruc = ruc;
             inValue.login = login;
@@ -1002,7 +1002,7 @@ namespace Integrado.FEBata {
             inValue.tipoDoc = tipoDoc;
             inValue.folio = folio;
             inValue.estado = estado;
-            inValue.version = version;
+            inValue.mensaje = mensaje;
             Integrado.FEBata.OnlineARCResponse retVal = ((Integrado.FEBata.OnlinePortType)(this)).OnlineARC(inValue);
             return retVal.@return;
         }
@@ -1012,7 +1012,7 @@ namespace Integrado.FEBata {
             return base.Channel.OnlineARCAsync(request);
         }
         
-        public System.Threading.Tasks.Task<Integrado.FEBata.OnlineARCResponse> OnlineARCAsync(string ruc, string login, string clave, string rucEmisor, int tipoDoc, string folio, int estado, string version) {
+        public System.Threading.Tasks.Task<Integrado.FEBata.OnlineARCResponse> OnlineARCAsync(string ruc, string login, string clave, string rucEmisor, int tipoDoc, string folio, int estado, string mensaje) {
             Integrado.FEBata.OnlineARCRequest inValue = new Integrado.FEBata.OnlineARCRequest();
             inValue.ruc = ruc;
             inValue.login = login;
@@ -1021,7 +1021,7 @@ namespace Integrado.FEBata {
             inValue.tipoDoc = tipoDoc;
             inValue.folio = folio;
             inValue.estado = estado;
-            inValue.version = version;
+            inValue.mensaje = mensaje;
             return ((Integrado.FEBata.OnlinePortType)(this)).OnlineARCAsync(inValue);
         }
         
