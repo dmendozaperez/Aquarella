@@ -984,7 +984,9 @@ namespace www.aquarella.com.pe.Aquarella.Logistica
                                         {
                                             _des_oferta = Math.Round(((_precio * _cant) - _com_mon) * (_por_desc), 2, MidpointRounding.AwayFromZero);
                                         }
-                                        else {
+
+                                        if (_max_pares == 1)
+                                        {
                                             _des_oferta = Math.Round(((_precio * _cant) - _com_mon) * (_por_desc), 2, MidpointRounding.AwayFromZero);
                                         }
                                     

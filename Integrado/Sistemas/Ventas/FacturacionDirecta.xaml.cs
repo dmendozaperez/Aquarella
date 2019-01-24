@@ -543,7 +543,7 @@ namespace Integrado.Sistemas.Ventas
                                         if (_articulo == vfila["articulo"].ToString() && _talla == vfila["talla"].ToString() && _oferta_id == vfila["oferta"].ToString())
                                         {
                                             venta_det_list[i].total_descto += Convert.ToDecimal(vfila["descuento"]);
-
+                                            venta_det_list[i].ofe_nroItem = 1;
                                             venta_det_list[i].total_linea = Math.Round((venta_det_list[i].total_pares * venta_det_list[i].precio) - (venta_det_list[i].comision) - (venta_det_list[i].total_descto), 2, MidpointRounding.AwayFromZero);
                                            
                                         }
