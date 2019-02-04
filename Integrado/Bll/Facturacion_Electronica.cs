@@ -41,6 +41,25 @@ namespace Integrado.Bll
 
             try
             {
+
+                if (Ent_Global._canal_venta == "AQ")
+                {
+                    if (Ent_Conexion._Base_Datos != "BdAquarella")
+                    {
+                        cod_hash = "prueba";
+                        return;
+                    } 
+                }
+                if (Ent_Global._canal_venta == "BA")
+                {
+                    if (Ent_Conexion._Base_Datos != "BD_ECOMMERCE")
+                    {
+                        cod_hash = "prueba";
+                        return;
+                    }
+                        
+                }
+                    
                 /*QUIERE DECIR QUE QUE SE USA LA FACTURACION ELECTRONICA DE CARVAJAL*/
                 if (Ent_Global.pr_facturador=="C")
                 { 
