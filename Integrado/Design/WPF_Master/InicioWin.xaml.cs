@@ -62,10 +62,10 @@ namespace Integrado.Design.WPF_Master
         private void btnaquarella_Click(object sender, RoutedEventArgs e)
         {
             Mouse.OverrideCursor = Cursors.Wait;
-            _server = "www.aquarellaperu.com.pe";
+            _server = "posperubd.bgr.pe";
             _base_datos = "BdAquarella";
-            _user = "sa";
-            _password = "Bata2013";
+            _user = "sis_aquarella";
+            _password = "Bata2018**";
 
             Boolean ini_mod = false;
             Ent_Global._canal_venta = "AQ";
@@ -224,7 +224,7 @@ namespace Integrado.Design.WPF_Master
 
 
 
-                //string _entorno = "AQHIG1";
+               // string _entorno = "AQHIG1";
                 string _entorno = "";
                 //Ent_Global._session_activa = true;
                 //Ent_Usuario user = new Ent_Usuario();           
