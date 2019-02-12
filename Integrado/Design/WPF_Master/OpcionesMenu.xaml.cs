@@ -91,6 +91,8 @@ namespace Integrado.Design.WPF_Master
             DispatcherTimer dispatcherTimerE = new DispatcherTimer();
             DispatcherTimer dispatcherTimerU = new DispatcherTimer();
 
+            DispatcherTimer dispatcherTimerAQ = new DispatcherTimer();
+
             /* Reporte de Listado de Pedidos Pendientes */
             btnrep.Visibility = Visibility.Hidden;
             lblrep.Visibility = Visibility.Hidden;
@@ -112,8 +114,53 @@ namespace Integrado.Design.WPF_Master
 
             }
 
+            if (Ent_Global._canal_venta == "AQ")
+            {
+                dispatcherTimerAQ.Tick += new EventHandler(dispatcherTimerAQ_Tick);
+                dispatcherTimerAQ.Interval = new TimeSpan(0, 0, 20);
+                dispatcherTimerAQ.Start();
+            }
+
 
         }
+
+        private void dispatcherTimerAQ_Tick(object sender, EventArgs e)
+        {        
+            #region<FACTURACION ELECTRONICA>
+            Dat_FE dat_fe = new Dat_FE();
+            List<Ent_FE> listarFE = dat_fe.get_doc_fe_error();
+
+            if (listarFE != null)
+            {
+                foreach (var fila in listarFE)
+                {
+                    string cod_hash = ""; string _error = ""; String _url_pdf = "";
+                    Facturacion_Electronica.ejecutar_factura_electronica(fila.tipo, (fila.tipo == "N") ? fila.not_id : fila.numero, ref cod_hash, ref _error, ref _url_pdf);
+
+                    if (_error.Length == 0)
+                    {
+                        if (fila.tipo == "B")
+                        {
+                            Dat_Venta.insertar_codigo_hash(fila.numero, cod_hash, "V", _url_pdf);
+                        }
+                        else
+                        {
+                            Dat_Venta.insertar_codigo_hash(fila.not_id, cod_hash, "N", _url_pdf);
+                        }
+                    }
+                    else
+                    {
+                        dat_fe.update_error_FE(_error);
+                    }
+
+
+                }
+                Bll.Basico._enviar_webservice_xml();
+            }
+
+            #endregion
+        }
+
         private void dispatcherTimerU_Tick(object sender, EventArgs e)
         {
             #region<ENVIO DATA URBANO HACIA PRESTASHOP>
