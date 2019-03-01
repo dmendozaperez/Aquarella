@@ -227,7 +227,7 @@ namespace www.aquarella.com.pe.bll
             catch (Exception e) { throw new Exception(e.Message, e.InnerException); }
         }
 
-        public static string setCrearLiquidacionPremio(int basId, int premioId)
+        public static string setCrearLiquidacionPremio(int basId, int premioId, string TipoPremio ="C")
         {
             //return "";
             string strLiqui = string.Empty;
@@ -244,6 +244,7 @@ namespace www.aquarella.com.pe.bll
                 cmd.Parameters.AddWithValue("@bas_id", basId);
                 //cmd.Parameters.AddWithValue("@gru_id_devolver", DbType.String);
                 cmd.Parameters.AddWithValue("@tipoRegalo", premioId);
+                cmd.Parameters.AddWithValue("@tipoPremio", TipoPremio);
                 //cmd.Parameters["@gru_id_devolver"].Direction = ParameterDirection.Output;
                 cmd.Parameters.Add("@gru_id_devolver", SqlDbType.VarChar, 20).Direction = ParameterDirection.Output;
                 cmd.ExecuteNonQuery();

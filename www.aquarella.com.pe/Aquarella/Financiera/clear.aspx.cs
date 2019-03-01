@@ -473,14 +473,26 @@ namespace www.aquarella.com.pe.Aquarella.Financiera
                     {
                         string[] prems = clear.Split('|');
                         string strpremio = prems[1].ToString();
+                        string strpremio2 = prems[2].ToString();
                         string strmensaje = "";
                         string strmensajePremio = "";
 
                         if (strpremio != "N" && strpremio != "0")
                         {
-                            string strIdLiquidacion = Clear.setCrearLiquidacionPremio(Convert.ToInt32(strIdPromotor), Convert.ToInt32(strpremio));
-                           strmensajePremio = "(Premio generado en el pedido:" + strIdLiquidacion + ")";
+                            string strIdLiquidacion = Clear.setCrearLiquidacionPremio(Convert.ToInt32(strIdPromotor), Convert.ToInt32(strpremio),"C");
+                           strmensajePremio = "Premio generado en el pedido:" + strIdLiquidacion + " ";
                         }
+
+                        if (strpremio2 != "N" && strpremio2 != "0")
+                        {
+                            string strIdLiquidacion = Clear.setCrearLiquidacionPremio(Convert.ToInt32(strIdPromotor), Convert.ToInt32(strpremio2),"P");
+                            string cadena = "";
+                            if (strmensajePremio != "") { cadena = "y"; }
+
+                            strmensajePremio = strmensajePremio+ " " + cadena + " en el pedido:" + strIdLiquidacion + " ";
+                        }
+
+                        if (strmensajePremio != "") { strmensajePremio = " ( "+ strmensajePremio+" ) "; }
 
                         msnMessage.LoadMessage("El cruce de información fue grabado correctamente " + strmensajePremio + ", su pedido sera enviado  marcación y posterior facturación; número del cruce: " + prems[0].ToString() + strmensaje, UserControl.ucMessage.MessageType.Information);
 

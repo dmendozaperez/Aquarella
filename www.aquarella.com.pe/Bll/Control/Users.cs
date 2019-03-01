@@ -201,7 +201,7 @@ namespace www.aquarella.com.pe.bll
                 dt = new DataTable();
                 da.Fill(dt);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 dt = null;
             }
