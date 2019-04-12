@@ -396,6 +396,9 @@
     <None Include="Service References\FEBata\Integrado.FEBata.ConsultaInformeReversionesResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
+    <None Include="Service References\FEBata\Integrado.FEBata.ConsultResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
     <None Include="Service References\FEBata\Integrado.FEBata.GenInformeReversionesResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
@@ -426,7 +429,7 @@
     <None Include="Service References\FEBata\Integrado.FEBata.OnlineRecoveryResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Service References\FEBata\Online1.wsdl" />
+    <None Include="Service References\FEBata\Online.wsdl" />
     <None Include="Service References\FEBata\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
