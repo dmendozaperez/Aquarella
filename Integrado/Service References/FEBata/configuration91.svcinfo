@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<SavedWcfConfigurationInformation xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="9.1" CheckSum="5V7ogNyguYj4NHpU/uED2HSOZY0=">
+<SavedWcfConfigurationInformation xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="9.1" CheckSum="sxj3G2DJC+4dNVUZXemgGTtRPU0=">
   <bindingConfigurations>
     <bindingConfiguration bindingType="basicHttpBinding" name="OnlineSOAP11Binding">
       <properties>
@@ -263,10 +263,10 @@
     </bindingConfiguration>
   </bindingConfigurations>
   <endpoints>
-    <endpoint name="OnlineSOAP11port_http" contract="FEBata.OnlinePortType" bindingType="basicHttpBinding" address="http://200.121.128.110:8080/axis2/services/Online" bindingConfiguration="OnlineSOAP11Binding">
+    <endpoint name="OnlineSOAP11port_http" contract="FEBata.OnlinePortType" bindingType="basicHttpBinding" address="http://200.121.226.193:8080/axis2/services/Online" bindingConfiguration="OnlineSOAP11Binding">
       <properties>
         <property path="/address" isComplexType="false" isExplicitlyDefined="true" clrType="System.Uri, System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-          <serializedValue>http://200.121.128.110:8080/axis2/services/Online</serializedValue>
+          <serializedValue>http://200.121.226.193:8080/axis2/services/Online</serializedValue>
         </property>
         <property path="/behaviorConfiguration" isComplexType="false" isExplicitlyDefined="false" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <serializedValue />
@@ -348,10 +348,10 @@
         </property>
       </properties>
     </endpoint>
-    <endpoint name="OnlineSOAP12port_http" contract="FEBata.OnlinePortType" bindingType="customBinding" address="http://200.121.128.110:8080/axis2/services/Online" bindingConfiguration="OnlineSOAP12Binding">
+    <endpoint name="OnlineSOAP12port_http" contract="FEBata.OnlinePortType" bindingType="customBinding" address="http://200.121.226.193:8080/axis2/services/Online" bindingConfiguration="OnlineSOAP12Binding">
       <properties>
         <property path="/address" isComplexType="false" isExplicitlyDefined="true" clrType="System.Uri, System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-          <serializedValue>http://200.121.128.110:8080/axis2/services/Online</serializedValue>
+          <serializedValue>http://200.121.226.193:8080/axis2/services/Online</serializedValue>
         </property>
         <property path="/behaviorConfiguration" isComplexType="false" isExplicitlyDefined="false" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <serializedValue />

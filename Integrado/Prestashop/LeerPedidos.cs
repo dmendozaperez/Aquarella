@@ -212,10 +212,15 @@ namespace Integrado.Prestashop
                         {
                             Order_Dtl dtl = new Order_Dtl();
                             string articulo_talla = key_det.det_artic_ref.ToString().Trim().Replace("-", "");
-                            string articulo = articulo_talla.Substring(0, articulo_talla.Length - 2);
-                            string talla = articulo_talla.Substring(articulo_talla.Length - 2, 2);
+                                //string articulo = articulo_talla.Substring(0, articulo_talla.Length - 2);
+                                //string talla = articulo_talla.Substring(articulo_talla.Length - 2, 2);
 
-                            dtl._code = articulo;
+                                int vsubstrlenfin = 0;
+                                string articulo = articulo_talla.Substring(0, 7);
+                                vsubstrlenfin = articulo_talla.Length - articulo.Length;
+                                string talla = articulo_talla.Substring(articulo.Length, vsubstrlenfin);
+
+                                dtl._code = articulo;
                             dtl._size = talla;
                             dtl._qty = Convert.ToInt32(key_det.det_cant);
                             dtl._priceigv = key_det.det_prec_sigv;

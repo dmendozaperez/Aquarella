@@ -480,7 +480,7 @@ namespace CapaDato.Bll.Venta
         public static string _leer_formato_electronico_PAPERLESS(string _tipo_doc, string _num_doc, ref string _error,ref string return_numdoc)
         {
             string _formato_doc = "";
-            string sqlquery = "[USP_Leer_Formato_Electronico_Paperless]";
+            string sqlquery = "[USP_Leer_Formato_Electronico_Paperless_UBL_2_1]";
             SqlConnection cn = null;
             SqlCommand cmd = null;
             try
