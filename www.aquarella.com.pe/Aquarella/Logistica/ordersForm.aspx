@@ -33,7 +33,7 @@
         $(function () {
             var bnaceptar = $("input[id$='btnaceptar']");
             allFields = $([]).add(bnaceptar);
-            var pagetitle = $(this).attr("Seleccione Nota de Credito");
+            var pagetitle = $(this).attr("Seleccione Nota de Credito 2");
 
             $("#dialog-NC").dialog({
                 autoOpen: false,
