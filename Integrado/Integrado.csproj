@@ -166,11 +166,14 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Bll\Basico.cs" />
+    <Compile Include="Bll\EnviaPedidoCxpres.cs" />
     <Compile Include="Bll\Facturacion_Electronica.cs" />
     <Compile Include="Bll\Fe_Sunat_Qr.cs" />
     <Compile Include="Certificado\ReportInvoiceClass.cs" />
     <Compile Include="Bll\ReportInvoiceSummary.cs" />
     <Compile Include="Bll\Transaction_det.cs" />
+    <Compile Include="comercioxpress\EnviaPedidoCxpress.cs" />
+    <Compile Include="comercioxpress\GenerarEtiquetaCxpres.cs" />
     <Compile Include="Design\Control\Enums.cs" />
     <Compile Include="Design\Control\LoginForm.xaml.cs">
       <DependentUpon>LoginForm.xaml</DependentUpon>
@@ -199,6 +202,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ReportGuiaRem.rpt</DependentUpon>
       <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Service References\comercioxpress\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
     <Compile Include="Service References\FEBata\Reference.cs">
       <AutoGen>True</AutoGen>
@@ -387,6 +395,19 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
     <Content Include="Certificado\CDBATA.pfx" />
+    <None Include="Service References\comercioxpress\Integrado.comercioxpress.registrarResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\comercioxpress\Integrado.comercioxpress.response.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\comercioxpress\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Service References\comercioxpress\configuration.svcinfo" />
+    <None Include="Service References\comercioxpress\configuration91.svcinfo" />
+    <None Include="Service References\comercioxpress\WSOrdenServicio.wsdl" />
     <None Include="Service References\FEBata\Integrado.FEBata.AddDocInfoResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
@@ -429,7 +450,7 @@
     <None Include="Service References\FEBata\Integrado.FEBata.OnlineRecoveryResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Service References\FEBata\Online.wsdl" />
+    <None Include="Service References\FEBata\Online1.wsdl" />
     <None Include="Service References\FEBata\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
@@ -865,6 +886,7 @@
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <ItemGroup>
+    <WCFMetadataStorage Include="Service References\comercioxpress\" />
     <WCFMetadataStorage Include="Service References\FEBata\" />
     <WCFMetadataStorage Include="Service References\ServiceBata\" />
   </ItemGroup>

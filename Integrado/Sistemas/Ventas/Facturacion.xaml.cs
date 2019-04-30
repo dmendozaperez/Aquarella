@@ -559,7 +559,7 @@ namespace Integrado.Sistemas.Ventas
                             if (_cod_urbano.Trim().Length > 0)
                             {
                                 msj_eccomer = "Se Genero correctamente la factura nro: " + grabar_numerodoc + "\n"
-                                                   + "Se envío correctamente la solicitud a Urbano, Nro guía obtenida: " + _cod_urbano + "\n\n"
+                                                   + "Se envío correctamente la solicitud al Courier, Nro guía obtenida: " + _cod_urbano + "\n\n"
                                                    + "¿Desea imprimir la etiqueta de este pedido? " + _liq_id;
 
                                 MessageDialogResult resultetiq = await this.ShowMessageAsync(Ent_Msg.msginfomacion, msj_eccomer, MessageDialogStyle.AffirmativeAndNegative, mySettings);
@@ -584,7 +584,7 @@ namespace Integrado.Sistemas.Ventas
                             else
                             {
                                 msj_eccomer = "Se Genero correctamente la factura nro: " + grabar_numerodoc + "\n"
-                                                   + "No se pudo enviar la solicitud a Urbano.\n\n";
+                                                   + "No se pudo enviar la solicitud a Courier.\n\n";
                                 MessageDialogResult resultetiq = await this.ShowMessageAsync(Ent_Msg.msginfomacion, msj_eccomer, MessageDialogStyle.Affirmative, okSettings);
                             }
 

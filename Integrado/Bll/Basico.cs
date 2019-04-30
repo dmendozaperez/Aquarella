@@ -1,6 +1,7 @@
 ﻿using CapaDato.Bll.Ecommerce;
 using CapaEntidad.Bll.Ecommerce;
 using CapaEntidad.Bll.Util;
+using Integrado.comercioxpress;
 using Integrado.Prestashop;
 using Integrado.Urbano;
 using System;
@@ -243,14 +244,18 @@ namespace Integrado.Bll
         public static void act_presta_urbano(string ven_id, ref string error,ref string cod_urbano)
         {
             Dat_PrestaShop action_presta = null;
-            Dat_Urbano data_urbano =null;
+            Dat_Urbano data_urbano = null;
+
+            Dat_Cexpress data_Cexpress = null;
+
             error = "";
             try
             {
-                string guia_presta = ""; string guia_urb = "";
+                string guia_presta = ""; string guia_urb = ""; string name_carrier = "";
                 action_presta = new Dat_PrestaShop();
                 data_urbano = new Dat_Urbano();
-                action_presta.get_guia_presta_urba(ven_id, ref guia_presta, ref guia_urb);
+                //action_presta.get_guia_presta_urba(ven_id, ref guia_presta, ref guia_urb, ref name_carrier);
+                action_presta.get_carrier(ven_id, ref guia_presta, ref name_carrier);
 
                 if (guia_presta.Trim().Length > 0)
                 {
@@ -259,24 +264,49 @@ namespace Integrado.Bll
 
                     if (valida)
                     {
+                        data_Cexpress = new Dat_Cexpress();
                         //action_presta.updestafac_prestashop(guia_presta);
+                        EnviaPedidoCxpress envia2 = new EnviaPedidoCxpress();
+                        string nroserv = "";
 
                         /*enviamos urbano la guia*/
                         EnviaPedido envia = new EnviaPedido();
-                        //intentando 3 veces
-                        for (Int32 i=0;i<3;++i)
+
+                        if (name_carrier == "Comercio Xpress")
                         {
-                            Ent_Urbano ent_urbano=envia.sendUrbano(ven_id);
-                            if (ent_urbano.error == "1")
+                            Ent_Cexpress ent_Cexpress = envia2.sendCexpress(ven_id, ref nroserv);
+                        }
+
+                        //intentando 3 veces
+                        for (Int32 i = 0; i < 3; ++i)
+                        {
+                            /*Nuevo*/
+                            if (name_carrier == "Comercio Xpress")
                             {
-                                if (ent_urbano.guia.Trim().Length > 0)
+                                //Ent_Cexpress ent_Cexpress = envia2.sendCexpress(ven_id, ref nroserv);
+                                action_presta.updestafac_prestashop(guia_presta);
+                                data_Cexpress.update_guia(guia_presta, nroserv);
+                                guia_urb = nroserv;
+
+                            }
+                            else
+                            {
+                                Ent_Urbano ent_urbano = envia.sendUrbano(ven_id);
+                                if (ent_urbano.error == "1")
                                 {
-                                    action_presta.updestafac_prestashop(guia_presta);
-                                    data_urbano.update_guia(guia_presta, ent_urbano.guia);
-                                    guia_urb = ent_urbano.guia;
-                                    break;
+                                    if (ent_urbano.guia.Trim().Length > 0)
+                                    {
+                                        action_presta.updestafac_prestashop(guia_presta);
+                                        data_urbano.update_guia(guia_presta, ent_urbano.guia);
+                                        guia_urb = ent_urbano.guia;
+                                        break;
+                                    }
                                 }
                             }
+
+
+
+
                         }
                         //guia_urb=
                         //action_presta.get_guia_presta_urba(ven_id, ref guia_presta, ref guia_urb);

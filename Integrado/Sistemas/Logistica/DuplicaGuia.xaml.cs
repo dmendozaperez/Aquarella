@@ -53,7 +53,7 @@ namespace Integrado.Sistemas.Logistica
 
             //#region<VENTA DE LA FACTURACION ELECTRONICA>
             //Bll.Facturacion_Electronica.ejecutar_factura_electronica(tipo, num, ref _codigo_hash, ref _error, ref _pdf_url);
-            ////return;
+            //return;
             ////Bll.Facturacion_Electronica.ejecutar_factura_electronica(tipo, num, ref _codigo_hash, ref _error);
             //Dat_Venta.insertar_codigo_hash(num, _codigo_hash, "V",_pdf_url);
             //Bll.Basico._enviar_webservice_xml();

@@ -18,7 +18,8 @@ namespace CapaDato.Bll.Ecommerce
                                              Boolean _pago_credito = false, Decimal _porc_percepcion = 0,
                                              List<Order_Dtl_Temp> order_dtl_temp = null, decimal _Liq_Pst_Id = 0, string _Liq_Pst_Ref = "",
                                              Decimal _CostoE = 0, Cliente cl = null, Pagos pag = null,DateTime? _ped_fecha=null,decimal _liq_tot_cigv=0,
-                                             string _ped_ubigeo_ent="",string _ped_dir_ent="",string _ped_ref_ent="", string _ped_nom_ent = "", string _ped_tel_ent = "", Decimal _det_peso=0, DataTable pagos = null)
+                                             string _ped_ubigeo_ent="",string _ped_dir_ent="",string _ped_ref_ent="", string _ped_nom_ent = "", string _ped_tel_ent = "", Decimal _det_peso=0, DataTable pagos = null,
+                                             string _name_courier = null)
         {
             string[] resultDoc = new string[2];
             string sqlquery = "USP_Insertar_Modifica_Liquidacion";
@@ -153,6 +154,8 @@ namespace CapaDato.Bll.Ecommerce
 
                 //porcentaje percepcion
                 cmd.Parameters.AddWithValue("@Ped_Por_Perc", _porc_percepcion);
+
+                cmd.Parameters.AddWithValue("@name_courier", _name_courier);
                 //da = new SqlDataAdapter(cmd);
                 //da.Fill(ds);
 
@@ -263,12 +266,15 @@ namespace CapaDato.Bll.Ecommerce
             }
             return valida;
         }
+
+
+
         /// <summary>
         /// retorna el numero de guia de prestashop y de urbano
         /// </summary>
-        public void get_guia_presta_urba(string ven_id,ref string guia_presta,ref string guia_urb)
+        public void get_guia_presta_urba(string ven_id,ref string guia_presta,ref string guia_urb, ref string name_carrier)
         {
-            string sqlquery = "USP_Get_GuiaUrbXVentas";
+            string sqlquery = "[USP_Get_GuiaUrbXVentas_jvh]";
             try
             {
                 using (SqlConnection cn = new SqlConnection(Ent_Conexion.conexion))
@@ -282,14 +288,17 @@ namespace CapaDato.Bll.Ecommerce
 
                         cmd.Parameters.Add("@cod_prestashop", SqlDbType.VarChar, 30);
                         cmd.Parameters.Add("@cod_urbano", SqlDbType.VarChar, 30);
+                        cmd.Parameters.Add("@name_carrier", SqlDbType.VarChar, 15);
 
                         cmd.Parameters["@cod_prestashop"].Direction = ParameterDirection.Output;
                         cmd.Parameters["@cod_urbano"].Direction = ParameterDirection.Output;
+                        cmd.Parameters["@name_carrier"].Direction = ParameterDirection.Output;
 
                         cmd.ExecuteNonQuery();
 
                         guia_presta =(string)cmd.Parameters["@cod_prestashop"].Value;
-                        guia_urb = (string)cmd.Parameters["@cod_urbano"].Value; 
+                        guia_urb = (string)cmd.Parameters["@cod_urbano"].Value;
+                        name_carrier = (string)cmd.Parameters["@name_carrier"].Value;
                     }
                 }
             }
@@ -300,5 +309,47 @@ namespace CapaDato.Bll.Ecommerce
                 throw;
             }
         }
+
+
+        public void get_carrier(string ven_id, ref string guia_presta, ref string name_carrier)
+        {
+            string sqlquery = "[USP_Get_GuiaUrbXVentas_jvh]";
+            ///string guia_presta = "";
+            string guia_urb = "";
+            try
+            {
+                using (SqlConnection cn = new SqlConnection(Ent_Conexion.conexion))
+                {
+                    if (cn.State == 0) cn.Open();
+                    using (SqlCommand cmd = new SqlCommand(sqlquery, cn))
+                    {
+                        cmd.CommandTimeout = 0;
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        cmd.Parameters.AddWithValue("@ven_id", ven_id);
+
+                        cmd.Parameters.Add("@cod_prestashop", SqlDbType.VarChar, 30);
+                        cmd.Parameters.Add("@cod_urbano", SqlDbType.VarChar, 30);
+                        cmd.Parameters.Add("@name_carrier", SqlDbType.VarChar, 15);
+
+                        cmd.Parameters["@cod_prestashop"].Direction = ParameterDirection.Output;
+                        cmd.Parameters["@cod_urbano"].Direction = ParameterDirection.Output;
+                        cmd.Parameters["@name_carrier"].Direction = ParameterDirection.Output;
+
+                        cmd.ExecuteNonQuery();
+
+                        guia_presta = (string)cmd.Parameters["@cod_prestashop"].Value;
+                        guia_urb = (string)cmd.Parameters["@cod_urbano"].Value;
+                        name_carrier = (string)cmd.Parameters["@name_carrier"].Value;
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                guia_presta = "";
+                guia_urb = "";
+                throw;
+            }
+        }
+
     }
 }

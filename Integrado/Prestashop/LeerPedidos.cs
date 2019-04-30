@@ -134,6 +134,7 @@ namespace Integrado.Prestashop
                                            cli_dni = item["cli_dni"].ToString(),
                                            cli_ubigeo = item["cli_ubigeo"].ToString(),
                                            ped_ship_sigv = Convert.ToDecimal(item["ped_ship_sigv"]),
+                                           name_courier = Convert.ToString(item["name_courier"]),
                                            // Modificado por : Henry Morales - 19/06/2018
                                            // Se modificó para tomar los pagos en diferentes formas de pago (DataTable dtpedidospag)
                                            /*pag_metodo = item["pag_metodo"].ToString(),
@@ -169,6 +170,7 @@ namespace Integrado.Prestashop
                                            cli_dni = G.Key.cli_dni,
                                            cli_ubigeo = G.Key.cli_ubigeo,
                                            ped_ship_sigv = G.Key.ped_ship_sigv,
+                                           name_courier = G.Key.name_courier
                                            // Modificado por : Henry Morales - 19/06/2018
                                            // Se modificó para tomar los pagos en diferentes formas de pago (DataTable dtpedidospag)
                                            /*pag_metodo = G.Key.pag_metodo,
@@ -214,13 +216,12 @@ namespace Integrado.Prestashop
                             string articulo_talla = key_det.det_artic_ref.ToString().Trim().Replace("-", "");
                                 //string articulo = articulo_talla.Substring(0, articulo_talla.Length - 2);
                                 //string talla = articulo_talla.Substring(articulo_talla.Length - 2, 2);
-
                                 int vsubstrlenfin = 0;
                                 string articulo = articulo_talla.Substring(0, 7);
                                 vsubstrlenfin = articulo_talla.Length - articulo.Length;
                                 string talla = articulo_talla.Substring(articulo.Length, vsubstrlenfin);
 
-                                dtl._code = articulo;
+                            dtl._code = articulo;
                             dtl._size = talla;
                             dtl._qty = Convert.ToInt32(key_det.det_cant);
                             dtl._priceigv = key_det.det_prec_sigv;
@@ -311,7 +312,7 @@ namespace Integrado.Prestashop
                                 // Se agergaron los campos de nombre y telefono de referencia para la entrega ( key.ped_nom_ent ; key.ped_tel_ent)
                                 string[] result= update_psth.Update_Pedido_Prestashop(Ent_Global._bas_id_codigo, 9219, "", 0, 0, "", "", items_det, 0, 1, "", "", 0, 0, "", "", 0, null,
                                               false, 0, null, key.pedido, key.ped_ref, key.ped_ship_sigv, cl, pg, key.ped_fecha, key.ped_total_cigv,key.ped_ubigeo_ent,
-                                              key.ped_dir_ent,key.ped_ref_ent, key.ped_nom_ent, key.ped_tel_ent, _tot_peso, pago_ped);
+                                              key.ped_dir_ent,key.ped_ref_ent, key.ped_nom_ent, key.ped_tel_ent, _tot_peso, pago_ped, key.name_courier);
                             if (result[0].ToString()=="-1")
                             {
                                     _error += result[1].ToString();
