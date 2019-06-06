@@ -9,8 +9,11 @@ namespace Sistema_AQLocal
     {
         public static string conexion_local
         {
-            get { return "Server=10.10.10.206;Database=BdAquarella;User ID=sa;Password=Bata2013;Trusted_Connection=False;"; }
+            //get { return "Server=10.10.10.206;Database=BdAquarella;User ID=sa;Password=Bata2013;Trusted_Connection=False;"; }
             //get { return "Server=10.10.10.232;Database=BdAquarella;User ID=sa;Password=Bata2013;Trusted_Connection=False;"; }
+            //get { return "Server=10.10.10.206;Database=BdAquarella;User ID=sa;Password=Bata2013;Trusted_Connection=False;"; }
+            get { return "Server=172.28.7.14;Database=BdAquarella;User ID=sis_aquarella;Password=Bata2018**;Trusted_Connection=False;"; }
+            // get { return "Server=172.19.7.169;Database=BdAquarellaFE;User ID=sa;Password=Bata2013;Trusted_Connection=False;"; }
         }
         public static string mensaje
         {

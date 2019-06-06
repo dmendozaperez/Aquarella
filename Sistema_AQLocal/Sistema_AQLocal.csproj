@@ -14,7 +14,7 @@
     <IsWebBootstrapper>true</IsWebBootstrapper>
     <TargetFrameworkProfile>
     </TargetFrameworkProfile>
-    <PublishUrl>\\10.10.10.207\wwwroot\Aquarella\Windows_Local\</PublishUrl>
+    <PublishUrl>\\172.28.7.9\Aquarella\Windows_Local\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Web</InstallFrom>
     <UpdateEnabled>true</UpdateEnabled>
@@ -24,7 +24,7 @@
     <UpdatePeriodically>false</UpdatePeriodically>
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
-    <InstallUrl>http://10.10.10.206/Windows_Local/</InstallUrl>
+    <InstallUrl>http://www.catalogo.aquarellaperu.com.pe/Aquarella/Windows_Local/</InstallUrl>
     <ProductName>Sistema Aquarella%28Windows%29</ProductName>
     <PublisherName>Microsoft</PublisherName>
     <SuiteName>%28Corporacion Bata%29</SuiteName>
