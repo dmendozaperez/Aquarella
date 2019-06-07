@@ -54,8 +54,11 @@ namespace www.aquarella.com.pe.bll
         #endregion
 
         #region <METODOS PUBLICOS>
-        public static DataSet Get_CARGAR_POS( string _postpago)
+        public static DataSet Get_CARGAR_POS( string _postpago, int _basid, decimal _idCust)
         {
+            //Se agrega 2 variables: _basid, _idCust - 06-06-2019
+            //Funcionalidad: Para que se observe la opción Op. Gratuitas solo si el usuario realiza una compra a su nombre, mas no a nombre de otras promotoras.
+
             string sqlquery = "USP_Leer_MedioPagoCondicion";
             SqlConnection cn = null;
             SqlCommand cmd = null;
@@ -68,6 +71,8 @@ namespace www.aquarella.com.pe.bll
                 cmd.CommandTimeout = 0;
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.Parameters.AddWithValue("@post", _postpago);
+                cmd.Parameters.AddWithValue("@bas_id", _basid);
+                cmd.Parameters.AddWithValue("@cust_id", _idCust);
                 da = new SqlDataAdapter(cmd);
                 ds = new DataSet();
                 da.Fill(ds);

@@ -43,7 +43,7 @@ namespace www.aquarella.com.pe.Aquarella.Logistica
             _nSArtSiz = "_nSArtSiz", _nameSessionShipTo = "ShippingInfoObj", _nameSessionCustomer = "nameSessionCustomer",
             _nSCatalog = "_nSCatalog", _nsDtlArticle = "_nsDtlArticle", _nSOrderUrl = "_nSorderUrl", _estadoliqui = "_estadoliqui",_pagocredito="pagocredito", _nropedido = "_nropedido", _idliquidacion = "_idliquidacion",_valor_subtotal="_valor_subtotal",
             _number = ConfigurationManager.AppSettings["kNumber"], _currency = ConfigurationManager.AppSettings["kCurrency"],
-            varIdOperacionPOS = ConfigurationManager.AppSettings["ID_Num_Tarjeta_POS"], varPagoxMuestra = "008";
+            varIdOperacionPOS = ConfigurationManager.AppSettings["ID_Num_Tarjeta_POS"], varPagoxMuestra = "008", varPagoxOPG = "OPG";
 
 
         string _formParent = "panelOrdersCustomer.aspx";
@@ -710,7 +710,7 @@ namespace www.aquarella.com.pe.Aquarella.Logistica
                         resultLine._lineTotal = Math.Round((resultLine._price * newQty) - (resultLine._dscto * newQty) - resultLine._commission, 2, MidpointRounding.AwayFromZero);
                         resultLine._lineTotDesc = (num*((resultLine._price * newQty) - (resultLine._dscto * newQty) - resultLine._commission)).ToString(_currency);
                         // resultLine._lineTotDesc = ((resultLine._priceigv * newQty) - (resultLine._dscto * newQty) - resultLine._commissionigv).ToString(_currency);
-                        if (varTipoPago == "008")
+                        if (varTipoPago == "008" || varTipoPago == "OPG")
                         {
                             resultLine._lineTotal = (resultLine._price * newQty);
                             resultLine._commissionPctg = 0m;
@@ -744,7 +744,7 @@ namespace www.aquarella.com.pe.Aquarella.Logistica
                     newLine._lineTotDesc = (num2*((newLine._price * qty) - (newLine._dscto * qty) - newLine._commission)).ToString(_currency);
                     //newLine._lineTotDesc = ((newLine._priceigv * qty) - (newLine._dscto * qty) - newLine._commissionigv).ToString(_currency);
 
-                    if (varTipoPago == "008")
+                    if (varTipoPago == "008" || varTipoPago == "OPG")
                     {
                         newLine._lineTotal = (newLine._price * qty);
                         newLine._commissionPctg = 0m;
@@ -862,8 +862,8 @@ namespace www.aquarella.com.pe.Aquarella.Logistica
             {
                 Coordinator cust = (Coordinator)HttpContext.Current.Session[_nameSessionCustomer];
                 string varTipoPago = cust._vartipopago;
-
-                if (orderLines!=null && varTipoPago != varPagoxMuestra)
+                // se agregó varPagoxOPG.06-06-19
+                if (orderLines!=null && varTipoPago != varPagoxMuestra && varTipoPago != varPagoxOPG)
                 {
 
                     /*formatear las promociones*/
@@ -1282,7 +1282,7 @@ namespace www.aquarella.com.pe.Aquarella.Logistica
                         resultLine._lineTotal = Math.Round((resultLine._price * qty) - (resultLine._dscto * qty) - resultLine._commission,2,MidpointRounding.AwayFromZero);
                         resultLine._lineTotDesc = (((resultLine._price * qty) - (resultLine._dscto * qty) - resultLine._commission)).ToString(_currency);
                     //resultLine._lineTotDesc = ((resultLine._priceigv * qty) - (resultLine._dscto * qty) - resultLine._commissionigv).ToString(_currency);
-                        if (cust._vartipopago == "008")
+                        if (cust._vartipopago == "008" || cust._vartipopago == "OPG")
                         {
                         resultLine._lineTotal = (resultLine._price * qty);
                             resultLine._commissionPctg = 0m;
@@ -1552,7 +1552,7 @@ namespace www.aquarella.com.pe.Aquarella.Logistica
                     //*******************************
 
                     decimal _totalOPG = 0.00m;
-                    if (cust._vartipopago == "008") {
+                    if (cust._vartipopago == "008" || cust._vartipopago == "OPG") {
                         _totalOPG = grandTotal;                        
                         subTotalDesc = (0).ToString(_currency);
                         grandTotalDesc = (0).ToString(_currency);
@@ -1739,7 +1739,7 @@ namespace www.aquarella.com.pe.Aquarella.Logistica
                     //*******************************
 
                     decimal _totalOPG = 0.00m;
-                    if (cust._vartipopago == "008")
+                    if (cust._vartipopago == "008" || cust._vartipopago == "OPG")
                     {
                         _totalOPG = subTotal;
                         subTotalDesc = (0).ToString(_currency);
@@ -2441,6 +2441,14 @@ namespace www.aquarella.com.pe.Aquarella.Logistica
                 msnMessage.LoadMessage("No se puede guardar un pedido borrador cuando se paga por Muestra de Mercadería: " + DateTime.Now, UserControl.ucMessage.MessageType.Information);
                 return;
             }
+            // se agregó varPagoxOPG.06-06-19
+            if (h_numTipPago.Value == varPagoxOPG)
+            {
+                script += "closeDialogLoadPedido()";
+                System.Web.UI.ScriptManager.RegisterStartupScript(upMsg, Page.GetType(), "CloseDialog", script, true);
+                msnMessage.LoadMessage("No se puede guardar un pedido borrador cuando se paga por Operación gratuita de Mercadería: " + DateTime.Now, UserControl.ucMessage.MessageType.Information);
+                return;
+            }
 
             if (h_numTipPago.Value == varIdOperacionPOS)
             {                
@@ -2563,6 +2571,14 @@ namespace www.aquarella.com.pe.Aquarella.Logistica
                 script += "closeDialogLoadPedido()";
                 System.Web.UI.ScriptManager.RegisterStartupScript(upMsg, Page.GetType(), "CloseDialog", script, true);
                 msnMessage.LoadMessage("No se puede guardar un pedido borrador cuando se paga por Muestra de Mercadería: " + DateTime.Now, UserControl.ucMessage.MessageType.Information);
+                return;
+            }
+            // se agregó varPagoxOPG.06-06-19
+            if (h_numTipPago.Value == varPagoxOPG)
+            {
+                script += "closeDialogLoadPedido()";
+                System.Web.UI.ScriptManager.RegisterStartupScript(upMsg, Page.GetType(), "CloseDialog", script, true);
+                msnMessage.LoadMessage("No se puede guardar un pedido borrador cuando se paga por Operación gratuita de Mercadería: " + DateTime.Now, UserControl.ucMessage.MessageType.Information);
                 return;
             }
 
@@ -2744,7 +2760,7 @@ namespace www.aquarella.com.pe.Aquarella.Logistica
 
             decimal total = 0;
             //cuando tipo de pago es por muestras (operacion Gratuita)
-            if (strTipoPago == "008")
+            if (strTipoPago == "008" || strTipoPago == "OPG")
             {
                 total = Convert.ToDecimal(txtValue.Text);
             }
@@ -3607,15 +3623,19 @@ namespace www.aquarella.com.pe.Aquarella.Logistica
         //}
 
         //metodo de forma de pago de la liquidacion
-        [WebMethod()]
+        [WebMethod(EnableSession = true)]
         public static List<formapago> getformapago()
         {
             List<formapago> formaList = new List<formapago>();
 
             Users _user = new Users();
             _user = (Users)HttpContext.Current.Session[Constants.NameSessionUser];
+            Coordinator _cust = new Coordinator();
+            _cust = (Coordinator)HttpContext.Current.Session[_nameSessionCustomer];
 
-            DataSet dsformapago = formapago.Get_CARGAR_POS( _user._usv_postpago);
+            // DataSet dsformapago = formapago.Get_CARGAR_POS( _user._usv_postpago);
+            //Se agrega 2 variables: _basid, _idCust - 06-06-2019
+            DataSet dsformapago = formapago.Get_CARGAR_POS(_user._usv_postpago, _user._bas_id, _cust._idCust);
 
             if (dsformapago != null)
             {

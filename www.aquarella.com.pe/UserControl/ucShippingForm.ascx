@@ -427,6 +427,9 @@
                 if (valor == "008") {
                     strMuestra = ', con forma de pago POR MUESTRA de MERCADERIA'                  
                 }
+                if (valor == "OPG") {
+                    strMuestra = ', con forma de pago por OPERACIÓN GRATUITA de MERCADERIA'
+                }
 
                 document.getElementById('popupx').innerHTML = 'Generaremos su liquidación ' + strMuestra + ' ; ¿desea continuar?'
                 
@@ -438,7 +441,9 @@
                 if (valor == "008") {
                     strMuestra = ', con forma de pago POR  MUESTRA de MERCADERIA'
                 }
-
+                if (valor == "OPG") {
+                    strMuestra = ', con forma de pago POR OPERACIÓN GRATUITA de MERCADERIA'
+                }
                 document.getElementById('popupy').innerHTML = 'Modificaremos su liquidación ' + strMuestra + ' ; ¿desea continuar?'
             }
         }
