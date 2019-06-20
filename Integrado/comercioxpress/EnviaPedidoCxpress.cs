@@ -234,8 +234,8 @@ namespace Integrado.comercioxpress
 
                         var e = dd.registrar(objcla);
 
-                        //nroserv = e.nroOrdenServicio.ToString();
-                        nroserv = e.listaPiezas[0].nuPieza.ToString();
+                        nroserv = e.nroOrdenServicio.ToString();
+                        //nroserv = e.listaPiezas[0].nuPieza.ToString();
 
 
                     }
