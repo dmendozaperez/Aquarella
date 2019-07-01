@@ -3145,7 +3145,7 @@ namespace www.aquarella.com.pe.Aquarella.Logistica
             //
 
             Coordinator cust = (Coordinator)HttpContext.Current.Session[_nameSessionCustomer];
-            //en este codigo vamos a grabar el clear si es que tiene nota d ecredito
+            //en este codigo vamos a grabar el clear si es que tiene nota de credito
             string clear = string.Empty;
             string listDoc = string.Empty;
             string listLiq = vorder;

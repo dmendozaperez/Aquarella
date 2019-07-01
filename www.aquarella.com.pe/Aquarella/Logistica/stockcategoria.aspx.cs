@@ -91,7 +91,7 @@ namespace www.aquarella.com.pe.Aquarella.Logistica
             DataSet dsreturn = www.aquarella.com.pe.bll.Stock.getstockcategoria(valor,_tempo);
 
             Pivot pvt = new Pivot(dsreturn.Tables[0]);
-            string[] fila = { "Categoria", "Codigo", "Descripcion", "tempo", "stock", "foto" };
+            string[] fila = { "Categoria", "Codigo", "Descripcion", "tempo", "stock", "foto" , "precio" };
             //string[] col = { "Ano","Mes","Semana", "Dia" };
             //string[] col = { "Ano", "Mes", "Semana" };
             string[] col = {"talla"};
@@ -114,7 +114,7 @@ namespace www.aquarella.com.pe.Aquarella.Logistica
              for (int rowIndex = gvReturns.Rows.Count - 2; rowIndex >= 0; rowIndex--)
             {
                 GridViewRow row = gvReturns.Rows[rowIndex];
-                row.Cells[2].Width = 200;
+                row.Cells[2].Width = 220;
                 row.Cells[1].Wrap = true;
             }
              gvReturns.HeaderStyle.Wrap = true;
@@ -128,7 +128,7 @@ namespace www.aquarella.com.pe.Aquarella.Logistica
         {
             gvReturns.PageIndex = e.NewPageIndex;
             Pivot pvt = new Pivot((DataTable)Session[_nameSessionData]);
-            string[] fila = { "Categoria", "Codigo", "Descripcion", "tempo", "stock", "foto" };
+            string[] fila = { "Categoria", "Codigo", "Descripcion", "tempo", "stock", "foto" ,"precio"};
             //string[] col = {"Ano", "Mes","Semana", "Dia" };
             string[] col = { "talla" };
 
@@ -186,8 +186,12 @@ namespace www.aquarella.com.pe.Aquarella.Logistica
                          "<img src='" +  rutafoto + "' border='0' width='30' height='30' alt='Informaci&oacute;n  Y Fotograf&iacute;a del Art&iacute;culo : <" + nameArticle + ">  - " + referencia + "' />" +
                         "</a>";
                 }
-                catch
+                catch (Exception ex)
                 {
+                    // throw new Exception(e.Message, e.InnerException);
+                   // throw ;
+                    this.msnMessage.LoadMessage("Error de Consulta: " + ex.Message, ucMessage.MessageType.Error);
+                    return;
                 }
             }
             
@@ -319,7 +323,7 @@ namespace www.aquarella.com.pe.Aquarella.Logistica
 
                     File.Delete(FilePath);
                     Pivot pvt = new Pivot(dtExcel);
-                    string[] fila = { "Categoria", "Codigo", "Descripcion", "tempo", "stock", "foto" };
+                    string[] fila = { "Categoria", "Codigo", "Descripcion", "tempo", "stock", "foto" ,"precio"};
                     string[] col = { "talla" };
                     gvReturns.DataSource = pvt.PivotData("Cantidad", AggregateFunction.Sum, fila, col);
                     gvReturns.DataBind();
@@ -332,7 +336,7 @@ namespace www.aquarella.com.pe.Aquarella.Logistica
                     DataTable dt = new DataTable();
                     dt = (DataTable)Session[_nameSessionData];
                     Pivot pvt = new Pivot(dt);
-                    string[] fila = { "Categoria", "Codigo", "Descripcion", "tempo", "stock", "foto" };
+                    string[] fila = { "Categoria", "Codigo", "Descripcion", "tempo", "stock", "foto" ,"precio"};
                     string[] col = { "talla" };
                     gvReturns.DataSource = pvt.PivotData("Cantidad", AggregateFunction.Sum, fila, col);
                     gvReturns.DataBind();
@@ -483,7 +487,7 @@ namespace www.aquarella.com.pe.Aquarella.Logistica
 
             DataTable dt1 = (DataTable)Session[_nameSessionData];
             Pivot pvt = new Pivot((DataTable)Session[_nameSessionData]);
-            string[] fila = { "Categoria", "Codigo", "foto", "Descripcion", "tempo", "stock" };
+            string[] fila = { "Categoria", "Codigo", "foto", "Descripcion", "tempo", "stock" ,"precio"};
             string[] col = { "talla" };
 
             StringBuilder sb = new StringBuilder();
@@ -496,6 +500,9 @@ namespace www.aquarella.com.pe.Aquarella.Logistica
             Response.ClearContent();
             Response.AddHeader("content-disposition", attachment);
             Response.ContentType = "application/ms-excel";
+            
+          //  Response.ContentType = "application / vnd.openxmlformats - officedocument.spreadsheetml.sheet";
+
             StringWriter stw = new StringWriter();
             HtmlTextWriter htextw = new HtmlTextWriter(stw);
             GridView gvexport = new GridView();
@@ -505,14 +512,14 @@ namespace www.aquarella.com.pe.Aquarella.Logistica
 
             string cadena = stw.ToString();
 
-            string iniImagen = "<img WIDTH = '34' HEIGHT = '34' alt = 'Logo_FR'  style = 'margin: 50px 50px 50px 50px; vertical-align:middle;' src = 'http";
+            string iniImagen = "<img WIDTH = '34' HEIGHT = '34' alt = 'Logo_FR'  style = 'margin: 50px 50px 50px 150px; vertical-align:middle; padding-left:10px' src = 'http";
             string finImagen = ".jpg' />";
 
             cadena = cadena.Replace("http", iniImagen);
             cadena = cadena.Replace(".jpg", finImagen);
             cadena = cadena.Replace("<tr", "<tr height = 40");
             cadena = cadena.Replace("<td", "<td height = 40");
-            cadena = cadena.Replace("foto", "&nbsp;&nbsp;&nbsp;&nbsp;Foto&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;");
+            cadena = cadena.Replace("foto", "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Foto&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;");
 
             ScriptManager.RegisterStartupScript(this, typeof(Page), "invocarfuncion", "ocultarDescarga(); ", true);
 
@@ -527,7 +534,7 @@ namespace www.aquarella.com.pe.Aquarella.Logistica
 
             DataTable dt1 = (DataTable)Session[_nameSessionData];
             Pivot pvt = new Pivot((DataTable)Session[_nameSessionData]);
-            string[] fila = { "Categoria", "Codigo", "foto", "Descripcion", "tempo", "stock" };
+            string[] fila = { "Categoria", "Codigo", "foto", "Descripcion", "tempo", "stock" ,"precio"};
             string[] col = { "talla" };
 
             dt = pvt.PivotData("Cantidad", AggregateFunction.Sum, fila, col);

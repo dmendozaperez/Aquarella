@@ -123,9 +123,19 @@ namespace www.aquarella.com.pe.bll
 
                 foreach (string Field in RowFields)
                 {
-                    row[Field] = RowName[Field];
-                    strFilter += " and " + Field + " = '" + RowName[Field].ToString() + "'";
-                }
+                    //GFT
+                    if (Field == "precio")
+                    {
+                        RowName[Field] = Math.Round(Convert.ToDouble(RowName[Field]), 2);
+                        row[Field] = RowName[Field];
+                        strFilter += " and " + Field + " = '" + RowName[Field].ToString() + "'";
+                    }
+                    else
+                    {
+                        row[Field] = RowName[Field];
+                      strFilter += " and " + Field + " = '" + RowName[Field].ToString() + "'";
+                    }
+            }
                 strFilter = strFilter.Substring(5);
 
                 foreach (var col in ColList)

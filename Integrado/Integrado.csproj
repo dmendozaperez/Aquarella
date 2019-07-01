@@ -394,7 +394,6 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <Content Include="Certificado\CDBATA.pfx" />
     <None Include="Service References\comercioxpress\Integrado.comercioxpress.registrarResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
