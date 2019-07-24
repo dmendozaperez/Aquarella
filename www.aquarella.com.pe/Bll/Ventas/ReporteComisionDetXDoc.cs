@@ -74,7 +74,9 @@ namespace www.aquarella.com.pe.Bll.Ventas
 
         public static DataSet _reportecomisionbono(DateTime _fechaini, DateTime _fechafin)
         {
-            string sqlquery = "USP_Reporte_Comision";
+
+            string sqlquery = "USP_Reporte_Comision_gft_prueba";
+           // string sqlquery = "USP_Reporte_Comision";
             SqlConnection cn = null;
             SqlCommand cmd = null;
             SqlDataAdapter da = null;

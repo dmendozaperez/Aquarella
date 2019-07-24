@@ -212,11 +212,11 @@ CodeBehind="rptComisiones.aspx.cs" Inherits="www.aquarella.com.pe.Aquarella.Vent
                         <HeaderStyle HorizontalAlign="Right" />
                         <ItemStyle HorizontalAlign="Right" />
                         </asp:BoundField>
-                           <asp:BoundField DataField="Bonos reactivadas" DataFormatString="{0:C}" 
+                     <%--      <asp:BoundField DataField="Bonos reactivadas" DataFormatString="{0:C}" 
                         HeaderText="Bonos reactivadas">
                         <HeaderStyle HorizontalAlign="Right" />
                         <ItemStyle HorizontalAlign="Right" />
-                        </asp:BoundField>
+                        </asp:BoundField>--%>
                          <asp:BoundField DataField="SubTotal Sin IGV" DataFormatString="{0:C}" 
                             HeaderText="SubTotal Sin IGV">
                         <HeaderStyle HorizontalAlign="Right" />
