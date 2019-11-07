@@ -99,7 +99,7 @@ namespace www.aquarella.com.pe.Aquarella.Financiera
                 //if (!(Payments.existe_op(txtNoVoucher.Text.Trim())))
                 //{
                 //en esta opcion validamos lo del pedido relacionado con el lider
-                /* string _valida = "0";*/// Payments.valida_pedido_pago(Convert.ToDecimal(idCust), txtpedido.Text);
+                 _valida = Payments.valida_pedido_pago(Convert.ToDecimal(idCust), txtpedido.Text);
                     //en esta opcion si la funcion retorna un error
                     if (_valida == "-1")
                     {

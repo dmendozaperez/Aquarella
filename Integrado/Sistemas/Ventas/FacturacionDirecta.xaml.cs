@@ -824,7 +824,7 @@ namespace Integrado.Sistemas.Ventas
 
                 string v_articulo = txtarticulo.Text.Trim();
                 //
-                string _barra = (txtarticulo.Text.Trim().Length == 18) ? txtarticulo.Text.Trim() : "";
+                string _barra = (txtarticulo.Text.Trim().Length == 18 || txtarticulo.Text.Trim().Length == 13) ? txtarticulo.Text.Trim() : "";
 
 
                 string[] info_articulo = (_barra.Length==18)? Ent_BarCodes.getInfoFromTheBarCode(v_articulo):null;
@@ -891,7 +891,13 @@ namespace Integrado.Sistemas.Ventas
 
                             string rutafot= articulo_stock_var[0].articulo_foto.ToString();
 
-                            imgfoto.Source = new BitmapImage(new Uri(rutafot));                         
+                            //imgfoto.Source = new BitmapImage(new Uri(rutafot));
+
+                            BitmapImage bm = image_bitmap(rutafot);
+
+
+
+                             if (bm!=null) imgfoto.Source = bm;// new BitmapImage(new Uri(rutafot));
 
                             dg1.ItemsSource = from c in articulo_stock_var
                                               select new Dat_Venta
@@ -971,6 +977,21 @@ namespace Integrado.Sistemas.Ventas
             {
                 MessageBox.Show(exc.Message, Ent_Msg.msginfomacion, MessageBoxButton.OK, MessageBoxImage.Error);
             }
+        }
+        private BitmapImage image_bitmap(string rutafot)
+        {
+            BitmapImage img = null;
+            try
+            {
+                img= new BitmapImage(new Uri(rutafot));
+                //img = new BitmapImage(new Uri(@"/Integrado;component/Design/Images/card_user.png"));
+                
+            }
+            catch
+            {
+                img = null;                
+            }
+            return img;
         }
         private void txtarticulo_KeyDown(object sender, KeyEventArgs e)
         {

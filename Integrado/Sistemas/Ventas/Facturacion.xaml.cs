@@ -266,7 +266,7 @@ namespace Integrado.Sistemas.Ventas
 
                 string v_articulo = txtarticulo.Text.Trim();
                 //
-                string _barra = (txtarticulo.Text.Trim().Length == 18) ? txtarticulo.Text.Trim() : "";
+                string _barra = (txtarticulo.Text.Trim().Length == 18 || txtarticulo.Text.Trim().Length == 13) ? txtarticulo.Text.Trim() : "";
 
 
                 string[] info_articulo = Ent_BarCodes.getInfoFromTheBarCode(v_articulo);

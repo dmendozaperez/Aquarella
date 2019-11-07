@@ -45,7 +45,7 @@
                                 <Border BorderBrush="{DynamicResource AccentColorBrush}"
                                 Margin="10"
                                  BorderThickness="2">
-                                    <Image Name="imgfoto"  HorizontalAlignment="Center" VerticalAlignment="Center" Height="250" Width="250" ></Image>
+                                    <Image Name="imgfoto"  HorizontalAlignment="Center" VerticalAlignment="Center" Height="250" Width="250" Source="/Integrado;component/Design/Images/card_user.png" ></Image>
                                 </Border>
                             </Grid>
 

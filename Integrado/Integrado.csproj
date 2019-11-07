@@ -15,7 +15,7 @@
     <WarningLevel>4</WarningLevel>
     <TargetFrameworkProfile />
     <IsWebBootstrapper>true</IsWebBootstrapper>
-    <PublishUrl>\\172.28.7.9\inetpub\wwwroot\AppEC\</PublishUrl>
+    <PublishUrl>\\172.28.7.9\Aquarella\Windows_WPF\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Web</InstallFrom>
     <UpdateEnabled>true</UpdateEnabled>
@@ -25,13 +25,13 @@
     <UpdatePeriodically>false</UpdatePeriodically>
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
-    <InstallUrl>http://posperu.bgr.pe/AppEC/</InstallUrl>
+    <InstallUrl>http://www.catalogo.aquarellaperu.com.pe/Aquarella/Windows_WPF/</InstallUrl>
     <ProductName>Sistema Facturacion</ProductName>
     <PublisherName>Bata Peru</PublisherName>
     <SuiteName>%28Corporacion Bata%29</SuiteName>
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <WebPage>publish.htm</WebPage>
-    <ApplicationRevision>100</ApplicationRevision>
+    <ApplicationRevision>103</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>true</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
@@ -618,6 +618,8 @@
     <Resource Include="Design\Images\bt_package.png" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\image_broken.png" />
+    <None Include="Resources\Imagen.png" />
     <Resource Include="Design\Images\impresora.png" />
     <Resource Include="Design\Images\lupa.jpg" />
     <Resource Include="Design\Images\printer.ico" />
@@ -637,6 +639,8 @@
     <Resource Include="Design\Images\imprimir-urbano.png" />
     <Resource Include="Design\Images\reenviar-urbano.png" />
     <Resource Include="Design\Images\lista.png" />
+    <Resource Include="Design\Images\image_broken.png" />
+    <Resource Include="Design\Images\card_user.png" />
     <Content Include="Esquemas\FACTURA_BOLETA.xml" />
     <Content Include="Esquemas\NOTAS.xml" />
   </ItemGroup>

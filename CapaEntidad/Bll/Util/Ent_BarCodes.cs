@@ -69,13 +69,16 @@ namespace CapaEntidad.Bll.Util
             /// Digit 10-> Cte
             /// Digit 11-12-> Position in plane
             /// Digit 13-> Static of verification
+            /// BARRA EA13
             else if (numDigitsInCodeBar == 13)
             {
                 ///
-                String refArticle = codeBar.ToString().Substring(1, 8);
+                String refArticle = codeBar.ToString().Substring(1, 7);
 
                 ///
-                String posPlaneColumn = (Convert.ToDecimal(codeBar.Substring(10, 2))).ToString();
+                String posPlaneColumn = Convert.ToDecimal((codeBar.Substring(10, 2)).ToString()).ToString();
+
+                String calidad = (codeBar.Substring(8, 1)).ToString();
 
                 /// Ref Articulo
                 /// 
@@ -85,6 +88,7 @@ namespace CapaEntidad.Bll.Util
                 /// 
                 infoArray[1] = posPlaneColumn;
 
+                infoArray[2] = calidad;
                 ///
                 return infoArray;
             }

@@ -500,7 +500,7 @@ function addArticle(size, qty, TipoPago) {
     SendAjax(urlMethod, jsonData, renderTableInit);  //addArticlesTable);   
     cleanForm();
     /*en esta opcion vamos a ver si hay ofertas*/
-    fupdateitemoferta();0
+    fupdateitemoferta();
     /**********/
 }
 

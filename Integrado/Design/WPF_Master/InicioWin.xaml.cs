@@ -62,14 +62,14 @@ namespace Integrado.Design.WPF_Master
         private void btnaquarella_Click(object sender, RoutedEventArgs e)
         {
             Mouse.OverrideCursor = Cursors.Wait;
-            //_server = "172.28.7.14";
-            //_base_datos = "BdAquarella";
-            //_user = "sis_aquarella";
-            //_password = "Bata2018**";
-            _server = "172.19.7.169";
-            _base_datos = "BdAquarellaFE";
-            _user = "prueba1";
-            _password = "123456";
+            _server = "3.16.178.73";
+            _base_datos = "BdAquarella";
+            _user = "sis_aquarella";
+            _password = "Bata2018**";
+            //_server = "172.19.7.169";
+            //_base_datos = "BdAquarella_DESA";
+            //_user = "prueba1";
+            //_password = "123456";
 
             Boolean ini_mod = false;
             Ent_Global._canal_venta = "AQ";
@@ -220,7 +220,7 @@ namespace Integrado.Design.WPF_Master
                 Ent_Conexion._password = _password;
               
                 string _error = "";
-                Basico.copiar_archivo_config(ref _error);
+                //Basico.copiar_archivo_config(ref _error);
                 if (_error.Length > 0)
                 {
                     MessageBox.Show(_error + "==>> CONSULTE CON SISTEMA ACERCA DEL ERROR....", Ent_Msg.msginfomacion, MessageBoxButton.OK, MessageBoxImage.Exclamation);
@@ -228,7 +228,7 @@ namespace Integrado.Design.WPF_Master
 
 
 
-               // string _entorno = "AQHIG1";
+                //string _entorno = "AQHIG1";
                 string _entorno = "";
                 //Ent_Global._session_activa = true;
                 //Ent_Usuario user = new Ent_Usuario();           
