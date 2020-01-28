@@ -562,6 +562,24 @@ namespace www.aquarella.com.pe.Aquarella.Admonred {
         protected global::System.Web.UI.WebControls.TextBox txtagenciaruc;
         
         /// <summary>
+        /// Control UpdatePanel27.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel UpdatePanel27;
+        
+        /// <summary>
+        /// Control txtRucComision.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtRucComision;
+        
+        /// <summary>
         /// Control btBack.
         /// </summary>
         /// <remarks>

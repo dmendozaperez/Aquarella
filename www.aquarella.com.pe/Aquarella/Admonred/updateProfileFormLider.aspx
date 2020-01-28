@@ -746,7 +746,23 @@
                         </Triggers>
                     </asp:UpdatePanel>            
                             </td>
-                        </tr>                
+                        </tr>               
+                        
+                        <tr>
+                            <td>
+                                <label for="lblagenciaruc" class="f12">
+                        Ruc :</label>
+                    <asp:UpdatePanel ID="UpdatePanel27" runat="server">
+                        <ContentTemplate>
+                            <asp:TextBox ID="txtRucComision" runat="server" MaxLength="11" AccessKey="p" Width="450px"></asp:TextBox>
+                        </ContentTemplate>
+                        <Triggers>
+                            <asp:AsyncPostBackTrigger ControlID="btValidateDoc" EventName="click" />
+                        </Triggers>
+                    </asp:UpdatePanel>            
+                            </td>
+                        </tr>       
+                         
                     </table>
                 </td>
             </tr>

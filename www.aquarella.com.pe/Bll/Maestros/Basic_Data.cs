@@ -485,7 +485,7 @@ namespace www.aquarella.com.pe.bll
         public static string crear_usuario(string Bas_Primer_Nombre,string Bas_Segundo_Nombre,string Bas_Primer_Apellido,string Bas_Segundo_Apellido,
 	                                       DateTime Bas_Fec_nac,string Bas_Documento,string Bas_Doc_Tip_Id,string Bas_Per_Tip_Id,string  Bas_Direccion,string Bas_Telefono,
                                            string  Bas_Fax,string Bas_Celular,string Bas_Correo,string Bas_Are_Id,string Bas_Cre_Usuario,string Bas_Sex_Id,string Bas_Dis_Id,string Bas_Usu_TipId,
-                                           string Bas_Contraseña,Int32 _acceso=0,Boolean lider=false,string agencia="",string destino="",string agencia_ruc="")
+                                           string Bas_Contraseña,Int32 _acceso=0,Boolean lider=false,string agencia="",string destino="",string agencia_ruc="" , string ruc_comision = "")
         {
             string sqlquery = "USP_Crear_Usuario";
             SqlConnection cn = null;
@@ -523,6 +523,8 @@ namespace www.aquarella.com.pe.bll
                 cmd.Parameters.AddWithValue("@bas_destino", destino);
                 cmd.Parameters.AddWithValue("@bas_agencia_ruc", agencia_ruc);
 
+                cmd.Parameters.AddWithValue("@bas_ruc_comision", ruc_comision);
+
 
                 cmd.ExecuteNonQuery();
                 return "1";
@@ -550,7 +552,8 @@ namespace www.aquarella.com.pe.bll
                   string  bas_usu_tipid,
                   Boolean defectotipousu=false,
                   string agencia="",string destino="",
-                  string agencia_ruc=""  
+                  string agencia_ruc=""  ,
+                  string ruc_comision = ""
           )
         {
             string sqlquery = "USP_Modificar_Basico_Dato";
@@ -586,6 +589,8 @@ namespace www.aquarella.com.pe.bll
                 cmd.Parameters.AddWithValue("@bas_agencia", agencia);
                 cmd.Parameters.AddWithValue("@bas_destino", destino);
                 cmd.Parameters.AddWithValue("@bas_agencia_ruc", agencia_ruc);
+
+                cmd.Parameters.AddWithValue("@bas_ruc_comision", ruc_comision);
 
 
                 cmd.ExecuteNonQuery();
