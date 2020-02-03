@@ -422,25 +422,25 @@ namespace www.aquarella.com.pe.Aquarella.Logistica
             try
             {
 
-                    Coordinator cust = (Coordinator)HttpContext.Current.Session[_nameSessionCustomer];
+                Coordinator cust = (Coordinator)HttpContext.Current.Session[_nameSessionCustomer];
                 string co = cust._co;
 
                 List<Articles_Sizes> artSizes = new List<Articles_Sizes>();
-                
+
                 Order_Dtl newLineOrder = new Order_Dtl();
                 List<Order_Dtl> order = new List<Order_Dtl>();
 
-                DataSet dsArt = Article.getArticle(code.Replace("-", string.Empty).Trim(),cust._idCust);
+                DataSet dsArt = Article.getArticle(code.Replace("-", string.Empty).Trim(), cust._idCust);
 
                 decimal new_precio_oferta_conigv = 0;
                 decimal new_precio_oferta_sinigv = 0;
-                getpromocion_especial(code.Replace("-", string.Empty).Trim(),ref new_precio_oferta_conigv,ref  new_precio_oferta_sinigv);
+                getpromocion_especial(code.Replace("-", string.Empty).Trim(), ref new_precio_oferta_conigv, ref new_precio_oferta_sinigv);
 
-                if  (new_precio_oferta_conigv > 0)
+                if (new_precio_oferta_conigv > 0)
                 {
-                    if (dsArt!=null)
+                    if (dsArt != null)
                     {
-                        if (dsArt.Tables.Count>0)
+                        if (dsArt.Tables.Count > 0)
                         {
 
                             dsArt.Tables[0].Rows[0]["art_pre_sin_igv"] = new_precio_oferta_sinigv;
@@ -449,9 +449,9 @@ namespace www.aquarella.com.pe.Aquarella.Logistica
                         }
                     }
                     //decimal new_precio_oferta_sinigv=new_precio_oferta_conigv*
-                }               
+                }
 
-                string TipoPago = cust._vartipopago ;
+                string TipoPago = cust._vartipopago;
 
                 //if (TipoPago == "008")
                 //{
@@ -475,43 +475,7 @@ namespace www.aquarella.com.pe.Aquarella.Logistica
                     throw new Exception("El artículo digitado es inexistente.");
 
                 /* Session con las ofertas */
-                List<Tran_Ofertas> listOfertas = new List<Tran_Ofertas>();
-                int _idOfe = 0;
-
-                if (HttpContext.Current.Session["TranOfertas"] != null)
-                {
-                    listOfertas = (List<Tran_Ofertas>)HttpContext.Current.Session["TranOfertas"];
-                    _idOfe = listOfertas.Max(m => m.id);
-                }
-                List<Tran_Ofertas> list = new List<Tran_Ofertas>();
-                list = (from DataRow dr in dsArt.Tables[0].Rows
-                               select new Tran_Ofertas()
-                               {
-                                   id = _idOfe + 1,
-                                   idArt = dr["Art_Id"].ToString(),
-                                   ofe_id = Convert.ToDecimal(dr["ofe_id"]),
-                                   max_pares = Convert.ToDecimal(dr["Ofe_Maxpares"]),
-                                   ofe_porc = Convert.ToDecimal(dr["ofe_porc"]),
-                                   ofe_tipo = Convert.ToString(dr["ofe_tipo"]),
-                                   ofe_artventa = Convert.ToDecimal(dr["ofe_artventa"]),
-                                   ofe_prioridad = Convert.ToDecimal(dr["ofe_prioridad"]),
-                               }).ToList();
-                listOfertas = listOfertas.Union(list).ToList();
-
-                HttpContext.Current.Session["TranOfertas"] = listOfertas;
-                /* Session con las ofertas */
-                newLineOrder = Order_Dtl.getNewLineOrder(dsArt.Tables[0],_idOfe + 1);
-                artSizes = Articles_Sizes.getObjectSizes(dsArt.Tables[1], false);
-
-                if (dsArt == null || dsArt.Tables[1].Rows.Count == 0)
-                    throw new Exception("Lamentablemente no existen tallas habilitas para este artículo");
-
-                HttpContext.Current.Session[_nSArtSiz] = artSizes;                
-
-                order.Add(newLineOrder);
-
-                #region<REGION  DE OFERTAS TEMPORALES>
-                List< Tran_Ofertas > listOfertas = new List<Tran_Ofertas>();
+                List < Tran_Ofertas > listOfertas = new List<Tran_Ofertas>();
                 int _idOfe = 0;
 
                 if (HttpContext.Current.Session["TranOfertas"] != null)
@@ -535,16 +499,26 @@ namespace www.aquarella.com.pe.Aquarella.Logistica
                 listOfertas = listOfertas.Union(list).ToList();
 
                 HttpContext.Current.Session["TranOfertas"] = listOfertas;
-                #endregion
+                /* Session con las ofertas */
+                newLineOrder = Order_Dtl.getNewLineOrder(dsArt.Tables[0], _idOfe + 1);
+                artSizes = Articles_Sizes.getObjectSizes(dsArt.Tables[1], false);
 
-                HttpContext.Current.Session[_nSNewOrdrLine] = order;   
+                if (dsArt == null || dsArt.Tables[1].Rows.Count == 0)
+                    throw new Exception("Lamentablemente no existen tallas habilitas para este artículo");
+
+                HttpContext.Current.Session[_nSArtSiz] = artSizes;
+
+                order.Add(newLineOrder);
+
+                HttpContext.Current.Session[_nSNewOrdrLine] = order;
                 return order;
             }
-            catch (Exception e) {
-                string mensaje = e.Message; 
+            catch (Exception e)
+            {
+                string mensaje = e.Message;
 
-                    if(mensaje == "No se puede convertir un objeto DBNull en otros tipos.")
-                        mensaje ="Stock por ingresar";
+                if (mensaje == "No se puede convertir un objeto DBNull en otros tipos.")
+                    mensaje = "Stock por ingresar";
 
                 throw new Exception(mensaje, e.InnerException);
 
@@ -680,7 +654,7 @@ namespace www.aquarella.com.pe.Aquarella.Logistica
             return addArticle(newLineOrder, qty, varTipoPago);//, tipoPago);
  
 
-            return addArticle(newLineOrder, qty, varTipoPago);//, tipoPago);
+            //return addArticle(newLineOrder, qty, varTipoPago);//, tipoPago);
         }
 
 

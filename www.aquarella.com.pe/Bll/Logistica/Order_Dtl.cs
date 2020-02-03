@@ -386,4 +386,19 @@ namespace www.aquarella.com.pe.bll
 
         public string premId { get; set; }
     }
+    public class Tran_Ofertas
+    {
+        /* OBJETO EN CLASE Order_dtl.cs */
+        public int id { get; set; }
+        public string idArt { get; set; }
+        public string talla { get; set; }
+        public decimal cant { get; set; }
+        public decimal ofe_id { get; set; }
+        public decimal max_pares { get; set; }
+        public decimal ofe_porc { get; set; }
+        public string ofe_tipo { get; set; }
+        public decimal ofe_artventa { get; set; }
+        public decimal ofe_prioridad { get; set; }
+        public string hecho { get; set; } = "";
+    }
 }
