@@ -510,6 +510,33 @@ namespace www.aquarella.com.pe.Aquarella.Logistica
 
                 order.Add(newLineOrder);
 
+                #region<REGION  DE OFERTAS TEMPORALES>
+                List< Tran_Ofertas > listOfertas = new List<Tran_Ofertas>();
+                int _idOfe = 0;
+
+                if (HttpContext.Current.Session["TranOfertas"] != null)
+                {
+                    listOfertas = (List<Tran_Ofertas>)HttpContext.Current.Session["TranOfertas"];
+                    _idOfe = listOfertas.Max(m => m.id);
+                }
+                List<Tran_Ofertas> list = new List<Tran_Ofertas>();
+                list = (from DataRow dr in dsArt.Tables[0].Rows
+                        select new Tran_Ofertas()
+                        {
+                            id = _idOfe + 1,
+                            idArt = dr["Art_Id"].ToString(),
+                            ofe_id = Convert.ToDecimal(dr["ofe_id"]),
+                            max_pares = Convert.ToDecimal(dr["Ofe_Maxpares"]),
+                            ofe_porc = Convert.ToDecimal(dr["ofe_porc"]),
+                            ofe_tipo = Convert.ToString(dr["ofe_tipo"]),
+                            ofe_artventa = Convert.ToDecimal(dr["ofe_artventa"]),
+                            ofe_prioridad = Convert.ToDecimal(dr["ofe_prioridad"]),
+                        }).ToList();
+                listOfertas = listOfertas.Union(list).ToList();
+
+                HttpContext.Current.Session["TranOfertas"] = listOfertas;
+                #endregion
+
                 HttpContext.Current.Session[_nSNewOrdrLine] = order;   
                 return order;
             }
@@ -653,6 +680,7 @@ namespace www.aquarella.com.pe.Aquarella.Logistica
             return addArticle(newLineOrder, qty, varTipoPago);//, tipoPago);
  
 
+            return addArticle(newLineOrder, qty, varTipoPago);//, tipoPago);
         }
 
 
