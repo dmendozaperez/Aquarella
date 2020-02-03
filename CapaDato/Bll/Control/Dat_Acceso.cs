@@ -34,6 +34,32 @@ namespace CapaDato.Bll.Control
             }
             return dt;
         }
+        public static DataSet getSalesCoorByMonthPctg()
+        {
+            string sqlquery = "USP_Leer_ComisionPersona";
+            SqlConnection cn = null;
+            SqlCommand cmd = null;
+            SqlDataAdapter da = null;
+            DataSet ds = null;
+            try
+            {
+                cn = new SqlConnection(Ent_Conexion.conexion);
+                cmd = new SqlCommand(sqlquery, cn);
+                //cmd.CommandTimeout = 0;
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@are_id", "-1");
+                cmd.Parameters.AddWithValue("@fecha_ini",Convert.ToDateTime("01-01-2019"));
+                cmd.Parameters.AddWithValue("@fecha_fin",Convert.ToDateTime("04-12-2019"));
+                cmd.Parameters.AddWithValue("@asesor","");              
+                da = new SqlDataAdapter(cmd);
+                ds = new DataSet();
+                //DataTable dt = new DataTable();
+                //da.Fill(dt);
+                da.Fill(ds);
+                return ds;
+            }
+            catch (Exception e) { throw new Exception(e.Message, e.InnerException); }
+        }
         public static Boolean getpunto_vta(string _entorno)
         {
             Boolean _valida = false;

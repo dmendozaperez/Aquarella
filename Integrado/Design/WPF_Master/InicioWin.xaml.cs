@@ -62,10 +62,10 @@ namespace Integrado.Design.WPF_Master
         private void btnaquarella_Click(object sender, RoutedEventArgs e)
         {
             Mouse.OverrideCursor = Cursors.Wait;
-            _server = "3.16.178.73";
+            _server = "3.16.178.73";//"172.28.7.14";// "3.16.178.73";
             _base_datos = "BdAquarella";
-            _user = "sis_aquarella";
-            _password = "Bata2018**";
+            _user = "aquarella_web";
+            _password = "Bata2019**";
             //_server = "172.19.7.169";
             //_base_datos = "BdAquarella_DESA";
             //_user = "prueba1";
@@ -238,6 +238,8 @@ namespace Integrado.Design.WPF_Master
 
 
                 Boolean inicio_config = Dat_Acceso.getpunto_vta(_entorno);
+
+               // Dat_Acceso.getSalesCoorByMonthPctg();
 
                 _ini = inicio_config;
                 if (!inicio_config)

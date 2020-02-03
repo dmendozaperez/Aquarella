@@ -475,6 +475,35 @@ namespace www.aquarella.com.pe.bll
             catch (Exception e) { throw new Exception(e.Message, e.InnerException); }
         }
 
+        public  DataSet getSalesCoorByMonthPctg_2(int _are_id, String _asesor, DateTime _date_start, DateTime _date_end)
+        {
+            string sqlquery = "USP_Leer_ComisionPersona";
+            SqlConnection cn = null;
+            SqlCommand cmd = null;
+            SqlDataAdapter da = null;
+            DataSet ds = null;
+            try
+            {
+                cn = new SqlConnection(Conexion.myconexion());
+                cmd = new SqlCommand(sqlquery, cn);
+                cmd.CommandTimeout = 0;
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@are_id", _are_id);
+                cmd.Parameters.AddWithValue("@fecha_ini", _date_start);
+                cmd.Parameters.AddWithValue("@fecha_fin", _date_end);
+                cmd.Parameters.AddWithValue("@asesor", _asesor);
+                if (cn.State == 0) cn.Open();
+                cmd.ExecuteNonQuery();
+                da = new SqlDataAdapter(cmd);
+                ds = new DataSet();
+                //DataTable dt = new DataTable();
+                //da.Fill(dt);
+                da.Fill(ds);
+                return ds;
+            }
+            catch (Exception e) { throw new Exception(e.Message, e.InnerException); }
+        }
+
         public static DataSet getSalesCoorByMonthPctg(int _are_id, String _asesor, DateTime _date_start, DateTime _date_end)
         {
             string sqlquery = "USP_Leer_ComisionPersona";
@@ -492,8 +521,8 @@ namespace www.aquarella.com.pe.bll
                 cmd.Parameters.AddWithValue("@fecha_ini", _date_start);
                 cmd.Parameters.AddWithValue("@fecha_fin", _date_end);
                 cmd.Parameters.AddWithValue("@asesor", _asesor);
-                //if (cn.State == 0) cn.Open();
-                //cmd.ExecuteNonQuery();
+                if (cn.State == 0) cn.Open();
+                cmd.ExecuteNonQuery();
                 da = new SqlDataAdapter(cmd);
                 ds = new DataSet();
                 //DataTable dt = new DataTable();

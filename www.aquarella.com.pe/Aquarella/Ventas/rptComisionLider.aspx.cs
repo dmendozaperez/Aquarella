@@ -91,7 +91,8 @@ namespace www.aquarella.com.pe.Aquarella.Ventas
 
         protected void btConsult_Click(object sender, EventArgs e)
         {
-
+            //Payments pr = new Payments();
+            //pr.getSalesCoorByMonthPctg_2(-1, "",Convert.ToDateTime("25-11-2019"),Convert.ToDateTime("03-12-2019"));
 
             if ((_user._usu_tip_id == "01") || (_user._usu_tip_id == "03"))
             {
