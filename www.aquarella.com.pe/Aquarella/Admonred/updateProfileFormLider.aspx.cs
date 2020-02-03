@@ -400,7 +400,9 @@ namespace www.aquarella.com.pe.Aquarella.Admonred
 
             txtagenciaruc.Text = infoPerson["bas_agencia_ruc"].ToString();
 
-             //Ahora vamos a mostrar , departamento,provincia y distrito del cliente
+            txtRucComision.Text = infoPerson["Bas_Ruc_Comision"].ToString();
+
+            //Ahora vamos a mostrar , departamento,provincia y distrito del cliente
             if (infoPerson["dis_dep_id"] != null && !string.IsNullOrEmpty(infoPerson["dis_dep_id"].ToString()))
             {
                 String vcod_dpto = infoPerson["dis_dep_id"].ToString();
@@ -642,6 +644,7 @@ namespace www.aquarella.com.pe.Aquarella.Admonred
 
             string agencia_ruc = txtagenciaruc.Text.Trim();
 
+            string ruc_comision = txtRucComision.Text.Trim();
             // Estado Cuenta
             //string estado = "A";
 
@@ -664,7 +667,7 @@ namespace www.aquarella.com.pe.Aquarella.Admonred
                 {
                     // Realizar procesos de actualizacion de un coordinador
                     string respuesta = Basic_Data.updateBasicDatausers(cust._usn_userid,primerNombre, segundoNombre, primerApellido, segApellido, fechaNacimiento, tipoDoc, tipoPersona,
-                        direccion,telefono,fax,celular,mail,area,User,sexo,ciudad,"",true,agencia,destino, agencia_ruc);
+                        direccion,telefono,fax,celular,mail,area,User,sexo,ciudad,"",true,agencia,destino, agencia_ruc , ruc_comision);
 
 
                     //string respuesta = Basic_Data.updateBasicData(_user._usv_co, cust._usn_userid, primerNombre, segundoNombre, primerApellido, segApellido,
@@ -721,7 +724,7 @@ namespace www.aquarella.com.pe.Aquarella.Admonred
                     //                   limiteCredito, autoretenedor, granContri);
 
                     string resp = Basic_Data.crear_usuario(primerNombre, segundoNombre, primerApellido, segApellido, fechaNacimiento, cedula, tipoDoc, tipoPersona, direccion,
-                                                         telefono, fax, celular, mail, area, User, sexo, ciudad, "01", Cryptographic.encrypt(cedula),0,true,agencia,destino, agencia_ruc);
+                                                         telefono, fax, celular, mail, area, User, sexo, ciudad, "01", Cryptographic.encrypt(cedula),0,true,agencia,destino, agencia_ruc , ruc_comision);
 
                     // Crear el login de usuario para el coordinador con el cual podra iniciar sesion en el sistema
                     //Users.createUserLider(_user._usv_co, Convert.ToDecimal(resp), mail, Cryptographic.encrypt(cedula));

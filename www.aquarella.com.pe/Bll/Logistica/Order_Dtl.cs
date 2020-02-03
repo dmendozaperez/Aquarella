@@ -158,6 +158,8 @@ namespace www.aquarella.com.pe.bll
         /// Nombre de conexion a bd
         /// </summary>
 
+            public int id_tran_ofe { get; set; }
+        public int nroProms { get; set; }
 
         #endregion
 
@@ -169,7 +171,7 @@ namespace www.aquarella.com.pe.bll
         /// <param name="dtArt"></param>
         /// <param name="dtDisscArt"></param>
         /// <returns></returns>
-        public static Order_Dtl getNewLineOrder(DataTable dtArt)
+        public static Order_Dtl getNewLineOrder(DataTable dtArt,int _idOfe)
         {
             Order_Dtl order = new Order_Dtl();
 
@@ -202,9 +204,12 @@ namespace www.aquarella.com.pe.bll
                 _ap_percepcion = dr["Afec_Percepcion"].ToString(),
                 _ofe_Tipo = dr["Ofe_tipo"].ToString(),
                 _ofe_PrecioPack = Convert.ToDecimal(dr["Ofe_ArtVenta"]),
-                _ofe_id =Convert.ToDecimal(dr["Ofe_Id"]),
-                _ofe_maxpares=Convert.ToDecimal(dr["Ofe_MaxPares"]),
-                _ofe_porc=Convert.ToDecimal(dr["Ofe_Porc"])
+                _ofe_id = Convert.ToDecimal(dr["Ofe_Id"]),
+                _ofe_maxpares = Convert.ToDecimal(dr["Ofe_MaxPares"]),
+                _ofe_porc = Convert.ToDecimal(dr["Ofe_Porc"]),
+                id_tran_ofe = _idOfe,
+                nroProms = dtArt.Rows.Count,
+
             };
 
             //if (dtDisscArt == null || dtDisscArt.Rows.Count == 0)
@@ -381,19 +386,19 @@ namespace www.aquarella.com.pe.bll
 
         public string premId { get; set; }
     }
-
     public class Tran_Ofertas
     {
-/// OBJETO EN CLASE Order_dtl.cs /
+        /* OBJETO EN CLASE Order_dtl.cs */
         public int id { get; set; }
-        public string idArt { get; set; }
-        public string talla { get; set; }
-        public decimal cant { get; set; }
-        public decimal ofe_id { get; set; }
-        public decimal max_pares { get; set; }
-        public decimal ofe_porc { get; set; }
-        public string ofe_tipo { get; set; }
-        public decimal ofe_artventa { get; set; }
-        public decimal ofe_prioridad { get; set; }
+        public string idArt         { get; set; }
+        public string talla         { get; set; }
+        public decimal cant         { get; set; }
+        public decimal ofe_id       { get; set; }
+        public decimal max_pares    { get; set; }
+        public decimal ofe_porc     { get; set; }
+        public string ofe_tipo      { get; set; }
+        public decimal ofe_artventa     { get; set; }
+        public decimal ofe_prioridad    { get; set; }
+        public string hecho { get; set; } = "";
     }
 }

@@ -104,14 +104,16 @@ namespace www.aquarella.com.pe.Aquarella.Logistica
             if (!this.IsPostBack)
             {
 
-               
-                
+
+
                 ////nota de credito
                 //setParamsDataSource("1");
                 ////
                 ////
                 //refreshGrid();    
                 ////*************************
+                HttpContext.Current.Session["TranOfertas"] = null;
+
                 Session[_nameList] = new List<Documents_Trans>();
                 (HttpContext.Current.Session[_valida])=0;
 
@@ -472,18 +474,8 @@ namespace www.aquarella.com.pe.Aquarella.Logistica
                 if (dsArt == null || dsArt.Tables[0].Rows.Count == 0)
                     throw new Exception("El artículo digitado es inexistente.");
 
-                newLineOrder = Order_Dtl.getNewLineOrder(dsArt.Tables[0]);
-                artSizes = Articles_Sizes.getObjectSizes(dsArt.Tables[1], false);
-
-                if (dsArt == null || dsArt.Tables[1].Rows.Count == 0)
-                    throw new Exception("Lamentablemente no existen tallas habilitas para este artículo");
-
-                HttpContext.Current.Session[_nSArtSiz] = artSizes;                
-
-                order.Add(newLineOrder);
-
-                #region<REGION  DE OFERTAS TEMPORALES>
-                List< Tran_Ofertas > listOfertas = new List<Tran_Ofertas>();
+                /* Session con las ofertas */
+                List<Tran_Ofertas> listOfertas = new List<Tran_Ofertas>();
                 int _idOfe = 0;
 
                 if (HttpContext.Current.Session["TranOfertas"] != null)
@@ -493,21 +485,30 @@ namespace www.aquarella.com.pe.Aquarella.Logistica
                 }
                 List<Tran_Ofertas> list = new List<Tran_Ofertas>();
                 list = (from DataRow dr in dsArt.Tables[0].Rows
-                        select new Tran_Ofertas()
-                        {
-                            id = _idOfe + 1,
-                            idArt = dr["Art_Id"].ToString(),
-                            ofe_id = Convert.ToDecimal(dr["ofe_id"]),
-                            max_pares = Convert.ToDecimal(dr["Ofe_Maxpares"]),
-                            ofe_porc = Convert.ToDecimal(dr["ofe_porc"]),
-                            ofe_tipo = Convert.ToString(dr["ofe_tipo"]),
-                            ofe_artventa = Convert.ToDecimal(dr["ofe_artventa"]),
-                            ofe_prioridad = Convert.ToDecimal(dr["ofe_prioridad"]),
-                        }).ToList();
+                               select new Tran_Ofertas()
+                               {
+                                   id = _idOfe + 1,
+                                   idArt = dr["Art_Id"].ToString(),
+                                   ofe_id = Convert.ToDecimal(dr["ofe_id"]),
+                                   max_pares = Convert.ToDecimal(dr["Ofe_Maxpares"]),
+                                   ofe_porc = Convert.ToDecimal(dr["ofe_porc"]),
+                                   ofe_tipo = Convert.ToString(dr["ofe_tipo"]),
+                                   ofe_artventa = Convert.ToDecimal(dr["ofe_artventa"]),
+                                   ofe_prioridad = Convert.ToDecimal(dr["ofe_prioridad"]),
+                               }).ToList();
                 listOfertas = listOfertas.Union(list).ToList();
 
                 HttpContext.Current.Session["TranOfertas"] = listOfertas;
-                #endregion
+                /* Session con las ofertas */
+                newLineOrder = Order_Dtl.getNewLineOrder(dsArt.Tables[0],_idOfe + 1);
+                artSizes = Articles_Sizes.getObjectSizes(dsArt.Tables[1], false);
+
+                if (dsArt == null || dsArt.Tables[1].Rows.Count == 0)
+                    throw new Exception("Lamentablemente no existen tallas habilitas para este artículo");
+
+                HttpContext.Current.Session[_nSArtSiz] = artSizes;                
+
+                order.Add(newLineOrder);
 
                 HttpContext.Current.Session[_nSNewOrdrLine] = order;   
                 return order;
@@ -645,12 +646,13 @@ namespace www.aquarella.com.pe.Aquarella.Logistica
             //
             newLineOrder._size = size;
             newLineOrder._premio = "N";
-
-            //List<Order_Dtl> listar_pedido= addArticle(newLineOrder, qty, varTipoPago);//, tipoPago);
-
-
-
+            if (newLineOrder.nroProms > 1 && qty > 1)
+            {
+                throw new Exception("Articulo con mas de una promocion no puede tener cantidad " + qty + " en una misma talla. Si desea agregar mas de un articulo en la misma talla, Hagalo en otra transaccion por favor.");
+            }
             return addArticle(newLineOrder, qty, varTipoPago);//, tipoPago);
+ 
+
         }
 
 
@@ -706,6 +708,7 @@ namespace www.aquarella.com.pe.Aquarella.Logistica
             // Lista de pedido
             List<Order_Dtl> orderLines = (List<Order_Dtl>)(((object)HttpContext.Current.Session[_nSOrder]) != null ? (object)HttpContext.Current.Session[_nSOrder] : new List<Order_Dtl>()); ;
 
+            
             //verificamos que no exista un premio en la lista
             string codArt = newLine._code;
             string tallArt = newLine._size;
@@ -791,6 +794,7 @@ namespace www.aquarella.com.pe.Aquarella.Logistica
                 }
 
             }
+
             return orderLines;
         }
 
@@ -885,10 +889,81 @@ namespace www.aquarella.com.pe.Aquarella.Logistica
 
         //}
 
+
+        public static List<Order_Dtl> pre_promocion(List<Order_Dtl>  orderLines )
+        {
+            /* promociones */
+
+            List<Tran_Ofertas> listOfertas = new List<Tran_Ofertas>();
+
+            if (HttpContext.Current.Session["TranOfertas"] != null)
+            {
+                listOfertas = (List<Tran_Ofertas>)HttpContext.Current.Session["TranOfertas"];
+            }
+            listOfertas.Select(a =>
+            {
+                a.hecho = "";
+                return a;
+            }).ToList();
+            listOfertas = listOfertas.Where(w => (orderLines.Select(s => s.id_tran_ofe).Distinct().ToArray()).Contains(w.id)).ToList();
+            listOfertas = listOfertas.OrderByDescending(o => o.ofe_prioridad).OrderByDescending(a => a.ofe_id).ToList();            
+
+            foreach (Tran_Ofertas item in listOfertas)
+            {
+                decimal ofe_id = item.ofe_id;
+                decimal max_pares = item.max_pares; // item.max_pares; //deberia ser la suma de max pares en general de toda la lista por item.ofe_id
+                int max_ofe = (int)(listOfertas.Where(w => w.ofe_id == ofe_id).Count() / 2); // item.max_pares; //deberia ser la suma de max pares en general de toda la lista por item.ofe_id
+                decimal _max_pares_valida = 0;
+                string ofe_tipo = item.ofe_tipo;
+                decimal ofe_grupo = item.ofe_artventa;
+                if (listOfertas.Count(c => c.ofe_id == ofe_id && c.hecho == "") >= max_pares)
+                {
+                    foreach (Tran_Ofertas subItem in listOfertas)
+                    {
+                        int _id_linea = subItem.id;
+
+                        if (subItem.ofe_id == ofe_id && subItem.hecho == "")
+                        {
+                            if ((new String[] { "C", "M" }).Contains(ofe_tipo))
+                            {
+                                if (subItem.ofe_artventa != ofe_grupo)
+                                {
+                                    break;
+                                }
+                            }
+                            orderLines.Where(w => w.id_tran_ofe == _id_linea).Select(a =>
+                            {
+                                a._ofe_id = subItem.ofe_id;
+                                a._ofe_maxpares = subItem.max_pares;
+                                a._ofe_porc = subItem.ofe_porc;
+                                a._ofe_Tipo = subItem.ofe_tipo;
+                                a._ofe_PrecioPack = subItem.ofe_artventa;
+                                //a.prom_menor = (a._qty > 1 ? (listOfertas)  : false);
+                                return a;
+                            }).ToList();
+                            listOfertas.Where(w => w.id == _id_linea && w.ofe_id == subItem.ofe_id).Select(a =>
+                              {
+                                  a.hecho = "x";
+                                  return a;
+                              }).ToList();
+                            _max_pares_valida++;
+                        }
+                    }
+                }
+            }
+
+            return orderLines;
+            /* promociones */
+        }
+
+
         [WebMethod()]
         public static List<Order_Dtl> fupdateitemoferta()
         {
             List<Order_Dtl> orderLines = (List<Order_Dtl>)(((object)HttpContext.Current.Session[_nSOrder]) != null ? (object)HttpContext.Current.Session[_nSOrder] : new List<Order_Dtl>()); ;
+
+            orderLines = pre_promocion(orderLines);
+
             try
             {
                 Coordinator cust = (Coordinator)HttpContext.Current.Session[_nameSessionCustomer];
@@ -1749,8 +1824,13 @@ namespace www.aquarella.com.pe.Aquarella.Logistica
             {
                 Order_Dtl resultLine;
 
-                if (orderLines != null)
+                if (orderLines != null) { 
                     resultLine = orderLines.Where(x => x._code.Equals(code) && x._size.Equals(size) && x._premio.Equals("N")).FirstOrDefault();
+                    if (resultLine.nroProms > 1 && qty > 1)
+                    {
+                        throw new Exception("Articulo con mas de una promocion no puede tener cantidad " + qty + " en una misma talla. Si desea agregar mas de un articulo en la misma talla, Hagalo en otra transaccion por favor.");
+                    }
+                }
                 else
                     resultLine = new Order_Dtl();
 
@@ -1793,7 +1873,9 @@ namespace www.aquarella.com.pe.Aquarella.Logistica
                 }
 
             }
-            catch { }
+            catch {
+                throw new Exception("Articulo con mas de una promocion no puede tener cantidad " + qty + " en una misma talla. Si desea agregar mas de un articulo en la misma talla, Hagalo en otra transaccion por favor.");
+            }
 
             return (List<Order_Dtl>)HttpContext.Current.Session[_nSOrder];
         }
