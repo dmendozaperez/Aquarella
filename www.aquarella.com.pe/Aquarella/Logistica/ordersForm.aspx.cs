@@ -896,6 +896,7 @@ namespace www.aquarella.com.pe.Aquarella.Logistica
 
             List<Tran_Ofertas> listOfertas = new List<Tran_Ofertas>();
 
+            List<int> hechos = new List<int>();
             if (HttpContext.Current.Session["TranOfertas"] != null)
             {
                 listOfertas = (List<Tran_Ofertas>)HttpContext.Current.Session["TranOfertas"];
@@ -906,50 +907,139 @@ namespace www.aquarella.com.pe.Aquarella.Logistica
                 return a;
             }).ToList();
             listOfertas = listOfertas.Where(w => (orderLines.Select(s => s.id_tran_ofe).Distinct().ToArray()).Contains(w.id)).ToList();
-            listOfertas = listOfertas.OrderByDescending(o => o.ofe_prioridad).OrderByDescending(a => a.ofe_id).ToList();            
+            listOfertas = listOfertas.OrderBy(o => o.ofe_prioridad).OrderBy(a => a.ofe_id).ToList();
 
             foreach (Tran_Ofertas item in listOfertas)
             {
                 decimal ofe_id = item.ofe_id;
                 decimal max_pares = item.max_pares; // item.max_pares; //deberia ser la suma de max pares en general de toda la lista por item.ofe_id
-                int max_ofe = (int)(listOfertas.Where(w => w.ofe_id == ofe_id).Count() / 2); // item.max_pares; //deberia ser la suma de max pares en general de toda la lista por item.ofe_id
+                int max_ofe = 0; // (int)(listOfertas.Where(w => w.ofe_id == ofe_id).Count() / 2); // item.max_pares; //deberia ser la suma de max pares en general de toda la lista por item.ofe_id
                 decimal _max_pares_valida = 0;
                 string ofe_tipo = item.ofe_tipo;
                 decimal ofe_grupo = item.ofe_artventa;
-                if (listOfertas.Count(c => c.ofe_id == ofe_id && c.hecho == "") >= max_pares)
-                {
-                    foreach (Tran_Ofertas subItem in listOfertas)
-                    {
-                        int _id_linea = subItem.id;
 
-                        if (subItem.ofe_id == ofe_id && subItem.hecho == "")
+                if ((new String[] { "C", "M" }).Contains(ofe_tipo))
+                {
+                    int gru1 = listOfertas.Count(c => c.ofe_id == ofe_id && c.hecho == "" && c.ofe_artventa == 1 && !hechos.Contains(c.id));
+                    int gru2 = listOfertas.Count(c => c.ofe_id == ofe_id && c.hecho == "" && c.ofe_artventa == 2 && !hechos.Contains(c.id));
+                    max_ofe = (new int[] { gru1, gru2 }).Min();
+                    if (max_ofe >= 1)
+                    {
+                        for (int i = 0; i < max_ofe; i++)
                         {
-                            if ((new String[] { "C", "M" }).Contains(ofe_tipo))
+
+                            Tran_Ofertas subItem1 = listOfertas.Where(w => w.hecho == "" && w.ofe_id == ofe_id && w.ofe_artventa == 1 && !hechos.Contains(w.id)).Take(1).FirstOrDefault();
+                            Tran_Ofertas subItem2 = listOfertas.Where(w => w.hecho == "" && w.ofe_id == ofe_id && w.ofe_artventa == 2 && !hechos.Contains(w.id)).Take(1).FirstOrDefault();
+
+                            orderLines.Where(w => w.id_tran_ofe == subItem1.id).Select(a =>
                             {
-                                if (subItem.ofe_artventa != ofe_grupo)
-                                {
-                                    break;
-                                }
-                            }
-                            orderLines.Where(w => w.id_tran_ofe == _id_linea).Select(a =>
-                            {
-                                a._ofe_id = subItem.ofe_id;
-                                a._ofe_maxpares = subItem.max_pares;
-                                a._ofe_porc = subItem.ofe_porc;
-                                a._ofe_Tipo = subItem.ofe_tipo;
-                                a._ofe_PrecioPack = subItem.ofe_artventa;
-                                //a.prom_menor = (a._qty > 1 ? (listOfertas)  : false);
+                                a._ofe_id = subItem1.ofe_id;
+                                a._ofe_maxpares = subItem1.max_pares;
+                                a._ofe_porc = subItem1.ofe_porc;
+                                a._ofe_Tipo = subItem1.ofe_tipo;
+                                a._ofe_PrecioPack = subItem1.ofe_artventa;
                                 return a;
                             }).ToList();
-                            listOfertas.Where(w => w.id == _id_linea && w.ofe_id == subItem.ofe_id).Select(a =>
-                              {
-                                  a.hecho = "x";
-                                  return a;
-                              }).ToList();
-                            _max_pares_valida++;
-                        }
+                            listOfertas.Where(w => w.id == subItem1.id).Select(a =>
+                            {
+                                a.hecho = "x";
+                                return a;
+                            }).ToList();
+                            hechos.Add(subItem1.id);
+
+                            orderLines.Where(w => w.id_tran_ofe == subItem2.id).Select(a =>
+                            {
+                                a._ofe_id = subItem2.ofe_id;
+                                a._ofe_maxpares = subItem2.max_pares;
+                                a._ofe_porc = subItem2.ofe_porc;
+                                a._ofe_Tipo = subItem2.ofe_tipo;
+                                a._ofe_PrecioPack = subItem2.ofe_artventa;
+                                return a;
+                            }).ToList();
+                            listOfertas.Where(w => w.id == subItem2.id).Select(a =>
+                            {
+                                a.hecho = "x";
+                                return a;
+                            }).ToList();
+                            hechos.Add(subItem2.id);
+                        }                        
+                    }
+                    else
+                    {
+                        continue;
                     }
                 }
+                else
+                {
+                    foreach (Tran_Ofertas subItem in listOfertas.Where(w => w.hecho == "" && w.ofe_id == ofe_id && !hechos.Contains(w.id)))
+                    {
+                        int _id_linea = subItem.id;
+                        orderLines.Where(w => w.id_tran_ofe == _id_linea ).Select(a =>
+                        {
+                            a._ofe_id = subItem.ofe_id;
+                            a._ofe_maxpares = subItem.max_pares;
+                            a._ofe_porc = subItem.ofe_porc;
+                            a._ofe_Tipo = subItem.ofe_tipo;
+                            a._ofe_PrecioPack = subItem.ofe_artventa;
+                            //a.prom_menor = (a._qty > 1 ? (listOfertas)  : false);
+                            return a;
+                        }).ToList();
+                        listOfertas.Where(w => w.id == _id_linea).Select(a =>
+                        {
+                            a.hecho = "x";
+                            return a;
+                        }).ToList();
+                    }
+                }
+
+                //if ((new String[] { "C", "M" }).Contains(ofe_tipo))
+                //{
+                //    if (listOfertas.Count(c => c.ofe_id == ofe_id && c.hecho == "" && c.ofe_artventa == 1) < max_ofe)
+                //    {
+                //        continue;
+                //    }
+                //    if (listOfertas.Count(c => c.ofe_id == ofe_id && c.hecho == "" && c.ofe_artventa == 2) < max_ofe)
+                //    {
+                //        continue;
+                //    }
+                //}
+
+                ////if (listOfertas.Count(c => c.ofe_id == ofe_id && c.hecho == "") >= max_pares)
+                ////{
+                //    foreach (Tran_Ofertas subItem in listOfertas.Where(w=>w.hecho == "" && w.ofe_id == ofe_id && ofe_grupo == w.ofe_artventa))
+                //    {
+                //        int _id_linea = subItem.id;
+
+                //        //if (_max_pares_valida < max_pares) { 
+                //            //if (subItem.ofe_id == ofe_id && listOfertas.Where(w => w.id == _id_linea && w.hecho == "x").Count() == 0)//listOfertas.Where(w => w.id == _id_linea && w.hecho == "x").Count() == 0)
+                //            //{
+                //                if ((new String[] { "C", "M" }).Contains(ofe_tipo))
+                //                {   
+                //                    if (subItem.ofe_artventa != ofe_grupo)
+                //                    {
+                //                        //continue;
+                //                    }
+                //                }
+                //                orderLines.Where(w => w.id_tran_ofe == _id_linea).Select(a =>
+                //                {
+                //                    a._ofe_id = subItem.ofe_id;
+                //                    a._ofe_maxpares = subItem.max_pares;
+                //                    a._ofe_porc = subItem.ofe_porc;
+                //                    a._ofe_Tipo = subItem.ofe_tipo;
+                //                    a._ofe_PrecioPack = subItem.ofe_artventa;
+                //                    //a.prom_menor = (a._qty > 1 ? (listOfertas)  : false);
+                //                    return a;
+                //                }).ToList();
+                //                listOfertas.Where(w => w.id == _id_linea).Select(a =>
+                //                {
+                //                    a.hecho = "x";
+                //                    return a;
+                //                }).ToList();
+                //                _max_pares_valida++;
+                //            //}
+                //        //}
+                //    }
+                //}
             }
 
             return orderLines;
