@@ -907,7 +907,7 @@ namespace www.aquarella.com.pe.Aquarella.Logistica
                 return a;
             }).ToList();
             listOfertas = listOfertas.Where(w => (orderLines.Select(s => s.id_tran_ofe).Distinct().ToArray()).Contains(w.id)).ToList();
-            listOfertas = listOfertas.OrderBy(o => o.ofe_prioridad).OrderBy(a => a.ofe_id).ToList();
+            listOfertas = listOfertas.OrderBy(o => o.ofe_prioridad).ToList();//.OrderBy(a => a.ofe_id).ToList();
 
             foreach (Tran_Ofertas item in listOfertas)
             {
@@ -918,7 +918,7 @@ namespace www.aquarella.com.pe.Aquarella.Logistica
                 string ofe_tipo = item.ofe_tipo;
                 decimal ofe_grupo = item.ofe_artventa;
 
-                if ((new String[] { "C", "M" }).Contains(ofe_tipo))
+                if ((new String[] {"M" }).Contains(ofe_tipo))
                 {
                     int gru1 = listOfertas.Count(c => c.ofe_id == ofe_id && c.hecho == "" && c.ofe_artventa == 1 && !hechos.Contains(c.id));
                     int gru2 = listOfertas.Count(c => c.ofe_id == ofe_id && c.hecho == "" && c.ofe_artventa == 2 && !hechos.Contains(c.id));
@@ -963,6 +963,56 @@ namespace www.aquarella.com.pe.Aquarella.Logistica
                             }).ToList();
                             hechos.Add(subItem2.id);
                         }                        
+                    }
+                    else
+                    {
+                        continue;
+                    }
+                }else if ((new String[] { "C" }).Contains(ofe_tipo))
+                {
+                    int gru1 = listOfertas.Count(c => c.ofe_id == ofe_id && c.hecho == "" && c.ofe_porc == 1 && !hechos.Contains(c.id));
+                    int gru2 = listOfertas.Count(c => c.ofe_id == ofe_id && c.hecho == "" && c.ofe_porc == 2 && !hechos.Contains(c.id));
+                    max_ofe = (new int[] { gru1, gru2 }).Min();
+                    if (max_ofe >= 1)
+                    {
+                        for (int i = 0; i < max_ofe; i++)
+                        {
+
+                            Tran_Ofertas subItem1 = listOfertas.Where(w => w.hecho == "" && w.ofe_id == ofe_id && w.ofe_porc == 1 && !hechos.Contains(w.id)).Take(1).FirstOrDefault();
+                            Tran_Ofertas subItem2 = listOfertas.Where(w => w.hecho == "" && w.ofe_id == ofe_id && w.ofe_porc == 2 && !hechos.Contains(w.id)).Take(1).FirstOrDefault();
+
+                            orderLines.Where(w => w.id_tran_ofe == subItem1.id).Select(a =>
+                            {
+                                a._ofe_id = subItem1.ofe_id;
+                                a._ofe_maxpares = subItem1.max_pares;
+                                a._ofe_porc = subItem1.ofe_porc;
+                                a._ofe_Tipo = subItem1.ofe_tipo;
+                                a._ofe_PrecioPack = subItem1.ofe_artventa;
+                                return a;
+                            }).ToList();
+                            listOfertas.Where(w => w.id == subItem1.id).Select(a =>
+                            {
+                                a.hecho = "x";
+                                return a;
+                            }).ToList();
+                            hechos.Add(subItem1.id);
+
+                            orderLines.Where(w => w.id_tran_ofe == subItem2.id).Select(a =>
+                            {
+                                a._ofe_id = subItem2.ofe_id;
+                                a._ofe_maxpares = subItem2.max_pares;
+                                a._ofe_porc = subItem2.ofe_porc;
+                                a._ofe_Tipo = subItem2.ofe_tipo;
+                                a._ofe_PrecioPack = subItem2.ofe_artventa;
+                                return a;
+                            }).ToList();
+                            listOfertas.Where(w => w.id == subItem2.id).Select(a =>
+                            {
+                                a.hecho = "x";
+                                return a;
+                            }).ToList();
+                            hechos.Add(subItem2.id);
+                        }
                     }
                     else
                     {
