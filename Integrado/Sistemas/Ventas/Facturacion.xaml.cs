@@ -72,7 +72,7 @@ namespace Integrado.Sistemas.Ventas
             lblusuario.Content = user._nombre;
 
             this.Title = "PAGINA DE FACTURACION [" + Ent_Global._nom_modulo + "]";
-
+            if (!Ent_Global._err_con_mysql) lblconexion_presta.Visibility = Visibility.Hidden;
             this.DataContext = this;
         }
         private void dispatcherTimer_Tick(object sender, EventArgs e)

@@ -391,6 +391,7 @@ namespace Integrado.Design.WPF_Master
                             Ent_Global._session_activa = true;
                             lblnombre_login.Content= "Usuario | " + user._nombre;
                             lblusuario.Content= user._nombre;
+                            if (!Ent_Global._err_con_mysql) lblconexion_presta.Visibility = Visibility.Hidden;                            
                             //lblnombres.Text = "Usuario | " + user._nombre;
                             //activadesctiva(true);
                             await this.HideMetroDialogAsync(_customDialog);

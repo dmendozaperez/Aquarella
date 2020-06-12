@@ -61,6 +61,8 @@ namespace Integrado.Sistemas.Logistica
             btnreenvio.Visibility = (Ent_Global._canal_venta == "AQ") ? Visibility.Hidden : Visibility.Visible;
             btnimprimirurbano.Visibility = (Ent_Global._canal_venta == "AQ") ? Visibility.Hidden : Visibility.Visible;
 
+            if (!Ent_Global._err_con_mysql) lblconexion_presta.Visibility = Visibility.Hidden;
+
         }
         private void dispatcherTimer_Tick(object sender, EventArgs e)
         {
@@ -226,7 +228,8 @@ namespace Integrado.Sistemas.Logistica
 
                 ProgressAlert = await this.ShowProgressAsync(Ent_Msg.msgcargando, "Espere un momento por favor, cargando pedidos");  //show message
                 ProgressAlert.SetIndeterminate();
-                string _cargar_data = await Task.Run(() => (Ent_Global._err_con_mysql)?"error de conexion MySql Prestashop": carga_data.ImportaDataPrestaShop());
+                string _cargar_data = await Task.Run(() => (Ent_Global._err_con_mysql)?"": carga_data.ImportaDataPrestaShop());
+
                 if (_cargar_data.Length == 0)
                 {
                     //await Task.Run(() => refrescagrilla_prestashop());

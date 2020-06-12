@@ -53,6 +53,7 @@ namespace Integrado.Sistemas.Ventas
             lblusuario.Content = user._nombre;
 
             this.Title = "PAGINA DE CONSULTA NOTA DE CREDITO [" + Ent_Global._nom_modulo + "]";
+            if (!Ent_Global._err_con_mysql) lblconexion_presta.Visibility = Visibility.Hidden;
         }
         private void dispatcherTimer_Tick(object sender, EventArgs e)
         {
