@@ -20,6 +20,8 @@ namespace CapaEntidad.Bll.Util
         public string _usv_username { set; get; }
         public string _usv_postpago { get; set; }
         public DateTime _usd_creation { set; get; }
+
+        public Boolean _err_con_mysql { get; set; }
         #endregion <REGION DE ATRIBUTOS>
     }
 }

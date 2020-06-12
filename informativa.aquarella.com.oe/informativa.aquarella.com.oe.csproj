@@ -186,13 +186,16 @@
     <Content Include="assets\ico\apple-touch-icon-57-precomposed.png" />
     <Content Include="assets\ico\apple-touch-icon-72-precomposed.png" />
     <Content Include="assets\ico\favicon.ico" />
+    <Content Include="assets\ico\favicon1.ico" />
     <Content Include="assets\img\catalogo1\1.jpg" />
+    <Content Include="assets\img\catalogobata.png" />
     <Content Include="assets\img\line.png" />
     <Content Include="assets\img\logo%402x.png" />
     <Content Include="assets\img\logo.jpg" />
     <Content Include="assets\img\logo.png" />
     <Content Include="assets\img\logo1.jpg" />
     <Content Include="assets\img\logo1.png" />
+    <Content Include="assets\img\logo1c.jpg" />
     <Content Include="assets\img\pattern.jpg" />
     <Content Include="assets\img\regalo.jpg" />
     <Content Include="assets\img\team\1.jpg" />

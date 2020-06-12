@@ -346,6 +346,8 @@ namespace Integrado.Design.WPF_Master
             }
             DataRow dr = dtusuario.Rows[0];
             Ent_Global._bas_id_codigo = Convert.ToInt32(dr["bas_id"].ToString());
+            Ent_Global._err_con_mysql = Convert.ToBoolean(dr["err_con_mysql"]);
+
             Ent_Usuario  u = new Ent_Usuario
             {
                 _bas_id = Convert.ToInt32(dr["bas_id"].ToString()),
@@ -359,7 +361,8 @@ namespace Integrado.Design.WPF_Master
                 _usn_userid = Convert.ToInt32(dr["bas_id"].ToString()),
                 _usv_username = dr["usu_nombre"].ToString(),
                 _usd_creation = System.DateTime.Parse(dr["usu_fecha_cre"].ToString()),              
-                _usv_postpago = dr["postpago"].ToString()
+                _usv_postpago = dr["postpago"].ToString(),
+                _err_con_mysql=Convert.ToBoolean(dr["err_con_mysql"])
             };
 
             return u;

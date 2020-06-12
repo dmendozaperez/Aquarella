@@ -260,7 +260,7 @@ namespace Integrado.Bll
                 if (guia_presta.Trim().Length > 0)
                 {
                     UpdaEstado updateestado = new UpdaEstado();
-                    Boolean valida = updateestado.ActualizarReference(guia_presta);
+                    Boolean valida =(Ent_Global._err_con_mysql)?true: updateestado.ActualizarReference(guia_presta);/*si la variable global es 1 quiere decir que el mysql esta sin conexion*/
 
                     if (valida)
                     {

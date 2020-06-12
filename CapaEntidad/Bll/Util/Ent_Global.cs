@@ -7,6 +7,7 @@ namespace CapaEntidad.Bll.Util
 {
     public class Ent_Global
     {
+        public static Boolean _err_con_mysql { get; set; }
         public static Int32 _bas_id_codigo { set; get; }
         public static string _nom_modulo { set; get; }
 

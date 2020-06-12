@@ -226,7 +226,7 @@ namespace Integrado.Sistemas.Logistica
 
                 ProgressAlert = await this.ShowProgressAsync(Ent_Msg.msgcargando, "Espere un momento por favor, cargando pedidos");  //show message
                 ProgressAlert.SetIndeterminate();
-                string _cargar_data = await Task.Run(() => carga_data.ImportaDataPrestaShop());
+                string _cargar_data = await Task.Run(() => (Ent_Global._err_con_mysql)?"error de conexion MySql Prestashop": carga_data.ImportaDataPrestaShop());
                 if (_cargar_data.Length == 0)
                 {
                     //await Task.Run(() => refrescagrilla_prestashop());

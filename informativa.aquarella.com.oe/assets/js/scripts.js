@@ -62,7 +62,7 @@ jQuery(document).ready(function() {
 	/*
 	    Google maps
 	*/
-	var position = new google.maps.LatLng(-12.126967, -77.002267);
+	var position = new google.maps.LatLng(-12.1189941, -77.0272104);
     $('.map').gmap({'center': position,'zoom': 15, 'disableDefaultUI':true, 'callback': function() {
             var self = this;
             self.addMarker({'position': this.get('map').getCenter() });	

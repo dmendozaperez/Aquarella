@@ -99,6 +99,7 @@
                          <asp:BoundField DataField="asesor" HeaderText="Asesor" SortExpression="asesor" />    
                         <asp:BoundField DataField="Are_Descripcion" HeaderText="Área" SortExpression="Are_Descripcion" />                        
                         <asp:BoundField DataField="nombres" HeaderText="Cliente" SortExpression="nombres" />
+                        <asp:BoundField DataField="dni_promotor" HeaderText="Dni-Cliente" SortExpression="dni_promotor" />
                         <asp:BoundField DataField="ubicacion" HeaderText="Ubicación" SortExpression="ubicacion" />
                         <asp:BoundField DataField="Liq_Id" HeaderText="No.Liq" SortExpression="Liq_Id" />
                         <asp:BoundField DataField="Liq_EstId" HeaderText="Estdo" SortExpression="Liq_EstId"

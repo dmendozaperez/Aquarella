@@ -302,6 +302,7 @@
                                     <TextBlock x:Name="lblInfoUser" Style="{StaticResource SpacerStyle}"/>
                                 </StackPanel>
                                 <StackPanel x:Name="LinksLogin" Style="{StaticResource LoginPanelStyle}">
+                                    <Label x:Name="lblconexion_presta" FontFamily="Georgia" FontWeight="Bold" Foreground="#FFF0F927" FontSize="13" Margin="224,-1,0,-5" Content="Modo sin PrestaShop" HorizontalAlignment="Left" Grid.Column="0"  Width="auto" FontStretch="Expanded"/>
                                     <TextBlock Style="{StaticResource SpacerStyle}"/>
                                     <Rectangle Style="{StaticResource DividerStyleSmoke}" />
                                     <TextBlock Style="{StaticResource SpacerStyle}"/>
