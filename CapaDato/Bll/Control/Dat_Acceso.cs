@@ -90,8 +90,8 @@ namespace CapaDato.Bll.Control
                                 Ent_Global._serie_imp= dr["serie_imp"].ToString();
                                 Ent_Global._impresora = dr["impresora"].ToString();
 
-                                if (Ent_Global._canal_venta=="BA") Ent_Global._impresora_etiquetas = dr["impresora_etiq"].ToString();
-
+                                //if (Ent_Global._canal_venta=="BA") Ent_Global._impresora_etiquetas = dr["impresora_etiq"].ToString();
+                                Ent_Global._impresora_etiquetas = dr["impresora_etiq"].ToString();
                             }
                             _valida = true;
                         }

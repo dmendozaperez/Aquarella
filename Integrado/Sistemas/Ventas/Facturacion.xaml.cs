@@ -544,10 +544,17 @@ namespace Integrado.Sistemas.Ventas
                         //byte[] img_qr = null;
                         string _genera_tk = await Task.Run(() => Imprimir_Doc.Generar_Impresion("F", grabar_numerodoc) /*Impresora_Epson.Config_Imp.GenerarTicketFact(grabar_numerodoc, 1, _codigo_hash)*/);
 
+                        /*IMPRESION DE ETIQUETAS*/
+                        if (Ent_Global._canal_venta == "AQ")
+                        {
+                            GenerarEtiqueta genera_etiqueta = new GenerarEtiqueta();
+                            await Task.Run(() => genera_etiqueta.aq_imp_etiqueta2(grabar_numerodoc));
+                        }
 
-                        #region<SOLO PARA E-CCOMMERCE>
 
-                        if (Ent_Global._canal_venta == "BA")
+                            #region<SOLO PARA E-CCOMMERCE>
+
+                            if (Ent_Global._canal_venta == "BA")
                         {
                             string _cod_urbano = "";
                             await Task.Run(() => Basico.act_presta_urbano(grabar_numerodoc, ref _error, ref _cod_urbano));

@@ -14,6 +14,7 @@ using System.Windows.Shapes;
 using MahApps.Metro.Controls;
 using CapaDato.Bll.Venta;
 using Integrado.Urbano;
+using CapaEntidad.Bll.Util;
 
 namespace Integrado.Sistemas.Logistica
 {
@@ -25,6 +26,9 @@ namespace Integrado.Sistemas.Logistica
         public ImprimeUrbano()
         {
             InitializeComponent();
+
+            this.Title = (Ent_Global._canal_venta == "AQ")? "[Reimprimir Etiquetas Catalogo]" : "[Duplicado de Guia Urbano]";
+            this.lbltitulo.Content= (Ent_Global._canal_venta == "AQ") ? "Reimprimir Pedidos Etiquetas" : "Imprimir Guia Urbano";
         }
 
 
@@ -36,15 +40,38 @@ namespace Integrado.Sistemas.Logistica
         private async void btnimprimir_Click(object sender, RoutedEventArgs e)
         {
             string _venid = txtnumero.Text.Replace("-","");
-            GenerarEtiqueta genera_etiqueta = new GenerarEtiqueta();
-            await Task.Run(() => genera_etiqueta.imp_etiqueta(_venid));
+
+            if (Ent_Global._canal_venta == "AQ")
+            {
+                //MessageBox.Show(Ent_Global._impresora_etiquetas);
+                GenerarEtiqueta genera_etiqueta = new GenerarEtiqueta();
+                await Task.Run(() => genera_etiqueta.aq_imp_etiqueta(_venid));
+            }
+            else
+            {
+                GenerarEtiqueta genera_etiqueta = new GenerarEtiqueta();
+                await Task.Run(() => genera_etiqueta.imp_etiqueta(_venid));
+            }
+            
+            
         }
 
         private async void btnimprimir2_Click(object sender, RoutedEventArgs e)
         {
             string _venid = txtnumero.Text.Replace("-", "");
-            GenerarEtiqueta genera_etiqueta = new GenerarEtiqueta();
-            await Task.Run(() => genera_etiqueta.imp_etiqueta2(_venid));
+
+            if (Ent_Global._canal_venta == "AQ")
+            {
+                //MessageBox.Show(Ent_Global._impresora_etiquetas);
+                GenerarEtiqueta genera_etiqueta = new GenerarEtiqueta();
+                await Task.Run(() => genera_etiqueta.aq_imp_etiqueta2(_venid));
+            }
+            else
+            {
+                GenerarEtiqueta genera_etiqueta = new GenerarEtiqueta();
+                await Task.Run(() => genera_etiqueta.imp_etiqueta2(_venid));
+            }
+            
         }
     }
 

@@ -61,6 +61,10 @@ namespace Integrado.Sistemas.Logistica
             btnreenvio.Visibility = (Ent_Global._canal_venta == "AQ") ? Visibility.Hidden : Visibility.Visible;
             btnimprimirurbano.Visibility = (Ent_Global._canal_venta == "AQ") ? Visibility.Hidden : Visibility.Visible;
 
+            btnimprimietiqaq.Visibility = (Ent_Global._canal_venta == "AQ") ? Visibility.Visible : Visibility.Hidden ;
+
+            if (Ent_Global._canal_venta == "AQ") btnimprimietiqaq.Margin = new Thickness(-540, 0, 0, 0);
+
             if (!Ent_Global._err_con_mysql) lblconexion_presta.Visibility = Visibility.Hidden;
 
         }

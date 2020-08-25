@@ -121,7 +121,7 @@ namespace Integrado.Design.WPF_Master
         private void btnbata_Click(object sender, RoutedEventArgs e)
         {
             Mouse.OverrideCursor = Cursors.Wait;
-            _server =  "ecommerce.bgr.pe";
+            _server = "posperubd.bgr.pe";// "ecommerce.bgr.pe";
             _base_datos = "BD_ECOMMERCE";
             _user = "ecommerce";
             _password = "Bata2018.*@=?++";
@@ -236,7 +236,7 @@ namespace Integrado.Design.WPF_Master
                 if (Environment.GetEnvironmentVariable("aq") != null)
                     _entorno = Environment.GetEnvironmentVariable("aq");
 
-
+                //_entorno = "AQCH3";
                 Boolean inicio_config = Dat_Acceso.getpunto_vta(_entorno);
 
                // Dat_Acceso.getSalesCoorByMonthPctg();

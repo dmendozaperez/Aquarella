@@ -60,6 +60,7 @@
     <Compile Include="Bll\Util\Ent_Msg.cs" />
     <Compile Include="Bll\Util\Ent_Tarjeta.cs" />
     <Compile Include="Bll\Util\Ent_Usuario.cs" />
+    <Compile Include="Bll\Venta\Ent_Etiquetas_Catalogo.cs" />
     <Compile Include="Bll\Venta\Ent_FE.cs" />
     <Compile Include="Bll\Venta\Ent_Venta.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

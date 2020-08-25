@@ -543,7 +543,8 @@
                         <ColumnDefinition Width="50"></ColumnDefinition>
                         <ColumnDefinition Width="110"></ColumnDefinition>
                         <ColumnDefinition Width="110"></ColumnDefinition>
-                        <ColumnDefinition Width="690"></ColumnDefinition>
+                        <ColumnDefinition Width="110"></ColumnDefinition>
+                        <ColumnDefinition Width="580"></ColumnDefinition>
                         <ColumnDefinition Width="230"></ColumnDefinition>
                         <ColumnDefinition Width="100"></ColumnDefinition>
                     </Grid.ColumnDefinitions>
@@ -590,19 +591,40 @@
                             <TextBlock Text="Imprimir" VerticalAlignment="Bottom"  FontSize="14" Margin="0,0,0,0" HorizontalAlignment="Center" Grid.Column="0" Grid.Row="1"/>
                         </Grid>
                     </Button>
+                    <Button x:Name="btnimprimietiqaq"  Grid.RowSpan="4" Grid.Column="3" Grid.Row="1"   Width="100" Height="100" Cursor="Hand" Margin="0,0,0,0"  VerticalAlignment="Center" HorizontalAlignment="Center" Click="btnimprimirurbano_Click">
+                        <Button.ToolTip>
+                            <ToolTip>
+                                <StackPanel>
+                                    <TextBlock FontWeight="Bold" TextAlignment="Left" ><Run Text="Re-Imprimir Etiquetas"/></TextBlock>
+                                    <TextBlock><Run Text="No lo presione hasta estar seguro de ingresar a la ventana."/></TextBlock>
+                                </StackPanel>
+                            </ToolTip>
+                        </Button.ToolTip>
+                        <Grid Width="100" Margin="0" HorizontalAlignment="Center" VerticalAlignment="Center">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="20"/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Image Grid.Column="0" Grid.Row="0"  Source="/Integrado;component/Design/Images/impresora.png" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                            <TextBlock Text="Imprimir" VerticalAlignment="Bottom"  FontSize="14" Margin="0,0,0,0" HorizontalAlignment="Center" Grid.Column="0" Grid.Row="1"/>
+                        </Grid>
+                    </Button>
 
-                    <Label Content="Número de pedidos" FontWeight="Bold" FontSize="14" Grid.Column="4" Grid.Row="1" ></Label>
-                    <Label Content="Cantidades Totales" FontWeight="Bold" FontSize="14" Grid.Column="4" Grid.Row="2" ></Label>
-                    <Label Content="Cantidades totales empacados" FontWeight="Bold" FontSize="14"  Grid.Column="4" Grid.Row="3" ></Label>
-                    <Label Content="Cantidades restante por empacar" FontWeight="Bold" FontSize="14"  Grid.Column="4" Grid.Row="4" ></Label>
-                    <Label Name="lblnped" Grid.Column="5" Grid.Row="1" Content="0" HorizontalAlignment="Right" FontSize="16" FontWeight="Bold"></Label>
-                    <Label Name="lblcantot" Grid.Column="5" Grid.Row="2" Content="0" HorizontalAlignment="Right" FontSize="16" FontWeight="Bold"></Label>
-                    <Label Name="lblcanemp" Grid.Column="5" Grid.Row="3" Content="0" HorizontalAlignment="Right" FontSize="16" FontWeight="Bold"></Label>
-                    <Label Name="lblresemp" Grid.Column="5" Grid.Row="4" Content="0" HorizontalAlignment="Right" FontSize="16" FontWeight="Bold"></Label>
-                    <dxga:LinearGaugeControl Background="#FFECEAE2" HorizontalAlignment="Left"  Grid.Column="4" Grid.Row="1"  VerticalAlignment="Top" Height="1.5" Margin="4,27,0,0" Width="360" Grid.ColumnSpan="2"/>
-                    <dxga:LinearGaugeControl Background="#FFECEAE2" HorizontalAlignment="Left"  Grid.Column="4" Grid.Row="2"  VerticalAlignment="Top" Height="1.5" Margin="4,27,0,0" Width="360" Grid.ColumnSpan="2"/>
-                    <dxga:LinearGaugeControl Background="#FFECEAE2" HorizontalAlignment="Left"  Grid.Column="4" Grid.Row="3"  VerticalAlignment="Top" Height="1.5" Margin="4,27,0,0" Width="360" Grid.ColumnSpan="2"/>
-                    <dxga:LinearGaugeControl Background="#FFECEAE2" HorizontalAlignment="Left"  Grid.Column="4" Grid.Row="4"  VerticalAlignment="Top" Height="1.5" Margin="4,27,0,0" Width="360" Grid.ColumnSpan="2"/>
+                    <Label Content="Número de pedidos" FontWeight="Bold" FontSize="14" Grid.Column="5" Grid.Row="1" ></Label>
+                    <Label Content="Cantidades Totales" FontWeight="Bold" FontSize="14" Grid.Column="5" Grid.Row="2" ></Label>
+                    <Label Content="Cantidades totales empacados" FontWeight="Bold" FontSize="14"  Grid.Column="5" Grid.Row="3" ></Label>
+                    <Label Content="Cantidades restante por empacar" FontWeight="Bold" FontSize="14"  Grid.Column="5" Grid.Row="4" ></Label>
+                    <Label Name="lblnped" Grid.Column="6" Grid.Row="1" Content="0" HorizontalAlignment="Right" FontSize="16" FontWeight="Bold"></Label>
+                    <Label Name="lblcantot" Grid.Column="6" Grid.Row="2" Content="0" HorizontalAlignment="Right" FontSize="16" FontWeight="Bold"></Label>
+                    <Label Name="lblcanemp" Grid.Column="6" Grid.Row="3" Content="0" HorizontalAlignment="Right" FontSize="16" FontWeight="Bold"></Label>
+                    <Label Name="lblresemp" Grid.Column="6" Grid.Row="4" Content="0" HorizontalAlignment="Right" FontSize="16" FontWeight="Bold"></Label>
+                    <dxga:LinearGaugeControl Background="#FFECEAE2" HorizontalAlignment="Left"  Grid.Column="5" Grid.Row="1"  VerticalAlignment="Top" Height="1.5" Margin="4,27,0,0" Width="360" Grid.ColumnSpan="2"/>
+                    <dxga:LinearGaugeControl Background="#FFECEAE2" HorizontalAlignment="Left"  Grid.Column="5" Grid.Row="2"  VerticalAlignment="Top" Height="1.5" Margin="4,27,0,0" Width="360" Grid.ColumnSpan="2"/>
+                    <dxga:LinearGaugeControl Background="#FFECEAE2" HorizontalAlignment="Left"  Grid.Column="5" Grid.Row="3"  VerticalAlignment="Top" Height="1.5" Margin="4,27,0,0" Width="360" Grid.ColumnSpan="2"/>
+                    <dxga:LinearGaugeControl Background="#FFECEAE2" HorizontalAlignment="Left"  Grid.Column="5" Grid.Row="4"  VerticalAlignment="Top" Height="1.5" Margin="4,27,0,0" Width="360" Grid.ColumnSpan="2"/>
                 </Grid>
             </Grid>
 

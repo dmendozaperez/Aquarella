@@ -56,6 +56,8 @@ namespace Integrado.Design.WPF_Master
 
             lblhora.Content = DateTime.Now.ToLongTimeString();//Doy la hora actual al reloj
 
+            if (!Ent_Global._err_con_mysql) lblconexion_presta.Visibility = Visibility.Hidden;
+
             //Actualiza reloj
             DispatcherTimer dispatcherTimer = new DispatcherTimer();
             dispatcherTimer.Tick += new EventHandler(dispatcherTimer_Tick);
