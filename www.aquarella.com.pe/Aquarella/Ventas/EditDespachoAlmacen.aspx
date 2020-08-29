@@ -23,12 +23,12 @@
             }
         }
 
-        function AbrirPopup(idLider, Descripcion, atendido) {
+        function AbrirPopup(idLider, Descripcion, atendido, Lid_Prom) {
 
             if (atendido!='S'){
             var options = 'location=1,status=1,scrollbars=1,width=800,height=500';
 
-            var href = 'panelRotulo_App.aspx?LIDER_ID=' + idLider + '&DESCRIPCION=' + Descripcion;
+            var href = 'panelRotulo_App.aspx?LIDER_ID=' + idLider + '&DESCRIPCION=' + Descripcion + '&LIDER_PROM=' + Lid_Prom;
 
             window.open(href, 'Proveedores', options);
             } else {
@@ -228,9 +228,13 @@
                         <HeaderStyle HorizontalAlign="Left" />
                         <ItemStyle HorizontalAlign="Left" />
                         </asp:BoundField>
-                         
+                            <asp:BoundField DataField="promotor" HeaderText="Promotor" ItemStyle-Width="110px">
+                        <HeaderStyle HorizontalAlign="Left" />
+                        <ItemStyle HorizontalAlign="Left" />
+                        </asp:BoundField>
                          <asp:TemplateField HeaderText="Rotulo" SortExpression="pin_employee" ItemStyle-HorizontalAlign="Center" ItemStyle-Width="110px">
                             <ItemTemplate> 
+                                       <asp:HiddenField ID="hf_lider_prom" runat="server" Value='<%# Eval("Lid_Prom")%>' /> 
                                     <asp:HiddenField ID="hf_IdDetalle" runat="server" Value='<%# Eval("Desp_IdDetalle")%>' />
                                     <asp:HiddenField ID="hf_IdLider" runat="server" Value='<%# Eval("IdLider")%>' />
                                     <asp:HiddenField ID="hf_Descripcion" runat="server" Value='<%# Eval("Desp_Descripcion")%>' />
@@ -241,27 +245,29 @@
                                      <asp:HiddenField ID="hf_IdEstado" runat="server" Value='<%# Eval("IdEstado")%>' />
                                     <asp:HiddenField ID="hf_flete" runat="server" Value='<%# Eval("McaFlete")%>' />
                                    <asp:HiddenField ID="hf_Courier" runat="server" Value='<%# Eval("McaCourier")%>' />
+                                      <asp:HiddenField ID="hf_Promotor" runat="server" Value='<%# Eval("Promotor")%>' />
+                                    <asp:HiddenField ID="hf_Pedidos" runat="server" Value='<%# Eval("Pedido")%>' />
                                   
-                                <textarea cols="10" rows="5" readonly  id='Rotulo_<%# Eval("IdLider")%>' name='Rotulo_<%# Eval("IdLider")%>'> <%# Eval("Rotulo")%></textarea>
+                                <textarea cols="10" rows="5" readonly  id='Rotulo_<%# Eval("Lid_Prom")%>' name='Rotulo_<%# Eval("Lid_Prom")%>'> <%# Eval("Rotulo")%></textarea>
                                 
                             </ItemTemplate>
                        </asp:TemplateField>
                           <asp:TemplateField HeaderText="" ItemStyle-HorizontalAlign="Center" ItemStyle-Width="10px">
                                 <ItemTemplate>
                                     <center>
-                                        <a href="#" onclick="AbrirPopup('<%# Eval("IdLider")%>','<%# Eval("NombreLider")%>','<%# Eval("atendido")%>')">
+                                        <a href="#" onclick="AbrirPopup('<%# Eval("IdLider")%>','<%# Eval("NombreLider")%>','<%# Eval("atendido")%>','<%# Eval("Lid_Prom")%>')">
                                             <asp:Image ID="Image1" ImageUrl="~/Design/images/Botones/editOrder.png" runat="server" />
                                         </a>
                                     </center>
                                 </ItemTemplate>
                                 <ItemStyle HorizontalAlign="Center" />
                             </asp:TemplateField>
-                          <asp:TemplateField HeaderText="Rotulo Courier" SortExpression="pin_RotuloCourier" ItemStyle-HorizontalAlign="Center" ItemStyle-Width="110px">
+                          <asp:TemplateField Visible="false" HeaderText="Rotulo Courier" SortExpression="pin_RotuloCourier" ItemStyle-HorizontalAlign="Center" ItemStyle-Width="110px">
                             <ItemTemplate>
                                 <textarea cols="10" rows="5"  readonly id='RotuloCourier_<%# Eval("IdLider")%>' name='RotuloCourier_<%# Eval("IdLider")%>'> <%# Eval("Rotulo_Courier")%></textarea>
                             </ItemTemplate>
                        </asp:TemplateField>                         
-                       <asp:TemplateField HeaderText="Courier" SortExpression="pin_courier" ItemStyle-HorizontalAlign="Center" ItemStyle-Width="110px">
+                       <asp:TemplateField Visible="false" HeaderText="Courier" SortExpression="pin_courier" ItemStyle-HorizontalAlign="Center" ItemStyle-Width="110px">
                             <ItemTemplate>
                                <asp:CheckBox id="chkCourier" runat="server"  AutoPostBack="false"/>
                             </ItemTemplate>
@@ -276,28 +282,43 @@
                               <asp:TextBox id="TxtDestino" Text='<%# Eval("Destino")%>' TextMode="multiline" MaxLength="500"  Columns="10" Rows="5" runat="server" />
                            </ItemTemplate>
                        </asp:TemplateField>
-                          <asp:BoundField DataField="TotalPremio" HeaderText="Premios" ItemStyle-Width="50px">
+                                <asp:BoundField DataField="Pedido" HeaderText="Pedidos" ItemStyle-Width="110px">
+                         <HeaderStyle HorizontalAlign="Left" />
+                        <ItemStyle HorizontalAlign="Left" />
+                        </asp:BoundField>
+
+                            <asp:BoundField DataField="Total_Cantidad"  HeaderText="T.Cant" ItemStyle-Width="50px">
                         <HeaderStyle HorizontalAlign="Center" />
                         <ItemStyle HorizontalAlign="Center" />
                         </asp:BoundField>
-                         <asp:BoundField DataField="TotalPremioEnviado" HeaderText="Premios Enviados" ItemStyle-Width="50px">
+
+                           <asp:BoundField DataField="Total_Cantidad_Envio" HeaderText="T.Cant.Env" ItemStyle-Width="50px">
+                        <HeaderStyle HorizontalAlign="Center" />
+                        <ItemStyle HorizontalAlign="Center" />
+                        </asp:BoundField>  
+
+                          <asp:BoundField DataField="TotalPremio" Visible="false" HeaderText="Premios" ItemStyle-Width="50px">
+                        <HeaderStyle HorizontalAlign="Center" />
+                        <ItemStyle HorizontalAlign="Center" />
+                        </asp:BoundField>
+                         <asp:BoundField Visible="false" DataField="TotalPremioEnviado" HeaderText="Premios Enviados" ItemStyle-Width="50px">
                         <HeaderStyle HorizontalAlign="Center" />
                         <ItemStyle HorizontalAlign="Center" />
                         </asp:BoundField>
                          
-                         <asp:BoundField DataField="TotalCatalogo" HeaderText="Catalogos Facturados" ItemStyle-Width="50px">
+                         <asp:BoundField DataField="TotalCatalogo" Visible="false" HeaderText="Catalogos Facturados" ItemStyle-Width="50px">
                         <HeaderStyle HorizontalAlign="Center" />
                         <ItemStyle HorizontalAlign="Center" />
                         </asp:BoundField>
-                         <asp:BoundField DataField="TotalCatalogEnviado" HeaderText="Catalogos Enviados" ItemStyle-Width="50px">
+                         <asp:BoundField Visible="false" DataField="TotalCatalogEnviado" HeaderText="Catalogos Enviados" ItemStyle-Width="50px">
                         <HeaderStyle HorizontalAlign="Center" />
                         <ItemStyle HorizontalAlign="Center" />
                         </asp:BoundField>  
-                         <asp:BoundField DataField="TotalPares" HeaderText="Pares" ItemStyle-Width="50px">
+                         <asp:BoundField DataField="TotalPares" Visible="false" HeaderText="Pares" ItemStyle-Width="50px">
                         <HeaderStyle HorizontalAlign="Center" />
                         <ItemStyle HorizontalAlign="Center" />
                         </asp:BoundField>
-                           <asp:BoundField DataField="TotalParesEnviado" HeaderText="Pares Enviados" ItemStyle-Width="50px">
+                           <asp:BoundField Visible="false" DataField="TotalParesEnviado" HeaderText="Pares Enviados" ItemStyle-Width="50px">
                         <HeaderStyle HorizontalAlign="Center" />
                         <ItemStyle HorizontalAlign="Center" />
                         </asp:BoundField>                       

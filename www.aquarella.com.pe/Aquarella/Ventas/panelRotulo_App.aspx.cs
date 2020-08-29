@@ -19,6 +19,7 @@ namespace www.aquarella.com.pe.Aquarella.Ventas
         public string _Descripcion { get; set; }
         public string _Estado_ID { get; set; }
         public string _IdLider { get; set; }
+        public string _Lid_Prom { get; set; }
         public decimal _APN_ID { get; set; }
 
         public bool respuesta;
@@ -36,6 +37,10 @@ namespace www.aquarella.com.pe.Aquarella.Ventas
             //_Descripcion = "seleccionar";// Request.QueryString["DESCRIPCION"];
             _IdLider = Request.QueryString["LIDER_ID"];
             _Descripcion = Request.QueryString["DESCRIPCION"];
+            _Lid_Prom = Request.QueryString["LIDER_PROM"];
+
+            h_lider_prom.Value = _Lid_Prom;
+
             TxtLider.Text = _Descripcion;
             llenarGrilla();
 

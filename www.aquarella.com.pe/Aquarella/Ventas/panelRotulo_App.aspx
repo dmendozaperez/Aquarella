@@ -25,13 +25,15 @@
 
         function Actualizar(IdLider,Nombre, Documento, Direccion, Destino, Telefono) {
            
+            var lider_prom=$("[id$='h_lider_prom']").val();
+
            //$("#409").val('nuevo rotulo');
             //document.getElementById("408").value = "Tutorial Javascript";
             var strRotulo = Nombre + " DNI:" + Documento;
             var strRotuloCourier = Nombre + " DNI:" + Documento + " Dirección:" + Direccion + " Ubicación:" + Destino + " Teléfono:" + Telefono;
             //alert(strRotuloCourier)
             window.opener.$("[id*='RotuloCourier_" + IdLider + "']").val(strRotuloCourier);
-           window.opener.$("[id*='Rotulo_" + IdLider + "']").val(strRotulo);
+            window.opener.$("[id*='Rotulo_" + lider_prom + "']").val(strRotulo);
            //document.getElementById("ContentPlaceHolder1_TxtDescripcion").value = 23423;
             window.close();
           
@@ -42,6 +44,7 @@
 </head>
 <body>
     <form id="form1" runat="server">
+          <asp:HiddenField ID="h_lider_prom"  runat="server" />
     <asp:ScriptManager ID="ScriptManager1" runat="server">
     </asp:ScriptManager>
     <div>

@@ -187,7 +187,40 @@ namespace www.aquarella.com.pe.Aquarella.Ventas
         protected void ibExportToExcel_Click(object sender, ImageClickEventArgs e)
         {
             DataTable dt = (DataTable)Session[_nameSessionData];
-            ExportarExcel(dt, "1,11", "2", "Despacho_Pendiente");
+
+
+            DataTable dtexcel = dt.Clone();
+
+            foreach (DataRow fila in dt.Rows)
+            {
+                dtexcel.ImportRow(fila);
+            }
+
+
+
+            DataColumn col_remove = dtexcel.Columns["Area_Id"];
+            dtexcel.Columns.Remove(col_remove);
+
+            col_remove = dtexcel.Columns["Rotulo_Courier"];
+            dtexcel.Columns.Remove(col_remove);
+
+            col_remove = dtexcel.Columns["TotalPares"];
+            dtexcel.Columns.Remove(col_remove);
+
+            col_remove = dtexcel.Columns["TotalCatalogo"];
+            dtexcel.Columns.Remove(col_remove);
+
+            col_remove = dtexcel.Columns["TotalPremio"];
+            dtexcel.Columns.Remove(col_remove);
+
+            col_remove = dtexcel.Columns["IGV"];
+            dtexcel.Columns.Remove(col_remove);
+
+     
+
+
+            ExportarExcel(dtexcel, "", "2", "Despacho_Pendiente");
+            //ExportarExcel(dtexcel, "1,11", "2", "Despacho_Pendiente");
 
         }
 
@@ -315,8 +348,14 @@ namespace www.aquarella.com.pe.Aquarella.Ventas
 
                     string strIdLider = ((HiddenField)(gvReturns.Rows[i].FindControl("hf_IdLider"))).Value;
                     string strLider = ((HiddenField)(gvReturns.Rows[i].FindControl("hf_Lider"))).Value;
+
+                    string strLid_Prom = ((HiddenField)(gvReturns.Rows[i].FindControl("hf_lider_prom"))).Value;
+
+                    string strPromotor = ((HiddenField)(gvReturns.Rows[i].FindControl("hf_Promotor"))).Value;
+                    string strPedidos = ((HiddenField)(gvReturns.Rows[i].FindControl("hf_Pedidos"))).Value;
+
                     //string strRotulo = ((TextBox)(gvReturns.Rows[i].FindControl("txtRotulo"))).Text;
-                    string strRotulo = Request.Form["Rotulo_" + strIdLider];
+                    string strRotulo = Request.Form["Rotulo_" + strLid_Prom];
                     string strRotuloCourier = Request.Form["RotuloCourier_" + strIdLider];
                     string strPares = ((HiddenField)(gvReturns.Rows[i].FindControl("hf_Pares"))).Value;
                     string strCatalogo = ((HiddenField)(gvReturns.Rows[i].FindControl("hf_Catal"))).Value; 
@@ -351,9 +390,14 @@ namespace www.aquarella.com.pe.Aquarella.Ventas
                     strDataDetalle += " Obs=¿" + strObs + "¿ ";
                     strDataDetalle += " Det=¿" + strDetalle + "¿ ";
                     strDataDetalle += " McaFlete=¿" + strMcaFlete + "¿ ";
+
+                    strDataDetalle += " Promotor=¿" + strPromotor + "¿ ";
+                    strDataDetalle += " Pedidos=¿" + strPedidos + "¿ ";
+                    strDataDetalle += " LidProm=¿" + strLid_Prom + "¿ ";
+
                     strDataDetalle += "/>";
 
-                    strLiqLiderDespacho += devolverIdliquidacion(strIdLider);
+                    strLiqLiderDespacho += devolverIdliquidacion(strIdLider, strLid_Prom);
 
                     if (strRotulo.Trim() == "") { 
                        msjError += "Rotulo,";
@@ -422,7 +466,7 @@ namespace www.aquarella.com.pe.Aquarella.Ventas
             Response.Redirect("EditDespachoAlmacen.aspx?IdDespacho=" + _iddespacho);
         }
 
-        private string devolverIdliquidacion(string strIdLider)
+        private string devolverIdliquidacion(string strIdLider, string strLid_Prom)
         {
             string StrlistLiquidacion = "";
             DataTable dtidLiquidacion = new DataTable();
@@ -430,7 +474,7 @@ namespace www.aquarella.com.pe.Aquarella.Ventas
 
             foreach (DataRow row in dtidLiquidacion.Rows)
             {
-                if (strIdLider == row["Area_Id"].ToString()) {
+                if (strIdLider == row["Area_Id"].ToString() && strLid_Prom == row["Lid_Prom"].ToString()) {
 
                     string strLiq_Id = row["Liq_Id"].ToString();
                     StrlistLiquidacion += "<row  ";

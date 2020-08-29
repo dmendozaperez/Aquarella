@@ -141,7 +141,7 @@ namespace www.aquarella.com.pe.Aquarella.Logistica
 
         protected void grdPivot2_RowCreated(object sender, GridViewRowEventArgs e)
         {
-
+          
 
             //        gvReturns.Columns[2].ItemStyle.Width = Unit.Parse("10px");
 
@@ -168,9 +168,11 @@ namespace www.aquarella.com.pe.Aquarella.Logistica
 
                     e.Row.Cells[7].Visible = false;
                     e.Row.Cells[2].Visible = false;
-                   
+
+                    if (e.Row.DataItem == null) return;
+
                     //
-                    string referencia = DataBinder.Eval(e.Row.DataItem, "Codigo").ToString();
+                        string referencia = DataBinder.Eval(e.Row.DataItem, "Codigo").ToString();
 
                     string rutafoto= DataBinder.Eval(e.Row.DataItem, "foto").ToString();
                     //
@@ -513,10 +515,14 @@ namespace www.aquarella.com.pe.Aquarella.Logistica
             string cadena = stw.ToString();
 
             string iniImagen = "<img WIDTH = '34' HEIGHT = '34' alt = 'Logo_FR'  style = 'margin: 50px 50px 50px 150px; vertical-align:middle; padding-left:10px' src = 'http";
-            string finImagen = ".jpg' />";
+            string finImagen = ".JPG' />";
 
             cadena = cadena.Replace("http", iniImagen);
+            cadena = cadena.Replace(".JPG", finImagen);
+
+            finImagen = ".jpg' />";
             cadena = cadena.Replace(".jpg", finImagen);
+
             cadena = cadena.Replace("<tr", "<tr height = 40");
             cadena = cadena.Replace("<td", "<td height = 40");
             cadena = cadena.Replace("foto", "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Foto&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;");

@@ -274,8 +274,85 @@ namespace www.aquarella.com.pe.Aquarella.Ventas
         {
             DataTable dt = (DataTable)Session[_nameSessionData];
 
+            DataTable dtexcel = dt.Clone();
 
-            ExportarExcel(dt, "0,1,2,3,21,22,23,24,25,26,27,28,29,30,31", "2", "Orden_Despacho");
+            foreach(DataRow fila in dt.Rows)
+            {
+                dtexcel.ImportRow(fila);
+            }
+          
+
+
+            DataColumn col_remove = dtexcel.Columns["Desp_NroDoc"];
+            dtexcel.Columns.Remove(col_remove);
+
+            col_remove = dtexcel.Columns["Desp_Descripcion"];
+            dtexcel.Columns.Remove(col_remove);
+
+            col_remove = dtexcel.Columns["Estado"];
+            dtexcel.Columns.Remove(col_remove);
+
+            col_remove = dtexcel.Columns["Desp_FechaCre"];
+            dtexcel.Columns.Remove(col_remove);
+            col_remove = dtexcel.Columns["Rotulo_Courier"];
+            dtexcel.Columns.Remove(col_remove);
+            col_remove = dtexcel.Columns["Courier"];
+            dtexcel.Columns.Remove(col_remove);
+            col_remove = dtexcel.Columns["McaCourier"];
+            dtexcel.Columns.Remove(col_remove);
+            col_remove = dtexcel.Columns["Enviado"];
+            dtexcel.Columns.Remove(col_remove);
+
+            col_remove = dtexcel.Columns["TotalPremio"];
+            dtexcel.Columns.Remove(col_remove);
+
+            col_remove = dtexcel.Columns["TotalPremioEnviado"];
+            dtexcel.Columns.Remove(col_remove);
+
+            col_remove = dtexcel.Columns["TotalCatalogo"];
+            dtexcel.Columns.Remove(col_remove);
+
+            col_remove = dtexcel.Columns["TotalCatalogEnviado"];
+            dtexcel.Columns.Remove(col_remove);
+
+            col_remove = dtexcel.Columns["TotalPares"];
+            dtexcel.Columns.Remove(col_remove);
+
+            col_remove = dtexcel.Columns["TotalParesEnviado"];
+            dtexcel.Columns.Remove(col_remove);
+
+           
+
+            col_remove = dtexcel.Columns["Desp_IdDetalle"];
+            dtexcel.Columns.Remove(col_remove);
+
+            col_remove = dtexcel.Columns["Desp_Id"];
+            dtexcel.Columns.Remove(col_remove);
+
+            col_remove = dtexcel.Columns["TotalParesEnviadoEdit"];
+            dtexcel.Columns.Remove(col_remove);
+
+            col_remove = dtexcel.Columns["TotalCatalogEnviadoEdit"];
+            dtexcel.Columns.Remove(col_remove);
+
+            col_remove = dtexcel.Columns["IdEstado"];
+            dtexcel.Columns.Remove(col_remove);
+
+            col_remove = dtexcel.Columns["Atendido"];
+            dtexcel.Columns.Remove(col_remove);
+
+            col_remove = dtexcel.Columns["IdLider"];
+            dtexcel.Columns.Remove(col_remove);
+
+            col_remove = dtexcel.Columns["McaFlete"];
+            dtexcel.Columns.Remove(col_remove);
+
+            col_remove = dtexcel.Columns["TotalPremioEnviadoEdit"];
+            dtexcel.Columns.Remove(col_remove);
+
+
+            //ExportarExcel(dtexcel, "0,1,2,3,21,22,23,24,25,26,27,28,29,30,31", "2", "Orden_Despacho");
+            ExportarExcel(dtexcel, "", "2", "Orden_Despacho");
 
         }
                 
@@ -417,12 +494,18 @@ namespace www.aquarella.com.pe.Aquarella.Ventas
             for (int i = 0; i <= gvReturns.Rows.Count - 1; i++)
             {
                 
-                string strIdDetalle = ((HiddenField)(gvReturns.Rows[i].FindControl("hf_IdDetalle"))).Value;     
+                string strIdDetalle = ((HiddenField)(gvReturns.Rows[i].FindControl("hf_IdDetalle"))).Value;
+
+                string strLid_Prom = ((HiddenField)(gvReturns.Rows[i].FindControl("hf_lider_prom"))).Value;
                 //string strRotulo = ((TextBox)(gvReturns.Rows[i].FindControl("txtRotulo"))).Text;
                 string strDestino = ((TextBox)(gvReturns.Rows[i].FindControl("TxtDestino"))).Text;
                 string strAgencia = ((TextBox)(gvReturns.Rows[i].FindControl("txtAgencia"))).Text;
                 string strIdLider = ((HiddenField)(gvReturns.Rows[i].FindControl("hf_IdLider"))).Value;
-                string strRotulo = Request.Form["Rotulo_" + strIdLider];
+
+                string strPromotor = ((HiddenField)(gvReturns.Rows[i].FindControl("hf_Promotor"))).Value;
+                string strPedidos = ((HiddenField)(gvReturns.Rows[i].FindControl("hf_Pedidos"))).Value;
+
+                string strRotulo = Request.Form["Rotulo_" + strLid_Prom];
                 string strRotuloCourier = Request.Form["RotuloCourier_" + strIdLider];
 
                 string strObs = ((TextBox)(gvReturns.Rows[i].FindControl("TxtObservacion"))).Text;
@@ -446,9 +529,13 @@ namespace www.aquarella.com.pe.Aquarella.Ventas
                 strDataDetalle += " McaCourier=¿" + strMcaCourier + "¿ ";
                 strDataDetalle += " Destino=¿" + strDestino + "¿ ";
                 strDataDetalle += " Agencia=¿" + strAgencia + "¿ ";
-                 strDataDetalle += " Obs=¿" + strObs + "¿ ";
+                strDataDetalle += " Obs=¿" + strObs + "¿ ";
                 strDataDetalle += " Det=¿" + strDetalle + "¿ ";
                 strDataDetalle += " McaFlete=¿" + strMcaFlete + "¿ ";
+                strDataDetalle += " Promotor=¿" + strPromotor + "¿ ";
+                strDataDetalle += " Pedidos=¿" + strPedidos + "¿ ";
+                strDataDetalle += " LidProm=¿" + strLid_Prom + "¿ ";
+
                 strDataDetalle += "/>";
 
                 if (strRotulo.Trim() == "")
