@@ -237,6 +237,7 @@ namespace Integrado.Design.WPF_Master
                     _entorno = Environment.GetEnvironmentVariable("aq");
 
                 //_entorno = "AQCH3";
+                Ent_Global._nombre_entorno = _entorno;
                 Boolean inicio_config = Dat_Acceso.getpunto_vta(_entorno);
 
                // Dat_Acceso.getSalesCoorByMonthPctg();

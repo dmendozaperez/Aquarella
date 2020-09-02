@@ -217,8 +217,104 @@ namespace www.aquarella.com.pe.Aquarella.Ventas
         {
             DataTable dt = (DataTable)Session[_nameSessionData];
 
+            DataTable dtexcel = dt.Clone();
+
+            foreach (DataRow fila in dt.Rows)
+            {
+                dtexcel.ImportRow(fila);
+            }
+
+
+
+            DataColumn col_remove = dtexcel.Columns["Desp_NroDoc"];
+            dtexcel.Columns.Remove(col_remove);
+
+            col_remove = dtexcel.Columns["Desp_Descripcion"];
+            dtexcel.Columns.Remove(col_remove);
+
+            col_remove = dtexcel.Columns["Estado"];
+            dtexcel.Columns.Remove(col_remove);
+
+            col_remove = dtexcel.Columns["Desp_FechaCre"];
+            dtexcel.Columns.Remove(col_remove);
+
+            col_remove = dtexcel.Columns["Rotulo_Courier"];
+            dtexcel.Columns.Remove(col_remove);
+
+            col_remove = dtexcel.Columns["TotalPremio"];
+            dtexcel.Columns.Remove(col_remove);
+
+            col_remove = dtexcel.Columns["TotalPremioEnviado"];
+            dtexcel.Columns.Remove(col_remove);
+
+            col_remove = dtexcel.Columns["TotalCatalogo"];
+            dtexcel.Columns.Remove(col_remove);
+
+            col_remove = dtexcel.Columns["TotalCatalogEnviado"];
+            dtexcel.Columns.Remove(col_remove);
+
+            col_remove = dtexcel.Columns["TotalParesEnviado"];
+            dtexcel.Columns.Remove(col_remove);
+
+            col_remove = dtexcel.Columns["Total_Cantidad"];
+            dtexcel.Columns.Remove(col_remove);
+
+            col_remove = dtexcel.Columns["Total_Cantidad_Envio"];
+            dtexcel.Columns.Remove(col_remove);
+
+            col_remove = dtexcel.Columns["TotalVenta"];
+            dtexcel.Columns.Remove(col_remove);
+
+            col_remove = dtexcel.Columns["CobroFlete"];
+            dtexcel.Columns.Remove(col_remove);
+
+            col_remove = dtexcel.Columns["Courier"];
+            dtexcel.Columns.Remove(col_remove);
+
+            col_remove = dtexcel.Columns["Detalle"];
+            dtexcel.Columns.Remove(col_remove);
+
+            col_remove = dtexcel.Columns["McaCourier"];
+            dtexcel.Columns.Remove(col_remove);
+
+            col_remove = dtexcel.Columns["McaFlete"];
+            dtexcel.Columns.Remove(col_remove);
+
+            col_remove = dtexcel.Columns["Enviado"];
+            dtexcel.Columns.Remove(col_remove);
+
+            col_remove = dtexcel.Columns["Desp_IdDetalle"];
+            dtexcel.Columns.Remove(col_remove);
+
+            col_remove = dtexcel.Columns["Desp_Id"];
+            dtexcel.Columns.Remove(col_remove);
+
+            col_remove = dtexcel.Columns["TotalParesEnviadoEdit"];
+            dtexcel.Columns.Remove(col_remove);
+
+            col_remove = dtexcel.Columns["TotalCatalogEnviadoEdit"];
+            dtexcel.Columns.Remove(col_remove);
+
+            col_remove = dtexcel.Columns["TotalPremioEnviadoEdit"];
+            dtexcel.Columns.Remove(col_remove);
+
+            col_remove = dtexcel.Columns["IdEstado"];
+            dtexcel.Columns.Remove(col_remove);
+
+            col_remove = dtexcel.Columns["Atendido"];
+            dtexcel.Columns.Remove(col_remove);
+
+            col_remove = dtexcel.Columns["IdLider"];
+            dtexcel.Columns.Remove(col_remove);
+
+            col_remove = dtexcel.Columns["Lid_prom"];
+            dtexcel.Columns.Remove(col_remove);
+
+
             //ExportarExcel(dt, "0,1,2,3,19,20,21,22,23,24,25,26,27,28,29", "2", "Orden_Despacho");
-            ExportarExcel(dt, "0,1,2,3,21,22,23,24,25,26,27,28,29,30,31", "2", "Orden_Despacho");
+            //ExportarExcel(dt, "0,1,2,3,21,22,23,24,25,26,27,28,29,30,31", "2", "Orden_Despacho");
+
+            ExportarExcel(dtexcel, "", "2", "Orden_Despacho");
 
         }
 

@@ -48,6 +48,11 @@ namespace CapaDato.Bll.Logistica
                 cmd = new SqlCommand(sqlquery, cn);
                 cmd.CommandTimeout = 0;
                 cmd.CommandType = CommandType.StoredProcedure;
+
+                if (Ent_Global._canal_venta=="AQ")
+                    cmd.Parameters.AddWithValue("@pto_venta", Ent_Global._nombre_entorno);
+
+
                 cmd.Parameters.Add("@numguia", SqlDbType.VarChar, 20);
                 cmd.Parameters["@numguia"].Direction = ParameterDirection.Output;
                 cmd.ExecuteNonQuery();

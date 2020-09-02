@@ -397,7 +397,7 @@ namespace www.aquarella.com.pe.Aquarella.Ventas
 
                     strDataDetalle += "/>";
 
-                    strLiqLiderDespacho += devolverIdliquidacion(strIdLider, strLid_Prom);
+                    strLiqLiderDespacho += devolverIdliquidacion(strIdLider, strLid_Prom, strPedidos);
 
                     if (strRotulo.Trim() == "") { 
                        msjError += "Rotulo,";
@@ -466,7 +466,7 @@ namespace www.aquarella.com.pe.Aquarella.Ventas
             Response.Redirect("EditDespachoAlmacen.aspx?IdDespacho=" + _iddespacho);
         }
 
-        private string devolverIdliquidacion(string strIdLider, string strLid_Prom)
+        private string devolverIdliquidacion(string strIdLider, string strLid_Prom,string pedido)
         {
             string StrlistLiquidacion = "";
             DataTable dtidLiquidacion = new DataTable();
@@ -474,7 +474,8 @@ namespace www.aquarella.com.pe.Aquarella.Ventas
 
             foreach (DataRow row in dtidLiquidacion.Rows)
             {
-                if (strIdLider == row["Area_Id"].ToString() && strLid_Prom == row["Lid_Prom"].ToString()) {
+                if (strIdLider == row["Area_Id"].ToString() && strLid_Prom == row["Lid_Prom"].ToString() && pedido.Length > 0)
+                {
 
                     string strLiq_Id = row["Liq_Id"].ToString();
                     StrlistLiquidacion += "<row  ";
@@ -484,10 +485,17 @@ namespace www.aquarella.com.pe.Aquarella.Ventas
                     StrlistLiquidacion += "/>";
 
                 }
+                if (strIdLider == row["Area_Id"].ToString() &&  pedido.Length == 0 && row["bas_tip_des"].ToString()=="02")
+                {
+                    string strLiq_Id = row["Liq_Id"].ToString();
+                    StrlistLiquidacion += "<row  ";
+                    StrlistLiquidacion += " IdLider=¿" + strIdLider + "¿ ";
+                    StrlistLiquidacion += " IdDespacho=¿xxyy¿ ";
+                    StrlistLiquidacion += " IdLiqui=¿" + strLiq_Id + "¿ ";
+                    StrlistLiquidacion += "/>";
 
-
+                }
             }
-
 
             return StrlistLiquidacion;
 

@@ -19,6 +19,7 @@ namespace CapaEntidad.Bll.Util
 
         public static Boolean _session_activa { set; get; }
 
+        public static string _nombre_entorno { get; set; }
 
         #region<CREACION DE VARIABLES PARA FACTURACION CON ALMACEN>
         public static string _pvt_nombre { get; set; }

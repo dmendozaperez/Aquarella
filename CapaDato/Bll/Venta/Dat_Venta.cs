@@ -212,6 +212,10 @@ namespace CapaDato.Bll.Venta
                 cmd = new SqlCommand(sqlquery, cn);
                 cmd.CommandTimeout = 0;
                 cmd.CommandType = CommandType.StoredProcedure;
+
+                if (Ent_Global._canal_venta == "AQ")
+                    cmd.Parameters.AddWithValue("@pto_venta", Ent_Global._nombre_entorno);
+
                 cmd.Parameters.AddWithValue("@liq_id", _liq);
                 cmd.Parameters.AddWithValue("@usu_creacion", Ent_Global._bas_id_codigo);
                 cmd.Parameters.Add("@numero_venta", SqlDbType.VarChar, 20);

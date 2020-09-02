@@ -23,7 +23,7 @@
             }
         }
 
-        function Inprimir(Rotulo, Destino, Agencia,RotuloCourier, mcaCourier) {
+        function Inprimir(Rotulo, Destino, Agencia,RotuloCourier, mcaCourier,Flete) {
 
            
             if (mcaCourier == 'N') {
@@ -47,7 +47,8 @@
                 mywindow.document.write('<b>' + nombre + '</b><br>');
                 mywindow.document.write('<b>DNI' + Doc + '</b><br>');
                 mywindow.document.write('<b>Destino:' + Destino + '</b><br>');
-                mywindow.document.write('<b>Empresa: ' + Agencia + '</b>');
+                mywindow.document.write('<b>Empresa: ' + Agencia + '</b><br>');
+                mywindow.document.write('<b>Flete: ' + Flete + '</b>');
                 mywindow.document.write('</center></body></html>');
                 mywindow.document.write('</body></html>');
             } else {
@@ -88,7 +89,8 @@
                 mywindow.document.write('<b>DNI:' + Doc + '</b><br>');
                 mywindow.document.write('<b>Dirección:' + direccion + '</b><br>');
                 mywindow.document.write('<b>Ubicación: ' + ubicacion + '</b><br>');
-                mywindow.document.write('<b>Telefono: ' + Telefono + '</b>');
+                mywindow.document.write('<b>Telefono: ' + Telefono + '</b><br>');
+                mywindow.document.write('<b>Flete: ' + Flete + '</b>');
                 mywindow.document.write('</center></body></html>');
                 mywindow.document.write('</body></html>');
             }
@@ -298,6 +300,10 @@
                         <HeaderStyle HorizontalAlign="Left" />
                         <ItemStyle HorizontalAlign="Left" />
                         </asp:BoundField>
+                             <asp:BoundField DataField="promotor" HeaderText="Promotor" ItemStyle-Width="110px">
+                        <HeaderStyle HorizontalAlign="Left" />
+                        <ItemStyle HorizontalAlign="Left" />
+                        </asp:BoundField>
                         <asp:BoundField DataField="Rotulo" HeaderText="Rotulo" ItemStyle-Width="110px">
                         <HeaderStyle HorizontalAlign="Left" />
                         <ItemStyle HorizontalAlign="Left" />
@@ -355,6 +361,10 @@
                         <HeaderStyle HorizontalAlign="Left" />
                         <ItemStyle HorizontalAlign="Left" />
                         </asp:BoundField>
+                               <asp:BoundField DataField="Pedido" HeaderText="Pedidos" ItemStyle-Width="110px">
+                         <HeaderStyle HorizontalAlign="Left" />
+                        <ItemStyle HorizontalAlign="Left" />
+                        </asp:BoundField>
                                                
                         <asp:BoundField DataField="TotalVenta" DataFormatString="{0:C}"  ItemStyle-Width="50px"
                             HeaderText="Monto">
@@ -367,7 +377,7 @@
                         <ItemStyle HorizontalAlign="Center" />
                         </asp:BoundField>
 
-                        <asp:BoundField DataField="Courier" ItemStyle-Width="50px" HeaderText="Courier">
+                        <asp:BoundField DataField="Courier" Visible="false" ItemStyle-Width="50px" HeaderText="Courier">
                         <HeaderStyle HorizontalAlign="center" />
                         <ItemStyle HorizontalAlign="Center" />
                         </asp:BoundField>
@@ -386,7 +396,7 @@
              
                                     <center>
                                       
-                                         <a href="#" onclick="Inprimir('<%# Eval("Rotulo")%>','<%# Eval("Destino")%>','<%# Eval("Agencia")%>','<%# Eval("Rotulo_Courier")%>','<%# Eval("McaCourier")%>')">
+                                         <a href="#" onclick="Inprimir('<%# Eval("Rotulo")%>','<%# Eval("Destino")%>','<%# Eval("Agencia")%>','<%# Eval("Rotulo_Courier")%>','<%# Eval("McaCourier")%>','<%# Eval("CobroFlete")%>')">
                                             <asp:Image ID="Image1" ImageUrl="~/Design/images/Botones/printer.png" runat="server" />
                                         </a>
                                       
