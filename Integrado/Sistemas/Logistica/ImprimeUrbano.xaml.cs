@@ -29,6 +29,10 @@ namespace Integrado.Sistemas.Logistica
 
             this.Title = (Ent_Global._canal_venta == "AQ")? "[Reimprimir Etiquetas Catalogo]" : "[Duplicado de Guia Urbano]";
             this.lbltitulo.Content= (Ent_Global._canal_venta == "AQ") ? "Reimprimir Pedidos Etiquetas" : "Imprimir Guia Urbano";
+
+            btnimprimir.Visibility = (Ent_Global._canal_venta == "AQ") ? Visibility.Hidden : Visibility.Visible;
+
+            lblec.Visibility = (Ent_Global._canal_venta == "AQ") ? Visibility.Hidden : Visibility.Visible;
         }
 
 

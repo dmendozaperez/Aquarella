@@ -47,6 +47,8 @@ namespace CapaDato.Bll.Venta
                                     etiqueta.destino = dr["destino"].ToString();
                                     etiqueta.agencia = dr["agencia"].ToString();
                                     etiqueta.agencia_direccion = dr["agencia_direccion"].ToString();
+                                    etiqueta.numdoc = dr["numdoc"].ToString();
+                                    etiqueta.tipo_des= dr["tipo_despacho"].ToString();
                                 }
                             }
 

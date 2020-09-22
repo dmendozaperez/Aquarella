@@ -54,7 +54,7 @@
                     <Image Grid.Column="0"  Source="/Integrado;component/Design/Images/impresora.png"/>
                 </Grid>
             </Button>
-            <Label Content="Imprimir 101.6x101.6" Grid.Column="1" FontWeight="Bold" FontSize="12" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,50,0,0" ></Label>
+            <Label Content="Imprimir 101.6x101.6" Name="lblec" Grid.Column="1" FontWeight="Bold" FontSize="12" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,50,0,0" ></Label>
             
             <Button x:Name="btnimprimir2" Grid.Column="2" Height="100"  Width="120"  Cursor="Hand" Background="White" BorderBrush="White" Click="btnimprimir2_Click">
                 <Button.ToolTip>

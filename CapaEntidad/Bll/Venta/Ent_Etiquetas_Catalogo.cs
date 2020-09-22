@@ -20,6 +20,8 @@ namespace CapaEntidad.Bll.Venta
         public string destino { get; set; }
         public string agencia { get; set; }
         public string agencia_direccion { get; set; }        
+        public string numdoc { get; set; }
+        public string tipo_des { get; set; }
 
 
     }

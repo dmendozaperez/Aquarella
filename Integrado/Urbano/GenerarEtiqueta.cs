@@ -502,6 +502,8 @@ namespace Integrado.Urbano
                 string destino = etiqueta.destino;
                 string agencia = etiqueta.agencia;
                 string agencia_direccion = etiqueta.agencia_direccion;
+                string numdoc = etiqueta.numdoc;
+                string tipo_des = etiqueta.tipo_des;
 
                 //// Generar Formato de Información
                 //string cliente = etiqueta.cliente; ;//RemoverDiacriticos(oGuia.nom_cliente);
@@ -601,7 +603,10 @@ namespace Integrado.Urbano
                         }
                     }
                     strb.Append("^FO030,435^A0,030,020^FDDistri: " + distrito + "^FS\n");
-                    strb.Append("^FO030,015^BCN,62,Y,N,N^FD" + pedido + "^FS\n");
+
+                    strb.Append("^FO030,465^A0,030,020^FDTipDes: " + tipo_des + "^FS\n");
+
+                    strb.Append("^FO030,015^BCN,62,Y,N,N^FD" + numdoc + "^FS\n");
                     strb.Append("^XZ\n");
                 }
                 else
@@ -687,7 +692,10 @@ namespace Integrado.Urbano
                         }
                     }
                     strb.Append("^FO030,435^A0,030,020^FDDirAgen: " + agencia_direccion + "^FS\n");
-                    strb.Append("^FO030,015^BCN,62,Y,N,N^FD" + pedido + "^FS\n");
+
+                    strb.Append("^FO030,465^A0,030,020^FDTipDes: " + tipo_des + "^FS\n");
+
+                    strb.Append("^FO030,015^BCN,62,Y,N,N^FD" + numdoc + "^FS\n");
                     strb.Append("^XZ\n");
                 }
 
