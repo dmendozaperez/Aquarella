@@ -91,9 +91,10 @@ namespace www.aquarella.com.pe.Reports.Logistica
                     Int32 paresman=Convert.ToInt32(dRowDtl["pares"]);
                     string agenciaman= dRowDtl["agencia"].ToString();
                     string destinoman= dRowDtl["destino"].ToString();
+                    string tipo_despacho= dRowDtl["Desp_Des"].ToString();
 
                     www.aquarella.com.pe.bll.Reports.Manifiesto_Reports objManReport = new www.aquarella.com.pe.bll.Reports.Manifiesto_Reports(idman, fechaman, guiaman,
-                        docman, liderman, promotorman, paresman, agenciaman, destinoman);
+                        docman, liderman, promotorman, paresman, agenciaman, destinoman, tipo_despacho);
 
                     _ManValsReport.Add(objManReport);
                 }
