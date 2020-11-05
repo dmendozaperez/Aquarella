@@ -62,7 +62,7 @@ namespace Integrado.Design.WPF_Master
         private void btnaquarella_Click(object sender, RoutedEventArgs e)
         {
             Mouse.OverrideCursor = Cursors.Wait;
-            _server = "posperubd.bgr.pe";//"172.28.7.14";// "3.16.178.73";
+            _server = "192.168.2.14";//"172.28.7.14";// "3.16.178.73";
             _base_datos = "BdAquarella";
             _user = "aquarella_web";
             _password = "Bata2019**";

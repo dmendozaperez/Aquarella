@@ -93,7 +93,30 @@
    <asp:Panel ID="pnlDwCustomers" Visible="true" runat="server">
         <div style="margin: 10px auto 0 auto;">
             <table width="100%" class="tablagris" cellpadding="4">
-               
+                <tr>
+                    <td>
+                        <table cellpadding="1" cellspacing="1" width="100%">
+                            <tr>
+                                <td class="f12" width="10%">
+                                    Tipo de despacho:</td>
+                                <td>
+                                    <table style="width: 43%;">
+                                        <tr>
+                                            <td class="style3">
+                                                <asp:DropDownList ID="dwtipo" runat="server" AppendDataBoundItems="true" 
+                                                    DataTextField="tip_des_nom" DataValueField="tip_des_cod" 
+                                                    ToolTip="Selecionar el tipo de despacho" Width="280px">
+                                                  
+                                                </asp:DropDownList>
+                                            </td>                                            
+                                            
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
                 <tr>
                     <td>
                         <table width="100%" cellpadding="1" cellspacing="1">
@@ -212,6 +235,10 @@
                                         HeaderText="N° de Despacho" ItemStyle-HorizontalAlign="Center">
                                         <HeaderStyle HorizontalAlign="Left" />
                                         <ItemStyle HorizontalAlign="Left" />
+                                    </asp:BoundField>
+                                      <asp:BoundField DataField="DESP_TIPO_DES"  ItemStyle-Width="210px" HeaderText="Tipo de Despacho" >
+                                    <HeaderStyle HorizontalAlign="Left" />
+                                    <ItemStyle HorizontalAlign="Left" />
                                     </asp:BoundField>
                                     <asp:BoundField DataField="Desp_Descripcion"  ItemStyle-Width="510px" HeaderText="Descripcion" >
                                     <HeaderStyle HorizontalAlign="Left" />

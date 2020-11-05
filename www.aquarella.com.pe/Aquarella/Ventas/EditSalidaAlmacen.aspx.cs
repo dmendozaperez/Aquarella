@@ -35,18 +35,21 @@ namespace www.aquarella.com.pe.Aquarella.Ventas
 
         private string _nombreSession = "ValoresventaxLider";
 
+        private string _session_tipo_despacho = "_session_tipo_despacho";
+
 
         protected void Page_Load(object sender, EventArgs e)
         {
             // Vencimiento de sesion
             _iddespacho = this.Request.Params["IdDespacho"] != null ? ((object)this.Request.Params["IdDespacho"]).ToString() : string.Empty;
+         
             if (Session[Constants.NameSessionUser] == null) Utilities.logout(Page.Session, Page.Response);
             else
                 _user = (Users)Session[Constants.NameSessionUser];
 
             if (!IsPostBack)
             {
-
+              
                 formUsuario();
 
             }
@@ -100,6 +103,10 @@ namespace www.aquarella.com.pe.Aquarella.Ventas
             if (dsreturn.Tables.Count > 0)
             {
                 dt1 = dsreturn.Tables[0];
+
+                Session[_session_tipo_despacho] = dt1.Rows[0]["DESP_TIPO"].ToString();
+                lbltipo.Text= dt1.Rows[0]["DESP_TIPO_DES"].ToString();
+
                 dtDt = dsreturn.Tables[1];
 
                 foreach (DataRow row in dtDt.Rows)
@@ -112,6 +119,7 @@ namespace www.aquarella.com.pe.Aquarella.Ventas
 
                     string _TotalPremioPedido = row["NroPremio"].ToString();
                     string _TotalPremioEnviado = row["PremioEnviados"].ToString();
+
 
 
                     txtPedido.Text = _TotalPedido;
@@ -134,7 +142,14 @@ namespace www.aquarella.com.pe.Aquarella.Ventas
 
             gvReturns.DataSource = dt1;
             gvReturns.DataBind();
-           
+
+            if  (Session[_session_tipo_despacho].ToString()=="L")
+            {
+                gvReturns.Columns[10].Visible = false;
+                gvReturns.Columns[11].Visible = false;
+            }
+
+
             Session[_nameSessionData] = dsreturn.Tables[0];
 
             TxtDescripcion.Text = ((HiddenField)(gvReturns.Rows[0].FindControl("hf_Descripcion"))).Value;
@@ -310,6 +325,21 @@ namespace www.aquarella.com.pe.Aquarella.Ventas
             col_remove = dtexcel.Columns["Lid_prom"];
             dtexcel.Columns.Remove(col_remove);
 
+            col_remove = dtexcel.Columns["DESP_TIPO_DES"];
+            dtexcel.Columns.Remove(col_remove);
+
+            col_remove = dtexcel.Columns["DESP_TIPO"];
+            dtexcel.Columns.Remove(col_remove);
+
+            if (Session[_session_tipo_despacho].ToString()=="L")
+            {
+                col_remove = dtexcel.Columns["Agencia"];
+                dtexcel.Columns.Remove(col_remove);
+
+                col_remove = dtexcel.Columns["Destino"];
+                dtexcel.Columns.Remove(col_remove);
+            }
+
 
             //ExportarExcel(dt, "0,1,2,3,19,20,21,22,23,24,25,26,27,28,29", "2", "Orden_Despacho");
             //ExportarExcel(dt, "0,1,2,3,21,22,23,24,25,26,27,28,29,30,31", "2", "Orden_Despacho");
@@ -409,10 +439,12 @@ namespace www.aquarella.com.pe.Aquarella.Ventas
             string strTotalPremioPedido = txtPedidoP.Text;
             string strTotalPremioEnviado = txtEnviadoP.Text;
             string strTotalMonto = txtMonto.Text;
+            string str_tipo_des = lbltipo.Text;
 
             string strTable = "<table <Table border='1' bgColor='#ffffff' " +
             "borderColor='#000000' cellSpacing='2' cellPadding='2' " +
             "style='font-size:10.0pt; font-family:Calibri; background:white;'>";
+            strTable += "<tr height=38 ><td height=38  bgcolor='#969696' width='38'>Tipo Despacho </ td ><td width='400' align='left' >" + str_tipo_des + "</ td > ";
             strTable += "<tr height=38 ><td height=38  bgcolor='#969696' width='38'>Nro. Documento </ td ><td width='400' align='left' >" + nrodoc + "</ td > ";
             strTable += "<td height=38  bgcolor='#969696' width='38'>Fec. Creación. </ td ><td width='400' align='left' colspan='2' >" + fec + "</ td > </tr>";
             strTable += "<tr height=38 ><td height=38  bgcolor='#969696' width='38'>Total Monto. </ td ><td width='400' align='left' >" + strTotalMonto + "</ td > ";

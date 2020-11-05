@@ -43,6 +43,17 @@ namespace www.aquarella.com.pe.Aquarella.Ventas
 
             if (!IsPostBack)
             {
+                DataTable dt_des = new DataTable();
+                dt_des.Columns.Add("tip_des_cod", typeof(string));
+                dt_des.Columns.Add("tip_des_nom", typeof(string));
+
+                dt_des.Rows.Add("L", "Lima-Callao");
+                dt_des.Rows.Add("P", "Provincia");
+
+                dwtipo.DataSource = dt_des;
+                dwtipo.DataBind();
+
+                dwtipo.SelectedValue = "P";
 
                 txtDateStart.Text = DateTime.Today.ToString("dd/MM/yyyy");
                 txtDateEnd.Text = DateTime.Today.ToString("dd/MM/yyyy");
@@ -83,7 +94,9 @@ namespace www.aquarella.com.pe.Aquarella.Ventas
 
         private void sbconsulta()
         {
-            DataSet dsreturn = www.aquarella.com.pe.Bll.Ventas.DespachoAlmacen.getDespachos(Convert.ToDateTime(txtDateStart.Text), Convert.ToDateTime(txtDateEnd.Text),"");
+            string tipo_des = dwtipo.SelectedValue;
+
+            DataSet dsreturn = www.aquarella.com.pe.Bll.Ventas.DespachoAlmacen.getDespachos(Convert.ToDateTime(txtDateStart.Text), Convert.ToDateTime(txtDateEnd.Text),"", tipo_des);
             DataTable dt1 = new DataTable("tabla1");
            
             if (dsreturn.Tables.Count > 0)

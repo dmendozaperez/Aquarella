@@ -23,7 +23,7 @@
             }
         }
 
-        function Inprimir(Rotulo, Destino, Agencia,RotuloCourier, mcaCourier,Flete) {
+        function Inprimir(Rotulo, Destino, Agencia,RotuloCourier, mcaCourier,Flete,tipo_des) {
 
            
             if (mcaCourier == 'N') {
@@ -46,8 +46,13 @@
                 mywindow.document.write('</head><body onLoad="self.print()"><center>');
                 mywindow.document.write('<b>' + nombre + '</b><br>');
                 mywindow.document.write('<b>DNI' + Doc + '</b><br>');
-                mywindow.document.write('<b>Destino:' + Destino + '</b><br>');
-                mywindow.document.write('<b>Empresa: ' + Agencia + '</b><br>');
+
+                if (tipo_des == "P") {
+                    mywindow.document.write('<b>Destino:' + Destino + '</b><br>');
+                    mywindow.document.write('<b>Empresa: ' + Agencia + '</b><br>');
+                }
+                
+
                 mywindow.document.write('<b>Flete: ' + Flete + '</b>');
                 mywindow.document.write('</center></body></html>');
                 mywindow.document.write('</body></html>');
@@ -168,6 +173,7 @@
             </td>
             <td>
                     <asp:TextBox id="txtEstado"   Enabled="false"  runat="server" />
+                    <asp:Label ID="lbltipo" Font-Size="18PX" ForeColor="Red" Font-Bold="true" runat="server" Text="Label">PROVINCIA</asp:Label>
             </td>
             
         </tr>
@@ -396,7 +402,7 @@
              
                                     <center>
                                       
-                                         <a href="#" onclick="Inprimir('<%# Eval("Rotulo")%>','<%# Eval("Destino")%>','<%# Eval("Agencia")%>','<%# Eval("Rotulo_Courier")%>','<%# Eval("McaCourier")%>','<%# Eval("CobroFlete")%>')">
+                                         <a href="#" onclick="Inprimir('<%# Eval("Rotulo")%>','<%# Eval("Destino")%>','<%# Eval("Agencia")%>','<%# Eval("Rotulo_Courier")%>','<%# Eval("McaCourier")%>','<%# Eval("CobroFlete")%>','<%# Eval("DESP_TIPO")%>')">
                                             <asp:Image ID="Image1" ImageUrl="~/Design/images/Botones/printer.png" runat="server" />
                                         </a>
                                       

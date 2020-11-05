@@ -83,7 +83,7 @@ namespace www.aquarella.com.pe.Bll.Ventas
             catch (Exception e) { throw new Exception(e.Message, e.InnerException); }
         }
 
-        public static DataSet getDespachos(DateTime _date_start, DateTime _date_end,string  strNroDocumento)
+        public static DataSet getDespachos(DateTime _date_start, DateTime _date_end,string  strNroDocumento,string desp_tipo="P")
         {
 
             string sqlquery = "USP_Listar_Despacho_almacen";
@@ -97,6 +97,7 @@ namespace www.aquarella.com.pe.Bll.Ventas
                 cmd = new SqlCommand(sqlquery, cn);
                 cmd.CommandTimeout = 0;
                 cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@desp_tipo", desp_tipo);
                 cmd.Parameters.AddWithValue("@Nro_documento", strNroDocumento);
                 cmd.Parameters.AddWithValue("@fecha_inicio", _date_start);
                 cmd.Parameters.AddWithValue("@fecha_final", _date_end);
