@@ -42,6 +42,8 @@
     <Compile Include="Bll\Control\Ent_Aplicacion.cs" />
     <Compile Include="Bll\Ecommerce\Cliente.cs" />
     <Compile Include="Bll\Ecommerce\Ent_Cexpress.cs" />
+    <Compile Include="Bll\Ecommerce\Ent_Chazki.cs" />
+    <Compile Include="Bll\Ecommerce\Ent_Ecommerce_Chazki.cs" />
     <Compile Include="Bll\Ecommerce\Ent_Etiqueta.cs" />
     <Compile Include="Bll\Ecommerce\Ent_GuiaCexpress.cs" />
     <Compile Include="Bll\Ecommerce\Ent_GuiaUrbano.cs" />

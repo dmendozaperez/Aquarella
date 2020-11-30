@@ -4,6 +4,7 @@ using CapaEntidad.Bll.Util;
 using Integrado.comercioxpress;
 using Integrado.Prestashop;
 using Integrado.Urbano;
+using Integrado.Chazki;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -179,7 +180,7 @@ namespace Integrado.Bll
                 {
                     Directory.CreateDirectory(@_ruta_copy);
                 }
-              
+
                 #region<REGION PARA ENVIAR EL XML AL SERVIDOR>
 
 
@@ -223,8 +224,6 @@ namespace Integrado.Bll
                 var uriSource = new Uri("/Integrado;component/Design/Images/aq_lineal.jpg", UriKind.Relative);
                 imglogo.Source = new BitmapImage(uriSource);
 
-
-
             }
             else
             {
@@ -241,8 +240,10 @@ namespace Integrado.Bll
         }
 
         #region<PROCESOS DE E-CCOMERCE>
-        public static void act_presta_urbano(string ven_id, ref string error,ref string cod_urbano)
+        public static void act_presta_urbano(string ven_id, ref string error, ref string cod_urbano)
         {
+            //string codigo = ven_id.Substring(0,4)+"-"+ven_id.Substring(4,8);
+
             Dat_PrestaShop action_presta = null;
             Dat_Urbano data_urbano = null;
 
@@ -251,16 +252,19 @@ namespace Integrado.Bll
             error = "";
             try
             {
-                string guia_presta = ""; string guia_urb = ""; string name_carrier = "";
+                string guia_presta = ""; string guia_courier = ""; string name_carrier = "";
                 action_presta = new Dat_PrestaShop();
                 data_urbano = new Dat_Urbano();
                 //action_presta.get_guia_presta_urba(ven_id, ref guia_presta, ref guia_urb, ref name_carrier);
                 action_presta.get_carrier(ven_id, ref guia_presta, ref name_carrier);
+                string track_chazki;
 
                 if (guia_presta.Trim().Length > 0)
                 {
                     UpdaEstado updateestado = new UpdaEstado();
-                    Boolean valida =(Ent_Global._err_con_mysql)?true: updateestado.ActualizarReference(guia_presta);/*si la variable global es 1 quiere decir que el mysql esta sin conexion*/
+                    //comentado
+                    Boolean valida = (Ent_Global._err_con_mysql) ? true : updateestado.ActualizarReference(guia_presta);/*si la variable global es 1 quiere decir que el mysql esta sin conexion*/
+                    //Boolean valida = true;
 
                     if (valida)
                     {
@@ -286,8 +290,23 @@ namespace Integrado.Bll
                                 //Ent_Cexpress ent_Cexpress = envia2.sendCexpress(ven_id, ref nroserv);
                                 action_presta.updestafac_prestashop(guia_presta);
                                 data_Cexpress.update_guia(guia_presta, nroserv);
-                                guia_urb = nroserv;
+                                guia_courier = nroserv;
+                                break;
 
+                            }
+                            //Chazki - Envíos Express
+                            else if (name_carrier == "Chazki - Envíos Express")
+                            {
+                                EnviarChazki objChazki = new EnviarChazki();
+
+                                string nrodelivery_chazki = objChazki.Envia_Courier_chazki(ven_id);
+                                if (nrodelivery_chazki != "")
+                                {
+                                    action_presta.updestafac_prestashop(guia_presta);
+                                    data_Cexpress.update_guia(guia_presta, nrodelivery_chazki);
+                                    guia_courier = nrodelivery_chazki;
+                                    break;
+                                }
                             }
                             else
                             {
@@ -298,31 +317,41 @@ namespace Integrado.Bll
                                     {
                                         action_presta.updestafac_prestashop(guia_presta);
                                         data_urbano.update_guia(guia_presta, ent_urbano.guia);
-                                        guia_urb = ent_urbano.guia;
+                                        guia_courier = ent_urbano.guia;
                                         break;
                                     }
                                 }
                             }
-
-
-
 
                         }
                         //guia_urb=
                         //action_presta.get_guia_presta_urba(ven_id, ref guia_presta, ref guia_urb);
 
                         ActTracking enviaguia_presta = new ActTracking();
-                        string[] valida_prest = enviaguia_presta.ActualizaTrackin(guia_presta, guia_urb);
-                        /*el valor 1 quiere decir que actualizo prestashop*/
-                        if (valida_prest[0] == "1" && guia_urb.ToString() != "")
+                        string[] valida_prest;
+
+                        if (name_carrier == "Chazki - Envíos Express") //para chazki el codigo de seguimiento es el mismo nro de boleta
                         {
-                            data_urbano.updprestashopGuia(guia_presta, guia_urb);
+                            track_chazki = ven_id.Substring(0, 4) + "-" + ven_id.Substring(4, 8);
+
+                            valida_prest = enviaguia_presta.ActualizaTrackin(guia_presta, track_chazki);
+                        }
+                        else
+                        {
+                            valida_prest = enviaguia_presta.ActualizaTrackin(guia_presta, guia_courier);
                         }
 
-                        cod_urbano = guia_urb;
+
+                        /*el valor 1 quiere decir que actualizo prestashop*/
+                        if (valida_prest[0] == "1" && guia_courier.ToString() != "")
+                        {
+                            data_urbano.updprestashopGuia(guia_presta, guia_courier);
+                        }
+                        cod_urbano = guia_courier;
                         /************************/
                     }
                 }
+
 
             }
             catch (Exception exc)
@@ -331,6 +360,7 @@ namespace Integrado.Bll
                 error = exc.Message;
             }
         }
-        #endregion
+
     }
 }
+#endregion

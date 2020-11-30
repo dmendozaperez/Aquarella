@@ -173,12 +173,12 @@ namespace Integrado.Sistemas.Ventas
             string _cod_urbano = "";
             string _error = "";
             string _venid = (string)row["Ven_Id"].ToString();
-            
-            msj_eccomer = "¿Está seguro de Enviar la Solicitud a Urbano referente al Doc. Nro. " + _venid + "?";
+
+            msj_eccomer = "¿Está seguro de Enviar la Solicitud al courier referente al Doc. Nro. " + _venid + "?";
             MessageDialogResult resultetiq = await this.ShowMessageAsync(Ent_Msg.msginfomacion, msj_eccomer, MessageDialogStyle.AffirmativeAndNegative, mySettings);
 
             if (resultetiq == MessageDialogResult.Affirmative)
-            {
+
                 if (Ent_Global._canal_venta == "BA")
                 {
 
@@ -188,7 +188,7 @@ namespace Integrado.Sistemas.Ventas
                     /*si el codigo de urbano esta null entonces no va el mensaje*/
                     if (_cod_urbano.Trim().Length > 0)
                     {
-                        msj_eccomer = "Se envío correctamente la solicitud a Urbano, Nro. Código obtenido: " + _cod_urbano + ".\n¿Desea Imprimir la etiqueta de este pedido?";
+                        msj_eccomer = "Se envío correctamente la solicitud al courier, Nro. Código obtenido: " + _cod_urbano + ".\n¿Desea Imprimir la etiqueta de este pedido?";
                         resultetiq = await this.ShowMessageAsync(Ent_Msg.msginfomacion, msj_eccomer, MessageDialogStyle.AffirmativeAndNegative, mySettings);
 
                         if (resultetiq == MessageDialogResult.Affirmative)
@@ -201,15 +201,15 @@ namespace Integrado.Sistemas.Ventas
                     }
                     else
                     {
-                        msj_eccomer = "No se pudo enviar la solicitud a Urbano.";
+                        msj_eccomer = "No se pudo enviar la solicitud.";
                         resultetiq = await this.ShowMessageAsync(Ent_Msg.msginfomacion, msj_eccomer, MessageDialogStyle.Affirmative, okSettings);
                     }
 
                 }
-            }
-
-
         }
+
+
+
 
         private void btnbuscar_Click(object sender, RoutedEventArgs e)
         {

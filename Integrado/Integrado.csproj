@@ -133,6 +133,8 @@
     <Reference Include="System.Data.Entity" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Net" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Net.Http.WebRequest" />
     <Reference Include="System.Printing" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
@@ -172,6 +174,7 @@
     <Compile Include="Certificado\ReportInvoiceClass.cs" />
     <Compile Include="Bll\ReportInvoiceSummary.cs" />
     <Compile Include="Bll\Transaction_det.cs" />
+    <Compile Include="Chazki\EnviarChazki.cs" />
     <Compile Include="comercioxpress\EnviaPedidoCxpress.cs" />
     <Compile Include="comercioxpress\GenerarEtiquetaCxpres.cs" />
     <Compile Include="Design\Control\Enums.cs" />

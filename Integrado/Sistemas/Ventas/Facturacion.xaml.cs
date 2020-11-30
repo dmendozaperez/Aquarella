@@ -551,7 +551,6 @@ namespace Integrado.Sistemas.Ventas
                             await Task.Run(() => genera_etiqueta.aq_imp_etiqueta2(grabar_numerodoc));
                         }
 
-
                             #region<SOLO PARA E-CCOMMERCE>
 
                             if (Ent_Global._canal_venta == "BA")
