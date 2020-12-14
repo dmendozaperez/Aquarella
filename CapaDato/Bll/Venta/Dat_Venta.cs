@@ -230,6 +230,12 @@ namespace CapaDato.Bll.Venta
                 _error = exc.Message;
                 //throw;
             }
+            if (Ent_Global._canal_venta == "BA" && num_doc == "0") //se agrego validacion temporal para los casos de los pedidos que cambian de almacen a tienda para despacho
+            {
+                num_doc = "-1";
+                _error = "El pedido Nro." + _liq + " ya fue facturado posiblemente por tienda ,regrese a la bandeja de pedidos para actualizar la lista.";
+            }
+
             return num_doc;
         }
         public static string borrar_lineapaquete(decimal _paqid, string _articulo, string _talla)

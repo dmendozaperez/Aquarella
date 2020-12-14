@@ -26,13 +26,13 @@ namespace Integrado.Urbano
                 Ent_Urbano acceso = data_urbano.get_acceso();
 
                 dt = data_urbano.get_data(_ven_id);
-                
-                if (dt!=null)
+
+                if (dt != null)
                 {
-                    if (dt.Rows.Count>0)
+                    if (dt.Rows.Count > 0)
                     {
                         /*agrupamos los pedidos*/
-                        var grupo_pedido = from item in dt.AsEnumerable()                                            
+                        var grupo_pedido = from item in dt.AsEnumerable()
                                            group item by
                                            new
                                            {
@@ -43,7 +43,7 @@ namespace Integrado.Urbano
                                                nro_guia_trans = Convert.ToString(item["nro_guia_trans"]),
                                                nro_factura = Convert.ToString(item["nro_factura"].ToString()),
                                                cod_empresa = Convert.ToString(item["cod_empresa"].ToString()),
-                                               nom_empresa = Convert.ToString(item["nom_empresa"].ToString()),                                           
+                                               nom_empresa = Convert.ToString(item["nom_empresa"].ToString()),
                                                cod_cliente = Convert.ToString(item["cod_cliente"]),
                                                nom_cliente = Convert.ToString(item["ref_nombre"]),
                                                //nom_cliente = Convert.ToString(item["nom_cliente"]),
@@ -62,7 +62,7 @@ namespace Integrado.Urbano
                                        into G
                                            select new
                                            {
-                                               cod_rastreo =G.Key.cod_rastreo,
+                                               cod_rastreo = G.Key.cod_rastreo,
                                                fech_emi_vent = G.Key.fech_emi_vent,
                                                nro_guia_trans = G.Key.nro_guia_trans,
                                                nro_factura = G.Key.nro_factura,
@@ -79,7 +79,7 @@ namespace Integrado.Urbano
                                                peso_total = G.Key.peso_total,
                                                cant_total = G.Key.cant_total,
                                            };
-                       
+
 
                         /*recorremos los pedidos para agregar al pedido*/
                         foreach (var key in grupo_pedido)
@@ -92,16 +92,16 @@ namespace Integrado.Urbano
                             guiaUrbano.cod_rastreo = key.cod_rastreo;//Codigo de rastreo, # de orden de Prestashop ==> Referencia de pedido
                             guiaUrbano.cod_barra = key.cod_rastreo;//Codigo de barra, # de orden de Prestashop ==> Referencia de pedido
                             guiaUrbano.fech_emi_vent = key.fech_emi_vent;//Fecha de emisión de venta==> fecha de venta   
-                            guiaUrbano.nro_o_compra =key.cod_rastreo;//# de orden de compra==> # de orden de Prestashop ==> Referencia de pedido
-                            guiaUrbano.nro_guia_trans =key.nro_guia_trans;//# de guía de transporte==># numero de guia sistemas
+                            guiaUrbano.nro_o_compra = key.cod_rastreo;//# de orden de compra==> # de orden de Prestashop ==> Referencia de pedido
+                            guiaUrbano.nro_guia_trans = key.nro_guia_trans;//# de guía de transporte==># numero de guia sistemas
                             guiaUrbano.nro_factura = key.nro_factura;//# de factura ==> # numero desde base
                             guiaUrbano.cod_empresa = key.cod_empresa;//RUC BATA ==> # desde base
                             guiaUrbano.nom_empresa = key.nom_empresa;//BATA - Emcomer S.A. ==> # desde base
                             guiaUrbano.cod_cliente = key.cod_cliente;//DNI - RUC cliente ==> # desde base
                             guiaUrbano.nom_cliente = key.nom_cliente;//Nombre de cliente ==> # desde base
-                            guiaUrbano.nro_telf =key.nro_telf;//# de teléfono de cliente ==> # desde base
-                            guiaUrbano.nro_telf_mobil =key.nro_telf_mobil;//# de celular de cliente ==> # desde base
-                            guiaUrbano.correo_elec =key.correo_elec;//Email de cliente ==> # desde base
+                            guiaUrbano.nro_telf = key.nro_telf;//# de teléfono de cliente ==> # desde base
+                            guiaUrbano.nro_telf_mobil = key.nro_telf_mobil;//# de celular de cliente ==> # desde base
+                            guiaUrbano.correo_elec = key.correo_elec;//Email de cliente ==> # desde base
                             guiaUrbano.dir_entrega = key.dir_entrega;// Dirección de entrega 
                             guiaUrbano.nro_via = "";//# de vía
                             guiaUrbano.nro_int = "";//# de interior
@@ -115,7 +115,7 @@ namespace Integrado.Urbano
 
 
                             var ped_det = from item in dt.AsEnumerable()
-                                          where item.Field<string>("cod_rastreo") == Convert.ToString(key.cod_rastreo)                                          
+                                          where item.Field<string>("cod_rastreo") == Convert.ToString(key.cod_rastreo)
                                           select new
                                           {
                                               cod_sku = item["cod_sku"].ToString(),
@@ -134,9 +134,9 @@ namespace Integrado.Urbano
                                     cod_sku = key_det.cod_sku,
                                     descr_sku = key_det.descr_sku,
                                     modelo_sku = key_det.modelo_sku,
-                                    marca_sku =key_det.marca_sku,
-                                    peso_sku =key_det.peso_sku.ToString(),
-                                    cantidad_sku =key_det.cantidad_sku.ToString()
+                                    marca_sku = key_det.marca_sku,
+                                    peso_sku = key_det.peso_sku.ToString(),
+                                    cantidad_sku = key_det.cantidad_sku.ToString()
                                 };
                                 productos_items.Add(prod_item);
                             }
@@ -204,8 +204,8 @@ namespace Integrado.Urbano
                                 //en este paso envia si es que urbano recibio los datos con exito
                                 post_data = post;
                                 //if (post.error=="1")
-                               // {
-                               //     if (post.guia.Trim().Length>0)
+                                // {
+                                //     if (post.guia.Trim().Length>0)
                                 //        data_urbano.update_guia(key.cod_rastreo, post.guia);
                                 //}
 
@@ -227,9 +227,9 @@ namespace Integrado.Urbano
             }
             catch (Exception exc)
             {
-                post_data = null;                                
+                post_data = null;
             }
-            return post_data ;
+            return post_data;
         }
         public Boolean send()
         {
@@ -339,7 +339,7 @@ namespace Integrado.Urbano
             }
             catch (Exception)
             {
-                valida = false;                
+                valida = false;
             }
             return valida;
         }

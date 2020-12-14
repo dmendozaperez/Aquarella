@@ -47,7 +47,7 @@ namespace CapaDato.Bll.Ecommerce
                             }
                             ven.listaArticulos = listaArticulos;
                             /*TIENDA ORIGEN*/
-                            if (dtChazki.Rows.Count == 0)
+                            if (dtChazki.Rows.Count > 0)
                             {
                                 Ent_ChazkiApi Chazki = new Ent_ChazkiApi();
                                 Chazki.storeId = dtChazki.Rows[0]["chazki_store_id"].ToString();
@@ -60,7 +60,7 @@ namespace CapaDato.Bll.Ecommerce
                                 ven.informacionTiendaEnvio = Chazki;
                             }
                             /*CLENTE DESTINO*/
-                            if (dtCliente.Rows.Count > 0) //des
+                            if (dtCliente.Rows.Count > 0)
                             {
                                 Ent_Cliente Cliente = new Ent_Cliente();
 

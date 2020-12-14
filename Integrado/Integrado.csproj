@@ -206,6 +206,7 @@
       <DependentUpon>ReportGuiaRem.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Savar\EnviarSavar.cs" />
     <Compile Include="Service References\comercioxpress\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
