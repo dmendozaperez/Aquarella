@@ -44,6 +44,7 @@
     <Compile Include="Bll\Ecommerce\Dat_Cexpress.cs" />
     <Compile Include="Bll\Ecommerce\Dat_Chazki.cs" />
     <Compile Include="Bll\Ecommerce\Dat_PrestaShop.cs" />
+    <Compile Include="Bll\Ecommerce\Dat_Savar.cs" />
     <Compile Include="Bll\Ecommerce\Dat_Urbano.cs" />
     <Compile Include="Bll\Logistica\Dat_ConfigGuia.cs" />
     <Compile Include="Bll\Logistica\Dat_Liquidacion.cs" />

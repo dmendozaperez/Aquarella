@@ -464,7 +464,6 @@ namespace Integrado.Sistemas.Ventas
                 if (_valida == 1) return;
 
 
-
                 var mySettings = new MetroDialogSettings()
                 {
                     AffirmativeButtonText = "Si",
@@ -473,13 +472,11 @@ namespace Integrado.Sistemas.Ventas
                     ColorScheme = MetroDialogOptions.ColorScheme,
                 };
 
-
                 var okSettings = new MetroDialogSettings()
                 {
                     AffirmativeButtonText = "Ok",
                     ColorScheme = MetroDialogOptions.ColorScheme,
                 };
-
 
 
                 MessageDialogResult result = await this.ShowMessageAsync(Ent_Msg.msginfomacion, "¿Realmente desea FACTURAR este pedido ? " + _liq_id,
@@ -490,9 +487,18 @@ namespace Integrado.Sistemas.Ventas
                 {
                     string _error_venta = "";
                     //Mouse.OverrideCursor = Cursors.Wait;
-                    ProgressAlert = await this.ShowProgressAsync(Ent_Msg.msgcargando, "Generando Facturacion Electronica del pedido N°:" + _liq_id);  //show message
+                    ProgressAlert = await this.ShowProgressAsync(Ent_Msg.msgcargando, "Generando Facturación Electrónica del pedido N°:" + _liq_id);  //show message
                     ProgressAlert.SetIndeterminate();
                     string grabar_numerodoc = await Task.Run(() => Dat_Venta.insertar_venta(_liq_id, ref _error_venta));
+
+                    //if (grabar_numerodoc == "0")
+                    //{
+                    //    //string _error = "";
+                    //    lblmensaje.Content = "El número de pedido "+ _liq_id + " ya fue facturado posiblemente por tienda , actualice la bandeja de pedidos.";
+                    //    return;
+
+                    //}
+
                     //string grabar_numerodoc = Dat_Venta.insertar_venta(_liq_id);
 
                     if (grabar_numerodoc != "-1")
@@ -506,20 +512,18 @@ namespace Integrado.Sistemas.Ventas
                         string _error = "";
                         string _url_pdf = "";
 
-                        await Task.Run(() => Facturacion_Electronica.ejecutar_factura_electronica(Basico.Left(grabar_numerodoc, 1), grabar_numerodoc, ref _codigo_hash, ref _error,ref _url_pdf));
+                        await Task.Run(() => Facturacion_Electronica.ejecutar_factura_electronica(Basico.Left(grabar_numerodoc, 1), grabar_numerodoc, ref _codigo_hash, ref _error, ref _url_pdf));
 
                         //await Task.Run(() => Facturacion_Electronica.ejecutar_factura_electronica_ws (Basico.Left(grabar_numerodoc, 1), grabar_numerodoc, ref _codigo_hash, ref _error,ref _url_pdf));
 
                         //*************
 
 
-
-
                         //****enviar los xml al server
 
                         if (_codigo_hash.Length == 0 || _codigo_hash == null)
                         {
-                            await Task.Run(() => Facturacion_Electronica.ejecutar_factura_electronica(Basico.Left(grabar_numerodoc, 1), grabar_numerodoc, ref _codigo_hash, ref _error,ref _url_pdf));
+                            await Task.Run(() => Facturacion_Electronica.ejecutar_factura_electronica(Basico.Left(grabar_numerodoc, 1), grabar_numerodoc, ref _codigo_hash, ref _error, ref _url_pdf));
                         }
                         if (_codigo_hash.Length == 0 || _codigo_hash == null)
                         {
@@ -529,7 +533,7 @@ namespace Integrado.Sistemas.Ventas
                             //MessageBox.Show("ERROR EN LA GENERACION POR FAVOR CONSULTE CON SISTEMAS..==>> TIPO DE ERROR (" + _error + ")", Ent_Msg.msginfomacion,MessageBoxButton.OK,MessageBoxImage.Error);
                             return;
                         }
-                        
+
                         if (_error.Length > 0)
                         {
                             await ProgressAlert.CloseAsync();
@@ -539,7 +543,7 @@ namespace Integrado.Sistemas.Ventas
                         }
                         await Task.Run(() => Basico._enviar_webservice_xml());
                         //EN ESTE PASO VAMOS A GRABAR EL CODIGO HASH
-                        await Task.Run(() => Dat_Venta.insertar_codigo_hash(grabar_numerodoc, _codigo_hash, "V",_url_pdf));
+                        await Task.Run(() => Dat_Venta.insertar_codigo_hash(grabar_numerodoc, _codigo_hash, "V", _url_pdf));
                         ///
                         //byte[] img_qr = null;
                         string _genera_tk = await Task.Run(() => Imprimir_Doc.Generar_Impresion("F", grabar_numerodoc) /*Impresora_Epson.Config_Imp.GenerarTicketFact(grabar_numerodoc, 1, _codigo_hash)*/);
@@ -551,9 +555,9 @@ namespace Integrado.Sistemas.Ventas
                             await Task.Run(() => genera_etiqueta.aq_imp_etiqueta2(grabar_numerodoc));
                         }
 
-                            #region<SOLO PARA E-CCOMMERCE>
+                        #region<SOLO PARA E-CCOMMERCE>
 
-                            if (Ent_Global._canal_venta == "BA")
+                        if (Ent_Global._canal_venta == "BA")
                         {
                             string _cod_urbano = "";
                             await Task.Run(() => Basico.act_presta_urbano(grabar_numerodoc, ref _error, ref _cod_urbano));
@@ -585,7 +589,7 @@ namespace Integrado.Sistemas.Ventas
                                     ProgressAlert.SetIndeterminate();
                                 }
                                 // await ProgressAlert.CloseAsync();
-                                
+
                             }
                             else
                             {

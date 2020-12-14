@@ -5,6 +5,7 @@ using Integrado.comercioxpress;
 using Integrado.Prestashop;
 using Integrado.Urbano;
 using Integrado.Chazki;
+using Integrado.Savar;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -307,6 +308,20 @@ namespace Integrado.Bll
                                     guia_courier = nrodelivery_chazki;
                                     break;
                                 }
+                            }
+                            else if (name_carrier == "Savar")
+                            {
+                                EnviarSavar objSavar = new EnviarSavar();
+
+                                string nrodelivery_savar = objSavar.Envia_Courier_Savar(ven_id);
+                                if (nrodelivery_savar != "")
+                                {
+                                    action_presta.updestafac_prestashop(guia_presta);
+                                    data_Cexpress.update_guia(guia_presta, nrodelivery_savar);
+                                    guia_courier = nrodelivery_savar;
+                                    break;
+                                }
+
                             }
                             else
                             {
