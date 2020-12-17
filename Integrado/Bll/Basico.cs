@@ -304,12 +304,12 @@ namespace Integrado.Bll
                                 if (nrodelivery_chazki != "")
                                 {
                                     action_presta.updestafac_prestashop(guia_presta);
-                                    data_Cexpress.update_guia(guia_presta, nrodelivery_chazki);
-                                    guia_courier = nrodelivery_chazki;
+                                    data_Cexpress.update_guia(guia_presta, ven_id);
+                                    guia_courier = ven_id;
                                     break;
                                 }
                             }
-                            else if (name_carrier == "Savar")
+                            else if (name_carrier == "Envío a Domicilio - Savar")
                             {
                                 EnviarSavar objSavar = new EnviarSavar();
 
@@ -345,16 +345,16 @@ namespace Integrado.Bll
                         ActTracking enviaguia_presta = new ActTracking();
                         string[] valida_prest;
 
-                        if (name_carrier == "Chazki - Envíos Express") //para chazki el codigo de seguimiento es el mismo nro de boleta
-                        {
-                            track_chazki = ven_id.Substring(0, 4) + "-" + ven_id.Substring(4, 8);
+                        //if (name_carrier == "Chazki - Envíos Express") //para chazki el codigo de seguimiento es el mismo nro de boleta
+                        //{
+                        //    track_chazki = ven_id.Substring(0, 4) + "-" + ven_id.Substring(4, 8);
 
-                            valida_prest = enviaguia_presta.ActualizaTrackin(guia_presta, track_chazki);
-                        }
-                        else
-                        {
+                        //    valida_prest = enviaguia_presta.ActualizaTrackin(guia_presta, track_chazki);
+                        //}
+                        //else
+                        //{
                             valida_prest = enviaguia_presta.ActualizaTrackin(guia_presta, guia_courier);
-                        }
+                        //}
 
 
                         /*el valor 1 quiere decir que actualizo prestashop*/

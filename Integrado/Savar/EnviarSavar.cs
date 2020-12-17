@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Data;
-
+using System.Text.RegularExpressions;
 
 namespace Integrado.Savar
 {
@@ -58,30 +58,7 @@ namespace Integrado.Savar
 
             objList_savar.Add(objE_savar);
             string jsonSavar = JsonConvert.SerializeObject(objList_savar);
-            //Response_Registro rpta = new Response_Registro();
-
-            //try
-            //{
-
-            //    using (var http = new HttpClient())
-            //    {
-            //        http.DefaultRequestHeaders.Add("Authorization", "0deda460-b467-4d58-b038-5968350820bd");
-
-            //        HttpContent content = new StringContent(jsonSavar);
-            //        content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
-
-            //        var request = http.PostAsync("https://test.savarexpress.com.pe/govari/api/ServicioDelivery", content);
-
-            //        string result = request.Result.ToString();
-
-            //    }
-            //}
-            //catch (Exception ex)
-            //{
-            //    ex.Message.ToString();
-            //}
-
-            //Dat_ECommerce objD_ecommerce = new Dat_ECommerce();
+ 
             DataTable dtConexion = new DataTable();
 
             dtConexion = objD_savar.Ecommerce_getConexionesAPI("savar", 1); //conexion de savar
@@ -92,6 +69,7 @@ namespace Integrado.Savar
                 using (HttpClient client = new HttpClient())
                 {
                     client.DefaultRequestHeaders.Add("Authorization", dtConexion.Rows[0]["Token"].ToString());
+                    //client.DefaultRequestHeaders.Add("TOKEN", dtConexion.Rows[0]["Token"].ToString());
 
                     using (StringContent jsonContent = new StringContent(jsonSavar))
                     {
@@ -99,29 +77,28 @@ namespace Integrado.Savar
 
                         var request = client.PostAsync(dtConexion.Rows[0]["Url"].ToString(), jsonContent);
 
-                        var response = request.Result.Content.ReadAsStringAsync().Result;
+                        string response = request.Result.Content.ReadAsStringAsync().Result;
+                        string codseguimiento = Regex.Replace(response, @"[^A-Za-z0-9ñÑ ]+", "");
 
-                       
-                        //rpta = JsonConvert.DeserializeObject<Response_Registro>(response);
-
-                        //if (rpta.codeDelivery.ToString() != "")
-                        //{
-
-                        //}
-
+                        if (objE_savar.CodPaquete == codseguimiento)
+                        {
+                            retorno = codseguimiento;
+                        }
+                        else
+                        {
+                            retorno = "";
+                        }
                     }
                 }
-
             }
             catch (Exception ex)
             {
-
-                ex.Message.ToString();
+                retorno = "";
             }
 
-            return "";
+            return retorno;
         }
-
-
     }
 }
+
+
