@@ -121,7 +121,7 @@ namespace Integrado.Design.WPF_Master
         private void btnbata_Click(object sender, RoutedEventArgs e)
         {
             Mouse.OverrideCursor = Cursors.Wait;
-            _server = "posperubd.bgr.pe";// "ecommerce.bgr.pe";
+            _server = "ecommerce.bgr.pe";//"192.168.2.14";// "ecommerce.bgr.pe";
             _base_datos = "BD_ECOMMERCE";
             _user = "ecommerce";
             _password = "Bata2018.*@=?++";
