@@ -296,7 +296,7 @@ namespace Integrado.Bll
 
                             }
                             //Chazki - Envíos Express
-                            else if (name_carrier == "Chazki - Envíos Express")
+                            else if (name_carrier.Contains("Chazki"))
                             {
                                 EnviarChazki objChazki = new EnviarChazki();
 
@@ -309,7 +309,7 @@ namespace Integrado.Bll
                                     break;
                                 }
                             }
-                            else if (name_carrier == "Envío a Domicilio - Savar")
+                            else if (name_carrier.Contains("Savar"))
                             {
                                 EnviarSavar objSavar = new EnviarSavar();
 
