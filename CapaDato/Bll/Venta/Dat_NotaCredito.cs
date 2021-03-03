@@ -88,7 +88,7 @@ namespace CapaDato.Bll.Venta
             return dt;
         }
         public static String[] saveReturnOrder(
-          string RHN_COORDINATOR, string _ALMACEN, List<Ent_Nota_Dtl> listArticlesReturned, Int32 _usuing, string _codigo_estado)
+          string RHN_COORDINATOR, string _ALMACEN, List<Ent_Nota_Dtl> listArticlesReturned, Int32 _usuing, string _codigo_estado,string _nro_VTEX)
         {
            
             string sqlquery = "USP_Insertar_NotaCredito";
@@ -128,6 +128,7 @@ namespace CapaDato.Bll.Venta
                 cmd.Parameters.AddWithValue("@TmpNc", dt);
                 cmd.Parameters.AddWithValue("@usu_ing", _usuing);
                 cmd.Parameters.AddWithValue("@not_estado_nc", _codigo_estado);
+                cmd.Parameters.AddWithValue("@nro_vtex", _nro_VTEX);
                 cmd.Parameters["@not_id"].Direction = ParameterDirection.Output;
                 cmd.ExecuteNonQuery();
 
@@ -270,6 +271,31 @@ namespace CapaDato.Bll.Venta
                 return ds;
             }
             catch (Exception e) { throw new Exception(e.Message, e.InnerException); }
+        }
+
+        public static string dt_valida_codigoVTEX(string _nro)
+        {
+            string sqlquery = "USP_ValidaNroVTEX";
+            SqlConnection cn = null;
+            SqlCommand cmd = null;
+            SqlDataAdapter da = null;
+            DataTable dt = null;
+            try
+            {
+                cn = new SqlConnection(Ent_Conexion.conexion);
+                cmd = new SqlCommand(sqlquery, cn);
+                cmd.CommandTimeout = 0;
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@NRO_VTEX", _nro);
+                da = new SqlDataAdapter(cmd);
+                dt = new DataTable();
+                da.Fill(dt);
+            }
+            catch
+            {
+                dt = null;
+            }
+            return dt.Rows[0][0].ToString();
         }
     }
 }

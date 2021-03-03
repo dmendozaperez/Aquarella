@@ -58,6 +58,12 @@ namespace Integrado.Sistemas.Ventas
 
             if (!Ent_Global._err_con_mysql) lblconexion_presta.Visibility = Visibility.Hidden;
 
+            if (Ent_Global._canal_venta != "BA")
+            {
+                lblNroVTEX.Visibility = Visibility.Hidden;
+                txtNroVTEX.Visibility = Visibility.Hidden;
+            }
+
         }
         private void dispatcherTimer_Tick(object sender, EventArgs e)
         {
@@ -104,7 +110,7 @@ namespace Integrado.Sistemas.Ventas
         private void MetroWindow_Loaded(object sender, RoutedEventArgs e)
         {
             Inicio_Windows();
-        }       
+        }
         private DataTable createStructureDataTable()
         {
             DataTable dtEstructura = new DataTable();
@@ -177,7 +183,7 @@ namespace Integrado.Sistemas.Ventas
             DataTable dt = this.createStructureDataTable();
             dtv_grilla = new DataView(dt);
 
-            Mouse.OverrideCursor = Cursors.Wait;            
+            Mouse.OverrideCursor = Cursors.Wait;
             DataSet dsCustomers = Dat_NotaCredito.getCoordinators("%%");
 
             // Enlazar datos al dropdown list encargado de mostrar la informacion de los coordinadores
@@ -187,7 +193,7 @@ namespace Integrado.Sistemas.Ventas
             dwcliente.SelectedIndex = -1;
             dwcliente.Focus();
 
-            dwclientex.ItemsSource= dsCustomers.Tables[0].DefaultView;
+            dwclientex.ItemsSource = dsCustomers.Tables[0].DefaultView;
             dwclientex.DisplayMember = "Nombres";
             dwclientex.ValueMember = "bas_id";
             dwclientex.SelectedIndex = -1;
@@ -202,7 +208,7 @@ namespace Integrado.Sistemas.Ventas
             Mouse.OverrideCursor = null;
             calculateTotals();
             dwcliente.Focus();
-            
+
         }
         private void limpiar()
         {
@@ -325,7 +331,7 @@ namespace Integrado.Sistemas.Ventas
             dtv_grilla = new DataView(dt);
 
 
-            
+
             ///
             this.dg1.ItemsSource = dtv_grilla;
             ///
@@ -337,6 +343,7 @@ namespace Integrado.Sistemas.Ventas
             txtarticulo.Text = "";
             ///
             lblinfo.Content = "";
+            txtNroVTEX.Text = "";
             //pninfo.Visible = false;
 
             //lblarticuloselect.Text = "0";
@@ -361,7 +368,7 @@ namespace Integrado.Sistemas.Ventas
             {
                 /// Pos 0: Articulo referencia
                 /// Pos 1: Plano
-                infoCodeBars =Ent_BarCodes.getInfoFromTheBarCode(txtarticulo.Text);
+                infoCodeBars = Ent_BarCodes.getInfoFromTheBarCode(txtarticulo.Text);
                 ///
                 if (infoCodeBars == null)
                 {
@@ -511,7 +518,7 @@ namespace Integrado.Sistemas.Ventas
             lblinfo.Content = "";
             //pninfo.Visible = false;
             /// Realizar la busqueda del articulo en la factura
-            DataTable dtArticleInvoiced =Dat_NotaCredito.searchArticleInvoice(noInvoice, article, size, customer, calidad);
+            DataTable dtArticleInvoiced = Dat_NotaCredito.searchArticleInvoice(noInvoice, article, size, customer, calidad);
 
             /// Verificar que existan datos /// 
             if (dtArticleInvoiced != null && dtArticleInvoiced.Rows.Count > 0)
@@ -653,11 +660,11 @@ namespace Integrado.Sistemas.Ventas
 
         private void txtfactura_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.Key==Key.Enter)
+            if (e.Key == Key.Enter)
             {
                 if (!_key_combo)
-                { 
-                     txtarticulo.Focus();
+                {
+                    txtarticulo.Focus();
                 }
                 else
                 {
@@ -668,7 +675,7 @@ namespace Integrado.Sistemas.Ventas
 
         private void txtarticulo_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.Key==Key.Enter)
+            if (e.Key == Key.Enter)
             {
                 btnbuscar_Click(btnbuscar, new RoutedEventArgs());
             }
@@ -681,7 +688,7 @@ namespace Integrado.Sistemas.Ventas
         private Boolean _key_combo = false;
         private void dwcliente_PreviewKeyDown(object sender, KeyEventArgs e)
         {
-            if (e.Key==Key.Enter)
+            if (e.Key == Key.Enter)
             {
                 //dwcliente.SelectedValue = _cliente_id;
                 //_key_combo = true;
@@ -698,62 +705,62 @@ namespace Integrado.Sistemas.Ventas
 
             if (_cod == "01")
             {
-                MessageBox.Show("SI SELECCIONA ESTA OPCION [" + dwestado.Text.ToUpper() + "] , ANULARA LA OPERACION DEL DOCUMENTO DE REFERENCIA", Ent_Msg.msginfomacion, MessageBoxButton.OK, MessageBoxImage.Error);                
+                MessageBox.Show("SI SELECCIONA ESTA OPCION [" + dwestado.Text.ToUpper() + "] , ANULARA LA OPERACION DEL DOCUMENTO DE REFERENCIA", Ent_Msg.msginfomacion, MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 
         private void btneliminar_Click(object sender, RoutedEventArgs e)
         {
-                        
-            lblinfo.Content = "";                           
+
+            lblinfo.Content = "";
             try
-                    {
+            {
 
-                        DataRowView row = (DataRowView)((Button)e.Source).DataContext;
+                DataRowView row = (DataRowView)((Button)e.Source).DataContext;
 
-                        //Int32 _fila = dg0.CurrentCell.RowIndex;
-                        /// Recuperar información de la linea deseada a eliminar. formato NoFactura@Articulo@Talla
-                        string invo = (string)row["IDV_INVOICE"].ToString();// dg0.CurrentRow.Cells["IDV_INVOICE"].Value.ToString(); // e.CommandArgument.ToString().Split('@')[0];
-                        ///
-                        string art = (string)row["IDV_ARTICLE"].ToString();// dg0.CurrentRow.Cells["IDV_ARTICLE"].Value.ToString(); //e.CommandArgument.ToString().Split('@')[1];
-                                                                           ///
-                        string size = (string)row["IDV_SIZE"].ToString();//  dg0.CurrentRow.Cells["IDV_SIZE"].Value.ToString(); //dg0.Rows[_fila].Cells["IDV_SIZE"].ToString();//e.CommandArgument.ToString().Split('@')[2];
+                //Int32 _fila = dg0.CurrentCell.RowIndex;
+                /// Recuperar información de la linea deseada a eliminar. formato NoFactura@Articulo@Talla
+                string invo = (string)row["IDV_INVOICE"].ToString();// dg0.CurrentRow.Cells["IDV_INVOICE"].Value.ToString(); // e.CommandArgument.ToString().Split('@')[0];
+                                                                    ///
+                string art = (string)row["IDV_ARTICLE"].ToString();// dg0.CurrentRow.Cells["IDV_ARTICLE"].Value.ToString(); //e.CommandArgument.ToString().Split('@')[1];
+                                                                   ///
+                string size = (string)row["IDV_SIZE"].ToString();//  dg0.CurrentRow.Cells["IDV_SIZE"].Value.ToString(); //dg0.Rows[_fila].Cells["IDV_SIZE"].ToString();//e.CommandArgument.ToString().Split('@')[2];
 
-                        string calidad = (string)row["CALIDAD"].ToString();//  dg0.CurrentRow.Cells["CALIDAD"].Value.ToString(); //e.CommandArgument.ToString().Split('@')[3];
-                                                                               ///
-                        string[] keys = { invo, art, size, calidad };
-                        ///
-                        DataView dv = (DataView)dtv_grilla;// Session[_nameSessionArtsRet];
-                        /// 
-                        dv.Table.Rows.Find(keys).Delete();
-                        /// Set the new DataView
-                        /// 
-                        dtv_grilla = dv;
-                        //Session[_nameSessionArtsRet] = dv;
-                        ///
-                        this.calculateTotals();
-                        ///          
+                string calidad = (string)row["CALIDAD"].ToString();//  dg0.CurrentRow.Cells["CALIDAD"].Value.ToString(); //e.CommandArgument.ToString().Split('@')[3];
+                                                                   ///
+                string[] keys = { invo, art, size, calidad };
+                ///
+                DataView dv = (DataView)dtv_grilla;// Session[_nameSessionArtsRet];
+                                                   /// 
+                dv.Table.Rows.Find(keys).Delete();
+                /// Set the new DataView
+                /// 
+                dtv_grilla = dv;
+                //Session[_nameSessionArtsRet] = dv;
+                ///
+                this.calculateTotals();
+                ///          
 
-                        
-                        lblinfo.Foreground = (Brush)new BrushConverter().ConvertFromString("#FF0068FF");// System.Drawing.ColorTranslator.FromHtml("#e7df65");
-                        lblinfo.Content = " > El artículo -" + art + "- en talla -" + size + "- de la factura -" + invo + "- ha sido eliminado.";
 
-                        //msnMessage.LoadMessage(" > El artículo -" + art + "- en talla -" + size + "- de la factura -" + invo + "- ha sido eliminado.", UserControl.ucMessage.MessageType.Information);
-                        ///
-                        this.dg1.ItemsSource = dv;
-                        actualizar_item(dg1);
-                        //this.GridViewArticlesToReturn.DataBind();
-                    }
-                    catch
-                    {
-                        lblinfo.Foreground = (Brush)new BrushConverter().ConvertFromString("#ee7749");// System.Drawing.ColorTranslator.FromHtml("#ee7749");
-                        lblinfo.Content = " > Error intentando eliminar el artículo.";
-                        //msnMessage.LoadMessage(" > Error intentando eliminar el artículo.", UserControl.ucMessage.MessageType.Error);
-                    }
+                lblinfo.Foreground = (Brush)new BrushConverter().ConvertFromString("#FF0068FF");// System.Drawing.ColorTranslator.FromHtml("#e7df65");
+                lblinfo.Content = " > El artículo -" + art + "- en talla -" + size + "- de la factura -" + invo + "- ha sido eliminado.";
 
-                
-                //chkmover.CheckedChanged += new EventHandler(chk_evento);
-            
+                //msnMessage.LoadMessage(" > El artículo -" + art + "- en talla -" + size + "- de la factura -" + invo + "- ha sido eliminado.", UserControl.ucMessage.MessageType.Information);
+                ///
+                this.dg1.ItemsSource = dv;
+                actualizar_item(dg1);
+                //this.GridViewArticlesToReturn.DataBind();
+            }
+            catch
+            {
+                lblinfo.Foreground = (Brush)new BrushConverter().ConvertFromString("#ee7749");// System.Drawing.ColorTranslator.FromHtml("#ee7749");
+                lblinfo.Content = " > Error intentando eliminar el artículo.";
+                //msnMessage.LoadMessage(" > Error intentando eliminar el artículo.", UserControl.ucMessage.MessageType.Error);
+            }
+
+
+            //chkmover.CheckedChanged += new EventHandler(chk_evento);
+
         }
 
         private async void btngenera_Click(object sender, RoutedEventArgs e)
@@ -763,7 +770,7 @@ namespace Integrado.Sistemas.Ventas
             lblinfo.Content = "";
             //Mouse.OverrideCursor = Cursors.Wait;            
             if (dtv_grilla.Count == 0)
-            {                
+            {
                 lblinfo.Foreground = (Brush)new BrushConverter().ConvertFromString("#ee7749");// System.Drawing.ColorTranslator.FromHtml("#ee7749");
                 lblinfo.Content = " > No hay datos para generar la nota de credito.";
                 //Mouse.OverrideCursor = null;
@@ -778,16 +785,16 @@ namespace Integrado.Sistemas.Ventas
                 {
                     DataTable dt = dv.ToTable();
 
-                    if (dt.Rows.Count>0)
+                    if (dt.Rows.Count > 0)
                     {
                         String ndoc = dt.Rows[0]["IDV_INVOICE"].ToString();
                         var cantidad = dt.AsEnumerable().Sum(s => s.Field<Decimal>("IDN_QTY"));
 
-                        Boolean valida_tot= Dat_NotaCredito.getvalidaNota_DevTot(ndoc, cantidad);
+                        Boolean valida_tot = Dat_NotaCredito.getvalidaNota_DevTot(ndoc, cantidad);
 
                         // Modificado por : Henry Morales - 12/07/2018
                         // Se agergó validación para que solo Afecte cuando Seleccione Devolución Total
-                        if (!valida_tot && dwestado.SelectedValue.ToString()!="07")
+                        if (!valida_tot && dwestado.SelectedValue.ToString() != "07")
                         {
                             lblinfo.Foreground = (Brush)new BrushConverter().ConvertFromString("#ee7749");// System.Drawing.ColorTranslator.FromHtml("#ee7749");
                             lblinfo.Content = " > Se tiene que realizar la devolucion en su totalidad.";
@@ -798,9 +805,9 @@ namespace Integrado.Sistemas.Ventas
                 }
 
             }
-                #endregion
+            #endregion
 
-                var mySettings = new MetroDialogSettings()
+            var mySettings = new MetroDialogSettings()
             {
                 AffirmativeButtonText = "Si",
                 NegativeButtonText = "No",
@@ -820,7 +827,7 @@ namespace Integrado.Sistemas.Ventas
         private async void facturar()
         {
             ///
-            string _almacen = Ent_Global._pvt_almaid ;
+            string _almacen = Ent_Global._pvt_almaid;
             ProgressDialogController ProgressAlert = null;
             try
             {
@@ -844,15 +851,15 @@ namespace Integrado.Sistemas.Ventas
 
                 //if (articlesToMove > 0)
                 //{
-                    //
-                    //if (string.IsNullOrEmpty(dwStorages.SelectedValue))
-                    //{
-                    //    dwStorages.Focus();
-                    //    msnMessage.LoadMessage("> Seleccione el area o storage a donde se enviaran los artículos seleccionados.", UserControl.ucMessage.MessageType.Information);
+                //
+                //if (string.IsNullOrEmpty(dwStorages.SelectedValue))
+                //{
+                //    dwStorages.Focus();
+                //    msnMessage.LoadMessage("> Seleccione el area o storage a donde se enviaran los artículos seleccionados.", UserControl.ucMessage.MessageType.Information);
 
-                    //}
-                    //else
-                    moveArticles = true;
+                //}
+                //else
+                moveArticles = true;
                 //}
                 //else
                 //    moveArticles = true;
@@ -878,10 +885,10 @@ namespace Integrado.Sistemas.Ventas
                         //
                         //if (ck)
                         //{
-                            Ent_Nota_Dtl objReturned = new Ent_Nota_Dtl(invo, art, size, qty, _almacen, calidad);
-                            /// Agregar el objeto a la lista generica
-                            lstArticlesReturned.Add(objReturned);
-                            ///                         
+                        Ent_Nota_Dtl objReturned = new Ent_Nota_Dtl(invo, art, size, qty, _almacen, calidad);
+                        /// Agregar el objeto a la lista generica
+                        lstArticlesReturned.Add(objReturned);
+                        ///                         
                         //}
                         //else
                         //{
@@ -898,9 +905,24 @@ namespace Integrado.Sistemas.Ventas
                 {
 
                     string _codigo_estado = dwestado.SelectedValue.ToString();
+                    string _nro_VTEX = txtNroVTEX.Text.Trim();
                     ProgressAlert = await this.ShowProgressAsync(Ent_Msg.msgcargando, "Generando Nota de Credito Electronica...");
-                    // Devolucion                        
-                    string[] results = await Task.Run(() => Dat_NotaCredito.saveReturnOrder(_cliente_id, _almacen, lstArticlesReturned, Ent_Global._bas_id_codigo, _codigo_estado));
+                    // Devolucion    
+
+                    //valida codigo VTEX solo para Ecommerce
+                    if (Ent_Global._canal_venta == "BA")
+                    {
+                        string Nro_doc = Dat_NotaCredito.dt_valida_codigoVTEX(_nro_VTEX.Replace(" ",""));
+                        if (Nro_doc != "")
+                        {
+                            if (ProgressAlert != null) await ProgressAlert.CloseAsync();
+                            //lblinfo.Content = " >> El nro VTEX ingresado ya esta siendo usado por la boleta : "+ Nro_VTEX + "..." ;
+                            await this.ShowMessageAsync(Ent_Msg.msginfomacion, "El Nro° VTEX que esta tratando de registrar hace referencia al documento : " + Nro_doc + " ,Favor de validar o registrar otro Nro°.");
+                            return;
+                        }
+                    }
+
+                    string[] results = await Task.Run(() => Dat_NotaCredito.saveReturnOrder(_cliente_id, _almacen, lstArticlesReturned, Ent_Global._bas_id_codigo, _codigo_estado, _nro_VTEX));
                     //string[] results =Dat_NotaCredito.saveReturnOrder(_cliente_id, _almacen, lstArticlesReturned, Ent_Global._bas_id_codigo, _codigo_estado);
 
                     if (results != null)
@@ -919,13 +941,13 @@ namespace Integrado.Sistemas.Ventas
                             string _codigo_hash = "";
                             string _error = "";
                             string _url_pdf = "";
-                            await Task.Run(() => Facturacion_Electronica.ejecutar_factura_electronica("N", results[0].ToString(), ref _codigo_hash, ref _error,ref _url_pdf));
+                            await Task.Run(() => Facturacion_Electronica.ejecutar_factura_electronica("N", results[0].ToString(), ref _codigo_hash, ref _error, ref _url_pdf));
                             //Facturacion_Electronica.ejecutar_factura_electronica_NC(results[0].ToString(), ref _codigo_hash);
 
-                            
-                            if (_codigo_hash.Length==0 || _codigo_hash==null)
+
+                            if (_codigo_hash.Length == 0 || _codigo_hash == null)
                             {
-                                await Task.Run(() => Facturacion_Electronica.ejecutar_factura_electronica("N", results[0].ToString(), ref _codigo_hash, ref _error,ref _url_pdf));
+                                await Task.Run(() => Facturacion_Electronica.ejecutar_factura_electronica("N", results[0].ToString(), ref _codigo_hash, ref _error, ref _url_pdf));
                             }
                             if (_codigo_hash.Length == 0 || _codigo_hash == null)
                             {
@@ -940,9 +962,9 @@ namespace Integrado.Sistemas.Ventas
                                 lblinfo.Content = " >> Se producjo un error en la generacion de codigo hash FE";
                                 return;
                             }
-                                //
+                            //
 
-                                //Facturacion_Electronica.ejecutar_factura_electronica_NC(results[0].ToString(), ref _codigo_hash);
+                            //Facturacion_Electronica.ejecutar_factura_electronica_NC(results[0].ToString(), ref _codigo_hash);
 
                             if (_error.Length > 0)
                             {
@@ -968,14 +990,14 @@ namespace Integrado.Sistemas.Ventas
                             string _genera_tk = await Task.Run(() => Imprimir_Doc.Generar_Impresion("N", results[0].ToString()) /*Impresora_Epson.Config_Imp_NC.GenerarTicketNC(results[0].ToString(), 1, _codigo_hash)*/);
                             //string _genera_tk = Impresora_Epson.Config_Imp_NC.GenerarTicketNC(results[0].ToString(), 1, _codigo_hash);
                             if (_genera_tk == null)
-                            {                                                                
+                            {
                                 if (ProgressAlert != null) await ProgressAlert.CloseAsync();
                                 await this.ShowMessageAsync(Ent_Msg.msginfomacion, " >> Se producjo un error en la impresion del ticket");
                                 //MessageBox.Show("ERROR EN LA GENERACION POR FAVOR CONSULTE CON SISTEMAS..==>> TIPO DE ERROR (" + _error + ")", Ent_Msg.msginfomacion, MessageBoxButton.OK, MessageBoxImage.Error);
                                 this.cleanForm();
                                 lblinfo.Foreground = (Brush)new BrushConverter().ConvertFromString("#ee7749");//System.Drawing.ColorTranslator.FromHtml("#ee7749");
                                 lblinfo.Content = " >> Se producjo un error en la impresion del ticket";
-                                
+
 
                                 //lbltickets.Text = " >> Se producjo un error en la impresion del ticket";
                             }
@@ -1002,7 +1024,7 @@ namespace Integrado.Sistemas.Ventas
                             //this.cleanForm();
                             lblinfo.Foreground = (Brush)new BrushConverter().ConvertFromString("#ee7749");//System.Drawing.ColorTranslator.FromHtml("#ee7749");
                             lblinfo.Content = " > La Devolución No Se Ha Realizado Correctamente." + results[0] + "";
-                            
+
                             //msnMessage.LoadMessage(" > La Devoluci&oacute;n No Se Ha Realizado Correctamente." + results[0] + "<br /> > El reporte de la devoluci&oacute;n no se ha generado; <a href='" + url + "' target='Blank'>Ver Reporte Devolucion</a>", UserControl.ucMessage.MessageType.Error);
                         }
                     }
@@ -1013,7 +1035,7 @@ namespace Integrado.Sistemas.Ventas
                         //this.cleanForm();
                         lblinfo.Foreground = (Brush)new BrushConverter().ConvertFromString("#ee7749");//System.Drawing.ColorTranslator.FromHtml("#ee7749");
                         lblinfo.Content = " > La Devolución No Se Ha Realizado Correctamente.";
-                       
+
                         //msnMessage.LoadMessage(" > La Devoluci&oacute;n No Se Ha Realizado Correctamente.", UserControl.ucMessage.MessageType.Error);
                     }
                     //}
@@ -1026,14 +1048,14 @@ namespace Integrado.Sistemas.Ventas
                 //this.cleanForm();
                 lblinfo.Foreground = (Brush)new BrushConverter().ConvertFromString("#ee7749");//System.Drawing.ColorTranslator.FromHtml("#ee7749");
                 lblinfo.Content = " > Ha ocurrido un error y la devoluciión no se ha realizado correctamente.";
-               
+
                 //msnMessage.LoadMessage(" > Ha ocurrido un error y la devoluci&oacute;n no se ha realizado correctamente.", UserControl.ucMessage.MessageType.Error);
             }
         }
 
         private void dwclientex_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.Key==Key.Enter)
+            if (e.Key == Key.Enter)
             {
                 try
                 {
@@ -1066,7 +1088,7 @@ namespace Integrado.Sistemas.Ventas
 
                     }
                 }
-                catch(Exception exc)
+                catch (Exception exc)
                 {
                 }
                 Mouse.OverrideCursor = null;
@@ -1116,7 +1138,7 @@ namespace Integrado.Sistemas.Ventas
 
         private void dwclientex_PreviewKeyDown(object sender, KeyEventArgs e)
         {
-            if (e.Key==Key.Enter)
+            if (e.Key == Key.Enter)
             {
                 //try
                 //{

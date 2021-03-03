@@ -57,6 +57,9 @@ namespace Integrado.Urbano
                                                ref_direc = Convert.ToString(item["ref_direc"].ToString()),
                                                peso_total = Convert.ToDecimal(item["peso_total"].ToString()),
                                                cant_total = Convert.ToDecimal(item["tot_cant"].ToString()),
+                                               //se agrego nuevos campos por seguro de pedidos
+                                               //asegurado = item["asegurado"].ToString(),
+                                               //monto_asegurado = Convert.ToDecimal(item["monto_asegurado"]),
 
                                            }
                                        into G
@@ -78,6 +81,9 @@ namespace Integrado.Urbano
                                                ref_direc = G.Key.ref_direc,
                                                peso_total = G.Key.peso_total,
                                                cant_total = G.Key.cant_total,
+                                               //se agrego nuevos campos por seguro de pedidos
+                                              // asegurado = G.Key.asegurado,
+                                               //monto_asegurado = G.Key.monto_asegurado,
                                            };
 
 
@@ -110,7 +116,9 @@ namespace Integrado.Urbano
                             guiaUrbano.ref_direc = key.ref_direc;//Referencia dirección entrega
                             guiaUrbano.peso_total = key.peso_total.ToString(); //Peso total, 0.3g por defecto para cada par
                             guiaUrbano.pieza_total = key.cant_total.ToString(); //Cantidad total, No se considera el Envío
-                            //guiaUrbano.pieza_total = "3";//# de bultos
+                                                                                //guiaUrbano.pieza_total = "3";//# de bultos
+                            //guiaUrbano.asegurado = key.asegurado;//Indicador de pedido asegurado SI/NO
+                            //guiaUrbano.monto_asegurado = key.monto_asegurado; //Monto total asegurado por pedido
                             #endregion
 
 
@@ -167,6 +175,11 @@ namespace Integrado.Urbano
                             guiaEncoded += "%22ref_direc%22%3A%22" + HttpUtility.UrlEncode(guiaUrbano.ref_direc) + "%22%2C";
                             guiaEncoded += "%22peso_total%22%3A%22" + guiaUrbano.peso_total + "%22%2C";
                             guiaEncoded += "%22pieza_total%22%3A%22" + guiaUrbano.pieza_total + "%22%2C";
+
+                            /*se agrego para pedidos asegurados*/
+                            //guiaEncoded += "%22asegurado%22%3A%22" + guiaUrbano.asegurado + "%22%2C";
+                            //guiaEncoded += "%22monto_asegurado%22%3A%22" + guiaUrbano.monto_asegurado + "%22%2C";
+
 
                             //Construyendo cadena desde lista de productos
                             string productos = "";
